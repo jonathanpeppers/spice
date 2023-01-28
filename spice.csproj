@@ -1,9 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFrameworks>net7.0;net7.0-android</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Android/**/*.cs" Condition=" '$(TargetPlatformIdentifier)' != 'Android' " />
+    <Compile Remove="Vanilla/**/*.cs" Condition=" '$(TargetPlatformIdentifier)' != '' " />
+  </ItemGroup>
 
 </Project>
