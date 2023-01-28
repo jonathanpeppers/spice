@@ -1,6 +1,6 @@
 namespace Spice;
 
-public class Label : View
+public partial class Label : View
 {
     public string Text { get; set; } = "";
 }

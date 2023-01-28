@@ -17,10 +17,8 @@ public class App : Application
         };
 
         Main = new View {
-            Children = {
-                label,
-                button,
-            }
+            label,
+            button,
         };
     }
 }

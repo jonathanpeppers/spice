@@ -11,4 +11,8 @@
     <Compile Remove="Vanilla/**/*.cs" Condition=" '$(TargetPlatformIdentifier)' != '' " />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Vanilla\" />
+  </ItemGroup>
+
 </Project>
