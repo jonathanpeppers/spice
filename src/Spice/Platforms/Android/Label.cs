@@ -8,9 +8,15 @@ public partial class Label
 
 	public static implicit operator Android.Widget.TextView(Label label) => label.NativeView;
 
-	public Label() : base(inherited: true) => NativeView = new Android.Widget.Button(Platform.Context);
+	public Label() : base(inherited: true) => NativeView = new Android.Widget.Button(Platform.Context)
+	{
+		LayoutParameters = LayoutParameters
+	};
 
-	public Label(Context context) : base(inherited: true) => NativeView = new Android.Widget.Button(context);
+	public Label(Context context) : base(inherited: true) => NativeView = new Android.Widget.Button(context)
+	{
+		LayoutParameters = LayoutParameters
+	};
 
 #pragma warning disable CS8618
 	public Label(bool inherited) : base(inherited)

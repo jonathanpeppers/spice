@@ -8,9 +8,15 @@ public partial class Button
 
 	public static implicit operator Android.Widget.Button(Button button) => button.NativeView;
 
-	public Button() : base(inherited: true) => NativeView = new Android.Widget.Button(Platform.Context);
+	public Button() : base(inherited: true) => NativeView = new Android.Widget.Button(Platform.Context)
+	{
+		LayoutParameters = LayoutParameters
+	};
 
-	public Button(Context context) : base(inherited: true) => NativeView = new Android.Widget.Button(context);
+	public Button(Context context) : base(inherited: true) => NativeView = new Android.Widget.Button(context)
+	{
+		LayoutParameters = LayoutParameters
+	};
 
 #pragma warning disable CS8618
 	public Button(bool inherited) : base(inherited)

@@ -21,7 +21,7 @@ public partial class View
 
 	public Android.Views.View NativeView => _nativeView;
 
-	readonly Android.Views.ViewGroup.LayoutParams _layoutParams =
+	protected readonly Android.Views.ViewGroup.LayoutParams LayoutParameters =
 		new(Android.Views.ViewGroup.LayoutParams.WrapContent, Android.Views.ViewGroup.LayoutParams.WrapContent);
 
 	partial void OnHorizontalAlignChanged(Align value)
@@ -31,15 +31,15 @@ public partial class View
 			case Align.Center:
 			case Align.Start:
 			case Align.End:
-				_layoutParams.Width = Android.Views.ViewGroup.LayoutParams.WrapContent;
+				LayoutParameters.Width = Android.Views.ViewGroup.LayoutParams.WrapContent;
 				break;
 			case Align.Stretch:
-				_layoutParams.Width = Android.Views.ViewGroup.LayoutParams.MatchParent;
+				LayoutParameters.Width = Android.Views.ViewGroup.LayoutParams.MatchParent;
 				break;
 			default:
 				throw new NotSupportedException($"Align value '{value}' not supported!");
 		}
-		_nativeView.LayoutParameters = _layoutParams;
+		_nativeView.LayoutParameters = LayoutParameters;
 	}
 
 	partial void OnVerticalAlignChanged(Align value)
@@ -49,14 +49,14 @@ public partial class View
 			case Align.Center:
 			case Align.Start:
 			case Align.End:
-				_layoutParams.Height = Android.Views.ViewGroup.LayoutParams.WrapContent;
+				LayoutParameters.Height = Android.Views.ViewGroup.LayoutParams.WrapContent;
 				break;
 			case Align.Stretch:
-				_layoutParams.Height = Android.Views.ViewGroup.LayoutParams.MatchParent;
+				LayoutParameters.Height = Android.Views.ViewGroup.LayoutParams.MatchParent;
 				break;
 			default:
 				throw new NotSupportedException($"Align value '{value}' not supported!");
 		}
-		_nativeView.LayoutParameters = _layoutParams;
+		_nativeView.LayoutParameters = LayoutParameters;
 	}
 }
