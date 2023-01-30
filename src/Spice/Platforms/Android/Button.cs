@@ -22,4 +22,22 @@ public partial class Button
 	public new Android.Widget.Button NativeView { get; private set; }
 
 	protected override Android.Views.View _nativeView => NativeView;
+
+	EventHandler? _click;
+
+	partial void OnClickedChanged(Action<Button>? value)
+	{
+		if (value == null)
+		{
+			if (_click != null)
+			{
+				NativeView.Click -= _click;
+				_click = null;
+			}
+		}
+		else
+		{
+			NativeView.Click += _click = (sender, e) => Clicked?.Invoke(this);
+		}
+	}
 }
