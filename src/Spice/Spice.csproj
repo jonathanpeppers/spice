@@ -10,6 +10,10 @@
 		<SingleProject>true</SingleProject>
 	</PropertyGroup>
 
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
+	</ItemGroup>
+
 	<ItemGroup Condition=" '$(TargetPlatformIdentifier)' == 'Android' ">
 		<PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.6.0.1" />
 	</ItemGroup>

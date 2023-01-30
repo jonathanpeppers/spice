@@ -9,12 +9,15 @@ public class App : Application
 		var label = new Label
 		{
 			Text = "Hello, Spice! 🌶",
-			Align = Align.Center,
+			VerticalAlign = Align.Center,
+			HorizontalAlign = Align.Center,
 		};
 
 		var button = new Button
 		{
 			Text = "Click Me",
+			VerticalAlign = Align.Center,
+			HorizontalAlign = Align.Center,
 			Clicked = _ => label.Text = $"Times: {++count}"
 		};
 

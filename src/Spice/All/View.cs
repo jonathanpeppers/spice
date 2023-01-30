@@ -2,11 +2,9 @@ using System.Collections;
 
 namespace Spice;
 
-public partial class View : IEnumerable<View>
+public partial class View : ObservableObject, IEnumerable<View>
 {
 	public View this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-	public Align Align { get; set; }
 
 	public IList<View> Children { get; set; } = new List<View>();
 
@@ -15,4 +13,10 @@ public partial class View : IEnumerable<View>
 	public IEnumerator<View> GetEnumerator() => Children.GetEnumerator();
 
 	IEnumerator IEnumerable.GetEnumerator() => Children.GetEnumerator();
+
+	[ObservableProperty]
+	Align _horizontalAlign;
+
+	[ObservableProperty]
+	Align _verticalAlign;
 }

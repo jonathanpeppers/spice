@@ -22,4 +22,6 @@ public partial class Label
 	public new Android.Widget.TextView NativeView { get; private set; }
 
 	protected override Android.Views.View _nativeView => NativeView;
+
+	partial void OnTextChanged(string value) => NativeView.Text = value;
 }

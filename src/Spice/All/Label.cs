@@ -2,5 +2,6 @@ namespace Spice;
 
 public partial class Label : View
 {
-	public string Text { get; set; } = "";
+	[ObservableProperty]
+	string _text = "";
 }
