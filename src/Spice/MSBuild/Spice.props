@@ -1,7 +1,6 @@
 ﻿<Project>
 	<PropertyGroup>
 		<UseMauiAssets Condition=" '$(UseMauiAssets)' == '' ">true</UseMauiAssets>
-		<UseMauiEssentials Condition=" '$(UseMauiEssentials)' == '' ">true</UseMauiEssentials>
 	</PropertyGroup>
 
 	<Import Sdk="Microsoft.Maui.Sdk.net7" Project="Microsoft.Maui.Controls.SingleProject.props" />
