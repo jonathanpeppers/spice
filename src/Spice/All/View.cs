@@ -4,11 +4,23 @@ namespace Spice;
 
 public partial class View : ObservableObject, IEnumerable<View>
 {
-	public View this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+	public View this[int index]
+	{
+		get => Children[index];
+		set => Children[index] = value;
+	}
 
 	public IList<View> Children { get; set; } = new List<View>();
 
-	public void Add(View item) => Children.Add(item);
+	public
+#if !VANILLA
+		partial
+#endif
+		void Add(View item)
+#if VANILLA
+		=> Children.Add(item)
+#endif
+	;
 
 	public IEnumerator<View> GetEnumerator() => Children.GetEnumerator();
 

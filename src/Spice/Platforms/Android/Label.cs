@@ -10,7 +10,7 @@ public partial class Label
 
 	public Label(Context context) : base(context, c => new TextView(c)) { }
 
-	public Label(Context context, Func<Context, Android.Views.View> creator) : base (context, creator) { }
+	public Label(Context context, Func<Context, Android.Views.View> creator) : base(context, creator) { }
 
 	public new TextView NativeView => (TextView)_nativeView.Value;
 

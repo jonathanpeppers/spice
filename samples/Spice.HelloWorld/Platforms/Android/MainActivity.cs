@@ -6,8 +6,7 @@ namespace Spice.HelloWorld;
 	// TODO: fix splash theme
 	// Theme = "@style/Maui.SplashTheme", 
 	Theme = "@style/Theme.MaterialComponents.Light.DarkActionBar",
-	MainLauncher = true,
-	ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize | ConfigChanges.Density)]
+	MainLauncher = true)]
 public class MainActivity : SpiceActivity
 {
 	protected override void OnCreate(Bundle savedInstanceState)

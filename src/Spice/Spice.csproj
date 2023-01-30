@@ -8,6 +8,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<SingleProject>true</SingleProject>
+		<DefineConstants Condition=" '$(TargetFramework)' == 'net7.0' ">$(DefineConstants);VANILLA</DefineConstants>
 	</PropertyGroup>
 
 	<ItemGroup>
