@@ -22,7 +22,7 @@ public partial class View
 	public Android.Views.View NativeView => _nativeView.Value;
 
 	readonly Android.Views.ViewGroup.LayoutParams _layoutParameters =
-		new(Android.Views.ViewGroup.LayoutParams.WrapContent, Android.Views.ViewGroup.LayoutParams.WrapContent);
+		new(Android.Views.ViewGroup.LayoutParams.MatchParent, Android.Views.ViewGroup.LayoutParams.MatchParent);
 
 	partial void OnHorizontalAlignChanged(Align value)
 	{
