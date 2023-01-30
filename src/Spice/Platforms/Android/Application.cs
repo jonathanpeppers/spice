@@ -8,7 +8,6 @@ public partial class Application
 
 	public Application(Context context) : base(context) { }
 
-#pragma warning disable MVVMTK0034
 	partial void OnMainChanging(View? value)
 	{
 		if (_main != null)
@@ -16,7 +15,6 @@ public partial class Application
 			NativeView.RemoveView(_main);
 		}
 	}
-#pragma warning restore MVVMTK0034
 
 	partial void OnMainChanged(View? value)
 	{

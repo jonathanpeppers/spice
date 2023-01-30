@@ -360,3 +360,5 @@ dotnet_naming_style.s_camelcase.required_suffix =
 dotnet_naming_style.s_camelcase.word_separator = 
 dotnet_naming_style.s_camelcase.capitalization = camel_case
 
+# CommunityToolkit.Mvvm
+dotnet_analyzer_diagnostic.category-CommunityToolkit.Mvvm.SourceGenerators.ObservablePropertyGenerator.severity = none
