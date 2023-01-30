@@ -53,7 +53,7 @@ public partial class View
 				_layoutParameters.Width = Android.Views.ViewGroup.LayoutParams.MatchParent;
 				break;
 			default:
-				throw new NotSupportedException($"Align value '{value}' not supported!");
+				throw new NotSupportedException($"{nameof(HorizontalAlign)} value '{value}' not supported!");
 		}
 	}
 
@@ -80,7 +80,7 @@ public partial class View
 				_layoutParameters.Height = Android.Views.ViewGroup.LayoutParams.MatchParent;
 				break;
 			default:
-				throw new NotSupportedException($"Align value '{value}' not supported!");
+				throw new NotSupportedException($"{nameof(VerticalAlign)} value '{value}' not supported!");
 		}
 	}
 }
