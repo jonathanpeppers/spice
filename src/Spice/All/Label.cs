@@ -2,5 +2,5 @@ namespace Spice;
 
 public partial class Label : View
 {
-    public string Text { get; set; } = "";
+	public string Text { get; set; } = "";
 }

@@ -2,23 +2,25 @@
 
 public class App : Application
 {
-    public App ()
-    {
-        int count = 0;
+	public App()
+	{
+		int count = 0;
 
-        var label = new Label {
-            Text = "Hello, Spice! 🌶",
-            Align = Align.Center,
-        };
+		var label = new Label
+		{
+			Text = "Hello, Spice! 🌶",
+			Align = Align.Center,
+		};
 
-        var button = new Button {
-            Text = "Click Me",
-            Clicked = _ => label.Text = $"Times: {++count}"
-        };
+		var button = new Button
+		{
+			Text = "Click Me",
+			Clicked = _ => label.Text = $"Times: {++count}"
+		};
 
-        Main = new View {
-            label,
-            button,
-        };
-    }
+		Main = new View {
+			label,
+			button,
+		};
+	}
 }
