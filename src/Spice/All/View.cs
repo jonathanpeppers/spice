@@ -1,26 +1,13 @@
 using System.Collections;
+using System.Collections.ObjectModel;
 
 namespace Spice;
 
 public partial class View : ObservableObject, IEnumerable<View>
 {
-	public View this[int index]
-	{
-		get => Children[index];
-		set => Children[index] = value;
-	}
+	public ObservableCollection<View> Children { get; set; } = new();
 
-	public IList<View> Children { get; set; } = new List<View>();
-
-	public
-#if !VANILLA
-		partial
-#endif
-		void Add(View item)
-#if VANILLA
-		=> Children.Add(item)
-#endif
-	;
+	public void Add(View item) => Children.Add(item);
 
 	public IEnumerator<View> GetEnumerator() => Children.GetEnumerator();
 

@@ -9,21 +9,21 @@ public class App : Application
 		var label = new Label
 		{
 			Text = "Hello, Spice! 🌶",
-			HorizontalAlign = Align.Center,
-			VerticalAlign = Align.Center,
 		};
 
 		var button = new Button
 		{
 			Text = "Click Me",
-			HorizontalAlign = Align.Center,
-			VerticalAlign = Align.Center,
 			Clicked = _ => label.Text = $"Times: {++count}"
 		};
 
 		Main = new StackView {
-			label,
-			button,
+			HorizontalAlign = Align.Center,
+			VerticalAlign = Align.Center,
+			Children = {
+				label,
+				button,
+			}
 		};
 	}
 }
