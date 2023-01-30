@@ -4,11 +4,11 @@ namespace Spice;
 
 public partial class View
 {
-	public static implicit operator Android.Views.View(View view) => view.Android;
+	public static implicit operator Android.Views.View(View view) => view._nativeView;
 
-	public View() => Android = new Android.Views.View(Platform.Context);
+	public View() => _nativeView = new Android.Views.View(Platform.Context);
 
-	public View(Context context) => Android = new Android.Views.View(context);
+	public View(Context context) => _nativeView = new Android.Widget.RelativeLayout(context);
 
 #pragma warning disable CS8618
 	public View(bool inherited)
@@ -17,5 +17,7 @@ public partial class View
 		// NOTE: the purpose of this constructor is so types can prevent subclasses from creating controls
 	}
 
-	public Android.Views.View Android { get; private set; }
+	protected virtual Android.Views.View _nativeView { get; private set; }
+
+	public Android.Views.View NativeView => _nativeView;
 }
