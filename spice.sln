@@ -5,19 +5,16 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{48107061-5BFC-432A-8596-9F5317640928}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spice", "src\Spice\Spice.csproj", "{7CE31213-ADE5-48C4-8767-CCB81F506687}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spice", "src\Spice\Spice.csproj", "{7CE31213-ADE5-48C4-8767-CCB81F506687}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{3B2FB0DA-F456-4440-958A-54952C24F498}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spice.HelloWorld", "samples\Spice.HelloWorld\Spice.HelloWorld.csproj", "{ACFD1D42-5303-4ACE-BC79-6A32CC3675B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spice.HelloWorld", "samples\Spice.HelloWorld\Spice.HelloWorld.csproj", "{ACFD1D42-5303-4ACE-BC79-6A32CC3675B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{7CE31213-ADE5-48C4-8767-CCB81F506687}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -26,8 +23,13 @@ Global
 		{7CE31213-ADE5-48C4-8767-CCB81F506687}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ACFD1D42-5303-4ACE-BC79-6A32CC3675B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ACFD1D42-5303-4ACE-BC79-6A32CC3675B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACFD1D42-5303-4ACE-BC79-6A32CC3675B6}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{ACFD1D42-5303-4ACE-BC79-6A32CC3675B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACFD1D42-5303-4ACE-BC79-6A32CC3675B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACFD1D42-5303-4ACE-BC79-6A32CC3675B6}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7CE31213-ADE5-48C4-8767-CCB81F506687} = {48107061-5BFC-432A-8596-9F5317640928}
