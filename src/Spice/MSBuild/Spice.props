@@ -3,8 +3,11 @@
 		<UseMauiAssets Condition=" '$(UseMauiAssets)' == '' ">true</UseMauiAssets>
 	</PropertyGroup>
 
-	<!-- TODO: remove this before shipping -->
+	
 	<ItemGroup>
+		<!-- This tells VS Windows to load XamarinVS -->
+		<ProjectCapability Include="Maui" />
+		<!-- TODO: remove this before shipping -->
 		<ProjectCapability Include="MauiScenarioTesting" />
 	</ItemGroup>
 
