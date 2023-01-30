@@ -1,6 +1,4 @@
-﻿using Android.App;
-using Android.Content.PM;
-using Android.OS;
+﻿using Android.Content.PM;
 
 namespace Spice.HelloWorld;
 
@@ -11,4 +9,10 @@ namespace Spice.HelloWorld;
 	ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize | ConfigChanges.Density)]
 public class MainActivity : SpiceActivity
 {
+	protected override void OnCreate(Bundle savedInstanceState)
+	{
+		base.OnCreate(savedInstanceState);
+
+		SetContentView(new App(this));
+	}
 }

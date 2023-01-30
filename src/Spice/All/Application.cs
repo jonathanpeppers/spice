@@ -1,6 +1,6 @@
 namespace Spice;
 
-public class Application
+public class Application : View
 {
 	public View? Main { get; set; }
 }
