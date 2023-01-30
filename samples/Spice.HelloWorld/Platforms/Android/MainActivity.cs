@@ -13,6 +13,6 @@ public class MainActivity : SpiceActivity
 	{
 		base.OnCreate(savedInstanceState);
 
-		SetContentView(new App(this));
+		SetContentView(new App());
 	}
 }
