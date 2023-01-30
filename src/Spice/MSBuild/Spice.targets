@@ -1,0 +1,3 @@
+﻿<Project>
+	<Import Sdk="Microsoft.Maui.Sdk.net7" Project="Microsoft.Maui.Controls.SingleProject.targets" />
+</Project>

@@ -1,4 +1,4 @@
-﻿namespace Spice;
+﻿namespace Spice.HelloWorld;
 
 public class App : Application
 {
