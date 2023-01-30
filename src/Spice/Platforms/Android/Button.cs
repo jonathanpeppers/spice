@@ -4,30 +4,15 @@ namespace Spice;
 
 public partial class Button
 {
-	public static implicit operator Android.Views.View(Button button) => button.NativeView;
-
 	public static implicit operator Android.Widget.Button(Button button) => button.NativeView;
 
-	public Button() : base(inherited: true) => NativeView = new Android.Widget.Button(Platform.Context)
-	{
-		LayoutParameters = LayoutParameters
-	};
+	public Button() : base(Platform.Context!, c => new Android.Widget.Button(c)) { }
 
-	public Button(Context context) : base(inherited: true) => NativeView = new Android.Widget.Button(context)
-	{
-		LayoutParameters = LayoutParameters
-	};
+	public Button(Context context) : base(context, c => new Android.Widget.Button(c)) { }
 
-#pragma warning disable CS8618
-	public Button(bool inherited) : base(inherited)
-#pragma warning restore CS8618
-	{
-		// NOTE: the purpose of this constructor is so types can prevent subclasses from creating controls
-	}
+	public Button(Context context, Func<Context, Android.Views.View> creator) : base(context, creator) { }
 
-	public new Android.Widget.Button NativeView { get; private set; }
-
-	protected override Android.Views.View _nativeView => NativeView;
+	public new Android.Widget.Button NativeView => (Android.Widget.Button)_nativeView.Value;
 
 	EventHandler? _click;
 

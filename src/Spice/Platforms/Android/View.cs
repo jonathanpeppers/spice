@@ -4,24 +4,24 @@ namespace Spice;
 
 public partial class View
 {
-	public static implicit operator Android.Views.View(View view) => view._nativeView;
+	public static implicit operator Android.Views.View(View view) => view._nativeView.Value;
 
-	public View() => _nativeView = new Android.Views.View(Platform.Context);
+	public View() : this(Platform.Context!, c => new Android.Widget.RelativeLayout(c)) { }
 
-	public View(Context context) => _nativeView = new Android.Widget.RelativeLayout(context);
+	public View(Context context) : this(context, c => new Android.Widget.RelativeLayout(c)) { }
 
-#pragma warning disable CS8618
-	public View(bool inherited)
-#pragma warning restore CS8618
+	public View(Context context, Func<Context, Android.Views.View> creator) => _nativeView = new Lazy<Android.Views.View>(() =>
 	{
-		// NOTE: the purpose of this constructor is so types can prevent subclasses from creating controls
-	}
+		var view = creator(context);
+		view.LayoutParameters = _layoutParameters;
+		return view;
+	});
 
-	protected virtual Android.Views.View _nativeView { get; private set; }
+	protected readonly Lazy<Android.Views.View> _nativeView;
 
-	public Android.Views.View NativeView => _nativeView;
+	public Android.Views.View NativeView => _nativeView.Value;
 
-	protected readonly Android.Views.ViewGroup.LayoutParams LayoutParameters =
+	readonly Android.Views.ViewGroup.LayoutParams _layoutParameters =
 		new(Android.Views.ViewGroup.LayoutParams.WrapContent, Android.Views.ViewGroup.LayoutParams.WrapContent);
 
 	partial void OnHorizontalAlignChanged(Align value)
@@ -31,15 +31,14 @@ public partial class View
 			case Align.Center:
 			case Align.Start:
 			case Align.End:
-				LayoutParameters.Width = Android.Views.ViewGroup.LayoutParams.WrapContent;
+				_layoutParameters.Width = Android.Views.ViewGroup.LayoutParams.WrapContent;
 				break;
 			case Align.Stretch:
-				LayoutParameters.Width = Android.Views.ViewGroup.LayoutParams.MatchParent;
+				_layoutParameters.Width = Android.Views.ViewGroup.LayoutParams.MatchParent;
 				break;
 			default:
 				throw new NotSupportedException($"Align value '{value}' not supported!");
 		}
-		_nativeView.LayoutParameters = LayoutParameters;
 	}
 
 	partial void OnVerticalAlignChanged(Align value)
@@ -49,14 +48,13 @@ public partial class View
 			case Align.Center:
 			case Align.Start:
 			case Align.End:
-				LayoutParameters.Height = Android.Views.ViewGroup.LayoutParams.WrapContent;
+				_layoutParameters.Height = Android.Views.ViewGroup.LayoutParams.WrapContent;
 				break;
 			case Align.Stretch:
-				LayoutParameters.Height = Android.Views.ViewGroup.LayoutParams.MatchParent;
+				_layoutParameters.Height = Android.Views.ViewGroup.LayoutParams.MatchParent;
 				break;
 			default:
 				throw new NotSupportedException($"Align value '{value}' not supported!");
 		}
-		_nativeView.LayoutParameters = LayoutParameters;
 	}
 }
