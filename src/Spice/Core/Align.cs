@@ -2,8 +2,8 @@ namespace Spice;
 
 public enum Align
 {
-	Stretch,
 	Center,
+	Stretch,
 	Start,
 	End,
 }

@@ -8,6 +8,9 @@ public partial class Application
 
 	public Application(Context context) : base(context) { }
 
+	protected override Android.Views.ViewGroup.LayoutParams CreateLayoutParameters() =>
+		new RelativeLayout.LayoutParams(Android.Views.ViewGroup.LayoutParams.MatchParent, Android.Views.ViewGroup.LayoutParams.MatchParent);
+
 	partial void OnMainChanging(View? value)
 	{
 		if (_main != null)

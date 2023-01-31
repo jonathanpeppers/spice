@@ -18,16 +18,7 @@ public class App : Application
 			Clicked = _ => label.Text = $"Times: {++count}"
 		};
 
-		Main = new StackView
-		{
-			HorizontalAlign = Align.Center,
-			VerticalAlign = Align.Center,
-			BackgroundColor = Colors.Green,
-			Children =
-			{
-				label,
-				button,
-			}
-		};
+		BackgroundColor = Colors.CornflowerBlue;
+		Main = new StackView { label, button };
 	}
 }
