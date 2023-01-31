@@ -1,7 +1,5 @@
 ﻿using System.Collections.Specialized;
 
-using UIKit;
-
 namespace Spice;
 
 public partial class View
