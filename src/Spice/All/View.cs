@@ -18,4 +18,7 @@ public partial class View : ObservableObject, IEnumerable<View>
 
 	[ObservableProperty]
 	Align _verticalAlign;
+
+	[ObservableProperty]
+	Color? _backgroundColor;
 }

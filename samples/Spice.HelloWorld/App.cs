@@ -9,6 +9,7 @@ public class App : Application
 		var label = new Label
 		{
 			Text = "Hello, Spice! 🌶",
+			TextColor = Colors.Red,
 		};
 
 		var button = new Button
@@ -17,10 +18,13 @@ public class App : Application
 			Clicked = _ => label.Text = $"Times: {++count}"
 		};
 
-		Main = new StackView {
+		Main = new StackView
+		{
 			HorizontalAlign = Align.Center,
 			VerticalAlign = Align.Center,
-			Children = {
+			BackgroundColor = Colors.Green,
+			Children =
+			{
 				label,
 				button,
 			}

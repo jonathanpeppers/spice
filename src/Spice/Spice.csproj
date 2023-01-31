@@ -13,11 +13,14 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
+		<PackageReference Include="Microsoft.Maui.Graphics" Version="7.0.58" />
 	</ItemGroup>
 
 	<ItemGroup Condition=" '$(TargetPlatformIdentifier)' == 'Android' ">
 		<PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.6.0.1" />
 		<PackageReference Include="Xamarin.Google.Android.Material" Version="1.7.0.2" />
+		<AndroidJavaSource Include="Platforms/Android/*.java" />
+		<TransformFile Include="Platforms/Android/Transforms.xml" />
 	</ItemGroup>
 
 	<Import Sdk="Microsoft.NET.Sdk" Project="Sdk.targets" />

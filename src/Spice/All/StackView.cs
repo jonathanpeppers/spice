@@ -2,6 +2,6 @@
 
 public partial class StackView : View
 {
-    [ObservableProperty]
-    Orientation _orientation;
+	[ObservableProperty]
+	Orientation _orientation;
 }

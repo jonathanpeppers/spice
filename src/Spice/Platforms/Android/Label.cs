@@ -15,4 +15,16 @@ public partial class Label
 	public new TextView NativeView => (TextView)_nativeView.Value;
 
 	partial void OnTextChanged(string value) => NativeView.Text = value;
+
+	partial void OnTextColorChanged(Color? value)
+	{
+		if (value != null)
+		{
+			NativeView.SetTextColor(Interop.GetDefaultColorStateList(value.ToAndroidColor()));
+		}
+		else
+		{
+			NativeView.SetTextColor(null);
+		}
+	}
 }
