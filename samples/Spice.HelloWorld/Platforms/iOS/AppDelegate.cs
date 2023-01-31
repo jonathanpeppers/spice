@@ -2,10 +2,23 @@
 
 namespace Spice.HelloWorld;
 
-//TODO: iOS
+[Register("AppDelegate")]
+public class AppDelegate : SpiceAppDelegate
+{
+	public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+	{
+		base.FinishedLaunching(application, launchOptions);
 
-//[Register("AppDelegate")]
-//public class AppDelegate : MauiUIApplicationDelegate
-//{
-//	protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
-//}
+		ArgumentNullException.ThrowIfNull(Window);
+
+		var app = new App();
+		app.NativeView.Frame = Window.Frame;
+
+		var vc = new UIViewController();
+		vc.View!.AddSubview(app);
+		Window.RootViewController = vc;
+		Window.MakeKeyAndVisible();
+
+		return true;
+	}
+}
