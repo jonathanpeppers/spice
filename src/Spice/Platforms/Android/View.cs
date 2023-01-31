@@ -82,7 +82,7 @@ public partial class View
 
 		if (_layoutParameters.Value is LinearLayout.LayoutParams linearParameters)
 		{
-			UpdateGravity(linearParameters);
+			UpdateLinearParameters(linearParameters);
 		}
 	}
 
@@ -117,11 +117,11 @@ public partial class View
 
 		if (_layoutParameters.Value is LinearLayout.LayoutParams linearParameters)
 		{
-			UpdateGravity(linearParameters);
+			UpdateLinearParameters(linearParameters);
 		}
 	}
 
-	void UpdateGravity(LinearLayout.LayoutParams linearParameters)
+	void UpdateLinearParameters(LinearLayout.LayoutParams linearParameters)
 	{
 		var gravity = Android.Views.GravityFlags.NoGravity;
 		int height = Android.Views.ViewGroup.LayoutParams.WrapContent, width = Android.Views.ViewGroup.LayoutParams.WrapContent;
