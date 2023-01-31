@@ -5,7 +5,15 @@ public partial class StackView
 {
 	public static implicit operator LinearLayout(StackView stackView) => stackView.NativeView;
 
-	public StackView() : base(Platform.Context!,
+	public StackView() : this(Platform.Context!,
+		c => new LinearLayout(c)
+		{
+			// TODO: reduce JNI calls
+			Orientation = Android.Widget.Orientation.Vertical
+		})
+	{ }
+
+	public StackView(Context context) : this(context,
 		c => new LinearLayout(c)
 		{
 			// TODO: reduce JNI calls
