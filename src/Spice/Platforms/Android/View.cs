@@ -88,27 +88,7 @@ public partial class View
 
 		if (_layoutParameters.Value is LinearLayout.LayoutParams linearParameters)
 		{
-			switch (value)
-			{
-				case Align.Center:
-					linearParameters.Width = Android.Views.ViewGroup.LayoutParams.WrapContent;
-					linearParameters.Gravity = Android.Views.GravityFlags.CenterHorizontal;
-					break;
-				case Align.Start:
-					linearParameters.Width = Android.Views.ViewGroup.LayoutParams.WrapContent;
-					linearParameters.Gravity = Android.Views.GravityFlags.Left;
-					break;
-				case Align.End:
-					linearParameters.Width = Android.Views.ViewGroup.LayoutParams.WrapContent;
-					linearParameters.Gravity = Android.Views.GravityFlags.Right;
-					break;
-				case Align.Stretch:
-					linearParameters.Width = Android.Views.ViewGroup.LayoutParams.MatchParent;
-					linearParameters.Gravity = Android.Views.GravityFlags.FillHorizontal;
-					break;
-				default:
-					throw new NotSupportedException($"{nameof(HorizontalAlign)} value '{value}' not supported!");
-			}
+			UpdateGravity(linearParameters);
 		}
 	}
 
@@ -143,28 +123,57 @@ public partial class View
 
 		if (_layoutParameters.Value is LinearLayout.LayoutParams linearParameters)
 		{
-			switch (value)
-			{
-				case Align.Center:
-					linearParameters.Height = Android.Views.ViewGroup.LayoutParams.WrapContent;
-					linearParameters.Gravity = Android.Views.GravityFlags.CenterVertical;
-					break;
-				case Align.Start:
-					linearParameters.Height = Android.Views.ViewGroup.LayoutParams.WrapContent;
-					linearParameters.Gravity = Android.Views.GravityFlags.Top;
-					break;
-				case Align.End:
-					linearParameters.Height = Android.Views.ViewGroup.LayoutParams.WrapContent;
-					linearParameters.Gravity = Android.Views.GravityFlags.Bottom;
-					break;
-				case Align.Stretch:
-					linearParameters.Height = Android.Views.ViewGroup.LayoutParams.MatchParent;
-					linearParameters.Gravity = Android.Views.GravityFlags.FillVertical;
-					break;
-				default:
-					throw new NotSupportedException($"{nameof(VerticalAlign)} value '{value}' not supported!");
-			}
+			UpdateGravity(linearParameters);
 		}
+	}
+
+	void UpdateGravity(LinearLayout.LayoutParams linearParameters)
+	{
+		var gravity = Android.Views.GravityFlags.NoGravity;
+		int height = Android.Views.ViewGroup.LayoutParams.WrapContent, width = Android.Views.ViewGroup.LayoutParams.WrapContent;
+
+		switch (_horizontalAlign)
+		{
+			case Align.Center:
+				gravity |= Android.Views.GravityFlags.CenterHorizontal;
+				break;
+			case Align.Start:
+				gravity |= Android.Views.GravityFlags.Left;
+				break;
+			case Align.End:
+				gravity |= Android.Views.GravityFlags.Right;
+				break;
+			case Align.Stretch:
+				height = Android.Views.ViewGroup.LayoutParams.MatchParent;
+				gravity |= Android.Views.GravityFlags.FillHorizontal;
+				break;
+			default:
+				throw new NotSupportedException($"{nameof(HorizontalAlign)} value '{_horizontalAlign}' not supported!");
+		}
+
+		switch (_verticalAlign)
+		{
+			case Align.Center:
+				gravity |= Android.Views.GravityFlags.CenterVertical;
+				break;
+			case Align.Start:
+				gravity |= Android.Views.GravityFlags.Top;
+				break;
+			case Align.End:
+				gravity |= Android.Views.GravityFlags.Bottom;
+				break;
+			case Align.Stretch:
+				height = Android.Views.ViewGroup.LayoutParams.MatchParent;
+				gravity |= Android.Views.GravityFlags.FillVertical;
+				break;
+			default:
+				throw new NotSupportedException($"{nameof(VerticalAlign)} value '{_verticalAlign}' not supported!");
+		}
+
+		// TODO: reduce JNI calls
+		linearParameters.Width = width;
+		linearParameters.Height = height;
+		linearParameters.Gravity = gravity;
 	}
 
 	partial void OnBackgroundColorChanged(Color? value) => _nativeView.Value.Background = value.ToAndroidDrawable();
