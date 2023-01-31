@@ -2,9 +2,9 @@
 
 public partial class Application
 {
-	public Application() { }
+	public Application() : base(() => new UIView(Platform.Window!.Frame) { AutoresizingMask = UIViewAutoresizing.All }) { }
 
-	public Application(CGRect frame) : base(frame) { }
+	public Application(CGRect frame) : base(() => new UIView(frame) { AutoresizingMask = UIViewAutoresizing.All }) { }
 
 	partial void OnMainChanging(View? value)
 	{
@@ -19,6 +19,7 @@ public partial class Application
 		if (value != null)
 		{
 			NativeView.AddSubview(value);
+			value.UpdateAlign();
 		}
 	}
 }

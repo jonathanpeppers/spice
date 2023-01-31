@@ -4,9 +4,9 @@ public partial class Label
 {
 	public static implicit operator UILabel(Label label) => label.NativeView;
 
-	public Label() : base(() => new UILabel { AutoresizingMask = UIViewAutoresizing.All }) { }
+	public Label() : base(() => new UILabel { TranslatesAutoresizingMaskIntoConstraints = false }) { }
 
-	public Label(CGRect rect) : base(() => new UILabel(rect) { AutoresizingMask = UIViewAutoresizing.All }) { }
+	public Label(CGRect rect) : base(() => new UILabel(rect) { TranslatesAutoresizingMaskIntoConstraints = false }) { }
 
 	public Label(Func<UIView> creator) : base(creator) { }
 

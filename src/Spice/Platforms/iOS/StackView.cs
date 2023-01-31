@@ -4,9 +4,9 @@ public partial class StackView
 {
 	public static implicit operator UIStackView(StackView stackView) => stackView.NativeView;
 
-	public StackView() : this(() => new UIStackView { AutoresizingMask = UIViewAutoresizing.All }) { }
+	public StackView() : this(() => new UIStackView { TranslatesAutoresizingMaskIntoConstraints = false }) { }
 
-	public StackView(CGRect frame) : this(() => new UIStackView(frame) { AutoresizingMask = UIViewAutoresizing.All }) { }
+	public StackView(CGRect frame) : this(() => new UIStackView(frame) { TranslatesAutoresizingMaskIntoConstraints = false }) { }
 
 	public StackView(Func<UIView> creator) : base(creator) { }
 
