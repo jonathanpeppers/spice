@@ -9,6 +9,8 @@
 		<Nullable>enable</Nullable>
 		<SingleProject>true</SingleProject>
 		<DefineConstants Condition=" '$(TargetFramework)' == 'net7.0' ">$(DefineConstants);VANILLA</DefineConstants>
+		<!-- Weird fix for VS Mac -->
+		<CreatePackage Condition=" '$(TargetFramework)' == 'net7.0-ios' ">false</CreatePackage>
 	</PropertyGroup>
 
 	<ItemGroup>
