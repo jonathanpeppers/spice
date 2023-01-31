@@ -6,7 +6,7 @@ public partial class StackView
 
 	public StackView() : this(() => new UIStackView { AutoresizingMask = UIViewAutoresizing.All }) { }
 
-	public StackView(CGRect rect) : this(() => new UIStackView(rect) { AutoresizingMask = UIViewAutoresizing.All }) { }
+	public StackView(CGRect frame) : this(() => new UIStackView(frame) { AutoresizingMask = UIViewAutoresizing.All }) { }
 
 	public StackView(Func<UIView> creator) : base(creator) { }
 

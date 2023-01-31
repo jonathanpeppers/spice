@@ -4,7 +4,7 @@ public partial class Application
 {
 	public Application() { }
 
-	public Application(CGRect rect) : base(rect) { }
+	public Application(CGRect frame) : base(frame) { }
 
 	partial void OnMainChanging(View? value)
 	{

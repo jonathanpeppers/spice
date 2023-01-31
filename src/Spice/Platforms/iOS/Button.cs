@@ -6,11 +6,15 @@ public partial class Button
 
 	public Button() : base(() => new UIButton { AutoresizingMask = UIViewAutoresizing.All }) { }
 
-	public Button(CGRect rect) : base(() => new UIButton(rect) { AutoresizingMask = UIViewAutoresizing.All }) { }
+	public Button(CGRect frame) : base(() => new UIButton(frame) { AutoresizingMask = UIViewAutoresizing.All }) { }
 
 	public Button(Func<UIView> creator) : base(creator) { }
 
 	public new UIButton NativeView => (UIButton)_nativeView.Value;
+
+	partial void OnTextChanged(string value) => NativeView.SetTitle(value, UIControlState.Normal);
+
+	partial void OnTextColorChanged(Color? value) => NativeView.SetTitleColor(value.ToUIColor(), UIControlState.Normal);
 
 	EventHandler? _click;
 

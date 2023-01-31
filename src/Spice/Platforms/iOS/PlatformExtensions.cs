@@ -1,6 +1,4 @@
-﻿using UIKit;
-
-namespace Spice;
+﻿namespace Spice;
 
 public static class PlatformExtensions
 {

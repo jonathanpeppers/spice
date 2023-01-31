@@ -14,6 +14,20 @@ public partial class Button
 
 	public new Android.Widget.Button NativeView => (Android.Widget.Button)_nativeView.Value;
 
+	partial void OnTextChanged(string value) => NativeView.Text = value;
+
+	partial void OnTextColorChanged(Color? value)
+	{
+		if (value != null)
+		{
+			NativeView.SetTextColor(Interop.GetDefaultColorStateList(value.ToAndroidColor()));
+		}
+		else
+		{
+			NativeView.SetTextColor(null);
+		}
+	}
+
 	EventHandler? _click;
 
 	partial void OnClickedChanged(Action<Button>? value)

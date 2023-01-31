@@ -8,7 +8,7 @@ public partial class View
 
 	public View() : this(() => new UIView { AutoresizingMask = UIViewAutoresizing.All }) { }
 
-	public View(CGRect rect) : this(() => new UIView(rect) { AutoresizingMask = UIViewAutoresizing.All }) { }
+	public View(CGRect frame) : this(() => new UIView(frame) { AutoresizingMask = UIViewAutoresizing.All }) { }
 
 	public View(Func<UIKit.UIView> creator)
 	{

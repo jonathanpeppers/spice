@@ -1,6 +1,4 @@
-﻿using Foundation;
-
-namespace Spice;
+﻿namespace Spice;
 
 public class SpiceAppDelegate : UIApplicationDelegate
 {
