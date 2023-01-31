@@ -44,12 +44,18 @@ public class App : Application
 
 ## Scope
 
-* No XAML. No DI. No MVVM. No MVC.
+* No XAML. No DI. No MVVM. No MVC. No data-binding. No System.Reflection.
 * Target iOS & Android only to start.
 * Implement only the simplest controls.
+* The native platforms do their own layout.
 * Document how to author custom controls.
+* Leverage C# Hot Reload for fast development.
 * Measure startup time & app size.
 * Profit?
+
+Some benefits of this approach are full support for trimming and
+eventually [NativeAOT](https://learn.microsoft.com/dotnet/core/deploying/native-aot/)
+if it comes to mobile one day. 😉
 
 ## Thoughts on .NET MAUI
 
