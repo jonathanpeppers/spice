@@ -6,6 +6,7 @@ In reviewing, many of the *cool* UI frameworks for mobile:
 * [SwiftUI](https://developer.apple.com/xcode/swiftui/)
 * [Jetpack Compose](https://developer.android.com/jetpack/compose)
 * [Fabulous](https://fabulous.dev/)
+* [Comet](https://github.com/dotnet/Comet)
 * An, of course, [.NET MAUI](https://dotnet.microsoft.com/apps/maui)!
 
 Looking at what apps look like today -- it seems like bunch of
