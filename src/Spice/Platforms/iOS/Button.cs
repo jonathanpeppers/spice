@@ -4,15 +4,22 @@ public partial class Button
 {
 	public static implicit operator UIButton(Button button) => button.NativeView;
 
-	public Button() : base(_ => new UIButton { AutoresizingMask = UIViewAutoresizing.FlexibleDimensions }) { }
+	public Button() : base(_ => new UIButton { AutoresizingMask = UIViewAutoresizing.None }) { }
 
-	public Button(CGRect frame) : base(_ => new UIButton(frame) { AutoresizingMask = UIViewAutoresizing.FlexibleDimensions }) { }
+	public Button(CGRect frame) : base(_ => new UIButton(frame) { AutoresizingMask = UIViewAutoresizing.None }) { }
 
 	public Button(Func<View, UIView> creator) : base(creator) { }
 
 	public new UIButton NativeView => (UIButton)_nativeView.Value;
 
-	partial void OnTextChanged(string value) => NativeView.SetTitle(value, UIControlState.Normal);
+	partial void OnTextChanged(string value)
+	{
+		NativeView.SetTitle(value, UIControlState.Normal);
+		if (HorizontalAlign != Align.Stretch && VerticalAlign != Align.Stretch)
+		{
+			NativeView.SizeToFit();
+		}
+	}
 
 	partial void OnTextColorChanged(Color? value) => NativeView.SetTitleColor(value.ToUIColor(), UIControlState.Normal);
 

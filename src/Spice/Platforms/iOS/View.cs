@@ -6,9 +6,9 @@ public partial class View
 {
 	public static implicit operator UIView(View view) => view._nativeView.Value;
 
-	public View() : this(_ => new UIView { AutoresizingMask = UIViewAutoresizing.FlexibleDimensions }) { }
+	public View() : this(_ => new UIView { AutoresizingMask = UIViewAutoresizing.None }) { }
 
-	public View(CGRect frame) : this(_ => new UIView(frame) { AutoresizingMask = UIViewAutoresizing.FlexibleDimensions }) { }
+	public View(CGRect frame) : this(_ => new UIView(frame) { AutoresizingMask = UIViewAutoresizing.None }) { }
 
 	public View(Func<View, UIKit.UIView> creator)
 	{
