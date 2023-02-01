@@ -13,8 +13,9 @@ Looking at what apps look like today -- it seems like bunch of
 rigamarole to me. Can we build mobile applications *without* design
 patterns?
 
-The idea is we could build apps in a simple way, in a similar vein
-(but not the same) as minimal APIs in ASP.NET Core:
+The idea is we could build apps in a simple way, in a similar vein as
+[minimal APIs in ASP.NET Core][minimal-apis] but for mobile & maybe
+one day desktop:
 
 ```csharp
 public class App : Application
@@ -39,6 +40,38 @@ public class App : Application
 }
 ```
 
+These "view" types are mostly just [POCOs][poco].
+
+Thus you can easily write unit tests in a vanilla `net7.0` Xunit
+project, such as:
+
+```csharp
+[Fact]
+public void Application()
+{
+    var app = new App();
+    Assert.Equal(2, app.Main.Children.Count);
+
+    var label = app.Main.Children[0] as Label;
+    Assert.NotNull(label);
+    var button = app.Main.Children[1] as Button;
+    Assert.NotNull(button);
+
+    button.Clicked(button);
+    Assert.Equal("Times: 1", label.Text);
+
+    button.Clicked(button);
+    Assert.Equal("Times: 2", label.Text);
+}
+```
+
+The above views in a `net7.0` project are not real UI, while
+`net7.0-android` and `net7.0-ios` projects get the full
+implementations that actually *do* something on screen.
+
+[poco]: https://en.wikipedia.org/wiki/Plain_old_CLR_object
+[minimal-apis]: https://learn.microsoft.com/aspnet/core/fundamentals/minimal-apis
+
 ## Scope
 
 * No XAML. No DI. No MVVM. No MVC. No data-binding. No System.Reflection.
@@ -51,8 +84,9 @@ public class App : Application
 * Profit?
 
 Some benefits of this approach are full support for trimming and
-eventually [NativeAOT](https://learn.microsoft.com/dotnet/core/deploying/native-aot/)
-if it comes to mobile one day. 😉
+eventually [NativeAOT][nativeaot] if it comes to mobile one day. 😉
+
+[nativeaot]: https://learn.microsoft.com/dotnet/core/deploying/native-aot/
 
 ## Thoughts on .NET MAUI
 
