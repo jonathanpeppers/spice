@@ -9,6 +9,8 @@
 		<Nullable>enable</Nullable>
 		<SingleProject>true</SingleProject>
 		<IsTrimmable>true</IsTrimmable>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 		<DefineConstants Condition=" '$(TargetFramework)' == 'net7.0' ">$(DefineConstants);VANILLA</DefineConstants>
 		<!-- Weird fix for VS Mac -->
 		<CreatePackage Condition=" '$(TargetFramework)' == 'net7.0-ios' ">false</CreatePackage>
