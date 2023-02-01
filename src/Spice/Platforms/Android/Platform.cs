@@ -4,5 +4,5 @@ namespace Spice;
 
 class Platform
 {
-	public static Context? Context { get; set; }
+	public static Context Context { get; set; } = null!;
 }

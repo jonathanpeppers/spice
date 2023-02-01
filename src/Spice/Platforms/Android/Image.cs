@@ -8,11 +8,13 @@ public partial class Image
 
 	static ImageView Create(Context context) => new(context);
 
-	public Image() : this(Platform.Context!, Create) { }
+	public Image() : this(Platform.Context, Create) { }
 
 	public Image(Context context) : this(context, Create) { }
 
-	public Image(Context context, Func<Context, Android.Views.View> creator) : base(context, creator) { }
+	protected Image(Func<Context, Android.Views.View> creator) : this(Platform.Context, creator) { }
+
+	protected Image(Context context, Func<Context, Android.Views.View> creator) : base(context, creator) { }
 
 	public new ImageView NativeView => (ImageView)_nativeView.Value;
 

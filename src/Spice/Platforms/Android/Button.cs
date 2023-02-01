@@ -8,11 +8,13 @@ public partial class Button
 
 	static Android.Widget.Button Create(Context context) => new(context);
 
-	public Button() : this(Platform.Context!, Create) { }
+	public Button() : this(Platform.Context, Create) { }
 
 	public Button(Context context) : this(context, Create) { }
 
-	public Button(Context context, Func<Context, Android.Views.View> creator) : base(context, creator) { }
+	protected Button(Func<Context, Android.Views.View> creator) : this(Platform.Context, creator) { }
+
+	protected Button(Context context, Func<Context, Android.Views.View> creator) : base(context, creator) { }
 
 	public new Android.Widget.Button NativeView => (Android.Widget.Button)_nativeView.Value;
 

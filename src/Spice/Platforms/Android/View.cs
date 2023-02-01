@@ -9,11 +9,13 @@ public partial class View
 
 	static RelativeLayout Create(Context context) => new(context);
 
-	public View() : this(Platform.Context!, Create) { }
+	public View() : this(Platform.Context, Create) { }
 
 	public View(Context context) : this(context, Create) { }
 
-	public View(Context context, Func<Context, Android.Views.View> creator)
+	protected View(Func<Context, Android.Views.View> creator) : this(Platform.Context, creator) { }
+
+	protected View(Context context, Func<Context, Android.Views.View> creator)
 	{
 		_layoutParameters = new Lazy<Android.Views.ViewGroup.LayoutParams>(CreateLayoutParameters);
 		_nativeView = new Lazy<Android.Views.View>(() =>

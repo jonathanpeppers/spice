@@ -2,7 +2,7 @@
 
 public static class PlatformExtensions
 {
-	static readonly Lazy<float> Density = new(() => Platform.Context!.Resources!.DisplayMetrics!.Density);
+	static readonly Lazy<float> Density = new(() => Platform.Context.Resources!.DisplayMetrics!.Density);
 
 	public static int ToPixels(this int value) => (int)Math.Round(value * Density.Value);
 

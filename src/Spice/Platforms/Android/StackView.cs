@@ -16,11 +16,13 @@ public partial class StackView
 		return layout;
 	}
 
-	public StackView() : this(Platform.Context!, Create) { }
+	public StackView() : this(Platform.Context, Create) { }
 
 	public StackView(Context context) : this(context, Create) { }
 
-	public StackView(Context context, Func<Context, Android.Views.View> creator) : base(context, creator) { }
+	protected StackView(Func<Context, Android.Views.View> creator) : this(Platform.Context, creator) { }
+
+	protected StackView(Context context, Func<Context, Android.Views.View> creator) : base(context, creator) { }
 
 	public new LinearLayout NativeView => (LinearLayout)_nativeView.Value;
 

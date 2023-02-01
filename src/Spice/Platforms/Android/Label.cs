@@ -8,11 +8,13 @@ public partial class Label
 
 	static TextView Create(Context context) => new(context);
 
-	public Label() : base(Platform.Context!, Create) { }
+	public Label() : base(Platform.Context, Create) { }
 
 	public Label(Context context) : base(context, Create) { }
 
-	public Label(Context context, Func<Context, Android.Views.View> creator) : base(context, creator) { }
+	protected Label(Func<Context, Android.Views.View> creator) : base(Platform.Context, creator) { }
+
+	protected Label(Context context, Func<Context, Android.Views.View> creator) : base(context, creator) { }
 
 	public new TextView NativeView => (TextView)_nativeView.Value;
 

@@ -69,6 +69,28 @@ The above views in a `net7.0` project are not real UI, while
 `net7.0-android` and `net7.0-ios` projects get the full
 implementations that actually *do* something on screen.
 
+So for example, adding `App` to the screen on Android:
+
+```csharp
+protected override void OnCreate(Bundle savedInstanceState)
+{
+    base.OnCreate(savedInstanceState);
+
+    SetContentView(new App());
+}
+```
+
+And on iOS:
+
+```csharp
+var vc = new UIViewController();
+vc.View!.AddSubview(new App());
+Window.RootViewController = vc;
+```
+
+`App` is a native view on both platforms. You just add it to an
+existing app as you would any other control or view.
+
 [poco]: https://en.wikipedia.org/wiki/Plain_old_CLR_object
 [minimal-apis]: https://learn.microsoft.com/aspnet/core/fundamentals/minimal-apis
 
@@ -102,3 +124,85 @@ Spice will even leverage various parts of .NET MAUI:
 
 And, of course, you should be able to use Microsoft.Maui.Essentials by
 opting in with `UseMauiEssentials=true`.
+
+It is an achievement in itself that I was able to invent my own UI
+framework and pick and choose the pieces of .NET MAUI that made sense
+for my framework.
+
+## Implemented Controls
+
+* `View`: maps to `Android.Views.View` and `UIKit.View`.
+* `Label`: maps to `Android.Widget.TextView` and `UIKit.UILabel`
+* `Button`: maps to `Android.Widget.Button` and `UIKit.UIButton`
+* `StackView`: maps to `Android.Widget.LinearLayout` and `UIKit.UIStackView`
+* `Image`: maps to `Android.Widget.ImageView` and `UIKit.UIImageView`
+
+## Custom Controls
+
+Let's review an implementation for `Image`.
+
+First, you can write the cross-platform part for a vanilla `net7.0`
+class library:
+
+```csharp
+public partial class Image : View
+{
+    [ObservableProperty]
+    string _source = "";
+}
+```
+
+`[ObservableProperty]` comes from the [MVVM Community
+Toolkit][observable] -- I made use of it for simplicity. It will
+automatically generate various `partial` methods,
+`INotifyPropertyChanged`, and a `public` property named `Source`.
+
+We can implement the control on Android, such as:
+
+```csharp
+public partial class Image
+{
+    public static implicit operator ImageView(Image image) => image.NativeView;
+
+    public Image() : this(c => new ImageView(c)) { }
+
+    public new ImageView NativeView => (ImageView)_nativeView.Value;
+
+    partial void OnSourceChanged(string value)
+    {
+        // NOTE: I actually implemented this in Java for performance reasons
+        var image = NativeView;
+        var context = image.Context;
+        int id = context.Resources!.GetIdentifier(value, "drawable", context.PackageName);
+        if (id != 0) 
+        {
+            image.SetImageResource(id);
+        }
+    }
+}
+```
+
+This code takes the name of an image, and looks up a drawable with the
+same name. This also leverages the .NET MAUI asset system, so a
+`spice.svg` can simply be loaded via `new Image { Source = "spice" }`.
+
+Lastly, the iOS implementation:
+
+```csharp
+public partial class Image
+{
+    public static implicit operator UIImageView(Image image) => image.NativeView;
+
+    public Image() : base(_ => new UIImageView { AutoresizingMask = UIViewAutoresizing.None }) { }
+
+    public new UIImageView NativeView => (UIImageView)_nativeView.Value;
+
+    partial void OnSourceChanged(string value) => NativeView.Image = UIImage.FromFile($"{value}.png");
+}
+```
+
+This implementation is a bit simpler, all we have to do is call
+`UIImage.FromFile()` and make sure to append a `.png` file extension
+that the MAUI asset system generates.
+
+[observable]: https://learn.microsoft.com/dotnet/communitytoolkit/mvvm/generators/observableproperty
