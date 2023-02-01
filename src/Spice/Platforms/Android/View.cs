@@ -7,9 +7,11 @@ public partial class View
 {
 	public static implicit operator Android.Views.View(View view) => view._nativeView.Value;
 
-	public View() : this(Platform.Context!, c => new RelativeLayout(c)) { }
+	static RelativeLayout Create(Context context) => new(context);
 
-	public View(Context context) : this(context, c => new RelativeLayout(c)) { }
+	public View() : this(Platform.Context!, Create) { }
+
+	public View(Context context) : this(context, Create) { }
 
 	public View(Context context, Func<Context, Android.Views.View> creator)
 	{

@@ -6,9 +6,11 @@ public partial class Button
 {
 	public static implicit operator Android.Widget.Button(Button button) => button.NativeView;
 
-	public Button() : base(Platform.Context!, c => new Android.Widget.Button(c)) { }
+	static Android.Widget.Button Create(Context context) => new(context);
 
-	public Button(Context context) : base(context, c => new Android.Widget.Button(c)) { }
+	public Button() : this(Platform.Context!, Create) { }
+
+	public Button(Context context) : this(context, Create) { }
 
 	public Button(Context context, Func<Context, Android.Views.View> creator) : base(context, creator) { }
 

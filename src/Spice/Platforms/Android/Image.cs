@@ -6,9 +6,11 @@ public partial class Image
 {
 	public static implicit operator ImageView(Image image) => image.NativeView;
 
-	public Image() : this(Platform.Context!, c => new ImageView(c)) { }
+	static ImageView Create(Context context) => new(context);
 
-	public Image(Context context) : this(context, c => new ImageView(c)) { }
+	public Image() : this(Platform.Context!, Create) { }
+
+	public Image(Context context) : this(context, Create) { }
 
 	public Image(Context context, Func<Context, Android.Views.View> creator) : base(context, creator) { }
 

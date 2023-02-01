@@ -1,4 +1,5 @@
 ﻿using Android.Content;
+
 namespace Spice;
 
 public partial class StackView

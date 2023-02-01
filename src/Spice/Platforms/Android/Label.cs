@@ -6,9 +6,11 @@ public partial class Label
 {
 	public static implicit operator TextView(Label label) => label.NativeView;
 
-	public Label() : base(Platform.Context!, c => new TextView(c)) { }
+	static TextView Create(Context context) => new TextView(context);
 
-	public Label(Context context) : base(context, c => new TextView(c)) { }
+	public Label() : base(Platform.Context!, Create) { }
+
+	public Label(Context context) : base(context, Create) { }
 
 	public Label(Context context, Func<Context, Android.Views.View> creator) : base(context, creator) { }
 
