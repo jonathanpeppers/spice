@@ -5,21 +5,19 @@ public partial class StackView
 {
 	public static implicit operator LinearLayout(StackView stackView) => stackView.NativeView;
 
-	public StackView() : this(Platform.Context!,
-		c => new LinearLayout(c)
+	static LinearLayout Create(Context context)
+	{
+		var layout = new LinearLayout(context)
 		{
-			// TODO: reduce JNI calls
-			Orientation = Android.Widget.Orientation.Vertical
-		})
-	{ }
+			Orientation = Android.Widget.Orientation.Vertical,
+		};
+		layout.SetGravity(Android.Views.GravityFlags.Center);
+		return layout;
+	}
 
-	public StackView(Context context) : this(context,
-		c => new LinearLayout(c)
-		{
-			// TODO: reduce JNI calls
-			Orientation = Android.Widget.Orientation.Vertical
-		})
-	{ }
+	public StackView() : this(Platform.Context!, Create) { }
+
+	public StackView(Context context) : this(context, Create) { }
 
 	public StackView(Context context, Func<Context, Android.Views.View> creator) : base(context, creator) { }
 
