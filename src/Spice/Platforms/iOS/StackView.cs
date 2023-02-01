@@ -4,9 +4,9 @@ public partial class StackView
 {
 	public static implicit operator UIStackView(StackView stackView) => stackView.NativeView;
 
-	public StackView() : this(v => new SpiceStackView((StackView)v) { AutoresizingMask = UIViewAutoresizing.None, Axis = UILayoutConstraintAxis.Vertical }) { }
+	public StackView() : this(v => new SpiceStackView((StackView)v) { AutoresizingMask = UIViewAutoresizing.None, Alignment = UIStackViewAlignment.Center, Axis = UILayoutConstraintAxis.Vertical }) { }
 
-	public StackView(CGRect frame) : this(v => new SpiceStackView((StackView)v, frame) { AutoresizingMask = UIViewAutoresizing.None, Axis = UILayoutConstraintAxis.Vertical }) { }
+	public StackView(CGRect frame) : this(v => new SpiceStackView((StackView)v, frame) { AutoresizingMask = UIViewAutoresizing.None, Alignment = UIStackViewAlignment.Center, Axis = UILayoutConstraintAxis.Vertical }) { }
 
 	public StackView(Func<View, UIView> creator) : base(creator) { }
 
@@ -25,6 +25,12 @@ public partial class StackView
 			default:
 				throw new NotSupportedException($"{nameof(Orientation)} value '{value}' not supported!");
 		}
+	}
+
+	protected override void AddSubview(View view)
+	{
+		NativeView.AddArrangedSubview(view);
+		view.UpdateAlign();
 	}
 
 	class SpiceStackView : UIStackView

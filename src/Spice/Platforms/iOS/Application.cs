@@ -18,8 +18,7 @@ public partial class Application
 	{
 		if (value != null)
 		{
-			NativeView.AddSubview(value);
-			value.UpdateAlign();
+			AddSubview(value);
 		}
 	}
 }

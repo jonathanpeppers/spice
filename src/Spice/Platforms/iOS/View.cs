@@ -21,6 +21,12 @@ public partial class View
 
 	public UIView NativeView => _nativeView.Value;
 
+	protected virtual void AddSubview(View view)
+	{
+		NativeView.AddSubview(view);
+		view.UpdateAlign();
+	}
+
 	void OnChildrenChanged(object? sender, NotifyCollectionChangedEventArgs e)
 	{
 		if (e.OldItems != null)
@@ -35,8 +41,7 @@ public partial class View
 		{
 			foreach (View item in e.NewItems)
 			{
-				NativeView.AddSubview(item);
-				item.UpdateAlign();
+				AddSubview(item);
 			}
 		}
 	}
