@@ -130,5 +130,5 @@ public partial class View
 		}
 	}
 
-	partial void OnBackgroundColorChanged(Color? value) => _nativeView.Value.Background = value.ToAndroidDrawable();
+	partial void OnBackgroundColorChanged(Color? value) => _nativeView.Value.SetBackgroundColor(value.ToAndroidColor());
 }

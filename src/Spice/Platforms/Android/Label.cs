@@ -22,7 +22,7 @@ public partial class Label
 	{
 		if (value != null)
 		{
-			NativeView.SetTextColor(Interop.GetDefaultColorStateList(value.ToAndroidColor()));
+			NativeView.SetTextColor(Interop.GetDefaultColorStateList(value.ToAndroidInt()));
 		}
 		else
 		{
