@@ -6,7 +6,7 @@ public partial class Label
 {
 	public static implicit operator TextView(Label label) => label.NativeView;
 
-	static TextView Create(Context context) => new TextView(context);
+	static TextView Create(Context context) => new(context);
 
 	public Label() : base(Platform.Context!, Create) { }
 
