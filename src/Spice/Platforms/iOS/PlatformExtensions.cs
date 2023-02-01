@@ -4,9 +4,6 @@ namespace Spice;
 
 public static class PlatformExtensions
 {
-	/// <summary>
-	/// TODO: when reducing JNI calls, this should create int instead
-	/// </summary>
 	public static UIColor? ToUIColor(this Color? color)
 	{
 		if (color == null)
