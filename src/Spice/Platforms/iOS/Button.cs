@@ -4,11 +4,11 @@ public partial class Button
 {
 	public static implicit operator UIButton(Button button) => button.NativeView;
 
-	public Button() : base(() => new UIButton { TranslatesAutoresizingMaskIntoConstraints = false }) { }
+	public Button() : base(_ => new UIButton { AutoresizingMask = UIViewAutoresizing.FlexibleDimensions }) { }
 
-	public Button(CGRect frame) : base(() => new UIButton(frame) { TranslatesAutoresizingMaskIntoConstraints = false }) { }
+	public Button(CGRect frame) : base(_ => new UIButton(frame) { AutoresizingMask = UIViewAutoresizing.FlexibleDimensions }) { }
 
-	public Button(Func<UIView> creator) : base(creator) { }
+	public Button(Func<View, UIView> creator) : base(creator) { }
 
 	public new UIButton NativeView => (UIButton)_nativeView.Value;
 

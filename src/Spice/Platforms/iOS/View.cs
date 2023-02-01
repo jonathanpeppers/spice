@@ -6,13 +6,13 @@ public partial class View
 {
 	public static implicit operator UIView(View view) => view._nativeView.Value;
 
-	public View() : this(() => new UIView { TranslatesAutoresizingMaskIntoConstraints = false }) { }
+	public View() : this(_ => new UIView { AutoresizingMask = UIViewAutoresizing.FlexibleDimensions }) { }
 
-	public View(CGRect frame) : this(() => new UIView(frame) { TranslatesAutoresizingMaskIntoConstraints = false }) { }
+	public View(CGRect frame) : this(_ => new UIView(frame) { AutoresizingMask = UIViewAutoresizing.FlexibleDimensions }) { }
 
-	public View(Func<UIKit.UIView> creator)
+	public View(Func<View, UIKit.UIView> creator)
 	{
-		_nativeView = new Lazy<UIView>(creator);
+		_nativeView = new Lazy<UIView>(() => creator(this));
 
 		Children.CollectionChanged += OnChildrenChanged;
 	}
@@ -50,27 +50,31 @@ public partial class View
 	internal void UpdateAlign()
 	{
 		var view = NativeView;
-		if (view.TranslatesAutoresizingMaskIntoConstraints)
-			return;
-
 		var superview = view.Superview;
 		if (superview == null || superview is UIStackView)
 			return;
 
+		var size = default(CGSize?);
+		var superframe = superview.Frame;
+		var frame = new CGRect();
+
 		switch (_horizontalAlign)
 		{
 			case Align.Center:
-				view.CenterXAnchor.ConstraintEqualTo(superview.CenterXAnchor).Active = true;
+				frame.Width = getSize().Width;
+				frame.X = (superframe.Width - frame.Width) / 2;
 				break;
 			case Align.Start:
-				view.LeftAnchor.ConstraintEqualTo(superview.LeftAnchor).Active = true;
+				frame.Width = getSize().Width;
+				frame.X = 0;
 				break;
 			case Align.End:
-				view.RightAnchor.ConstraintEqualTo(superview.RightAnchor).Active = true;
+				frame.Width = getSize().Width;
+				frame.X = superframe.Width - frame.Width;
 				break;
 			case Align.Stretch:
-				view.LeftAnchor.ConstraintEqualTo(superview.LeftAnchor).Active = true;
-				view.RightAnchor.ConstraintEqualTo(superview.RightAnchor).Active = true;
+				frame.Width = superframe.Width;
+				frame.X = 0;
 				break;
 			default:
 				throw new NotSupportedException($"{nameof(HorizontalAlign)} value '{_horizontalAlign}' not supported!");
@@ -79,20 +83,35 @@ public partial class View
 		switch (_horizontalAlign)
 		{
 			case Align.Center:
-				view.CenterYAnchor.ConstraintEqualTo(superview.CenterYAnchor).Active = true;
+				frame.Height = getSize().Height;
+				frame.Y = (superframe.Height - frame.Height) / 2;
 				break;
 			case Align.Start:
-				view.TopAnchor.ConstraintEqualTo(superview.TopAnchor).Active = true;
+				frame.Height = getSize().Height;
+				frame.Y = 0;
 				break;
 			case Align.End:
-				view.BottomAnchor.ConstraintEqualTo(superview.BottomAnchor).Active = true;
+				frame.Height = getSize().Height;
+				frame.Y = superframe.Height - frame.Height;
 				break;
 			case Align.Stretch:
-				view.TopAnchor.ConstraintEqualTo(superview.TopAnchor).Active = true;
-				view.BottomAnchor.ConstraintEqualTo(superview.BottomAnchor).Active = true;
+				frame.Height = superframe.Height;
+				frame.Y = 0;
 				break;
 			default:
 				throw new NotSupportedException($"{nameof(VerticalAlign)} value '{_verticalAlign}' not supported!");
+		}
+
+		// Set the actual frame
+		view.Frame = frame;
+
+		CGSize getSize()
+		{
+			if (size != null)
+				return size.Value;
+
+			view!.SizeToFit();
+			return (size = view.Frame.Size).Value;
 		}
 	}
 }

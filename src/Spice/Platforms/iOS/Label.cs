@@ -4,11 +4,11 @@ public partial class Label
 {
 	public static implicit operator UILabel(Label label) => label.NativeView;
 
-	public Label() : base(() => new UILabel { TranslatesAutoresizingMaskIntoConstraints = false }) { }
+	public Label() : base(_ => new UILabel { AutoresizingMask = UIViewAutoresizing.FlexibleDimensions }) { }
 
-	public Label(CGRect rect) : base(() => new UILabel(rect) { TranslatesAutoresizingMaskIntoConstraints = false }) { }
+	public Label(CGRect rect) : base(_ => new UILabel(rect) { AutoresizingMask = UIViewAutoresizing.FlexibleDimensions }) { }
 
-	public Label(Func<UIView> creator) : base(creator) { }
+	public Label(Func<View, UIView> creator) : base(creator) { }
 
 	public new UILabel NativeView => (UILabel)_nativeView.Value;
 

@@ -2,9 +2,9 @@
 
 public partial class Application
 {
-	public Application() : base(() => new UIView(Platform.Window!.Frame) { AutoresizingMask = UIViewAutoresizing.All }) { }
+	public Application() : base(_ => new UIView(Platform.Window!.Frame) { AutoresizingMask = UIViewAutoresizing.FlexibleDimensions }) { }
 
-	public Application(CGRect frame) : base(() => new UIView(frame) { AutoresizingMask = UIViewAutoresizing.All }) { }
+	public Application(CGRect frame) : base(_ => new UIView(frame) { AutoresizingMask = UIViewAutoresizing.FlexibleDimensions }) { }
 
 	partial void OnMainChanging(View? value)
 	{
