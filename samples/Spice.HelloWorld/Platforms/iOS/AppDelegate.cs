@@ -16,6 +16,9 @@ public class AppDelegate : SpiceAppDelegate
 		Window.RootViewController = vc;
 		Window.MakeKeyAndVisible();
 
+		// Uncomment to debug UI layout
+		//vc.View.DumpHierarchy();
+
 		return true;
 	}
 }

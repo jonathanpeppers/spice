@@ -1,4 +1,6 @@
-﻿namespace Spice;
+﻿using System.Diagnostics;
+
+namespace Spice;
 
 public static class PlatformExtensions
 {
@@ -15,5 +17,15 @@ public static class PlatformExtensions
 		int b = (int)Math.Round(color.Blue * byte.MaxValue);
 		int a = (int)Math.Round(color.Alpha * byte.MaxValue);
 		return UIColor.FromRGBA(r, g, b, a);
+	}
+
+	[Conditional("DEBUG")]
+	public static void DumpHierarchy(this UIView? view)
+	{
+		if (view == null)
+			return;
+		var selector = new ObjCRuntime.Selector("recursiveDescription");
+		var result = view.PerformSelector(selector);
+		Debug.WriteLine(result);
 	}
 }
