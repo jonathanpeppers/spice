@@ -9,7 +9,7 @@ public class App : Application
 		var label = new Label
 		{
 			Text = "Hello, Spice! 🌶",
-			TextColor = Colors.Red,
+			TextColor = Colors.Red
 		};
 
 		var button = new Button
@@ -19,6 +19,6 @@ public class App : Application
 		};
 
 		BackgroundColor = Colors.CornflowerBlue;
-		Main = new StackView { label, button };
+		Main = new StackView { new Image { Source = "spice" }, label, button };
 	}
 }
