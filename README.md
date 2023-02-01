@@ -164,7 +164,7 @@ public partial class Image
 {
     public static implicit operator ImageView(Image image) => image.NativeView;
 
-    public Image() : this(c => new ImageView(c)) { }
+    public Image() : base(c => new ImageView(c)) { }
 
     public new ImageView NativeView => (ImageView)_nativeView.Value;
 
