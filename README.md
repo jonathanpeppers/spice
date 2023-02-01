@@ -170,10 +170,10 @@ public partial class Image
 
     partial void OnSourceChanged(string value)
     {
-        // NOTE: I actually implemented this in Java for performance reasons
+        // NOTE: the real implementation is in Java for performance reasons
         var image = NativeView;
         var context = image.Context;
-        int id = context.Resources!.GetIdentifier(value, "drawable", context.PackageName);
+        int id = context!.Resources!.GetIdentifier(value, "drawable", context.PackageName);
         if (id != 0) 
         {
             image.SetImageResource(id);
