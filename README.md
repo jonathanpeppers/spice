@@ -267,3 +267,52 @@ or iOS view controllers if necessary.
 Hopefully, we can implement this for a future release of Visual Studio.
 
 [muh]: https://learn.microsoft.com/dotnet/api/system.reflection.metadata.metadataupdatehandlerattribute
+
+## Startup Time & App Size
+
+In comparison to a `dotnet new maui` project.
+
+Startup time for a `Release` build on a Pixel 5:
+
+Spice:
+```log
+02-02 16:42:18.363  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +277ms
+02-02 16:42:19.784  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +247ms
+02-02 16:42:21.309  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +256ms
+02-02 16:42:22.714  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +241ms
+02-02 16:42:24.156  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +260ms
+02-02 16:42:25.581  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +267ms
+02-02 16:42:27.016  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +251ms
+02-02 16:42:28.464  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +269ms
+02-02 16:42:29.879  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +244ms
+02-02 16:42:31.322  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +270ms
+Average(ms): 258.2
+Std Err(ms): 3.90099702355408
+Std Dev(ms): 12.3360357399684
+```
+
+.NET MAUI:
+```log
+02-02 16:45:33.614  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +540ms
+02-02 16:45:35.318  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +540ms
+02-02 16:45:37.026  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +555ms
+02-02 16:45:38.772  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +559ms
+02-02 16:45:40.499  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +542ms
+02-02 16:45:42.218  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +556ms
+02-02 16:45:43.938  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +540ms
+02-02 16:45:45.668  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +544ms
+02-02 16:45:47.387  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +533ms
+02-02 16:45:49.141  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +571ms
+Average(ms): 548
+Std Err(ms): 3.6998498468031
+Std Dev(ms): 11.6999525165228
+```
+
+App size:
+
+```
+10272496 com.companyname.HeadToHeadSpice-Signed.apk
+15180467 com.companyname.HeadToHeadMaui-Signed.apk
+```
+
+This gives you an idea of how much "stuff" is in .NET MAUI.
