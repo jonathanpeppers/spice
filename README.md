@@ -221,3 +221,38 @@ This implementation is a bit simpler, all we have to do is call
 that the MAUI asset system generates.
 
 [observable]: https://learn.microsoft.com/dotnet/communitytoolkit/mvvm/generators/observableproperty
+
+## Hot Reload
+
+C# Hot Reload (in Visual Studio) works fine, as it does for vanilla .NET
+iOS/Android apps:
+
+![Hot Reload Demo](docs/hotreload.gif)
+
+Unfortunately, `MetadataUpdateHandler` does not currently work for
+non-MAUI apps in Visual Studio 2022 17.5:
+
+```csharp
+[assembly: System.Reflection.Metadata.MetadataUpdateHandler(typeof(HotReload))]
+
+static class HotReload
+{
+    static void UpdateApplication(Type[]? updatedTypes)
+    {
+        if (updatedTypes == null)
+            return;
+        foreach (var type in updatedTypes)
+        {
+            // Do something with the type
+            Console.WriteLine("UpdateApplication: " + type);
+        }
+    }
+}
+```
+
+And so we can't add proper functionality for reloading `ctor`'s of
+Spice views. The general idea is we could recreate the `App` class and
+replace the views on screen. We could also create Android activities
+or iOS view controllers if necessary.
+
+Hopefully, we can implement this for a future release of Visual Studio.
