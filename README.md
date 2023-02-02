@@ -229,8 +229,14 @@ iOS/Android apps:
 
 ![Hot Reload Demo](docs/hotreload.gif)
 
-Unfortunately, `MetadataUpdateHandler` does not currently work for
-non-MAUI apps in Visual Studio 2022 17.5:
+Note that this only works for `Button.Clicked` because the method is
+invoked when you click. If the method that was changed was already
+run, *something* has to force it to run again.
+[`MetadataUpdateHandler`][muh] is the solution to this problem, giving
+frameworks a way to "reload themselves" for Hot Reload.
+
+Unfortunately, [`MetadataUpdateHandler`][muh] does not currently work
+for non-MAUI apps in Visual Studio 2022 17.5:
 
 ```csharp
 [assembly: System.Reflection.Metadata.MetadataUpdateHandler(typeof(HotReload))]
@@ -250,9 +256,14 @@ static class HotReload
 }
 ```
 
+The above code works fine in a `dotnet new maui` app, but not a
+`dotnet new spice` or `dotnet new android` application.
+
 And so we can't add proper functionality for reloading `ctor`'s of
 Spice views. The general idea is we could recreate the `App` class and
 replace the views on screen. We could also create Android activities
 or iOS view controllers if necessary.
 
 Hopefully, we can implement this for a future release of Visual Studio.
+
+[muh]: https://learn.microsoft.com/dotnet/api/system.reflection.metadata.metadataupdatehandlerattribute
