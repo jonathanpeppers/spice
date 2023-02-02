@@ -13,9 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spice.HelloWorld", "samples
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F5353B45-FDD2-4EE7-980A-FB84A87879F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spice.Tests", "tests\Spice.Tests\Spice.Tests.csproj", "{A341C61E-BE06-4C5E-A5CE-577A1B2F2CAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spice.Tests", "tests\Spice.Tests\Spice.Tests.csproj", "{A341C61E-BE06-4C5E-A5CE-577A1B2F2CAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spice.Templates", "src\Spice.Templates\Spice.Templates.csproj", "{B6D2589D-8C59-4BBF-8540-36A37160735A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spice.Templates", "src\Spice.Templates\Spice.Templates.csproj", "{B6D2589D-8C59-4BBF-8540-36A37160735A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeadToHeadSpice", "samples\HeadToHeadSpice\HeadToHeadSpice.csproj", "{8F5CD9C5-9538-4AEC-9A7F-5EA178110A35}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,11 @@ Global
 		{B6D2589D-8C59-4BBF-8540-36A37160735A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6D2589D-8C59-4BBF-8540-36A37160735A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6D2589D-8C59-4BBF-8540-36A37160735A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F5CD9C5-9538-4AEC-9A7F-5EA178110A35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F5CD9C5-9538-4AEC-9A7F-5EA178110A35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F5CD9C5-9538-4AEC-9A7F-5EA178110A35}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8F5CD9C5-9538-4AEC-9A7F-5EA178110A35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F5CD9C5-9538-4AEC-9A7F-5EA178110A35}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,5 +57,6 @@ Global
 		{ACFD1D42-5303-4ACE-BC79-6A32CC3675B6} = {3B2FB0DA-F456-4440-958A-54952C24F498}
 		{A341C61E-BE06-4C5E-A5CE-577A1B2F2CAA} = {F5353B45-FDD2-4EE7-980A-FB84A87879F1}
 		{B6D2589D-8C59-4BBF-8540-36A37160735A} = {48107061-5BFC-432A-8596-9F5317640928}
+		{8F5CD9C5-9538-4AEC-9A7F-5EA178110A35} = {3B2FB0DA-F456-4440-958A-54952C24F498}
 	EndGlobalSection
 EndGlobal
