@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Jonathan Peppers",
+    "classifications": [ "MAUI", "Android", "iOS" ],
+    "identity": "Spice.templates.spice",
+    "name": "Spice application",
+    "description": "A project for creating cross-platform applications in C#",
+    "shortName": "spice",
+    "tags": {
+      "language": "C#",
+      "type": "project"
+    },
+    "sourceName": "Hello",
+    "sources": [
+        {
+          "source": "./",
+          "target": "./",
+          "copyOnly": "**/*.svg"
+        }
+    ],
+    "preferNameDirectory": true,
+    "primaryOutputs": [
+      { "path": "Hello.csproj" }
+    ],
+    "defaultName": "Hello"
+}

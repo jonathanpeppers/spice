@@ -1,7 +1,7 @@
 ﻿using UIKit;
 using Foundation;
 
-namespace Spice.HelloWorld;
+namespace Hello;
 
 [Register("AppDelegate")]
 public class AppDelegate : SpiceAppDelegate
@@ -16,9 +16,6 @@ public class AppDelegate : SpiceAppDelegate
 		vc.View!.AddSubview(new App());
 		Window.RootViewController = vc;
 		Window.MakeKeyAndVisible();
-
-		// Uncomment to debug UI layout
-		//vc.View.DumpHierarchy();
 
 		return true;
 	}

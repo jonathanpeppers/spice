@@ -129,6 +129,21 @@ It is an achievement in itself that I was able to invent my own UI
 framework and pick and choose the pieces of .NET MAUI that made sense
 for my framework.
 
+## Getting Started
+
+Simply install the template:
+
+```bash
+dotnet new install Spice.Templates
+```
+
+Create the project and build it as you would for other .NET projects:
+
+```bash
+dotnet new spice
+dotnet build
+```
+
 ## Implemented Controls
 
 * `View`: maps to `Android.Views.View` and `UIKit.View`.

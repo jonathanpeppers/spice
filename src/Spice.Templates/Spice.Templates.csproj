@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.Build.NoTargets">
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <Description>Templates for Spice 🌶, a prototype UI framework for mobile</Description>
+    <PackageType>Template</PackageType>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <GenerateDependencyFile>false</GenerateDependencyFile>
+    <!-- This project has no .NET assemblies, so disable the warning for that -->
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+    <!-- Remove the `<group targetFramework="..." />` entry from the .nuspec. -->
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="../../LICENSE" Pack="true" PackagePath="" />
+    <Content Include="templates/**/*" />
+    <Compile Remove="**/*" />
+  </ItemGroup>
+</Project>

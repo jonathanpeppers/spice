@@ -1,4 +1,4 @@
 ﻿using UIKit;
-using Spice.HelloWorld;
+using Hello;
 
 UIApplication.Main(args, null, typeof(AppDelegate));

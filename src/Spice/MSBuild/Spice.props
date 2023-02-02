@@ -1,9 +1,4 @@
 ﻿<Project>
-	<PropertyGroup>
-		<UseMauiAssets Condition=" '$(UseMauiAssets)' == '' ">true</UseMauiAssets>
-	</PropertyGroup>
-
-	
 	<ItemGroup>
 		<!-- This tells VS Windows to load XamarinVS -->
 		<ProjectCapability Include="Maui" />

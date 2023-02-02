@@ -1,3 +1,7 @@
 ﻿<Project>
 	<Import Sdk="Microsoft.Maui.Sdk.net7" Project="Microsoft.Maui.Controls.SingleProject.targets" />
+
+	<ItemGroup Condition=" '$(SpiceEnablePlatformUsings)' != 'true' and ('$(ImplicitUsings)' == 'true' or '$(ImplicitUsings)' == 'enable') ">
+		<Using Remove="@(Using->HasMetadata('Platform'))" />
+	</ItemGroup>
 </Project>

@@ -7,8 +7,10 @@
         <TargetFrameworks>net7.0-android;net7.0-ios</TargetFrameworks>
         <OutputType>Exe</OutputType>
         <RootNamespace>Spice.HelloWorld</RootNamespace>
+        <UseMauiAssets>true</UseMauiAssets>
         <SingleProject>true</SingleProject>
         <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
         <ApplicationTitle>Hello Spice</ApplicationTitle>
         <ApplicationId>com.companyname.spice.helloworld</ApplicationId>
         <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
