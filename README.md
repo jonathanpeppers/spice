@@ -120,7 +120,7 @@ Spice will even leverage various parts of .NET MAUI:
 * The iOS and Android workloads for .NET.
 * The .NET MAUI "Single Project" system.
 * The .NET MAUI "Asset" system, aka Resizetizer.
-* Microsoft.Maui.Graphics.
+* Microsoft.Maui.Graphics for primitives like `Color`.
 
 And, of course, you should be able to use Microsoft.Maui.Essentials by
 opting in with `UseMauiEssentials=true`.
