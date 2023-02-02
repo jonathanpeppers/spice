@@ -1,5 +1,11 @@
 # Spice 🌶, a spicy cross-platform UI framework!
 
+A prototype (and design) of API minimalism for mobile.
+
+If you like this idea, star for approval! Read on for details!
+
+## Background & Motivation
+
 In reviewing, many of the *cool* UI frameworks for mobile:
 
 * [Flutter](https://flutter.dev)
@@ -105,8 +111,8 @@ existing app as you would any other control or view.
 * Measure startup time & app size.
 * Profit?
 
-Some benefits of this approach are full support for trimming and
-eventually [NativeAOT][nativeaot] if it comes to mobile one day. 😉
+Benefits of this approach are full support for trimming and eventually
+[NativeAOT][nativeaot] if it comes to mobile one day. 😉
 
 [nativeaot]: https://learn.microsoft.com/dotnet/core/deploying/native-aot/
 
