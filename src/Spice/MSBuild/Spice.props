@@ -1,4 +1,8 @@
 ﻿<Project>
+	<PropertyGroup>
+		<!-- To attempt XAML hot reload features one day -->
+		<!--<IgnoreMauiXamlHotReloadCompatibilityCheck>true</IgnoreMauiXamlHotReloadCompatibilityCheck>-->
+	</PropertyGroup>
 	<ItemGroup>
 		<!-- This tells VS Windows to load XamarinVS -->
 		<ProjectCapability Include="Maui" />
