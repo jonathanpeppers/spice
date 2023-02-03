@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spice", "src\Spice\Spice.cs
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{3B2FB0DA-F456-4440-958A-54952C24F498}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spice.HelloWorld", "samples\Spice.HelloWorld\Spice.HelloWorld.csproj", "{ACFD1D42-5303-4ACE-BC79-6A32CC3675B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spice.Scenarios", "samples\Spice.Scenarios\Spice.Scenarios.csproj", "{ACFD1D42-5303-4ACE-BC79-6A32CC3675B6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F5353B45-FDD2-4EE7-980A-FB84A87879F1}"
 EndProject

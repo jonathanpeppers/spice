@@ -238,6 +238,40 @@ This implementation is a bit simpler, all we have to do is call
 `UIImage.FromFile()` and make sure to append a `.png` file extension
 that the MAUI asset system generates.
 
+Now, let's say you don't want to create a control from scratch.
+Imagine a "ghost button":
+
+```csharp
+class GhostButton : Button
+{
+    public GhostButton() => NativeView.Alpha = 0.5f;
+}
+```
+
+In this case, the `NativeView` property returns the underlying
+`Android.Widget.Button` or `UIKit.Button` that both conveniently have
+an `Alpha` property that ranges from 0.0f to 1.0f. The same code
+works on both platforms!
+
+Imagine the APIs were different, you could instead do:
+
+```csharp
+class GhostButton : Button
+{
+    public GhostButton
+    {
+#if ANDROID
+        NativeView.SomeAndroidAPI(0.5f);
+#elif IOS
+        NativeView.SomeiOSAPI(0.5f);
+#endif
+    }
+}
+```
+
+Accessing the native views don't require any weird design patterns.
+Just `#if` as you please.
+
 [observable]: https://learn.microsoft.com/dotnet/communitytoolkit/mvvm/generators/observableproperty
 
 ## Hot Reload

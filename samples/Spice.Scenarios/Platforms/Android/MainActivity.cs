@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.OS;
 
-namespace Spice.HelloWorld;
+namespace Spice.Scenarios;
 
 [Activity(
 	// TODO: fix splash theme

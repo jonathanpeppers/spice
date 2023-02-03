@@ -1,7 +1,7 @@
 ﻿using UIKit;
 using Foundation;
 
-namespace Spice.HelloWorld;
+namespace Spice.Scenarios;
 
 [Register("AppDelegate")]
 public class AppDelegate : SpiceAppDelegate

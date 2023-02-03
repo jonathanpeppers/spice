@@ -6,13 +6,13 @@
     <PropertyGroup>
         <TargetFrameworks>net7.0-android;net7.0-ios</TargetFrameworks>
         <OutputType>Exe</OutputType>
-        <RootNamespace>Spice.HelloWorld</RootNamespace>
+        <RootNamespace>Spice.Scenarios</RootNamespace>
         <UseMauiAssets>true</UseMauiAssets>
         <SingleProject>true</SingleProject>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <ApplicationTitle>Hello Spice</ApplicationTitle>
-        <ApplicationId>com.companyname.spice.helloworld</ApplicationId>
+        <ApplicationId>com.companyname.spice.scenarios</ApplicationId>
         <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
         <ApplicationVersion>1</ApplicationVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
