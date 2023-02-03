@@ -5,17 +5,15 @@ namespace Spice;
 public partial class Application
 {
 	/// <summary>
-	/// Application ctor
+	/// The root "view" of a Spice application. Set Main to a single view.
 	/// </summary>
 	public Application() { }
 
-	/// <summary>
-	/// Application ctor
-	/// </summary>
+	/// <inheritdoc />
 	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
 	public Application(Context context) : base(context) { }
 
-	/// <inheritdoc cref="F:Spice.View.CreateLayoutParameters" />
+	/// <inheritdoc />
 	protected override Android.Views.ViewGroup.LayoutParams CreateLayoutParameters() =>
 		new RelativeLayout.LayoutParams(Android.Views.ViewGroup.LayoutParams.MatchParent, Android.Views.ViewGroup.LayoutParams.MatchParent);
 

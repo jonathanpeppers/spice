@@ -9,19 +9,17 @@ public partial class Button
 	public static implicit operator UIButton(Button button) => button.NativeView;
 
 	/// <summary>
-	/// Button ctor
+	/// You know the button! Use the Clicked event.
+	/// Android -> Android.Widget.Button
+	/// iOS -> UIKit.UIButton
 	/// </summary>
 	public Button() : base(_ => new UIButton { AutoresizingMask = UIViewAutoresizing.None }) { }
 
-	/// <summary>
-	/// Button ctor
-	/// </summary>
+	/// <inheritdoc />
 	/// <param name="frame">Pass the underlying view a frame</param>
 	public Button(CGRect frame) : base(_ => new UIButton(frame) { AutoresizingMask = UIViewAutoresizing.None }) { }
 
-	/// <summary>
-	/// Button ctor
-	/// </summary>
+	/// <inheritdoc />
 	/// <param name="creator">Subclasses can pass in a Func to create a UIView</param>
 	protected Button(Func<View, UIView> creator) : base(creator) { }
 

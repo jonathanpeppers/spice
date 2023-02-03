@@ -8,7 +8,7 @@ namespace Spice;
 /// </summary>
 public class SpiceActivity : AppCompatActivity
 {
-	/// <inheritdoc cref="F:AndroidX.AppCompat.App.AppCompatActivity.OnCreate" />
+	/// <inheritdoc />
 	protected override void OnCreate(Bundle? savedInstanceState)
 	{
 		Platform.Context = this;

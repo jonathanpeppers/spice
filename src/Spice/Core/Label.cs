@@ -2,8 +2,8 @@ namespace Spice;
 
 /// <summary>
 /// Represents text on screen. Set the 
-/// Android -> Android.Widget.ImageView
-/// iOS -> UIKit.UIImageView
+/// Android -> Android.Widget.TextView
+/// iOS -> UIKit.UILabel
 /// </summary>
 public partial class Label : View
 {

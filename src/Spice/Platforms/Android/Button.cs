@@ -13,25 +13,21 @@ public partial class Button
 	static Android.Widget.Button Create(Context context) => new(context);
 
 	/// <summary>
-	/// Button ctor
+	/// You know the button! Use the Clicked event.
+	/// Android -> Android.Widget.Button
+	/// iOS -> UIKit.UIButton
 	/// </summary>
 	public Button() : this(Platform.Context, Create) { }
 
-	/// <summary>
-	/// Button ctor
-	/// </summary>
+	/// <inheritdoc />
 	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
 	public Button(Context context) : this(context, Create) { }
 
-	/// <summary>
-	/// Button ctor
-	/// </summary>
+	/// <inheritdoc />
 	/// <param name="creator">Subclasses can pass in a Func to create a Android.Views.View</param>
 	protected Button(Func<Context, Android.Views.View> creator) : this(Platform.Context, creator) { }
 
-	/// <summary>
-	/// Button ctor
-	/// </summary>
+	/// <inheritdoc />
 	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
 	/// <param name="creator">Subclasses can pass in a Func to create a Android.Views.View</param>
 	protected Button(Context context, Func<Context, Android.Views.View> creator) : base(context, creator) { }

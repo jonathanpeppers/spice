@@ -3,13 +3,11 @@
 public partial class Application
 {
 	/// <summary>
-	/// Application ctor
+	/// The root "view" of a Spice application. Set Main to a single view.
 	/// </summary>
 	public Application() : base(_ => new UIView(Platform.Window!.Frame) { AutoresizingMask = UIViewAutoresizing.All }) { }
 
-	/// <summary>
-	/// Application ctor
-	/// </summary>
+	/// <inheritdoc />
 	/// <param name="frame">Pass the underlying view a frame</param>
 	public Application(CGRect frame) : base(_ => new UIView(frame) { AutoresizingMask = UIViewAutoresizing.All }) { }
 

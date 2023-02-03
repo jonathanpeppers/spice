@@ -9,19 +9,17 @@ public partial class Image
 	public static implicit operator UIImageView(Image image) => image.NativeView;
 
 	/// <summary>
-	/// Image ctor
+	/// Represents an image on screen. Set the Source property such as "spice".
+	/// Android -> Android.Widget.ImageView
+	/// iOS -> UIKit.UIImageView
 	/// </summary>
 	public Image() : base(_ => new UIImageView { AutoresizingMask = UIViewAutoresizing.None }) { }
 
-	/// <summary>
-	/// Image ctor
-	/// </summary>
+	/// <inheritdoc />
 	/// <param name="frame">Pass the underlying view a frame</param>
 	public Image(CGRect frame) : base(_ => new UIImageView(frame) { AutoresizingMask = UIViewAutoresizing.None }) { }
 
-	/// <summary>
-	/// Image ctor
-	/// </summary>
+	/// <inheritdoc />
 	/// <param name="creator">Subclasses can pass in a Func to create a UIView</param>
 	protected Image(Func<View, UIView> creator) : base(creator) { }
 

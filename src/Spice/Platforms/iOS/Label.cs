@@ -9,19 +9,17 @@ public partial class Label
 	public static implicit operator UILabel(Label label) => label.NativeView;
 
 	/// <summary>
-	/// Label ctor
+	/// Represents text on screen. Set the 
+	/// Android -> Android.Widget.TextView
+	/// iOS -> UIKit.UILabel
 	/// </summary>
 	public Label() : base(_ => new UILabel { AutoresizingMask = UIViewAutoresizing.None }) { }
 
-	/// <summary>
-	/// Label ctor
-	/// </summary>
+	/// <inheritdoc />
 	/// <param name="frame">Pass the underlying view a frame</param>
 	public Label(CGRect frame) : base(_ => new UILabel(frame) { AutoresizingMask = UIViewAutoresizing.None }) { }
 
-	/// <summary>
-	/// Label ctor
-	/// </summary>
+	/// <inheritdoc />
 	/// <param name="creator">Subclasses can pass in a Func to create a UIView</param>
 	protected Label(Func<View, UIView> creator) : base(creator) { }
 

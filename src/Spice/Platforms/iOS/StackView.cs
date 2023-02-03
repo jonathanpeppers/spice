@@ -9,19 +9,17 @@ public partial class StackView
 	public static implicit operator UIStackView(StackView stackView) => stackView.NativeView;
 
 	/// <summary>
-	/// StackView ctor
+	/// A parent view for laying out child controls in a row. Defaults to Orientation=Vertical.
+	/// Android -> Android.Widget.LinearLayout
+	/// iOS -> UIKit.UIStackView
 	/// </summary>
 	public StackView() : this(v => new SpiceStackView((StackView)v) { AutoresizingMask = UIViewAutoresizing.None, Alignment = UIStackViewAlignment.Center, Axis = UILayoutConstraintAxis.Vertical }) { }
 
-	/// <summary>
-	/// StackView ctor
-	/// </summary>
+	/// <inheritdoc />
 	/// <param name="frame">Pass the underlying view a frame</param>
 	public StackView(CGRect frame) : this(v => new SpiceStackView((StackView)v, frame) { AutoresizingMask = UIViewAutoresizing.None, Alignment = UIStackViewAlignment.Center, Axis = UILayoutConstraintAxis.Vertical }) { }
 
-	/// <summary>
-	/// StackView ctor
-	/// </summary>
+	/// <inheritdoc />
 	/// <param name="creator">Subclasses can pass in a Func to create a UIView</param>
 	protected StackView(Func<View, UIView> creator) : base(creator) { }
 
@@ -45,7 +43,7 @@ public partial class StackView
 		}
 	}
 
-	/// <inheritdoc cref="F:Spice.View.AddSubview" />
+	/// <inheritdoc />
 	protected override void AddSubview(View view)
 	{
 		NativeView.AddArrangedSubview(view);
