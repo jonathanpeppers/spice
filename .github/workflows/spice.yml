@@ -26,6 +26,9 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 7.0.x
+        
+    - name: install workloads
+      run: dotnet workload install maui-android maui-ios --verbosity diag
 
     - name: tests
       run: dotnet test
