@@ -22,9 +22,6 @@ class HelloWorldScenario : StackView
 			Clicked = _ => label.Text = $"Times: {++count}"
 		};
 
-		HorizontalAlign = Align.Stretch;
-		VerticalAlign = Align.Stretch;
-		BackgroundColor = Colors.CornflowerBlue;
 		Add(new Image { Source = "spice" });
 		Add(label);
 		Add(button);

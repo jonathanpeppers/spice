@@ -20,9 +20,6 @@ class GhostButtonScenario : StackView
 			Clicked = _ => label.Text = $"Times: {++count}"
 		};
 
-		HorizontalAlign = Align.Stretch;
-		VerticalAlign = Align.Stretch;
-		BackgroundColor = Colors.LimeGreen;
 		Add(new Image { Source = "spice" });
 		Add(label);
 		Add(button);
