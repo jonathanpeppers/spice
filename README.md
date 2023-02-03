@@ -58,12 +58,8 @@ project, such as:
 public void Application()
 {
     var app = new App();
-    Assert.Equal(2, app.Main.Children.Count);
-
-    var label = app.Main.Children[0] as Label;
-    Assert.NotNull(label);
-    var button = app.Main.Children[1] as Button;
-    Assert.NotNull(button);
+    var label = (Label)app.Main.Children[0];
+    var button = (Button)app.Main.Children[1];
 
     button.Clicked(button);
     Assert.Equal("Times: 1", label.Text);
