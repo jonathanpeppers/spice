@@ -4,6 +4,8 @@ A prototype (and design) of API minimalism for mobile.
 
 If you like this idea, star for approval! Read on for details!
 
+![Spice running on iOS and Android](docs/spice.png)
+
 ## Background & Motivation
 
 In reviewing, many of the *cool* UI frameworks for mobile:
