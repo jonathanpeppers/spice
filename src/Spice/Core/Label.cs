@@ -1,7 +1,7 @@
 namespace Spice;
 
 /// <summary>
-/// Represents text on screen. Set the 
+/// Represents text on screen. Set the Text property to a string value.
 /// Android -> Android.Widget.TextView
 /// iOS -> UIKit.UILabel
 /// </summary>

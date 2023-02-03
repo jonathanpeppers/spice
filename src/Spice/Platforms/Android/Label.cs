@@ -13,33 +13,21 @@ public partial class Label
 	static TextView Create(Context context) => new(context);
 
 	/// <summary>
-	/// Represents text on screen. Set the 
+	/// Represents text on screen. Set the Text property to a string value.
 	/// Android -> Android.Widget.TextView
 	/// iOS -> UIKit.UILabel
 	/// </summary>
 	public Label() : base(Platform.Context, Create) { }
 
-	/// <summary>
-	/// Represents text on screen. Set the 
-	/// Android -> Android.Widget.TextView
-	/// iOS -> UIKit.UILabel
-	/// </summary>
+	/// <inheritdoc />
 	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
 	public Label(Context context) : base(context, Create) { }
 
-	/// <summary>
-	/// Represents text on screen. Set the 
-	/// Android -> Android.Widget.TextView
-	/// iOS -> UIKit.UILabel
-	/// </summary>
+	/// <inheritdoc />
 	/// <param name="creator">Subclasses can pass in a Func to create a Android.Views.View</param>
 	protected Label(Func<Context, Android.Views.View> creator) : base(Platform.Context, creator) { }
 
-	/// <summary>
-	/// Represents text on screen. Set the 
-	/// Android -> Android.Widget.TextView
-	/// iOS -> UIKit.UILabel
-	/// </summary>
+	/// <inheritdoc />
 	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
 	/// <param name="creator">Subclasses can pass in a Func to create a Android.Views.View</param>
 	protected Label(Context context, Func<Context, Android.Views.View> creator) : base(context, creator) { }
