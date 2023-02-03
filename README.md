@@ -78,7 +78,7 @@ implementations that actually *do* something on screen.
 So for example, adding `App` to the screen on Android:
 
 ```csharp
-protected override void OnCreate(Bundle savedInstanceState)
+protected override void OnCreate(Bundle? savedInstanceState)
 {
     base.OnCreate(savedInstanceState);
 
