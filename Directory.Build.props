@@ -3,11 +3,12 @@
     <!-- Projects have to opt in -->
     <IsPackable>false</IsPackable>
     <Version>0.1.0</Version>
-    <PackageVersion>$(Version)-alpha.1</PackageVersion>
+    <PackageVersion>$(Version)-alpha.2</PackageVersion>
     <Authors>Jonathan Peppers</Authors>
     <PackageProjectUrl>https://github.com/jonathanpeppers/spice</PackageProjectUrl>
     <PackageTags>.NET C# MAUI Mobile Android iOS</PackageTags>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageOutputPath>$(MSBuildThisFileDirectory)bin/$(Configuration)/</PackageOutputPath>
   </PropertyGroup>
 </Project>

@@ -22,6 +22,7 @@
 
 	<ItemGroup>
 		<None Include="../../LICENSE" Pack="true" PackagePath="" />
+		<None Include="README.md" Pack="true" PackagePath="" />
 		<None Include="MSBuild/**" Pack="true" PackagePath="build;buildTransitive" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
 		<PackageReference Include="Microsoft.Maui.Graphics" Version="7.0.58" />
