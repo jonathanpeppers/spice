@@ -8,8 +8,6 @@
 		<ProjectCapability Include="Maui" />
 		<!-- If we want to track Spice -->
 		<ProjectCapability Include="Spice" />
-		<!-- TODO: remove this before shipping -->
-		<ProjectCapability Include="MauiScenarioTesting" />
 	</ItemGroup>
 	<ItemGroup>
 		<!-- Deemed "safe enough" for now -->
