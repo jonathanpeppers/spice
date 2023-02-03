@@ -1,5 +1,7 @@
 <Project>
   <PropertyGroup>
+    <!-- Projects have to opt in -->
+    <IsPackable>false</IsPackable>
     <Version>0.1.0</Version>
     <PackageVersion>$(Version)-alpha.1</PackageVersion>
     <Authors>Jonathan Peppers</Authors>

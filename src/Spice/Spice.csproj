@@ -5,7 +5,8 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net7.0;net7.0-android;net7.0-ios</TargetFrameworks>
-		<Description>Spice 🌶, a prototype UI framework for mobile</Description>
+		<Description>Spice 🌶, a spicy UI framework for mobile</Description>
+		<IsPackable>true</IsPackable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<SingleProject>true</SingleProject>
