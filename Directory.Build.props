@@ -9,6 +9,7 @@
     <PackageTags>.NET C# MAUI Mobile Android iOS</PackageTags>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
     <PackageOutputPath>$(MSBuildThisFileDirectory)bin/$(Configuration)/</PackageOutputPath>
   </PropertyGroup>
 </Project>
