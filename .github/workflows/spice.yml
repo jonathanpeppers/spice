@@ -35,7 +35,7 @@ jobs:
     - name: tests
       run: dotnet test
 
-    - name: tests
+    - name: pack
       run: dotnet pack -bl:bin/pack.binlog
 
     - name: artifacts
