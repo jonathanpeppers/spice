@@ -7,6 +7,7 @@
 		<TargetFrameworks>net7.0;net7.0-android;net7.0-ios</TargetFrameworks>
 		<Description>Spice 🌶, a spicy UI framework for mobile</Description>
 		<IsPackable>true</IsPackable>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<SingleProject>true</SingleProject>
@@ -16,6 +17,7 @@
 		<DefineConstants Condition=" '$(TargetFramework)' == 'net7.0' ">$(DefineConstants);VANILLA</DefineConstants>
 		<SpiceEnablePlatformUsings>true</SpiceEnablePlatformUsings>
 		<AndroidGenerateResourceDesigner>false</AndroidGenerateResourceDesigner>
+		<_UseLegacyJavadocImport>true</_UseLegacyJavadocImport>
 	</PropertyGroup>
 
 	<ItemGroup>

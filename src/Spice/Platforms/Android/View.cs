@@ -5,16 +5,36 @@ namespace Spice;
 
 public partial class View
 {
+	/// <summary>
+	/// Returns view.NativeView
+	/// </summary>
+	/// <param name="view"></param>
 	public static implicit operator Android.Views.View(View view) => view._nativeView.Value;
 
 	static RelativeLayout Create(Context context) => new(context);
 
+	/// <summary>
+	/// View ctor
+	/// </summary>
 	public View() : this(Platform.Context, Create) { }
 
+	/// <summary>
+	/// View ctor
+	/// </summary>
+	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
 	public View(Context context) : this(context, Create) { }
 
+	/// <summary>
+	/// View ctor
+	/// </summary>
+	/// <param name="creator">Subclasses can pass in a Func to create a Android.Views.View</param>
 	protected View(Func<Context, Android.Views.View> creator) : this(Platform.Context, creator) { }
 
+	/// <summary>
+	/// View ctor
+	/// </summary>
+	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
+	/// <param name="creator">Subclasses can pass in a Func to create a Android.Views.View</param>
 	protected View(Context context, Func<Context, Android.Views.View> creator)
 	{
 		_layoutParameters = new Lazy<Android.Views.ViewGroup.LayoutParams>(CreateLayoutParameters);
@@ -28,9 +48,19 @@ public partial class View
 		Children.CollectionChanged += OnChildrenChanged;
 	}
 
+	/// <summary>
+	/// Subclasses can access the lazy LayoutParams
+	/// </summary>
 	protected readonly Lazy<Android.Views.ViewGroup.LayoutParams> _layoutParameters;
+	/// <summary>
+	/// Subclasses can access the lazy View
+	/// </summary>
 	protected readonly Lazy<Android.Views.View> _nativeView;
 
+	/// <summary>
+	/// Creates the LayoutParams for this view
+	/// </summary>
+	/// <returns>Android.Views.ViewGroup.LayoutParams</returns>
 	protected virtual Android.Views.ViewGroup.LayoutParams CreateLayoutParameters()
 	{
 		var layoutParameters = new RelativeLayout.LayoutParams(Android.Views.ViewGroup.LayoutParams.WrapContent, Android.Views.ViewGroup.LayoutParams.WrapContent);
@@ -39,6 +69,9 @@ public partial class View
 		return layoutParameters;
 	}
 
+	/// <summary>
+	/// The underlying Android.Views.ViewGroup
+	/// </summary>
 	public Android.Views.ViewGroup NativeView => (Android.Views.ViewGroup)_nativeView.Value;
 
 	void OnChildrenChanged(object? sender, NotifyCollectionChangedEventArgs e)

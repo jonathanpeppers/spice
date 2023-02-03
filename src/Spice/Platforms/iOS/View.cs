@@ -4,23 +4,48 @@ namespace Spice;
 
 public partial class View
 {
-	public static implicit operator UIView(View view) => view._nativeView.Value;
+	/// <summary>
+	/// Returns view.NativeView
+	/// </summary>
+	/// <param name="view">The Spice.View</param>
+	public static implicit operator UIView(View view) => view.NativeView;
 
+	/// <summary>
+	/// View ctor
+	/// </summary>
 	public View() : this(_ => new UIView { AutoresizingMask = UIViewAutoresizing.None }) { }
 
+	/// <summary>
+	/// View ctor
+	/// </summary>
+	/// <param name="frame">Pass the underlying view a frame</param>
 	public View(CGRect frame) : this(_ => new UIView(frame) { AutoresizingMask = UIViewAutoresizing.None }) { }
 
-	public View(Func<View, UIKit.UIView> creator)
+	/// <summary>
+	/// View ctor
+	/// </summary>
+	/// <param name="creator">Subclasses can pass in a Func to create a UIView</param>
+	protected View(Func<View, UIView> creator)
 	{
 		_nativeView = new Lazy<UIView>(() => creator(this));
 
 		Children.CollectionChanged += OnChildrenChanged;
 	}
 
+	/// <summary>
+	/// Subclasses can access the underlying Lazy
+	/// </summary>
 	protected readonly Lazy<UIView> _nativeView;
 
+	/// <summary>
+	/// The underlying UIView
+	/// </summary>
 	public UIView NativeView => _nativeView.Value;
 
+	/// <summary>
+	/// Subclasses can override when a view is added
+	/// </summary>
+	/// <param name="view">The Spice.View</param>
 	protected virtual void AddSubview(View view)
 	{
 		NativeView.AddSubview(view);

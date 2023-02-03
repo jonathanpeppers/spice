@@ -2,14 +2,32 @@
 
 public partial class StackView
 {
+	/// <summary>
+	/// Returns stackView.NativeView
+	/// </summary>
+	/// <param name="stackView">The Spice.StackView</param>
 	public static implicit operator UIStackView(StackView stackView) => stackView.NativeView;
 
+	/// <summary>
+	/// StackView ctor
+	/// </summary>
 	public StackView() : this(v => new SpiceStackView((StackView)v) { AutoresizingMask = UIViewAutoresizing.None, Alignment = UIStackViewAlignment.Center, Axis = UILayoutConstraintAxis.Vertical }) { }
 
+	/// <summary>
+	/// StackView ctor
+	/// </summary>
+	/// <param name="frame">Pass the underlying view a frame</param>
 	public StackView(CGRect frame) : this(v => new SpiceStackView((StackView)v, frame) { AutoresizingMask = UIViewAutoresizing.None, Alignment = UIStackViewAlignment.Center, Axis = UILayoutConstraintAxis.Vertical }) { }
 
-	public StackView(Func<View, UIView> creator) : base(creator) { }
+	/// <summary>
+	/// StackView ctor
+	/// </summary>
+	/// <param name="creator">Subclasses can pass in a Func to create a UIView</param>
+	protected StackView(Func<View, UIView> creator) : base(creator) { }
 
+	/// <summary>
+	/// The underlying UIStackView
+	/// </summary>
 	public new UIStackView NativeView => (UIStackView)_nativeView.Value;
 
 	partial void OnOrientationChanging(Orientation value)
@@ -27,6 +45,7 @@ public partial class StackView
 		}
 	}
 
+	/// <inheritdoc cref="F:Spice.View.AddSubview" />
 	protected override void AddSubview(View view)
 	{
 		NativeView.AddArrangedSubview(view);
