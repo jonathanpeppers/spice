@@ -3,7 +3,8 @@
     <TargetFramework>net7.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <Description>Templates for Spice 🌶, a prototype UI framework for mobile</Description>
+    <Description>Templates for Spice 🌶, a spicy UI framework for mobile</Description>
+    <IsPackable>true</IsPackable>
     <PackageType>Template</PackageType>
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
