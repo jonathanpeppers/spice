@@ -282,43 +282,43 @@ Startup time for a `Release` build on a Pixel 5:
 
 Spice:
 ```log
-02-02 17:02:49.152  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +272ms
-02-02 17:02:50.578  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +241ms
-02-02 17:02:52.003  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +251ms
-02-02 17:02:53.413  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +261ms
-02-02 17:02:54.825  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +254ms
-02-02 17:02:56.249  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +260ms
-02-02 17:02:57.673  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +266ms
-02-02 17:02:59.112  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +258ms
-02-02 17:03:00.531  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +249ms
-02-02 17:03:01.952  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +252ms
-Average(ms): 256.4
-Std Err(ms): 2.82528268005561
-Std Dev(ms): 8.93432830280051
+02-02 20:09:49.583  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +261ms
+02-02 20:09:51.060  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +265ms
+02-02 20:09:52.482  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +262ms
+02-02 20:09:53.902  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +266ms
+02-02 20:09:55.345  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +246ms
+02-02 20:09:56.755  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +243ms
+02-02 20:09:58.190  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +264ms
+02-02 20:09:59.592  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +246ms
+02-02 20:10:01.030  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +249ms
+02-02 20:10:02.452  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +248ms
+Average(ms): 255
+Std Err(ms): 2.94014360949333
+Std Dev(ms): 9.29755045398757
 ```
 
 .NET MAUI:
 ```log
-02-02 17:05:02.946  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +543ms
-02-02 17:05:04.877  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +528ms
-02-02 17:05:06.593  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +546ms
-02-02 17:05:08.278  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +540ms
-02-02 17:05:09.979  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +529ms
-02-02 17:05:11.745  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +544ms
-02-02 17:05:13.471  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +553ms
-02-02 17:05:15.197  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +533ms
-02-02 17:05:16.904  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +539ms
-02-02 17:05:18.646  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +567ms
-Average(ms): 542.2
-Std Err(ms): 3.69022733415948
-Std Dev(ms): 11.6695234597552
+02-02 20:07:52.357  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +541ms
+02-02 20:07:54.078  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +538ms
+02-02 20:07:55.799  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +538ms
+02-02 20:07:57.531  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +539ms
+02-02 20:07:59.262  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +537ms
+02-02 20:08:00.944  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +540ms
+02-02 20:08:02.666  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +544ms
+02-02 20:08:04.397  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +527ms
+02-02 20:08:06.111  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +532ms
+02-02 20:08:07.803  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +535ms
+Average(ms): 537.1
+Std Err(ms): 1.52351931760353
+Std Dev(ms): 4.8177911028926
 ```
 
-App size:
+App size of a single-architecture `.apk`, built for `android-arm64`:
 
 ```
- 9222186 com.companyname.HeadToHeadSpice-Signed.apk
-15180467 com.companyname.HeadToHeadMaui-Signed.apk
+ 7772202 com.companyname.HeadToHeadSpice-Signed.apk
+12808825 com.companyname.HeadToHeadMaui-Signed.apk
 ```
 
 This gives you an idea of how much "stuff" is in .NET MAUI.
