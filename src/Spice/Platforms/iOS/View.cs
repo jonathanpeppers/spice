@@ -85,7 +85,7 @@ public partial class View
 				throw new NotSupportedException($"{nameof(HorizontalAlign)} value '{_horizontalAlign}' not supported!");
 		}
 
-		switch (_horizontalAlign)
+		switch (_verticalAlign)
 		{
 			case Align.Center:
 				frame.Height = getSize().Height;
