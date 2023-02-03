@@ -90,12 +90,14 @@ And on iOS:
 
 ```csharp
 var vc = new UIViewController();
-vc.View!.AddSubview(new App());
+vc.View.AddSubview(new App());
 Window.RootViewController = vc;
 ```
 
-`App` is a native view on both platforms. You just add it to an
-existing app as you would any other control or view.
+`App` is a native view on both platforms. You just add it to an the
+screen as you would any other control or view. This can be mix &
+matched with regular iOS & Android UI because Spice views are just
+native views.
 
 [poco]: https://en.wikipedia.org/wiki/Plain_old_CLR_object
 [minimal-apis]: https://learn.microsoft.com/aspnet/core/fundamentals/minimal-apis
@@ -103,6 +105,7 @@ existing app as you would any other control or view.
 ## Scope
 
 * No XAML. No DI. No MVVM. No MVC. No data-binding. No System.Reflection.
+  * *Do we need these things?*
 * Target iOS & Android only to start.
 * Implement only the simplest controls.
 * The native platforms do their own layout.
@@ -143,12 +146,19 @@ Simply install the template:
 dotnet new install Spice.Templates
 ```
 
-Create the project and build it as you would for other .NET projects:
+Create the project and build it as you would for other .NET MAUI
+projects:
 
 ```bash
 dotnet new spice
 dotnet build
+# To run on Android
+dotnet build -f net7.0-android -t:Run
+# To run on iOS
+dotnet build -f net7.0-ios -t:Run
 ```
+
+Of course, you can also just open the project in Visual Studio and hit F5.
 
 ## Implemented Controls
 
@@ -276,7 +286,9 @@ Hopefully, we can implement this for a future release of Visual Studio.
 
 ## Startup Time & App Size
 
-In comparison to a `dotnet new maui` project.
+In comparison to a `dotnet new maui` project, I created a Spice
+project with the same layouts and optimized settings for both project
+types. (`AndroidLinkMode=r8`, etc.)
 
 Startup time for a `Release` build on a Pixel 5:
 
@@ -322,3 +334,13 @@ App size of a single-architecture `.apk`, built for `android-arm64`:
 ```
 
 This gives you an idea of how much "stuff" is in .NET MAUI.
+
+In some respects the above comparison isn't completely fair, as Spice
+has like 0 features. However, Spice is [fully trimmable][trimming],
+and so a `Release` build of an app without `Spice.Button` will have
+the code for `Spice.Button` trimmed away. It will be quite difficult
+for .NET MAUI to become [fully trimmable][trimming] -- due to the
+nature of XAML, data-binding, and other System.Reflection usage in the
+framework.
+
+[trimming]: https://learn.microsoft.com/dotnet/core/deploying/trimming/prepare-libraries-for-trimming
