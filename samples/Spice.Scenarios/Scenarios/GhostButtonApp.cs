@@ -3,9 +3,9 @@
 /// <summary>
 /// See GhostButton for an example of platform-specific logic
 /// </summary>
-class GhostButtonApp : StackView
+class GhostButtonScenario : StackView
 {
-	public GhostButtonApp()
+	public GhostButtonScenario()
 	{
 		int count = 0;
 

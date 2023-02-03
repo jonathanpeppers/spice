@@ -4,9 +4,9 @@
 /// Most basic scenario
 /// NOTE: my color choices are suspect! 🌈🤢
 /// </summary>
-class HelloWorldApp : StackView
+class HelloWorldScenario : StackView
 {
-	public HelloWorldApp()
+	public HelloWorldScenario()
 	{
 		int count = 0;
 
