@@ -33,7 +33,7 @@ jobs:
       run: dotnet build -bl:bin/build.binlog
 
     - name: tests
-      run: dotnet test
+      run: dotnet test tests/Spice.Tests/Spice.Tests.csproj
 
     - name: pack
       run: dotnet pack -bl:bin/pack.binlog
