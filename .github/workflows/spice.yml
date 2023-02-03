@@ -1,0 +1,40 @@
+name: build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    strategy:
+      matrix:
+        configuration: [Release]
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: install .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.x
+
+    - name: tests
+      run: dotnet test
+
+    - name: tests
+      run: dotnet pack -bl:bin/${{ env.configuration }}/pack.binlog
+
+    - name: artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: nupkgs
+        path: bin/${{ env.configuration }}
