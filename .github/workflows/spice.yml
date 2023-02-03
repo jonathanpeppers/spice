@@ -16,7 +16,7 @@ jobs:
       Configuration: Release
 
     steps:
-    - name: Checkout
+    - name: checkout
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
@@ -28,6 +28,9 @@ jobs:
         
     - name: install workloads
       run: dotnet workload install maui-android maui-ios --verbosity diag
+
+    - name: build
+      run: dotnet build -bl:bin/build.binlog
 
     - name: tests
       run: dotnet test
