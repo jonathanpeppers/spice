@@ -13,7 +13,7 @@ public class ApplicationTests
 
 			var label = new Label
 			{
-				Text = "Hello, Spice! 🌶",
+				Text = "Hello, Spice 🌶",
 			};
 
 			var button = new Button

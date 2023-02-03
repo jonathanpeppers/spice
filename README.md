@@ -32,7 +32,7 @@ public class App : Application
     
         var label = new Label
         {
-            Text = "Hello, Spice! 🌶",
+            Text = "Hello, Spice 🌶",
         };
     
         var button = new Button
@@ -96,7 +96,7 @@ Window.RootViewController = vc;
 
 `App` is a native view on both platforms. You just add it to an the
 screen as you would any other control or view. This can be mix &
-matched with regular iOS & Android UI because Spice views are just
+matched with regular iOS & Android UI because Spice 🌶 views are just
 native views.
 
 [poco]: https://en.wikipedia.org/wiki/Plain_old_CLR_object
@@ -114,8 +114,8 @@ native views.
 * Measure startup time & app size.
 * Profit?
 
-Benefits of this approach are full support for trimming and eventually
-[NativeAOT][nativeaot] if it comes to mobile one day. 😉
+Benefits of this approach are full support for [trimming][trimming]
+and eventually [NativeAOT][nativeaot] if it comes to mobile one day. 😉
 
 [nativeaot]: https://learn.microsoft.com/dotnet/core/deploying/native-aot/
 
@@ -124,7 +124,7 @@ Benefits of this approach are full support for trimming and eventually
 .NET MAUI is great. XAML is great. Think of this idea as a "mini"
 MAUI.
 
-Spice will even leverage various parts of .NET MAUI:
+Spice 🌶 will even leverage various parts of .NET MAUI:
 
 * The iOS and Android workloads for .NET.
 * The .NET MAUI "Single Project" system.
@@ -276,7 +276,7 @@ The above code works fine in a `dotnet new maui` app, but not a
 `dotnet new spice` or `dotnet new android` application.
 
 And so we can't add proper functionality for reloading `ctor`'s of
-Spice views. The general idea is we could recreate the `App` class and
+Spice 🌶 views. The general idea is we could recreate the `App` class and
 replace the views on screen. We could also create Android activities
 or iOS view controllers if necessary.
 
@@ -292,7 +292,7 @@ types. (`AndroidLinkMode=r8`, etc.)
 
 Startup time for a `Release` build on a Pixel 5:
 
-Spice:
+Spice 🌶:
 ```log
 02-02 20:09:49.583  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +261ms
 02-02 20:09:51.060  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +265ms
@@ -335,8 +335,8 @@ App size of a single-architecture `.apk`, built for `android-arm64`:
 
 This gives you an idea of how much "stuff" is in .NET MAUI.
 
-In some respects the above comparison isn't completely fair, as Spice
-has like 0 features. However, Spice is [fully trimmable][trimming],
+In some respects the above comparison isn't completely fair, as Spice 🌶
+has like 0 features. However, Spice 🌶 is [fully trimmable][trimming],
 and so a `Release` build of an app without `Spice.Button` will have
 the code for `Spice.Button` trimmed away. It will be quite difficult
 for .NET MAUI to become [fully trimmable][trimming] -- due to the

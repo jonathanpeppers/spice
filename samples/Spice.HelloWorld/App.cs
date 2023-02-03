@@ -8,7 +8,7 @@ public class App : Application
 
 		var label = new Label
 		{
-			Text = "Hello, Spice! 🌶",
+			Text = "Hello, Spice 🌶",
 			TextColor = Colors.Red
 		};
 
