@@ -17,6 +17,7 @@ public class App : Application
 			Clicked = _ => label.Text = $"Times: {++count}"
 		};
 
+		BackgroundColor = Colors.CornflowerBlue;
 		Main = new StackView { new Image { Source = "spice" }, label, button };
 	}
 }
