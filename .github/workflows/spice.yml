@@ -10,11 +10,10 @@ jobs:
 
   build:
 
-    strategy:
-      matrix:
-        configuration: [Release]
+    runs-on: macos-latest
 
-    runs-on: macOS-latest
+    env:
+      Configuration: Release
 
     steps:
     - name: Checkout
@@ -34,10 +33,10 @@ jobs:
       run: dotnet test
 
     - name: tests
-      run: dotnet pack -bl:bin/${{ env.configuration }}/pack.binlog
+      run: dotnet pack -bl:bin/pack.binlog
 
     - name: artifacts
       uses: actions/upload-artifact@v3
       with:
         name: nupkgs
-        path: bin/${{ env.configuration }}
+        path: bin
