@@ -32,9 +32,8 @@ public partial class CollectionView<T>
 	/// </summary>
 	public new UICollectionView NativeView => (UICollectionView)_nativeView.Value;
 
-	void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
-	{
-		NativeView.CollectionViewLayout.InvalidateLayout();
-	}
+	void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) => NativeView.CollectionViewLayout.InvalidateLayout();
+
+	partial void OnItemTemplateChanged(Func<T, View>? value) => NativeView.CollectionViewLayout.InvalidateLayout();
 }
 
