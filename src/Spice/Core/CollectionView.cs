@@ -13,6 +13,7 @@ public partial class CollectionView<T> : View
 	[ObservableProperty]
 	ObservableCollection<T>? _items;
 
+#if !VANILLA
 	partial void OnItemsChanging(ObservableCollection<T>? value)
 	{
 		if (_items != null)
@@ -24,11 +25,7 @@ public partial class CollectionView<T> : View
 		if (value != null)
 			value.CollectionChanged += OnCollectionChanged;
 	}
-
-	void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
-	{
-
-	}
+#endif
 
 	[ObservableProperty]
 	Func<T, View>? _itemTemplate;
