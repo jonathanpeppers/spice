@@ -11,19 +11,19 @@ namespace Spice;
 public partial class CollectionView<T> : View
 {
 	[ObservableProperty]
-	ObservableCollection<T>? _items;
+	IEnumerable<T>? _items;
 
 #if !VANILLA
-	partial void OnItemsChanging(ObservableCollection<T>? value)
+	partial void OnItemsChanging(IEnumerable<T>? value)
 	{
-		if (_items != null)
-			_items.CollectionChanged -= OnCollectionChanged;
+		if (_items is ObservableCollection<T> obs)
+			obs.CollectionChanged -= OnCollectionChanged;
 	}
 
-	partial void OnItemsChanged(ObservableCollection<T>? value)
+	partial void OnItemsChanged(IEnumerable<T>? value)
 	{
-		if (value != null)
-			value.CollectionChanged += OnCollectionChanged;
+		if (value is ObservableCollection<T> obs)
+			obs.CollectionChanged += OnCollectionChanged;
 	}
 #endif
 
