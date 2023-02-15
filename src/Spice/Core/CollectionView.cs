@@ -29,6 +29,9 @@ public partial class CollectionView<T> : View
 
 	[ObservableProperty]
 	Func<T, View>? _itemTemplate;
+
+	[ObservableProperty]
+	Action<View, T>? _recycled;
 }
 
 /// <summary>

@@ -7,6 +7,7 @@ public class CollectionViewScenario : CollectionView<User>
 	public CollectionViewScenario()
 	{
 		BackgroundColor = Colors.Red;
+
 		ItemTemplate = user => new StackView
 		{
 			Orientation = Orientation.Horizontal,
@@ -19,6 +20,9 @@ public class CollectionViewScenario : CollectionView<User>
 				}
 			}
 		};
+
+		// TODO: work on design here
+		Recycled = (view, user) => ((Label)view.Children[1]).Text = $"{user.FirstName} {user.LastName}";
 
 		Items = new[] {
 			new User("Chuck", "Norris"),

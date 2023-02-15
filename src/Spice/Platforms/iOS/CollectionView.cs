@@ -68,30 +68,37 @@ public partial class CollectionView<T>
 
 		public override UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
 		{
+			var items = SpiceView.Items;
+			ArgumentNullException.ThrowIfNull(items);
+
+			var item = items.Skip(indexPath.Row).First();
+
 			var cell = collectionView.DequeueReusableCell(CellId, indexPath) as UICollectionViewCell;
 			if (cell == null)
 			{
 				cell = new UICollectionViewCell();
+
+				var itemTemplate = SpiceView.ItemTemplate;
+				if (itemTemplate != null)
+				{
+					var view = itemTemplate(item);
+					view.NativeView.Frame = new CGRect(CGPoint.Empty, cell.Frame.Size);
+					cell.AddSubview(view);
+				}
 			}
 			else
 			{
-				//TODO: cell was recycled, how to recycle spice views?
-			}
-
-			var items = SpiceView.Items;
-			if (items == null)
-				return cell;
-
-			var itemTemplate = SpiceView.ItemTemplate;
-			if (itemTemplate != null)
-			{
-				var view = itemTemplate(items.Skip(indexPath.Row).First());
-				view.NativeView.Frame = new CGRect(CGPoint.Empty, cell.Frame.Size);
-				cell.AddSubview(view);
+				//TODO: need the Spice.View
+				SpiceView.Recycled?.Invoke(null, item);
 			}
 
 			return cell;
 		}
+	}
+
+	class SpiceCell : UICollectionViewCell
+	{
+
 	}
 }
 
