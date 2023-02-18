@@ -5,7 +5,10 @@ namespace Spice;
 
 public partial class CollectionView<T>
 {
-	static UICollectionViewLayout GetLayout() => new UICollectionViewFlowLayout();
+	static UICollectionViewLayout GetLayout() => new UICollectionViewFlowLayout
+	{
+		ItemSize = new CGSize(Platform.Window!.Frame.Width, 200)
+	};
 
 	/// <summary>
 	/// Returns collectionView.NativeView
@@ -82,16 +85,16 @@ public partial class CollectionView<T>
 				var itemTemplate = SpiceView.ItemTemplate;
 				if (itemTemplate != null)
 				{
-					var view = cell.View = itemTemplate(item);
-					view.NativeView.Frame = new CGRect(CGPoint.Empty, cell.Frame.Size);
-					cell.AddSubview(view);
+					cell.AddSubview(cell.View = itemTemplate(item));
 				}
 			}
 			else
 			{
 				SpiceView.Recycled?.Invoke(cell.View, item);
+				
 			}
 
+			cell.SetNeedsLayout();
 			return cell;
 		}
 	}
@@ -104,5 +107,16 @@ class SpiceCell : UICollectionViewCell
 	public SpiceCell(NativeHandle handle) : base(handle) { }
 
 	public View? View { get; set; }
+
+	public override void LayoutSubviews()
+	{
+		base.LayoutSubviews();
+
+		if (View != null)
+		{
+			var size = Frame.Size;
+			View.NativeView.Frame = new CGRect(0, 0, size.Width, size.Height);
+		}
+	}
 }
 
