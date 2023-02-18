@@ -1,4 +1,5 @@
 ﻿using System.Collections.Specialized;
+using ObjCRuntime;
 
 namespace Spice;
 
@@ -60,7 +61,7 @@ public partial class CollectionView<T>
 		public override nint NumberOfSections(UICollectionView collectionView)
 		{
 			//TODO: do this somewhere else
-			collectionView.RegisterClassForCell(typeof(UICollectionViewCell), CellId);
+			collectionView.RegisterClassForCell(typeof(SpiceCell), CellId);
 			return 1;
 		}
 
@@ -73,32 +74,35 @@ public partial class CollectionView<T>
 
 			var item = items.Skip(indexPath.Row).First();
 
-			var cell = collectionView.DequeueReusableCell(CellId, indexPath) as UICollectionViewCell;
-			if (cell == null)
-			{
-				cell = new UICollectionViewCell();
+			var cell = (SpiceCell)collectionView.DequeueReusableCell(CellId, indexPath);
+			ArgumentNullException.ThrowIfNull(cell);
 
+			if (cell.View == null)
+			{
 				var itemTemplate = SpiceView.ItemTemplate;
 				if (itemTemplate != null)
 				{
-					var view = itemTemplate(item);
+					var view = cell.View = itemTemplate(item);
 					view.NativeView.Frame = new CGRect(CGPoint.Empty, cell.Frame.Size);
 					cell.AddSubview(view);
 				}
 			}
 			else
 			{
-				//TODO: need the Spice.View
-				SpiceView.Recycled?.Invoke(null, item);
+				SpiceView.Recycled?.Invoke(cell.View, item);
 			}
 
 			return cell;
 		}
 	}
+}
 
-	class SpiceCell : UICollectionViewCell
-	{
+class SpiceCell : UICollectionViewCell
+{
+	public SpiceCell() { }
 
-	}
+	public SpiceCell(NativeHandle handle) : base(handle) { }
+
+	public View? View { get; set; }
 }
 
