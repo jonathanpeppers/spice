@@ -62,7 +62,7 @@ public partial class WebView
 	}
 
 	/// <summary>
-	/// Returns true if you can go back
+	/// Returns true if you can go forward
 	/// </summary>
 	public bool CanGoForward => NativeView.CanGoForward();
 
