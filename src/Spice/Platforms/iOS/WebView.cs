@@ -36,11 +36,21 @@ public partial class WebView
 	/// <summary>
 	/// A "web view" for rendering HTML content on each platform.
 	/// </summary>
-	public WebView() : base(_ => Create(Platform.Window!.Frame)) { }
+	public WebView() : base(_ => Create(CGRect.Empty))
+	{
+		// Most users would want this default instead of center
+		HorizontalAlign = Align.Stretch;
+		VerticalAlign = Align.Stretch;
+	}
 
 	/// <inheritdoc />
 	/// <param name="frame">Pass the underlying view a frame</param>
-	public WebView(CGRect frame) : base(_ => Create(frame)) { }
+	public WebView(CGRect frame) : base(_ => Create(frame))
+	{
+		// Most users would want this default instead of center
+		HorizontalAlign = Align.Stretch;
+		VerticalAlign = Align.Stretch;
+	}
 
 	/// <inheritdoc />
 	/// <param name="creator">Subclasses can pass in a Func to create a UIView</param>

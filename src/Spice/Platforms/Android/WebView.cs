@@ -23,11 +23,21 @@ public partial class WebView
 	/// <summary>
 	/// A "web view" for rendering HTML content on each platform.
 	/// </summary>
-	public WebView() : this(Platform.Context, Create) { }
+	public WebView() : this(Platform.Context, Create)
+	{
+		// Most users would want this default instead of center
+		HorizontalAlign = Align.Stretch;
+		VerticalAlign = Align.Stretch;
+	}
 
 	/// <inheritdoc />
 	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
-	public WebView(Context context) : this(context, Create) { }
+	public WebView(Context context) : this(context, Create)
+	{
+		// Most users would want this default instead of center
+		HorizontalAlign = Align.Stretch;
+		VerticalAlign = Align.Stretch;
+	}
 
 	/// <inheritdoc />
 	/// <param name="creator">Subclasses can pass in a Func to create a Android.Views.View</param>
