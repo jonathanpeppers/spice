@@ -1,4 +1,5 @@
 ﻿using Android.Content;
+using Android.OS;
 using Android.Runtime;
 using Android.Webkit;
 
@@ -16,7 +17,12 @@ public partial class WebView
 	{
 		var view = new Android.Webkit.WebView(context);
 		view.SetWebViewClient(new SpiceWebViewClient());
-		view.Settings.JavaScriptEnabled = true; // This is the default
+		view.SetWebChromeClient(new SpiceWebChromeClient());
+
+		var settings = view.Settings;
+		settings.JavaScriptEnabled = true; // This is the default for IsJavaScriptEnabled
+		settings.DomStorageEnabled = true;
+		settings.SetSupportMultipleWindows(support: true);
 		return view;
 	}
 
@@ -99,6 +105,29 @@ public partial class WebView
 			// Otherwise it launches the default browser from the OS
 			var scheme = request?.Url?.Scheme;
 			return scheme != "http" && scheme != "https";
+		}
+	}
+
+	class SpiceWebChromeClient : WebChromeClient
+	{
+		public SpiceWebChromeClient() { }
+
+		public SpiceWebChromeClient(nint javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
+
+		// From: https://github.com/dotnet/maui/blob/260fa08b0f75fbbb945375592896dd9eb374f22f/src/BlazorWebView/src/Maui/Android/BlazorWebChromeClient.cs#L17
+		public override bool OnCreateWindow(Android.Webkit.WebView? view, bool isDialog, bool isUserGesture, Message? resultMsg)
+		{
+			if (view?.Context is not null)
+			{
+				// Intercept _blank target <a> tags to always open in device browser
+				// regardless of UrlLoadingStrategy.OpenInWebview
+				var requestUrl = view.GetHitTestResult().Extra;
+				var intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(requestUrl));
+				view.Context.StartActivity(intent);
+			}
+
+			// We don't actually want to create a new WebView window so we just return false 
+			return false;
 		}
 	}
 }
