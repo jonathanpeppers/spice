@@ -6,10 +6,31 @@ public class App : Application
 	{
 		BackgroundColor = Colors.CornflowerBlue;
 
-		// Comment/uncomment to try different scenarios/samples
-		Main = new HelloWorldScenario();
-		//Main = new GhostButtonScenario();
-		//Main = new WebViewScenario();
-		//Main = new EntryScenario();
+		Main = new StackView
+		{
+			Children =
+			{
+				new Button
+				{
+					Text = "Hello World",
+					Clicked = _ => Main = new HelloWorldScenario(),
+				},
+				new Button
+				{
+					Text = "Ghost Button",
+					Clicked = _ => Main = new GhostButtonScenario(),
+				},
+				new Button
+				{
+					Text = "WebView",
+					Clicked = _ => Main = new WebViewScenario(),
+				},
+				new Button
+				{
+					Text = "Entry",
+					Clicked = _ => Main = new EntryScenario(),
+				},
+			}
+		};
 	}
 }
