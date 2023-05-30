@@ -12,4 +12,10 @@ public partial class StackView : View
 	/// </summary>
 	[ObservableProperty]
 	Orientation _orientation;
+
+	/// <summary>
+	/// Spacing between children
+	/// </summary>
+	[ObservableProperty]
+	int _spacing = 0;
 }

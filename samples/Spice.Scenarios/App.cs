@@ -10,5 +10,6 @@ public class App : Application
 		Main = new HelloWorldScenario();
 		//Main = new GhostButtonScenario();
 		//Main = new WebViewScenario();
+		//Main = new EntryScenario();
 	}
 }
