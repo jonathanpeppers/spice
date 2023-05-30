@@ -10,7 +10,7 @@ jobs:
 
   build:
 
-    runs-on: macos-latest
+    runs-on: macos-13
 
     env:
       Configuration: Release
