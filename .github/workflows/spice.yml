@@ -21,6 +21,10 @@ jobs:
       with:
         fetch-depth: 0
 
+    - uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+
     - name: install .NET
       uses: actions/setup-dotnet@v3
       with:
