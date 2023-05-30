@@ -43,6 +43,8 @@ public partial class StackView
 		}
 	}
 
+	partial void OnSpacingChanged(int value) => NativeView.Spacing = value;
+
 	/// <inheritdoc />
 	protected override void AddSubview(View view)
 	{

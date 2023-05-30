@@ -59,4 +59,6 @@ public partial class StackView
 				throw new NotSupportedException($"{nameof(Orientation)} value '{value}' not supported!");
 		}
 	}
+
+	partial void OnSpacingChanged(int value) => NativeView.DividerPadding = value;
 }
