@@ -5,7 +5,20 @@
 /// Android -> Android.Webkit.WebView
 /// iOS -> WebKit.WKWebView
 /// </summary>
-public partial class BlazorWebView : View
+public partial class BlazorWebView : WebView
 {
 	internal const string AppHostAddress = "0.0.0.0";
+
+	/// <summary>
+	/// Gets or sets the path to the HTML file to render.
+	/// <para>This is an app relative path to the file such as <c>wwwroot\index.html</c></para>
+	/// </summary>
+	[ObservableProperty]
+	public string? _hostPage;
+
+	/// <summary>
+	/// Gets or sets the path for initial navigation within the Blazor navigation context when the Blazor component is finished loading.
+	/// </summary>
+	[ObservableProperty]
+	public string? _startPage;
 }

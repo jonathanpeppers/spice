@@ -13,7 +13,7 @@ public partial class WebView
 	/// <param name="view">The Spice.WebView</param>
 	public static implicit operator Android.Webkit.WebView(WebView view) => view.NativeView;
 
-	static Android.Webkit.WebView Create(Context context)
+	internal static Android.Webkit.WebView Create(Context context)
 	{
 		var view = new Android.Webkit.WebView(context);
 		view.SetWebViewClient(new SpiceWebViewClient());
