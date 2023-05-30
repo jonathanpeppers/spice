@@ -9,7 +9,7 @@ public partial class Entry
 	public static implicit operator UITextField(Entry entry) => entry.NativeView;
 
 	/// <summary>
-	/// Represents text on screen. Set the Text property to a string value.
+	/// Control for text input, like a form field.
 	/// Android -> Android.Widget.EditText
 	/// iOS -> UIKit.UITextField
 	/// </summary>

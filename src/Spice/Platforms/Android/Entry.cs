@@ -14,7 +14,7 @@ public partial class Entry
 	static EditText Create(Context context) => new(context);
 
 	/// <summary>
-	/// Represents text on screen. Set the Text property to a string value.
+	/// Control for text input, like a form field.
 	/// Android -> Android.Widget.EditText
 	/// iOS -> UIKit.UITextField
 	/// </summary>
