@@ -21,7 +21,8 @@ jobs:
       with:
         fetch-depth: 0
 
-    - uses: maxim-lobanov/setup-xcode@v1
+    - name: select Xcode version
+      uses: maxim-lobanov/setup-xcode@v1
       with:
         xcode-version: latest-stable
 
