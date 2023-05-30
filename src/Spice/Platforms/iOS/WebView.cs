@@ -35,6 +35,8 @@ public partial class WebView
 
 	/// <summary>
 	/// A "web view" for rendering HTML content on each platform.
+	/// Android -> Android.Webkit.WebView
+	/// iOS -> WebKit.WKWebView
 	/// </summary>
 	public WebView() : base(_ => Create(CGRect.Empty))
 	{
