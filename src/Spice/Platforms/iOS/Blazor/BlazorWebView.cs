@@ -43,13 +43,14 @@ public partial class BlazorWebView
 	static new WKWebViewConfiguration CreateConfiguration()
 	{
 		var config = WebView.CreateConfiguration();
+		var schemeHandler = new SchemeHandler();
 
-		config.UserContentController.AddScriptMessageHandler(new WebViewScriptMessageHandler(), "webwindowinterop");
+		config.UserContentController.AddScriptMessageHandler(new WebViewScriptMessageHandler(schemeHandler), "webwindowinterop");
 		config.UserContentController.AddUserScript(new WKUserScript(
 			new NSString(BlazorInitScript), WKUserScriptInjectionTime.AtDocumentEnd, true));
 
 		// iOS WKWebView doesn't allow handling 'http'/'https' schemes, so we use the fake 'app' scheme
-		config.SetUrlSchemeHandler(new SchemeHandler(), urlScheme: "app");
+		config.SetUrlSchemeHandler(schemeHandler, urlScheme: "app");
 
 		return config;
 	}
@@ -116,12 +117,16 @@ public partial class BlazorWebView
 
 	private class WebViewScriptMessageHandler : NSObject, IWKScriptMessageHandler
 	{
-		public BlazorWebView? WebView { get; set; }
+		readonly SchemeHandler _schemeHandler;
+
+		public WebViewScriptMessageHandler(SchemeHandler schemeHandler) => _schemeHandler = schemeHandler;
 
 		public void DidReceiveScriptMessage(WKUserContentController userContentController, WKScriptMessage message)
 		{
 			ArgumentNullException.ThrowIfNull(message);
-			WebView?.Manager?.MessageReceivedInternal(AppOriginUri, ((NSString)message.Body).ToString());
+
+			//TODO: not a fan of getting WebView.Manager through here...
+			_schemeHandler.WebView?.Manager?.MessageReceivedInternal(AppOriginUri, ((NSString)message.Body).ToString());
 		}
 	}
 
