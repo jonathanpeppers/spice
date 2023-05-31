@@ -4,4 +4,7 @@
 	<ItemGroup Condition=" '$(SpiceEnablePlatformUsings)' != 'true' and ('$(ImplicitUsings)' == 'true' or '$(ImplicitUsings)' == 'enable') ">
 		<Using Remove="@(Using->HasMetadata('Platform'))" />
 	</ItemGroup>
+
+	<!-- Microsoft.NET.Sdk.Razor signals to import this -->
+	<Import Condition=" '$(UsingMicrosoftNETSdkRazor)' == 'true' " Project="Spice.Blazor.targets" />
 </Project>
