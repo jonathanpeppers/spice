@@ -18,9 +18,6 @@ namespace Spice;
 /// </summary>
 internal class iOSWebViewManager : WebViewManager
 {
-	internal const string AppOrigin = "app://" + BlazorWebView.AppHostAddress + "/";
-	internal static readonly Uri AppOriginUri = new(AppOrigin);
-
 	private readonly WKWebView _webview;
 	private readonly string _contentRootRelativeToAppRoot;
 
@@ -36,7 +33,7 @@ internal class iOSWebViewManager : WebViewManager
 	/// <param name="hostPageRelativePath">Path to the host page within the fileProvider.</param>
 
 	public iOSWebViewManager(WKWebView webview, IServiceProvider provider, Dispatcher dispatcher, IFileProvider fileProvider, JSComponentConfigurationStore jsComponents, string contentRootRelativeToAppRoot, string hostPageRelativePath)
-		: base(provider, dispatcher, AppOriginUri, fileProvider, jsComponents, hostPageRelativePath)
+		: base(provider, dispatcher, BlazorWebView.AppOriginUri, fileProvider, jsComponents, hostPageRelativePath)
 	{
 		ArgumentNullException.ThrowIfNull(nameof(webview));
 
@@ -208,7 +205,7 @@ internal class iOSWebViewManager : WebViewManager
 			}
 			else
 			{
-				openExternally = !AppOriginUri.IsBaseOf(uri);
+				openExternally = !BlazorWebView.AppOriginUri.IsBaseOf(uri);
 			}
 
 			if (openExternally)
