@@ -28,8 +28,6 @@
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
 		<PackageReference Include="Microsoft.Maui.Graphics" Version="7.0.58" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebView" Version="7.0.5" />
-		<PackageReference Include="Microsoft.Extensions.Primitives" Version="7.0.0" />
-		<PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" Version="7.0.0" />
 	</ItemGroup>
 
 	<ItemGroup Condition=" '$(TargetPlatformIdentifier)' == 'Android' ">
