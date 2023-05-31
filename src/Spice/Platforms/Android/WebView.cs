@@ -31,30 +31,28 @@ public partial class WebView
 	/// Android -> Android.Webkit.WebView
 	/// iOS -> WebKit.WKWebView
 	/// </summary>
-	public WebView() : this(Platform.Context, c => Create(c))
+	public WebView() : this(Platform.Context, c => Create(c)) => Initialize();
+
+	/// <inheritdoc />
+	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
+	public WebView(Context context) : this(context, c => Create(c)) => Initialize();
+
+	/// <inheritdoc />
+	/// <param name="creator">Subclasses can pass in a Func to create a Android.Views.View</param>
+	protected WebView(Func<Context, Android.Views.View> creator) : this(Platform.Context, creator) => Initialize();
+
+	/// <inheritdoc />
+	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
+	/// <param name="creator">Subclasses can pass in a Func to create a Android.Views.View</param>
+	protected WebView(Context context, Func<Context, Android.Views.View> creator) : base(context, creator) => Initialize();
+
+	// Called by ctors
+	void Initialize()
 	{
 		// Most users would want this default instead of center
 		HorizontalAlign = Align.Stretch;
 		VerticalAlign = Align.Stretch;
 	}
-
-	/// <inheritdoc />
-	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
-	public WebView(Context context) : this(context, c => Create(c))
-	{
-		// Most users would want this default instead of center
-		HorizontalAlign = Align.Stretch;
-		VerticalAlign = Align.Stretch;
-	}
-
-	/// <inheritdoc />
-	/// <param name="creator">Subclasses can pass in a Func to create a Android.Views.View</param>
-	protected WebView(Func<Context, Android.Views.View> creator) : this(Platform.Context, creator) { }
-
-	/// <inheritdoc />
-	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
-	/// <param name="creator">Subclasses can pass in a Func to create a Android.Views.View</param>
-	protected WebView(Context context, Func<Context, Android.Views.View> creator) : base(context, creator) { }
 
 	/// <summary>
 	/// The underlying Android.WebKit.WebView
