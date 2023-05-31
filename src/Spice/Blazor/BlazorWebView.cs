@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Specialized;
+using System.Collections.ObjectModel;
 
 using Microsoft.AspNetCore.Components.Web;
 
@@ -70,7 +71,7 @@ public partial class BlazorWebView : WebView
 	/// </summary>
 	partial void LoadNativeWebView(string contentRootDir, string hostPageRelativePath);
 
-	void OnCollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) => LoadWebView();
+	void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) => LoadWebView();
 
 	partial void OnHostPageChanged(string value) => LoadWebView();
 
