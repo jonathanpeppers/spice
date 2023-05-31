@@ -7,6 +7,10 @@ public class App : Application
 		Main = new BlazorWebView
 		{
 			HostPage = "wwwroot/index.html",
+			RootComponents =
+			{
+				new RootComponent { Selector = "#app", ComponentType = typeof(Main) }
+			},
 		};
 	}
 }
