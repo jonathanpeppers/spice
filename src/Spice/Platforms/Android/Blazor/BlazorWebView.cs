@@ -22,6 +22,12 @@ public partial class BlazorWebView
 	/// </summary>
 	public BlazorWebView() : this(Platform.Context, c => Create(c, webViewClient: new SpiceBlazorWebViewClient()))
 	{
+		//TODO: do something better than this
+		if (NativeView?.WebViewClient is SpiceBlazorWebViewClient c)
+		{
+			c.WebView = this;
+		}
+
 		Initialize();
 	}
 
@@ -29,6 +35,12 @@ public partial class BlazorWebView
 	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
 	public BlazorWebView(Context context) : this(context, c => Create(c, webViewClient: new SpiceBlazorWebViewClient()))
 	{
+		//TODO: do something better than this
+		if (NativeView?.WebViewClient is SpiceBlazorWebViewClient c)
+		{
+			c.WebView = this;
+		}
+
 		Initialize();
 	}
 
