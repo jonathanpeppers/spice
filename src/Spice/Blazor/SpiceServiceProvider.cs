@@ -1,14 +1,18 @@
-﻿namespace Spice;
+﻿using Microsoft.Extensions.DependencyInjection;
 
-internal class SpiceServiceProvider : IServiceProvider
+namespace Spice;
+
+/// <summary>
+/// Implements IServiceProvider to make ASP.NET able to launch
+/// </summary>
+internal class SpiceServiceProvider
 {
-	public static readonly SpiceServiceProvider Instance = new();
+	public static readonly IServiceProvider Instance;
 
-	readonly Dictionary<Type, object> _services = new();
-
-	public object? GetService(Type serviceType)
+	static SpiceServiceProvider()
 	{
-		_services.TryGetValue(serviceType, out var value);
-		return value;
+		var services = new ServiceCollection();
+		services.AddBlazorWebView();
+		Instance = services.BuildServiceProvider();
 	}
 }

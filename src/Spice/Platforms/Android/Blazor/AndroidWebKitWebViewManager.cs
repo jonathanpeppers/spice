@@ -96,11 +96,7 @@ namespace Microsoft.AspNetCore.Components.WebView.Maui
 
 			public override void OnMessage(WebMessagePort? port, WebMessage? message)
 			{
-				if (message is null)
-				{
-					throw new ArgumentNullException(nameof(message));
-				}
-
+				ArgumentNullException.ThrowIfNull(message);
 				_onMessageReceived(message.Data);
 			}
 		}
