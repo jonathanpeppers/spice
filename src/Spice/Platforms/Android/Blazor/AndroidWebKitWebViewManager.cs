@@ -43,15 +43,6 @@ namespace Microsoft.AspNetCore.Components.WebView.Maui
 			: base(services, dispatcher, AppOriginUri, fileProvider, jsComponents, hostPageRelativePath)
 		{
 			ArgumentNullException.ThrowIfNull(webview);
-
-#if WEBVIEW2_MAUI
-			if (services.GetService<MauiBlazorMarkerService>() is null)
-			{
-				throw new InvalidOperationException(
-					"Unable to find the required services. " +
-					$"Please add all the required services by calling '{nameof(IServiceCollection)}.{nameof(BlazorWebViewServiceCollectionExtensions.AddMauiBlazorWebView)}' in the application startup code.");
-			}
-#endif
 			_webview = webview;
 			_contentRootRelativeToAppRoot = contentRootRelativeToAppRoot;
 		}
