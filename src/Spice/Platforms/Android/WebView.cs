@@ -13,11 +13,11 @@ public partial class WebView
 	/// <param name="view">The Spice.WebView</param>
 	public static implicit operator Android.Webkit.WebView(WebView view) => view.NativeView;
 
-	static Android.Webkit.WebView Create(Context context)
+	internal static Android.Webkit.WebView Create(Context context, WebViewClient? webViewClient = null, WebChromeClient? webChromeClient = null)
 	{
 		var view = new Android.Webkit.WebView(context);
-		view.SetWebViewClient(new SpiceWebViewClient());
-		view.SetWebChromeClient(new SpiceWebChromeClient());
+		view.SetWebViewClient(webViewClient ?? new SpiceWebViewClient());
+		view.SetWebChromeClient(webChromeClient ?? new SpiceWebChromeClient());
 
 		var settings = view.Settings;
 		settings.JavaScriptEnabled = true; // This is the default for IsJavaScriptEnabled
@@ -31,30 +31,28 @@ public partial class WebView
 	/// Android -> Android.Webkit.WebView
 	/// iOS -> WebKit.WKWebView
 	/// </summary>
-	public WebView() : this(Platform.Context, Create)
+	public WebView() : this(Platform.Context, c => Create(c)) => Initialize();
+
+	/// <inheritdoc />
+	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
+	public WebView(Context context) : this(context, c => Create(c)) => Initialize();
+
+	/// <inheritdoc />
+	/// <param name="creator">Subclasses can pass in a Func to create a Android.Views.View</param>
+	protected WebView(Func<Context, Android.Views.View> creator) : this(Platform.Context, creator) => Initialize();
+
+	/// <inheritdoc />
+	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
+	/// <param name="creator">Subclasses can pass in a Func to create a Android.Views.View</param>
+	protected WebView(Context context, Func<Context, Android.Views.View> creator) : base(context, creator) => Initialize();
+
+	// Called by ctors
+	void Initialize()
 	{
 		// Most users would want this default instead of center
 		HorizontalAlign = Align.Stretch;
 		VerticalAlign = Align.Stretch;
 	}
-
-	/// <inheritdoc />
-	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
-	public WebView(Context context) : this(context, Create)
-	{
-		// Most users would want this default instead of center
-		HorizontalAlign = Align.Stretch;
-		VerticalAlign = Align.Stretch;
-	}
-
-	/// <inheritdoc />
-	/// <param name="creator">Subclasses can pass in a Func to create a Android.Views.View</param>
-	protected WebView(Func<Context, Android.Views.View> creator) : this(Platform.Context, creator) { }
-
-	/// <inheritdoc />
-	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
-	/// <param name="creator">Subclasses can pass in a Func to create a Android.Views.View</param>
-	protected WebView(Context context, Func<Context, Android.Views.View> creator) : base(context, creator) { }
 
 	/// <summary>
 	/// The underlying Android.WebKit.WebView
@@ -97,7 +95,7 @@ public partial class WebView
 	{
 		public SpiceWebViewClient() { }
 
-		public SpiceWebViewClient(nint javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
+		protected SpiceWebViewClient(nint javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
 
 		public override bool ShouldOverrideUrlLoading(Android.Webkit.WebView? view, IWebResourceRequest? request)
 		{
@@ -112,7 +110,7 @@ public partial class WebView
 	{
 		public SpiceWebChromeClient() { }
 
-		public SpiceWebChromeClient(nint javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
+		protected SpiceWebChromeClient(nint javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
 
 		// From: https://github.com/dotnet/maui/blob/260fa08b0f75fbbb945375592896dd9eb374f22f/src/BlazorWebView/src/Maui/Android/BlazorWebChromeClient.cs#L17
 		public override bool OnCreateWindow(Android.Webkit.WebView? view, bool isDialog, bool isUserGesture, Message? resultMsg)

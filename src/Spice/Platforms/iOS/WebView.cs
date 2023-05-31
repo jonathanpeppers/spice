@@ -10,22 +10,30 @@ public partial class WebView
 	/// <param name="view">The Spice.WebView</param>
 	public static implicit operator WKWebView(WebView view) => view.NativeView;
 
-	static WKWebViewConfiguration CreateConfiguration()
+	internal static WKWebViewConfiguration CreateConfiguration()
 	{
 		var config = new WKWebViewConfiguration();
-		if (OperatingSystem.IsIOSVersionAtLeast(13))
+
+		// By default, setting inline media playback to allowed, including autoplay
+		// and picture in picture, since these things MUST be set during the webview
+		// creation, and have no effect if set afterwards.
+		// A custom handler factory delegate could be set to disable these defaults
+		// but if we do not set them here, they cannot be changed once the
+		// handler's platform view is created, so erring on the side of wanting this
+		// capability by default.
+		if (OperatingSystem.IsMacCatalystVersionAtLeast(10) || OperatingSystem.IsIOSVersionAtLeast(10))
 		{
-			config.DefaultWebpagePreferences = new WKWebpagePreferences
-			{
-				AllowsContentJavaScript = true,
-			};
+			config.AllowsPictureInPictureMediaPlayback = true;
+			config.AllowsInlineMediaPlayback = true;
+			config.MediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypes.None;
 		}
+
 		return config;
 	}
 
-	static WKWebView Create(CGRect frame)
+	internal static WKWebView Create(CGRect frame, Func<WKWebViewConfiguration> createConfiguration)
 	{
-		var view = new WKWebView(frame, CreateConfiguration())
+		var view = new WKWebView(frame, createConfiguration())
 		{
 			AutoresizingMask = UIViewAutoresizing.None,
 			NavigationDelegate = new SpiceNavigationDelegate(),
@@ -38,25 +46,23 @@ public partial class WebView
 	/// Android -> Android.Webkit.WebView
 	/// iOS -> WebKit.WKWebView
 	/// </summary>
-	public WebView() : base(_ => Create(CGRect.Empty))
-	{
-		// Most users would want this default instead of center
-		HorizontalAlign = Align.Stretch;
-		VerticalAlign = Align.Stretch;
-	}
+	public WebView() : base(_ => Create(CGRect.Empty, CreateConfiguration)) => Initialize();
 
 	/// <inheritdoc />
 	/// <param name="frame">Pass the underlying view a frame</param>
-	public WebView(CGRect frame) : base(_ => Create(frame))
+	public WebView(CGRect frame) : base(_ => Create(frame, CreateConfiguration)) => Initialize();
+
+	/// <inheritdoc />
+	/// <param name="creator">Subclasses can pass in a Func to create a UIView</param>
+	protected WebView(Func<View, UIView> creator) : base(creator) => Initialize();
+
+	// Called by ctor
+	void Initialize()
 	{
 		// Most users would want this default instead of center
 		HorizontalAlign = Align.Stretch;
 		VerticalAlign = Align.Stretch;
 	}
-
-	/// <inheritdoc />
-	/// <param name="creator">Subclasses can pass in a Func to create a UIView</param>
-	protected WebView(Func<View, UIView> creator) : base(creator) { }
 
 	/// <summary>
 	/// The underlying WebKit.WKWebView
