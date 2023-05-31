@@ -1,4 +1,4 @@
 ﻿using UIKit;
-using Spice.Scenarios;
+using Spice.BlazorSample;
 
 UIApplication.Main(args, null, typeof(AppDelegate));

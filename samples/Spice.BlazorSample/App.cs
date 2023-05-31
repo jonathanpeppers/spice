@@ -1,4 +1,4 @@
-﻿namespace Spice.Scenarios;
+﻿namespace Spice.BlazorSample;
 
 public class App : Application
 {

@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.OS;
 
-namespace Spice.Scenarios;
+namespace Spice.BlazorSample;
 
 [Activity(
 	// TODO: fix splash theme

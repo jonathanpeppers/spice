@@ -1,7 +1,7 @@
 ﻿using UIKit;
 using Foundation;
 
-namespace Spice.Scenarios;
+namespace Spice.BlazorSample;
 
 [Register("AppDelegate")]
 public class AppDelegate : SpiceAppDelegate
