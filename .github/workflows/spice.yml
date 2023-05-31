@@ -37,6 +37,11 @@ jobs:
     - name: build
       run: dotnet build -bl:bin/build.binlog
 
+    - name: run apkdiff
+      run: |
+        dotnet tool install --global apkdiff
+        apkdiff -s --save-description-2=bin/com.companyname.spice.scenarios-Signed.apkdesc --descrease-is-regression --test-apk-percentage-regression=3 --test-content-percentage-regression=5 sizes/com.companyname.spice.scenarios-Signed.apkdesc samples/Spice.Scenarios/bin/Release/net7.0-android/android-arm64/com.companyname.spice.scenarios-Signed.apk
+
     - name: tests
       run: dotnet test tests/Spice.Tests/Spice.Tests.csproj
 

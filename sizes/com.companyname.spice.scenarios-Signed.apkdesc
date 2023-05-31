@@ -1,0 +1,3660 @@
+{
+  "Comment": null,
+  "Entries": {
+    "AndroidManifest.xml": {
+      "Size": 4388
+    },
+    "assemblies/assemblies.arm64_v8a.blob": {
+      "Size": 467626
+    },
+    "assemblies/assemblies.blob": {
+      "Size": 661498
+    },
+    "assemblies/assemblies.manifest": {
+      "Size": 1793
+    },
+    "assemblies/rc.bin": {
+      "Size": 1182
+    },
+    "classes.dex": {
+      "Size": 8668564
+    },
+    "DebugProbesKt.bin": {
+      "Size": 1738
+    },
+    "kotlin/annotation/annotation.kotlin_builtins": {
+      "Size": 926
+    },
+    "kotlin/ArithmeticException.kotlin_metadata": {
+      "Size": 204
+    },
+    "kotlin/AssertionError.kotlin_metadata": {
+      "Size": 135
+    },
+    "kotlin/BuilderInference.kotlin_metadata": {
+      "Size": 443
+    },
+    "kotlin/CharCodeKt.kotlin_metadata": {
+      "Size": 449
+    },
+    "kotlin/ClassCastException.kotlin_metadata": {
+      "Size": 153
+    },
+    "kotlin/collections/_ArraysKt.kotlin_metadata": {
+      "Size": 72003
+    },
+    "kotlin/collections/_CollectionsKt.kotlin_metadata": {
+      "Size": 14189
+    },
+    "kotlin/collections/_MapsKt.kotlin_metadata": {
+      "Size": 3817
+    },
+    "kotlin/collections/_SetsKt.kotlin_metadata": {
+      "Size": 518
+    },
+    "kotlin/collections/_UArraysKt.kotlin_metadata": {
+      "Size": 41357
+    },
+    "kotlin/collections/_UCollectionsKt.kotlin_metadata": {
+      "Size": 979
+    },
+    "kotlin/collections/AbstractCollection.kotlin_metadata": {
+      "Size": 579
+    },
+    "kotlin/collections/AbstractIterator.kotlin_metadata": {
+      "Size": 364
+    },
+    "kotlin/collections/AbstractList.kotlin_metadata": {
+      "Size": 1403
+    },
+    "kotlin/collections/AbstractMap.kotlin_metadata": {
+      "Size": 945
+    },
+    "kotlin/collections/AbstractMutableCollection.kotlin_metadata": {
+      "Size": 598
+    },
+    "kotlin/collections/AbstractMutableList.kotlin_metadata": {
+      "Size": 739
+    },
+    "kotlin/collections/AbstractMutableMap.kotlin_metadata": {
+      "Size": 692
+    },
+    "kotlin/collections/AbstractMutableSet.kotlin_metadata": {
+      "Size": 584
+    },
+    "kotlin/collections/AbstractSet.kotlin_metadata": {
+      "Size": 478
+    },
+    "kotlin/collections/ArrayAsCollection.kotlin_metadata": {
+      "Size": 452
+    },
+    "kotlin/collections/ArrayDeque.kotlin_metadata": {
+      "Size": 1928
+    },
+    "kotlin/collections/ArrayList.kotlin_metadata": {
+      "Size": 972
+    },
+    "kotlin/collections/ArraysKt.kotlin_metadata": {
+      "Size": 1032
+    },
+    "kotlin/collections/BooleanIterator.kotlin_metadata": {
+      "Size": 178
+    },
+    "kotlin/collections/ByteIterator.kotlin_metadata": {
+      "Size": 169
+    },
+    "kotlin/collections/CharIterator.kotlin_metadata": {
+      "Size": 169
+    },
+    "kotlin/collections/collections.kotlin_builtins": {
+      "Size": 3685
+    },
+    "kotlin/collections/CollectionsHKt.kotlin_metadata": {
+      "Size": 1094
+    },
+    "kotlin/collections/CollectionsKt.kotlin_metadata": {
+      "Size": 2613
+    },
+    "kotlin/collections/DoubleIterator.kotlin_metadata": {
+      "Size": 175
+    },
+    "kotlin/collections/EmptyIterator.kotlin_metadata": {
+      "Size": 300
+    },
+    "kotlin/collections/EmptyList.kotlin_metadata": {
+      "Size": 800
+    },
+    "kotlin/collections/EmptyMap.kotlin_metadata": {
+      "Size": 673
+    },
+    "kotlin/collections/EmptySet.kotlin_metadata": {
+      "Size": 578
+    },
+    "kotlin/collections/FloatIterator.kotlin_metadata": {
+      "Size": 172
+    },
+    "kotlin/collections/Grouping.kotlin_metadata": {
+      "Size": 261
+    },
+    "kotlin/collections/GroupingKt.kotlin_metadata": {
+      "Size": 1298
+    },
+    "kotlin/collections/HashMap.kotlin_metadata": {
+      "Size": 725
+    },
+    "kotlin/collections/HashSet.kotlin_metadata": {
+      "Size": 607
+    },
+    "kotlin/collections/IndexedValue.kotlin_metadata": {
+      "Size": 378
+    },
+    "kotlin/collections/IndexingIterable.kotlin_metadata": {
+      "Size": 291
+    },
+    "kotlin/collections/IndexingIterator.kotlin_metadata": {
+      "Size": 299
+    },
+    "kotlin/collections/IntIterator.kotlin_metadata": {
+      "Size": 166
+    },
+    "kotlin/collections/IterablesKt.kotlin_metadata": {
+      "Size": 511
+    },
+    "kotlin/collections/IteratorsKt.kotlin_metadata": {
+      "Size": 316
+    },
+    "kotlin/collections/LinkedHashMap.kotlin_metadata": {
+      "Size": 731
+    },
+    "kotlin/collections/LinkedHashSet.kotlin_metadata": {
+      "Size": 613
+    },
+    "kotlin/collections/LongIterator.kotlin_metadata": {
+      "Size": 169
+    },
+    "kotlin/collections/MapAccessorsKt.kotlin_metadata": {
+      "Size": 543
+    },
+    "kotlin/collections/MapsKt.kotlin_metadata": {
+      "Size": 4472
+    },
+    "kotlin/collections/MapWithDefault.kotlin_metadata": {
+      "Size": 220
+    },
+    "kotlin/collections/MapWithDefaultImpl.kotlin_metadata": {
+      "Size": 768
+    },
+    "kotlin/collections/MapWithDefaultKt.kotlin_metadata": {
+      "Size": 482
+    },
+    "kotlin/collections/MovingSubList.kotlin_metadata": {
+      "Size": 362
+    },
+    "kotlin/collections/MutableCollectionsKt.kotlin_metadata": {
+      "Size": 1941
+    },
+    "kotlin/collections/MutableMapWithDefault.kotlin_metadata": {
+      "Size": 228
+    },
+    "kotlin/collections/MutableMapWithDefaultImpl.kotlin_metadata": {
+      "Size": 943
+    },
+    "kotlin/collections/RandomAccess.kotlin_metadata": {
+      "Size": 108
+    },
+    "kotlin/collections/ReversedList.kotlin_metadata": {
+      "Size": 380
+    },
+    "kotlin/collections/ReversedListReadOnly.kotlin_metadata": {
+      "Size": 257
+    },
+    "kotlin/collections/ReversedViewsKt.kotlin_metadata": {
+      "Size": 335
+    },
+    "kotlin/collections/RingBuffer.kotlin_metadata": {
+      "Size": 648
+    },
+    "kotlin/collections/SetsKt.kotlin_metadata": {
+      "Size": 1340
+    },
+    "kotlin/collections/ShortIterator.kotlin_metadata": {
+      "Size": 172
+    },
+    "kotlin/collections/SlidingWindowKt.kotlin_metadata": {
+      "Size": 443
+    },
+    "kotlin/collections/State.kotlin_metadata": {
+      "Size": 161
+    },
+    "kotlin/collections/UArraySortingKt.kotlin_metadata": {
+      "Size": 715
+    },
+    "kotlin/Comparator.kotlin_metadata": {
+      "Size": 155
+    },
+    "kotlin/CompareToKt.kotlin_metadata": {
+      "Size": 224
+    },
+    "kotlin/comparisons/_ComparisonsKt.kotlin_metadata": {
+      "Size": 2660
+    },
+    "kotlin/comparisons/_UComparisonsKt.kotlin_metadata": {
+      "Size": 1787
+    },
+    "kotlin/comparisons/ComparisonsKt.kotlin_metadata": {
+      "Size": 1372
+    },
+    "kotlin/comparisons/NaturalOrderComparator.kotlin_metadata": {
+      "Size": 246
+    },
+    "kotlin/comparisons/ReversedComparator.kotlin_metadata": {
+      "Size": 243
+    },
+    "kotlin/comparisons/ReverseOrderComparator.kotlin_metadata": {
+      "Size": 246
+    },
+    "kotlin/ConcurrentModificationException.kotlin_metadata": {
+      "Size": 224
+    },
+    "kotlin/contracts/CallsInPlace.kotlin_metadata": {
+      "Size": 237
+    },
+    "kotlin/contracts/ConditionalEffect.kotlin_metadata": {
+      "Size": 242
+    },
+    "kotlin/contracts/ContractBuilder.kotlin_metadata": {
+      "Size": 519
+    },
+    "kotlin/contracts/ContractBuilderKt.kotlin_metadata": {
+      "Size": 360
+    },
+    "kotlin/contracts/Effect.kotlin_metadata": {
+      "Size": 228
+    },
+    "kotlin/contracts/ExperimentalContracts.kotlin_metadata": {
+      "Size": 332
+    },
+    "kotlin/contracts/InvocationKind.kotlin_metadata": {
+      "Size": 339
+    },
+    "kotlin/contracts/Returns.kotlin_metadata": {
+      "Size": 238
+    },
+    "kotlin/contracts/ReturnsNotNull.kotlin_metadata": {
+      "Size": 245
+    },
+    "kotlin/contracts/SimpleEffect.kotlin_metadata": {
+      "Size": 343
+    },
+    "kotlin/coroutines/AbstractCoroutineContextElement.kotlin_metadata": {
+      "Size": 248
+    },
+    "kotlin/coroutines/AbstractCoroutineContextKey.kotlin_metadata": {
+      "Size": 542
+    },
+    "kotlin/coroutines/cancellation/CancellationException.kotlin_metadata": {
+      "Size": 249
+    },
+    "kotlin/coroutines/cancellation/CancellationExceptionHKt.kotlin_metadata": {
+      "Size": 279
+    },
+    "kotlin/coroutines/CombinedContext.kotlin_metadata": {
+      "Size": 933
+    },
+    "kotlin/coroutines/Continuation.kotlin_metadata": {
+      "Size": 306
+    },
+    "kotlin/coroutines/ContinuationInterceptor.kotlin_metadata": {
+      "Size": 511
+    },
+    "kotlin/coroutines/ContinuationKt.kotlin_metadata": {
+      "Size": 1013
+    },
+    "kotlin/coroutines/CoroutineContext.kotlin_metadata": {
+      "Size": 584
+    },
+    "kotlin/coroutines/CoroutineContextImplKt.kotlin_metadata": {
+      "Size": 348
+    },
+    "kotlin/coroutines/coroutines.kotlin_builtins": {
+      "Size": 200
+    },
+    "kotlin/coroutines/EmptyCoroutineContext.kotlin_metadata": {
+      "Size": 630
+    },
+    "kotlin/coroutines/intrinsics/CoroutineSingletons.kotlin_metadata": {
+      "Size": 276
+    },
+    "kotlin/coroutines/intrinsics/CoroutinesIntrinsicsHKt.kotlin_metadata": {
+      "Size": 753
+    },
+    "kotlin/coroutines/intrinsics/IntrinsicsKt.kotlin_metadata": {
+      "Size": 399
+    },
+    "kotlin/coroutines/RestrictsSuspension.kotlin_metadata": {
+      "Size": 358
+    },
+    "kotlin/coroutines/SafeContinuation.kotlin_metadata": {
+      "Size": 469
+    },
+    "kotlin/DeepRecursiveFunction.kotlin_metadata": {
+      "Size": 471
+    },
+    "kotlin/DeepRecursiveKt.kotlin_metadata": {
+      "Size": 632
+    },
+    "kotlin/DeepRecursiveScope.kotlin_metadata": {
+      "Size": 892
+    },
+    "kotlin/DeepRecursiveScopeImpl.kotlin_metadata": {
+      "Size": 819
+    },
+    "kotlin/enums/EnumEntries.kotlin_metadata": {
+      "Size": 277
+    },
+    "kotlin/enums/EnumEntriesKt.kotlin_metadata": {
+      "Size": 386
+    },
+    "kotlin/enums/EnumEntriesList.kotlin_metadata": {
+      "Size": 675
+    },
+    "kotlin/enums/EnumEntriesSerializationProxy.kotlin_metadata": {
+      "Size": 201
+    },
+    "kotlin/Error.kotlin_metadata": {
+      "Size": 172
+    },
+    "kotlin/Exception.kotlin_metadata": {
+      "Size": 176
+    },
+    "kotlin/ExceptionsHKt.kotlin_metadata": {
+      "Size": 380
+    },
+    "kotlin/experimental/BitwiseOperationsKt.kotlin_metadata": {
+      "Size": 479
+    },
+    "kotlin/experimental/ExperimentalObjCName.kotlin_metadata": {
+      "Size": 381
+    },
+    "kotlin/experimental/ExperimentalObjCRefinement.kotlin_metadata": {
+      "Size": 387
+    },
+    "kotlin/experimental/ExperimentalTypeInference.kotlin_metadata": {
+      "Size": 477
+    },
+    "kotlin/ExperimentalMultiplatform.kotlin_metadata": {
+      "Size": 572
+    },
+    "kotlin/ExperimentalStdlibApi.kotlin_metadata": {
+      "Size": 659
+    },
+    "kotlin/ExperimentalSubclassOptIn.kotlin_metadata": {
+      "Size": 346
+    },
+    "kotlin/ExperimentalUnsignedTypes.kotlin_metadata": {
+      "Size": 615
+    },
+    "kotlin/FloorDivModKt.kotlin_metadata": {
+      "Size": 1792
+    },
+    "kotlin/HashCodeKt.kotlin_metadata": {
+      "Size": 188
+    },
+    "kotlin/IllegalArgumentException.kotlin_metadata": {
+      "Size": 217
+    },
+    "kotlin/IllegalStateException.kotlin_metadata": {
+      "Size": 214
+    },
+    "kotlin/IndexOutOfBoundsException.kotlin_metadata": {
+      "Size": 160
+    },
+    "kotlin/InitializedLazyImpl.kotlin_metadata": {
+      "Size": 262
+    },
+    "kotlin/internal/AccessibleLateinitPropertyLiteral.kotlin_metadata": {
+      "Size": 380
+    },
+    "kotlin/internal/ContractsDsl.kotlin_metadata": {
+      "Size": 263
+    },
+    "kotlin/internal/DynamicExtension.kotlin_metadata": {
+      "Size": 324
+    },
+    "kotlin/internal/Exact.kotlin_metadata": {
+      "Size": 291
+    },
+    "kotlin/internal/HidesMembers.kotlin_metadata": {
+      "Size": 320
+    },
+    "kotlin/internal/InlineOnly.kotlin_metadata": {
+      "Size": 368
+    },
+    "kotlin/internal/internal.kotlin_builtins": {
+      "Size": 646
+    },
+    "kotlin/internal/IntrinsicConstEvaluation.kotlin_metadata": {
+      "Size": 403
+    },
+    "kotlin/internal/LowPriorityInOverloadResolution.kotlin_metadata": {
+      "Size": 360
+    },
+    "kotlin/internal/NoInfer.kotlin_metadata": {
+      "Size": 293
+    },
+    "kotlin/internal/OnlyInputTypes.kotlin_metadata": {
+      "Size": 310
+    },
+    "kotlin/internal/PlatformDependent.kotlin_metadata": {
+      "Size": 307
+    },
+    "kotlin/internal/ProgressionUtilKt.kotlin_metadata": {
+      "Size": 345
+    },
+    "kotlin/internal/PureReifiable.kotlin_metadata": {
+      "Size": 309
+    },
+    "kotlin/internal/RequireKotlin.kotlin_metadata": {
+      "Size": 665
+    },
+    "kotlin/internal/RequireKotlinVersionKind.kotlin_metadata": {
+      "Size": 241
+    },
+    "kotlin/internal/UProgressionUtilKt.kotlin_metadata": {
+      "Size": 422
+    },
+    "kotlin/io/IoHKt.kotlin_metadata": {
+      "Size": 287
+    },
+    "kotlin/io/ReadAfterEOFException.kotlin_metadata": {
+      "Size": 159
+    },
+    "kotlin/io/Serializable.kotlin_metadata": {
+      "Size": 99
+    },
+    "kotlin/js/ExperimentalJsExport.kotlin_metadata": {
+      "Size": 367
+    },
+    "kotlin/js/JsExport.kotlin_metadata": {
+      "Size": 458
+    },
+    "kotlin/js/JsName.kotlin_metadata": {
+      "Size": 390
+    },
+    "kotlin/jvm/JvmField.kotlin_metadata": {
+      "Size": 275
+    },
+    "kotlin/jvm/JvmInline.kotlin_metadata": {
+      "Size": 326
+    },
+    "kotlin/jvm/JvmMultifileClass.kotlin_metadata": {
+      "Size": 283
+    },
+    "kotlin/jvm/JvmName.kotlin_metadata": {
+      "Size": 383
+    },
+    "kotlin/jvm/JvmOverloads.kotlin_metadata": {
+      "Size": 303
+    },
+    "kotlin/jvm/JvmPackageName.kotlin_metadata": {
+      "Size": 452
+    },
+    "kotlin/jvm/JvmRecord.kotlin_metadata": {
+      "Size": 326
+    },
+    "kotlin/jvm/JvmSerializableLambda.kotlin_metadata": {
+      "Size": 390
+    },
+    "kotlin/jvm/JvmStatic.kotlin_metadata": {
+      "Size": 347
+    },
+    "kotlin/jvm/JvmSuppressWildcards.kotlin_metadata": {
+      "Size": 386
+    },
+    "kotlin/jvm/JvmSynthetic.kotlin_metadata": {
+      "Size": 330
+    },
+    "kotlin/jvm/JvmWildcard.kotlin_metadata": {
+      "Size": 277
+    },
+    "kotlin/jvm/Strictfp.kotlin_metadata": {
+      "Size": 364
+    },
+    "kotlin/jvm/Synchronized.kotlin_metadata": {
+      "Size": 332
+    },
+    "kotlin/jvm/Transient.kotlin_metadata": {
+      "Size": 276
+    },
+    "kotlin/jvm/Volatile.kotlin_metadata": {
+      "Size": 275
+    },
+    "kotlin/kotlin.kotlin_builtins": {
+      "Size": 17768
+    },
+    "kotlin/KotlinHKt.kotlin_metadata": {
+      "Size": 735
+    },
+    "kotlin/KotlinNothingValueException.kotlin_metadata": {
+      "Size": 297
+    },
+    "kotlin/KotlinVersion.kotlin_metadata": {
+      "Size": 610
+    },
+    "kotlin/KotlinVersionCurrentValue.kotlin_metadata": {
+      "Size": 181
+    },
+    "kotlin/LateinitKt.kotlin_metadata": {
+      "Size": 224
+    },
+    "kotlin/Lazy.kotlin_metadata": {
+      "Size": 155
+    },
+    "kotlin/LazyKt.kotlin_metadata": {
+      "Size": 262
+    },
+    "kotlin/LazyThreadSafetyMode.kotlin_metadata": {
+      "Size": 155
+    },
+    "kotlin/math/MathHKt.kotlin_metadata": {
+      "Size": 3579
+    },
+    "kotlin/math/UMathKt.kotlin_metadata": {
+      "Size": 510
+    },
+    "kotlin/native/CName.kotlin_metadata": {
+      "Size": 456
+    },
+    "kotlin/native/concurrent/SharedImmutable.kotlin_metadata": {
+      "Size": 355
+    },
+    "kotlin/native/concurrent/ThreadLocal.kotlin_metadata": {
+      "Size": 366
+    },
+    "kotlin/native/FreezingIsDeprecated.kotlin_metadata": {
+      "Size": 808
+    },
+    "kotlin/native/HiddenFromObjC.kotlin_metadata": {
+      "Size": 474
+    },
+    "kotlin/native/HidesFromObjC.kotlin_metadata": {
+      "Size": 435
+    },
+    "kotlin/native/ObjCName.kotlin_metadata": {
+      "Size": 594
+    },
+    "kotlin/native/RefinesInSwift.kotlin_metadata": {
+      "Size": 436
+    },
+    "kotlin/native/ShouldRefineInSwift.kotlin_metadata": {
+      "Size": 480
+    },
+    "kotlin/NoSuchElementException.kotlin_metadata": {
+      "Size": 157
+    },
+    "kotlin/NotImplementedError.kotlin_metadata": {
+      "Size": 134
+    },
+    "kotlin/NoWhenBranchMatchedException.kotlin_metadata": {
+      "Size": 436
+    },
+    "kotlin/NullPointerException.kotlin_metadata": {
+      "Size": 155
+    },
+    "kotlin/NumberFormatException.kotlin_metadata": {
+      "Size": 164
+    },
+    "kotlin/NumbersKt.kotlin_metadata": {
+      "Size": 1758
+    },
+    "kotlin/OptIn.kotlin_metadata": {
+      "Size": 629
+    },
+    "kotlin/OptionalExpectation.kotlin_metadata": {
+      "Size": 341
+    },
+    "kotlin/OverloadResolutionByLambdaReturnType.kotlin_metadata": {
+      "Size": 420
+    },
+    "kotlin/Pair.kotlin_metadata": {
+      "Size": 402
+    },
+    "kotlin/PreconditionsKt.kotlin_metadata": {
+      "Size": 613
+    },
+    "kotlin/properties/Delegates.kotlin_metadata": {
+      "Size": 543
+    },
+    "kotlin/properties/NotNullVar.kotlin_metadata": {
+      "Size": 341
+    },
+    "kotlin/properties/ObservableProperty.kotlin_metadata": {
+      "Size": 477
+    },
+    "kotlin/properties/PropertyDelegateProvider.kotlin_metadata": {
+      "Size": 300
+    },
+    "kotlin/properties/ReadOnlyProperty.kotlin_metadata": {
+      "Size": 234
+    },
+    "kotlin/properties/ReadWriteProperty.kotlin_metadata": {
+      "Size": 323
+    },
+    "kotlin/PropertyReferenceDelegatesKt.kotlin_metadata": {
+      "Size": 606
+    },
+    "kotlin/random/Random.kotlin_metadata": {
+      "Size": 1086
+    },
+    "kotlin/random/RandomKt.kotlin_metadata": {
+      "Size": 720
+    },
+    "kotlin/random/URandomKt.kotlin_metadata": {
+      "Size": 1087
+    },
+    "kotlin/random/XorWowRandom.kotlin_metadata": {
+      "Size": 469
+    },
+    "kotlin/ranges/_RangesKt.kotlin_metadata": {
+      "Size": 6156
+    },
+    "kotlin/ranges/_URangesKt.kotlin_metadata": {
+      "Size": 3254
+    },
+    "kotlin/ranges/CharProgression.kotlin_metadata": {
+      "Size": 558
+    },
+    "kotlin/ranges/CharProgressionIterator.kotlin_metadata": {
+      "Size": 326
+    },
+    "kotlin/ranges/CharRange.kotlin_metadata": {
+      "Size": 857
+    },
+    "kotlin/ranges/ClosedDoubleRange.kotlin_metadata": {
+      "Size": 488
+    },
+    "kotlin/ranges/ClosedFloatingPointRange.kotlin_metadata": {
+      "Size": 339
+    },
+    "kotlin/ranges/ClosedFloatRange.kotlin_metadata": {
+      "Size": 486
+    },
+    "kotlin/ranges/ClosedRange.kotlin_metadata": {
+      "Size": 258
+    },
+    "kotlin/ranges/ComparableOpenEndRange.kotlin_metadata": {
+      "Size": 370
+    },
+    "kotlin/ranges/ComparableRange.kotlin_metadata": {
+      "Size": 362
+    },
+    "kotlin/ranges/IntProgression.kotlin_metadata": {
+      "Size": 534
+    },
+    "kotlin/ranges/IntProgressionIterator.kotlin_metadata": {
+      "Size": 305
+    },
+    "kotlin/ranges/IntRange.kotlin_metadata": {
+      "Size": 836
+    },
+    "kotlin/ranges/LongProgression.kotlin_metadata": {
+      "Size": 554
+    },
+    "kotlin/ranges/LongProgressionIterator.kotlin_metadata": {
+      "Size": 309
+    },
+    "kotlin/ranges/LongRange.kotlin_metadata": {
+      "Size": 857
+    },
+    "kotlin/ranges/OpenEndDoubleRange.kotlin_metadata": {
+      "Size": 477
+    },
+    "kotlin/ranges/OpenEndFloatRange.kotlin_metadata": {
+      "Size": 475
+    },
+    "kotlin/ranges/OpenEndRange.kotlin_metadata": {
+      "Size": 346
+    },
+    "kotlin/ranges/ranges.kotlin_builtins": {
+      "Size": 3305
+    },
+    "kotlin/ranges/RangesKt.kotlin_metadata": {
+      "Size": 934
+    },
+    "kotlin/ranges/UIntProgression.kotlin_metadata": {
+      "Size": 732
+    },
+    "kotlin/ranges/UIntProgressionIterator.kotlin_metadata": {
+      "Size": 396
+    },
+    "kotlin/ranges/UIntRange.kotlin_metadata": {
+      "Size": 997
+    },
+    "kotlin/ranges/ULongProgression.kotlin_metadata": {
+      "Size": 752
+    },
+    "kotlin/ranges/ULongProgressionIterator.kotlin_metadata": {
+      "Size": 399
+    },
+    "kotlin/ranges/ULongRange.kotlin_metadata": {
+      "Size": 1001
+    },
+    "kotlin/reflect/KCallable.kotlin_metadata": {
+      "Size": 205
+    },
+    "kotlin/reflect/KClass.kotlin_metadata": {
+      "Size": 317
+    },
+    "kotlin/reflect/KClassesKt.kotlin_metadata": {
+      "Size": 494
+    },
+    "kotlin/reflect/KClassifier.kotlin_metadata": {
+      "Size": 152
+    },
+    "kotlin/reflect/KFunction.kotlin_metadata": {
+      "Size": 153
+    },
+    "kotlin/reflect/KMutableProperty.kotlin_metadata": {
+      "Size": 131
+    },
+    "kotlin/reflect/KMutableProperty0.kotlin_metadata": {
+      "Size": 218
+    },
+    "kotlin/reflect/KMutableProperty1.kotlin_metadata": {
+      "Size": 255
+    },
+    "kotlin/reflect/KMutableProperty2.kotlin_metadata": {
+      "Size": 294
+    },
+    "kotlin/reflect/KProperty.kotlin_metadata": {
+      "Size": 126
+    },
+    "kotlin/reflect/KProperty0.kotlin_metadata": {
+      "Size": 174
+    },
+    "kotlin/reflect/KProperty1.kotlin_metadata": {
+      "Size": 211
+    },
+    "kotlin/reflect/KProperty2.kotlin_metadata": {
+      "Size": 250
+    },
+    "kotlin/reflect/KType.kotlin_metadata": {
+      "Size": 356
+    },
+    "kotlin/reflect/KTypeParameter.kotlin_metadata": {
+      "Size": 364
+    },
+    "kotlin/reflect/KTypeProjection.kotlin_metadata": {
+      "Size": 690
+    },
+    "kotlin/reflect/KVariance.kotlin_metadata": {
+      "Size": 196
+    },
+    "kotlin/reflect/reflect.kotlin_builtins": {
+      "Size": 2395
+    },
+    "kotlin/reflect/TypeOfKt.kotlin_metadata": {
+      "Size": 240
+    },
+    "kotlin/RequiresOptIn.kotlin_metadata": {
+      "Size": 498
+    },
+    "kotlin/Result.kotlin_metadata": {
+      "Size": 899
+    },
+    "kotlin/ResultKt.kotlin_metadata": {
+      "Size": 1440
+    },
+    "kotlin/RuntimeException.kotlin_metadata": {
+      "Size": 202
+    },
+    "kotlin/sequences/_SequencesKt.kotlin_metadata": {
+      "Size": 11439
+    },
+    "kotlin/sequences/_USequencesKt.kotlin_metadata": {
+      "Size": 635
+    },
+    "kotlin/sequences/ConstrainedOnceSequence.kotlin_metadata": {
+      "Size": 236
+    },
+    "kotlin/sequences/DistinctIterator.kotlin_metadata": {
+      "Size": 369
+    },
+    "kotlin/sequences/DistinctSequence.kotlin_metadata": {
+      "Size": 304
+    },
+    "kotlin/sequences/DropSequence.kotlin_metadata": {
+      "Size": 349
+    },
+    "kotlin/sequences/DropTakeSequence.kotlin_metadata": {
+      "Size": 203
+    },
+    "kotlin/sequences/DropWhileSequence.kotlin_metadata": {
+      "Size": 313
+    },
+    "kotlin/sequences/EmptySequence.kotlin_metadata": {
+      "Size": 304
+    },
+    "kotlin/sequences/FilteringSequence.kotlin_metadata": {
+      "Size": 341
+    },
+    "kotlin/sequences/FlatteningSequence.kotlin_metadata": {
+      "Size": 349
+    },
+    "kotlin/sequences/GeneratorSequence.kotlin_metadata": {
+      "Size": 348
+    },
+    "kotlin/sequences/IndexingSequence.kotlin_metadata": {
+      "Size": 272
+    },
+    "kotlin/sequences/MergingSequence.kotlin_metadata": {
+      "Size": 359
+    },
+    "kotlin/sequences/Sequence.kotlin_metadata": {
+      "Size": 180
+    },
+    "kotlin/sequences/SequenceBuilderIterator.kotlin_metadata": {
+      "Size": 727
+    },
+    "kotlin/sequences/SequenceBuilderKt.kotlin_metadata": {
+      "Size": 751
+    },
+    "kotlin/sequences/SequenceScope.kotlin_metadata": {
+      "Size": 477
+    },
+    "kotlin/sequences/SequencesKt.kotlin_metadata": {
+      "Size": 1375
+    },
+    "kotlin/sequences/SubSequence.kotlin_metadata": {
+      "Size": 396
+    },
+    "kotlin/sequences/TakeSequence.kotlin_metadata": {
+      "Size": 349
+    },
+    "kotlin/sequences/TakeWhileSequence.kotlin_metadata": {
+      "Size": 313
+    },
+    "kotlin/sequences/TransformingIndexedSequence.kotlin_metadata": {
+      "Size": 339
+    },
+    "kotlin/sequences/TransformingSequence.kotlin_metadata": {
+      "Size": 376
+    },
+    "kotlin/StandardKt.kotlin_metadata": {
+      "Size": 967
+    },
+    "kotlin/SubclassOptInRequired.kotlin_metadata": {
+      "Size": 448
+    },
+    "kotlin/SuspendKt.kotlin_metadata": {
+      "Size": 287
+    },
+    "kotlin/text/_OneToManyTitlecaseMappingsKt.kotlin_metadata": {
+      "Size": 115
+    },
+    "kotlin/text/_StringsKt.kotlin_metadata": {
+      "Size": 9415
+    },
+    "kotlin/text/Appendable.kotlin_metadata": {
+      "Size": 263
+    },
+    "kotlin/text/AppendableKt.kotlin_metadata": {
+      "Size": 694
+    },
+    "kotlin/text/CharacterCodingException.kotlin_metadata": {
+      "Size": 260
+    },
+    "kotlin/text/CharCategory.kotlin_metadata": {
+      "Size": 899
+    },
+    "kotlin/text/CharKt.kotlin_metadata": {
+      "Size": 1820
+    },
+    "kotlin/text/DelimitedRangesSequence.kotlin_metadata": {
+      "Size": 545
+    },
+    "kotlin/text/IndentKt.kotlin_metadata": {
+      "Size": 588
+    },
+    "kotlin/text/MatchGroup.kotlin_metadata": {
+      "Size": 136
+    },
+    "kotlin/text/MatchGroupCollection.kotlin_metadata": {
+      "Size": 208
+    },
+    "kotlin/text/MatchNamedGroupCollection.kotlin_metadata": {
+      "Size": 252
+    },
+    "kotlin/text/MatchResult.kotlin_metadata": {
+      "Size": 741
+    },
+    "kotlin/text/Regex.kotlin_metadata": {
+      "Size": 1258
+    },
+    "kotlin/text/RegexExtensionsKt.kotlin_metadata": {
+      "Size": 278
+    },
+    "kotlin/text/RegexOption.kotlin_metadata": {
+      "Size": 141
+    },
+    "kotlin/text/StringBuilder.kotlin_metadata": {
+      "Size": 1902
+    },
+    "kotlin/text/StringBuilderKt.kotlin_metadata": {
+      "Size": 2144
+    },
+    "kotlin/text/StringNumberConversionsKt.kotlin_metadata": {
+      "Size": 541
+    },
+    "kotlin/text/StringsKt.kotlin_metadata": {
+      "Size": 5866
+    },
+    "kotlin/text/TextHKt.kotlin_metadata": {
+      "Size": 3130
+    },
+    "kotlin/text/Typography.kotlin_metadata": {
+      "Size": 1785
+    },
+    "kotlin/text/UStringsKt.kotlin_metadata": {
+      "Size": 1431
+    },
+    "kotlin/Throws.kotlin_metadata": {
+      "Size": 561
+    },
+    "kotlin/time/AbstractDoubleTimeSource.kotlin_metadata": {
+      "Size": 898
+    },
+    "kotlin/time/AbstractLongTimeSource.kotlin_metadata": {
+      "Size": 783
+    },
+    "kotlin/time/AdjustedTimeMark.kotlin_metadata": {
+      "Size": 276
+    },
+    "kotlin/time/ComparableTimeMark.kotlin_metadata": {
+      "Size": 464
+    },
+    "kotlin/time/Duration.kotlin_metadata": {
+      "Size": 9546
+    },
+    "kotlin/time/DurationKt.kotlin_metadata": {
+      "Size": 6025
+    },
+    "kotlin/time/DurationUnit.kotlin_metadata": {
+      "Size": 344
+    },
+    "kotlin/time/DurationUnitKt.kotlin_metadata": {
+      "Size": 601
+    },
+    "kotlin/time/ExperimentalTime.kotlin_metadata": {
+      "Size": 666
+    },
+    "kotlin/time/LongSaturatedMathKt.kotlin_metadata": {
+      "Size": 505
+    },
+    "kotlin/time/MeasureTimeKt.kotlin_metadata": {
+      "Size": 646
+    },
+    "kotlin/time/MonotonicTimeSource.kotlin_metadata": {
+      "Size": 474
+    },
+    "kotlin/time/TestTimeSource.kotlin_metadata": {
+      "Size": 369
+    },
+    "kotlin/time/TimedValue.kotlin_metadata": {
+      "Size": 492
+    },
+    "kotlin/time/TimeMark.kotlin_metadata": {
+      "Size": 361
+    },
+    "kotlin/time/TimeSource.kotlin_metadata": {
+      "Size": 1002
+    },
+    "kotlin/time/ValueTimeMarkReading.kotlin_metadata": {
+      "Size": 109
+    },
+    "kotlin/Triple.kotlin_metadata": {
+      "Size": 471
+    },
+    "kotlin/TuplesKt.kotlin_metadata": {
+      "Size": 247
+    },
+    "kotlin/UByte.kotlin_metadata": {
+      "Size": 2244
+    },
+    "kotlin/UByteArray.kotlin_metadata": {
+      "Size": 895
+    },
+    "kotlin/UByteArrayKt.kotlin_metadata": {
+      "Size": 376
+    },
+    "kotlin/UByteKt.kotlin_metadata": {
+      "Size": 505
+    },
+    "kotlin/UInt.kotlin_metadata": {
+      "Size": 2310
+    },
+    "kotlin/UIntArray.kotlin_metadata": {
+      "Size": 892
+    },
+    "kotlin/UIntArrayKt.kotlin_metadata": {
+      "Size": 373
+    },
+    "kotlin/UIntKt.kotlin_metadata": {
+      "Size": 648
+    },
+    "kotlin/ULong.kotlin_metadata": {
+      "Size": 2312
+    },
+    "kotlin/ULongArray.kotlin_metadata": {
+      "Size": 895
+    },
+    "kotlin/ULongArrayKt.kotlin_metadata": {
+      "Size": 376
+    },
+    "kotlin/ULongKt.kotlin_metadata": {
+      "Size": 650
+    },
+    "kotlin/UNINITIALIZED_VALUE.kotlin_metadata": {
+      "Size": 100
+    },
+    "kotlin/UninitializedPropertyAccessException.kotlin_metadata": {
+      "Size": 444
+    },
+    "kotlin/UnsafeLazyImpl.kotlin_metadata": {
+      "Size": 382
+    },
+    "kotlin/UnsignedUtilsKt.kotlin_metadata": {
+      "Size": 634
+    },
+    "kotlin/UnsupportedOperationException.kotlin_metadata": {
+      "Size": 222
+    },
+    "kotlin/UNumbersKt.kotlin_metadata": {
+      "Size": 2153
+    },
+    "kotlin/UShort.kotlin_metadata": {
+      "Size": 2244
+    },
+    "kotlin/UShortArray.kotlin_metadata": {
+      "Size": 898
+    },
+    "kotlin/UShortArrayKt.kotlin_metadata": {
+      "Size": 379
+    },
+    "kotlin/UShortKt.kotlin_metadata": {
+      "Size": 507
+    },
+    "kotlin/WasExperimental.kotlin_metadata": {
+      "Size": 455
+    },
+    "lib/arm64-v8a/libaot-CommunityToolkit.Mvvm.dll.so": {
+      "Size": 3904
+    },
+    "lib/arm64-v8a/libaot-Java.Interop.dll.so": {
+      "Size": 148176
+    },
+    "lib/arm64-v8a/libaot-Microsoft.Maui.Graphics.dll.so": {
+      "Size": 4040
+    },
+    "lib/arm64-v8a/libaot-Mono.Android.dll.so": {
+      "Size": 259528
+    },
+    "lib/arm64-v8a/libaot-Spice.dll.so": {
+      "Size": 6872
+    },
+    "lib/arm64-v8a/libaot-Spice.Scenarios.dll.so": {
+      "Size": 37488
+    },
+    "lib/arm64-v8a/libaot-System.ComponentModel.TypeConverter.dll.so": {
+      "Size": 3848
+    },
+    "lib/arm64-v8a/libaot-System.Console.dll.so": {
+      "Size": 4768
+    },
+    "lib/arm64-v8a/libaot-System.Linq.dll.so": {
+      "Size": 43432
+    },
+    "lib/arm64-v8a/libaot-System.ObjectModel.dll.so": {
+      "Size": 8344
+    },
+    "lib/arm64-v8a/libaot-System.Private.CoreLib.dll.so": {
+      "Size": 960136
+    },
+    "lib/arm64-v8a/libaot-System.Runtime.dll.so": {
+      "Size": 3608
+    },
+    "lib/arm64-v8a/libaot-System.Runtime.InteropServices.dll.so": {
+      "Size": 3808
+    },
+    "lib/arm64-v8a/libaot-Xamarin.AndroidX.Activity.dll.so": {
+      "Size": 8200
+    },
+    "lib/arm64-v8a/libaot-Xamarin.AndroidX.AppCompat.dll.so": {
+      "Size": 28448
+    },
+    "lib/arm64-v8a/libaot-Xamarin.AndroidX.Core.dll.so": {
+      "Size": 12912
+    },
+    "lib/arm64-v8a/libaot-Xamarin.AndroidX.DrawerLayout.dll.so": {
+      "Size": 7552
+    },
+    "lib/arm64-v8a/libaot-Xamarin.AndroidX.Fragment.dll.so": {
+      "Size": 16856
+    },
+    "lib/arm64-v8a/libaot-Xamarin.AndroidX.Lifecycle.Common.dll.so": {
+      "Size": 5024
+    },
+    "lib/arm64-v8a/libaot-Xamarin.AndroidX.Lifecycle.LiveData.Core.dll.so": {
+      "Size": 5008
+    },
+    "lib/arm64-v8a/libaot-Xamarin.AndroidX.Lifecycle.ViewModel.dll.so": {
+      "Size": 5464
+    },
+    "lib/arm64-v8a/libaot-Xamarin.AndroidX.Loader.dll.so": {
+      "Size": 6840
+    },
+    "lib/arm64-v8a/libaot-Xamarin.AndroidX.SavedState.dll.so": {
+      "Size": 4320
+    },
+    "lib/arm64-v8a/libmonodroid.so": {
+      "Size": 371792
+    },
+    "lib/arm64-v8a/libmonosgen-2.0.so": {
+      "Size": 3075360
+    },
+    "lib/arm64-v8a/libSystem.IO.Compression.Native.so": {
+      "Size": 723840
+    },
+    "lib/arm64-v8a/libSystem.Native.so": {
+      "Size": 93768
+    },
+    "lib/arm64-v8a/libSystem.Security.Cryptography.Native.Android.so": {
+      "Size": 151624
+    },
+    "lib/arm64-v8a/libxamarin-app.so": {
+      "Size": 41016
+    },
+    "META-INF/activity_release.kotlin_module": {
+      "Size": 137
+    },
+    "META-INF/ANDROIDD.RSA": {
+      "Size": 1213
+    },
+    "META-INF/ANDROIDD.SF": {
+      "Size": 144561
+    },
+    "META-INF/androidx.activity_activity.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.annotation_annotation-experimental.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.appcompat_appcompat.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.appcompat_appcompat-resources.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.arch.core_core-runtime.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.cardview_cardview.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.coordinatorlayout_coordinatorlayout.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.core_core.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.core_core-ktx.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.cursoradapter_cursoradapter.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.customview_customview.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.documentfile_documentfile.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.drawerlayout_drawerlayout.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.dynamicanimation_dynamicanimation.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.emoji2_emoji2.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.emoji2_emoji2-views-helper.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.fragment_fragment.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.interpolator_interpolator.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.legacy_legacy-support-core-utils.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.lifecycle_lifecycle-livedata-core.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.lifecycle_lifecycle-process.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.lifecycle_lifecycle-runtime.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.lifecycle_lifecycle-viewmodel.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.lifecycle_lifecycle-viewmodel-savedstate.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.loader_loader.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.localbroadcastmanager_localbroadcastmanager.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.print_print.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.recyclerview_recyclerview.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.savedstate_savedstate.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.startup_startup-runtime.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.tracing_tracing.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.transition_transition.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.vectordrawable_vectordrawable.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.vectordrawable_vectordrawable-animated.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.versionedparcelable_versionedparcelable.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.viewpager_viewpager.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.viewpager2_viewpager2.version": {
+      "Size": 6
+    },
+    "META-INF/annotation.kotlin_module": {
+      "Size": 24
+    },
+    "META-INF/annotation-experimental_release.kotlin_module": {
+      "Size": 24
+    },
+    "META-INF/appcompat_release.kotlin_module": {
+      "Size": 24
+    },
+    "META-INF/com.android.tools/proguard/coroutines.pro": {
+      "Size": 1345
+    },
+    "META-INF/com.android.tools/r8/coroutines.pro": {
+      "Size": 1190
+    },
+    "META-INF/com.android.tools/r8-from-1.6.0/coroutines.pro": {
+      "Size": 899
+    },
+    "META-INF/com.android.tools/r8-upto-3.0.0/coroutines.pro": {
+      "Size": 558
+    },
+    "META-INF/com.google.android.material_material.version": {
+      "Size": 6
+    },
+    "META-INF/core_release.kotlin_module": {
+      "Size": 24
+    },
+    "META-INF/core-ktx_release.kotlin_module": {
+      "Size": 1150
+    },
+    "META-INF/fragment_release.kotlin_module": {
+      "Size": 24
+    },
+    "META-INF/kotlin-stdlib.kotlin_module": {
+      "Size": 8253
+    },
+    "META-INF/kotlin-stdlib-common.kotlin_module": {
+      "Size": 1628
+    },
+    "META-INF/kotlin-stdlib-jdk7.kotlin_module": {
+      "Size": 199
+    },
+    "META-INF/kotlin-stdlib-jdk8.kotlin_module": {
+      "Size": 356
+    },
+    "META-INF/kotlinx_coroutines_android.version": {
+      "Size": 5
+    },
+    "META-INF/kotlinx_coroutines_core.version": {
+      "Size": 5
+    },
+    "META-INF/kotlinx-coroutines-android.kotlin_module": {
+      "Size": 75
+    },
+    "META-INF/kotlinx-coroutines-core.kotlin_module": {
+      "Size": 2759
+    },
+    "META-INF/lifecycle-viewmodel_release.kotlin_module": {
+      "Size": 154
+    },
+    "META-INF/lifecycle-viewmodel-savedstate_release.kotlin_module": {
+      "Size": 101
+    },
+    "META-INF/MANIFEST.MF": {
+      "Size": 144434
+    },
+    "META-INF/maven/com.google.guava/listenablefuture/pom.properties": {
+      "Size": 96
+    },
+    "META-INF/maven/com.google.guava/listenablefuture/pom.xml": {
+      "Size": 2226
+    },
+    "META-INF/proguard/androidx-annotations.pro": {
+      "Size": 433
+    },
+    "META-INF/proguard/coroutines.pro": {
+      "Size": 1363
+    },
+    "META-INF/savedstate_release.kotlin_module": {
+      "Size": 80
+    },
+    "META-INF/services/kotlinx.coroutines.CoroutineExceptionHandler": {
+      "Size": 54
+    },
+    "META-INF/services/kotlinx.coroutines.internal.MainDispatcherFactory": {
+      "Size": 52
+    },
+    "res/anim/abc_fade_in.xml": {
+      "Size": 388
+    },
+    "res/anim/abc_fade_out.xml": {
+      "Size": 388
+    },
+    "res/anim/abc_grow_fade_in_from_bottom.xml": {
+      "Size": 852
+    },
+    "res/anim/abc_popup_enter.xml": {
+      "Size": 508
+    },
+    "res/anim/abc_popup_exit.xml": {
+      "Size": 508
+    },
+    "res/anim/abc_shrink_fade_out_from_bottom.xml": {
+      "Size": 852
+    },
+    "res/anim/abc_slide_in_bottom.xml": {
+      "Size": 396
+    },
+    "res/anim/abc_slide_in_top.xml": {
+      "Size": 396
+    },
+    "res/anim/abc_slide_out_bottom.xml": {
+      "Size": 396
+    },
+    "res/anim/abc_slide_out_top.xml": {
+      "Size": 396
+    },
+    "res/anim/abc_tooltip_enter.xml": {
+      "Size": 388
+    },
+    "res/anim/abc_tooltip_exit.xml": {
+      "Size": 388
+    },
+    "res/anim/btn_checkbox_to_checked_box_inner_merged_animation.xml": {
+      "Size": 2124
+    },
+    "res/anim/btn_checkbox_to_checked_box_outer_merged_animation.xml": {
+      "Size": 2780
+    },
+    "res/anim/btn_checkbox_to_checked_icon_null_animation.xml": {
+      "Size": 1196
+    },
+    "res/anim/btn_checkbox_to_unchecked_box_inner_merged_animation.xml": {
+      "Size": 2360
+    },
+    "res/anim/btn_checkbox_to_unchecked_check_path_merged_animation.xml": {
+      "Size": 2520
+    },
+    "res/anim/btn_checkbox_to_unchecked_icon_null_animation.xml": {
+      "Size": 1196
+    },
+    "res/anim/btn_radio_to_off_mtrl_dot_group_animation.xml": {
+      "Size": 1656
+    },
+    "res/anim/btn_radio_to_off_mtrl_ring_outer_animation.xml": {
+      "Size": 1656
+    },
+    "res/anim/btn_radio_to_off_mtrl_ring_outer_path_animation.xml": {
+      "Size": 1028
+    },
+    "res/anim/btn_radio_to_on_mtrl_dot_group_animation.xml": {
+      "Size": 1656
+    },
+    "res/anim/btn_radio_to_on_mtrl_ring_outer_animation.xml": {
+      "Size": 1656
+    },
+    "res/anim/btn_radio_to_on_mtrl_ring_outer_path_animation.xml": {
+      "Size": 1028
+    },
+    "res/anim/design_snackbar_in.xml": {
+      "Size": 312
+    },
+    "res/anim/design_snackbar_out.xml": {
+      "Size": 312
+    },
+    "res/anim/linear_indeterminate_line1_head_interpolator.xml": {
+      "Size": 400
+    },
+    "res/anim/linear_indeterminate_line1_tail_interpolator.xml": {
+      "Size": 400
+    },
+    "res/anim/linear_indeterminate_line2_head_interpolator.xml": {
+      "Size": 400
+    },
+    "res/anim/linear_indeterminate_line2_tail_interpolator.xml": {
+      "Size": 400
+    },
+    "res/anim/mtrl_card_lowers_interpolator.xml": {
+      "Size": 400
+    },
+    "res/animator/design_fab_hide_motion_spec.xml": {
+      "Size": 796
+    },
+    "res/animator/design_fab_show_motion_spec.xml": {
+      "Size": 796
+    },
+    "res/animator/fragment_close_enter.xml": {
+      "Size": 1128
+    },
+    "res/animator/fragment_close_exit.xml": {
+      "Size": 1128
+    },
+    "res/animator/fragment_fade_enter.xml": {
+      "Size": 452
+    },
+    "res/animator/fragment_fade_exit.xml": {
+      "Size": 452
+    },
+    "res/animator/fragment_open_enter.xml": {
+      "Size": 1128
+    },
+    "res/animator/fragment_open_exit.xml": {
+      "Size": 1128
+    },
+    "res/animator/m3_btn_elevated_btn_state_list_anim.xml": {
+      "Size": 1796
+    },
+    "res/animator/m3_btn_state_list_anim.xml": {
+      "Size": 1796
+    },
+    "res/animator/m3_card_elevated_state_list_anim.xml": {
+      "Size": 1632
+    },
+    "res/animator/m3_card_state_list_anim.xml": {
+      "Size": 1584
+    },
+    "res/animator/m3_chip_state_list_anim.xml": {
+      "Size": 1180
+    },
+    "res/animator/m3_elevated_chip_state_list_anim.xml": {
+      "Size": 1072
+    },
+    "res/animator/m3_extended_fab_hide_motion_spec.xml": {
+      "Size": 820
+    },
+    "res/animator/m3_extended_fab_show_motion_spec.xml": {
+      "Size": 820
+    },
+    "res/animator/m3_extended_fab_state_list_animator.xml": {
+      "Size": 2724
+    },
+    "res/animator/mtrl_btn_state_list_anim.xml": {
+      "Size": 2664
+    },
+    "res/animator/mtrl_btn_unelevated_state_list_anim.xml": {
+      "Size": 120
+    },
+    "res/animator/mtrl_card_state_list_anim.xml": {
+      "Size": 1208
+    },
+    "res/animator/mtrl_chip_state_list_anim.xml": {
+      "Size": 1072
+    },
+    "res/animator/mtrl_extended_fab_change_size_collapse_motion_spec.xml": {
+      "Size": 1116
+    },
+    "res/animator/mtrl_extended_fab_change_size_expand_motion_spec.xml": {
+      "Size": 1116
+    },
+    "res/animator/mtrl_extended_fab_hide_motion_spec.xml": {
+      "Size": 608
+    },
+    "res/animator/mtrl_extended_fab_show_motion_spec.xml": {
+      "Size": 820
+    },
+    "res/animator/mtrl_extended_fab_state_list_animator.xml": {
+      "Size": 2724
+    },
+    "res/animator/mtrl_fab_hide_motion_spec.xml": {
+      "Size": 796
+    },
+    "res/animator/mtrl_fab_show_motion_spec.xml": {
+      "Size": 796
+    },
+    "res/animator/mtrl_fab_transformation_sheet_collapse_spec.xml": {
+      "Size": 1888
+    },
+    "res/animator/mtrl_fab_transformation_sheet_expand_spec.xml": {
+      "Size": 1888
+    },
+    "res/animator-v21/design_appbar_state_list_animator.xml": {
+      "Size": 1216
+    },
+    "res/anim-v21/design_bottom_sheet_slide_in.xml": {
+      "Size": 616
+    },
+    "res/anim-v21/design_bottom_sheet_slide_out.xml": {
+      "Size": 616
+    },
+    "res/anim-v21/fragment_fast_out_extra_slow_in.xml": {
+      "Size": 364
+    },
+    "res/anim-v21/mtrl_bottom_sheet_slide_in.xml": {
+      "Size": 616
+    },
+    "res/anim-v21/mtrl_bottom_sheet_slide_out.xml": {
+      "Size": 616
+    },
+    "res/color/abc_background_cache_hint_selector_material_dark.xml": {
+      "Size": 468
+    },
+    "res/color/abc_background_cache_hint_selector_material_light.xml": {
+      "Size": 468
+    },
+    "res/color/abc_btn_colored_text_material.xml": {
+      "Size": 604
+    },
+    "res/color/abc_hint_foreground_material_dark.xml": {
+      "Size": 564
+    },
+    "res/color/abc_hint_foreground_material_light.xml": {
+      "Size": 564
+    },
+    "res/color/abc_primary_text_disable_only_material_dark.xml": {
+      "Size": 464
+    },
+    "res/color/abc_primary_text_disable_only_material_light.xml": {
+      "Size": 464
+    },
+    "res/color/abc_primary_text_material_dark.xml": {
+      "Size": 464
+    },
+    "res/color/abc_primary_text_material_light.xml": {
+      "Size": 464
+    },
+    "res/color/abc_search_url_text.xml": {
+      "Size": 588
+    },
+    "res/color/abc_secondary_text_material_dark.xml": {
+      "Size": 464
+    },
+    "res/color/abc_secondary_text_material_light.xml": {
+      "Size": 464
+    },
+    "res/color/abc_tint_btn_checkable.xml": {
+      "Size": 728
+    },
+    "res/color/abc_tint_default.xml": {
+      "Size": 1224
+    },
+    "res/color/abc_tint_edittext.xml": {
+      "Size": 772
+    },
+    "res/color/abc_tint_seek_thumb.xml": {
+      "Size": 604
+    },
+    "res/color/abc_tint_spinner.xml": {
+      "Size": 772
+    },
+    "res/color/abc_tint_switch_track.xml": {
+      "Size": 768
+    },
+    "res/color/design_box_stroke_color.xml": {
+      "Size": 712
+    },
+    "res/color/design_error.xml": {
+      "Size": 464
+    },
+    "res/color/design_icon_tint.xml": {
+      "Size": 376
+    },
+    "res/color/m3_appbar_overlay_color.xml": {
+      "Size": 376
+    },
+    "res/color/m3_assist_chip_icon_tint_color.xml": {
+      "Size": 500
+    },
+    "res/color/m3_assist_chip_stroke_color.xml": {
+      "Size": 872
+    },
+    "res/color/m3_button_background_color_selector.xml": {
+      "Size": 500
+    },
+    "res/color/m3_button_foreground_color_selector.xml": {
+      "Size": 500
+    },
+    "res/color/m3_button_outline_color_selector.xml": {
+      "Size": 500
+    },
+    "res/color/m3_button_ripple_color.xml": {
+      "Size": 808
+    },
+    "res/color/m3_button_ripple_color_selector.xml": {
+      "Size": 808
+    },
+    "res/color/m3_calendar_item_disabled_text.xml": {
+      "Size": 376
+    },
+    "res/color/m3_calendar_item_stroke_color.xml": {
+      "Size": 712
+    },
+    "res/color/m3_card_foreground_color.xml": {
+      "Size": 768
+    },
+    "res/color/m3_card_ripple_color.xml": {
+      "Size": 1556
+    },
+    "res/color/m3_card_stroke_color.xml": {
+      "Size": 464
+    },
+    "res/color/m3_checkbox_button_icon_tint.xml": {
+      "Size": 964
+    },
+    "res/color/m3_checkbox_button_tint.xml": {
+      "Size": 1000
+    },
+    "res/color/m3_chip_assist_text_color.xml": {
+      "Size": 500
+    },
+    "res/color/m3_chip_background_color.xml": {
+      "Size": 712
+    },
+    "res/color/m3_chip_ripple_color.xml": {
+      "Size": 1556
+    },
+    "res/color/m3_chip_stroke_color.xml": {
+      "Size": 872
+    },
+    "res/color/m3_chip_text_color.xml": {
+      "Size": 624
+    },
+    "res/color/m3_dark_default_color_primary_text.xml": {
+      "Size": 500
+    },
+    "res/color/m3_dark_default_color_secondary_text.xml": {
+      "Size": 500
+    },
+    "res/color/m3_dark_highlighted_text.xml": {
+      "Size": 376
+    },
+    "res/color/m3_dark_hint_foreground.xml": {
+      "Size": 564
+    },
+    "res/color/m3_dark_primary_text_disable_only.xml": {
+      "Size": 500
+    },
+    "res/color/m3_default_color_primary_text.xml": {
+      "Size": 500
+    },
+    "res/color/m3_default_color_secondary_text.xml": {
+      "Size": 500
+    },
+    "res/color/m3_efab_ripple_color_selector.xml": {
+      "Size": 808
+    },
+    "res/color/m3_elevated_chip_background_color.xml": {
+      "Size": 748
+    },
+    "res/color/m3_fab_efab_background_color_selector.xml": {
+      "Size": 500
+    },
+    "res/color/m3_fab_efab_foreground_color_selector.xml": {
+      "Size": 500
+    },
+    "res/color/m3_fab_ripple_color_selector.xml": {
+      "Size": 808
+    },
+    "res/color/m3_filled_icon_button_container_color_selector.xml": {
+      "Size": 668
+    },
+    "res/color/m3_highlighted_text.xml": {
+      "Size": 376
+    },
+    "res/color/m3_hint_foreground.xml": {
+      "Size": 564
+    },
+    "res/color/m3_icon_button_icon_color_selector.xml": {
+      "Size": 668
+    },
+    "res/color/m3_navigation_bar_item_with_indicator_icon_tint.xml": {
+      "Size": 464
+    },
+    "res/color/m3_navigation_bar_item_with_indicator_label_tint.xml": {
+      "Size": 464
+    },
+    "res/color/m3_navigation_bar_ripple_color_selector.xml": {
+      "Size": 1232
+    },
+    "res/color/m3_navigation_item_background_color.xml": {
+      "Size": 588
+    },
+    "res/color/m3_navigation_item_icon_tint.xml": {
+      "Size": 624
+    },
+    "res/color/m3_navigation_item_ripple_color.xml": {
+      "Size": 1372
+    },
+    "res/color/m3_navigation_item_text_color.xml": {
+      "Size": 624
+    },
+    "res/color/m3_popupmenu_overlay_color.xml": {
+      "Size": 376
+    },
+    "res/color/m3_primary_text_disable_only.xml": {
+      "Size": 500
+    },
+    "res/color/m3_radiobutton_button_tint.xml": {
+      "Size": 644
+    },
+    "res/color/m3_radiobutton_ripple_tint.xml": {
+      "Size": 1372
+    },
+    "res/color/m3_selection_control_ripple_color_selector.xml": {
+      "Size": 1372
+    },
+    "res/color/m3_simple_item_ripple_color.xml": {
+      "Size": 748
+    },
+    "res/color/m3_slider_active_track_color.xml": {
+      "Size": 500
+    },
+    "res/color/m3_slider_halo_color.xml": {
+      "Size": 500
+    },
+    "res/color/m3_slider_inactive_track_color.xml": {
+      "Size": 500
+    },
+    "res/color/m3_slider_thumb_color.xml": {
+      "Size": 500
+    },
+    "res/color/m3_switch_thumb_tint.xml": {
+      "Size": 588
+    },
+    "res/color/m3_switch_track_tint.xml": {
+      "Size": 624
+    },
+    "res/color/m3_tabs_icon_color.xml": {
+      "Size": 624
+    },
+    "res/color/m3_tabs_ripple_color.xml": {
+      "Size": 1372
+    },
+    "res/color/m3_text_button_background_color_selector.xml": {
+      "Size": 508
+    },
+    "res/color/m3_text_button_foreground_color_selector.xml": {
+      "Size": 748
+    },
+    "res/color/m3_text_button_ripple_color_selector.xml": {
+      "Size": 1936
+    },
+    "res/color/m3_textfield_filled_background_color.xml": {
+      "Size": 500
+    },
+    "res/color/m3_textfield_indicator_text_color.xml": {
+      "Size": 624
+    },
+    "res/color/m3_textfield_input_text_color.xml": {
+      "Size": 500
+    },
+    "res/color/m3_textfield_label_color.xml": {
+      "Size": 624
+    },
+    "res/color/m3_textfield_stroke_color.xml": {
+      "Size": 748
+    },
+    "res/color/m3_timepicker_button_background_color.xml": {
+      "Size": 528
+    },
+    "res/color/m3_timepicker_button_ripple_color.xml": {
+      "Size": 1536
+    },
+    "res/color/m3_timepicker_button_text_color.xml": {
+      "Size": 768
+    },
+    "res/color/m3_timepicker_clock_text_color.xml": {
+      "Size": 464
+    },
+    "res/color/m3_timepicker_display_background_color.xml": {
+      "Size": 464
+    },
+    "res/color/m3_timepicker_display_ripple_color.xml": {
+      "Size": 1372
+    },
+    "res/color/m3_timepicker_display_stroke_color.xml": {
+      "Size": 464
+    },
+    "res/color/m3_timepicker_display_text_color.xml": {
+      "Size": 624
+    },
+    "res/color/m3_timepicker_secondary_text_button_ripple_color.xml": {
+      "Size": 808
+    },
+    "res/color/m3_timepicker_secondary_text_button_text_color.xml": {
+      "Size": 500
+    },
+    "res/color/m3_tonal_button_ripple_color_selector.xml": {
+      "Size": 808
+    },
+    "res/color/material_cursor_color.xml": {
+      "Size": 340
+    },
+    "res/color/material_divider_color.xml": {
+      "Size": 376
+    },
+    "res/color/material_on_background_disabled.xml": {
+      "Size": 376
+    },
+    "res/color/material_on_background_emphasis_high_type.xml": {
+      "Size": 376
+    },
+    "res/color/material_on_background_emphasis_medium.xml": {
+      "Size": 376
+    },
+    "res/color/material_on_primary_disabled.xml": {
+      "Size": 376
+    },
+    "res/color/material_on_primary_emphasis_high_type.xml": {
+      "Size": 376
+    },
+    "res/color/material_on_primary_emphasis_medium.xml": {
+      "Size": 376
+    },
+    "res/color/material_on_surface_disabled.xml": {
+      "Size": 376
+    },
+    "res/color/material_on_surface_emphasis_high_type.xml": {
+      "Size": 376
+    },
+    "res/color/material_on_surface_emphasis_medium.xml": {
+      "Size": 376
+    },
+    "res/color/material_on_surface_stroke.xml": {
+      "Size": 376
+    },
+    "res/color/material_slider_active_tick_marks_color.xml": {
+      "Size": 520
+    },
+    "res/color/material_slider_active_track_color.xml": {
+      "Size": 500
+    },
+    "res/color/material_slider_halo_color.xml": {
+      "Size": 500
+    },
+    "res/color/material_slider_inactive_tick_marks_color.xml": {
+      "Size": 520
+    },
+    "res/color/material_slider_inactive_track_color.xml": {
+      "Size": 520
+    },
+    "res/color/material_slider_thumb_color.xml": {
+      "Size": 500
+    },
+    "res/color/material_timepicker_button_background.xml": {
+      "Size": 500
+    },
+    "res/color/material_timepicker_button_stroke.xml": {
+      "Size": 376
+    },
+    "res/color/material_timepicker_clock_text_color.xml": {
+      "Size": 464
+    },
+    "res/color/material_timepicker_clockface.xml": {
+      "Size": 376
+    },
+    "res/color/material_timepicker_modebutton_tint.xml": {
+      "Size": 376
+    },
+    "res/color/mtrl_btn_bg_color_selector.xml": {
+      "Size": 500
+    },
+    "res/color/mtrl_btn_ripple_color.xml": {
+      "Size": 948
+    },
+    "res/color/mtrl_btn_stroke_color_selector.xml": {
+      "Size": 520
+    },
+    "res/color/mtrl_btn_text_btn_bg_color_selector.xml": {
+      "Size": 520
+    },
+    "res/color/mtrl_btn_text_btn_ripple_color.xml": {
+      "Size": 948
+    },
+    "res/color/mtrl_btn_text_color_selector.xml": {
+      "Size": 500
+    },
+    "res/color/mtrl_calendar_item_stroke_color.xml": {
+      "Size": 808
+    },
+    "res/color/mtrl_calendar_selected_range.xml": {
+      "Size": 376
+    },
+    "res/color/mtrl_card_view_foreground.xml": {
+      "Size": 788
+    },
+    "res/color/mtrl_card_view_ripple.xml": {
+      "Size": 768
+    },
+    "res/color/mtrl_chip_background_color.xml": {
+      "Size": 848
+    },
+    "res/color/mtrl_chip_close_icon_tint.xml": {
+      "Size": 1092
+    },
+    "res/color/mtrl_chip_surface_color.xml": {
+      "Size": 340
+    },
+    "res/color/mtrl_chip_text_color.xml": {
+      "Size": 520
+    },
+    "res/color/mtrl_choice_chip_background_color.xml": {
+      "Size": 848
+    },
+    "res/color/mtrl_choice_chip_ripple_color.xml": {
+      "Size": 948
+    },
+    "res/color/mtrl_choice_chip_text_color.xml": {
+      "Size": 808
+    },
+    "res/color/mtrl_error.xml": {
+      "Size": 464
+    },
+    "res/color/mtrl_fab_bg_color_selector.xml": {
+      "Size": 500
+    },
+    "res/color/mtrl_fab_icon_text_color_selector.xml": {
+      "Size": 500
+    },
+    "res/color/mtrl_fab_ripple_color.xml": {
+      "Size": 948
+    },
+    "res/color/mtrl_filled_background_color.xml": {
+      "Size": 808
+    },
+    "res/color/mtrl_filled_icon_tint.xml": {
+      "Size": 644
+    },
+    "res/color/mtrl_filled_stroke_color.xml": {
+      "Size": 788
+    },
+    "res/color/mtrl_indicator_text_color.xml": {
+      "Size": 520
+    },
+    "res/color/mtrl_navigation_bar_colored_item_tint.xml": {
+      "Size": 520
+    },
+    "res/color/mtrl_navigation_bar_colored_ripple_color.xml": {
+      "Size": 948
+    },
+    "res/color/mtrl_navigation_bar_item_tint.xml": {
+      "Size": 520
+    },
+    "res/color/mtrl_navigation_bar_ripple_color.xml": {
+      "Size": 1672
+    },
+    "res/color/mtrl_navigation_item_background_color.xml": {
+      "Size": 644
+    },
+    "res/color/mtrl_navigation_item_icon_tint.xml": {
+      "Size": 624
+    },
+    "res/color/mtrl_navigation_item_text_color.xml": {
+      "Size": 624
+    },
+    "res/color/mtrl_on_primary_text_btn_text_color_selector.xml": {
+      "Size": 500
+    },
+    "res/color/mtrl_on_surface_ripple_color.xml": {
+      "Size": 808
+    },
+    "res/color/mtrl_outlined_icon_tint.xml": {
+      "Size": 644
+    },
+    "res/color/mtrl_outlined_stroke_color.xml": {
+      "Size": 788
+    },
+    "res/color/mtrl_popupmenu_overlay_color.xml": {
+      "Size": 376
+    },
+    "res/color/mtrl_switch_thumb_icon_tint.xml": {
+      "Size": 784
+    },
+    "res/color/mtrl_switch_thumb_tint.xml": {
+      "Size": 1028
+    },
+    "res/color/mtrl_switch_track_decoration_tint.xml": {
+      "Size": 624
+    },
+    "res/color/mtrl_switch_track_tint.xml": {
+      "Size": 784
+    },
+    "res/color/mtrl_tabs_colored_ripple_color.xml": {
+      "Size": 948
+    },
+    "res/color/mtrl_tabs_icon_color_selector.xml": {
+      "Size": 500
+    },
+    "res/color/mtrl_tabs_icon_color_selector_colored.xml": {
+      "Size": 500
+    },
+    "res/color/mtrl_tabs_legacy_text_color_selector.xml": {
+      "Size": 464
+    },
+    "res/color/mtrl_tabs_ripple_color.xml": {
+      "Size": 1672
+    },
+    "res/color/mtrl_text_btn_text_color_selector.xml": {
+      "Size": 888
+    },
+    "res/color/switch_thumb_material_dark.xml": {
+      "Size": 464
+    },
+    "res/color/switch_thumb_material_light.xml": {
+      "Size": 464
+    },
+    "res/color-night-v8/material_timepicker_button_stroke.xml": {
+      "Size": 376
+    },
+    "res/color-night-v8/material_timepicker_clockface.xml": {
+      "Size": 376
+    },
+    "res/color-night-v8/material_timepicker_modebutton_tint.xml": {
+      "Size": 340
+    },
+    "res/color-v21/abc_btn_colored_borderless_text_material.xml": {
+      "Size": 464
+    },
+    "res/color-v23/abc_btn_colored_borderless_text_material.xml": {
+      "Size": 500
+    },
+    "res/color-v23/abc_btn_colored_text_material.xml": {
+      "Size": 500
+    },
+    "res/color-v23/abc_color_highlight_material.xml": {
+      "Size": 544
+    },
+    "res/color-v23/abc_tint_btn_checkable.xml": {
+      "Size": 624
+    },
+    "res/color-v23/abc_tint_default.xml": {
+      "Size": 1120
+    },
+    "res/color-v23/abc_tint_edittext.xml": {
+      "Size": 668
+    },
+    "res/color-v23/abc_tint_seek_thumb.xml": {
+      "Size": 500
+    },
+    "res/color-v23/abc_tint_spinner.xml": {
+      "Size": 668
+    },
+    "res/color-v23/abc_tint_switch_track.xml": {
+      "Size": 664
+    },
+    "res/color-v31/m3_dynamic_dark_default_color_primary_text.xml": {
+      "Size": 500
+    },
+    "res/color-v31/m3_dynamic_dark_default_color_secondary_text.xml": {
+      "Size": 500
+    },
+    "res/color-v31/m3_dynamic_dark_highlighted_text.xml": {
+      "Size": 376
+    },
+    "res/color-v31/m3_dynamic_dark_hint_foreground.xml": {
+      "Size": 564
+    },
+    "res/color-v31/m3_dynamic_dark_primary_text_disable_only.xml": {
+      "Size": 500
+    },
+    "res/color-v31/m3_dynamic_default_color_primary_text.xml": {
+      "Size": 500
+    },
+    "res/color-v31/m3_dynamic_default_color_secondary_text.xml": {
+      "Size": 500
+    },
+    "res/color-v31/m3_dynamic_highlighted_text.xml": {
+      "Size": 376
+    },
+    "res/color-v31/m3_dynamic_hint_foreground.xml": {
+      "Size": 564
+    },
+    "res/color-v31/m3_dynamic_primary_text_disable_only.xml": {
+      "Size": 500
+    },
+    "res/drawable/$avd_hide_password__0.xml": {
+      "Size": 1176
+    },
+    "res/drawable/$avd_hide_password__1.xml": {
+      "Size": 592
+    },
+    "res/drawable/$avd_hide_password__2.xml": {
+      "Size": 556
+    },
+    "res/drawable/$avd_show_password__0.xml": {
+      "Size": 1136
+    },
+    "res/drawable/$avd_show_password__1.xml": {
+      "Size": 592
+    },
+    "res/drawable/$avd_show_password__2.xml": {
+      "Size": 556
+    },
+    "res/drawable/$mtrl_checkbox_button_checked_unchecked__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_checked_unchecked__1.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_checked_unchecked__2.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_checked_indeterminate__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_checked_unchecked__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_checked_unchecked__1.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_checked_unchecked__2.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_indeterminate_checked__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_indeterminate_unchecked__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_indeterminate_unchecked__1.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_indeterminate_unchecked__2.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_unchecked_checked__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_unchecked_checked__1.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_unchecked_checked__2.xml": {
+      "Size": 596
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_unchecked_indeterminate__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_unchecked_indeterminate__1.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_unchecked_indeterminate__2.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_unchecked_checked__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_unchecked_checked__1.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_unchecked_checked__2.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_switch_thumb_checked_pressed__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_switch_thumb_checked_unchecked__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_switch_thumb_checked_unchecked__1.xml": {
+      "Size": 636
+    },
+    "res/drawable/$mtrl_switch_thumb_pressed_checked__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_switch_thumb_pressed_unchecked__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_switch_thumb_unchecked_checked__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_switch_thumb_unchecked_checked__1.xml": {
+      "Size": 636
+    },
+    "res/drawable/$mtrl_switch_thumb_unchecked_pressed__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/abc_btn_borderless_material.xml": {
+      "Size": 588
+    },
+    "res/drawable/abc_btn_check_material.xml": {
+      "Size": 464
+    },
+    "res/drawable/abc_btn_check_material_anim.xml": {
+      "Size": 816
+    },
+    "res/drawable/abc_btn_default_mtrl_shape.xml": {
+      "Size": 932
+    },
+    "res/drawable/abc_btn_radio_material.xml": {
+      "Size": 464
+    },
+    "res/drawable/abc_btn_radio_material_anim.xml": {
+      "Size": 816
+    },
+    "res/drawable/abc_cab_background_internal_bg.xml": {
+      "Size": 372
+    },
+    "res/drawable/abc_cab_background_top_material.xml": {
+      "Size": 336
+    },
+    "res/drawable/abc_ic_ab_back_material.xml": {
+      "Size": 692
+    },
+    "res/drawable/abc_ic_arrow_drop_right_black_24dp.xml": {
+      "Size": 1000
+    },
+    "res/drawable/abc_ic_clear_material.xml": {
+      "Size": 684
+    },
+    "res/drawable/abc_ic_go_search_api_material.xml": {
+      "Size": 640
+    },
+    "res/drawable/abc_ic_menu_copy_mtrl_am_alpha.xml": {
+      "Size": 756
+    },
+    "res/drawable/abc_ic_menu_cut_mtrl_alpha.xml": {
+      "Size": 1096
+    },
+    "res/drawable/abc_ic_menu_overflow_material.xml": {
+      "Size": 792
+    },
+    "res/drawable/abc_ic_menu_paste_mtrl_am_alpha.xml": {
+      "Size": 796
+    },
+    "res/drawable/abc_ic_menu_selectall_mtrl_alpha.xml": {
+      "Size": 920
+    },
+    "res/drawable/abc_ic_menu_share_mtrl_alpha.xml": {
+      "Size": 980
+    },
+    "res/drawable/abc_ic_search_api_material.xml": {
+      "Size": 812
+    },
+    "res/drawable/abc_ic_voice_search_api_material.xml": {
+      "Size": 828
+    },
+    "res/drawable/abc_item_background_holo_dark.xml": {
+      "Size": 1012
+    },
+    "res/drawable/abc_item_background_holo_light.xml": {
+      "Size": 1012
+    },
+    "res/drawable/abc_list_selector_background_transition_holo_dark.xml": {
+      "Size": 424
+    },
+    "res/drawable/abc_list_selector_background_transition_holo_light.xml": {
+      "Size": 424
+    },
+    "res/drawable/abc_list_selector_holo_dark.xml": {
+      "Size": 1064
+    },
+    "res/drawable/abc_list_selector_holo_light.xml": {
+      "Size": 1064
+    },
+    "res/drawable/abc_ratingbar_indicator_material.xml": {
+      "Size": 124
+    },
+    "res/drawable/abc_ratingbar_material.xml": {
+      "Size": 124
+    },
+    "res/drawable/abc_ratingbar_small_material.xml": {
+      "Size": 124
+    },
+    "res/drawable/abc_seekbar_thumb_material.xml": {
+      "Size": 1100
+    },
+    "res/drawable/abc_seekbar_tick_mark_material.xml": {
+      "Size": 516
+    },
+    "res/drawable/abc_seekbar_track_material.xml": {
+      "Size": 1408
+    },
+    "res/drawable/abc_spinner_textfield_background_material.xml": {
+      "Size": 1160
+    },
+    "res/drawable/abc_star_black_48dp.xml": {
+      "Size": 640
+    },
+    "res/drawable/abc_star_half_black_48dp.xml": {
+      "Size": 600
+    },
+    "res/drawable/abc_switch_thumb_material.xml": {
+      "Size": 464
+    },
+    "res/drawable/abc_tab_indicator_material.xml": {
+      "Size": 468
+    },
+    "res/drawable/abc_text_cursor_material.xml": {
+      "Size": 516
+    },
+    "res/drawable/abc_textfield_search_material.xml": {
+      "Size": 756
+    },
+    "res/drawable/abc_vector_test.xml": {
+      "Size": 612
+    },
+    "res/drawable/avd_hide_password.xml": {
+      "Size": 660
+    },
+    "res/drawable/avd_show_password.xml": {
+      "Size": 660
+    },
+    "res/drawable/btn_checkbox_checked_mtrl.xml": {
+      "Size": 2688
+    },
+    "res/drawable/btn_checkbox_checked_to_unchecked_mtrl_animation.xml": {
+      "Size": 688
+    },
+    "res/drawable/btn_checkbox_unchecked_mtrl.xml": {
+      "Size": 2660
+    },
+    "res/drawable/btn_checkbox_unchecked_to_checked_mtrl_animation.xml": {
+      "Size": 688
+    },
+    "res/drawable/btn_radio_off_mtrl.xml": {
+      "Size": 1728
+    },
+    "res/drawable/btn_radio_off_to_on_mtrl_animation.xml": {
+      "Size": 680
+    },
+    "res/drawable/btn_radio_on_mtrl.xml": {
+      "Size": 1656
+    },
+    "res/drawable/btn_radio_on_to_off_mtrl_animation.xml": {
+      "Size": 680
+    },
+    "res/drawable/design_fab_background.xml": {
+      "Size": 372
+    },
+    "res/drawable/design_ic_visibility.xml": {
+      "Size": 540
+    },
+    "res/drawable/design_ic_visibility_off.xml": {
+      "Size": 1144
+    },
+    "res/drawable/design_password_eye.xml": {
+      "Size": 816
+    },
+    "res/drawable/design_snackbar_background.xml": {
+      "Size": 484
+    },
+    "res/drawable/ic_clock_black_24dp.xml": {
+      "Size": 752
+    },
+    "res/drawable/ic_keyboard_black_24dp.xml": {
+      "Size": 852
+    },
+    "res/drawable/ic_m3_chip_check.xml": {
+      "Size": 704
+    },
+    "res/drawable/ic_m3_chip_checked_circle.xml": {
+      "Size": 900
+    },
+    "res/drawable/ic_m3_chip_close.xml": {
+      "Size": 648
+    },
+    "res/drawable/ic_mtrl_checked_circle.xml": {
+      "Size": 672
+    },
+    "res/drawable/ic_mtrl_chip_checked_black.xml": {
+      "Size": 600
+    },
+    "res/drawable/ic_mtrl_chip_checked_circle.xml": {
+      "Size": 940
+    },
+    "res/drawable/ic_mtrl_chip_close_circle.xml": {
+      "Size": 808
+    },
+    "res/drawable/m3_popupmenu_background_overlay.xml": {
+      "Size": 740
+    },
+    "res/drawable/m3_tabs_line_indicator.xml": {
+      "Size": 480
+    },
+    "res/drawable/m3_tabs_rounded_line_indicator.xml": {
+      "Size": 956
+    },
+    "res/drawable/material_ic_calendar_black_24dp.xml": {
+      "Size": 696
+    },
+    "res/drawable/material_ic_clear_black_24dp.xml": {
+      "Size": 752
+    },
+    "res/drawable/material_ic_edit_black_24dp.xml": {
+      "Size": 716
+    },
+    "res/drawable/material_ic_keyboard_arrow_left_black_24dp.xml": {
+      "Size": 712
+    },
+    "res/drawable/material_ic_keyboard_arrow_right_black_24dp.xml": {
+      "Size": 700
+    },
+    "res/drawable/material_ic_menu_arrow_down_black_24dp.xml": {
+      "Size": 648
+    },
+    "res/drawable/material_ic_menu_arrow_up_black_24dp.xml": {
+      "Size": 648
+    },
+    "res/drawable/maui_splash_image.xml": {
+      "Size": 488
+    },
+    "res/drawable/mtrl_bottomsheet_drag_handle.xml": {
+      "Size": 628
+    },
+    "res/drawable/mtrl_checkbox_button.xml": {
+      "Size": 1332
+    },
+    "res/drawable/mtrl_checkbox_button_checked_unchecked.xml": {
+      "Size": 724
+    },
+    "res/drawable/mtrl_checkbox_button_icon.xml": {
+      "Size": 1572
+    },
+    "res/drawable/mtrl_checkbox_button_icon_checked_indeterminate.xml": {
+      "Size": 524
+    },
+    "res/drawable/mtrl_checkbox_button_icon_checked_unchecked.xml": {
+      "Size": 724
+    },
+    "res/drawable/mtrl_checkbox_button_icon_indeterminate_checked.xml": {
+      "Size": 524
+    },
+    "res/drawable/mtrl_checkbox_button_icon_indeterminate_unchecked.xml": {
+      "Size": 724
+    },
+    "res/drawable/mtrl_checkbox_button_icon_unchecked_checked.xml": {
+      "Size": 724
+    },
+    "res/drawable/mtrl_checkbox_button_icon_unchecked_indeterminate.xml": {
+      "Size": 724
+    },
+    "res/drawable/mtrl_checkbox_button_unchecked_checked.xml": {
+      "Size": 724
+    },
+    "res/drawable/mtrl_dialog_background.xml": {
+      "Size": 716
+    },
+    "res/drawable/mtrl_dropdown_arrow.xml": {
+      "Size": 464
+    },
+    "res/drawable/mtrl_ic_arrow_drop_down.xml": {
+      "Size": 564
+    },
+    "res/drawable/mtrl_ic_arrow_drop_up.xml": {
+      "Size": 564
+    },
+    "res/drawable/mtrl_ic_cancel.xml": {
+      "Size": 724
+    },
+    "res/drawable/mtrl_ic_check_mark.xml": {
+      "Size": 744
+    },
+    "res/drawable/mtrl_ic_checkbox_checked.xml": {
+      "Size": 904
+    },
+    "res/drawable/mtrl_ic_checkbox_unchecked.xml": {
+      "Size": 612
+    },
+    "res/drawable/mtrl_ic_error.xml": {
+      "Size": 644
+    },
+    "res/drawable/mtrl_ic_indeterminate.xml": {
+      "Size": 744
+    },
+    "res/drawable/mtrl_popupmenu_background.xml": {
+      "Size": 740
+    },
+    "res/drawable/mtrl_popupmenu_background_overlay.xml": {
+      "Size": 740
+    },
+    "res/drawable/mtrl_switch_thumb.xml": {
+      "Size": 2004
+    },
+    "res/drawable/mtrl_switch_thumb_checked.xml": {
+      "Size": 744
+    },
+    "res/drawable/mtrl_switch_thumb_checked_pressed.xml": {
+      "Size": 524
+    },
+    "res/drawable/mtrl_switch_thumb_checked_unchecked.xml": {
+      "Size": 624
+    },
+    "res/drawable/mtrl_switch_thumb_pressed.xml": {
+      "Size": 744
+    },
+    "res/drawable/mtrl_switch_thumb_pressed_checked.xml": {
+      "Size": 524
+    },
+    "res/drawable/mtrl_switch_thumb_pressed_unchecked.xml": {
+      "Size": 524
+    },
+    "res/drawable/mtrl_switch_thumb_unchecked.xml": {
+      "Size": 744
+    },
+    "res/drawable/mtrl_switch_thumb_unchecked_checked.xml": {
+      "Size": 624
+    },
+    "res/drawable/mtrl_switch_thumb_unchecked_pressed.xml": {
+      "Size": 524
+    },
+    "res/drawable/mtrl_switch_track.xml": {
+      "Size": 588
+    },
+    "res/drawable/mtrl_switch_track_decoration.xml": {
+      "Size": 636
+    },
+    "res/drawable/mtrl_tabs_default_indicator.xml": {
+      "Size": 628
+    },
+    "res/drawable/navigation_empty_icon.xml": {
+      "Size": 516
+    },
+    "res/drawable/notification_bg.xml": {
+      "Size": 532
+    },
+    "res/drawable/notification_bg_low.xml": {
+      "Size": 532
+    },
+    "res/drawable/notification_icon_background.xml": {
+      "Size": 372
+    },
+    "res/drawable/notification_tile_bg.xml": {
+      "Size": 304
+    },
+    "res/drawable/test_level_drawable.xml": {
+      "Size": 448
+    },
+    "res/drawable/tooltip_frame_dark.xml": {
+      "Size": 484
+    },
+    "res/drawable/tooltip_frame_light.xml": {
+      "Size": 484
+    },
+    "res/drawable-hdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png": {
+      "Size": 272
+    },
+    "res/drawable-hdpi-v4/abc_btn_check_to_on_mtrl_000.png": {
+      "Size": 227
+    },
+    "res/drawable-hdpi-v4/abc_btn_check_to_on_mtrl_015.png": {
+      "Size": 404
+    },
+    "res/drawable-hdpi-v4/abc_btn_radio_to_on_mtrl_000.png": {
+      "Size": 464
+    },
+    "res/drawable-hdpi-v4/abc_btn_radio_to_on_mtrl_015.png": {
+      "Size": 563
+    },
+    "res/drawable-hdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png": {
+      "Size": 1096
+    },
+    "res/drawable-hdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png": {
+      "Size": 1243
+    },
+    "res/drawable-hdpi-v4/abc_cab_background_top_mtrl_alpha.9.png": {
+      "Size": 226
+    },
+    "res/drawable-hdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png": {
+      "Size": 171
+    },
+    "res/drawable-hdpi-v4/abc_list_divider_mtrl_alpha.9.png": {
+      "Size": 167
+    },
+    "res/drawable-hdpi-v4/abc_list_focused_holo.9.png": {
+      "Size": 244
+    },
+    "res/drawable-hdpi-v4/abc_list_longpressed_holo.9.png": {
+      "Size": 212
+    },
+    "res/drawable-hdpi-v4/abc_list_pressed_holo_dark.9.png": {
+      "Size": 208
+    },
+    "res/drawable-hdpi-v4/abc_list_pressed_holo_light.9.png": {
+      "Size": 208
+    },
+    "res/drawable-hdpi-v4/abc_list_selector_disabled_holo_dark.9.png": {
+      "Size": 228
+    },
+    "res/drawable-hdpi-v4/abc_list_selector_disabled_holo_light.9.png": {
+      "Size": 229
+    },
+    "res/drawable-hdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png": {
+      "Size": 738
+    },
+    "res/drawable-hdpi-v4/abc_popup_background_mtrl_mult.9.png": {
+      "Size": 1098
+    },
+    "res/drawable-hdpi-v4/abc_scrubber_control_off_mtrl_alpha.png": {
+      "Size": 201
+    },
+    "res/drawable-hdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png": {
+      "Size": 196
+    },
+    "res/drawable-hdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png": {
+      "Size": 272
+    },
+    "res/drawable-hdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png": {
+      "Size": 205
+    },
+    "res/drawable-hdpi-v4/abc_scrubber_track_mtrl_alpha.9.png": {
+      "Size": 196
+    },
+    "res/drawable-hdpi-v4/abc_spinner_mtrl_am_alpha.9.png": {
+      "Size": 345
+    },
+    "res/drawable-hdpi-v4/abc_switch_track_mtrl_alpha.9.png": {
+      "Size": 484
+    },
+    "res/drawable-hdpi-v4/abc_tab_indicator_mtrl_alpha.9.png": {
+      "Size": 190
+    },
+    "res/drawable-hdpi-v4/abc_text_select_handle_left_mtrl.png": {
+      "Size": 278
+    },
+    "res/drawable-hdpi-v4/abc_text_select_handle_middle_mtrl.png": {
+      "Size": 396
+    },
+    "res/drawable-hdpi-v4/abc_text_select_handle_right_mtrl.png": {
+      "Size": 262
+    },
+    "res/drawable-hdpi-v4/abc_textfield_activated_mtrl_alpha.9.png": {
+      "Size": 186
+    },
+    "res/drawable-hdpi-v4/abc_textfield_default_mtrl_alpha.9.png": {
+      "Size": 192
+    },
+    "res/drawable-hdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png": {
+      "Size": 178
+    },
+    "res/drawable-hdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png": {
+      "Size": 178
+    },
+    "res/drawable-hdpi-v4/notification_bg_low_normal.9.png": {
+      "Size": 212
+    },
+    "res/drawable-hdpi-v4/notification_bg_low_pressed.9.png": {
+      "Size": 225
+    },
+    "res/drawable-hdpi-v4/notification_bg_normal.9.png": {
+      "Size": 212
+    },
+    "res/drawable-hdpi-v4/notification_bg_normal_pressed.9.png": {
+      "Size": 225
+    },
+    "res/drawable-hdpi-v4/notify_panel_notification_icon_bg.png": {
+      "Size": 107
+    },
+    "res/drawable-hdpi-v4/spice.png": {
+      "Size": 5655
+    },
+    "res/drawable-hdpi-v4/splash.png": {
+      "Size": 1419
+    },
+    "res/drawable-ldrtl-hdpi-v17/abc_spinner_mtrl_am_alpha.9.png": {
+      "Size": 345
+    },
+    "res/drawable-ldrtl-mdpi-v17/abc_spinner_mtrl_am_alpha.9.png": {
+      "Size": 318
+    },
+    "res/drawable-ldrtl-xhdpi-v17/abc_spinner_mtrl_am_alpha.9.png": {
+      "Size": 417
+    },
+    "res/drawable-ldrtl-xxhdpi-v17/abc_spinner_mtrl_am_alpha.9.png": {
+      "Size": 525
+    },
+    "res/drawable-ldrtl-xxxhdpi-v17/abc_spinner_mtrl_am_alpha.9.png": {
+      "Size": 437
+    },
+    "res/drawable-mdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png": {
+      "Size": 267
+    },
+    "res/drawable-mdpi-v4/abc_btn_check_to_on_mtrl_000.png": {
+      "Size": 214
+    },
+    "res/drawable-mdpi-v4/abc_btn_check_to_on_mtrl_015.png": {
+      "Size": 321
+    },
+    "res/drawable-mdpi-v4/abc_btn_radio_to_on_mtrl_000.png": {
+      "Size": 324
+    },
+    "res/drawable-mdpi-v4/abc_btn_radio_to_on_mtrl_015.png": {
+      "Size": 356
+    },
+    "res/drawable-mdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png": {
+      "Size": 754
+    },
+    "res/drawable-mdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png": {
+      "Size": 825
+    },
+    "res/drawable-mdpi-v4/abc_cab_background_top_mtrl_alpha.9.png": {
+      "Size": 216
+    },
+    "res/drawable-mdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png": {
+      "Size": 173
+    },
+    "res/drawable-mdpi-v4/abc_list_divider_mtrl_alpha.9.png": {
+      "Size": 167
+    },
+    "res/drawable-mdpi-v4/abc_list_focused_holo.9.png": {
+      "Size": 222
+    },
+    "res/drawable-mdpi-v4/abc_list_longpressed_holo.9.png": {
+      "Size": 211
+    },
+    "res/drawable-mdpi-v4/abc_list_pressed_holo_dark.9.png": {
+      "Size": 207
+    },
+    "res/drawable-mdpi-v4/abc_list_pressed_holo_light.9.png": {
+      "Size": 207
+    },
+    "res/drawable-mdpi-v4/abc_list_selector_disabled_holo_dark.9.png": {
+      "Size": 217
+    },
+    "res/drawable-mdpi-v4/abc_list_selector_disabled_holo_light.9.png": {
+      "Size": 217
+    },
+    "res/drawable-mdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png": {
+      "Size": 541
+    },
+    "res/drawable-mdpi-v4/abc_popup_background_mtrl_mult.9.png": {
+      "Size": 776
+    },
+    "res/drawable-mdpi-v4/abc_scrubber_control_off_mtrl_alpha.png": {
+      "Size": 159
+    },
+    "res/drawable-mdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png": {
+      "Size": 145
+    },
+    "res/drawable-mdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png": {
+      "Size": 197
+    },
+    "res/drawable-mdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png": {
+      "Size": 203
+    },
+    "res/drawable-mdpi-v4/abc_scrubber_track_mtrl_alpha.9.png": {
+      "Size": 194
+    },
+    "res/drawable-mdpi-v4/abc_spinner_mtrl_am_alpha.9.png": {
+      "Size": 327
+    },
+    "res/drawable-mdpi-v4/abc_switch_track_mtrl_alpha.9.png": {
+      "Size": 395
+    },
+    "res/drawable-mdpi-v4/abc_tab_indicator_mtrl_alpha.9.png": {
+      "Size": 186
+    },
+    "res/drawable-mdpi-v4/abc_text_select_handle_left_mtrl.png": {
+      "Size": 203
+    },
+    "res/drawable-mdpi-v4/abc_text_select_handle_middle_mtrl.png": {
+      "Size": 310
+    },
+    "res/drawable-mdpi-v4/abc_text_select_handle_right_mtrl.png": {
+      "Size": 186
+    },
+    "res/drawable-mdpi-v4/abc_textfield_activated_mtrl_alpha.9.png": {
+      "Size": 181
+    },
+    "res/drawable-mdpi-v4/abc_textfield_default_mtrl_alpha.9.png": {
+      "Size": 178
+    },
+    "res/drawable-mdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png": {
+      "Size": 178
+    },
+    "res/drawable-mdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png": {
+      "Size": 178
+    },
+    "res/drawable-mdpi-v4/notification_bg_low_normal.9.png": {
+      "Size": 215
+    },
+    "res/drawable-mdpi-v4/notification_bg_low_pressed.9.png": {
+      "Size": 223
+    },
+    "res/drawable-mdpi-v4/notification_bg_normal.9.png": {
+      "Size": 215
+    },
+    "res/drawable-mdpi-v4/notification_bg_normal_pressed.9.png": {
+      "Size": 223
+    },
+    "res/drawable-mdpi-v4/notify_panel_notification_icon_bg.png": {
+      "Size": 98
+    },
+    "res/drawable-mdpi-v4/spice.png": {
+      "Size": 4372
+    },
+    "res/drawable-mdpi-v4/splash.png": {
+      "Size": 845
+    },
+    "res/drawable-v21/abc_action_bar_item_background_material.xml": {
+      "Size": 264
+    },
+    "res/drawable-v21/abc_btn_colored_material.xml": {
+      "Size": 1716
+    },
+    "res/drawable-v21/abc_dialog_material_background.xml": {
+      "Size": 716
+    },
+    "res/drawable-v21/abc_edit_text_material.xml": {
+      "Size": 1172
+    },
+    "res/drawable-v21/abc_list_divider_material.xml": {
+      "Size": 516
+    },
+    "res/drawable-v21/m3_tabs_background.xml": {
+      "Size": 776
+    },
+    "res/drawable-v21/material_cursor_drawable.xml": {
+      "Size": 588
+    },
+    "res/drawable-v21/mtrl_navigation_bar_item_background.xml": {
+      "Size": 264
+    },
+    "res/drawable-v21/notification_action_background.xml": {
+      "Size": 1180
+    },
+    "res/drawable-v23/abc_control_background_material.xml": {
+      "Size": 304
+    },
+    "res/drawable-v23/m3_appbar_background.xml": {
+      "Size": 684
+    },
+    "res/drawable-v23/m3_popupmenu_background_overlay.xml": {
+      "Size": 1228
+    },
+    "res/drawable-v23/m3_radiobutton_ripple.xml": {
+      "Size": 304
+    },
+    "res/drawable-v23/m3_selection_control_ripple.xml": {
+      "Size": 304
+    },
+    "res/drawable-v23/m3_tabs_background.xml": {
+      "Size": 868
+    },
+    "res/drawable-v23/m3_tabs_transparent_background.xml": {
+      "Size": 632
+    },
+    "res/drawable-v23/mtrl_popupmenu_background_overlay.xml": {
+      "Size": 1228
+    },
+    "res/drawable-v31/maui_splash_image.xml": {
+      "Size": 580
+    },
+    "res/drawable-watch-v20/abc_dialog_material_background.xml": {
+      "Size": 372
+    },
+    "res/drawable-xhdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png": {
+      "Size": 280
+    },
+    "res/drawable-xhdpi-v4/abc_btn_check_to_on_mtrl_000.png": {
+      "Size": 281
+    },
+    "res/drawable-xhdpi-v4/abc_btn_check_to_on_mtrl_015.png": {
+      "Size": 432
+    },
+    "res/drawable-xhdpi-v4/abc_btn_radio_to_on_mtrl_000.png": {
+      "Size": 651
+    },
+    "res/drawable-xhdpi-v4/abc_btn_radio_to_on_mtrl_015.png": {
+      "Size": 785
+    },
+    "res/drawable-xhdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png": {
+      "Size": 1526
+    },
+    "res/drawable-xhdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png": {
+      "Size": 1731
+    },
+    "res/drawable-xhdpi-v4/abc_cab_background_top_mtrl_alpha.9.png": {
+      "Size": 229
+    },
+    "res/drawable-xhdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png": {
+      "Size": 228
+    },
+    "res/drawable-xhdpi-v4/abc_list_divider_mtrl_alpha.9.png": {
+      "Size": 167
+    },
+    "res/drawable-xhdpi-v4/abc_list_focused_holo.9.png": {
+      "Size": 244
+    },
+    "res/drawable-xhdpi-v4/abc_list_longpressed_holo.9.png": {
+      "Size": 214
+    },
+    "res/drawable-xhdpi-v4/abc_list_pressed_holo_dark.9.png": {
+      "Size": 209
+    },
+    "res/drawable-xhdpi-v4/abc_list_pressed_holo_light.9.png": {
+      "Size": 209
+    },
+    "res/drawable-xhdpi-v4/abc_list_selector_disabled_holo_dark.9.png": {
+      "Size": 236
+    },
+    "res/drawable-xhdpi-v4/abc_list_selector_disabled_holo_light.9.png": {
+      "Size": 235
+    },
+    "res/drawable-xhdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png": {
+      "Size": 966
+    },
+    "res/drawable-xhdpi-v4/abc_popup_background_mtrl_mult.9.png": {
+      "Size": 1544
+    },
+    "res/drawable-xhdpi-v4/abc_scrubber_control_off_mtrl_alpha.png": {
+      "Size": 267
+    },
+    "res/drawable-xhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png": {
+      "Size": 267
+    },
+    "res/drawable-xhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png": {
+      "Size": 391
+    },
+    "res/drawable-xhdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png": {
+      "Size": 208
+    },
+    "res/drawable-xhdpi-v4/abc_scrubber_track_mtrl_alpha.9.png": {
+      "Size": 198
+    },
+    "res/drawable-xhdpi-v4/abc_spinner_mtrl_am_alpha.9.png": {
+      "Size": 448
+    },
+    "res/drawable-xhdpi-v4/abc_switch_track_mtrl_alpha.9.png": {
+      "Size": 618
+    },
+    "res/drawable-xhdpi-v4/abc_tab_indicator_mtrl_alpha.9.png": {
+      "Size": 194
+    },
+    "res/drawable-xhdpi-v4/abc_text_select_handle_left_mtrl.png": {
+      "Size": 335
+    },
+    "res/drawable-xhdpi-v4/abc_text_select_handle_middle_mtrl.png": {
+      "Size": 585
+    },
+    "res/drawable-xhdpi-v4/abc_text_select_handle_right_mtrl.png": {
+      "Size": 318
+    },
+    "res/drawable-xhdpi-v4/abc_textfield_activated_mtrl_alpha.9.png": {
+      "Size": 189
+    },
+    "res/drawable-xhdpi-v4/abc_textfield_default_mtrl_alpha.9.png": {
+      "Size": 187
+    },
+    "res/drawable-xhdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png": {
+      "Size": 184
+    },
+    "res/drawable-xhdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png": {
+      "Size": 182
+    },
+    "res/drawable-xhdpi-v4/notification_bg_low_normal.9.png": {
+      "Size": 221
+    },
+    "res/drawable-xhdpi-v4/notification_bg_low_pressed.9.png": {
+      "Size": 252
+    },
+    "res/drawable-xhdpi-v4/notification_bg_normal.9.png": {
+      "Size": 221
+    },
+    "res/drawable-xhdpi-v4/notification_bg_normal_pressed.9.png": {
+      "Size": 247
+    },
+    "res/drawable-xhdpi-v4/notify_panel_notification_icon_bg.png": {
+      "Size": 138
+    },
+    "res/drawable-xhdpi-v4/spice.png": {
+      "Size": 8412
+    },
+    "res/drawable-xhdpi-v4/splash.png": {
+      "Size": 1406
+    },
+    "res/drawable-xxhdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png": {
+      "Size": 286
+    },
+    "res/drawable-xxhdpi-v4/abc_btn_check_to_on_mtrl_000.png": {
+      "Size": 307
+    },
+    "res/drawable-xxhdpi-v4/abc_btn_check_to_on_mtrl_015.png": {
+      "Size": 593
+    },
+    "res/drawable-xxhdpi-v4/abc_btn_radio_to_on_mtrl_000.png": {
+      "Size": 984
+    },
+    "res/drawable-xxhdpi-v4/abc_btn_radio_to_on_mtrl_015.png": {
+      "Size": 1208
+    },
+    "res/drawable-xxhdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png": {
+      "Size": 2463
+    },
+    "res/drawable-xxhdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png": {
+      "Size": 2834
+    },
+    "res/drawable-xxhdpi-v4/abc_cab_background_top_mtrl_alpha.9.png": {
+      "Size": 237
+    },
+    "res/drawable-xxhdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png": {
+      "Size": 224
+    },
+    "res/drawable-xxhdpi-v4/abc_list_divider_mtrl_alpha.9.png": {
+      "Size": 171
+    },
+    "res/drawable-xxhdpi-v4/abc_list_focused_holo.9.png": {
+      "Size": 245
+    },
+    "res/drawable-xxhdpi-v4/abc_list_longpressed_holo.9.png": {
+      "Size": 221
+    },
+    "res/drawable-xxhdpi-v4/abc_list_pressed_holo_dark.9.png": {
+      "Size": 212
+    },
+    "res/drawable-xxhdpi-v4/abc_list_pressed_holo_light.9.png": {
+      "Size": 212
+    },
+    "res/drawable-xxhdpi-v4/abc_list_selector_disabled_holo_dark.9.png": {
+      "Size": 260
+    },
+    "res/drawable-xxhdpi-v4/abc_list_selector_disabled_holo_light.9.png": {
+      "Size": 258
+    },
+    "res/drawable-xxhdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png": {
+      "Size": 1779
+    },
+    "res/drawable-xxhdpi-v4/abc_popup_background_mtrl_mult.9.png": {
+      "Size": 2305
+    },
+    "res/drawable-xxhdpi-v4/abc_scrubber_control_off_mtrl_alpha.png": {
+      "Size": 322
+    },
+    "res/drawable-xxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png": {
+      "Size": 403
+    },
+    "res/drawable-xxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png": {
+      "Size": 595
+    },
+    "res/drawable-xxhdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png": {
+      "Size": 210
+    },
+    "res/drawable-xxhdpi-v4/abc_scrubber_track_mtrl_alpha.9.png": {
+      "Size": 207
+    },
+    "res/drawable-xxhdpi-v4/abc_spinner_mtrl_am_alpha.9.png": {
+      "Size": 524
+    },
+    "res/drawable-xxhdpi-v4/abc_switch_track_mtrl_alpha.9.png": {
+      "Size": 851
+    },
+    "res/drawable-xxhdpi-v4/abc_tab_indicator_mtrl_alpha.9.png": {
+      "Size": 204
+    },
+    "res/drawable-xxhdpi-v4/abc_text_select_handle_left_mtrl.png": {
+      "Size": 420
+    },
+    "res/drawable-xxhdpi-v4/abc_text_select_handle_middle_mtrl.png": {
+      "Size": 753
+    },
+    "res/drawable-xxhdpi-v4/abc_text_select_handle_right_mtrl.png": {
+      "Size": 422
+    },
+    "res/drawable-xxhdpi-v4/abc_textfield_activated_mtrl_alpha.9.png": {
+      "Size": 199
+    },
+    "res/drawable-xxhdpi-v4/abc_textfield_default_mtrl_alpha.9.png": {
+      "Size": 200
+    },
+    "res/drawable-xxhdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png": {
+      "Size": 187
+    },
+    "res/drawable-xxhdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png": {
+      "Size": 186
+    },
+    "res/drawable-xxhdpi-v4/spice.png": {
+      "Size": 10064
+    },
+    "res/drawable-xxhdpi-v4/splash.png": {
+      "Size": 2406
+    },
+    "res/drawable-xxxhdpi-v4/abc_btn_check_to_on_mtrl_000.png": {
+      "Size": 275
+    },
+    "res/drawable-xxxhdpi-v4/abc_btn_check_to_on_mtrl_015.png": {
+      "Size": 476
+    },
+    "res/drawable-xxxhdpi-v4/abc_btn_radio_to_on_mtrl_000.png": {
+      "Size": 785
+    },
+    "res/drawable-xxxhdpi-v4/abc_btn_radio_to_on_mtrl_015.png": {
+      "Size": 946
+    },
+    "res/drawable-xxxhdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png": {
+      "Size": 2505
+    },
+    "res/drawable-xxxhdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png": {
+      "Size": 2816
+    },
+    "res/drawable-xxxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png": {
+      "Size": 415
+    },
+    "res/drawable-xxxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png": {
+      "Size": 631
+    },
+    "res/drawable-xxxhdpi-v4/abc_spinner_mtrl_am_alpha.9.png": {
+      "Size": 430
+    },
+    "res/drawable-xxxhdpi-v4/abc_switch_track_mtrl_alpha.9.png": {
+      "Size": 813
+    },
+    "res/drawable-xxxhdpi-v4/abc_tab_indicator_mtrl_alpha.9.png": {
+      "Size": 202
+    },
+    "res/drawable-xxxhdpi-v4/abc_text_select_handle_left_mtrl.png": {
+      "Size": 513
+    },
+    "res/drawable-xxxhdpi-v4/abc_text_select_handle_right_mtrl.png": {
+      "Size": 513
+    },
+    "res/drawable-xxxhdpi-v4/spice.png": {
+      "Size": 15297
+    },
+    "res/drawable-xxxhdpi-v4/splash.png": {
+      "Size": 2526
+    },
+    "res/interpolator/btn_checkbox_checked_mtrl_animation_interpolator_0.xml": {
+      "Size": 316
+    },
+    "res/interpolator/btn_checkbox_checked_mtrl_animation_interpolator_1.xml": {
+      "Size": 328
+    },
+    "res/interpolator/btn_checkbox_unchecked_mtrl_animation_interpolator_0.xml": {
+      "Size": 316
+    },
+    "res/interpolator/btn_checkbox_unchecked_mtrl_animation_interpolator_1.xml": {
+      "Size": 328
+    },
+    "res/interpolator/btn_radio_to_off_mtrl_animation_interpolator_0.xml": {
+      "Size": 320
+    },
+    "res/interpolator/btn_radio_to_on_mtrl_animation_interpolator_0.xml": {
+      "Size": 320
+    },
+    "res/interpolator/fast_out_slow_in.xml": {
+      "Size": 400
+    },
+    "res/interpolator/mtrl_linear.xml": {
+      "Size": 132
+    },
+    "res/interpolator-v21/m3_sys_motion_easing_emphasized.xml": {
+      "Size": 280
+    },
+    "res/interpolator-v21/m3_sys_motion_easing_emphasized_accelerate.xml": {
+      "Size": 400
+    },
+    "res/interpolator-v21/m3_sys_motion_easing_emphasized_decelerate.xml": {
+      "Size": 400
+    },
+    "res/interpolator-v21/m3_sys_motion_easing_linear.xml": {
+      "Size": 400
+    },
+    "res/interpolator-v21/m3_sys_motion_easing_standard.xml": {
+      "Size": 400
+    },
+    "res/interpolator-v21/m3_sys_motion_easing_standard_accelerate.xml": {
+      "Size": 400
+    },
+    "res/interpolator-v21/m3_sys_motion_easing_standard_decelerate.xml": {
+      "Size": 400
+    },
+    "res/interpolator-v21/mtrl_fast_out_linear_in.xml": {
+      "Size": 400
+    },
+    "res/interpolator-v21/mtrl_fast_out_slow_in.xml": {
+      "Size": 400
+    },
+    "res/interpolator-v21/mtrl_linear_out_slow_in.xml": {
+      "Size": 400
+    },
+    "res/layout/abc_action_bar_title_item.xml": {
+      "Size": 872
+    },
+    "res/layout/abc_action_bar_up_container.xml": {
+      "Size": 440
+    },
+    "res/layout/abc_action_menu_item_layout.xml": {
+      "Size": 768
+    },
+    "res/layout/abc_action_menu_layout.xml": {
+      "Size": 576
+    },
+    "res/layout/abc_action_mode_bar.xml": {
+      "Size": 464
+    },
+    "res/layout/abc_action_mode_close_item_material.xml": {
+      "Size": 840
+    },
+    "res/layout/abc_activity_chooser_view.xml": {
+      "Size": 1684
+    },
+    "res/layout/abc_activity_chooser_view_list_item.xml": {
+      "Size": 1304
+    },
+    "res/layout/abc_alert_dialog_button_bar_material.xml": {
+      "Size": 1536
+    },
+    "res/layout/abc_alert_dialog_material.xml": {
+      "Size": 2648
+    },
+    "res/layout/abc_alert_dialog_title_material.xml": {
+      "Size": 1560
+    },
+    "res/layout/abc_cascading_menu_item_layout.xml": {
+      "Size": 1868
+    },
+    "res/layout/abc_dialog_title_material.xml": {
+      "Size": 1116
+    },
+    "res/layout/abc_expanded_menu_layout.xml": {
+      "Size": 388
+    },
+    "res/layout/abc_list_menu_item_checkbox.xml": {
+      "Size": 528
+    },
+    "res/layout/abc_list_menu_item_icon.xml": {
+      "Size": 780
+    },
+    "res/layout/abc_list_menu_item_layout.xml": {
+      "Size": 1396
+    },
+    "res/layout/abc_list_menu_item_radio.xml": {
+      "Size": 532
+    },
+    "res/layout/abc_popup_menu_header_item_layout.xml": {
+      "Size": 848
+    },
+    "res/layout/abc_popup_menu_item_layout.xml": {
+      "Size": 2072
+    },
+    "res/layout/abc_screen_content_include.xml": {
+      "Size": 548
+    },
+    "res/layout/abc_screen_simple.xml": {
+      "Size": 832
+    },
+    "res/layout/abc_screen_simple_overlay_action_mode.xml": {
+      "Size": 792
+    },
+    "res/layout/abc_screen_toolbar.xml": {
+      "Size": 1504
+    },
+    "res/layout/abc_search_dropdown_item_icons_2line.xml": {
+      "Size": 1916
+    },
+    "res/layout/abc_search_view.xml": {
+      "Size": 3472
+    },
+    "res/layout/abc_select_dialog_material.xml": {
+      "Size": 1020
+    },
+    "res/layout/abc_tooltip.xml": {
+      "Size": 1056
+    },
+    "res/layout/custom_dialog.xml": {
+      "Size": 612
+    },
+    "res/layout/design_bottom_navigation_item.xml": {
+      "Size": 1860
+    },
+    "res/layout/design_bottom_sheet_dialog.xml": {
+      "Size": 1224
+    },
+    "res/layout/design_layout_snackbar.xml": {
+      "Size": 528
+    },
+    "res/layout/design_layout_snackbar_include.xml": {
+      "Size": 1444
+    },
+    "res/layout/design_layout_tab_icon.xml": {
+      "Size": 408
+    },
+    "res/layout/design_layout_tab_text.xml": {
+      "Size": 436
+    },
+    "res/layout/design_menu_item_action_area.xml": {
+      "Size": 320
+    },
+    "res/layout/design_navigation_item.xml": {
+      "Size": 576
+    },
+    "res/layout/design_navigation_item_header.xml": {
+      "Size": 440
+    },
+    "res/layout/design_navigation_item_separator.xml": {
+      "Size": 472
+    },
+    "res/layout/design_navigation_item_subheader.xml": {
+      "Size": 564
+    },
+    "res/layout/design_navigation_menu.xml": {
+      "Size": 528
+    },
+    "res/layout/design_navigation_menu_item.xml": {
+      "Size": 856
+    },
+    "res/layout/design_text_input_end_icon.xml": {
+      "Size": 656
+    },
+    "res/layout/design_text_input_start_icon.xml": {
+      "Size": 652
+    },
+    "res/layout/m3_alert_dialog.xml": {
+      "Size": 2720
+    },
+    "res/layout/m3_alert_dialog_actions.xml": {
+      "Size": 1536
+    },
+    "res/layout/m3_alert_dialog_title.xml": {
+      "Size": 956
+    },
+    "res/layout/m3_auto_complete_simple_item.xml": {
+      "Size": 612
+    },
+    "res/layout/material_chip_input_combo.xml": {
+      "Size": 372
+    },
+    "res/layout/material_clock_display.xml": {
+      "Size": 1132
+    },
+    "res/layout/material_clock_display_divider.xml": {
+      "Size": 492
+    },
+    "res/layout/material_clock_period_toggle.xml": {
+      "Size": 1392
+    },
+    "res/layout/material_clockface_textview.xml": {
+      "Size": 476
+    },
+    "res/layout/material_clockface_view.xml": {
+      "Size": 1012
+    },
+    "res/layout/material_radial_view_group.xml": {
+      "Size": 768
+    },
+    "res/layout/material_textinput_timepicker.xml": {
+      "Size": 1052
+    },
+    "res/layout/material_time_chip.xml": {
+      "Size": 380
+    },
+    "res/layout/material_time_input.xml": {
+      "Size": 1000
+    },
+    "res/layout/material_timepicker.xml": {
+      "Size": 1136
+    },
+    "res/layout/material_timepicker_dialog.xml": {
+      "Size": 3132
+    },
+    "res/layout/material_timepicker_textinput_display.xml": {
+      "Size": 684
+    },
+    "res/layout/mtrl_alert_dialog.xml": {
+      "Size": 2476
+    },
+    "res/layout/mtrl_alert_dialog_actions.xml": {
+      "Size": 1620
+    },
+    "res/layout/mtrl_alert_dialog_title.xml": {
+      "Size": 956
+    },
+    "res/layout/mtrl_alert_select_dialog_item.xml": {
+      "Size": 588
+    },
+    "res/layout/mtrl_alert_select_dialog_multichoice.xml": {
+      "Size": 940
+    },
+    "res/layout/mtrl_alert_select_dialog_singlechoice.xml": {
+      "Size": 940
+    },
+    "res/layout/mtrl_auto_complete_simple_item.xml": {
+      "Size": 612
+    },
+    "res/layout/mtrl_calendar_day.xml": {
+      "Size": 352
+    },
+    "res/layout/mtrl_calendar_day_of_week.xml": {
+      "Size": 352
+    },
+    "res/layout/mtrl_calendar_days_of_week.xml": {
+      "Size": 436
+    },
+    "res/layout/mtrl_calendar_horizontal.xml": {
+      "Size": 1176
+    },
+    "res/layout/mtrl_calendar_month.xml": {
+      "Size": 688
+    },
+    "res/layout/mtrl_calendar_month_labeled.xml": {
+      "Size": 728
+    },
+    "res/layout/mtrl_calendar_month_navigation.xml": {
+      "Size": 1748
+    },
+    "res/layout/mtrl_calendar_months.xml": {
+      "Size": 428
+    },
+    "res/layout/mtrl_calendar_vertical.xml": {
+      "Size": 740
+    },
+    "res/layout/mtrl_calendar_year.xml": {
+      "Size": 352
+    },
+    "res/layout/mtrl_layout_snackbar.xml": {
+      "Size": 492
+    },
+    "res/layout/mtrl_layout_snackbar_include.xml": {
+      "Size": 952
+    },
+    "res/layout/mtrl_navigation_rail_item.xml": {
+      "Size": 1860
+    },
+    "res/layout/mtrl_picker_actions.xml": {
+      "Size": 984
+    },
+    "res/layout/mtrl_picker_dialog.xml": {
+      "Size": 1172
+    },
+    "res/layout/mtrl_picker_fullscreen.xml": {
+      "Size": 880
+    },
+    "res/layout/mtrl_picker_header_dialog.xml": {
+      "Size": 1532
+    },
+    "res/layout/mtrl_picker_header_fullscreen.xml": {
+      "Size": 2800
+    },
+    "res/layout/mtrl_picker_header_selection_text.xml": {
+      "Size": 712
+    },
+    "res/layout/mtrl_picker_header_title_text.xml": {
+      "Size": 624
+    },
+    "res/layout/mtrl_picker_header_toggle.xml": {
+      "Size": 528
+    },
+    "res/layout/mtrl_picker_text_input_date.xml": {
+      "Size": 984
+    },
+    "res/layout/mtrl_picker_text_input_date_range.xml": {
+      "Size": 1580
+    },
+    "res/layout/notification_template_part_chronometer.xml": {
+      "Size": 440
+    },
+    "res/layout/notification_template_part_time.xml": {
+      "Size": 440
+    },
+    "res/layout/select_dialog_item_material.xml": {
+      "Size": 640
+    },
+    "res/layout/select_dialog_multichoice_material.xml": {
+      "Size": 864
+    },
+    "res/layout/select_dialog_singlechoice_material.xml": {
+      "Size": 864
+    },
+    "res/layout/support_simple_spinner_dropdown_item.xml": {
+      "Size": 464
+    },
+    "res/layout-land/material_clock_period_toggle_land.xml": {
+      "Size": 1232
+    },
+    "res/layout-land/material_timepicker.xml": {
+      "Size": 1884
+    },
+    "res/layout-land/mtrl_picker_header_dialog.xml": {
+      "Size": 1532
+    },
+    "res/layout-ldrtl-v17/material_textinput_timepicker.xml": {
+      "Size": 1100
+    },
+    "res/layout-sw600dp-v13/design_layout_snackbar.xml": {
+      "Size": 528
+    },
+    "res/layout-sw600dp-v13/mtrl_layout_snackbar.xml": {
+      "Size": 492
+    },
+    "res/layout-v21/notification_action.xml": {
+      "Size": 1052
+    },
+    "res/layout-v21/notification_action_tombstone.xml": {
+      "Size": 1228
+    },
+    "res/layout-v21/notification_template_custom_big.xml": {
+      "Size": 2456
+    },
+    "res/layout-v21/notification_template_icon_group.xml": {
+      "Size": 988
+    },
+    "res/layout-v22/abc_alert_dialog_button_bar_material.xml": {
+      "Size": 1584
+    },
+    "res/layout-v22/design_navigation_item.xml": {
+      "Size": 636
+    },
+    "res/layout-v22/m3_alert_dialog_actions.xml": {
+      "Size": 1584
+    },
+    "res/layout-v22/material_timepicker_dialog.xml": {
+      "Size": 3184
+    },
+    "res/layout-v22/mtrl_alert_dialog_actions.xml": {
+      "Size": 1764
+    },
+    "res/layout-v26/abc_screen_toolbar.xml": {
+      "Size": 1560
+    },
+    "res/layout-v26/mtrl_calendar_month.xml": {
+      "Size": 744
+    },
+    "res/layout-watch-v20/abc_alert_dialog_button_bar_material.xml": {
+      "Size": 1208
+    },
+    "res/layout-watch-v20/abc_alert_dialog_title_material.xml": {
+      "Size": 1352
+    },
+    "res/mipmap-anydpi-v26/appicon.xml": {
+      "Size": 448
+    },
+    "res/mipmap-anydpi-v26/appicon_round.xml": {
+      "Size": 448
+    },
+    "res/mipmap-hdpi-v4/appicon.png": {
+      "Size": 951
+    },
+    "res/mipmap-hdpi-v4/appicon_background.png": {
+      "Size": 120
+    },
+    "res/mipmap-hdpi-v4/appicon_foreground.png": {
+      "Size": 1368
+    },
+    "res/mipmap-mdpi-v4/appicon.png": {
+      "Size": 747
+    },
+    "res/mipmap-mdpi-v4/appicon_background.png": {
+      "Size": 106
+    },
+    "res/mipmap-mdpi-v4/appicon_foreground.png": {
+      "Size": 1265
+    },
+    "res/mipmap-xhdpi-v4/appicon.png": {
+      "Size": 875
+    },
+    "res/mipmap-xhdpi-v4/appicon_background.png": {
+      "Size": 140
+    },
+    "res/mipmap-xhdpi-v4/appicon_foreground.png": {
+      "Size": 1981
+    },
+    "res/mipmap-xxhdpi-v4/appicon.png": {
+      "Size": 1058
+    },
+    "res/mipmap-xxhdpi-v4/appicon_background.png": {
+      "Size": 197
+    },
+    "res/mipmap-xxhdpi-v4/appicon_foreground.png": {
+      "Size": 2229
+    },
+    "res/mipmap-xxxhdpi-v4/appicon.png": {
+      "Size": 1419
+    },
+    "res/mipmap-xxxhdpi-v4/appicon_background.png": {
+      "Size": 275
+    },
+    "res/mipmap-xxxhdpi-v4/appicon_foreground.png": {
+      "Size": 3298
+    },
+    "resources.arsc": {
+      "Size": 892072
+    }
+  },
+  "PackageSize": 8411359
+}
