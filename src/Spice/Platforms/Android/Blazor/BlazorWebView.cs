@@ -20,14 +20,14 @@ public partial class BlazorWebView
 	/// Android -> Android.Webkit.WebView
 	/// iOS -> WebKit.WKWebView
 	/// </summary>
-	public BlazorWebView() : this(Platform.Context, Create)
+	public BlazorWebView() : this(Platform.Context, c => Create(c, webViewClient: new SpiceBlazorWebViewClient()))
 	{
 		Initialize();
 	}
 
 	/// <inheritdoc />
 	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
-	public BlazorWebView(Context context) : this(context, Create)
+	public BlazorWebView(Context context) : this(context, c => Create(c, webViewClient: new SpiceBlazorWebViewClient()))
 	{
 		Initialize();
 	}
@@ -43,6 +43,8 @@ public partial class BlazorWebView
 
 	static AndroidAssetFileProvider? _fileProvider;
 	AndroidWebKitWebViewManager? _webViewManager;
+
+	internal AndroidWebKitWebViewManager? Manager => _webViewManager;
 
 	partial void LoadNativeWebView(string contentRootDir, string hostPageRelativePath)
 	{

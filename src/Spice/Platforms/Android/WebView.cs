@@ -13,11 +13,11 @@ public partial class WebView
 	/// <param name="view">The Spice.WebView</param>
 	public static implicit operator Android.Webkit.WebView(WebView view) => view.NativeView;
 
-	internal static Android.Webkit.WebView Create(Context context)
+	internal static Android.Webkit.WebView Create(Context context, WebViewClient webViewClient = null, WebChromeClient webChromeClient = null)
 	{
 		var view = new Android.Webkit.WebView(context);
-		view.SetWebViewClient(new SpiceWebViewClient());
-		view.SetWebChromeClient(new SpiceWebChromeClient());
+		view.SetWebViewClient(webViewClient ?? new SpiceWebViewClient());
+		view.SetWebChromeClient(webChromeClient ?? new SpiceWebChromeClient());
 
 		var settings = view.Settings;
 		settings.JavaScriptEnabled = true; // This is the default for IsJavaScriptEnabled
@@ -31,7 +31,7 @@ public partial class WebView
 	/// Android -> Android.Webkit.WebView
 	/// iOS -> WebKit.WKWebView
 	/// </summary>
-	public WebView() : this(Platform.Context, Create)
+	public WebView() : this(Platform.Context, c => Create(c))
 	{
 		// Most users would want this default instead of center
 		HorizontalAlign = Align.Stretch;
@@ -40,7 +40,7 @@ public partial class WebView
 
 	/// <inheritdoc />
 	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
-	public WebView(Context context) : this(context, Create)
+	public WebView(Context context) : this(context, c => Create(c))
 	{
 		// Most users would want this default instead of center
 		HorizontalAlign = Align.Stretch;
@@ -97,7 +97,7 @@ public partial class WebView
 	{
 		public SpiceWebViewClient() { }
 
-		public SpiceWebViewClient(nint javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
+		protected SpiceWebViewClient(nint javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
 
 		public override bool ShouldOverrideUrlLoading(Android.Webkit.WebView? view, IWebResourceRequest? request)
 		{
@@ -112,7 +112,7 @@ public partial class WebView
 	{
 		public SpiceWebChromeClient() { }
 
-		public SpiceWebChromeClient(nint javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
+		protected SpiceWebChromeClient(nint javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
 
 		// From: https://github.com/dotnet/maui/blob/260fa08b0f75fbbb945375592896dd9eb374f22f/src/BlazorWebView/src/Maui/Android/BlazorWebChromeClient.cs#L17
 		public override bool OnCreateWindow(Android.Webkit.WebView? view, bool isDialog, bool isUserGesture, Message? resultMsg)
