@@ -42,7 +42,7 @@ internal class SpiceBlazorWebViewClient : WebViewClient
 
 	private bool ShouldOverrideUrlLoadingCore(IWebResourceRequest? request)
 	{
-		if (WebView?.Manager is not AndroidWebKitWebViewManager manager || !Uri.TryCreate(request?.Url?.ToString(), UriKind.RelativeOrAbsolute, out var uri))
+		if (WebView?.Manager is not AndroidWebViewManager manager || !Uri.TryCreate(request?.Url?.ToString(), UriKind.RelativeOrAbsolute, out var uri))
 		{
 			return false;
 		}
@@ -83,7 +83,7 @@ internal class SpiceBlazorWebViewClient : WebViewClient
 		requestUri = UriExtensions.RemovePossibleQueryString(requestUri);
 
 		if (requestUri != null &&
-			WebView?.Manager is AndroidWebKitWebViewManager manager &&
+			WebView?.Manager is AndroidWebViewManager manager &&
 			manager.TryGetResponseContentInternal(requestUri, allowFallbackOnHostPage, out var statusCode, out var statusMessage, out var content, out var headers))
 		{
 			var contentType = headers["Content-Type"];

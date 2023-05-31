@@ -54,9 +54,9 @@ public partial class BlazorWebView
 	protected BlazorWebView(Context context, Func<Context, Android.Views.View> creator) : base(context, creator) { }
 
 	static AndroidAssetFileProvider? _fileProvider;
-	AndroidWebKitWebViewManager? _webViewManager;
+	AndroidWebViewManager? _webViewManager;
 
-	internal AndroidWebKitWebViewManager? Manager => _webViewManager;
+	internal AndroidWebViewManager? Manager => _webViewManager;
 
 	partial void LoadNativeWebView(string contentRootDir, string hostPageRelativePath)
 	{
@@ -64,7 +64,7 @@ public partial class BlazorWebView
 		{
 			_fileProvider = new AndroidAssetFileProvider(NativeView.Context!.Assets, contentRootDir);
 		}
-		_webViewManager = new AndroidWebKitWebViewManager(NativeView, SpiceServiceProvider.Instance, SpiceDispatcher.Instance, _fileProvider, _jSComponents, contentRootDir, hostPageRelativePath);
+		_webViewManager = new AndroidWebViewManager(NativeView, SpiceServiceProvider.Instance, SpiceDispatcher.Instance, _fileProvider, _jSComponents, contentRootDir, hostPageRelativePath);
 
 		foreach (var component in RootComponents)
 		{

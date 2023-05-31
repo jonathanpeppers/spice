@@ -19,7 +19,7 @@ namespace Microsoft.AspNetCore.Components.WebView.Maui
 	/// to render web content.
 	/// </summary>
 	[SupportedOSPlatform("android23.0")]
-	internal class AndroidWebKitWebViewManager : WebViewManager
+	internal class AndroidWebViewManager : WebViewManager
 	{
 		// Using an IP address means that WebView doesn't wait for any DNS resolution,
 		// making it substantially faster. Note that this isn't real HTTP traffic, since
@@ -31,7 +31,7 @@ namespace Microsoft.AspNetCore.Components.WebView.Maui
 		private readonly string _contentRootRelativeToAppRoot;
 
 		/// <summary>
-		/// Constructs an instance of <see cref="AndroidWebKitWebViewManager"/>.
+		/// Constructs an instance of <see cref="AndroidWebViewManager"/>.
 		/// </summary>
 		/// <param name="webview">A wrapper to access platform-specific WebView APIs.</param>
 		/// <param name="services">A service provider containing services to be used by this class and also by application code.</param>
@@ -40,7 +40,7 @@ namespace Microsoft.AspNetCore.Components.WebView.Maui
 		/// <param name="jsComponents">Describes configuration for adding, removing, and updating root components from JavaScript code.</param>
 		/// <param name="contentRootRelativeToAppRoot">Path to the directory containing application content files.</param>
 		/// <param name="hostPageRelativePath">Path to the host page within the <paramref name="fileProvider"/>.</param>
-		public AndroidWebKitWebViewManager(AWebView webview, IServiceProvider services, Dispatcher dispatcher, IFileProvider fileProvider, JSComponentConfigurationStore jsComponents, string contentRootRelativeToAppRoot, string hostPageRelativePath)
+		public AndroidWebViewManager(AWebView webview, IServiceProvider services, Dispatcher dispatcher, IFileProvider fileProvider, JSComponentConfigurationStore jsComponents, string contentRootRelativeToAppRoot, string hostPageRelativePath)
 			: base(services, dispatcher, AppOriginUri, fileProvider, jsComponents, hostPageRelativePath)
 		{
 			ArgumentNullException.ThrowIfNull(webview);
