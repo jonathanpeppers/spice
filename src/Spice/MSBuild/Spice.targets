@@ -6,14 +6,6 @@
 		<MauiUseDefaultAotProfile Condition=" '$(MauiUseDefaultAotProfile)' == '' ">false</MauiUseDefaultAotProfile>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<!-- Deemed "safe enough" for now -->
-		<TrimmableAssembly Include="Microsoft.AspNetCore.Components.WebView" />
-		<TrimmableAssembly Include="Microsoft.Extensions.FileProviders.Abstractions" />
-		<TrimmableAssembly Include="Microsoft.Extensions.FileProviders.Embedded" />
-		<TrimmableAssembly Include="Microsoft.Extensions.Primitives" />
-	</ItemGroup>
-
 	<ItemGroup Condition=" '$(SpiceEnablePlatformUsings)' != 'true' and ('$(ImplicitUsings)' == 'true' or '$(ImplicitUsings)' == 'enable') ">
 		<Using Remove="@(Using->HasMetadata('Platform'))" />
 	</ItemGroup>
