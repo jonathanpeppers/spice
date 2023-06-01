@@ -32,7 +32,6 @@ other System.Reflection usage in the framework.
 
 [trimming]: https://learn.microsoft.com/dotnet/core/deploying/trimming/prepare-libraries-for-trimming
 
-
 ## Background & Motivation
 
 In reviewing, many of the *cool* UI frameworks for mobile:
@@ -127,6 +126,48 @@ native views.
 [poco]: https://en.wikipedia.org/wiki/Plain_old_CLR_object
 [minimal-apis]: https://learn.microsoft.com/aspnet/core/fundamentals/minimal-apis
 
+## *NEW* Blazor Support
+
+Currently, Blazor/Hybrid apps are strongly tied to .NET MAUI. The
+implementation is basically working with the plumbing of the native
+"web view" on each platform. So we could have implemented
+`BlazorWebView` to be used in "plain" `dotnet new android` or
+`dotnet new ios` apps. For now, I've migrated some of the source code
+from `BlazorWebView` from .NET MAUI to Spice 🌶, making it available
+as a new control:
+
+```csharp
+public class App : Application
+{
+    public App()
+    {
+        Main = new BlazorWebView
+        {
+            HostPage = "wwwroot/index.html",
+            RootComponents =
+            {
+                new RootComponent { Selector = "#app", ComponentType = typeof(Main) }
+            },
+        };
+    }
+}
+```
+
+From here, you can write `Index.razor` as the Blazor you know and love:
+
+```razor
+@page "/"
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+```
+
+This setup might be particularly useful if you want web content to
+take full control of the screen with minimal native controls. No need
+for the app size / startup overhead of .NET MAUI if you don't actually
+have native content?
+
 ## Scope
 
 * No XAML. No DI. No MVVM. No MVC. No data-binding. No System.Reflection.
@@ -171,7 +212,7 @@ Simply install the template:
 dotnet new install Spice.Templates
 ```
 
-Create either a plain Spice project, or a hybrid Blazor-enabled Spice project:
+Create either a plain Spice project, or a hybrid "Spice+Blazor" project:
 
 ```sh
 dotnet new spice
