@@ -1,4 +1,4 @@
-﻿<Project>
+<Project>
 
 	<Import Project="MSBuild/Spice.props" />
 	<Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
@@ -25,7 +25,7 @@
 		<None Include="README.md" Pack="true" PackagePath="" />
 		<None Include="../../docs/icon.png" Pack="true" PackagePath="" />
 		<None Include="MSBuild/**" Pack="true" PackagePath="build;buildTransitive" />
-		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
 		<PackageReference Include="Microsoft.Maui.Graphics" Version="7.0.58" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebView" Version="7.0.5" />
 	</ItemGroup>
