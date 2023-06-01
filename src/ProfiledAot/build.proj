@@ -8,7 +8,7 @@
   </PropertyGroup>
   <Target Name="Record">
     <RemoveDir Directories="$(Intermediate)" />
-    <Exec Command="&quot;$(DotNetPreviewTool)&quot; new $(App) -o $(Intermediate)" EnvironmentVariables="DOTNET_MULTILEVEL_LOOKUP=0" />
+    <Exec Command="dotnet new $(App) -o $(Intermediate)" EnvironmentVariables="DOTNET_MULTILEVEL_LOOKUP=0" />
     <!-- Copy replacement files-->
     <ItemGroup>
       <_FilesToCopy Include="$(App)/*" />

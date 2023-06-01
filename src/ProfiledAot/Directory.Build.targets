@@ -46,10 +46,10 @@
   </UsingTask>
   <Target Name="_StripAppMethods">
     <!-- This removes HelloAndroid.dll from the profile, as user's apps will have a different name -->
-    <Exec Command="&quot;$(DotNetPreviewTool)&quot; &quot;$(AotProfileToolPath)&quot; -sd --filter-module=&quot;^(?!$(App)).+&quot; &quot;$(MSBuildProjectDirectory)/custom.aprof&quot; -o &quot;$(MSBuildThisFileDirectory)dotnet.aotprofile&quot;" />
+    <Exec Command="dotnet &quot;$(AotProfileToolPath)&quot; -sd --filter-module=&quot;^(?!$(App)).+&quot; &quot;$(MSBuildProjectDirectory)/custom.aprof&quot; -o &quot;$(MSBuildThisFileDirectory)dotnet.aotprofile&quot;" />
   </Target>
   <Target Name="_SaveMethodNames">
     <!-- This saves all the method names to a text file, so we can see a diff over time -->
-    <Exec Command="&quot;$(DotNetPreviewTool)&quot; &quot;$(AotProfileToolPath)&quot; -m &quot;$(MSBuildThisFileDirectory)dotnet.aotprofile&quot; > &quot;$(MSBuildThisFileDirectory)dotnet.aotprofile.txt&quot;" />
+    <Exec Command="dotnet &quot;$(AotProfileToolPath)&quot; -m &quot;$(MSBuildThisFileDirectory)dotnet.aotprofile&quot; > &quot;$(MSBuildThisFileDirectory)dotnet.aotprofile.txt&quot;" />
   </Target>
 </Project>
