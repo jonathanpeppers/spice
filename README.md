@@ -6,6 +6,34 @@ If you like this idea, star for approval! Read on for details!
 
 ![Spice running on iOS and Android](docs/spice.png)
 
+## Getting Started
+
+Simply install the template:
+
+```sh
+dotnet new install Spice.Templates
+```
+
+Create either a plain Spice project, or a hybrid "Spice+Blazor" project:
+
+```sh
+dotnet new spice
+# Or if you want hybrid/web support
+dotnet new spice-blazor
+```
+
+Build it as you would for other .NET MAUI projects:
+
+```sh
+dotnet build
+# To run on Android
+dotnet build -f net7.0-android -t:Run
+# To run on iOS
+dotnet build -f net7.0-ios -t:Run
+```
+
+Of course, you can also just open the project in Visual Studio and hit F5.
+
 ## Startup Time & App Size
 
 In comparison to a `dotnet new maui` project, I created a Spice
@@ -207,34 +235,6 @@ opting in with `UseMauiEssentials=true`.
 It is an achievement in itself that I was able to invent my own UI
 framework and pick and choose the pieces of .NET MAUI that made sense
 for my framework.
-
-## Getting Started
-
-Simply install the template:
-
-```sh
-dotnet new install Spice.Templates
-```
-
-Create either a plain Spice project, or a hybrid "Spice+Blazor" project:
-
-```sh
-dotnet new spice
-# Or if you want hybrid/web support
-dotnet new spice-blazor
-```
-
-Build it as you would for other .NET MAUI projects:
-
-```sh
-dotnet build
-# To run on Android
-dotnet build -f net7.0-android -t:Run
-# To run on iOS
-dotnet build -f net7.0-ios -t:Run
-```
-
-Of course, you can also just open the project in Visual Studio and hit F5.
 
 ## Implemented Controls
 
