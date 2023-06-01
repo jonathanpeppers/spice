@@ -36,7 +36,6 @@ public partial class WebView
 		var view = new WKWebView(frame, createConfiguration())
 		{
 			AutoresizingMask = UIViewAutoresizing.None,
-			NavigationDelegate = new SpiceNavigationDelegate(),
 		};
 		return view;
 	}
@@ -46,11 +45,11 @@ public partial class WebView
 	/// Android -> Android.Webkit.WebView
 	/// iOS -> WebKit.WKWebView
 	/// </summary>
-	public WebView() : base(_ => Create(CGRect.Empty, CreateConfiguration)) => Initialize();
+	public WebView() : this(_ => Create(CGRect.Empty, CreateConfiguration)) { }
 
 	/// <inheritdoc />
 	/// <param name="frame">Pass the underlying view a frame</param>
-	public WebView(CGRect frame) : base(_ => Create(frame, CreateConfiguration)) => Initialize();
+	public WebView(CGRect frame) : this(_ => Create(frame, CreateConfiguration)) { }
 
 	/// <inheritdoc />
 	/// <param name="creator">Subclasses can pass in a Func to create a UIView</param>
@@ -97,11 +96,6 @@ public partial class WebView
 	{
 		NativeView.GoForward();
 		OnPropertyChanged(nameof(CanGoForward));
-	}
-
-	class SpiceNavigationDelegate : WKNavigationDelegate
-	{
-
 	}
 }
 

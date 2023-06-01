@@ -60,20 +60,15 @@ public partial class BlazorWebView
 	/// Android -> Android.Webkit.WebView
 	/// iOS -> WebKit.WKWebView
 	/// </summary>
-	public BlazorWebView() : base(_ => Create(CGRect.Empty, CreateConfiguration))
-	{
-		//TODO: do something better than this
-		if (NativeView.Configuration.GetUrlSchemeHandler(urlScheme: "app") is SchemeHandler s)
-		{
-			s.WebView = this;
-		}
-
-		Initialize();
-	}
+	public BlazorWebView() : this(_ => Create(CGRect.Empty, CreateConfiguration)) { }
 
 	/// <inheritdoc />
 	/// <param name="frame">Pass the underlying view a frame</param>
-	public BlazorWebView(CGRect frame) : base(_ => Create(frame, CreateConfiguration))
+	public BlazorWebView(CGRect frame) : this(_ => Create(frame, CreateConfiguration)) { }
+
+	/// <inheritdoc />
+	/// <param name="creator">Subclasses can pass in a Func to create a UIView</param>
+	protected BlazorWebView(Func<View, UIView> creator) : base(creator)
 	{
 		//TODO: do something better than this
 		if (NativeView.Configuration.GetUrlSchemeHandler(urlScheme: "app") is SchemeHandler s)
@@ -83,10 +78,6 @@ public partial class BlazorWebView
 
 		Initialize();
 	}
-
-	/// <inheritdoc />
-	/// <param name="creator">Subclasses can pass in a Func to create a UIView</param>
-	protected BlazorWebView(Func<View, UIView> creator) : base(creator) { }
 
 	/// <summary>
 	/// The underlying WebKit.WKWebView
