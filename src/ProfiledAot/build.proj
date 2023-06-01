@@ -3,7 +3,7 @@
     <!-- The template name -->
     <App Condition=" '$(App)' == '' ">spice</App>
     <RuntimeIdentifier Condition=" '$(RuntimeIdentifier)' == '' ">android-arm64</RuntimeIdentifier>
-    <Intermediate>obj/$(App)/</Intermediate>
+    <Intermediate>obj/$(App)-test/</Intermediate>
     <CSProj>$(Intermediate)$(App).csproj</CSProj>
   </PropertyGroup>
   <Target Name="Record">
@@ -11,6 +11,7 @@
     <Exec Command="dotnet new $(App) -o $(Intermediate)" EnvironmentVariables="DOTNET_MULTILEVEL_LOOKUP=0" />
     <!-- Copy replacement files-->
     <ItemGroup>
+      <_FilesToCopy Include="shared/*" />
       <_FilesToCopy Include="$(App)/*" />
     </ItemGroup>
     <Copy SourceFiles="@(_FilesToCopy)" DestinationFolder="$(Intermediate)" />
