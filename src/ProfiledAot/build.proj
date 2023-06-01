@@ -3,8 +3,8 @@
     <!-- The template name -->
     <App Condition=" '$(App)' == '' ">spice</App>
     <RuntimeIdentifier Condition=" '$(RuntimeIdentifier)' == '' ">android-arm64</RuntimeIdentifier>
-    <Intermediate>obj/$(App)-test/</Intermediate>
-    <CSProj>$(Intermediate)$(App).csproj</CSProj>
+    <Intermediate>obj/$(App.Replace("-", ""))test/</Intermediate>
+    <CSProj>$(Intermediate)$(App.Replace("-", ""))test.csproj</CSProj>
   </PropertyGroup>
   <Target Name="Record">
     <RemoveDir Directories="$(Intermediate)" />
@@ -17,6 +17,6 @@
     <Copy SourceFiles="@(_FilesToCopy)" DestinationFolder="$(Intermediate)" />
     <!-- Restore as a separate step due to: https://github.com/dotnet/sdk/issues/21877 -->
     <MSBuild Projects="$(CSProj)" Targets="Restore" />
-    <MSBuild Projects="$(CSProj)" Targets="Record" Properties="App=$(App);RuntimeIdentifier=$(RuntimeIdentifier)" />
+    <MSBuild Projects="$(CSProj)" Targets="Record" Properties="App=$(App);TargetFramework=net7.0-android;RuntimeIdentifier=$(RuntimeIdentifier)" />
   </Target>
 </Project>
