@@ -6,6 +6,33 @@ If you like this idea, star for approval! Read on for details!
 
 ![Spice running on iOS and Android](docs/spice.png)
 
+## Startup Time & App Size
+
+In comparison to a `dotnet new maui` project, I created a Spice
+project with the same layouts and optimized settings for both project
+types. (`AndroidLinkMode=r8`, etc.)
+
+App size of a single-architecture `.apk`, built for `android-arm64`:
+
+![Graph of an app size comparison](docs/appsize.png)
+
+The average startup time of 10 runs on a Pixel 5:
+
+![Graph of a startup comparison](docs/startup.png)
+
+This gives you an idea of how much "stuff" is in .NET MAUI.
+
+In some respects the above comparison isn't completely fair, as Spice
+🌶 has very few features. However, Spice 🌶 is [fully
+trimmable][trimming], and so a `Release` build of an app without
+`Spice.Button` will have the code for `Spice.Button` trimmed away. It
+will be quite difficult for .NET MAUI to become [fully
+trimmable][trimming] -- due to the nature of XAML, data-binding, and
+other System.Reflection usage in the framework.
+
+[trimming]: https://learn.microsoft.com/dotnet/core/deploying/trimming/prepare-libraries-for-trimming
+
+
 ## Background & Motivation
 
 In reviewing, many of the *cool* UI frameworks for mobile:
@@ -325,64 +352,3 @@ or iOS view controllers if necessary.
 Hopefully, we can implement this for a future release of Visual Studio.
 
 [muh]: https://learn.microsoft.com/dotnet/api/system.reflection.metadata.metadataupdatehandlerattribute
-
-## Startup Time & App Size
-
-In comparison to a `dotnet new maui` project, I created a Spice
-project with the same layouts and optimized settings for both project
-types. (`AndroidLinkMode=r8`, etc.)
-
-Startup time for a `Release` build on a Pixel 5:
-
-Spice 🌶:
-```log
-02-02 20:09:49.583  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +261ms
-02-02 20:09:51.060  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +265ms
-02-02 20:09:52.482  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +262ms
-02-02 20:09:53.902  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +266ms
-02-02 20:09:55.345  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +246ms
-02-02 20:09:56.755  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +243ms
-02-02 20:09:58.190  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +264ms
-02-02 20:09:59.592  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +246ms
-02-02 20:10:01.030  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +249ms
-02-02 20:10:02.452  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +248ms
-Average(ms): 255
-Std Err(ms): 2.94014360949333
-Std Dev(ms): 9.29755045398757
-```
-
-.NET MAUI:
-```log
-02-02 20:07:52.357  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +541ms
-02-02 20:07:54.078  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +538ms
-02-02 20:07:55.799  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +538ms
-02-02 20:07:57.531  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +539ms
-02-02 20:07:59.262  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +537ms
-02-02 20:08:00.944  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +540ms
-02-02 20:08:02.666  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +544ms
-02-02 20:08:04.397  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +527ms
-02-02 20:08:06.111  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +532ms
-02-02 20:08:07.803  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +535ms
-Average(ms): 537.1
-Std Err(ms): 1.52351931760353
-Std Dev(ms): 4.8177911028926
-```
-
-App size of a single-architecture `.apk`, built for `android-arm64`:
-
-```
- 7772202 com.companyname.HeadToHeadSpice-Signed.apk
-12808825 com.companyname.HeadToHeadMaui-Signed.apk
-```
-
-This gives you an idea of how much "stuff" is in .NET MAUI.
-
-In some respects the above comparison isn't completely fair, as Spice 🌶
-has like 0 features. However, Spice 🌶 is [fully trimmable][trimming],
-and so a `Release` build of an app without `Spice.Button` will have
-the code for `Spice.Button` trimmed away. It will be quite difficult
-for .NET MAUI to become [fully trimmable][trimming] -- due to the
-nature of XAML, data-binding, and other System.Reflection usage in the
-framework.
-
-[trimming]: https://learn.microsoft.com/dotnet/core/deploying/trimming/prepare-libraries-for-trimming
