@@ -21,12 +21,10 @@ internal class SpiceBlazorWebViewClient : WebViewClient
 	// making it substantially faster. Note that this isn't real HTTP traffic, since
 	// we intercept all the requests within this origin.
 	private static readonly string AppOrigin = $"https://{BlazorWebView.AppHostAddress}/";
-
 	private static readonly Uri AppOriginUri = new(AppOrigin);
+	readonly BlazorWebView? _webView;
 
-	public BlazorWebView? WebView { get; set; }
-
-	public SpiceBlazorWebViewClient() { }
+	public SpiceBlazorWebViewClient(BlazorWebView webView) => _webView = webView;
 
 	protected SpiceBlazorWebViewClient(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
 	{
@@ -42,7 +40,7 @@ internal class SpiceBlazorWebViewClient : WebViewClient
 
 	private bool ShouldOverrideUrlLoadingCore(IWebResourceRequest? request)
 	{
-		if (WebView?.Manager is not AndroidWebViewManager manager || !Uri.TryCreate(request?.Url?.ToString(), UriKind.RelativeOrAbsolute, out var uri))
+		if (_webView?.Manager is not AndroidWebViewManager manager || !Uri.TryCreate(request?.Url?.ToString(), UriKind.RelativeOrAbsolute, out var uri))
 		{
 			return false;
 		}
@@ -54,7 +52,7 @@ internal class SpiceBlazorWebViewClient : WebViewClient
 			try
 			{
 				var intent = Intent.ParseUri(uri.OriginalString, IntentUriType.Scheme);
-				WebView.NativeView.Context!.StartActivity(intent);
+				_webView.NativeView.Context!.StartActivity(intent);
 			}
 			catch (URISyntaxException)
 			{
@@ -83,7 +81,7 @@ internal class SpiceBlazorWebViewClient : WebViewClient
 		requestUri = UriExtensions.RemovePossibleQueryString(requestUri);
 
 		if (requestUri != null &&
-			WebView?.Manager is AndroidWebViewManager manager &&
+			_webView?.Manager is AndroidWebViewManager manager &&
 			manager.TryGetResponseContentInternal(requestUri, allowFallbackOnHostPage, out var statusCode, out var statusMessage, out var content, out var headers))
 		{
 			var contentType = headers["Content-Type"];
@@ -158,7 +156,7 @@ internal class SpiceBlazorWebViewClient : WebViewClient
 				", new JavaScriptValueCallback(_ =>
 			{
 				// Set up Server ports
-				WebView?.Manager?.SetUpMessageChannel();
+				_webView?.Manager?.SetUpMessageChannel();
 
 				// Start Blazor
 				view.EvaluateJavascript(@"

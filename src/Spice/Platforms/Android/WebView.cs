@@ -13,12 +13,9 @@ public partial class WebView
 	/// <param name="view">The Spice.WebView</param>
 	public static implicit operator Android.Webkit.WebView(WebView view) => view.NativeView;
 
-	internal static Android.Webkit.WebView Create(Context context, WebViewClient? webViewClient = null, WebChromeClient? webChromeClient = null)
+	internal static Android.Webkit.WebView Create(Context context)
 	{
 		var view = new Android.Webkit.WebView(context);
-		view.SetWebViewClient(webViewClient ?? new SpiceWebViewClient());
-		view.SetWebChromeClient(webChromeClient ?? new SpiceWebChromeClient());
-
 		var settings = view.Settings;
 		settings.JavaScriptEnabled = true; // This is the default for IsJavaScriptEnabled
 		settings.DomStorageEnabled = true;
@@ -31,15 +28,15 @@ public partial class WebView
 	/// Android -> Android.Webkit.WebView
 	/// iOS -> WebKit.WKWebView
 	/// </summary>
-	public WebView() : this(Platform.Context, c => Create(c)) => Initialize();
+	public WebView() : this(Platform.Context, Create) { }
 
 	/// <inheritdoc />
 	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
-	public WebView(Context context) : this(context, c => Create(c)) => Initialize();
+	public WebView(Context context) : this(context, Create) { }
 
 	/// <inheritdoc />
 	/// <param name="creator">Subclasses can pass in a Func to create a Android.Views.View</param>
-	protected WebView(Func<Context, Android.Views.View> creator) : this(Platform.Context, creator) => Initialize();
+	protected WebView(Func<Context, Android.Views.View> creator) : this(Platform.Context, creator) { }
 
 	/// <inheritdoc />
 	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
@@ -52,6 +49,18 @@ public partial class WebView
 		// Most users would want this default instead of center
 		HorizontalAlign = Align.Stretch;
 		VerticalAlign = Align.Stretch;
+
+		SetClients();
+	}
+
+	/// <summary>
+	/// Override to provide your own WebViewClient or WebChromeClient
+	/// </summary>
+	protected virtual void SetClients()
+	{
+		var view = NativeView;
+		view.SetWebViewClient(new SpiceWebViewClient());
+		view.SetWebChromeClient(new SpiceWebChromeClient());
 	}
 
 	/// <summary>
@@ -91,7 +100,7 @@ public partial class WebView
 		OnPropertyChanged(nameof(CanGoForward));
 	}
 
-	class SpiceWebViewClient : WebViewClient
+	internal class SpiceWebViewClient : WebViewClient
 	{
 		public SpiceWebViewClient() { }
 
@@ -106,7 +115,7 @@ public partial class WebView
 		}
 	}
 
-	class SpiceWebChromeClient : WebChromeClient
+	internal class SpiceWebChromeClient : WebChromeClient
 	{
 		public SpiceWebChromeClient() { }
 

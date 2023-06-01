@@ -20,29 +20,11 @@ public partial class BlazorWebView
 	/// Android -> Android.Webkit.WebView
 	/// iOS -> WebKit.WKWebView
 	/// </summary>
-	public BlazorWebView() : this(Platform.Context, c => Create(c, webViewClient: new SpiceBlazorWebViewClient()))
-	{
-		//TODO: do something better than this
-		if (NativeView?.WebViewClient is SpiceBlazorWebViewClient c)
-		{
-			c.WebView = this;
-		}
-
-		Initialize();
-	}
+	public BlazorWebView() : this(Platform.Context, Create) => Initialize();
 
 	/// <inheritdoc />
 	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
-	public BlazorWebView(Context context) : this(context, c => Create(c, webViewClient: new SpiceBlazorWebViewClient()))
-	{
-		//TODO: do something better than this
-		if (NativeView?.WebViewClient is SpiceBlazorWebViewClient c)
-		{
-			c.WebView = this;
-		}
-
-		Initialize();
-	}
+	public BlazorWebView(Context context) : this(context, Create) => Initialize();
 
 	/// <inheritdoc />
 	/// <param name="creator">Subclasses can pass in a Func to create a Android.Views.View</param>
@@ -57,6 +39,14 @@ public partial class BlazorWebView
 	AndroidWebViewManager? _webViewManager;
 
 	internal AndroidWebViewManager? Manager => _webViewManager;
+
+	/// <inheritdoc />
+	protected override void SetClients()
+	{
+		var view = NativeView;
+		view.SetWebViewClient(new SpiceBlazorWebViewClient(this));
+		view.SetWebChromeClient(new SpiceWebChromeClient());
+	}
 
 	partial void LoadNativeWebView(string contentRootDir, string hostPageRelativePath)
 	{
