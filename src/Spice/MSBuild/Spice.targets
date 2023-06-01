@@ -19,8 +19,8 @@
 	</ItemGroup>
 
 	<ItemGroup Condition=" '$(AndroidEnableProfiledAot)' == 'true' and '$(SpiceUseDefaultAotProfile)' != 'false' ">
-		<AndroidAotProfile Include="$(MSBuildThisFileDirectory)../build/spice.aotprofile" />
-		<AndroidAotProfile Include="$(MSBuildThisFileDirectory)../build/spice-blazor.aotprofile" />
+		<AndroidAotProfile Include="$(MSBuildThisFileDirectory)spice.aotprofile" />
+		<AndroidAotProfile Include="$(MSBuildThisFileDirectory)spice-blazor.aotprofile" />
 	</ItemGroup>
 
 	<!-- Microsoft.NET.Sdk.Razor signals to import this -->
