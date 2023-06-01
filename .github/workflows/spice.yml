@@ -52,6 +52,7 @@ jobs:
       run: dotnet pack -bl:bin/pack.binlog
 
     - name: artifacts
+      if: always()
       uses: actions/upload-artifact@v3
       with:
         name: nupkgs
