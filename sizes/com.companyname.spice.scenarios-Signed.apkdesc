@@ -8,10 +8,10 @@
       "Size": 467626
     },
     "assemblies/assemblies.blob": {
-      "Size": 661498
+      "Size": 661718
     },
     "assemblies/assemblies.manifest": {
-      "Size": 1793
+      "Size": 1769
     },
     "assemblies/rc.bin": {
       "Size": 1182
@@ -1088,19 +1088,19 @@
       "Size": 455
     },
     "lib/arm64-v8a/libaot-CommunityToolkit.Mvvm.dll.so": {
-      "Size": 3904
+      "Size": 4352
     },
     "lib/arm64-v8a/libaot-Java.Interop.dll.so": {
-      "Size": 148176
+      "Size": 161136
     },
     "lib/arm64-v8a/libaot-Microsoft.Maui.Graphics.dll.so": {
-      "Size": 4040
+      "Size": 16072
     },
     "lib/arm64-v8a/libaot-Mono.Android.dll.so": {
-      "Size": 259528
+      "Size": 306736
     },
     "lib/arm64-v8a/libaot-Spice.dll.so": {
-      "Size": 6872
+      "Size": 37408
     },
     "lib/arm64-v8a/libaot-Spice.Scenarios.dll.so": {
       "Size": 37488
@@ -1112,13 +1112,13 @@
       "Size": 4768
     },
     "lib/arm64-v8a/libaot-System.Linq.dll.so": {
-      "Size": 43432
+      "Size": 49608
     },
     "lib/arm64-v8a/libaot-System.ObjectModel.dll.so": {
-      "Size": 8344
+      "Size": 11152
     },
     "lib/arm64-v8a/libaot-System.Private.CoreLib.dll.so": {
-      "Size": 960136
+      "Size": 780864
     },
     "lib/arm64-v8a/libaot-System.Runtime.dll.so": {
       "Size": 3608
@@ -1127,19 +1127,19 @@
       "Size": 3808
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Activity.dll.so": {
-      "Size": 8200
+      "Size": 8664
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.AppCompat.dll.so": {
-      "Size": 28448
+      "Size": 29736
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Core.dll.so": {
-      "Size": 12912
+      "Size": 13384
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.DrawerLayout.dll.so": {
       "Size": 7552
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Fragment.dll.so": {
-      "Size": 16856
+      "Size": 17320
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Lifecycle.Common.dll.so": {
       "Size": 5024
@@ -1189,10 +1189,10 @@
     "META-INF/androidx.annotation_annotation-experimental.version": {
       "Size": 6
     },
-    "META-INF/androidx.appcompat_appcompat.version": {
+    "META-INF/androidx.appcompat_appcompat-resources.version": {
       "Size": 6
     },
-    "META-INF/androidx.appcompat_appcompat-resources.version": {
+    "META-INF/androidx.appcompat_appcompat.version": {
       "Size": 6
     },
     "META-INF/androidx.arch.core_core-runtime.version": {
@@ -1204,10 +1204,10 @@
     "META-INF/androidx.coordinatorlayout_coordinatorlayout.version": {
       "Size": 6
     },
-    "META-INF/androidx.core_core.version": {
+    "META-INF/androidx.core_core-ktx.version": {
       "Size": 6
     },
-    "META-INF/androidx.core_core-ktx.version": {
+    "META-INF/androidx.core_core.version": {
       "Size": 6
     },
     "META-INF/androidx.cursoradapter_cursoradapter.version": {
@@ -1225,10 +1225,10 @@
     "META-INF/androidx.dynamicanimation_dynamicanimation.version": {
       "Size": 6
     },
-    "META-INF/androidx.emoji2_emoji2.version": {
+    "META-INF/androidx.emoji2_emoji2-views-helper.version": {
       "Size": 6
     },
-    "META-INF/androidx.emoji2_emoji2-views-helper.version": {
+    "META-INF/androidx.emoji2_emoji2.version": {
       "Size": 6
     },
     "META-INF/androidx.fragment_fragment.version": {
@@ -1249,10 +1249,10 @@
     "META-INF/androidx.lifecycle_lifecycle-runtime.version": {
       "Size": 6
     },
-    "META-INF/androidx.lifecycle_lifecycle-viewmodel.version": {
+    "META-INF/androidx.lifecycle_lifecycle-viewmodel-savedstate.version": {
       "Size": 6
     },
-    "META-INF/androidx.lifecycle_lifecycle-viewmodel-savedstate.version": {
+    "META-INF/androidx.lifecycle_lifecycle-viewmodel.version": {
       "Size": 6
     },
     "META-INF/androidx.loader_loader.version": {
@@ -1279,10 +1279,10 @@
     "META-INF/androidx.transition_transition.version": {
       "Size": 6
     },
-    "META-INF/androidx.vectordrawable_vectordrawable.version": {
+    "META-INF/androidx.vectordrawable_vectordrawable-animated.version": {
       "Size": 6
     },
-    "META-INF/androidx.vectordrawable_vectordrawable-animated.version": {
+    "META-INF/androidx.vectordrawable_vectordrawable.version": {
       "Size": 6
     },
     "META-INF/androidx.versionedparcelable_versionedparcelable.version": {
@@ -1294,10 +1294,10 @@
     "META-INF/androidx.viewpager2_viewpager2.version": {
       "Size": 6
     },
-    "META-INF/annotation.kotlin_module": {
+    "META-INF/annotation-experimental_release.kotlin_module": {
       "Size": 24
     },
-    "META-INF/annotation-experimental_release.kotlin_module": {
+    "META-INF/annotation.kotlin_module": {
       "Size": 24
     },
     "META-INF/appcompat_release.kotlin_module": {
@@ -1306,14 +1306,14 @@
     "META-INF/com.android.tools/proguard/coroutines.pro": {
       "Size": 1345
     },
-    "META-INF/com.android.tools/r8/coroutines.pro": {
-      "Size": 1190
-    },
     "META-INF/com.android.tools/r8-from-1.6.0/coroutines.pro": {
       "Size": 899
     },
     "META-INF/com.android.tools/r8-upto-3.0.0/coroutines.pro": {
       "Size": 558
+    },
+    "META-INF/com.android.tools/r8/coroutines.pro": {
+      "Size": 1190
     },
     "META-INF/com.google.android.material_material.version": {
       "Size": 6
@@ -1327,9 +1327,6 @@
     "META-INF/fragment_release.kotlin_module": {
       "Size": 24
     },
-    "META-INF/kotlin-stdlib.kotlin_module": {
-      "Size": 8253
-    },
     "META-INF/kotlin-stdlib-common.kotlin_module": {
       "Size": 1628
     },
@@ -1338,6 +1335,9 @@
     },
     "META-INF/kotlin-stdlib-jdk8.kotlin_module": {
       "Size": 356
+    },
+    "META-INF/kotlin-stdlib.kotlin_module": {
+      "Size": 8253
     },
     "META-INF/kotlinx_coroutines_android.version": {
       "Size": 5
@@ -1380,6 +1380,21 @@
     },
     "META-INF/services/kotlinx.coroutines.internal.MainDispatcherFactory": {
       "Size": 52
+    },
+    "res/anim-v21/design_bottom_sheet_slide_in.xml": {
+      "Size": 616
+    },
+    "res/anim-v21/design_bottom_sheet_slide_out.xml": {
+      "Size": 616
+    },
+    "res/anim-v21/fragment_fast_out_extra_slow_in.xml": {
+      "Size": 364
+    },
+    "res/anim-v21/mtrl_bottom_sheet_slide_in.xml": {
+      "Size": 616
+    },
+    "res/anim-v21/mtrl_bottom_sheet_slide_out.xml": {
+      "Size": 616
     },
     "res/anim/abc_fade_in.xml": {
       "Size": 388
@@ -1474,6 +1489,9 @@
     "res/anim/mtrl_card_lowers_interpolator.xml": {
       "Size": 400
     },
+    "res/animator-v21/design_appbar_state_list_animator.xml": {
+      "Size": 1216
+    },
     "res/animator/design_fab_hide_motion_spec.xml": {
       "Size": 796
     },
@@ -1564,23 +1582,74 @@
     "res/animator/mtrl_fab_transformation_sheet_expand_spec.xml": {
       "Size": 1888
     },
-    "res/animator-v21/design_appbar_state_list_animator.xml": {
-      "Size": 1216
+    "res/color-night-v8/material_timepicker_button_stroke.xml": {
+      "Size": 376
     },
-    "res/anim-v21/design_bottom_sheet_slide_in.xml": {
-      "Size": 616
+    "res/color-night-v8/material_timepicker_clockface.xml": {
+      "Size": 376
     },
-    "res/anim-v21/design_bottom_sheet_slide_out.xml": {
-      "Size": 616
+    "res/color-night-v8/material_timepicker_modebutton_tint.xml": {
+      "Size": 340
     },
-    "res/anim-v21/fragment_fast_out_extra_slow_in.xml": {
-      "Size": 364
+    "res/color-v21/abc_btn_colored_borderless_text_material.xml": {
+      "Size": 464
     },
-    "res/anim-v21/mtrl_bottom_sheet_slide_in.xml": {
-      "Size": 616
+    "res/color-v23/abc_btn_colored_borderless_text_material.xml": {
+      "Size": 500
     },
-    "res/anim-v21/mtrl_bottom_sheet_slide_out.xml": {
-      "Size": 616
+    "res/color-v23/abc_btn_colored_text_material.xml": {
+      "Size": 500
+    },
+    "res/color-v23/abc_color_highlight_material.xml": {
+      "Size": 544
+    },
+    "res/color-v23/abc_tint_btn_checkable.xml": {
+      "Size": 624
+    },
+    "res/color-v23/abc_tint_default.xml": {
+      "Size": 1120
+    },
+    "res/color-v23/abc_tint_edittext.xml": {
+      "Size": 668
+    },
+    "res/color-v23/abc_tint_seek_thumb.xml": {
+      "Size": 500
+    },
+    "res/color-v23/abc_tint_spinner.xml": {
+      "Size": 668
+    },
+    "res/color-v23/abc_tint_switch_track.xml": {
+      "Size": 664
+    },
+    "res/color-v31/m3_dynamic_dark_default_color_primary_text.xml": {
+      "Size": 500
+    },
+    "res/color-v31/m3_dynamic_dark_default_color_secondary_text.xml": {
+      "Size": 500
+    },
+    "res/color-v31/m3_dynamic_dark_highlighted_text.xml": {
+      "Size": 376
+    },
+    "res/color-v31/m3_dynamic_dark_hint_foreground.xml": {
+      "Size": 564
+    },
+    "res/color-v31/m3_dynamic_dark_primary_text_disable_only.xml": {
+      "Size": 500
+    },
+    "res/color-v31/m3_dynamic_default_color_primary_text.xml": {
+      "Size": 500
+    },
+    "res/color-v31/m3_dynamic_default_color_secondary_text.xml": {
+      "Size": 500
+    },
+    "res/color-v31/m3_dynamic_highlighted_text.xml": {
+      "Size": 376
+    },
+    "res/color-v31/m3_dynamic_hint_foreground.xml": {
+      "Size": 564
+    },
+    "res/color-v31/m3_dynamic_primary_text_disable_only.xml": {
+      "Size": 500
     },
     "res/color/abc_background_cache_hint_selector_material_dark.xml": {
       "Size": 468
@@ -1663,10 +1732,10 @@
     "res/color/m3_button_outline_color_selector.xml": {
       "Size": 500
     },
-    "res/color/m3_button_ripple_color.xml": {
+    "res/color/m3_button_ripple_color_selector.xml": {
       "Size": 808
     },
-    "res/color/m3_button_ripple_color_selector.xml": {
+    "res/color/m3_button_ripple_color.xml": {
       "Size": 808
     },
     "res/color/m3_calendar_item_disabled_text.xml": {
@@ -2068,10 +2137,10 @@
     "res/color/mtrl_tabs_colored_ripple_color.xml": {
       "Size": 948
     },
-    "res/color/mtrl_tabs_icon_color_selector.xml": {
+    "res/color/mtrl_tabs_icon_color_selector_colored.xml": {
       "Size": 500
     },
-    "res/color/mtrl_tabs_icon_color_selector_colored.xml": {
+    "res/color/mtrl_tabs_icon_color_selector.xml": {
       "Size": 500
     },
     "res/color/mtrl_tabs_legacy_text_color_selector.xml": {
@@ -2088,534 +2157,6 @@
     },
     "res/color/switch_thumb_material_light.xml": {
       "Size": 464
-    },
-    "res/color-night-v8/material_timepicker_button_stroke.xml": {
-      "Size": 376
-    },
-    "res/color-night-v8/material_timepicker_clockface.xml": {
-      "Size": 376
-    },
-    "res/color-night-v8/material_timepicker_modebutton_tint.xml": {
-      "Size": 340
-    },
-    "res/color-v21/abc_btn_colored_borderless_text_material.xml": {
-      "Size": 464
-    },
-    "res/color-v23/abc_btn_colored_borderless_text_material.xml": {
-      "Size": 500
-    },
-    "res/color-v23/abc_btn_colored_text_material.xml": {
-      "Size": 500
-    },
-    "res/color-v23/abc_color_highlight_material.xml": {
-      "Size": 544
-    },
-    "res/color-v23/abc_tint_btn_checkable.xml": {
-      "Size": 624
-    },
-    "res/color-v23/abc_tint_default.xml": {
-      "Size": 1120
-    },
-    "res/color-v23/abc_tint_edittext.xml": {
-      "Size": 668
-    },
-    "res/color-v23/abc_tint_seek_thumb.xml": {
-      "Size": 500
-    },
-    "res/color-v23/abc_tint_spinner.xml": {
-      "Size": 668
-    },
-    "res/color-v23/abc_tint_switch_track.xml": {
-      "Size": 664
-    },
-    "res/color-v31/m3_dynamic_dark_default_color_primary_text.xml": {
-      "Size": 500
-    },
-    "res/color-v31/m3_dynamic_dark_default_color_secondary_text.xml": {
-      "Size": 500
-    },
-    "res/color-v31/m3_dynamic_dark_highlighted_text.xml": {
-      "Size": 376
-    },
-    "res/color-v31/m3_dynamic_dark_hint_foreground.xml": {
-      "Size": 564
-    },
-    "res/color-v31/m3_dynamic_dark_primary_text_disable_only.xml": {
-      "Size": 500
-    },
-    "res/color-v31/m3_dynamic_default_color_primary_text.xml": {
-      "Size": 500
-    },
-    "res/color-v31/m3_dynamic_default_color_secondary_text.xml": {
-      "Size": 500
-    },
-    "res/color-v31/m3_dynamic_highlighted_text.xml": {
-      "Size": 376
-    },
-    "res/color-v31/m3_dynamic_hint_foreground.xml": {
-      "Size": 564
-    },
-    "res/color-v31/m3_dynamic_primary_text_disable_only.xml": {
-      "Size": 500
-    },
-    "res/drawable/$avd_hide_password__0.xml": {
-      "Size": 1176
-    },
-    "res/drawable/$avd_hide_password__1.xml": {
-      "Size": 592
-    },
-    "res/drawable/$avd_hide_password__2.xml": {
-      "Size": 556
-    },
-    "res/drawable/$avd_show_password__0.xml": {
-      "Size": 1136
-    },
-    "res/drawable/$avd_show_password__1.xml": {
-      "Size": 592
-    },
-    "res/drawable/$avd_show_password__2.xml": {
-      "Size": 556
-    },
-    "res/drawable/$mtrl_checkbox_button_checked_unchecked__0.xml": {
-      "Size": 592
-    },
-    "res/drawable/$mtrl_checkbox_button_checked_unchecked__1.xml": {
-      "Size": 592
-    },
-    "res/drawable/$mtrl_checkbox_button_checked_unchecked__2.xml": {
-      "Size": 592
-    },
-    "res/drawable/$mtrl_checkbox_button_icon_checked_indeterminate__0.xml": {
-      "Size": 592
-    },
-    "res/drawable/$mtrl_checkbox_button_icon_checked_unchecked__0.xml": {
-      "Size": 592
-    },
-    "res/drawable/$mtrl_checkbox_button_icon_checked_unchecked__1.xml": {
-      "Size": 592
-    },
-    "res/drawable/$mtrl_checkbox_button_icon_checked_unchecked__2.xml": {
-      "Size": 592
-    },
-    "res/drawable/$mtrl_checkbox_button_icon_indeterminate_checked__0.xml": {
-      "Size": 592
-    },
-    "res/drawable/$mtrl_checkbox_button_icon_indeterminate_unchecked__0.xml": {
-      "Size": 592
-    },
-    "res/drawable/$mtrl_checkbox_button_icon_indeterminate_unchecked__1.xml": {
-      "Size": 592
-    },
-    "res/drawable/$mtrl_checkbox_button_icon_indeterminate_unchecked__2.xml": {
-      "Size": 592
-    },
-    "res/drawable/$mtrl_checkbox_button_icon_unchecked_checked__0.xml": {
-      "Size": 592
-    },
-    "res/drawable/$mtrl_checkbox_button_icon_unchecked_checked__1.xml": {
-      "Size": 592
-    },
-    "res/drawable/$mtrl_checkbox_button_icon_unchecked_checked__2.xml": {
-      "Size": 596
-    },
-    "res/drawable/$mtrl_checkbox_button_icon_unchecked_indeterminate__0.xml": {
-      "Size": 592
-    },
-    "res/drawable/$mtrl_checkbox_button_icon_unchecked_indeterminate__1.xml": {
-      "Size": 592
-    },
-    "res/drawable/$mtrl_checkbox_button_icon_unchecked_indeterminate__2.xml": {
-      "Size": 592
-    },
-    "res/drawable/$mtrl_checkbox_button_unchecked_checked__0.xml": {
-      "Size": 592
-    },
-    "res/drawable/$mtrl_checkbox_button_unchecked_checked__1.xml": {
-      "Size": 592
-    },
-    "res/drawable/$mtrl_checkbox_button_unchecked_checked__2.xml": {
-      "Size": 592
-    },
-    "res/drawable/$mtrl_switch_thumb_checked_pressed__0.xml": {
-      "Size": 592
-    },
-    "res/drawable/$mtrl_switch_thumb_checked_unchecked__0.xml": {
-      "Size": 592
-    },
-    "res/drawable/$mtrl_switch_thumb_checked_unchecked__1.xml": {
-      "Size": 636
-    },
-    "res/drawable/$mtrl_switch_thumb_pressed_checked__0.xml": {
-      "Size": 592
-    },
-    "res/drawable/$mtrl_switch_thumb_pressed_unchecked__0.xml": {
-      "Size": 592
-    },
-    "res/drawable/$mtrl_switch_thumb_unchecked_checked__0.xml": {
-      "Size": 592
-    },
-    "res/drawable/$mtrl_switch_thumb_unchecked_checked__1.xml": {
-      "Size": 636
-    },
-    "res/drawable/$mtrl_switch_thumb_unchecked_pressed__0.xml": {
-      "Size": 592
-    },
-    "res/drawable/abc_btn_borderless_material.xml": {
-      "Size": 588
-    },
-    "res/drawable/abc_btn_check_material.xml": {
-      "Size": 464
-    },
-    "res/drawable/abc_btn_check_material_anim.xml": {
-      "Size": 816
-    },
-    "res/drawable/abc_btn_default_mtrl_shape.xml": {
-      "Size": 932
-    },
-    "res/drawable/abc_btn_radio_material.xml": {
-      "Size": 464
-    },
-    "res/drawable/abc_btn_radio_material_anim.xml": {
-      "Size": 816
-    },
-    "res/drawable/abc_cab_background_internal_bg.xml": {
-      "Size": 372
-    },
-    "res/drawable/abc_cab_background_top_material.xml": {
-      "Size": 336
-    },
-    "res/drawable/abc_ic_ab_back_material.xml": {
-      "Size": 692
-    },
-    "res/drawable/abc_ic_arrow_drop_right_black_24dp.xml": {
-      "Size": 1000
-    },
-    "res/drawable/abc_ic_clear_material.xml": {
-      "Size": 684
-    },
-    "res/drawable/abc_ic_go_search_api_material.xml": {
-      "Size": 640
-    },
-    "res/drawable/abc_ic_menu_copy_mtrl_am_alpha.xml": {
-      "Size": 756
-    },
-    "res/drawable/abc_ic_menu_cut_mtrl_alpha.xml": {
-      "Size": 1096
-    },
-    "res/drawable/abc_ic_menu_overflow_material.xml": {
-      "Size": 792
-    },
-    "res/drawable/abc_ic_menu_paste_mtrl_am_alpha.xml": {
-      "Size": 796
-    },
-    "res/drawable/abc_ic_menu_selectall_mtrl_alpha.xml": {
-      "Size": 920
-    },
-    "res/drawable/abc_ic_menu_share_mtrl_alpha.xml": {
-      "Size": 980
-    },
-    "res/drawable/abc_ic_search_api_material.xml": {
-      "Size": 812
-    },
-    "res/drawable/abc_ic_voice_search_api_material.xml": {
-      "Size": 828
-    },
-    "res/drawable/abc_item_background_holo_dark.xml": {
-      "Size": 1012
-    },
-    "res/drawable/abc_item_background_holo_light.xml": {
-      "Size": 1012
-    },
-    "res/drawable/abc_list_selector_background_transition_holo_dark.xml": {
-      "Size": 424
-    },
-    "res/drawable/abc_list_selector_background_transition_holo_light.xml": {
-      "Size": 424
-    },
-    "res/drawable/abc_list_selector_holo_dark.xml": {
-      "Size": 1064
-    },
-    "res/drawable/abc_list_selector_holo_light.xml": {
-      "Size": 1064
-    },
-    "res/drawable/abc_ratingbar_indicator_material.xml": {
-      "Size": 124
-    },
-    "res/drawable/abc_ratingbar_material.xml": {
-      "Size": 124
-    },
-    "res/drawable/abc_ratingbar_small_material.xml": {
-      "Size": 124
-    },
-    "res/drawable/abc_seekbar_thumb_material.xml": {
-      "Size": 1100
-    },
-    "res/drawable/abc_seekbar_tick_mark_material.xml": {
-      "Size": 516
-    },
-    "res/drawable/abc_seekbar_track_material.xml": {
-      "Size": 1408
-    },
-    "res/drawable/abc_spinner_textfield_background_material.xml": {
-      "Size": 1160
-    },
-    "res/drawable/abc_star_black_48dp.xml": {
-      "Size": 640
-    },
-    "res/drawable/abc_star_half_black_48dp.xml": {
-      "Size": 600
-    },
-    "res/drawable/abc_switch_thumb_material.xml": {
-      "Size": 464
-    },
-    "res/drawable/abc_tab_indicator_material.xml": {
-      "Size": 468
-    },
-    "res/drawable/abc_text_cursor_material.xml": {
-      "Size": 516
-    },
-    "res/drawable/abc_textfield_search_material.xml": {
-      "Size": 756
-    },
-    "res/drawable/abc_vector_test.xml": {
-      "Size": 612
-    },
-    "res/drawable/avd_hide_password.xml": {
-      "Size": 660
-    },
-    "res/drawable/avd_show_password.xml": {
-      "Size": 660
-    },
-    "res/drawable/btn_checkbox_checked_mtrl.xml": {
-      "Size": 2688
-    },
-    "res/drawable/btn_checkbox_checked_to_unchecked_mtrl_animation.xml": {
-      "Size": 688
-    },
-    "res/drawable/btn_checkbox_unchecked_mtrl.xml": {
-      "Size": 2660
-    },
-    "res/drawable/btn_checkbox_unchecked_to_checked_mtrl_animation.xml": {
-      "Size": 688
-    },
-    "res/drawable/btn_radio_off_mtrl.xml": {
-      "Size": 1728
-    },
-    "res/drawable/btn_radio_off_to_on_mtrl_animation.xml": {
-      "Size": 680
-    },
-    "res/drawable/btn_radio_on_mtrl.xml": {
-      "Size": 1656
-    },
-    "res/drawable/btn_radio_on_to_off_mtrl_animation.xml": {
-      "Size": 680
-    },
-    "res/drawable/design_fab_background.xml": {
-      "Size": 372
-    },
-    "res/drawable/design_ic_visibility.xml": {
-      "Size": 540
-    },
-    "res/drawable/design_ic_visibility_off.xml": {
-      "Size": 1144
-    },
-    "res/drawable/design_password_eye.xml": {
-      "Size": 816
-    },
-    "res/drawable/design_snackbar_background.xml": {
-      "Size": 484
-    },
-    "res/drawable/ic_clock_black_24dp.xml": {
-      "Size": 752
-    },
-    "res/drawable/ic_keyboard_black_24dp.xml": {
-      "Size": 852
-    },
-    "res/drawable/ic_m3_chip_check.xml": {
-      "Size": 704
-    },
-    "res/drawable/ic_m3_chip_checked_circle.xml": {
-      "Size": 900
-    },
-    "res/drawable/ic_m3_chip_close.xml": {
-      "Size": 648
-    },
-    "res/drawable/ic_mtrl_checked_circle.xml": {
-      "Size": 672
-    },
-    "res/drawable/ic_mtrl_chip_checked_black.xml": {
-      "Size": 600
-    },
-    "res/drawable/ic_mtrl_chip_checked_circle.xml": {
-      "Size": 940
-    },
-    "res/drawable/ic_mtrl_chip_close_circle.xml": {
-      "Size": 808
-    },
-    "res/drawable/m3_popupmenu_background_overlay.xml": {
-      "Size": 740
-    },
-    "res/drawable/m3_tabs_line_indicator.xml": {
-      "Size": 480
-    },
-    "res/drawable/m3_tabs_rounded_line_indicator.xml": {
-      "Size": 956
-    },
-    "res/drawable/material_ic_calendar_black_24dp.xml": {
-      "Size": 696
-    },
-    "res/drawable/material_ic_clear_black_24dp.xml": {
-      "Size": 752
-    },
-    "res/drawable/material_ic_edit_black_24dp.xml": {
-      "Size": 716
-    },
-    "res/drawable/material_ic_keyboard_arrow_left_black_24dp.xml": {
-      "Size": 712
-    },
-    "res/drawable/material_ic_keyboard_arrow_right_black_24dp.xml": {
-      "Size": 700
-    },
-    "res/drawable/material_ic_menu_arrow_down_black_24dp.xml": {
-      "Size": 648
-    },
-    "res/drawable/material_ic_menu_arrow_up_black_24dp.xml": {
-      "Size": 648
-    },
-    "res/drawable/maui_splash_image.xml": {
-      "Size": 488
-    },
-    "res/drawable/mtrl_bottomsheet_drag_handle.xml": {
-      "Size": 628
-    },
-    "res/drawable/mtrl_checkbox_button.xml": {
-      "Size": 1332
-    },
-    "res/drawable/mtrl_checkbox_button_checked_unchecked.xml": {
-      "Size": 724
-    },
-    "res/drawable/mtrl_checkbox_button_icon.xml": {
-      "Size": 1572
-    },
-    "res/drawable/mtrl_checkbox_button_icon_checked_indeterminate.xml": {
-      "Size": 524
-    },
-    "res/drawable/mtrl_checkbox_button_icon_checked_unchecked.xml": {
-      "Size": 724
-    },
-    "res/drawable/mtrl_checkbox_button_icon_indeterminate_checked.xml": {
-      "Size": 524
-    },
-    "res/drawable/mtrl_checkbox_button_icon_indeterminate_unchecked.xml": {
-      "Size": 724
-    },
-    "res/drawable/mtrl_checkbox_button_icon_unchecked_checked.xml": {
-      "Size": 724
-    },
-    "res/drawable/mtrl_checkbox_button_icon_unchecked_indeterminate.xml": {
-      "Size": 724
-    },
-    "res/drawable/mtrl_checkbox_button_unchecked_checked.xml": {
-      "Size": 724
-    },
-    "res/drawable/mtrl_dialog_background.xml": {
-      "Size": 716
-    },
-    "res/drawable/mtrl_dropdown_arrow.xml": {
-      "Size": 464
-    },
-    "res/drawable/mtrl_ic_arrow_drop_down.xml": {
-      "Size": 564
-    },
-    "res/drawable/mtrl_ic_arrow_drop_up.xml": {
-      "Size": 564
-    },
-    "res/drawable/mtrl_ic_cancel.xml": {
-      "Size": 724
-    },
-    "res/drawable/mtrl_ic_check_mark.xml": {
-      "Size": 744
-    },
-    "res/drawable/mtrl_ic_checkbox_checked.xml": {
-      "Size": 904
-    },
-    "res/drawable/mtrl_ic_checkbox_unchecked.xml": {
-      "Size": 612
-    },
-    "res/drawable/mtrl_ic_error.xml": {
-      "Size": 644
-    },
-    "res/drawable/mtrl_ic_indeterminate.xml": {
-      "Size": 744
-    },
-    "res/drawable/mtrl_popupmenu_background.xml": {
-      "Size": 740
-    },
-    "res/drawable/mtrl_popupmenu_background_overlay.xml": {
-      "Size": 740
-    },
-    "res/drawable/mtrl_switch_thumb.xml": {
-      "Size": 2004
-    },
-    "res/drawable/mtrl_switch_thumb_checked.xml": {
-      "Size": 744
-    },
-    "res/drawable/mtrl_switch_thumb_checked_pressed.xml": {
-      "Size": 524
-    },
-    "res/drawable/mtrl_switch_thumb_checked_unchecked.xml": {
-      "Size": 624
-    },
-    "res/drawable/mtrl_switch_thumb_pressed.xml": {
-      "Size": 744
-    },
-    "res/drawable/mtrl_switch_thumb_pressed_checked.xml": {
-      "Size": 524
-    },
-    "res/drawable/mtrl_switch_thumb_pressed_unchecked.xml": {
-      "Size": 524
-    },
-    "res/drawable/mtrl_switch_thumb_unchecked.xml": {
-      "Size": 744
-    },
-    "res/drawable/mtrl_switch_thumb_unchecked_checked.xml": {
-      "Size": 624
-    },
-    "res/drawable/mtrl_switch_thumb_unchecked_pressed.xml": {
-      "Size": 524
-    },
-    "res/drawable/mtrl_switch_track.xml": {
-      "Size": 588
-    },
-    "res/drawable/mtrl_switch_track_decoration.xml": {
-      "Size": 636
-    },
-    "res/drawable/mtrl_tabs_default_indicator.xml": {
-      "Size": 628
-    },
-    "res/drawable/navigation_empty_icon.xml": {
-      "Size": 516
-    },
-    "res/drawable/notification_bg.xml": {
-      "Size": 532
-    },
-    "res/drawable/notification_bg_low.xml": {
-      "Size": 532
-    },
-    "res/drawable/notification_icon_background.xml": {
-      "Size": 372
-    },
-    "res/drawable/notification_tile_bg.xml": {
-      "Size": 304
-    },
-    "res/drawable/test_level_drawable.xml": {
-      "Size": 448
-    },
-    "res/drawable/tooltip_frame_dark.xml": {
-      "Size": 484
-    },
-    "res/drawable/tooltip_frame_light.xml": {
-      "Size": 484
     },
     "res/drawable-hdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png": {
       "Size": 272
@@ -2722,11 +2263,11 @@
     "res/drawable-hdpi-v4/notification_bg_low_pressed.9.png": {
       "Size": 225
     },
-    "res/drawable-hdpi-v4/notification_bg_normal.9.png": {
-      "Size": 212
-    },
     "res/drawable-hdpi-v4/notification_bg_normal_pressed.9.png": {
       "Size": 225
+    },
+    "res/drawable-hdpi-v4/notification_bg_normal.9.png": {
+      "Size": 212
     },
     "res/drawable-hdpi-v4/notify_panel_notification_icon_bg.png": {
       "Size": 107
@@ -2857,11 +2398,11 @@
     "res/drawable-mdpi-v4/notification_bg_low_pressed.9.png": {
       "Size": 223
     },
-    "res/drawable-mdpi-v4/notification_bg_normal.9.png": {
-      "Size": 215
-    },
     "res/drawable-mdpi-v4/notification_bg_normal_pressed.9.png": {
       "Size": 223
+    },
+    "res/drawable-mdpi-v4/notification_bg_normal.9.png": {
+      "Size": 215
     },
     "res/drawable-mdpi-v4/notify_panel_notification_icon_bg.png": {
       "Size": 98
@@ -3034,11 +2575,11 @@
     "res/drawable-xhdpi-v4/notification_bg_low_pressed.9.png": {
       "Size": 252
     },
-    "res/drawable-xhdpi-v4/notification_bg_normal.9.png": {
-      "Size": 221
-    },
     "res/drawable-xhdpi-v4/notification_bg_normal_pressed.9.png": {
       "Size": 247
+    },
+    "res/drawable-xhdpi-v4/notification_bg_normal.9.png": {
+      "Size": 221
     },
     "res/drawable-xhdpi-v4/notify_panel_notification_icon_bg.png": {
       "Size": 138
@@ -3199,6 +2740,495 @@
     "res/drawable-xxxhdpi-v4/splash.png": {
       "Size": 2526
     },
+    "res/drawable/$avd_hide_password__0.xml": {
+      "Size": 1176
+    },
+    "res/drawable/$avd_hide_password__1.xml": {
+      "Size": 592
+    },
+    "res/drawable/$avd_hide_password__2.xml": {
+      "Size": 556
+    },
+    "res/drawable/$avd_show_password__0.xml": {
+      "Size": 1136
+    },
+    "res/drawable/$avd_show_password__1.xml": {
+      "Size": 592
+    },
+    "res/drawable/$avd_show_password__2.xml": {
+      "Size": 556
+    },
+    "res/drawable/$mtrl_checkbox_button_checked_unchecked__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_checked_unchecked__1.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_checked_unchecked__2.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_checked_indeterminate__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_checked_unchecked__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_checked_unchecked__1.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_checked_unchecked__2.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_indeterminate_checked__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_indeterminate_unchecked__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_indeterminate_unchecked__1.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_indeterminate_unchecked__2.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_unchecked_checked__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_unchecked_checked__1.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_unchecked_checked__2.xml": {
+      "Size": 596
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_unchecked_indeterminate__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_unchecked_indeterminate__1.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_icon_unchecked_indeterminate__2.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_unchecked_checked__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_unchecked_checked__1.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_checkbox_button_unchecked_checked__2.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_switch_thumb_checked_pressed__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_switch_thumb_checked_unchecked__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_switch_thumb_checked_unchecked__1.xml": {
+      "Size": 636
+    },
+    "res/drawable/$mtrl_switch_thumb_pressed_checked__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_switch_thumb_pressed_unchecked__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_switch_thumb_unchecked_checked__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/$mtrl_switch_thumb_unchecked_checked__1.xml": {
+      "Size": 636
+    },
+    "res/drawable/$mtrl_switch_thumb_unchecked_pressed__0.xml": {
+      "Size": 592
+    },
+    "res/drawable/abc_btn_borderless_material.xml": {
+      "Size": 588
+    },
+    "res/drawable/abc_btn_check_material_anim.xml": {
+      "Size": 816
+    },
+    "res/drawable/abc_btn_check_material.xml": {
+      "Size": 464
+    },
+    "res/drawable/abc_btn_default_mtrl_shape.xml": {
+      "Size": 932
+    },
+    "res/drawable/abc_btn_radio_material_anim.xml": {
+      "Size": 816
+    },
+    "res/drawable/abc_btn_radio_material.xml": {
+      "Size": 464
+    },
+    "res/drawable/abc_cab_background_internal_bg.xml": {
+      "Size": 372
+    },
+    "res/drawable/abc_cab_background_top_material.xml": {
+      "Size": 336
+    },
+    "res/drawable/abc_ic_ab_back_material.xml": {
+      "Size": 692
+    },
+    "res/drawable/abc_ic_arrow_drop_right_black_24dp.xml": {
+      "Size": 1000
+    },
+    "res/drawable/abc_ic_clear_material.xml": {
+      "Size": 684
+    },
+    "res/drawable/abc_ic_go_search_api_material.xml": {
+      "Size": 640
+    },
+    "res/drawable/abc_ic_menu_copy_mtrl_am_alpha.xml": {
+      "Size": 756
+    },
+    "res/drawable/abc_ic_menu_cut_mtrl_alpha.xml": {
+      "Size": 1096
+    },
+    "res/drawable/abc_ic_menu_overflow_material.xml": {
+      "Size": 792
+    },
+    "res/drawable/abc_ic_menu_paste_mtrl_am_alpha.xml": {
+      "Size": 796
+    },
+    "res/drawable/abc_ic_menu_selectall_mtrl_alpha.xml": {
+      "Size": 920
+    },
+    "res/drawable/abc_ic_menu_share_mtrl_alpha.xml": {
+      "Size": 980
+    },
+    "res/drawable/abc_ic_search_api_material.xml": {
+      "Size": 812
+    },
+    "res/drawable/abc_ic_voice_search_api_material.xml": {
+      "Size": 828
+    },
+    "res/drawable/abc_item_background_holo_dark.xml": {
+      "Size": 1012
+    },
+    "res/drawable/abc_item_background_holo_light.xml": {
+      "Size": 1012
+    },
+    "res/drawable/abc_list_selector_background_transition_holo_dark.xml": {
+      "Size": 424
+    },
+    "res/drawable/abc_list_selector_background_transition_holo_light.xml": {
+      "Size": 424
+    },
+    "res/drawable/abc_list_selector_holo_dark.xml": {
+      "Size": 1064
+    },
+    "res/drawable/abc_list_selector_holo_light.xml": {
+      "Size": 1064
+    },
+    "res/drawable/abc_ratingbar_indicator_material.xml": {
+      "Size": 124
+    },
+    "res/drawable/abc_ratingbar_material.xml": {
+      "Size": 124
+    },
+    "res/drawable/abc_ratingbar_small_material.xml": {
+      "Size": 124
+    },
+    "res/drawable/abc_seekbar_thumb_material.xml": {
+      "Size": 1100
+    },
+    "res/drawable/abc_seekbar_tick_mark_material.xml": {
+      "Size": 516
+    },
+    "res/drawable/abc_seekbar_track_material.xml": {
+      "Size": 1408
+    },
+    "res/drawable/abc_spinner_textfield_background_material.xml": {
+      "Size": 1160
+    },
+    "res/drawable/abc_star_black_48dp.xml": {
+      "Size": 640
+    },
+    "res/drawable/abc_star_half_black_48dp.xml": {
+      "Size": 600
+    },
+    "res/drawable/abc_switch_thumb_material.xml": {
+      "Size": 464
+    },
+    "res/drawable/abc_tab_indicator_material.xml": {
+      "Size": 468
+    },
+    "res/drawable/abc_text_cursor_material.xml": {
+      "Size": 516
+    },
+    "res/drawable/abc_textfield_search_material.xml": {
+      "Size": 756
+    },
+    "res/drawable/abc_vector_test.xml": {
+      "Size": 612
+    },
+    "res/drawable/avd_hide_password.xml": {
+      "Size": 660
+    },
+    "res/drawable/avd_show_password.xml": {
+      "Size": 660
+    },
+    "res/drawable/btn_checkbox_checked_mtrl.xml": {
+      "Size": 2688
+    },
+    "res/drawable/btn_checkbox_checked_to_unchecked_mtrl_animation.xml": {
+      "Size": 688
+    },
+    "res/drawable/btn_checkbox_unchecked_mtrl.xml": {
+      "Size": 2660
+    },
+    "res/drawable/btn_checkbox_unchecked_to_checked_mtrl_animation.xml": {
+      "Size": 688
+    },
+    "res/drawable/btn_radio_off_mtrl.xml": {
+      "Size": 1728
+    },
+    "res/drawable/btn_radio_off_to_on_mtrl_animation.xml": {
+      "Size": 680
+    },
+    "res/drawable/btn_radio_on_mtrl.xml": {
+      "Size": 1656
+    },
+    "res/drawable/btn_radio_on_to_off_mtrl_animation.xml": {
+      "Size": 680
+    },
+    "res/drawable/design_fab_background.xml": {
+      "Size": 372
+    },
+    "res/drawable/design_ic_visibility_off.xml": {
+      "Size": 1144
+    },
+    "res/drawable/design_ic_visibility.xml": {
+      "Size": 540
+    },
+    "res/drawable/design_password_eye.xml": {
+      "Size": 816
+    },
+    "res/drawable/design_snackbar_background.xml": {
+      "Size": 484
+    },
+    "res/drawable/ic_clock_black_24dp.xml": {
+      "Size": 752
+    },
+    "res/drawable/ic_keyboard_black_24dp.xml": {
+      "Size": 852
+    },
+    "res/drawable/ic_m3_chip_check.xml": {
+      "Size": 704
+    },
+    "res/drawable/ic_m3_chip_checked_circle.xml": {
+      "Size": 900
+    },
+    "res/drawable/ic_m3_chip_close.xml": {
+      "Size": 648
+    },
+    "res/drawable/ic_mtrl_checked_circle.xml": {
+      "Size": 672
+    },
+    "res/drawable/ic_mtrl_chip_checked_black.xml": {
+      "Size": 600
+    },
+    "res/drawable/ic_mtrl_chip_checked_circle.xml": {
+      "Size": 940
+    },
+    "res/drawable/ic_mtrl_chip_close_circle.xml": {
+      "Size": 808
+    },
+    "res/drawable/m3_popupmenu_background_overlay.xml": {
+      "Size": 740
+    },
+    "res/drawable/m3_tabs_line_indicator.xml": {
+      "Size": 480
+    },
+    "res/drawable/m3_tabs_rounded_line_indicator.xml": {
+      "Size": 956
+    },
+    "res/drawable/material_ic_calendar_black_24dp.xml": {
+      "Size": 696
+    },
+    "res/drawable/material_ic_clear_black_24dp.xml": {
+      "Size": 752
+    },
+    "res/drawable/material_ic_edit_black_24dp.xml": {
+      "Size": 716
+    },
+    "res/drawable/material_ic_keyboard_arrow_left_black_24dp.xml": {
+      "Size": 712
+    },
+    "res/drawable/material_ic_keyboard_arrow_right_black_24dp.xml": {
+      "Size": 700
+    },
+    "res/drawable/material_ic_menu_arrow_down_black_24dp.xml": {
+      "Size": 648
+    },
+    "res/drawable/material_ic_menu_arrow_up_black_24dp.xml": {
+      "Size": 648
+    },
+    "res/drawable/maui_splash_image.xml": {
+      "Size": 488
+    },
+    "res/drawable/mtrl_bottomsheet_drag_handle.xml": {
+      "Size": 628
+    },
+    "res/drawable/mtrl_checkbox_button_checked_unchecked.xml": {
+      "Size": 724
+    },
+    "res/drawable/mtrl_checkbox_button_icon_checked_indeterminate.xml": {
+      "Size": 524
+    },
+    "res/drawable/mtrl_checkbox_button_icon_checked_unchecked.xml": {
+      "Size": 724
+    },
+    "res/drawable/mtrl_checkbox_button_icon_indeterminate_checked.xml": {
+      "Size": 524
+    },
+    "res/drawable/mtrl_checkbox_button_icon_indeterminate_unchecked.xml": {
+      "Size": 724
+    },
+    "res/drawable/mtrl_checkbox_button_icon_unchecked_checked.xml": {
+      "Size": 724
+    },
+    "res/drawable/mtrl_checkbox_button_icon_unchecked_indeterminate.xml": {
+      "Size": 724
+    },
+    "res/drawable/mtrl_checkbox_button_icon.xml": {
+      "Size": 1572
+    },
+    "res/drawable/mtrl_checkbox_button_unchecked_checked.xml": {
+      "Size": 724
+    },
+    "res/drawable/mtrl_checkbox_button.xml": {
+      "Size": 1332
+    },
+    "res/drawable/mtrl_dialog_background.xml": {
+      "Size": 716
+    },
+    "res/drawable/mtrl_dropdown_arrow.xml": {
+      "Size": 464
+    },
+    "res/drawable/mtrl_ic_arrow_drop_down.xml": {
+      "Size": 564
+    },
+    "res/drawable/mtrl_ic_arrow_drop_up.xml": {
+      "Size": 564
+    },
+    "res/drawable/mtrl_ic_cancel.xml": {
+      "Size": 724
+    },
+    "res/drawable/mtrl_ic_check_mark.xml": {
+      "Size": 744
+    },
+    "res/drawable/mtrl_ic_checkbox_checked.xml": {
+      "Size": 904
+    },
+    "res/drawable/mtrl_ic_checkbox_unchecked.xml": {
+      "Size": 612
+    },
+    "res/drawable/mtrl_ic_error.xml": {
+      "Size": 644
+    },
+    "res/drawable/mtrl_ic_indeterminate.xml": {
+      "Size": 744
+    },
+    "res/drawable/mtrl_popupmenu_background_overlay.xml": {
+      "Size": 740
+    },
+    "res/drawable/mtrl_popupmenu_background.xml": {
+      "Size": 740
+    },
+    "res/drawable/mtrl_switch_thumb_checked_pressed.xml": {
+      "Size": 524
+    },
+    "res/drawable/mtrl_switch_thumb_checked_unchecked.xml": {
+      "Size": 624
+    },
+    "res/drawable/mtrl_switch_thumb_checked.xml": {
+      "Size": 744
+    },
+    "res/drawable/mtrl_switch_thumb_pressed_checked.xml": {
+      "Size": 524
+    },
+    "res/drawable/mtrl_switch_thumb_pressed_unchecked.xml": {
+      "Size": 524
+    },
+    "res/drawable/mtrl_switch_thumb_pressed.xml": {
+      "Size": 744
+    },
+    "res/drawable/mtrl_switch_thumb_unchecked_checked.xml": {
+      "Size": 624
+    },
+    "res/drawable/mtrl_switch_thumb_unchecked_pressed.xml": {
+      "Size": 524
+    },
+    "res/drawable/mtrl_switch_thumb_unchecked.xml": {
+      "Size": 744
+    },
+    "res/drawable/mtrl_switch_thumb.xml": {
+      "Size": 2004
+    },
+    "res/drawable/mtrl_switch_track_decoration.xml": {
+      "Size": 636
+    },
+    "res/drawable/mtrl_switch_track.xml": {
+      "Size": 588
+    },
+    "res/drawable/mtrl_tabs_default_indicator.xml": {
+      "Size": 628
+    },
+    "res/drawable/navigation_empty_icon.xml": {
+      "Size": 516
+    },
+    "res/drawable/notification_bg_low.xml": {
+      "Size": 532
+    },
+    "res/drawable/notification_bg.xml": {
+      "Size": 532
+    },
+    "res/drawable/notification_icon_background.xml": {
+      "Size": 372
+    },
+    "res/drawable/notification_tile_bg.xml": {
+      "Size": 304
+    },
+    "res/drawable/test_level_drawable.xml": {
+      "Size": 448
+    },
+    "res/drawable/tooltip_frame_dark.xml": {
+      "Size": 484
+    },
+    "res/drawable/tooltip_frame_light.xml": {
+      "Size": 484
+    },
+    "res/interpolator-v21/m3_sys_motion_easing_emphasized_accelerate.xml": {
+      "Size": 400
+    },
+    "res/interpolator-v21/m3_sys_motion_easing_emphasized_decelerate.xml": {
+      "Size": 400
+    },
+    "res/interpolator-v21/m3_sys_motion_easing_emphasized.xml": {
+      "Size": 280
+    },
+    "res/interpolator-v21/m3_sys_motion_easing_linear.xml": {
+      "Size": 400
+    },
+    "res/interpolator-v21/m3_sys_motion_easing_standard_accelerate.xml": {
+      "Size": 400
+    },
+    "res/interpolator-v21/m3_sys_motion_easing_standard_decelerate.xml": {
+      "Size": 400
+    },
+    "res/interpolator-v21/m3_sys_motion_easing_standard.xml": {
+      "Size": 400
+    },
+    "res/interpolator-v21/mtrl_fast_out_linear_in.xml": {
+      "Size": 400
+    },
+    "res/interpolator-v21/mtrl_fast_out_slow_in.xml": {
+      "Size": 400
+    },
+    "res/interpolator-v21/mtrl_linear_out_slow_in.xml": {
+      "Size": 400
+    },
     "res/interpolator/btn_checkbox_checked_mtrl_animation_interpolator_0.xml": {
       "Size": 316
     },
@@ -3223,35 +3253,62 @@
     "res/interpolator/mtrl_linear.xml": {
       "Size": 132
     },
-    "res/interpolator-v21/m3_sys_motion_easing_emphasized.xml": {
-      "Size": 280
+    "res/layout-land/material_clock_period_toggle_land.xml": {
+      "Size": 1232
     },
-    "res/interpolator-v21/m3_sys_motion_easing_emphasized_accelerate.xml": {
-      "Size": 400
+    "res/layout-land/material_timepicker.xml": {
+      "Size": 1884
     },
-    "res/interpolator-v21/m3_sys_motion_easing_emphasized_decelerate.xml": {
-      "Size": 400
+    "res/layout-land/mtrl_picker_header_dialog.xml": {
+      "Size": 1532
     },
-    "res/interpolator-v21/m3_sys_motion_easing_linear.xml": {
-      "Size": 400
+    "res/layout-ldrtl-v17/material_textinput_timepicker.xml": {
+      "Size": 1100
     },
-    "res/interpolator-v21/m3_sys_motion_easing_standard.xml": {
-      "Size": 400
+    "res/layout-sw600dp-v13/design_layout_snackbar.xml": {
+      "Size": 528
     },
-    "res/interpolator-v21/m3_sys_motion_easing_standard_accelerate.xml": {
-      "Size": 400
+    "res/layout-sw600dp-v13/mtrl_layout_snackbar.xml": {
+      "Size": 492
     },
-    "res/interpolator-v21/m3_sys_motion_easing_standard_decelerate.xml": {
-      "Size": 400
+    "res/layout-v21/notification_action_tombstone.xml": {
+      "Size": 1228
     },
-    "res/interpolator-v21/mtrl_fast_out_linear_in.xml": {
-      "Size": 400
+    "res/layout-v21/notification_action.xml": {
+      "Size": 1052
     },
-    "res/interpolator-v21/mtrl_fast_out_slow_in.xml": {
-      "Size": 400
+    "res/layout-v21/notification_template_custom_big.xml": {
+      "Size": 2456
     },
-    "res/interpolator-v21/mtrl_linear_out_slow_in.xml": {
-      "Size": 400
+    "res/layout-v21/notification_template_icon_group.xml": {
+      "Size": 988
+    },
+    "res/layout-v22/abc_alert_dialog_button_bar_material.xml": {
+      "Size": 1584
+    },
+    "res/layout-v22/design_navigation_item.xml": {
+      "Size": 636
+    },
+    "res/layout-v22/m3_alert_dialog_actions.xml": {
+      "Size": 1584
+    },
+    "res/layout-v22/material_timepicker_dialog.xml": {
+      "Size": 3184
+    },
+    "res/layout-v22/mtrl_alert_dialog_actions.xml": {
+      "Size": 1764
+    },
+    "res/layout-v26/abc_screen_toolbar.xml": {
+      "Size": 1560
+    },
+    "res/layout-v26/mtrl_calendar_month.xml": {
+      "Size": 744
+    },
+    "res/layout-watch-v20/abc_alert_dialog_button_bar_material.xml": {
+      "Size": 1208
+    },
+    "res/layout-watch-v20/abc_alert_dialog_title_material.xml": {
+      "Size": 1352
     },
     "res/layout/abc_action_bar_title_item.xml": {
       "Size": 872
@@ -3271,11 +3328,11 @@
     "res/layout/abc_action_mode_close_item_material.xml": {
       "Size": 840
     },
-    "res/layout/abc_activity_chooser_view.xml": {
-      "Size": 1684
-    },
     "res/layout/abc_activity_chooser_view_list_item.xml": {
       "Size": 1304
+    },
+    "res/layout/abc_activity_chooser_view.xml": {
+      "Size": 1684
     },
     "res/layout/abc_alert_dialog_button_bar_material.xml": {
       "Size": 1536
@@ -3316,11 +3373,11 @@
     "res/layout/abc_screen_content_include.xml": {
       "Size": 548
     },
-    "res/layout/abc_screen_simple.xml": {
-      "Size": 832
-    },
     "res/layout/abc_screen_simple_overlay_action_mode.xml": {
       "Size": 792
+    },
+    "res/layout/abc_screen_simple.xml": {
+      "Size": 832
     },
     "res/layout/abc_screen_toolbar.xml": {
       "Size": 1504
@@ -3346,11 +3403,11 @@
     "res/layout/design_bottom_sheet_dialog.xml": {
       "Size": 1224
     },
-    "res/layout/design_layout_snackbar.xml": {
-      "Size": 528
-    },
     "res/layout/design_layout_snackbar_include.xml": {
       "Size": 1444
+    },
+    "res/layout/design_layout_snackbar.xml": {
+      "Size": 528
     },
     "res/layout/design_layout_tab_icon.xml": {
       "Size": 408
@@ -3361,9 +3418,6 @@
     "res/layout/design_menu_item_action_area.xml": {
       "Size": 320
     },
-    "res/layout/design_navigation_item.xml": {
-      "Size": 576
-    },
     "res/layout/design_navigation_item_header.xml": {
       "Size": 440
     },
@@ -3373,11 +3427,14 @@
     "res/layout/design_navigation_item_subheader.xml": {
       "Size": 564
     },
-    "res/layout/design_navigation_menu.xml": {
-      "Size": 528
+    "res/layout/design_navigation_item.xml": {
+      "Size": 576
     },
     "res/layout/design_navigation_menu_item.xml": {
       "Size": 856
+    },
+    "res/layout/design_navigation_menu.xml": {
+      "Size": 528
     },
     "res/layout/design_text_input_end_icon.xml": {
       "Size": 656
@@ -3385,14 +3442,14 @@
     "res/layout/design_text_input_start_icon.xml": {
       "Size": 652
     },
-    "res/layout/m3_alert_dialog.xml": {
-      "Size": 2720
-    },
     "res/layout/m3_alert_dialog_actions.xml": {
       "Size": 1536
     },
     "res/layout/m3_alert_dialog_title.xml": {
       "Size": 956
+    },
+    "res/layout/m3_alert_dialog.xml": {
+      "Size": 2720
     },
     "res/layout/m3_auto_complete_simple_item.xml": {
       "Size": 612
@@ -3400,11 +3457,11 @@
     "res/layout/material_chip_input_combo.xml": {
       "Size": 372
     },
-    "res/layout/material_clock_display.xml": {
-      "Size": 1132
-    },
     "res/layout/material_clock_display_divider.xml": {
       "Size": 492
+    },
+    "res/layout/material_clock_display.xml": {
+      "Size": 1132
     },
     "res/layout/material_clock_period_toggle.xml": {
       "Size": 1392
@@ -3427,23 +3484,23 @@
     "res/layout/material_time_input.xml": {
       "Size": 1000
     },
-    "res/layout/material_timepicker.xml": {
-      "Size": 1136
-    },
     "res/layout/material_timepicker_dialog.xml": {
       "Size": 3132
     },
     "res/layout/material_timepicker_textinput_display.xml": {
       "Size": 684
     },
-    "res/layout/mtrl_alert_dialog.xml": {
-      "Size": 2476
+    "res/layout/material_timepicker.xml": {
+      "Size": 1136
     },
     "res/layout/mtrl_alert_dialog_actions.xml": {
       "Size": 1620
     },
     "res/layout/mtrl_alert_dialog_title.xml": {
       "Size": 956
+    },
+    "res/layout/mtrl_alert_dialog.xml": {
+      "Size": 2476
     },
     "res/layout/mtrl_alert_select_dialog_item.xml": {
       "Size": 588
@@ -3457,10 +3514,10 @@
     "res/layout/mtrl_auto_complete_simple_item.xml": {
       "Size": 612
     },
-    "res/layout/mtrl_calendar_day.xml": {
+    "res/layout/mtrl_calendar_day_of_week.xml": {
       "Size": 352
     },
-    "res/layout/mtrl_calendar_day_of_week.xml": {
+    "res/layout/mtrl_calendar_day.xml": {
       "Size": 352
     },
     "res/layout/mtrl_calendar_days_of_week.xml": {
@@ -3469,14 +3526,14 @@
     "res/layout/mtrl_calendar_horizontal.xml": {
       "Size": 1176
     },
-    "res/layout/mtrl_calendar_month.xml": {
-      "Size": 688
-    },
     "res/layout/mtrl_calendar_month_labeled.xml": {
       "Size": 728
     },
     "res/layout/mtrl_calendar_month_navigation.xml": {
       "Size": 1748
+    },
+    "res/layout/mtrl_calendar_month.xml": {
+      "Size": 688
     },
     "res/layout/mtrl_calendar_months.xml": {
       "Size": 428
@@ -3487,11 +3544,11 @@
     "res/layout/mtrl_calendar_year.xml": {
       "Size": 352
     },
-    "res/layout/mtrl_layout_snackbar.xml": {
-      "Size": 492
-    },
     "res/layout/mtrl_layout_snackbar_include.xml": {
       "Size": 952
+    },
+    "res/layout/mtrl_layout_snackbar.xml": {
+      "Size": 492
     },
     "res/layout/mtrl_navigation_rail_item.xml": {
       "Size": 1860
@@ -3520,11 +3577,11 @@
     "res/layout/mtrl_picker_header_toggle.xml": {
       "Size": 528
     },
-    "res/layout/mtrl_picker_text_input_date.xml": {
-      "Size": 984
-    },
     "res/layout/mtrl_picker_text_input_date_range.xml": {
       "Size": 1580
+    },
+    "res/layout/mtrl_picker_text_input_date.xml": {
+      "Size": 984
     },
     "res/layout/notification_template_part_chronometer.xml": {
       "Size": 440
@@ -3544,71 +3601,11 @@
     "res/layout/support_simple_spinner_dropdown_item.xml": {
       "Size": 464
     },
-    "res/layout-land/material_clock_period_toggle_land.xml": {
-      "Size": 1232
-    },
-    "res/layout-land/material_timepicker.xml": {
-      "Size": 1884
-    },
-    "res/layout-land/mtrl_picker_header_dialog.xml": {
-      "Size": 1532
-    },
-    "res/layout-ldrtl-v17/material_textinput_timepicker.xml": {
-      "Size": 1100
-    },
-    "res/layout-sw600dp-v13/design_layout_snackbar.xml": {
-      "Size": 528
-    },
-    "res/layout-sw600dp-v13/mtrl_layout_snackbar.xml": {
-      "Size": 492
-    },
-    "res/layout-v21/notification_action.xml": {
-      "Size": 1052
-    },
-    "res/layout-v21/notification_action_tombstone.xml": {
-      "Size": 1228
-    },
-    "res/layout-v21/notification_template_custom_big.xml": {
-      "Size": 2456
-    },
-    "res/layout-v21/notification_template_icon_group.xml": {
-      "Size": 988
-    },
-    "res/layout-v22/abc_alert_dialog_button_bar_material.xml": {
-      "Size": 1584
-    },
-    "res/layout-v22/design_navigation_item.xml": {
-      "Size": 636
-    },
-    "res/layout-v22/m3_alert_dialog_actions.xml": {
-      "Size": 1584
-    },
-    "res/layout-v22/material_timepicker_dialog.xml": {
-      "Size": 3184
-    },
-    "res/layout-v22/mtrl_alert_dialog_actions.xml": {
-      "Size": 1764
-    },
-    "res/layout-v26/abc_screen_toolbar.xml": {
-      "Size": 1560
-    },
-    "res/layout-v26/mtrl_calendar_month.xml": {
-      "Size": 744
-    },
-    "res/layout-watch-v20/abc_alert_dialog_button_bar_material.xml": {
-      "Size": 1208
-    },
-    "res/layout-watch-v20/abc_alert_dialog_title_material.xml": {
-      "Size": 1352
-    },
-    "res/mipmap-anydpi-v26/appicon.xml": {
-      "Size": 448
-    },
     "res/mipmap-anydpi-v26/appicon_round.xml": {
       "Size": 448
     },
-    "res/mipmap-hdpi-v4/appicon.png": {
-      "Size": 951
+    "res/mipmap-anydpi-v26/appicon.xml": {
+      "Size": 448
     },
     "res/mipmap-hdpi-v4/appicon_background.png": {
       "Size": 120
@@ -3616,8 +3613,8 @@
     "res/mipmap-hdpi-v4/appicon_foreground.png": {
       "Size": 1368
     },
-    "res/mipmap-mdpi-v4/appicon.png": {
-      "Size": 747
+    "res/mipmap-hdpi-v4/appicon.png": {
+      "Size": 951
     },
     "res/mipmap-mdpi-v4/appicon_background.png": {
       "Size": 106
@@ -3625,8 +3622,8 @@
     "res/mipmap-mdpi-v4/appicon_foreground.png": {
       "Size": 1265
     },
-    "res/mipmap-xhdpi-v4/appicon.png": {
-      "Size": 875
+    "res/mipmap-mdpi-v4/appicon.png": {
+      "Size": 747
     },
     "res/mipmap-xhdpi-v4/appicon_background.png": {
       "Size": 140
@@ -3634,8 +3631,8 @@
     "res/mipmap-xhdpi-v4/appicon_foreground.png": {
       "Size": 1981
     },
-    "res/mipmap-xxhdpi-v4/appicon.png": {
-      "Size": 1058
+    "res/mipmap-xhdpi-v4/appicon.png": {
+      "Size": 875
     },
     "res/mipmap-xxhdpi-v4/appicon_background.png": {
       "Size": 197
@@ -3643,8 +3640,8 @@
     "res/mipmap-xxhdpi-v4/appicon_foreground.png": {
       "Size": 2229
     },
-    "res/mipmap-xxxhdpi-v4/appicon.png": {
-      "Size": 1419
+    "res/mipmap-xxhdpi-v4/appicon.png": {
+      "Size": 1058
     },
     "res/mipmap-xxxhdpi-v4/appicon_background.png": {
       "Size": 275
@@ -3652,9 +3649,12 @@
     "res/mipmap-xxxhdpi-v4/appicon_foreground.png": {
       "Size": 3298
     },
+    "res/mipmap-xxxhdpi-v4/appicon.png": {
+      "Size": 1419
+    },
     "resources.arsc": {
       "Size": 892072
     }
   },
-  "PackageSize": 8411359
+  "PackageSize": 8378591
 }
