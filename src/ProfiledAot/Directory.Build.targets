@@ -45,8 +45,8 @@
     </Task>
   </UsingTask>
   <Target Name="_StripAppMethods">
-    <!-- This removes HelloAndroid.dll from the profile, as user's apps will have a different name -->
-    <Exec Command="dotnet &quot;$(AotProfileToolPath)&quot; -sd --filter-module=&quot;^(?!$(App)).+&quot; &quot;$(MSBuildProjectDirectory)/custom.aprof&quot; -o &quot;$(MSBuildThisFileDirectory)$(App).aotprofile&quot;" />
+    <!-- This removes spicetest.dll from the profile, as user's apps will have a different name -->
+    <Exec Command="dotnet &quot;$(AotProfileToolPath)&quot; -sd --filter-module=&quot;^(?!$(App.Replace('-', ''))test).+&quot; &quot;$(MSBuildProjectDirectory)/custom.aprof&quot; -o &quot;$(MSBuildThisFileDirectory)$(App).aotprofile&quot;" />
   </Target>
   <Target Name="_SaveMethodNames">
     <!-- This saves all the method names to a text file, so we can see a diff over time -->

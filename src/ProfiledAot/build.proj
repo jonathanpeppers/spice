@@ -3,8 +3,8 @@
     <!-- The template name -->
     <App Condition=" '$(App)' == '' ">spice</App>
     <RuntimeIdentifier Condition=" '$(RuntimeIdentifier)' == '' ">android-arm64</RuntimeIdentifier>
-    <Intermediate>obj/$(App.Replace("-", ""))test/</Intermediate>
-    <CSProj>$(Intermediate)$(App.Replace("-", ""))test.csproj</CSProj>
+    <Intermediate>obj/$(App.Replace('-', ''))test/</Intermediate>
+    <CSProj>$(Intermediate)$(App.Replace('-', ''))test.csproj</CSProj>
   </PropertyGroup>
   <Target Name="Record">
     <RemoveDir Directories="$(Intermediate)" />
