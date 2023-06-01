@@ -1,6 +1,11 @@
 ﻿<Project>
 	<Import Sdk="Microsoft.Maui.Sdk.net7" Project="Microsoft.Maui.Controls.SingleProject.targets" />
 
+	<PropertyGroup Condition=" '$(AndroidEnableProfiledAot)' == 'true' ">
+		<AndroidUseDefaultAotProfile Condition=" '$(AndroidUseDefaultAotProfile)' == '' ">false</AndroidUseDefaultAotProfile>
+		<MauiUseDefaultAotProfile Condition=" '$(MauiUseDefaultAotProfile)' == '' ">false</MauiUseDefaultAotProfile>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<!-- Deemed "safe enough" for now -->
 		<TrimmableAssembly Include="Microsoft.AspNetCore.Components.WebView" />
@@ -11,6 +16,11 @@
 
 	<ItemGroup Condition=" '$(SpiceEnablePlatformUsings)' != 'true' and ('$(ImplicitUsings)' == 'true' or '$(ImplicitUsings)' == 'enable') ">
 		<Using Remove="@(Using->HasMetadata('Platform'))" />
+	</ItemGroup>
+
+	<ItemGroup Condition=" '$(AndroidEnableProfiledAot)' == 'true' and '$(SpiceUseDefaultAotProfile)' != 'false' ">
+		<AndroidAotProfile Include="$(MSBuildThisFileDirectory)../build/spice.aotprofile" />
+		<AndroidAotProfile Include="$(MSBuildThisFileDirectory)../build/spice-blazor.aotprofile" />
 	</ItemGroup>
 
 	<!-- Microsoft.NET.Sdk.Razor signals to import this -->
