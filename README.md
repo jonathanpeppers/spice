@@ -163,6 +163,10 @@ From here, you can write `Index.razor` as the Blazor you know and love:
 Welcome to your new app.
 ```
 
+To arrive at Blazor web content inside iOS/Android apps:
+
+![Screenshot of Blazor app on iOS](docs/blazor.png)
+
 This setup might be particularly useful if you want web content to
 take full control of the screen with minimal native controls. No need
 for the app size / startup overhead of .NET MAUI if you don't actually
