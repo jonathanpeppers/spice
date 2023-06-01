@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Jonathan Peppers",
+    "classifications": [ "MAUI", "Android", "iOS" ],
+    "identity": "Spice.templates.spice.blazor",
+    "name": "Spice Blazor application",
+    "description": "A project for creating cross-platform hybrid applications with C# and Blazor",
+    "shortName": "spice-blazor",
+    "tags": {
+      "language": "C#",
+      "type": "project"
+    },
+    "sourceName": "HelloBlazor",
+    "sources": [
+        {
+          "source": "./",
+          "target": "./",
+          "copyOnly": [ "**/wwwroot/css/**", "**/*.svg" ]
+        }
+    ],
+    "preferNameDirectory": true,
+    "primaryOutputs": [
+      { "path": "HelloBlazor.csproj" }
+    ],
+    "defaultName": "HelloBlazor"
+}
