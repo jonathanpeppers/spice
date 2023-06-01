@@ -140,15 +140,21 @@ for my framework.
 
 Simply install the template:
 
-```bash
+```sh
 dotnet new install Spice.Templates
 ```
 
-Create the project and build it as you would for other .NET MAUI
-projects:
+Create either a plain Spice project, or a hybrid Blazor-enabled Spice project:
 
-```bash
+```sh
 dotnet new spice
+# Or if you want hybrid/web support
+dotnet new spice-blazor
+```
+
+Build it as you would for other .NET MAUI projects:
+
+```sh
 dotnet build
 # To run on Android
 dotnet build -f net7.0-android -t:Run
@@ -165,6 +171,10 @@ Of course, you can also just open the project in Visual Studio and hit F5.
 * `Button`: maps to `Android.Widget.Button` and `UIKit.UIButton`
 * `StackView`: maps to `Android.Widget.LinearLayout` and `UIKit.UIStackView`
 * `Image`: maps to `Android.Widget.ImageView` and `UIKit.UIImageView`
+* `Entry`: maps to `Android.Widget.EditText` and `UIKit.UITextField`
+* `WebView`: maps to `Android.Webkit.WebView` and `WebKit.WKWebView`
+* `BlazorWebView` extends `WebView` adding support for Blazor. Use the
+  `spice-blazor` template to get started.
 
 ## Custom Controls
 
