@@ -6,6 +6,60 @@ If you like this idea, star for approval! Read on for details!
 
 ![Spice running on iOS and Android](docs/spice.png)
 
+## Getting Started
+
+Simply install the template:
+
+```sh
+dotnet new install Spice.Templates
+```
+
+Create either a plain Spice project, or a hybrid "Spice+Blazor" project:
+
+```sh
+dotnet new spice
+# Or if you want hybrid/web support
+dotnet new spice-blazor
+```
+
+Build it as you would for other .NET MAUI projects:
+
+```sh
+dotnet build
+# To run on Android
+dotnet build -f net7.0-android -t:Run
+# To run on iOS
+dotnet build -f net7.0-ios -t:Run
+```
+
+Of course, you can also just open the project in Visual Studio and hit F5.
+
+## Startup Time & App Size
+
+In comparison to a `dotnet new maui` project, I created a Spice
+project with the same layouts and optimized settings for both project
+types. (`AndroidLinkMode=r8`, etc.)
+
+App size of a single-architecture `.apk`, built for `android-arm64`:
+
+![Graph of an app size comparison](docs/appsize.png)
+
+The average startup time of 10 runs on a Pixel 5:
+
+![Graph of a startup comparison](docs/startup.png)
+
+This gives you an idea of how much "stuff" is in .NET MAUI.
+
+In some respects the above comparison isn't completely fair, as Spice
+🌶 has very few features. However, Spice 🌶 is [fully
+trimmable][trimming], and so a `Release` build of an app without
+`Spice.Button` will have the code for `Spice.Button` trimmed away. It
+will be quite difficult for .NET MAUI to become [fully
+trimmable][trimming] -- due to the nature of XAML, data-binding, and
+other System.Reflection usage in the framework.
+
+[trimming]: https://learn.microsoft.com/dotnet/core/deploying/trimming/prepare-libraries-for-trimming
+
 ## Background & Motivation
 
 In reviewing, many of the *cool* UI frameworks for mobile:
@@ -100,6 +154,52 @@ native views.
 [poco]: https://en.wikipedia.org/wiki/Plain_old_CLR_object
 [minimal-apis]: https://learn.microsoft.com/aspnet/core/fundamentals/minimal-apis
 
+## *NEW* Blazor Support
+
+Currently, Blazor/Hybrid apps are strongly tied to .NET MAUI. The
+implementation is basically working with the plumbing of the native
+"web view" on each platform. So we could have implemented
+`BlazorWebView` to be used in "plain" `dotnet new android` or
+`dotnet new ios` apps. For now, I've migrated some of the source code
+from `BlazorWebView` from .NET MAUI to Spice 🌶, making it available
+as a new control:
+
+```csharp
+public class App : Application
+{
+    public App()
+    {
+        Main = new BlazorWebView
+        {
+            HostPage = "wwwroot/index.html",
+            RootComponents =
+            {
+                new RootComponent { Selector = "#app", ComponentType = typeof(Main) }
+            },
+        };
+    }
+}
+```
+
+From here, you can write `Index.razor` as the Blazor you know and love:
+
+```razor
+@page "/"
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+```
+
+To arrive at Blazor web content inside iOS/Android apps:
+
+![Screenshot of Blazor app on iOS](docs/blazor.png)
+
+This setup might be particularly useful if you want web content to
+take full control of the screen with minimal native controls. No need
+for the app size / startup overhead of .NET MAUI if you don't actually
+have native content?
+
 ## Scope
 
 * No XAML. No DI. No MVVM. No MVC. No data-binding. No System.Reflection.
@@ -136,28 +236,6 @@ It is an achievement in itself that I was able to invent my own UI
 framework and pick and choose the pieces of .NET MAUI that made sense
 for my framework.
 
-## Getting Started
-
-Simply install the template:
-
-```bash
-dotnet new install Spice.Templates
-```
-
-Create the project and build it as you would for other .NET MAUI
-projects:
-
-```bash
-dotnet new spice
-dotnet build
-# To run on Android
-dotnet build -f net7.0-android -t:Run
-# To run on iOS
-dotnet build -f net7.0-ios -t:Run
-```
-
-Of course, you can also just open the project in Visual Studio and hit F5.
-
 ## Implemented Controls
 
 * `View`: maps to `Android.Views.View` and `UIKit.View`.
@@ -165,6 +243,10 @@ Of course, you can also just open the project in Visual Studio and hit F5.
 * `Button`: maps to `Android.Widget.Button` and `UIKit.UIButton`
 * `StackView`: maps to `Android.Widget.LinearLayout` and `UIKit.UIStackView`
 * `Image`: maps to `Android.Widget.ImageView` and `UIKit.UIImageView`
+* `Entry`: maps to `Android.Widget.EditText` and `UIKit.UITextField`
+* `WebView`: maps to `Android.Webkit.WebView` and `WebKit.WKWebView`
+* `BlazorWebView` extends `WebView` adding support for Blazor. Use the
+  `spice-blazor` template to get started.
 
 ## Custom Controls
 
@@ -315,64 +397,3 @@ or iOS view controllers if necessary.
 Hopefully, we can implement this for a future release of Visual Studio.
 
 [muh]: https://learn.microsoft.com/dotnet/api/system.reflection.metadata.metadataupdatehandlerattribute
-
-## Startup Time & App Size
-
-In comparison to a `dotnet new maui` project, I created a Spice
-project with the same layouts and optimized settings for both project
-types. (`AndroidLinkMode=r8`, etc.)
-
-Startup time for a `Release` build on a Pixel 5:
-
-Spice 🌶:
-```log
-02-02 20:09:49.583  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +261ms
-02-02 20:09:51.060  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +265ms
-02-02 20:09:52.482  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +262ms
-02-02 20:09:53.902  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +266ms
-02-02 20:09:55.345  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +246ms
-02-02 20:09:56.755  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +243ms
-02-02 20:09:58.190  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +264ms
-02-02 20:09:59.592  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +246ms
-02-02 20:10:01.030  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +249ms
-02-02 20:10:02.452  2174  2505 I ActivityTaskManager: Displayed com.companyname.HeadToHeadSpice/crc6421a68941fd0c4613.MainActivity: +248ms
-Average(ms): 255
-Std Err(ms): 2.94014360949333
-Std Dev(ms): 9.29755045398757
-```
-
-.NET MAUI:
-```log
-02-02 20:07:52.357  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +541ms
-02-02 20:07:54.078  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +538ms
-02-02 20:07:55.799  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +538ms
-02-02 20:07:57.531  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +539ms
-02-02 20:07:59.262  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +537ms
-02-02 20:08:00.944  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +540ms
-02-02 20:08:02.666  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +544ms
-02-02 20:08:04.397  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +527ms
-02-02 20:08:06.111  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +532ms
-02-02 20:08:07.803  2174  2505 I ActivityTaskManager: Displayed com.companyname.headtoheadmaui/crc649f845fb8d5de61df.MainActivity: +535ms
-Average(ms): 537.1
-Std Err(ms): 1.52351931760353
-Std Dev(ms): 4.8177911028926
-```
-
-App size of a single-architecture `.apk`, built for `android-arm64`:
-
-```
- 7772202 com.companyname.HeadToHeadSpice-Signed.apk
-12808825 com.companyname.HeadToHeadMaui-Signed.apk
-```
-
-This gives you an idea of how much "stuff" is in .NET MAUI.
-
-In some respects the above comparison isn't completely fair, as Spice 🌶
-has like 0 features. However, Spice 🌶 is [fully trimmable][trimming],
-and so a `Release` build of an app without `Spice.Button` will have
-the code for `Spice.Button` trimmed away. It will be quite difficult
-for .NET MAUI to become [fully trimmable][trimming] -- due to the
-nature of XAML, data-binding, and other System.Reflection usage in the
-framework.
-
-[trimming]: https://learn.microsoft.com/dotnet/core/deploying/trimming/prepare-libraries-for-trimming
