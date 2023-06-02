@@ -22,6 +22,10 @@ dotnet new spice
 dotnet new spice-blazor
 ```
 
+Or use the project template in Visual Studio:
+
+![Screenshot of the Spice project template in Visual Studio](docs/vs-template.png)
+
 Build it as you would for other .NET MAUI projects:
 
 ```sh
