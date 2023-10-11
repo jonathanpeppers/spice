@@ -2,22 +2,37 @@
   "Comment": null,
   "Entries": {
     "AndroidManifest.xml": {
-      "Size": 4388
+      "Size": 6012
     },
     "assemblies/assemblies.arm64_v8a.blob": {
       "Size": 468433
     },
     "assemblies/assemblies.blob": {
-      "Size": 661856
+      "Size": 681748
     },
     "assemblies/assemblies.manifest": {
-      "Size": 1769
+      "Size": 1842
     },
     "assemblies/rc.bin": {
       "Size": 1182
     },
     "classes.dex": {
-      "Size": 8668564
+      "Size": 8967324
+    },
+    "commonMain/default/linkdata/module": {
+      "Size": 70
+    },
+    "commonMain/default/linkdata/package_androidx.annotation/0_annotation.knm": {
+      "Size": 4603
+    },
+    "commonMain/default/linkdata/package_androidx/0_androidx.knm": {
+      "Size": 20
+    },
+    "commonMain/default/linkdata/root_package/0_.knm": {
+      "Size": 12
+    },
+    "commonMain/default/manifest": {
+      "Size": 98
     },
     "lib/arm64-v8a/libaot-CommunityToolkit.Mvvm.dll.so": {
       "Size": 4352
@@ -29,13 +44,13 @@
       "Size": 16072
     },
     "lib/arm64-v8a/libaot-Mono.Android.dll.so": {
-      "Size": 308768
+      "Size": 310104
     },
     "lib/arm64-v8a/libaot-Spice.dll.so": {
       "Size": 37408
     },
     "lib/arm64-v8a/libaot-Spice.Scenarios.dll.so": {
-      "Size": 37488
+      "Size": 37496
     },
     "lib/arm64-v8a/libaot-System.ComponentModel.TypeConverter.dll.so": {
       "Size": 3848
@@ -59,34 +74,37 @@
       "Size": 3808
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Activity.dll.so": {
-      "Size": 8664
+      "Size": 8904
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.AppCompat.dll.so": {
-      "Size": 29736
+      "Size": 29744
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Core.dll.so": {
-      "Size": 13384
+      "Size": 15024
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.DrawerLayout.dll.so": {
       "Size": 7552
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Fragment.dll.so": {
-      "Size": 17320
+      "Size": 17688
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Lifecycle.Common.dll.so": {
-      "Size": 5024
+      "Size": 5048
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Lifecycle.LiveData.Core.dll.so": {
-      "Size": 5008
+      "Size": 5016
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Lifecycle.ViewModel.dll.so": {
-      "Size": 5464
+      "Size": 6376
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Loader.dll.so": {
       "Size": 6840
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.SavedState.dll.so": {
       "Size": 4320
+    },
+    "lib/arm64-v8a/libaot-Xamarin.Kotlin.StdLib.dll.so": {
+      "Size": 4592
     },
     "lib/arm64-v8a/libmonodroid.so": {
       "Size": 371792
@@ -104,13 +122,13 @@
       "Size": 151624
     },
     "lib/arm64-v8a/libxamarin-app.so": {
-      "Size": 41016
+      "Size": 43032
     },
     "META-INF/ANDROIDD.RSA": {
       "Size": 1221
     },
     "META-INF/ANDROIDD.SF": {
-      "Size": 101334
+      "Size": 108174
     },
     "META-INF/androidx.activity_activity.version": {
       "Size": 6
@@ -125,7 +143,7 @@
       "Size": 6
     },
     "META-INF/androidx.arch.core_core-runtime.version": {
-      "Size": 6
+      "Size": 67
     },
     "META-INF/androidx.cardview_cardview.version": {
       "Size": 6
@@ -134,10 +152,10 @@
       "Size": 6
     },
     "META-INF/androidx.core_core-ktx.version": {
-      "Size": 6
+      "Size": 7
     },
     "META-INF/androidx.core_core.version": {
-      "Size": 6
+      "Size": 7
     },
     "META-INF/androidx.cursoradapter_cursoradapter.version": {
       "Size": 6
@@ -149,7 +167,7 @@
       "Size": 6
     },
     "META-INF/androidx.drawerlayout_drawerlayout.version": {
-      "Size": 6
+      "Size": 70
     },
     "META-INF/androidx.dynamicanimation_dynamicanimation.version": {
       "Size": 6
@@ -170,19 +188,19 @@
       "Size": 6
     },
     "META-INF/androidx.lifecycle_lifecycle-livedata-core.version": {
-      "Size": 6
+      "Size": 78
     },
     "META-INF/androidx.lifecycle_lifecycle-process.version": {
-      "Size": 6
+      "Size": 72
     },
     "META-INF/androidx.lifecycle_lifecycle-runtime.version": {
-      "Size": 6
+      "Size": 72
     },
     "META-INF/androidx.lifecycle_lifecycle-viewmodel-savedstate.version": {
-      "Size": 6
+      "Size": 85
     },
     "META-INF/androidx.lifecycle_lifecycle-viewmodel.version": {
-      "Size": 6
+      "Size": 74
     },
     "META-INF/androidx.loader_loader.version": {
       "Size": 6
@@ -191,6 +209,9 @@
       "Size": 6
     },
     "META-INF/androidx.print_print.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.profileinstaller_profileinstaller.version": {
       "Size": 6
     },
     "META-INF/androidx.recyclerview_recyclerview.version": {
@@ -238,6 +259,9 @@
     "META-INF/com.google.android.material_material.version": {
       "Size": 6
     },
+    "META-INF/kotlin-project-structure-metadata.json": {
+      "Size": 1669
+    },
     "META-INF/kotlinx_coroutines_android.version": {
       "Size": 5
     },
@@ -245,7 +269,7 @@
       "Size": 5
     },
     "META-INF/MANIFEST.MF": {
-      "Size": 101207
+      "Size": 108047
     },
     "META-INF/maven/com.google.guava/listenablefuture/pom.properties": {
       "Size": 96
@@ -264,6 +288,21 @@
     },
     "META-INF/services/kotlinx.coroutines.internal.MainDispatcherFactory": {
       "Size": 52
+    },
+    "nonJvmMain/default/linkdata/module": {
+      "Size": 90
+    },
+    "nonJvmMain/default/linkdata/package_androidx.annotation/0_annotation.knm": {
+      "Size": 991
+    },
+    "nonJvmMain/default/linkdata/package_androidx/0_androidx.knm": {
+      "Size": 20
+    },
+    "nonJvmMain/default/linkdata/root_package/0_.knm": {
+      "Size": 12
+    },
+    "nonJvmMain/default/manifest": {
+      "Size": 193
     },
     "res/anim-v21/design_bottom_sheet_slide_in.xml": {
       "Size": 616
@@ -1042,6 +1081,24 @@
     "res/color/switch_thumb_material_light.xml": {
       "Size": 464
     },
+    "res/drawable-anydpi-v21/ic_call_answer_low.xml": {
+      "Size": 1320
+    },
+    "res/drawable-anydpi-v21/ic_call_answer_video_low.xml": {
+      "Size": 736
+    },
+    "res/drawable-anydpi-v21/ic_call_answer_video.xml": {
+      "Size": 772
+    },
+    "res/drawable-anydpi-v21/ic_call_answer.xml": {
+      "Size": 1356
+    },
+    "res/drawable-anydpi-v21/ic_call_decline_low.xml": {
+      "Size": 1492
+    },
+    "res/drawable-anydpi-v21/ic_call_decline.xml": {
+      "Size": 1528
+    },
     "res/drawable-hdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png": {
       "Size": 272
     },
@@ -1141,6 +1198,24 @@
     "res/drawable-hdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png": {
       "Size": 178
     },
+    "res/drawable-hdpi-v4/ic_call_answer_low.png": {
+      "Size": 472
+    },
+    "res/drawable-hdpi-v4/ic_call_answer_video_low.png": {
+      "Size": 254
+    },
+    "res/drawable-hdpi-v4/ic_call_answer_video.png": {
+      "Size": 254
+    },
+    "res/drawable-hdpi-v4/ic_call_answer.png": {
+      "Size": 472
+    },
+    "res/drawable-hdpi-v4/ic_call_decline_low.png": {
+      "Size": 375
+    },
+    "res/drawable-hdpi-v4/ic_call_decline.png": {
+      "Size": 375
+    },
     "res/drawable-hdpi-v4/notification_bg_low_normal.9.png": {
       "Size": 212
     },
@@ -1153,6 +1228,9 @@
     "res/drawable-hdpi-v4/notification_bg_normal.9.png": {
       "Size": 212
     },
+    "res/drawable-hdpi-v4/notification_oversize_large_icon_bg.png": {
+      "Size": 909
+    },
     "res/drawable-hdpi-v4/notify_panel_notification_icon_bg.png": {
       "Size": 107
     },
@@ -1161,6 +1239,24 @@
     },
     "res/drawable-hdpi-v4/splash.png": {
       "Size": 1419
+    },
+    "res/drawable-ldpi-v4/ic_call_answer_low.png": {
+      "Size": 270
+    },
+    "res/drawable-ldpi-v4/ic_call_answer_video_low.png": {
+      "Size": 199
+    },
+    "res/drawable-ldpi-v4/ic_call_answer_video.png": {
+      "Size": 199
+    },
+    "res/drawable-ldpi-v4/ic_call_answer.png": {
+      "Size": 270
+    },
+    "res/drawable-ldpi-v4/ic_call_decline_low.png": {
+      "Size": 201
+    },
+    "res/drawable-ldpi-v4/ic_call_decline.png": {
+      "Size": 201
     },
     "res/drawable-ldrtl-hdpi-v17/abc_spinner_mtrl_am_alpha.9.png": {
       "Size": 345
@@ -1275,6 +1371,24 @@
     },
     "res/drawable-mdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png": {
       "Size": 178
+    },
+    "res/drawable-mdpi-v4/ic_call_answer_low.png": {
+      "Size": 317
+    },
+    "res/drawable-mdpi-v4/ic_call_answer_video_low.png": {
+      "Size": 206
+    },
+    "res/drawable-mdpi-v4/ic_call_answer_video.png": {
+      "Size": 206
+    },
+    "res/drawable-mdpi-v4/ic_call_answer.png": {
+      "Size": 317
+    },
+    "res/drawable-mdpi-v4/ic_call_decline_low.png": {
+      "Size": 264
+    },
+    "res/drawable-mdpi-v4/ic_call_decline.png": {
+      "Size": 264
     },
     "res/drawable-mdpi-v4/notification_bg_low_normal.9.png": {
       "Size": 215
@@ -1453,6 +1567,24 @@
     "res/drawable-xhdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png": {
       "Size": 182
     },
+    "res/drawable-xhdpi-v4/ic_call_answer_low.png": {
+      "Size": 623
+    },
+    "res/drawable-xhdpi-v4/ic_call_answer_video_low.png": {
+      "Size": 290
+    },
+    "res/drawable-xhdpi-v4/ic_call_answer_video.png": {
+      "Size": 290
+    },
+    "res/drawable-xhdpi-v4/ic_call_answer.png": {
+      "Size": 623
+    },
+    "res/drawable-xhdpi-v4/ic_call_decline_low.png": {
+      "Size": 452
+    },
+    "res/drawable-xhdpi-v4/ic_call_decline.png": {
+      "Size": 452
+    },
     "res/drawable-xhdpi-v4/notification_bg_low_normal.9.png": {
       "Size": 221
     },
@@ -1573,6 +1705,24 @@
     "res/drawable-xxhdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png": {
       "Size": 186
     },
+    "res/drawable-xxhdpi-v4/ic_call_answer_low.png": {
+      "Size": 884
+    },
+    "res/drawable-xxhdpi-v4/ic_call_answer_video_low.png": {
+      "Size": 384
+    },
+    "res/drawable-xxhdpi-v4/ic_call_answer_video.png": {
+      "Size": 384
+    },
+    "res/drawable-xxhdpi-v4/ic_call_answer.png": {
+      "Size": 884
+    },
+    "res/drawable-xxhdpi-v4/ic_call_decline_low.png": {
+      "Size": 628
+    },
+    "res/drawable-xxhdpi-v4/ic_call_decline.png": {
+      "Size": 628
+    },
     "res/drawable-xxhdpi-v4/spice.png": {
       "Size": 10064
     },
@@ -1617,6 +1767,24 @@
     },
     "res/drawable-xxxhdpi-v4/abc_text_select_handle_right_mtrl.png": {
       "Size": 513
+    },
+    "res/drawable-xxxhdpi-v4/ic_call_answer_low.png": {
+      "Size": 1171
+    },
+    "res/drawable-xxxhdpi-v4/ic_call_answer_video_low.png": {
+      "Size": 465
+    },
+    "res/drawable-xxxhdpi-v4/ic_call_answer_video.png": {
+      "Size": 465
+    },
+    "res/drawable-xxxhdpi-v4/ic_call_answer.png": {
+      "Size": 1171
+    },
+    "res/drawable-xxxhdpi-v4/ic_call_decline_low.png": {
+      "Size": 823
+    },
+    "res/drawable-xxxhdpi-v4/ic_call_decline.png": {
+      "Size": 823
     },
     "res/drawable-xxxhdpi-v4/spice.png": {
       "Size": 15297
@@ -2326,6 +2494,12 @@
     "res/layout/design_text_input_start_icon.xml": {
       "Size": 652
     },
+    "res/layout/ime_base_split_test_activity.xml": {
+      "Size": 364
+    },
+    "res/layout/ime_secondary_split_test_activity.xml": {
+      "Size": 876
+    },
     "res/layout/m3_alert_dialog_actions.xml": {
       "Size": 1536
     },
@@ -2537,8 +2711,8 @@
       "Size": 1419
     },
     "resources.arsc": {
-      "Size": 892072
+      "Size": 926760
     }
   },
-  "PackageSize": 8111579
+  "PackageSize": 8325801
 }
