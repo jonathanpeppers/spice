@@ -31,7 +31,7 @@ public class App : Application
 
 These "view" types are mostly just [POCOs][poco].
 
-Thus you can easily write unit tests in a vanilla `net7.0` Xunit
+Thus you can easily write unit tests in a vanilla `net8.0` Xunit
 project, such as:
 
 ```csharp
@@ -50,8 +50,8 @@ public void Application()
 }
 ```
 
-The above views in a `net7.0` project are not real UI, while
-`net7.0-android` and `net7.0-ios` projects get the full
+The above views in a `net8.0` project are not real UI, while
+`net8.0-android` and `net8.0-ios` projects get the full
 implementations that actually *do* something on screen.
 
 So for example, adding `App` to the screen on Android:
@@ -96,9 +96,9 @@ projects:
 dotnet new spice
 dotnet build
 # To run on Android
-dotnet build -f net7.0-android -t:Run
+dotnet build -f net8.0-android -t:Run
 # To run on iOS
-dotnet build -f net7.0-ios -t:Run
+dotnet build -f net8.0-ios -t:Run
 ```
 
 Of course, you can also just open the project in Visual Studio and hit F5.

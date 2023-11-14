@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
     <!-- Weird fix for VS Mac -->
-    <CreatePackage Condition=" '$(TargetFramework)' == 'net7.0-ios' ">false</CreatePackage>
+    <CreatePackage Condition=" '$(TargetFramework)' == 'net8.0-ios' ">false</CreatePackage>
   </PropertyGroup>
 </Project>
