@@ -27,7 +27,7 @@
 		<None Include="MSBuild/**" Pack="true" PackagePath="build;buildTransitive" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="Microsoft.Maui.Graphics" Version="8.0.3" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebView" Version="7.0.13" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebView" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup Condition=" '$(TargetPlatformIdentifier)' == 'Android' ">

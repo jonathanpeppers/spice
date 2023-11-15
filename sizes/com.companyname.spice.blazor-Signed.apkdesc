@@ -5,10 +5,10 @@
       "Size": 5988
     },
     "assemblies/assemblies.arm64_v8a.blob": {
-      "Size": 753594
+      "Size": 772533
     },
     "assemblies/assemblies.blob": {
-      "Size": 1557655
+      "Size": 1593823
     },
     "assemblies/assemblies.manifest": {
       "Size": 4903
@@ -92,19 +92,19 @@
       "Size": 169960
     },
     "lib/arm64-v8a/libaot-Microsoft.AspNetCore.Components.dll.so": {
-      "Size": 253320
+      "Size": 209136
     },
     "lib/arm64-v8a/libaot-Microsoft.AspNetCore.Components.Web.dll.so": {
-      "Size": 23032
+      "Size": 23056
     },
     "lib/arm64-v8a/libaot-Microsoft.AspNetCore.Components.WebView.dll.so": {
-      "Size": 95304
+      "Size": 91376
     },
     "lib/arm64-v8a/libaot-Microsoft.Extensions.DependencyInjection.Abstractions.dll.so": {
-      "Size": 12952
+      "Size": 13808
     },
     "lib/arm64-v8a/libaot-Microsoft.Extensions.DependencyInjection.dll.so": {
-      "Size": 92608
+      "Size": 61896
     },
     "lib/arm64-v8a/libaot-Microsoft.Extensions.FileProviders.Abstractions.dll.so": {
       "Size": 3856
@@ -113,28 +113,28 @@
       "Size": 3744
     },
     "lib/arm64-v8a/libaot-Microsoft.Extensions.FileProviders.Embedded.dll.so": {
-      "Size": 28192
+      "Size": 30456
     },
     "lib/arm64-v8a/libaot-Microsoft.Extensions.FileProviders.Physical.dll.so": {
-      "Size": 4488
+      "Size": 4512
     },
     "lib/arm64-v8a/libaot-Microsoft.Extensions.FileSystemGlobbing.dll.so": {
       "Size": 8696
     },
     "lib/arm64-v8a/libaot-Microsoft.Extensions.Logging.Abstractions.dll.so": {
-      "Size": 44376
+      "Size": 48632
     },
     "lib/arm64-v8a/libaot-Microsoft.Extensions.Logging.dll.so": {
-      "Size": 19752
+      "Size": 19848
     },
     "lib/arm64-v8a/libaot-Microsoft.Extensions.Options.dll.so": {
-      "Size": 29600
+      "Size": 30176
     },
     "lib/arm64-v8a/libaot-Microsoft.Extensions.Primitives.dll.so": {
-      "Size": 13424
+      "Size": 13616
     },
     "lib/arm64-v8a/libaot-Microsoft.JSInterop.dll.so": {
-      "Size": 65152
+      "Size": 66760
     },
     "lib/arm64-v8a/libaot-Mono.Android.dll.so": {
       "Size": 314560
@@ -185,7 +185,7 @@
       "Size": 6200
     },
     "lib/arm64-v8a/libaot-System.Linq.dll.so": {
-      "Size": 62856
+      "Size": 80040
     },
     "lib/arm64-v8a/libaot-System.Memory.dll.so": {
       "Size": 29816
@@ -203,7 +203,7 @@
       "Size": 11296
     },
     "lib/arm64-v8a/libaot-System.Private.CoreLib.dll.so": {
-      "Size": 1308016
+      "Size": 1324712
     },
     "lib/arm64-v8a/libaot-System.Private.Uri.dll.so": {
       "Size": 93688
@@ -224,13 +224,13 @@
       "Size": 4944
     },
     "lib/arm64-v8a/libaot-System.Text.Encodings.Web.dll.so": {
-      "Size": 22224
+      "Size": 22424
     },
     "lib/arm64-v8a/libaot-System.Text.Json.dll.so": {
-      "Size": 460576
+      "Size": 460816
     },
     "lib/arm64-v8a/libaot-System.Text.RegularExpressions.dll.so": {
-      "Size": 4952
+      "Size": 4960
     },
     "lib/arm64-v8a/libaot-System.Xml.Linq.dll.so": {
       "Size": 3528
@@ -2993,5 +2993,5 @@
       "Size": 986736
     }
   },
-  "PackageSize": 10710636
+  "PackageSize": 10755692
 }
