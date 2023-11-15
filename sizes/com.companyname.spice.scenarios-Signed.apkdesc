@@ -5,19 +5,19 @@
       "Size": 6012
     },
     "assemblies/assemblies.arm64_v8a.blob": {
-      "Size": 468433
+      "Size": 554095
     },
     "assemblies/assemblies.blob": {
-      "Size": 681748
+      "Size": 582145
     },
     "assemblies/assemblies.manifest": {
-      "Size": 1842
+      "Size": 2002
     },
     "assemblies/rc.bin": {
-      "Size": 1182
+      "Size": 1512
     },
     "classes.dex": {
-      "Size": 8967324
+      "Size": 9266728
     },
     "commonMain/default/linkdata/module": {
       "Size": 70
@@ -34,101 +34,110 @@
     "commonMain/default/manifest": {
       "Size": 98
     },
+    "lib/arm64-v8a/libaot-_Microsoft.Android.Resource.Designer.dll.so": {
+      "Size": 3720
+    },
     "lib/arm64-v8a/libaot-CommunityToolkit.Mvvm.dll.so": {
-      "Size": 4352
+      "Size": 4240
     },
     "lib/arm64-v8a/libaot-Java.Interop.dll.so": {
-      "Size": 161104
+      "Size": 169112
     },
     "lib/arm64-v8a/libaot-Microsoft.Maui.Graphics.dll.so": {
-      "Size": 16072
+      "Size": 15760
     },
     "lib/arm64-v8a/libaot-Mono.Android.dll.so": {
-      "Size": 310104
+      "Size": 297128
+    },
+    "lib/arm64-v8a/libaot-Mono.Android.Runtime.dll.so": {
+      "Size": 4184
     },
     "lib/arm64-v8a/libaot-Spice.dll.so": {
-      "Size": 37408
+      "Size": 35712
     },
     "lib/arm64-v8a/libaot-Spice.Scenarios.dll.so": {
-      "Size": 37496
+      "Size": 13344
     },
     "lib/arm64-v8a/libaot-System.ComponentModel.TypeConverter.dll.so": {
-      "Size": 3848
+      "Size": 3720
     },
     "lib/arm64-v8a/libaot-System.Console.dll.so": {
-      "Size": 4768
+      "Size": 4688
     },
     "lib/arm64-v8a/libaot-System.Linq.dll.so": {
-      "Size": 49608
+      "Size": 48784
     },
     "lib/arm64-v8a/libaot-System.ObjectModel.dll.so": {
-      "Size": 11152
+      "Size": 10952
     },
     "lib/arm64-v8a/libaot-System.Private.CoreLib.dll.so": {
-      "Size": 781352
+      "Size": 862472
     },
     "lib/arm64-v8a/libaot-System.Runtime.dll.so": {
-      "Size": 3608
+      "Size": 3528
     },
     "lib/arm64-v8a/libaot-System.Runtime.InteropServices.dll.so": {
-      "Size": 3808
+      "Size": 3560
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Activity.dll.so": {
-      "Size": 8904
+      "Size": 8816
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.AppCompat.dll.so": {
-      "Size": 29744
+      "Size": 29632
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Core.dll.so": {
-      "Size": 15024
+      "Size": 14936
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.DrawerLayout.dll.so": {
-      "Size": 7552
+      "Size": 7472
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Fragment.dll.so": {
-      "Size": 17688
+      "Size": 17624
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Lifecycle.Common.dll.so": {
-      "Size": 5048
+      "Size": 4952
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Lifecycle.LiveData.Core.dll.so": {
-      "Size": 5016
+      "Size": 4936
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Lifecycle.ViewModel.dll.so": {
-      "Size": 6376
+      "Size": 6296
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Loader.dll.so": {
-      "Size": 6840
+      "Size": 6744
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.SavedState.dll.so": {
-      "Size": 4320
+      "Size": 4232
     },
     "lib/arm64-v8a/libaot-Xamarin.Kotlin.StdLib.dll.so": {
-      "Size": 4592
+      "Size": 4496
+    },
+    "lib/arm64-v8a/libmono-component-marshal-ilgen.so": {
+      "Size": 97080
     },
     "lib/arm64-v8a/libmonodroid.so": {
-      "Size": 371792
+      "Size": 334520
     },
     "lib/arm64-v8a/libmonosgen-2.0.so": {
-      "Size": 3074688
+      "Size": 3193248
     },
     "lib/arm64-v8a/libSystem.IO.Compression.Native.so": {
-      "Size": 723928
+      "Size": 723560
     },
     "lib/arm64-v8a/libSystem.Native.so": {
-      "Size": 94104
+      "Size": 93952
     },
     "lib/arm64-v8a/libSystem.Security.Cryptography.Native.Android.so": {
-      "Size": 151624
+      "Size": 154904
     },
     "lib/arm64-v8a/libxamarin-app.so": {
-      "Size": 43032
+      "Size": 46096
     },
     "META-INF/ANDROIDD.RSA": {
       "Size": 1221
     },
     "META-INF/ANDROIDD.SF": {
-      "Size": 108174
+      "Size": 115151
     },
     "META-INF/androidx.activity_activity.version": {
       "Size": 6
@@ -158,6 +167,9 @@
       "Size": 7
     },
     "META-INF/androidx.cursoradapter_cursoradapter.version": {
+      "Size": 6
+    },
+    "META-INF/androidx.customview_customview-poolingcontainer.version": {
       "Size": 6
     },
     "META-INF/androidx.customview_customview.version": {
@@ -269,7 +281,13 @@
       "Size": 5
     },
     "META-INF/MANIFEST.MF": {
-      "Size": 108047
+      "Size": 115024
+    },
+    "META-INF/maven/com.google.errorprone/error_prone_annotations/pom.properties": {
+      "Size": 80
+    },
+    "META-INF/maven/com.google.errorprone/error_prone_annotations/pom.xml": {
+      "Size": 1832
     },
     "META-INF/maven/com.google.guava/listenablefuture/pom.properties": {
       "Size": 96
@@ -312,6 +330,18 @@
     },
     "res/anim-v21/fragment_fast_out_extra_slow_in.xml": {
       "Size": 364
+    },
+    "res/anim-v21/m3_bottom_sheet_slide_in.xml": {
+      "Size": 616
+    },
+    "res/anim-v21/m3_bottom_sheet_slide_out.xml": {
+      "Size": 656
+    },
+    "res/anim-v21/m3_side_sheet_slide_in.xml": {
+      "Size": 616
+    },
+    "res/anim-v21/m3_side_sheet_slide_out.xml": {
+      "Size": 616
     },
     "res/anim-v21/mtrl_bottom_sheet_slide_in.xml": {
       "Size": 616
@@ -409,10 +439,19 @@
     "res/anim/linear_indeterminate_line2_tail_interpolator.xml": {
       "Size": 400
     },
+    "res/anim/m3_motion_fade_enter.xml": {
+      "Size": 812
+    },
+    "res/anim/m3_motion_fade_exit.xml": {
+      "Size": 508
+    },
     "res/anim/mtrl_card_lowers_interpolator.xml": {
       "Size": 400
     },
     "res/animator-v21/design_appbar_state_list_animator.xml": {
+      "Size": 1216
+    },
+    "res/animator-v21/m3_appbar_state_list_animator.xml": {
       "Size": 1216
     },
     "res/animator/design_fab_hide_motion_spec.xml": {
@@ -456,6 +495,12 @@
     },
     "res/animator/m3_elevated_chip_state_list_anim.xml": {
       "Size": 1072
+    },
+    "res/animator/m3_extended_fab_change_size_collapse_motion_spec.xml": {
+      "Size": 1116
+    },
+    "res/animator/m3_extended_fab_change_size_expand_motion_spec.xml": {
+      "Size": 1116
     },
     "res/animator/m3_extended_fab_hide_motion_spec.xml": {
       "Size": 820
@@ -574,6 +619,39 @@
     "res/color-v31/m3_dynamic_primary_text_disable_only.xml": {
       "Size": 500
     },
+    "res/color-v31/m3_ref_palette_dynamic_neutral12.xml": {
+      "Size": 376
+    },
+    "res/color-v31/m3_ref_palette_dynamic_neutral17.xml": {
+      "Size": 376
+    },
+    "res/color-v31/m3_ref_palette_dynamic_neutral22.xml": {
+      "Size": 376
+    },
+    "res/color-v31/m3_ref_palette_dynamic_neutral24.xml": {
+      "Size": 376
+    },
+    "res/color-v31/m3_ref_palette_dynamic_neutral4.xml": {
+      "Size": 376
+    },
+    "res/color-v31/m3_ref_palette_dynamic_neutral6.xml": {
+      "Size": 376
+    },
+    "res/color-v31/m3_ref_palette_dynamic_neutral87.xml": {
+      "Size": 376
+    },
+    "res/color-v31/m3_ref_palette_dynamic_neutral92.xml": {
+      "Size": 376
+    },
+    "res/color-v31/m3_ref_palette_dynamic_neutral94.xml": {
+      "Size": 376
+    },
+    "res/color-v31/m3_ref_palette_dynamic_neutral96.xml": {
+      "Size": 376
+    },
+    "res/color-v31/m3_ref_palette_dynamic_neutral98.xml": {
+      "Size": 376
+    },
     "res/color/abc_background_cache_hint_selector_material_dark.xml": {
       "Size": 468
     },
@@ -674,7 +752,7 @@
       "Size": 1556
     },
     "res/color/m3_card_stroke_color.xml": {
-      "Size": 464
+      "Size": 1224
     },
     "res/color/m3_checkbox_button_icon_tint.xml": {
       "Size": 964
@@ -746,10 +824,10 @@
       "Size": 668
     },
     "res/color/m3_navigation_bar_item_with_indicator_icon_tint.xml": {
-      "Size": 464
+      "Size": 1196
     },
     "res/color/m3_navigation_bar_item_with_indicator_label_tint.xml": {
-      "Size": 464
+      "Size": 1196
     },
     "res/color/m3_navigation_bar_ripple_color_selector.xml": {
       "Size": 1232
@@ -758,13 +836,22 @@
       "Size": 588
     },
     "res/color/m3_navigation_item_icon_tint.xml": {
-      "Size": 624
+      "Size": 1356
     },
     "res/color/m3_navigation_item_ripple_color.xml": {
       "Size": 1372
     },
     "res/color/m3_navigation_item_text_color.xml": {
-      "Size": 624
+      "Size": 1356
+    },
+    "res/color/m3_navigation_rail_item_with_indicator_icon_tint.xml": {
+      "Size": 464
+    },
+    "res/color/m3_navigation_rail_item_with_indicator_label_tint.xml": {
+      "Size": 464
+    },
+    "res/color/m3_navigation_rail_ripple_color_selector.xml": {
+      "Size": 1232
     },
     "res/color/m3_popupmenu_overlay_color.xml": {
       "Size": 376
@@ -773,7 +860,7 @@
       "Size": 500
     },
     "res/color/m3_radiobutton_button_tint.xml": {
-      "Size": 644
+      "Size": 1576
     },
     "res/color/m3_radiobutton_ripple_tint.xml": {
       "Size": 1372
@@ -802,11 +889,23 @@
     "res/color/m3_switch_track_tint.xml": {
       "Size": 624
     },
+    "res/color/m3_tabs_icon_color_secondary.xml": {
+      "Size": 624
+    },
     "res/color/m3_tabs_icon_color.xml": {
       "Size": 624
     },
+    "res/color/m3_tabs_ripple_color_secondary.xml": {
+      "Size": 1372
+    },
     "res/color/m3_tabs_ripple_color.xml": {
       "Size": 1372
+    },
+    "res/color/m3_tabs_text_color_secondary.xml": {
+      "Size": 624
+    },
+    "res/color/m3_tabs_text_color.xml": {
+      "Size": 624
     },
     "res/color/m3_text_button_background_color_selector.xml": {
       "Size": 508
@@ -821,10 +920,10 @@
       "Size": 500
     },
     "res/color/m3_textfield_indicator_text_color.xml": {
-      "Size": 624
+      "Size": 872
     },
     "res/color/m3_textfield_input_text_color.xml": {
-      "Size": 500
+      "Size": 748
     },
     "res/color/m3_textfield_label_color.xml": {
       "Size": 624
@@ -850,9 +949,6 @@
     "res/color/m3_timepicker_display_ripple_color.xml": {
       "Size": 1372
     },
-    "res/color/m3_timepicker_display_stroke_color.xml": {
-      "Size": 464
-    },
     "res/color/m3_timepicker_display_text_color.xml": {
       "Size": 624
     },
@@ -861,6 +957,9 @@
     },
     "res/color/m3_timepicker_secondary_text_button_text_color.xml": {
       "Size": 500
+    },
+    "res/color/m3_timepicker_time_input_stroke_color.xml": {
+      "Size": 464
     },
     "res/color/m3_tonal_button_ripple_color_selector.xml": {
       "Size": 808
@@ -900,6 +999,36 @@
     },
     "res/color/material_on_surface_stroke.xml": {
       "Size": 376
+    },
+    "res/color/material_personalized__highlighted_text_inverse.xml": {
+      "Size": 376
+    },
+    "res/color/material_personalized__highlighted_text.xml": {
+      "Size": 376
+    },
+    "res/color/material_personalized_color_primary_text_inverse.xml": {
+      "Size": 500
+    },
+    "res/color/material_personalized_color_primary_text.xml": {
+      "Size": 500
+    },
+    "res/color/material_personalized_color_secondary_text_inverse.xml": {
+      "Size": 500
+    },
+    "res/color/material_personalized_color_secondary_text.xml": {
+      "Size": 500
+    },
+    "res/color/material_personalized_hint_foreground_inverse.xml": {
+      "Size": 564
+    },
+    "res/color/material_personalized_hint_foreground.xml": {
+      "Size": 564
+    },
+    "res/color/material_personalized_primary_inverse_text_disable_only.xml": {
+      "Size": 500
+    },
+    "res/color/material_personalized_primary_text_disable_only.xml": {
+      "Size": 500
     },
     "res/color/material_slider_active_tick_marks_color.xml": {
       "Size": 520
@@ -1810,6 +1939,24 @@
     "res/drawable/$avd_show_password__2.xml": {
       "Size": 556
     },
+    "res/drawable/$m3_avd_hide_password__0.xml": {
+      "Size": 1176
+    },
+    "res/drawable/$m3_avd_hide_password__1.xml": {
+      "Size": 592
+    },
+    "res/drawable/$m3_avd_hide_password__2.xml": {
+      "Size": 556
+    },
+    "res/drawable/$m3_avd_show_password__0.xml": {
+      "Size": 1136
+    },
+    "res/drawable/$m3_avd_show_password__1.xml": {
+      "Size": 592
+    },
+    "res/drawable/$m3_avd_show_password__2.xml": {
+      "Size": 556
+    },
     "res/drawable/$mtrl_checkbox_button_checked_unchecked__0.xml": {
       "Size": 592
     },
@@ -1874,10 +2021,10 @@
       "Size": 592
     },
     "res/drawable/$mtrl_switch_thumb_checked_unchecked__0.xml": {
-      "Size": 592
+      "Size": 548
     },
     "res/drawable/$mtrl_switch_thumb_checked_unchecked__1.xml": {
-      "Size": 636
+      "Size": 592
     },
     "res/drawable/$mtrl_switch_thumb_pressed_checked__0.xml": {
       "Size": 592
@@ -1886,10 +2033,10 @@
       "Size": 592
     },
     "res/drawable/$mtrl_switch_thumb_unchecked_checked__0.xml": {
-      "Size": 592
+      "Size": 548
     },
     "res/drawable/$mtrl_switch_thumb_unchecked_checked__1.xml": {
-      "Size": 636
+      "Size": 592
     },
     "res/drawable/$mtrl_switch_thumb_unchecked_pressed__0.xml": {
       "Size": 592
@@ -2059,6 +2206,12 @@
     "res/drawable/design_snackbar_background.xml": {
       "Size": 484
     },
+    "res/drawable/ic_arrow_back_black_24.xml": {
+      "Size": 612
+    },
+    "res/drawable/ic_clear_black_24.xml": {
+      "Size": 684
+    },
     "res/drawable/ic_clock_black_24dp.xml": {
       "Size": 752
     },
@@ -2085,6 +2238,18 @@
     },
     "res/drawable/ic_mtrl_chip_close_circle.xml": {
       "Size": 808
+    },
+    "res/drawable/ic_search_black_24.xml": {
+      "Size": 800
+    },
+    "res/drawable/m3_avd_hide_password.xml": {
+      "Size": 660
+    },
+    "res/drawable/m3_avd_show_password.xml": {
+      "Size": 660
+    },
+    "res/drawable/m3_password_eye.xml": {
+      "Size": 816
     },
     "res/drawable/m3_popupmenu_background_overlay.xml": {
       "Size": 740
@@ -2192,7 +2357,7 @@
       "Size": 524
     },
     "res/drawable/mtrl_switch_thumb_checked_unchecked.xml": {
-      "Size": 624
+      "Size": 784
     },
     "res/drawable/mtrl_switch_thumb_checked.xml": {
       "Size": 744
@@ -2207,7 +2372,7 @@
       "Size": 744
     },
     "res/drawable/mtrl_switch_thumb_unchecked_checked.xml": {
-      "Size": 624
+      "Size": 784
     },
     "res/drawable/mtrl_switch_thumb_unchecked_pressed.xml": {
       "Size": 524
@@ -2309,13 +2474,10 @@
       "Size": 1232
     },
     "res/layout-land/material_timepicker.xml": {
-      "Size": 1884
+      "Size": 1676
     },
     "res/layout-land/mtrl_picker_header_dialog.xml": {
       "Size": 1532
-    },
-    "res/layout-ldrtl-v17/material_textinput_timepicker.xml": {
-      "Size": 1100
     },
     "res/layout-sw600dp-v13/design_layout_snackbar.xml": {
       "Size": 528
@@ -2349,6 +2511,9 @@
     },
     "res/layout-v22/mtrl_alert_dialog_actions.xml": {
       "Size": 1764
+    },
+    "res/layout-v22/mtrl_search_view.xml": {
+      "Size": 3424
     },
     "res/layout-v26/abc_screen_toolbar.xml": {
       "Size": 1560
@@ -2512,17 +2677,20 @@
     "res/layout/m3_auto_complete_simple_item.xml": {
       "Size": 612
     },
+    "res/layout/m3_side_sheet_dialog.xml": {
+      "Size": 1180
+    },
     "res/layout/material_chip_input_combo.xml": {
       "Size": 372
     },
     "res/layout/material_clock_display_divider.xml": {
-      "Size": 492
+      "Size": 444
     },
     "res/layout/material_clock_display.xml": {
-      "Size": 1132
+      "Size": 796
     },
     "res/layout/material_clock_period_toggle.xml": {
-      "Size": 1392
+      "Size": 1220
     },
     "res/layout/material_clockface_textview.xml": {
       "Size": 476
@@ -2534,22 +2702,22 @@
       "Size": 768
     },
     "res/layout/material_textinput_timepicker.xml": {
-      "Size": 1052
+      "Size": 720
     },
     "res/layout/material_time_chip.xml": {
       "Size": 380
     },
     "res/layout/material_time_input.xml": {
-      "Size": 1000
+      "Size": 956
     },
     "res/layout/material_timepicker_dialog.xml": {
       "Size": 3132
     },
     "res/layout/material_timepicker_textinput_display.xml": {
-      "Size": 684
+      "Size": 728
     },
     "res/layout/material_timepicker.xml": {
-      "Size": 1136
+      "Size": 1608
     },
     "res/layout/mtrl_alert_dialog_actions.xml": {
       "Size": 1620
@@ -2621,7 +2789,7 @@
       "Size": 880
     },
     "res/layout/mtrl_picker_header_dialog.xml": {
-      "Size": 1532
+      "Size": 1492
     },
     "res/layout/mtrl_picker_header_fullscreen.xml": {
       "Size": 2800
@@ -2640,6 +2808,12 @@
     },
     "res/layout/mtrl_picker_text_input_date.xml": {
       "Size": 984
+    },
+    "res/layout/mtrl_search_bar.xml": {
+      "Size": 488
+    },
+    "res/layout/mtrl_search_view.xml": {
+      "Size": 3376
     },
     "res/layout/notification_template_part_chronometer.xml": {
       "Size": 440
@@ -2660,10 +2834,10 @@
       "Size": 464
     },
     "res/mipmap-anydpi-v26/appicon_round.xml": {
-      "Size": 448
+      "Size": 548
     },
     "res/mipmap-anydpi-v26/appicon.xml": {
-      "Size": 448
+      "Size": 548
     },
     "res/mipmap-hdpi-v4/appicon_background.png": {
       "Size": 120
@@ -2711,8 +2885,8 @@
       "Size": 1419
     },
     "resources.arsc": {
-      "Size": 926760
+      "Size": 1006580
     }
   },
-  "PackageSize": 8325801
+  "PackageSize": 8638458
 }
