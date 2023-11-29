@@ -3,4 +3,7 @@
     <!-- Weird fix for VS Mac -->
     <CreatePackage Condition=" '$(TargetFramework)' == 'net8.0-ios' ">false</CreatePackage>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Update="Microsoft.Maui.Resizetizer" Version="8.0.3" />
+  </ItemGroup>
 </Project>
