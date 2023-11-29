@@ -41,6 +41,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\src\Spice\Spice.csproj" />
+        <PackageReference Include="Microsoft.Maui.Resizetizer" />
     </ItemGroup>
 
     <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.targets" />
