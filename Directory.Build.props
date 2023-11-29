@@ -11,5 +11,6 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>icon.png</PackageIcon>
     <PackageOutputPath>$(MSBuildThisFileDirectory)bin/$(Configuration)/</PackageOutputPath>
+    <WarningsAsErrors>MA002</WarningsAsErrors>
   </PropertyGroup>
 </Project>
