@@ -1,6 +1,4 @@
 ﻿<Project>
-	<Import Sdk="Microsoft.Maui.Sdk.net7" Project="Microsoft.Maui.Controls.SingleProject.targets" />
-
 	<PropertyGroup Condition=" '$(AndroidEnableProfiledAot)' == 'true' ">
 		<AndroidUseDefaultAotProfile Condition=" '$(AndroidUseDefaultAotProfile)' == '' ">false</AndroidUseDefaultAotProfile>
 		<MauiUseDefaultAotProfile Condition=" '$(MauiUseDefaultAotProfile)' == '' ">false</MauiUseDefaultAotProfile>

@@ -42,6 +42,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\src\Spice\Spice.csproj" />
+        <ProjectReference Include="..\..\src\Spice.Transitive\Spice.Transitive.csproj" />
         <PackageReference Include="Microsoft.Maui.Resizetizer" />
     </ItemGroup>
 

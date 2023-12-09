@@ -25,9 +25,10 @@
 		<None Include="README.md" Pack="true" PackagePath="" />
 		<None Include="../../docs/icon.png" Pack="true" PackagePath="" />
 		<None Include="MSBuild/**" Pack="true" PackagePath="build;buildTransitive" />
-		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-		<PackageReference Include="Microsoft.Maui.Graphics" Version="8.0.3" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebView" Version="8.0.0" />
+		<PackageReference Include="CommunityToolkit.Mvvm" />
+		<PackageReference Include="Microsoft.Maui.Graphics" />
+		<PackageReference Include="Microsoft.Maui.Controls.Build.Tasks" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebView" />
 	</ItemGroup>
 
 	<ItemGroup Condition=" '$(TargetPlatformIdentifier)' == 'Android' ">

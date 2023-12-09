@@ -4,6 +4,10 @@
     <CreatePackage Condition=" '$(TargetFramework)' == 'net8.0-ios' ">false</CreatePackage>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Update="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Update="Microsoft.AspNetCore.Components.WebView" Version="8.0.0" />
+    <PackageReference Update="Microsoft.Maui.Graphics" Version="8.0.3" />
     <PackageReference Update="Microsoft.Maui.Resizetizer" Version="8.0.3" />
+    <PackageReference Update="Microsoft.Maui.Controls.Build.Tasks" Version="8.0.3" />
   </ItemGroup>
 </Project>
