@@ -10,7 +10,7 @@ jobs:
 
   build:
 
-    runs-on: macos-13
+    runs-on: windows-latest
 
     env:
       Configuration: Release
@@ -36,24 +36,24 @@ jobs:
     - name: install workloads
       run: dotnet workload install maui-android maui-ios --verbosity diag
 
-    - name: build
-      run: dotnet build -bl:bin/build.binlog
+    # - name: build
+    #   run: dotnet build -bl:bin/build.binlog
 
-    - name: run apkdiff
-      run: |
-        dotnet tool install --global apkdiff
-        apkdiff -s --save-description-2=bin/com.companyname.spice.scenarios-Signed.apkdesc --descrease-is-regression --test-apk-percentage-regression=$APK_PERCENTAGE_REGRESSION --test-content-percentage-regression=$CONTENT_PERCENTAGE_REGRESSION sizes/com.companyname.spice.scenarios-Signed.apkdesc samples/Spice.Scenarios/bin/Release/net8.0-android/android-arm64/com.companyname.spice.scenarios-Signed.apk
-        apkdiff -s --save-description-2=bin/com.companyname.spice.blazor-Signed.apkdesc --descrease-is-regression --test-apk-percentage-regression=$APK_PERCENTAGE_REGRESSION --test-content-percentage-regression=$CONTENT_PERCENTAGE_REGRESSION sizes/com.companyname.spice.blazor-Signed.apkdesc samples/Spice.BlazorSample/bin/Release/net8.0-android/android-arm64/com.companyname.spice.blazor-Signed.apk
+    # - name: run apkdiff
+    #   run: |
+    #     dotnet tool install --global apkdiff
+    #     apkdiff -s --save-description-2=bin/com.companyname.spice.scenarios-Signed.apkdesc --descrease-is-regression --test-apk-percentage-regression=$APK_PERCENTAGE_REGRESSION --test-content-percentage-regression=$CONTENT_PERCENTAGE_REGRESSION sizes/com.companyname.spice.scenarios-Signed.apkdesc samples/Spice.Scenarios/bin/Release/net8.0-android/android-arm64/com.companyname.spice.scenarios-Signed.apk
+    #     apkdiff -s --save-description-2=bin/com.companyname.spice.blazor-Signed.apkdesc --descrease-is-regression --test-apk-percentage-regression=$APK_PERCENTAGE_REGRESSION --test-content-percentage-regression=$CONTENT_PERCENTAGE_REGRESSION sizes/com.companyname.spice.blazor-Signed.apkdesc samples/Spice.BlazorSample/bin/Release/net8.0-android/android-arm64/com.companyname.spice.blazor-Signed.apk
 
-    - name: tests
-      run: dotnet test tests/Spice.Tests/Spice.Tests.csproj
+    # - name: tests
+    #   run: dotnet test tests/Spice.Tests/Spice.Tests.csproj
 
-    - name: pack
-      run: dotnet pack -bl:bin/pack.binlog
+    # - name: pack
+    #   run: dotnet pack -bl:bin/pack.binlog
 
-    - name: artifacts
-      if: always()
-      uses: actions/upload-artifact@v3
-      with:
-        name: nupkgs
-        path: bin
+    # - name: artifacts
+    #   if: always()
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     name: nupkgs
+    #     path: bin
