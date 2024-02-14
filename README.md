@@ -370,7 +370,7 @@ run, *something* has to force it to run again.
 frameworks a way to "reload themselves" for Hot Reload.
 
 Unfortunately, [`MetadataUpdateHandler`][muh] does not currently work
-for non-MAUI apps in Visual Studio 2022 17.5:
+for non-MAUI apps in Visual Studio 2022 17.5 (through 17.10):
 
 ```csharp
 [assembly: System.Reflection.Metadata.MetadataUpdateHandler(typeof(HotReload))]
