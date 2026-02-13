@@ -4,7 +4,7 @@
     <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
 
     <PropertyGroup>
-        <TargetFrameworks>net8.0-android;net8.0-ios</TargetFrameworks>
+        <TargetFrameworks>net10.0-android;net10.0-ios</TargetFrameworks>
         <OutputType>Exe</OutputType>
         <RootNamespace>Spice.Scenarios</RootNamespace>
         <UseMauiAssets>true</UseMauiAssets>

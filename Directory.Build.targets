@@ -1,9 +1,9 @@
 <Project>
   <PropertyGroup>
     <!-- Weird fix for VS Mac -->
-    <CreatePackage Condition=" '$(TargetFramework)' == 'net8.0-ios' ">false</CreatePackage>
+    <CreatePackage Condition=" '$(TargetFramework)' == 'net10.0-ios' ">false</CreatePackage>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Update="Microsoft.Maui.Resizetizer" Version="8.0.6" />
+    <PackageReference Update="Microsoft.Maui.Resizetizer" Version="10.0.40" />
   </ItemGroup>
 </Project>
