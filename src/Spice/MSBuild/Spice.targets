@@ -1,5 +1,77 @@
 ﻿<Project>
-	<Import Sdk="Microsoft.Maui.Sdk.net7" Project="Microsoft.Maui.Controls.SingleProject.targets" />
+	<!--
+		Inlined from Microsoft.Maui.Controls SingleProject MSBuild logic (previously in Microsoft.Maui.Sdk.net7 workload SDK).
+		In .NET 8+, this was moved to the Microsoft.Maui.Controls.Build.Tasks NuGet package,
+		but Spice doesn't reference Microsoft.Maui.Controls, so we inline just the Android/iOS parts.
+		See: https://github.com/dotnet/maui/blob/main/src/Controls/src/Build.Tasks/nuget/buildTransitive/netstandard2.0/
+	-->
+	<PropertyGroup Condition=" '$(SingleProject)' == 'true' ">
+		<PlatformsProjectFolder Condition=" '$(PlatformsProjectFolder)' == '' ">Platforms\</PlatformsProjectFolder>
+		<PlatformsProjectFolder>$([MSBuild]::EnsureTrailingSlash('$(PlatformsProjectFolder)'))</PlatformsProjectFolder>
+		<_KeepLaunchProfiles>true</_KeepLaunchProfiles>
+		<!-- Android -->
+		<EnableDefaultAndroidItems>false</EnableDefaultAndroidItems>
+		<AndroidProjectFolder Condition=" '$(AndroidProjectFolder)' == '' ">$(PlatformsProjectFolder)Android\</AndroidProjectFolder>
+		<AndroidProjectFolder>$([MSBuild]::EnsureTrailingSlash('$(AndroidProjectFolder)'))</AndroidProjectFolder>
+		<!-- iOS -->
+		<EnableDefaultiOSItems>false</EnableDefaultiOSItems>
+		<iOSProjectFolder Condition=" '$(iOSProjectFolder)' == '' ">$(PlatformsProjectFolder)iOS\</iOSProjectFolder>
+		<iOSProjectFolder>$([MSBuild]::EnsureTrailingSlash('$(iOSProjectFolder)'))</iOSProjectFolder>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<MauiPlatformSpecificFolder Include="$(AndroidProjectFolder)" TargetPlatformIdentifier="android" />
+		<MauiPlatformSpecificFolder Include="$(iOSProjectFolder)" TargetPlatformIdentifier="ios" />
+	</ItemGroup>
+
+	<PropertyGroup Condition=" '$(SingleProject)' == 'true' and '$([MSBuild]::GetTargetPlatformIdentifier($(TargetFramework)))' == 'android' ">
+		<AndroidManifest Condition=" Exists('$(AndroidProjectFolder)AndroidManifest.xml') ">$(AndroidProjectFolder)AndroidManifest.xml</AndroidManifest>
+		<MonoAndroidResourcePrefix>$(AndroidProjectFolder)Resources</MonoAndroidResourcePrefix>
+		<MonoAndroidAssetsPrefix>$(AndroidProjectFolder)Assets</MonoAndroidAssetsPrefix>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(SingleProject)' == 'true' and '$([MSBuild]::GetTargetPlatformIdentifier($(TargetFramework)))' == 'ios' ">
+		<IPhoneResourcePrefix>$(iOSProjectFolder)Resources</IPhoneResourcePrefix>
+		<CodesignEntitlements Condition=" '$(CodesignEntitlements)' == '' and Exists('$(iOSProjectFolder)Entitlements.plist') ">$(iOSProjectFolder)Entitlements.plist</CodesignEntitlements>
+	</PropertyGroup>
+
+	<ItemGroup Condition=" '$(SingleProject)' == 'true' ">
+		<!-- Add metadata indicating that the platform-specific files are not part of every build configuration. -->
+		<Compile Update="$(PlatformsProjectFolder)**/*$(DefaultLanguageSourceExtension)">
+			<ExcludeFromCurrentConfiguration>true</ExcludeFromCurrentConfiguration>
+		</Compile>
+
+		<!-- Add metadata for the files that are actually part of the current build configuration. -->
+		<Compile
+			Condition=" '$(TargetPlatformIdentifier)' == 'android' "
+			Update="$(AndroidProjectFolder)**/*$(DefaultLanguageSourceExtension)">
+			<ExcludeFromCurrentConfiguration>false</ExcludeFromCurrentConfiguration>
+		</Compile>
+		<Compile
+			Condition=" '$(TargetPlatformIdentifier)' == 'ios' "
+			Update="$(iOSProjectFolder)**/*$(DefaultLanguageSourceExtension)">
+			<ExcludeFromCurrentConfiguration>false</ExcludeFromCurrentConfiguration>
+		</Compile>
+	</ItemGroup>
+
+	<Target Name="_SpiceRemovePlatformCompileItems"
+			BeforeTargets="GenerateMSBuildEditorConfigFileShouldRun"
+			Condition=" '$(EnableDefaultItems)' == 'true' and '$(SingleProject)' == 'true' ">
+		<ItemGroup>
+			<!-- Remove everything that isn't part of this platform -->
+			<Compile
+				Condition=" '%(Compile.ExcludeFromCurrentConfiguration)' == 'true' "
+				Remove="$(PlatformsProjectFolder)**/*$(DefaultLanguageSourceExtension)" />
+		</ItemGroup>
+	</Target>
+
+	<!-- IDE capabilities -->
+	<ItemGroup Condition=" '$(SingleProject)' == 'true' ">
+		<ProjectCapability Include="MauiSingleProject" />
+		<ProjectCapability Include="LaunchProfiles" />
+		<ProjectCapability Include="LaunchProfilesGroupByPlatformFilters" Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &gt;= '17.0' " />
+		<ProjectCapability Include="SingleTargetBuildForStartupProjects" Condition=" '$(EnableSingleTargetBuildForStartupProjects)' != 'false' " />
+	</ItemGroup>
 
 	<PropertyGroup Condition=" '$(AndroidEnableProfiledAot)' == 'true' ">
 		<AndroidUseDefaultAotProfile Condition=" '$(AndroidUseDefaultAotProfile)' == '' ">false</AndroidUseDefaultAotProfile>
