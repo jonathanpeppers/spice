@@ -36,7 +36,7 @@ jobs:
         dotnet-version: 10.0.x
         
     - name: install workloads
-      run: dotnet workload install maui-android maui-ios --verbosity diag --version $WORKLOAD_VERSION
+      run: dotnet workload install maui-android maui-ios --version $WORKLOAD_VERSION
 
     - name: build
       run: dotnet build -bl:bin/build.binlog
