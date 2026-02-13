@@ -13,7 +13,7 @@
 		<SingleProject>true</SingleProject>
 		<IsTrimmable>true</IsTrimmable>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">16.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 		<DefineConstants Condition=" '$(TargetFramework)' == 'net10.0' ">$(DefineConstants);VANILLA</DefineConstants>
 		<SpiceEnablePlatformUsings>true</SpiceEnablePlatformUsings>

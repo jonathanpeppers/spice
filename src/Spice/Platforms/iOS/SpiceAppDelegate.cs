@@ -10,9 +10,15 @@ namespace Spice;
 /// <typeparam name="TApp">The <see cref="Application"/> subclass to display as the root view.</typeparam>
 public class SpiceSceneDelegate<TApp> : UIResponder, IUIWindowSceneDelegate where TApp : Application, new()
 {
+	/// <summary>
+	/// The main window for the scene.
+	/// </summary>
 	[Export("window")]
 	public UIWindow? Window { get; set; }
 
+	/// <summary>
+	/// Called when a new scene session is being created and the UIWindow needs to be configured.
+	/// </summary>
 	[Export("scene:willConnectToSession:options:")]
 	public virtual void WillConnect(UIScene scene, UISceneSession session, UISceneConnectionOptions connectionOptions)
 	{
@@ -36,6 +42,7 @@ public class SpiceSceneDelegate<TApp> : UIResponder, IUIWindowSceneDelegate wher
 /// <typeparam name="TApp">The <see cref="Application"/> subclass to display as the root view.</typeparam>
 public class SpiceAppDelegate<TApp> : UIApplicationDelegate where TApp : Application, new()
 {
+	/// <inheritdoc />
 	public override UISceneConfiguration GetConfiguration(UIApplication application, UISceneSession connectingSceneSession, UISceneConnectionOptions options)
 	{
 		var config = new UISceneConfiguration("Default Configuration", connectingSceneSession.Role);
