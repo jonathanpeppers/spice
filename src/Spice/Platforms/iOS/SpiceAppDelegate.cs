@@ -1,21 +1,45 @@
-﻿namespace Spice;
+﻿using Foundation;
+using ObjCRuntime;
+
+namespace Spice;
 
 /// <summary>
-/// The UIApplicationDelegate to use in Spice applications
+/// A <see cref="IUIWindowSceneDelegate"/> for Spice applications that sets up the <see cref="UIWindow"/>
+/// and root <see cref="Application"/> view using the modern scene-based lifecycle.
 /// </summary>
-public class SpiceAppDelegate : UIApplicationDelegate
+/// <typeparam name="TApp">The <see cref="Application"/> subclass to display as the root view.</typeparam>
+public class SpiceSceneDelegate<TApp> : UIResponder, IUIWindowSceneDelegate where TApp : Application, new()
 {
-	/// <inheritdoc />
-	public override UIWindow? Window
-	{
-		get;
-		set;
-	}
+	[Export("window")]
+	public UIWindow? Window { get; set; }
 
-	/// <inheritdoc />
-	public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+	[Export("scene:willConnectToSession:options:")]
+	public virtual void WillConnect(UIScene scene, UISceneSession session, UISceneConnectionOptions connectionOptions)
 	{
-		Window = Platform.Window = new UIWindow(UIScreen.MainScreen.Bounds);
-		return true;
+		if (scene is UIWindowScene windowScene)
+		{
+			Window = Platform.Window = new UIWindow(windowScene);
+
+			var vc = new UIViewController();
+			vc.View!.AddSubview(new TApp());
+			Window.RootViewController = vc;
+			Window.MakeKeyAndVisible();
+		}
+	}
+}
+
+/// <summary>
+/// The <see cref="UIApplicationDelegate"/> to use in Spice applications.
+/// Configures the app to use <see cref="SpiceSceneDelegate{TApp}"/> for the modern scene-based lifecycle.
+/// Requires <c>UIApplicationSceneManifest</c> in Info.plist.
+/// </summary>
+/// <typeparam name="TApp">The <see cref="Application"/> subclass to display as the root view.</typeparam>
+public class SpiceAppDelegate<TApp> : UIApplicationDelegate where TApp : Application, new()
+{
+	public override UISceneConfiguration GetConfiguration(UIApplication application, UISceneSession connectingSceneSession, UISceneConnectionOptions options)
+	{
+		var config = new UISceneConfiguration("Default Configuration", connectingSceneSession.Role);
+		config.DelegateType = typeof(SpiceSceneDelegate<TApp>);
+		return config;
 	}
 }
