@@ -15,33 +15,42 @@ public partial class CheckBox
 	/// </summary>
 	public CheckBox() : base(_ => new UIButton(UIButtonType.System) { AutoresizingMask = UIViewAutoresizing.None })
 	{
-		// Configure button as checkbox
-		NativeView.SetImage(UIImage.GetSystemImage("square"), UIControlState.Normal);
-		NativeView.SetImage(UIImage.GetSystemImage("checkmark.square.fill"), UIControlState.Selected);
-		
-		// Always toggle on tap
-		NativeView.TouchUpInside += OnTouchUpInside;
+		InitializeCheckBox();
 	}
 
 	/// <inheritdoc />
 	/// <param name="frame">Pass the underlying view a frame</param>
-	public CheckBox(CGRect frame) : base(_ => new UIButton(UIButtonType.System, frame) { AutoresizingMask = UIViewAutoresizing.None })
+	public CheckBox(CGRect frame) : base(_ =>
 	{
-		NativeView.SetImage(UIImage.GetSystemImage("square"), UIControlState.Normal);
-		NativeView.SetImage(UIImage.GetSystemImage("checkmark.square.fill"), UIControlState.Selected);
-		
-		// Always toggle on tap
-		NativeView.TouchUpInside += OnTouchUpInside;
+		var button = new UIButton(UIButtonType.System)
+		{
+			AutoresizingMask = UIViewAutoresizing.None,
+			Frame = frame
+		};
+		return button;
+	})
+	{
+		InitializeCheckBox();
 	}
 
 	/// <inheritdoc />
 	/// <param name="creator">Subclasses can pass in a Func to create a UIView</param>
-	protected CheckBox(Func<View, UIView> creator) : base(creator) { }
+	protected CheckBox(Func<View, UIView> creator) : base(creator)
+	{
+		InitializeCheckBox();
+	}
 
 	/// <summary>
 	/// The underlying UIKit.UIButton
 	/// </summary>
 	public new UIButton NativeView => (UIButton)_nativeView.Value;
+
+	void InitializeCheckBox()
+	{
+		NativeView.SetImage(UIImage.GetSystemImage("square"), UIControlState.Normal);
+		NativeView.SetImage(UIImage.GetSystemImage("checkmark.square.fill"), UIControlState.Selected);
+		NativeView.TouchUpInside += OnTouchUpInside;
+	}
 
 	partial void OnIsCheckedChanged(bool value)
 	{
@@ -56,6 +65,6 @@ public partial class CheckBox
 
 	partial void OnCheckedChangedChanged(Action<CheckBox>? value)
 	{
-		// Event subscription is handled in constructor
+		// Event subscription is handled in InitializeCheckBox
 	}
 }
