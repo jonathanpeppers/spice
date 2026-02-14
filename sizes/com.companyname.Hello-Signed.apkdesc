@@ -2,10 +2,10 @@
   "Comment": null,
   "Entries": {
     "AndroidManifest.xml": {
-      "Size": 6012
+      "Size": 6304
     },
     "classes.dex": {
-      "Size": 9032172
+      "Size": 9030788
     },
     "commonMain/default/linkdata/module": {
       "Size": 70
@@ -61,6 +61,9 @@
     "lib/arm64-v8a/libaot-CommunityToolkit.Mvvm.dll.so": {
       "Size": 4368
     },
+    "lib/arm64-v8a/libaot-Hello.dll.so": {
+      "Size": 8024
+    },
     "lib/arm64-v8a/libaot-Java.Interop.dll.so": {
       "Size": 164208
     },
@@ -68,16 +71,13 @@
       "Size": 15792
     },
     "lib/arm64-v8a/libaot-Mono.Android.dll.so": {
-      "Size": 305792
+      "Size": 292904
     },
     "lib/arm64-v8a/libaot-Mono.Android.Runtime.dll.so": {
       "Size": 4480
     },
     "lib/arm64-v8a/libaot-Spice.dll.so": {
-      "Size": 35576
-    },
-    "lib/arm64-v8a/libaot-Spice.Scenarios.dll.so": {
-      "Size": 15160
+      "Size": 27432
     },
     "lib/arm64-v8a/libaot-System.ComponentModel.TypeConverter.dll.so": {
       "Size": 3800
@@ -101,16 +101,16 @@
       "Size": 3640
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Activity.dll.so": {
-      "Size": 9528
+      "Size": 9520
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.AppCompat.dll.so": {
-      "Size": 29944
+      "Size": 29936
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Core.dll.so": {
-      "Size": 15392
+      "Size": 15384
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.DrawerLayout.dll.so": {
-      "Size": 8768
+      "Size": 8760
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Fragment.dll.so": {
       "Size": 18824
@@ -137,7 +137,7 @@
       "Size": 19168
     },
     "lib/arm64-v8a/libassembly-store.so": {
-      "Size": 1280584
+      "Size": 1265792
     },
     "lib/arm64-v8a/libmono-component-marshal-ilgen.so": {
       "Size": 36616
@@ -161,13 +161,7 @@
       "Size": 165536
     },
     "lib/arm64-v8a/libxamarin-app.so": {
-      "Size": 70208
-    },
-    "META-INF/ANDROIDD.RSA": {
-      "Size": 1607
-    },
-    "META-INF/ANDROIDD.SF": {
-      "Size": 118397
+      "Size": 67736
     },
     "META-INF/androidx.activity_activity.version": {
       "Size": 6
@@ -286,6 +280,12 @@
     "META-INF/androidx.viewpager2_viewpager2.version": {
       "Size": 6
     },
+    "META-INF/BNDLTOOL.RSA": {
+      "Size": 1211
+    },
+    "META-INF/BNDLTOOL.SF": {
+      "Size": 118478
+    },
     "META-INF/com.android.tools/proguard/coroutines.pro": {
       "Size": 1345
     },
@@ -311,7 +311,7 @@
       "Size": 5
     },
     "META-INF/MANIFEST.MF": {
-      "Size": 118270
+      "Size": 118351
     },
     "META-INF/maven/com.google.errorprone/error_prone_annotations/pom.properties": {
       "Size": 80
@@ -2962,9 +2962,12 @@
     "res/mipmap-xxxhdpi-v4/appicon.png": {
       "Size": 1455
     },
+    "res/xml/splits0.xml": {
+      "Size": 8404
+    },
     "resources.arsc": {
-      "Size": 1041120
+      "Size": 1041308
     }
   },
-  "PackageSize": 8952303
+  "PackageSize": 8923686
 }
