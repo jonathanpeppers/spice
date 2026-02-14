@@ -43,9 +43,10 @@ public partial class Picker
 	/// </summary>
 	public new UIPickerView NativeView => (UIPickerView)_nativeView.Value;
 
-	partial void OnItemsChanged(ObservableCollection<string> oldValue, ObservableCollection<string> newValue)
+	partial void OnItemsChanged(ObservableCollection<string>? oldValue, ObservableCollection<string> newValue)
 	{
-		oldValue.CollectionChanged -= OnItemsCollectionChanged;
+		if (oldValue != null)
+			oldValue.CollectionChanged -= OnItemsCollectionChanged;
 		newValue.CollectionChanged += OnItemsCollectionChanged;
 
 		ReloadItems();

@@ -77,9 +77,10 @@ public partial class Picker
 		RefreshAdapter();
 	}
 
-	partial void OnItemsChanged(ObservableCollection<string> oldValue, ObservableCollection<string> newValue)
+	partial void OnItemsChanged(ObservableCollection<string>? oldValue, ObservableCollection<string> newValue)
 	{
-		oldValue.CollectionChanged -= OnItemsCollectionChanged;
+		if (oldValue != null)
+			oldValue.CollectionChanged -= OnItemsCollectionChanged;
 		newValue.CollectionChanged += OnItemsCollectionChanged;
 
 		RefreshAdapter();
