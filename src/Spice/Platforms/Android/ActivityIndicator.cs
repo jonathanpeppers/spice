@@ -14,6 +14,7 @@ public partial class ActivityIndicator
 	{
 		var progressBar = new ProgressBar(context);
 		progressBar.Indeterminate = true;
+		progressBar.Visibility = Android.Views.ViewStates.Gone;
 		return progressBar;
 	}
 
