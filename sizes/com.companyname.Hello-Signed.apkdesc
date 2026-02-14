@@ -173,7 +173,7 @@
       "Size": 4480
     },
     "lib/arm64-v8a/libaot-Spice.dll.so": {
-      "Size": 27440
+      "Size": 28728
     },
     "lib/arm64-v8a/libaot-System.ComponentModel.TypeConverter.dll.so": {
       "Size": 3800
@@ -188,7 +188,7 @@
       "Size": 11312
     },
     "lib/arm64-v8a/libaot-System.Private.CoreLib.dll.so": {
-      "Size": 871968
+      "Size": 871840
     },
     "lib/arm64-v8a/libaot-System.Runtime.dll.so": {
       "Size": 3608
@@ -236,7 +236,7 @@
       "Size": 19168
     },
     "lib/arm64-v8a/libassembly-store.so": {
-      "Size": 1279304
+      "Size": 1270976
     },
     "lib/arm64-v8a/libmono-component-marshal-ilgen.so": {
       "Size": 36616
@@ -380,7 +380,7 @@
       "Size": 6
     },
     "META-INF/BNDLTOOL.RSA": {
-      "Size": 1605
+      "Size": 1607
     },
     "META-INF/BNDLTOOL.SF": {
       "Size": 125071
@@ -3107,5 +3107,5 @@
       "Size": 1041464
     }
   },
-  "PackageSize": 9211602
+  "PackageSize": 9199314
 }
