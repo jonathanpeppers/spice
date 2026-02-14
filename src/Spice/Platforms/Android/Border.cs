@@ -15,8 +15,7 @@ public partial class Border
 
 	/// <summary>
 	/// Represents a border around a single child view. Set Content to a View, and customize with Stroke, StrokeThickness, CornerRadius, and Padding.
-	/// Android -> Custom drawable with GradientDrawable
-	/// iOS -> UIView with CALayer border
+	/// Android -> FrameLayout with GradientDrawable background
 	/// </summary>
 	public Border() : base(Platform.Context, Create)
 	{
