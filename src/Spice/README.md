@@ -24,7 +24,7 @@ public class App : Application
             Clicked = _ => label.Text = $"Times: {++count}"
         };
     
-        Main = new StackView { label, button };
+        Main = new StackLayout { label, button };
     }
 }
 ```

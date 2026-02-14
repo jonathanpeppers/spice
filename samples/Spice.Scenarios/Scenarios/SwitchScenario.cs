@@ -3,7 +3,7 @@ namespace Spice.Scenarios;
 /// <summary>
 /// Demonstrates Switch control usage
 /// </summary>
-class SwitchScenario : StackView
+class SwitchScenario : StackLayout
 {
 	public SwitchScenario()
 	{

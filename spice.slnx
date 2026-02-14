@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Spice.Templates/Spice.Templates.csproj" />
+    <Project Path="src/Spice/Spice.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Spice.Tests/Spice.Tests.csproj" />
+  </Folder>
+</Solution>

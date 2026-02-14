@@ -4,7 +4,7 @@
 /// Most basic scenario
 /// NOTE: my color choices are suspect! 🌈🤢
 /// </summary>
-class HelloWorldScenario : StackView
+class HelloWorldScenario : StackLayout
 {
 	public HelloWorldScenario()
 	{

@@ -18,6 +18,6 @@ public class App : Application
 		};
 
 		BackgroundColor = Colors.CornflowerBlue;
-		Main = new StackView { new Image { Source = "spice" }, label, button };
+		Main = new StackLayout { new Image { Source = "spice" }, label, button };
 	}
 }

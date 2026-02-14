@@ -101,7 +101,7 @@ public class App : Application
             Clicked = _ => label.Text = $"Times: {++count}"
         };
     
-        Main = new StackView { label, button };
+        Main = new StackLayout { label, button };
     }
 }
 ```
@@ -245,7 +245,7 @@ for my framework.
 * `View`: maps to `Android.Views.View` and `UIKit.View`.
 * `Label`: maps to `Android.Widget.TextView` and `UIKit.UILabel`
 * `Button`: maps to `Android.Widget.Button` and `UIKit.UIButton`
-* `StackView`: maps to `Android.Widget.LinearLayout` and `UIKit.UIStackView`
+* `StackLayout`: maps to `Android.Widget.LinearLayout` and `UIKit.UIStackView`
 * `Image`: maps to `Android.Widget.ImageView` and `UIKit.UIImageView`
 * `Entry`: maps to `Android.Widget.EditText` and `UIKit.UITextField`
 * `WebView`: maps to `Android.Webkit.WebView` and `WebKit.WKWebView`
