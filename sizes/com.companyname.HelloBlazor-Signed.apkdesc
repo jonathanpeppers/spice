@@ -59,10 +59,13 @@
       "Size": 790
     },
     "classes.dex": {
-      "Size": 9392120
+      "Size": 9884408
+    },
+    "classes2.dex": {
+      "Size": 197456
     },
     "commonMain/default/linkdata/module": {
-      "Size": 70
+      "Size": 281
     },
     "commonMain/default/linkdata/package_androidx.annotation/0_annotation.knm": {
       "Size": 4603
@@ -71,22 +74,118 @@
       "Size": 697
     },
     "commonMain/default/linkdata/package_androidx.collection.internal/1_internal.knm": {
-      "Size": 766
+      "Size": 871
     },
     "commonMain/default/linkdata/package_androidx.collection/0_collection.knm": {
-      "Size": 6131
+      "Size": 50326
     },
     "commonMain/default/linkdata/package_androidx.collection/1_collection.knm": {
-      "Size": 4985
+      "Size": 124
+    },
+    "commonMain/default/linkdata/package_androidx.collection/2_collection.knm": {
+      "Size": 6895
+    },
+    "commonMain/default/linkdata/package_androidx.collection/3_collection.knm": {
+      "Size": 6451
+    },
+    "commonMain/default/linkdata/package_androidx.collection/4_collection.knm": {
+      "Size": 6604
+    },
+    "commonMain/default/linkdata/package_androidx.collection/5_collection.knm": {
+      "Size": 3642
     },
     "commonMain/default/linkdata/package_androidx/0_androidx.knm": {
       "Size": 20
+    },
+    "commonMain/default/linkdata/package_kotlinx.coroutines.channels/0_channels.knm": {
+      "Size": 16032
+    },
+    "commonMain/default/linkdata/package_kotlinx.coroutines.channels/1_channels.knm": {
+      "Size": 8842
+    },
+    "commonMain/default/linkdata/package_kotlinx.coroutines.flow.internal/0_internal.knm": {
+      "Size": 5146
+    },
+    "commonMain/default/linkdata/package_kotlinx.coroutines.flow.internal/1_internal.knm": {
+      "Size": 1942
+    },
+    "commonMain/default/linkdata/package_kotlinx.coroutines.flow/0_flow.knm": {
+      "Size": 8434
+    },
+    "commonMain/default/linkdata/package_kotlinx.coroutines.flow/1_flow.knm": {
+      "Size": 12759
+    },
+    "commonMain/default/linkdata/package_kotlinx.coroutines.flow/2_flow.knm": {
+      "Size": 9008
+    },
+    "commonMain/default/linkdata/package_kotlinx.coroutines.internal/0_internal.knm": {
+      "Size": 10333
+    },
+    "commonMain/default/linkdata/package_kotlinx.coroutines.internal/1_internal.knm": {
+      "Size": 3585
+    },
+    "commonMain/default/linkdata/package_kotlinx.coroutines.intrinsics/0_intrinsics.knm": {
+      "Size": 1266
+    },
+    "commonMain/default/linkdata/package_kotlinx.coroutines.selects/0_selects.knm": {
+      "Size": 6768
+    },
+    "commonMain/default/linkdata/package_kotlinx.coroutines.selects/1_selects.knm": {
+      "Size": 1849
+    },
+    "commonMain/default/linkdata/package_kotlinx.coroutines.sync/0_sync.knm": {
+      "Size": 4469
+    },
+    "commonMain/default/linkdata/package_kotlinx.coroutines.sync/1_sync.knm": {
+      "Size": 1040
+    },
+    "commonMain/default/linkdata/package_kotlinx.coroutines/0_coroutines.knm": {
+      "Size": 23712
+    },
+    "commonMain/default/linkdata/package_kotlinx.coroutines/1_coroutines.knm": {
+      "Size": 5292
+    },
+    "commonMain/default/linkdata/package_kotlinx.coroutines/2_coroutines.knm": {
+      "Size": 6947
+    },
+    "commonMain/default/linkdata/package_kotlinx.coroutines/3_coroutines.knm": {
+      "Size": 816
+    },
+    "commonMain/default/linkdata/package_kotlinx/0_kotlinx.knm": {
+      "Size": 19
     },
     "commonMain/default/linkdata/root_package/0_.knm": {
       "Size": 12
     },
     "commonMain/default/manifest": {
-      "Size": 98
+      "Size": 138
+    },
+    "concurrentMain/default/linkdata/module": {
+      "Size": 142
+    },
+    "concurrentMain/default/linkdata/package_kotlinx.coroutines.channels/0_channels.knm": {
+      "Size": 645
+    },
+    "concurrentMain/default/linkdata/package_kotlinx.coroutines.internal/0_internal.knm": {
+      "Size": 2230
+    },
+    "concurrentMain/default/linkdata/package_kotlinx.coroutines.internal/1_internal.knm": {
+      "Size": 491
+    },
+    "concurrentMain/default/linkdata/package_kotlinx.coroutines/0_coroutines.knm": {
+      "Size": 503
+    },
+    "concurrentMain/default/linkdata/package_kotlinx.coroutines/1_coroutines.knm": {
+      "Size": 1080
+    },
+    "concurrentMain/default/linkdata/package_kotlinx/0_kotlinx.knm": {
+      "Size": 19
+    },
+    "concurrentMain/default/linkdata/root_package/0_.knm": {
+      "Size": 12
+    },
+    "concurrentMain/default/manifest": {
+      "Size": 142
     },
     "kotlin/annotation/annotation.kotlin_builtins": {
       "Size": 928
@@ -107,7 +206,7 @@
       "Size": 3399
     },
     "kotlin/reflect/reflect.kotlin_builtins": {
-      "Size": 2396
+      "Size": 2426
     },
     "lib/arm64-v8a/libaot-_Microsoft.Android.Resource.Designer.dll.so": {
       "Size": 3800
@@ -116,7 +215,7 @@
       "Size": 4368
     },
     "lib/arm64-v8a/libaot-HelloBlazor.dll.so": {
-      "Size": 15456
+      "Size": 15464
     },
     "lib/arm64-v8a/libaot-Java.Interop.dll.so": {
       "Size": 168960
@@ -164,13 +263,13 @@
       "Size": 60344
     },
     "lib/arm64-v8a/libaot-Mono.Android.dll.so": {
-      "Size": 312576
+      "Size": 313152
     },
     "lib/arm64-v8a/libaot-Mono.Android.Runtime.dll.so": {
       "Size": 4480
     },
     "lib/arm64-v8a/libaot-Spice.dll.so": {
-      "Size": 48536
+      "Size": 49232
     },
     "lib/arm64-v8a/libaot-System.Collections.Concurrent.dll.so": {
       "Size": 54512
@@ -242,43 +341,46 @@
       "Size": 190832
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Activity.dll.so": {
-      "Size": 9224
+      "Size": 9184
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.AppCompat.dll.so": {
-      "Size": 29416
+      "Size": 29384
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Core.dll.so": {
-      "Size": 14920
+      "Size": 14848
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.DrawerLayout.dll.so": {
-      "Size": 7744
+      "Size": 7680
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Fragment.dll.so": {
-      "Size": 17880
+      "Size": 18128
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Lifecycle.Common.dll.so": {
-      "Size": 5168
+      "Size": 5080
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Lifecycle.LiveData.Core.dll.so": {
-      "Size": 5192
+      "Size": 5072
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Lifecycle.ViewModel.dll.so": {
-      "Size": 6408
+      "Size": 6312
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Loader.dll.so": {
-      "Size": 7128
+      "Size": 6872
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.SavedState.dll.so": {
-      "Size": 4480
+      "Size": 4376
     },
     "lib/arm64-v8a/libaot-Xamarin.Kotlin.StdLib.dll.so": {
-      "Size": 4744
+      "Size": 5736
+    },
+    "lib/arm64-v8a/libaot-Xamarin.KotlinX.Coroutines.Core.Jvm.dll.so": {
+      "Size": 4992
     },
     "lib/arm64-v8a/libarc.bin.so": {
       "Size": 19168
     },
     "lib/arm64-v8a/libassembly-store.so": {
-      "Size": 2579824
+      "Size": 2593648
     },
     "lib/arm64-v8a/libmono-component-marshal-ilgen.so": {
       "Size": 36616
@@ -302,7 +404,7 @@
       "Size": 165536
     },
     "lib/arm64-v8a/libxamarin-app.so": {
-      "Size": 74640
+      "Size": 76608
     },
     "META-INF/androidx.activity_activity.version": {
       "Size": 6
@@ -365,19 +467,19 @@
       "Size": 6
     },
     "META-INF/androidx.lifecycle_lifecycle-livedata-core.version": {
-      "Size": 78
+      "Size": 6
     },
     "META-INF/androidx.lifecycle_lifecycle-process.version": {
-      "Size": 72
+      "Size": 6
     },
     "META-INF/androidx.lifecycle_lifecycle-runtime.version": {
-      "Size": 72
+      "Size": 6
     },
     "META-INF/androidx.lifecycle_lifecycle-viewmodel-savedstate.version": {
-      "Size": 85
+      "Size": 6
     },
     "META-INF/androidx.lifecycle_lifecycle-viewmodel.version": {
-      "Size": 74
+      "Size": 6
     },
     "META-INF/androidx.loader_loader.version": {
       "Size": 6
@@ -422,10 +524,10 @@
       "Size": 6
     },
     "META-INF/BNDLTOOL.RSA": {
-      "Size": 1211
+      "Size": 1607
     },
     "META-INF/BNDLTOOL.SF": {
-      "Size": 122483
+      "Size": 129160
     },
     "META-INF/com.android.tools/proguard/coroutines.pro": {
       "Size": 1345
@@ -443,7 +545,7 @@
       "Size": 7
     },
     "META-INF/kotlin-project-structure-metadata.json": {
-      "Size": 1669
+      "Size": 9945
     },
     "META-INF/kotlinx_coroutines_android.version": {
       "Size": 5
@@ -452,13 +554,13 @@
       "Size": 5
     },
     "META-INF/MANIFEST.MF": {
-      "Size": 122356
+      "Size": 129033
     },
     "META-INF/maven/com.google.errorprone/error_prone_annotations/pom.properties": {
       "Size": 80
     },
     "META-INF/maven/com.google.errorprone/error_prone_annotations/pom.xml": {
-      "Size": 1832
+      "Size": 4252
     },
     "META-INF/maven/com.google.guava/listenablefuture/pom.properties": {
       "Size": 96
@@ -479,25 +581,64 @@
       "Size": 52
     },
     "nativeMain/default/linkdata/module": {
-      "Size": 120
+      "Size": 215
     },
     "nativeMain/default/linkdata/package_androidx.collection.internal/0_internal.knm": {
       "Size": 1212
     },
     "nativeMain/default/linkdata/package_androidx.collection.internal/1_internal.knm": {
-      "Size": 177
+      "Size": 289
     },
     "nativeMain/default/linkdata/package_androidx.collection/0_collection.knm": {
-      "Size": 3102
+      "Size": 3156
     },
     "nativeMain/default/linkdata/package_androidx/0_androidx.knm": {
       "Size": 20
+    },
+    "nativeMain/default/linkdata/package_kotlinx.coroutines.flow.internal/0_internal.knm": {
+      "Size": 734
+    },
+    "nativeMain/default/linkdata/package_kotlinx.coroutines.flow/0_flow.knm": {
+      "Size": 35
+    },
+    "nativeMain/default/linkdata/package_kotlinx.coroutines.internal/0_internal.knm": {
+      "Size": 2373
+    },
+    "nativeMain/default/linkdata/package_kotlinx.coroutines.internal/1_internal.knm": {
+      "Size": 1617
+    },
+    "nativeMain/default/linkdata/package_kotlinx.coroutines/0_coroutines.knm": {
+      "Size": 4024
+    },
+    "nativeMain/default/linkdata/package_kotlinx.coroutines/1_coroutines.knm": {
+      "Size": 1893
+    },
+    "nativeMain/default/linkdata/package_kotlinx/0_kotlinx.knm": {
+      "Size": 19
     },
     "nativeMain/default/linkdata/root_package/0_.knm": {
       "Size": 12
     },
     "nativeMain/default/manifest": {
-      "Size": 193
+      "Size": 248
+    },
+    "nativeOtherMain/default/linkdata/module": {
+      "Size": 107
+    },
+    "nativeOtherMain/default/linkdata/package_kotlinx.coroutines/0_coroutines.knm": {
+      "Size": 645
+    },
+    "nativeOtherMain/default/linkdata/package_kotlinx.coroutines/1_coroutines.knm": {
+      "Size": 347
+    },
+    "nativeOtherMain/default/linkdata/package_kotlinx/0_kotlinx.knm": {
+      "Size": 19
+    },
+    "nativeOtherMain/default/linkdata/root_package/0_.knm": {
+      "Size": 12
+    },
+    "nativeOtherMain/default/manifest": {
+      "Size": 258
     },
     "nonJvmMain/default/linkdata/module": {
       "Size": 90
@@ -3056,8 +3197,8 @@
       "Size": 8404
     },
     "resources.arsc": {
-      "Size": 1021236
+      "Size": 1021392
     }
   },
-  "PackageSize": 11179684
+  "PackageSize": 11471754
 }
