@@ -5,7 +5,7 @@
 /// Android -> Android.Widget.LinearLayout
 /// iOS -> UIKit.UIStackView
 /// </summary>
-public partial class StackView : View
+public partial class StackLayout : View
 {
 	/// <summary>
 	/// Set to specify if layout is vertical or horizontal. Defaults to vertical.
@@ -17,5 +17,5 @@ public partial class StackView : View
 	/// Spacing between children
 	/// </summary>
 	[ObservableProperty]
-	int _spacing = 0;
+	double _spacing = 0;
 }

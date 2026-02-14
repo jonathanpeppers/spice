@@ -2,13 +2,13 @@
 
 namespace Spice;
 
-public partial class StackView
+public partial class StackLayout
 {
 	/// <summary>
-	/// Returns stackView.NativeView
+	/// Returns stackLayout.NativeView
 	/// </summary>
-	/// <param name="stackView">The Spice.StackView</param>
-	public static implicit operator LinearLayout(StackView stackView) => stackView.NativeView;
+	/// <param name="stackLayout">The Spice.StackLayout</param>
+	public static implicit operator LinearLayout(StackLayout stackLayout) => stackLayout.NativeView;
 
 	static LinearLayout Create(Context context)
 	{
@@ -25,20 +25,20 @@ public partial class StackView
 	/// Android -> Android.Widget.LinearLayout
 	/// iOS -> UIKit.UIStackView
 	/// </summary>
-	public StackView() : this(Platform.Context, Create) { }
+	public StackLayout() : this(Platform.Context, Create) { }
 
 	/// <inheritdoc />
 	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
-	public StackView(Context context) : this(context, Create) { }
+	public StackLayout(Context context) : this(context, Create) { }
 
 	/// <inheritdoc />
 	/// <param name="creator">Subclasses can pass in a Func to create a Android.Views.View</param>
-	protected StackView(Func<Context, Android.Views.View> creator) : this(Platform.Context, creator) { }
+	protected StackLayout(Func<Context, Android.Views.View> creator) : this(Platform.Context, creator) { }
 
 	/// <inheritdoc />
 	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
 	/// <param name="creator">Subclasses can pass in a Func to create a Android.Views.View</param>
-	protected StackView(Context context, Func<Context, Android.Views.View> creator) : base(context, creator) { }
+	protected StackLayout(Context context, Func<Context, Android.Views.View> creator) : base(context, creator) { }
 
 	/// <summary>
 	/// The underlying Android.Widget.LinearLayout
@@ -60,5 +60,5 @@ public partial class StackView
 		}
 	}
 
-	partial void OnSpacingChanged(int value) => NativeView.DividerPadding = value;
+	partial void OnSpacingChanged(double value) => NativeView.DividerPadding = (int)value;
 }

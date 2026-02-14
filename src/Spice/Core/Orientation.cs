@@ -2,7 +2,7 @@
 
 /// <summary>
 /// General Orientation enum.
-/// Currently only used by StackView.
+/// Currently only used by StackLayout.
 /// </summary>
 public enum Orientation
 {
