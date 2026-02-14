@@ -34,6 +34,8 @@ public class App : Application
 				{
 					Text = "CheckBox",
 					Clicked = _ => Main = new CheckBoxScenario(),
+					Text = "Slider",
+					Clicked = _ => Main = new SliderScenario(),
 				},
 			}
 		};
