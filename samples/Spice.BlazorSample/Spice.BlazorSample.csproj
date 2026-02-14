@@ -20,6 +20,8 @@
         <RuntimeIdentifier Condition="'$(GITHUB_ACTIONS)' == 'true' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">android-arm64</RuntimeIdentifier>
         <EnableDefaultCssItems>false</EnableDefaultCssItems>
         <AndroidPackageFormat>apk</AndroidPackageFormat>
+        <!-- https://github.com/dotnet/aspnetcore/issues/63951 — Blazor doesn't support full trimming -->
+        <NoWarn>$(NoWarn);IL2111</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
