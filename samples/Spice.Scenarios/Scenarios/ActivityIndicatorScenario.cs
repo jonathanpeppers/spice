@@ -1,6 +1,6 @@
 namespace Spice.Scenarios;
 
-class ActivityIndicatorScenario : StackView
+class ActivityIndicatorScenario : StackLayout
 {
 	public ActivityIndicatorScenario()
 	{

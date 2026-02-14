@@ -9,7 +9,7 @@ public class App : Application
 	{
 		int count = 0;
 
-		Main = new StackView
+		Main = new StackLayout
 		{
 			new Image { Source = "dotnet_bot" },
 			new Label { Text = "Hello, World!" },
