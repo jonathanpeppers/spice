@@ -2,7 +2,7 @@ using System.Collections.ObjectModel;
 
 namespace Spice.Scenarios;
 
-class PickerScenario : StackView
+class PickerScenario : StackLayout
 {
 	public PickerScenario()
 	{
