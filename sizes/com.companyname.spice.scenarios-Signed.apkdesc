@@ -4,26 +4,26 @@
     "AndroidManifest.xml": {
       "Size": 6012
     },
-    "assemblies/assemblies.arm64_v8a.blob": {
-      "Size": 554095
-    },
-    "assemblies/assemblies.blob": {
-      "Size": 582145
-    },
-    "assemblies/assemblies.manifest": {
-      "Size": 2002
-    },
-    "assemblies/rc.bin": {
-      "Size": 1512
-    },
     "classes.dex": {
-      "Size": 9266728
+      "Size": 9032172
     },
     "commonMain/default/linkdata/module": {
       "Size": 70
     },
     "commonMain/default/linkdata/package_androidx.annotation/0_annotation.knm": {
       "Size": 4603
+    },
+    "commonMain/default/linkdata/package_androidx.collection.internal/0_internal.knm": {
+      "Size": 697
+    },
+    "commonMain/default/linkdata/package_androidx.collection.internal/1_internal.knm": {
+      "Size": 766
+    },
+    "commonMain/default/linkdata/package_androidx.collection/0_collection.knm": {
+      "Size": 6131
+    },
+    "commonMain/default/linkdata/package_androidx.collection/1_collection.knm": {
+      "Size": 4985
     },
     "commonMain/default/linkdata/package_androidx/0_androidx.knm": {
       "Size": 20
@@ -34,110 +34,140 @@
     "commonMain/default/manifest": {
       "Size": 98
     },
+    "kotlin/annotation/annotation.kotlin_builtins": {
+      "Size": 928
+    },
+    "kotlin/collections/collections.kotlin_builtins": {
+      "Size": 3685
+    },
+    "kotlin/coroutines/coroutines.kotlin_builtins": {
+      "Size": 200
+    },
+    "kotlin/internal/internal.kotlin_builtins": {
+      "Size": 646
+    },
+    "kotlin/kotlin.kotlin_builtins": {
+      "Size": 18640
+    },
+    "kotlin/ranges/ranges.kotlin_builtins": {
+      "Size": 3399
+    },
+    "kotlin/reflect/reflect.kotlin_builtins": {
+      "Size": 2396
+    },
     "lib/arm64-v8a/libaot-_Microsoft.Android.Resource.Designer.dll.so": {
-      "Size": 3720
+      "Size": 3800
     },
     "lib/arm64-v8a/libaot-CommunityToolkit.Mvvm.dll.so": {
-      "Size": 4240
+      "Size": 4368
     },
     "lib/arm64-v8a/libaot-Java.Interop.dll.so": {
-      "Size": 169112
+      "Size": 164208
     },
     "lib/arm64-v8a/libaot-Microsoft.Maui.Graphics.dll.so": {
-      "Size": 15760
+      "Size": 15792
     },
     "lib/arm64-v8a/libaot-Mono.Android.dll.so": {
-      "Size": 297128
+      "Size": 305568
     },
     "lib/arm64-v8a/libaot-Mono.Android.Runtime.dll.so": {
-      "Size": 4184
+      "Size": 4480
     },
     "lib/arm64-v8a/libaot-Spice.dll.so": {
-      "Size": 35712
+      "Size": 35360
     },
     "lib/arm64-v8a/libaot-Spice.Scenarios.dll.so": {
-      "Size": 13344
+      "Size": 13432
     },
     "lib/arm64-v8a/libaot-System.ComponentModel.TypeConverter.dll.so": {
-      "Size": 3720
+      "Size": 3800
     },
     "lib/arm64-v8a/libaot-System.Console.dll.so": {
-      "Size": 4688
+      "Size": 4768
     },
     "lib/arm64-v8a/libaot-System.Linq.dll.so": {
-      "Size": 48784
+      "Size": 22768
     },
     "lib/arm64-v8a/libaot-System.ObjectModel.dll.so": {
-      "Size": 10952
+      "Size": 11312
     },
     "lib/arm64-v8a/libaot-System.Private.CoreLib.dll.so": {
-      "Size": 862472
+      "Size": 871968
     },
     "lib/arm64-v8a/libaot-System.Runtime.dll.so": {
-      "Size": 3528
+      "Size": 3608
     },
     "lib/arm64-v8a/libaot-System.Runtime.InteropServices.dll.so": {
-      "Size": 3560
+      "Size": 3640
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Activity.dll.so": {
-      "Size": 8816
+      "Size": 9528
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.AppCompat.dll.so": {
-      "Size": 29632
+      "Size": 29944
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Core.dll.so": {
-      "Size": 14936
+      "Size": 15392
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.DrawerLayout.dll.so": {
-      "Size": 7472
+      "Size": 8768
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Fragment.dll.so": {
-      "Size": 17624
+      "Size": 18824
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Lifecycle.Common.dll.so": {
-      "Size": 4952
+      "Size": 5160
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Lifecycle.LiveData.Core.dll.so": {
-      "Size": 4936
+      "Size": 5168
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Lifecycle.ViewModel.dll.so": {
-      "Size": 6296
+      "Size": 6392
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Loader.dll.so": {
-      "Size": 6744
+      "Size": 7080
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.SavedState.dll.so": {
-      "Size": 4232
+      "Size": 4480
     },
     "lib/arm64-v8a/libaot-Xamarin.Kotlin.StdLib.dll.so": {
-      "Size": 4496
+      "Size": 4736
+    },
+    "lib/arm64-v8a/libarc.bin.so": {
+      "Size": 19168
+    },
+    "lib/arm64-v8a/libassembly-store.so": {
+      "Size": 1279920
     },
     "lib/arm64-v8a/libmono-component-marshal-ilgen.so": {
-      "Size": 97080
+      "Size": 36616
     },
     "lib/arm64-v8a/libmonodroid.so": {
-      "Size": 334520
+      "Size": 1408384
     },
     "lib/arm64-v8a/libmonosgen-2.0.so": {
-      "Size": 3193248
+      "Size": 3123272
+    },
+    "lib/arm64-v8a/libSystem.Globalization.Native.so": {
+      "Size": 71936
     },
     "lib/arm64-v8a/libSystem.IO.Compression.Native.so": {
-      "Size": 723560
+      "Size": 758968
     },
     "lib/arm64-v8a/libSystem.Native.so": {
-      "Size": 93952
+      "Size": 104064
     },
     "lib/arm64-v8a/libSystem.Security.Cryptography.Native.Android.so": {
-      "Size": 154904
+      "Size": 165536
     },
     "lib/arm64-v8a/libxamarin-app.so": {
-      "Size": 46096
+      "Size": 70120
     },
     "META-INF/ANDROIDD.RSA": {
-      "Size": 1221
+      "Size": 1607
     },
     "META-INF/ANDROIDD.SF": {
-      "Size": 115151
+      "Size": 118397
     },
     "META-INF/androidx.activity_activity.version": {
       "Size": 6
@@ -269,7 +299,7 @@
       "Size": 1190
     },
     "META-INF/com.google.android.material_material.version": {
-      "Size": 6
+      "Size": 7
     },
     "META-INF/kotlin-project-structure-metadata.json": {
       "Size": 1669
@@ -281,7 +311,7 @@
       "Size": 5
     },
     "META-INF/MANIFEST.MF": {
-      "Size": 115024
+      "Size": 118270
     },
     "META-INF/maven/com.google.errorprone/error_prone_annotations/pom.properties": {
       "Size": 80
@@ -306,6 +336,27 @@
     },
     "META-INF/services/kotlinx.coroutines.internal.MainDispatcherFactory": {
       "Size": 52
+    },
+    "nativeMain/default/linkdata/module": {
+      "Size": 120
+    },
+    "nativeMain/default/linkdata/package_androidx.collection.internal/0_internal.knm": {
+      "Size": 1212
+    },
+    "nativeMain/default/linkdata/package_androidx.collection.internal/1_internal.knm": {
+      "Size": 177
+    },
+    "nativeMain/default/linkdata/package_androidx.collection/0_collection.knm": {
+      "Size": 3102
+    },
+    "nativeMain/default/linkdata/package_androidx/0_androidx.knm": {
+      "Size": 20
+    },
+    "nativeMain/default/linkdata/root_package/0_.knm": {
+      "Size": 12
+    },
+    "nativeMain/default/manifest": {
+      "Size": 193
     },
     "nonJvmMain/default/linkdata/module": {
       "Size": 90
@@ -337,11 +388,17 @@
     "res/anim-v21/m3_bottom_sheet_slide_out.xml": {
       "Size": 656
     },
-    "res/anim-v21/m3_side_sheet_slide_in.xml": {
-      "Size": 616
+    "res/anim-v21/m3_side_sheet_enter_from_left.xml": {
+      "Size": 464
     },
-    "res/anim-v21/m3_side_sheet_slide_out.xml": {
-      "Size": 616
+    "res/anim-v21/m3_side_sheet_enter_from_right.xml": {
+      "Size": 464
+    },
+    "res/anim-v21/m3_side_sheet_exit_to_left.xml": {
+      "Size": 464
+    },
+    "res/anim-v21/m3_side_sheet_exit_to_right.xml": {
+      "Size": 464
     },
     "res/anim-v21/mtrl_bottom_sheet_slide_in.xml": {
       "Size": 616
@@ -723,6 +780,9 @@
     },
     "res/color/m3_assist_chip_stroke_color.xml": {
       "Size": 872
+    },
+    "res/color/m3_bottom_sheet_drag_handle_color.xml": {
+      "Size": 340
     },
     "res/color/m3_button_background_color_selector.xml": {
       "Size": 500
@@ -1364,10 +1424,10 @@
       "Size": 107
     },
     "res/drawable-hdpi-v4/spice.png": {
-      "Size": 5655
+      "Size": 6895
     },
     "res/drawable-hdpi-v4/splash.png": {
-      "Size": 1419
+      "Size": 1455
     },
     "res/drawable-ldpi-v4/ic_call_answer_low.png": {
       "Size": 270
@@ -1535,10 +1595,10 @@
       "Size": 98
     },
     "res/drawable-mdpi-v4/spice.png": {
-      "Size": 4372
+      "Size": 4314
     },
     "res/drawable-mdpi-v4/splash.png": {
-      "Size": 845
+      "Size": 1241
     },
     "res/drawable-v21/abc_action_bar_item_background_material.xml": {
       "Size": 264
@@ -1730,10 +1790,10 @@
       "Size": 138
     },
     "res/drawable-xhdpi-v4/spice.png": {
-      "Size": 8412
+      "Size": 8300
     },
     "res/drawable-xhdpi-v4/splash.png": {
-      "Size": 1406
+      "Size": 2041
     },
     "res/drawable-xxhdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png": {
       "Size": 286
@@ -1853,10 +1913,10 @@
       "Size": 628
     },
     "res/drawable-xxhdpi-v4/spice.png": {
-      "Size": 10064
+      "Size": 13935
     },
     "res/drawable-xxhdpi-v4/splash.png": {
-      "Size": 2406
+      "Size": 2574
     },
     "res/drawable-xxxhdpi-v4/abc_btn_check_to_on_mtrl_000.png": {
       "Size": 275
@@ -1916,10 +1976,10 @@
       "Size": 823
     },
     "res/drawable-xxxhdpi-v4/spice.png": {
-      "Size": 15297
+      "Size": 15087
     },
     "res/drawable-xxxhdpi-v4/splash.png": {
-      "Size": 2526
+      "Size": 2532
     },
     "res/drawable/$avd_hide_password__0.xml": {
       "Size": 1176
@@ -2247,6 +2307,9 @@
     },
     "res/drawable/m3_avd_show_password.xml": {
       "Size": 660
+    },
+    "res/drawable/m3_bottom_sheet_drag_handle.xml": {
+      "Size": 628
     },
     "res/drawable/m3_password_eye.xml": {
       "Size": 816
@@ -2843,25 +2906,34 @@
       "Size": 120
     },
     "res/mipmap-hdpi-v4/appicon_foreground.png": {
-      "Size": 1368
+      "Size": 1243
+    },
+    "res/mipmap-hdpi-v4/appicon_round.png": {
+      "Size": 1734
     },
     "res/mipmap-hdpi-v4/appicon.png": {
-      "Size": 951
+      "Size": 1073
     },
     "res/mipmap-mdpi-v4/appicon_background.png": {
       "Size": 106
     },
     "res/mipmap-mdpi-v4/appicon_foreground.png": {
-      "Size": 1265
+      "Size": 1129
+    },
+    "res/mipmap-mdpi-v4/appicon_round.png": {
+      "Size": 1523
     },
     "res/mipmap-mdpi-v4/appicon.png": {
-      "Size": 747
+      "Size": 741
     },
     "res/mipmap-xhdpi-v4/appicon_background.png": {
       "Size": 140
     },
     "res/mipmap-xhdpi-v4/appicon_foreground.png": {
-      "Size": 1981
+      "Size": 1723
+    },
+    "res/mipmap-xhdpi-v4/appicon_round.png": {
+      "Size": 2030
     },
     "res/mipmap-xhdpi-v4/appicon.png": {
       "Size": 875
@@ -2870,23 +2942,29 @@
       "Size": 197
     },
     "res/mipmap-xxhdpi-v4/appicon_foreground.png": {
-      "Size": 2229
+      "Size": 2142
+    },
+    "res/mipmap-xxhdpi-v4/appicon_round.png": {
+      "Size": 4317
     },
     "res/mipmap-xxhdpi-v4/appicon.png": {
-      "Size": 1058
+      "Size": 1336
     },
     "res/mipmap-xxxhdpi-v4/appicon_background.png": {
       "Size": 275
     },
     "res/mipmap-xxxhdpi-v4/appicon_foreground.png": {
-      "Size": 3298
+      "Size": 3023
+    },
+    "res/mipmap-xxxhdpi-v4/appicon_round.png": {
+      "Size": 5567
     },
     "res/mipmap-xxxhdpi-v4/appicon.png": {
-      "Size": 1419
+      "Size": 1455
     },
     "resources.arsc": {
-      "Size": 1006580
+      "Size": 1041120
     }
   },
-  "PackageSize": 8638458
+  "PackageSize": 8952303
 }
