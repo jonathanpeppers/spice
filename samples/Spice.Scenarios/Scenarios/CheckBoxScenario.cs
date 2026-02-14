@@ -3,7 +3,7 @@ namespace Spice.Scenarios;
 /// <summary>
 /// Example showing CheckBox usage
 /// </summary>
-class CheckBoxScenario : StackView
+class CheckBoxScenario : StackLayout
 {
 	public CheckBoxScenario()
 	{
