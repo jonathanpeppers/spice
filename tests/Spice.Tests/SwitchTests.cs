@@ -35,15 +35,11 @@ public class SwitchTests
 	[Fact]
 	public void ToggledActionWorks()
 	{
+		var switchControl = new Switch();
+		Assert.Null(switchControl.Toggled);
+
 		bool toggled = false;
-		var switchControl = new Switch
-		{
-			Toggled = _ => toggled = true
-		};
-
-		// Simulate toggling by setting IsOn
-		switchControl.IsOn = true;
-
+		switchControl.Toggled = _ => toggled = true;
 		Assert.NotNull(switchControl.Toggled);
 	}
 

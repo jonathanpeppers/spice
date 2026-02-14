@@ -34,15 +34,14 @@ public partial class Switch
 
 	partial void OnToggledChanged(Action<Switch>? value)
 	{
-		if (value == null)
+		// Unsubscribe existing handler if any
+		if (_valueChanged != null)
 		{
-			if (_valueChanged != null)
-			{
-				NativeView.ValueChanged -= _valueChanged;
-				_valueChanged = null;
-			}
+			NativeView.ValueChanged -= _valueChanged;
+			_valueChanged = null;
 		}
-		else
+
+		if (value != null)
 		{
 			NativeView.ValueChanged += _valueChanged = (sender, e) =>
 			{

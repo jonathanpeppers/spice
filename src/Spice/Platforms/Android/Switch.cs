@@ -44,15 +44,14 @@ public partial class Switch
 
 	partial void OnToggledChanged(Action<Switch>? value)
 	{
-		if (value == null)
+		// Unsubscribe existing handler if any
+		if (_checkedChange != null)
 		{
-			if (_checkedChange != null)
-			{
-				NativeView.CheckedChange -= _checkedChange;
-				_checkedChange = null;
-			}
+			NativeView.CheckedChange -= _checkedChange;
+			_checkedChange = null;
 		}
-		else
+
+		if (value != null)
 		{
 			NativeView.CheckedChange += _checkedChange = (sender, e) =>
 			{
