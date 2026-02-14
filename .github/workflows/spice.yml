@@ -33,6 +33,14 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 10.0.x
+
+    - name: cache NuGet packages
+      uses: actions/cache@v4
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj', '**/Directory.Build.props', '**/Directory.Build.targets') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
         
     - name: install workloads
       run: dotnet workload install maui-android maui-ios --version $WORKLOAD_VERSION
