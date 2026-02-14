@@ -1,6 +1,6 @@
 namespace Spice.Scenarios;
 
-class DatePickerScenario : StackView
+class DatePickerScenario : StackLayout
 {
 	public DatePickerScenario()
 	{
