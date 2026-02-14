@@ -19,6 +19,7 @@
     <None Include="../../src/Spice/README.md" Pack="true" PackagePath="" />
     <None Include="../../docs/icon.png" Pack="true" PackagePath="" />
     <Content Include="templates/**/*" />
+    <Content Remove="templates/Directory.Build.*" />
     <Compile Remove="**/*" />
   </ItemGroup>
 </Project>

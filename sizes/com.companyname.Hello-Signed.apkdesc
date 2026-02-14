@@ -2,64 +2,10 @@
   "Comment": null,
   "Entries": {
     "AndroidManifest.xml": {
-      "Size": 5988
-    },
-    "assets/wwwroot/_framework/blazor.modules.json": {
-      "Size": 4
-    },
-    "assets/wwwroot/_framework/blazor.webview.js": {
-      "Size": 441485
-    },
-    "assets/wwwroot/css/app.css": {
-      "Size": 3111
-    },
-    "assets/wwwroot/css/bootstrap/bootstrap.min.css": {
-      "Size": 162720
-    },
-    "assets/wwwroot/css/bootstrap/bootstrap.min.css.map": {
-      "Size": 449111
-    },
-    "assets/wwwroot/css/open-iconic/FONT-LICENSE": {
-      "Size": 4017
-    },
-    "assets/wwwroot/css/open-iconic/font/css/open-iconic-bootstrap.min.css": {
-      "Size": 9395
-    },
-    "assets/wwwroot/css/open-iconic/font/fonts/open-iconic.eot": {
-      "Size": 28196
-    },
-    "assets/wwwroot/css/open-iconic/font/fonts/open-iconic.otf": {
-      "Size": 20996
-    },
-    "assets/wwwroot/css/open-iconic/font/fonts/open-iconic.svg": {
-      "Size": 54789
-    },
-    "assets/wwwroot/css/open-iconic/font/fonts/open-iconic.ttf": {
-      "Size": 28028
-    },
-    "assets/wwwroot/css/open-iconic/font/fonts/open-iconic.woff": {
-      "Size": 14984
-    },
-    "assets/wwwroot/css/open-iconic/ICON-LICENSE": {
-      "Size": 1073
-    },
-    "assets/wwwroot/css/open-iconic/README.md": {
-      "Size": 3544
-    },
-    "assets/wwwroot/favicon.ico": {
-      "Size": 5430
-    },
-    "assets/wwwroot/index.html": {
-      "Size": 798
-    },
-    "assets/wwwroot/Spice.BlazorSample.58c9xjhuy8.bundle.scp.css": {
-      "Size": 2826
-    },
-    "assets/wwwroot/Spice.BlazorSample.styles.css": {
-      "Size": 2826
+      "Size": 5920
     },
     "classes.dex": {
-      "Size": 9392160
+      "Size": 9030788
     },
     "commonMain/default/linkdata/module": {
       "Size": 70
@@ -115,113 +61,38 @@
     "lib/arm64-v8a/libaot-CommunityToolkit.Mvvm.dll.so": {
       "Size": 4368
     },
+    "lib/arm64-v8a/libaot-Hello.dll.so": {
+      "Size": 8024
+    },
     "lib/arm64-v8a/libaot-Java.Interop.dll.so": {
-      "Size": 168960
+      "Size": 164208
     },
-    "lib/arm64-v8a/libaot-Microsoft.AspNetCore.Components.dll.so": {
-      "Size": 208152
-    },
-    "lib/arm64-v8a/libaot-Microsoft.AspNetCore.Components.Web.dll.so": {
-      "Size": 19008
-    },
-    "lib/arm64-v8a/libaot-Microsoft.AspNetCore.Components.WebView.dll.so": {
-      "Size": 90248
-    },
-    "lib/arm64-v8a/libaot-Microsoft.Extensions.DependencyInjection.Abstractions.dll.so": {
-      "Size": 16008
-    },
-    "lib/arm64-v8a/libaot-Microsoft.Extensions.DependencyInjection.dll.so": {
-      "Size": 59344
-    },
-    "lib/arm64-v8a/libaot-Microsoft.Extensions.FileProviders.Abstractions.dll.so": {
-      "Size": 4416
-    },
-    "lib/arm64-v8a/libaot-Microsoft.Extensions.FileProviders.Composite.dll.so": {
-      "Size": 3824
-    },
-    "lib/arm64-v8a/libaot-Microsoft.Extensions.FileProviders.Physical.dll.so": {
-      "Size": 4592
-    },
-    "lib/arm64-v8a/libaot-Microsoft.Extensions.FileSystemGlobbing.dll.so": {
-      "Size": 8432
-    },
-    "lib/arm64-v8a/libaot-Microsoft.Extensions.Logging.Abstractions.dll.so": {
-      "Size": 51480
-    },
-    "lib/arm64-v8a/libaot-Microsoft.Extensions.Logging.dll.so": {
-      "Size": 20360
-    },
-    "lib/arm64-v8a/libaot-Microsoft.Extensions.Options.dll.so": {
-      "Size": 29752
-    },
-    "lib/arm64-v8a/libaot-Microsoft.Extensions.Primitives.dll.so": {
-      "Size": 12880
-    },
-    "lib/arm64-v8a/libaot-Microsoft.JSInterop.dll.so": {
-      "Size": 60344
+    "lib/arm64-v8a/libaot-Microsoft.Maui.Graphics.dll.so": {
+      "Size": 15792
     },
     "lib/arm64-v8a/libaot-Mono.Android.dll.so": {
-      "Size": 312576
+      "Size": 292904
     },
     "lib/arm64-v8a/libaot-Mono.Android.Runtime.dll.so": {
       "Size": 4480
     },
-    "lib/arm64-v8a/libaot-Spice.BlazorSample.dll.so": {
-      "Size": 16216
-    },
     "lib/arm64-v8a/libaot-Spice.dll.so": {
-      "Size": 47304
-    },
-    "lib/arm64-v8a/libaot-System.Collections.Concurrent.dll.so": {
-      "Size": 54512
-    },
-    "lib/arm64-v8a/libaot-System.Collections.dll.so": {
-      "Size": 47664
-    },
-    "lib/arm64-v8a/libaot-System.Collections.Immutable.dll.so": {
-      "Size": 110200
-    },
-    "lib/arm64-v8a/libaot-System.ComponentModel.dll.so": {
-      "Size": 3656
-    },
-    "lib/arm64-v8a/libaot-System.ComponentModel.Primitives.dll.so": {
-      "Size": 4312
+      "Size": 27432
     },
     "lib/arm64-v8a/libaot-System.ComponentModel.TypeConverter.dll.so": {
-      "Size": 3872
+      "Size": 3800
     },
     "lib/arm64-v8a/libaot-System.Console.dll.so": {
-      "Size": 4912
-    },
-    "lib/arm64-v8a/libaot-System.Diagnostics.DiagnosticSource.dll.so": {
-      "Size": 29736
-    },
-    "lib/arm64-v8a/libaot-System.dll.so": {
-      "Size": 3592
-    },
-    "lib/arm64-v8a/libaot-System.IO.FileSystem.Watcher.dll.so": {
-      "Size": 6752
-    },
-    "lib/arm64-v8a/libaot-System.IO.Pipelines.dll.so": {
-      "Size": 3808
+      "Size": 4768
     },
     "lib/arm64-v8a/libaot-System.Linq.dll.so": {
-      "Size": 96256
-    },
-    "lib/arm64-v8a/libaot-System.Linq.Expressions.dll.so": {
-      "Size": 127432
-    },
-    "lib/arm64-v8a/libaot-System.Memory.dll.so": {
-      "Size": 29448
+      "Size": 22768
     },
     "lib/arm64-v8a/libaot-System.ObjectModel.dll.so": {
-      "Size": 12032
+      "Size": 11312
     },
     "lib/arm64-v8a/libaot-System.Private.CoreLib.dll.so": {
-      "Size": 1433536
-    },
-    "lib/arm64-v8a/libaot-System.Private.Uri.dll.so": {
-      "Size": 90360
+      "Size": 871968
     },
     "lib/arm64-v8a/libaot-System.Runtime.dll.so": {
       "Size": 3608
@@ -229,56 +100,44 @@
     "lib/arm64-v8a/libaot-System.Runtime.InteropServices.dll.so": {
       "Size": 3640
     },
-    "lib/arm64-v8a/libaot-System.Security.Cryptography.dll.so": {
-      "Size": 4160
-    },
-    "lib/arm64-v8a/libaot-System.Text.Encodings.Web.dll.so": {
-      "Size": 22392
-    },
-    "lib/arm64-v8a/libaot-System.Text.Json.dll.so": {
-      "Size": 445904
-    },
-    "lib/arm64-v8a/libaot-System.Text.RegularExpressions.dll.so": {
-      "Size": 190832
-    },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Activity.dll.so": {
-      "Size": 9224
+      "Size": 9520
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.AppCompat.dll.so": {
-      "Size": 29416
+      "Size": 29936
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Core.dll.so": {
-      "Size": 14920
+      "Size": 15384
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.DrawerLayout.dll.so": {
-      "Size": 7744
+      "Size": 8760
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Fragment.dll.so": {
-      "Size": 17880
+      "Size": 18824
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Lifecycle.Common.dll.so": {
-      "Size": 5168
+      "Size": 5160
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Lifecycle.LiveData.Core.dll.so": {
-      "Size": 5192
+      "Size": 5168
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Lifecycle.ViewModel.dll.so": {
-      "Size": 6408
+      "Size": 6392
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Loader.dll.so": {
-      "Size": 7128
+      "Size": 7080
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.SavedState.dll.so": {
       "Size": 4480
     },
     "lib/arm64-v8a/libaot-Xamarin.Kotlin.StdLib.dll.so": {
-      "Size": 4744
+      "Size": 4736
     },
     "lib/arm64-v8a/libarc.bin.so": {
       "Size": 19168
     },
     "lib/arm64-v8a/libassembly-store.so": {
-      "Size": 2579768
+      "Size": 1265840
     },
     "lib/arm64-v8a/libmono-component-marshal-ilgen.so": {
       "Size": 36616
@@ -302,13 +161,13 @@
       "Size": 165536
     },
     "lib/arm64-v8a/libxamarin-app.so": {
-      "Size": 74656
+      "Size": 67736
     },
     "META-INF/ANDROIDD.RSA": {
-      "Size": 1607
+      "Size": 1211
     },
     "META-INF/ANDROIDD.SF": {
-      "Size": 122413
+      "Size": 118387
     },
     "META-INF/androidx.activity_activity.version": {
       "Size": 6
@@ -452,7 +311,7 @@
       "Size": 5
     },
     "META-INF/MANIFEST.MF": {
-      "Size": 122286
+      "Size": 118260
     },
     "META-INF/maven/com.google.errorprone/error_prone_annotations/pom.properties": {
       "Size": 80
@@ -757,6 +616,9 @@
     "res/color-night-v8/material_timepicker_modebutton_tint.xml": {
       "Size": 340
     },
+    "res/color-v21/abc_btn_colored_borderless_text_material.xml": {
+      "Size": 464
+    },
     "res/color-v23/abc_btn_colored_borderless_text_material.xml": {
       "Size": 500
     },
@@ -853,6 +715,9 @@
     "res/color/abc_background_cache_hint_selector_material_light.xml": {
       "Size": 468
     },
+    "res/color/abc_btn_colored_text_material.xml": {
+      "Size": 604
+    },
     "res/color/abc_hint_foreground_material_dark.xml": {
       "Size": 564
     },
@@ -879,6 +744,24 @@
     },
     "res/color/abc_secondary_text_material_light.xml": {
       "Size": 464
+    },
+    "res/color/abc_tint_btn_checkable.xml": {
+      "Size": 728
+    },
+    "res/color/abc_tint_default.xml": {
+      "Size": 1224
+    },
+    "res/color/abc_tint_edittext.xml": {
+      "Size": 772
+    },
+    "res/color/abc_tint_seek_thumb.xml": {
+      "Size": 604
+    },
+    "res/color/abc_tint_spinner.xml": {
+      "Size": 772
+    },
+    "res/color/abc_tint_switch_track.xml": {
+      "Size": 768
     },
     "res/color/design_box_stroke_color.xml": {
       "Size": 712
@@ -1732,6 +1615,9 @@
     "res/drawable-v21/abc_list_divider_material.xml": {
       "Size": 516
     },
+    "res/drawable-v21/m3_tabs_background.xml": {
+      "Size": 776
+    },
     "res/drawable-v21/material_cursor_drawable.xml": {
       "Size": 588
     },
@@ -2428,6 +2314,9 @@
     "res/drawable/m3_password_eye.xml": {
       "Size": 816
     },
+    "res/drawable/m3_popupmenu_background_overlay.xml": {
+      "Size": 740
+    },
     "res/drawable/m3_tabs_line_indicator.xml": {
       "Size": 480
     },
@@ -2520,6 +2409,9 @@
     },
     "res/drawable/mtrl_ic_indeterminate.xml": {
       "Size": 744
+    },
+    "res/drawable/mtrl_popupmenu_background_overlay.xml": {
+      "Size": 740
     },
     "res/drawable/mtrl_popupmenu_background.xml": {
       "Size": 740
@@ -2668,6 +2560,24 @@
     "res/layout-v21/notification_template_icon_group.xml": {
       "Size": 988
     },
+    "res/layout-v22/abc_alert_dialog_button_bar_material.xml": {
+      "Size": 1584
+    },
+    "res/layout-v22/design_navigation_item.xml": {
+      "Size": 636
+    },
+    "res/layout-v22/m3_alert_dialog_actions.xml": {
+      "Size": 1584
+    },
+    "res/layout-v22/material_timepicker_dialog.xml": {
+      "Size": 3184
+    },
+    "res/layout-v22/mtrl_alert_dialog_actions.xml": {
+      "Size": 1764
+    },
+    "res/layout-v22/mtrl_search_view.xml": {
+      "Size": 3424
+    },
     "res/layout-v26/abc_screen_toolbar.xml": {
       "Size": 1560
     },
@@ -2705,7 +2615,7 @@
       "Size": 1684
     },
     "res/layout/abc_alert_dialog_button_bar_material.xml": {
-      "Size": 1584
+      "Size": 1536
     },
     "res/layout/abc_alert_dialog_material.xml": {
       "Size": 2648
@@ -2798,7 +2708,7 @@
       "Size": 564
     },
     "res/layout/design_navigation_item.xml": {
-      "Size": 636
+      "Size": 576
     },
     "res/layout/design_navigation_menu_item.xml": {
       "Size": 856
@@ -2819,7 +2729,7 @@
       "Size": 876
     },
     "res/layout/m3_alert_dialog_actions.xml": {
-      "Size": 1584
+      "Size": 1536
     },
     "res/layout/m3_alert_dialog_title.xml": {
       "Size": 956
@@ -2864,7 +2774,7 @@
       "Size": 956
     },
     "res/layout/material_timepicker_dialog.xml": {
-      "Size": 3184
+      "Size": 3132
     },
     "res/layout/material_timepicker_textinput_display.xml": {
       "Size": 728
@@ -2873,7 +2783,7 @@
       "Size": 1608
     },
     "res/layout/mtrl_alert_dialog_actions.xml": {
-      "Size": 1764
+      "Size": 1620
     },
     "res/layout/mtrl_alert_dialog_title.xml": {
       "Size": 956
@@ -2966,7 +2876,7 @@
       "Size": 488
     },
     "res/layout/mtrl_search_view.xml": {
-      "Size": 3424
+      "Size": 3376
     },
     "res/layout/notification_template_part_chronometer.xml": {
       "Size": 440
@@ -3053,8 +2963,8 @@
       "Size": 1455
     },
     "resources.arsc": {
-      "Size": 1021044
+      "Size": 1041120
     }
   },
-  "PackageSize": 11191928
+  "PackageSize": 8931813
 }
