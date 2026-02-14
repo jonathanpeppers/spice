@@ -42,4 +42,16 @@ public partial class View : ObservableObject, IEnumerable<View>
 	/// </summary>
 	[ObservableProperty]
 	Color? _backgroundColor;
+
+	/// <summary>
+	/// Whether the view is visible. Defaults to true.
+	/// </summary>
+	[ObservableProperty]
+	bool _isVisible = true;
+
+	/// <summary>
+	/// Whether the view is enabled (can respond to user interaction). Defaults to true.
+	/// </summary>
+	[ObservableProperty]
+	bool _isEnabled = true;
 }
