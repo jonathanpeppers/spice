@@ -174,4 +174,21 @@ public class BorderTests
 		border.BackgroundColor = null;
 		Assert.Null(border.BackgroundColor);
 	}
+
+	[Fact]
+	public void StrokeThicknessCanBeSetWhenStrokeIsNull()
+	{
+		var border = new Border
+		{
+			Stroke = null,
+			StrokeThickness = 5.0
+		};
+		Assert.Null(border.Stroke);
+		Assert.Equal(5.0, border.StrokeThickness);
+
+		// Setting Stroke after StrokeThickness should use the correct thickness
+		border.Stroke = Colors.Red;
+		Assert.Equal(Colors.Red, border.Stroke);
+		Assert.Equal(5.0, border.StrokeThickness);
+	}
 }

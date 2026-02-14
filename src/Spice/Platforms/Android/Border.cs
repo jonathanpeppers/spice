@@ -92,13 +92,19 @@ public partial class Border
 		{
 			drawable.SetStroke(value.ToPixels(), Stroke.ToAndroidInt());
 		}
+		else
+		{
+			// Even if Stroke is null, we need to update the stroke thickness
+			// so that when Stroke is set later, the thickness is correct
+			drawable.SetStroke(value.ToPixels(), 0);
+		}
 		UpdateContentPadding();
 	}
 
 	partial void OnCornerRadiusChanged(double value)
 	{
 		var drawable = GetOrCreateBorderDrawable();
-		drawable.SetCornerRadius((float)value);
+		drawable.SetCornerRadius((float)value.ToPixels());
 	}
 
 	partial void OnPaddingChanged(double value)
