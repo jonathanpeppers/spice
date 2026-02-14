@@ -77,6 +77,10 @@ public partial class View
 
 	partial void OnHorizontalAlignChanged(Align value) => UpdateAlign();
 
+	partial void OnIsVisibleChanged(bool value) => NativeView.Hidden = !value;
+
+	partial void OnIsEnabledChanged(bool value) => NativeView.UserInteractionEnabled = value;
+
 	internal void UpdateAlign()
 	{
 		var view = NativeView;
