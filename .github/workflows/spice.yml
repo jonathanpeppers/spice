@@ -10,16 +10,18 @@ jobs:
 
   build:
 
-    runs-on: macos-13
+    runs-on: macos-latest
 
     env:
       Configuration: Release
+      WORKLOAD_VERSION: 10.0.103
+      ValidateXcodeVersion: false
       APK_PERCENTAGE_REGRESSION: 3
       CONTENT_PERCENTAGE_REGRESSION: 5
 
     steps:
     - name: checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
@@ -29,12 +31,12 @@ jobs:
         xcode-version: latest-stable
 
     - name: install .NET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: 10.0.x
         
     - name: install workloads
-      run: dotnet workload install maui-android maui-ios --verbosity diag
+      run: dotnet workload install maui-android maui-ios --version $WORKLOAD_VERSION
 
     - name: build
       run: dotnet build -bl:bin/build.binlog
@@ -42,8 +44,8 @@ jobs:
     - name: run apkdiff
       run: |
         dotnet tool install --global apkdiff
-        apkdiff -s --save-description-2=bin/com.companyname.spice.scenarios-Signed.apkdesc --descrease-is-regression --test-apk-percentage-regression=$APK_PERCENTAGE_REGRESSION --test-content-percentage-regression=$CONTENT_PERCENTAGE_REGRESSION sizes/com.companyname.spice.scenarios-Signed.apkdesc samples/Spice.Scenarios/bin/Release/net8.0-android/android-arm64/com.companyname.spice.scenarios-Signed.apk
-        apkdiff -s --save-description-2=bin/com.companyname.spice.blazor-Signed.apkdesc --descrease-is-regression --test-apk-percentage-regression=$APK_PERCENTAGE_REGRESSION --test-content-percentage-regression=$CONTENT_PERCENTAGE_REGRESSION sizes/com.companyname.spice.blazor-Signed.apkdesc samples/Spice.BlazorSample/bin/Release/net8.0-android/android-arm64/com.companyname.spice.blazor-Signed.apk
+        apkdiff -s --save-description-2=bin/com.companyname.spice.scenarios-Signed.apkdesc --descrease-is-regression --test-apk-percentage-regression=$APK_PERCENTAGE_REGRESSION --test-content-percentage-regression=$CONTENT_PERCENTAGE_REGRESSION sizes/com.companyname.spice.scenarios-Signed.apkdesc samples/Spice.Scenarios/bin/Release/net10.0-android/android-arm64/com.companyname.spice.scenarios-Signed.apk
+        apkdiff -s --save-description-2=bin/com.companyname.spice.blazor-Signed.apkdesc --descrease-is-regression --test-apk-percentage-regression=$APK_PERCENTAGE_REGRESSION --test-content-percentage-regression=$CONTENT_PERCENTAGE_REGRESSION sizes/com.companyname.spice.blazor-Signed.apkdesc samples/Spice.BlazorSample/bin/Release/net10.0-android/android-arm64/com.companyname.spice.blazor-Signed.apk
 
     - name: tests
       run: dotnet test tests/Spice.Tests/Spice.Tests.csproj
@@ -53,7 +55,7 @@ jobs:
 
     - name: artifacts
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: nupkgs
         path: bin

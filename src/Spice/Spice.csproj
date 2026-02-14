@@ -4,7 +4,7 @@
 	<Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0;net8.0-android;net8.0-ios</TargetFrameworks>
+		<TargetFrameworks>net10.0;net10.0-android;net10.0-ios</TargetFrameworks>
 		<Description>Spice 🌶, a spicy UI framework for mobile</Description>
 		<IsPackable>true</IsPackable>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,9 +12,10 @@
 		<Nullable>enable</Nullable>
 		<SingleProject>true</SingleProject>
 		<IsTrimmable>true</IsTrimmable>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">16.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
-		<DefineConstants Condition=" '$(TargetFramework)' == 'net8.0' ">$(DefineConstants);VANILLA</DefineConstants>
+		<DefineConstants Condition=" '$(TargetFramework)' == 'net10.0' ">$(DefineConstants);VANILLA</DefineConstants>
 		<SpiceEnablePlatformUsings>true</SpiceEnablePlatformUsings>
 		<AndroidGenerateResourceDesigner>false</AndroidGenerateResourceDesigner>
 		<_UseLegacyJavadocImport>true</_UseLegacyJavadocImport>
@@ -25,9 +26,9 @@
 		<None Include="README.md" Pack="true" PackagePath="" />
 		<None Include="../../docs/icon.png" Pack="true" PackagePath="" />
 		<None Include="MSBuild/**" Pack="true" PackagePath="build;buildTransitive" />
-		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-		<PackageReference Include="Microsoft.Maui.Graphics" Version="8.0.3" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebView" Version="8.0.0" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="Microsoft.Maui.Graphics" Version="10.0.40" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebView" Version="10.0.3" />
 	</ItemGroup>
 
 	<ItemGroup Condition=" '$(TargetPlatformIdentifier)' == 'Android' ">

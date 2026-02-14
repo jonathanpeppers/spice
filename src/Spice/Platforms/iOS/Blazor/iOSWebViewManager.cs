@@ -1,5 +1,7 @@
 ﻿//From: https://github.com/dotnet/maui/blob/c8a6093ee805388732af8d75b437b099a301db22/src/BlazorWebView/src/Maui/iOS/IOSWebViewManager.cs
+using System.Runtime.InteropServices;
 using System.Text.Encodings.Web;
+using CoreFoundation;
 using Foundation;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -7,6 +9,7 @@ using Microsoft.AspNetCore.Components.WebView;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
+using ObjCRuntime;
 using UIKit;
 using WebKit;
 
@@ -35,7 +38,7 @@ internal class iOSWebViewManager : WebViewManager
 	public iOSWebViewManager(WKWebView webview, IServiceProvider provider, Dispatcher dispatcher, IFileProvider fileProvider, JSComponentConfigurationStore jsComponents, string contentRootRelativeToAppRoot, string hostPageRelativePath)
 		: base(provider, dispatcher, BlazorWebView.AppOriginUri, fileProvider, jsComponents, hostPageRelativePath)
 	{
-		ArgumentNullException.ThrowIfNull(nameof(webview));
+		ArgumentNullException.ThrowIfNull(webview);
 
 		_webview = webview;
 		_contentRootRelativeToAppRoot = contentRootRelativeToAppRoot;
@@ -66,7 +69,7 @@ internal class iOSWebViewManager : WebViewManager
 		var messageJSStringLiteral = JavaScriptEncoder.Default.Encode(message);
 		_webview.EvaluateJavaScript(
 			javascript: $"__dispatchMessageCallback(\"{messageJSStringLiteral}\")",
-			completionHandler: (NSObject result, NSError error) => { });
+			completionHandler: (NSObject? result, NSError? error) => { });
 	}
 
 	internal void MessageReceivedInternal(Uri uri, string message)
@@ -104,15 +107,24 @@ internal class iOSWebViewManager : WebViewManager
 			);
 		}
 
-		public override void RunJavaScriptTextInputPanel(
-			WKWebView webView, string prompt, string? defaultText, WKFrameInfo frame, Action<string> completionHandler)
+		// TODO: this should be an override but requires XAMCORE_5_0:
+		//       https://github.com/dotnet/macios/issues/15728
+		//       https://github.com/dotnet/macios/pull/22199
+		[Export("webView:runJavaScriptTextInputPanelWithPrompt:defaultText:initiatedByFrame:completionHandler:")]
+		public void RunJavaScriptTextInputPanelWithPrompt(
+			WKWebView webView,
+			string prompt,
+			string? defaultText,
+			WKFrameInfo frame,
+			IntPtr completionHandlerBlock)
 		{
+			var completionHandler = ActionStringTrampolineBlock.Create(completionHandlerBlock);
 			PresentAlertController(
 				webView,
 				prompt,
 				defaultText: defaultText,
-				okAction: x => completionHandler(x.TextFields[0].Text!),
-				cancelAction: _ => completionHandler(null!)
+				okAction: x => completionHandler?.Invoke(x.TextFields[0].Text),
+				cancelAction: _ => completionHandler?.Invoke(null)
 			);
 		}
 
@@ -160,10 +172,10 @@ internal class iOSWebViewManager : WebViewManager
 			if (cancelAction != null)
 				AddCancelAction(controller, () => cancelAction(controller));
 
-#pragma warning disable CA1416, CA1422 // TODO:  'UIApplication.Windows' is unsupported on: 'ios' 15.0 and later
-			GetTopViewController(UIApplication.SharedApplication.Windows.FirstOrDefault(m => m.IsKeyWindow)?.RootViewController)?
+#pragma warning disable CA1416 // TODO:  'UIApplication.Windows' is unsupported on: 'ios' 15.0 and later
+			GetTopViewController(Platform.Window?.RootViewController)?
 				.PresentViewController(controller, true, null);
-#pragma warning restore CA1416, CA1422
+#pragma warning restore CA1416
 		}
 
 		private static UIViewController? GetTopViewController(UIViewController? viewController)
@@ -178,6 +190,43 @@ internal class iOSWebViewManager : WebViewManager
 				return GetTopViewController(viewController.PresentedViewController);
 
 			return viewController;
+		}
+
+		// TODO: Remove after XAMCORE_5_0 is live:
+		//       https://github.com/dotnet/macios/issues/15728
+		//       https://github.com/dotnet/macios/pull/22199
+		sealed class ActionStringTrampolineBlock : TrampolineBlockBase
+		{
+			[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+			[UserDelegateType(typeof(Action<string?>))]
+			delegate void Invoker(IntPtr block, NativeHandle obj);
+
+			Invoker invoker;
+
+			public unsafe ActionStringTrampolineBlock(BlockLiteral* block)
+				: base(block)
+			{
+				invoker = block->GetDelegateForBlock<Invoker>();
+			}
+
+			[Preserve(Conditional = true)]
+			public unsafe static Action<string?>? Create(IntPtr block)
+			{
+				if (block == IntPtr.Zero)
+				{
+					return null;
+				}
+
+				var del = (Action<string?>)GetExistingManagedDelegate(block);
+				return del ?? new ActionStringTrampolineBlock((BlockLiteral*)block).Invoke;
+			}
+
+			void Invoke(string? obj)
+			{
+				var nsobj = CFString.CreateNative(obj);
+				invoker(BlockPointer, nsobj);
+				CFString.ReleaseNative(nsobj);
+			}
 		}
 	}
 
@@ -210,9 +259,7 @@ internal class iOSWebViewManager : WebViewManager
 
 			if (openExternally)
 			{
-#pragma warning disable CA1416, CA1422 // TODO: OpenUrl(...) has [UnsupportedOSPlatform("ios10.0")]
-				UIApplication.SharedApplication.OpenUrl(requestUrl);
-#pragma warning restore CA1416, CA1422
+				UIApplication.SharedApplication.OpenUrl(requestUrl, new UIApplicationOpenUrlOptions(), null);
 
 				// Cancel any further navigation as we've either opened the link in the external browser
 				// or canceled the underlying navigation action.
