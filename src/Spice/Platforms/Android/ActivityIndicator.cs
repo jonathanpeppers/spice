@@ -1,4 +1,5 @@
 using Android.Content;
+using AndroidProgressBar = Android.Widget.ProgressBar;
 
 namespace Spice;
 
@@ -8,11 +9,11 @@ public partial class ActivityIndicator
 	/// Returns activityIndicator.NativeView
 	/// </summary>
 	/// <param name="activityIndicator">The Spice.ActivityIndicator</param>
-	public static implicit operator ProgressBar(ActivityIndicator activityIndicator) => activityIndicator.NativeView;
+	public static implicit operator AndroidProgressBar(ActivityIndicator activityIndicator) => activityIndicator.NativeView;
 
-	static ProgressBar Create(Context context)
+	static AndroidProgressBar Create(Context context)
 	{
-		var progressBar = new ProgressBar(context);
+		var progressBar = new AndroidProgressBar(context);
 		progressBar.Indeterminate = true;
 		progressBar.Visibility = Android.Views.ViewStates.Gone;
 		return progressBar;
@@ -41,7 +42,7 @@ public partial class ActivityIndicator
 	/// <summary>
 	/// The underlying Android.Widget.ProgressBar
 	/// </summary>
-	public new ProgressBar NativeView => (ProgressBar)_nativeView.Value;
+	public new AndroidProgressBar NativeView => (AndroidProgressBar)_nativeView.Value;
 
 	partial void OnIsRunningChanged(bool value)
 	{
