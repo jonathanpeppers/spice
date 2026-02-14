@@ -47,4 +47,26 @@ public static class PlatformExtensions
 		var result = view.PerformSelector(selector);
 		Debug.WriteLine(result);
 	}
+
+	/// <summary>
+	/// Convert a DateTime to an NSDate
+	/// </summary>
+	/// <param name="dateTime">The DateTime to convert</param>
+	/// <returns>An NSDate</returns>
+	public static NSDate ToNSDate(this DateTime dateTime)
+	{
+		var reference = new DateTime(2001, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+		return NSDate.FromTimeIntervalSinceReferenceDate((dateTime.ToUniversalTime() - reference).TotalSeconds);
+	}
+
+	/// <summary>
+	/// Convert an NSDate to a DateTime
+	/// </summary>
+	/// <param name="nsDate">The NSDate to convert</param>
+	/// <returns>A DateTime</returns>
+	public static DateTime ToDateTime(this NSDate nsDate)
+	{
+		var reference = new DateTime(2001, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+		return reference.AddSeconds(nsDate.SecondsSinceReferenceDate).ToLocalTime();
+	}
 }

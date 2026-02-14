@@ -1,6 +1,6 @@
 namespace Spice.Scenarios;
 
-class SliderScenario : StackView
+class SliderScenario : StackLayout
 {
 	public SliderScenario()
 	{

@@ -60,19 +60,19 @@ public class ActivityIndicatorTests
 	}
 
 	[Fact]
-	public void ActivityIndicatorInStackView()
+	public void ActivityIndicatorInStackLayout()
 	{
 		var blue = new Color(0, 0, 255);
-		var stackView = new StackView();
+		var stackLayout = new StackLayout();
 		var activityIndicator = new ActivityIndicator
 		{
 			IsRunning = true,
 			Color = blue
 		};
 
-		stackView.Add(activityIndicator);
-		Assert.Single(stackView.Children);
-		Assert.Same(activityIndicator, stackView.Children[0]);
+		stackLayout.Add(activityIndicator);
+		Assert.Single(stackLayout.Children);
+		Assert.Same(activityIndicator, stackLayout.Children[0]);
 		Assert.True(activityIndicator.IsRunning);
 		Assert.Equal(blue, activityIndicator.Color);
 	}

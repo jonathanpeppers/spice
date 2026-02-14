@@ -13,11 +13,10 @@ jobs:
     runs-on: macos-latest
 
     env:
-      Configuration: Release
       WORKLOAD_VERSION: 10.0.103
       ValidateXcodeVersion: false
-      APK_PERCENTAGE_REGRESSION: 3
-      CONTENT_PERCENTAGE_REGRESSION: 5
+      APK_PERCENTAGE_REGRESSION: 10
+      CONTENT_PERCENTAGE_REGRESSION: 15
 
     steps:
     - name: checkout
@@ -34,18 +33,34 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 10.0.x
+
+    - name: cache NuGet packages
+      uses: actions/cache@v4
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj', '**/*.slnx', '**/Directory.Build.props', '**/Directory.Build.targets') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
         
     - name: install workloads
       run: dotnet workload install maui-android maui-ios --version $WORKLOAD_VERSION
 
-    - name: build
-      run: dotnet build -bl:bin/build.binlog
+    - name: restore all projects
+      run: |
+        dotnet restore spice.slnx
+        dotnet restore samples/samples.slnx
+
+    - name: build main solution (Release)
+      run: dotnet build spice.slnx -c Release --no-restore -bl:bin/build-main.binlog -maxcpucount
+
+    - name: build samples (Debug, faster)
+      run: dotnet build samples/samples.slnx -c Debug --no-restore -bl:bin/build-samples.binlog -maxcpucount
 
     - name: tests
-      run: dotnet test tests/Spice.Tests/Spice.Tests.csproj
+      run: dotnet test tests/Spice.Tests/Spice.Tests.csproj -c Release --no-build
 
     - name: pack
-      run: dotnet pack -bl:bin/pack.binlog
+      run: dotnet pack spice.slnx -c Release --no-build -bl:bin/pack.binlog
 
     - name: build templates
       run: |

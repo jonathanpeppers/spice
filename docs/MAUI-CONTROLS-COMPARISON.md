@@ -19,9 +19,9 @@ This document compares the stable/supported controls from .NET MAUI with what is
 | BindableLayout | ❌ No | ❌ No | Binding-focused pattern |
 | FlexLayout | ❌ No | 🟡 Maybe | Powerful but complex CSS flexbox |
 | Grid | ❌ No | 🔥 Yes | Essential for complex layouts |
-| HorizontalStackLayout | ❌ No | ❌ No | StackView with Horizontal orientation |
-| StackLayout | ✅ Yes | ✅ Done | Implemented as `StackView` |
-| VerticalStackLayout | ❌ No | ❌ No | StackView with Vertical orientation |
+| HorizontalStackLayout | ❌ No | ❌ No | StackLayout with Horizontal orientation |
+| StackLayout | ✅ Yes | ✅ Done | Fully implemented |
+| VerticalStackLayout | ❌ No | ❌ No | StackLayout with Vertical orientation |
 
 ## Views
 
@@ -36,7 +36,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 | CheckBox | ❌ No | 🔥 Yes | Standard checkbox input |
 | CollectionView | ❌ No | 🟡 Maybe | Powerful grid/list control |
 | ContentView | ❌ No | 🟡 Maybe | Custom control composition |
-| DatePicker | ❌ No | 🔥 Yes | Date selection - common in forms |
+| DatePicker | ✅ Yes | ✅ Done | Date selection - common in forms |
 | Editor | ❌ No | 🟡 Maybe | Multi-line text input |
 | Ellipse | ❌ No | 🟢 Maybe | Shape control - can use Image |
 | Entry | ✅ Yes | ✅ Done | Single-line text input |
@@ -66,7 +66,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 | SwipeView | ❌ No | 🟢 Maybe | Swipe actions - nice UX feature |
 | Switch | ✅ Yes | ✅ Done | Toggle control - essential |
 | TableView | ❌ No | ❌ No | Settings-style list (less common) |
-| TimePicker | ❌ No | 🔥 Yes | Time selection - common in forms |
+| TimePicker | ✅ Yes | ✅ Done | Time selection - common in forms |
 | TitleBar | ❌ No | ❌ No | Desktop-focused |
 | TwoPaneView | ❌ No | ❌ No | Foldable-specific |
 | WebView | ✅ Yes | ✅ Done | Fully implemented |
@@ -79,14 +79,16 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - ✅ ActivityIndicator
 - ✅ Application
 - ✅ Button
+- ✅ DatePicker
 - ✅ Entry (single-line text)
 - ✅ Image
 - ✅ Label
 - ✅ ProgressBar
 - ✅ ScrollView
 - ✅ Slider
-- ✅ StackView (equivalent to StackLayout)
+- ✅ StackLayout
 - ✅ Switch (toggle control)
+- ✅ TimePicker (time selection)
 - ✅ View (base class)
 - ✅ WebView
 - ✅ BlazorWebView (Blazor-specific)
@@ -108,27 +110,31 @@ This document compares the stable/supported controls from .NET MAUI with what is
 #### iOS (UIKit)
 - ActivityIndicator → UIActivityIndicatorView
 - Button → UIButton
+- DatePicker → UIDatePicker
 - Entry → UITextField
 - Image → UIImageView
 - Label → UILabel
 - ProgressBar → UIProgressView
 - ScrollView → UIScrollView
 - Slider → UISlider
-- StackView → UIStackView
+- StackLayout → UIStackView
 - Switch → UISwitch
+- TimePicker → UIDatePicker (Mode = Time)
 - WebView → WKWebView
 
 #### Android (Android Widgets)
 - ActivityIndicator → ProgressBar (indeterminate)
 - Button → AppCompatButton
+- DatePicker → DatePickerDialog
 - Entry → AppCompatEditText
 - Image → AppCompatImageView
 - Label → AppCompatTextView
 - ProgressBar → ProgressBar
 - ScrollView → ScrollView / HorizontalScrollView
 - Slider → SeekBar
-- StackView → LinearLayout
+- StackLayout → LinearLayout
 - Switch → SwitchCompat
+- TimePicker → TimePickerDialog
 - WebView → WebView
 
 ---
