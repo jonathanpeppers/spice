@@ -64,7 +64,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 | Slider | ✅ Yes | ✅ Done | Range selection - common |
 | Stepper | ❌ No | ❌ No | Rare, can use buttons + label |
 | SwipeView | ❌ No | 🟢 Maybe | Swipe actions - nice UX feature |
-| Switch | ❌ No | 🔥 Yes | Toggle control - essential |
+| Switch | ✅ Yes | ✅ Done | Toggle control - essential |
 | TableView | ❌ No | ❌ No | Settings-style list (less common) |
 | TimePicker | ❌ No | 🔥 Yes | Time selection - common in forms |
 | TitleBar | ❌ No | ❌ No | Desktop-focused |
@@ -85,6 +85,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - ✅ ScrollView
 - ✅ Slider
 - ✅ StackView (equivalent to StackLayout)
+- ✅ Switch (toggle control)
 - ✅ View (base class)
 - ✅ WebView
 - ✅ BlazorWebView (Blazor-specific)
@@ -112,6 +113,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - ScrollView → UIScrollView
 - Slider → UISlider
 - StackView → UIStackView
+- Switch → UISwitch
 - WebView → WKWebView
 
 #### Android (Android Widgets)
@@ -123,6 +125,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - ScrollView → ScrollView / HorizontalScrollView
 - Slider → SeekBar
 - StackView → LinearLayout
+- Switch → SwitchCompat
 - WebView → WebView
 
 ---
