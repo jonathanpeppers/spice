@@ -72,6 +72,11 @@ public class App : Application
 				},
 				new Button
 				{
+					Text = "Picker",
+					Clicked = _ => Main = new PickerScenario(),
+        },
+				new Button
+				{
 					Text = "CheckBox",
 					Clicked = _ => Main = new CheckBoxScenario(),
         },
