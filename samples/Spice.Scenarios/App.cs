@@ -32,6 +32,11 @@ public class App : Application
 				},
 				new Button
 				{
+					Text = "DatePicker",
+					Clicked = _ => Main = new DatePickerScenario(),
+				},
+				new Button
+				{
 					Text = "TimePicker",
 					Clicked = _ => Main = new TimePickerScenario(),
 				},

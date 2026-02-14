@@ -36,7 +36,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 | CheckBox | ❌ No | 🔥 Yes | Standard checkbox input |
 | CollectionView | ❌ No | 🟡 Maybe | Powerful grid/list control |
 | ContentView | ❌ No | 🟡 Maybe | Custom control composition |
-| DatePicker | ❌ No | 🔥 Yes | Date selection - common in forms |
+| DatePicker | ✅ Yes | ✅ Done | Date selection - common in forms |
 | Editor | ❌ No | 🟡 Maybe | Multi-line text input |
 | Ellipse | ❌ No | 🟢 Maybe | Shape control - can use Image |
 | Entry | ✅ Yes | ✅ Done | Single-line text input |
@@ -79,6 +79,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - ✅ ActivityIndicator
 - ✅ Application
 - ✅ Button
+- ✅ DatePicker
 - ✅ Entry (single-line text)
 - ✅ Image
 - ✅ Label
@@ -109,6 +110,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 #### iOS (UIKit)
 - ActivityIndicator → UIActivityIndicatorView
 - Button → UIButton
+- DatePicker → UIDatePicker
 - Entry → UITextField
 - Image → UIImageView
 - Label → UILabel
@@ -123,6 +125,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 #### Android (Android Widgets)
 - ActivityIndicator → ProgressBar (indeterminate)
 - Button → AppCompatButton
+- DatePicker → DatePickerDialog
 - Entry → AppCompatEditText
 - Image → AppCompatImageView
 - Label → AppCompatTextView
