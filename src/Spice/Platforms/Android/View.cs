@@ -166,4 +166,8 @@ public partial class View
 	}
 
 	partial void OnBackgroundColorChanged(Color? value) => _nativeView.Value.SetBackgroundColor(value.ToAndroidColor());
+
+	partial void OnIsVisibleChanged(bool value) => _nativeView.Value.Visibility = value ? Android.Views.ViewStates.Visible : Android.Views.ViewStates.Gone;
+
+	partial void OnIsEnabledChanged(bool value) => _nativeView.Value.Enabled = value;
 }
