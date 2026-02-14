@@ -6,7 +6,7 @@ public class App : Application
 	{
 		BackgroundColor = Colors.CornflowerBlue;
 
-		Main = new StackView
+		Main = new StackLayout
 		{
 			Children =
 			{
@@ -32,8 +32,23 @@ public class App : Application
 				},
 				new Button
 				{
+					Text = "DatePicker",
+					Clicked = _ => Main = new DatePickerScenario(),
+				},
+				new Button
+				{
+					Text = "TimePicker",
+					Clicked = _ => Main = new TimePickerScenario(),
+				},
+				new Button
+				{
 					Text = "ActivityIndicator",
 					Clicked = _ => Main = new ActivityIndicatorScenario(),
+				},
+				new Button
+				{
+					Text = "BoxView",
+					Clicked = _ => Main = new BoxViewScenario(),
 				},
 				new Button
 				{

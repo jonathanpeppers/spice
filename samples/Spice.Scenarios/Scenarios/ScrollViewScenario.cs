@@ -7,10 +7,10 @@ class ScrollViewScenario : ScrollView
 {
 	public ScrollViewScenario()
 	{
-		var stackView = new StackView { Spacing = 10 };
+		var stackLayout = new StackLayout { Spacing = 10 };
 
 		// Add a title
-		stackView.Add(new Label
+		stackLayout.Add(new Label
 		{
 			Text = "ScrollView Demo 📜",
 			TextColor = Colors.Blue
@@ -19,12 +19,12 @@ class ScrollViewScenario : ScrollView
 		// Add many items to demonstrate scrolling
 		for (int i = 1; i <= 30; i++)
 		{
-			stackView.Add(new Label
+			stackLayout.Add(new Label
 			{
 				Text = $"Item {i}"
 			});
 		}
 
-		Add(stackView);
+		Add(stackLayout);
 	}
 }

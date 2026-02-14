@@ -3,7 +3,7 @@ namespace Spice.Scenarios;
 /// <summary>
 /// Demonstrates the ProgressBar control with various progress values
 /// </summary>
-class ProgressBarScenario : StackView
+class ProgressBarScenario : StackLayout
 {
 	const double ProgressIncrement = 0.1; // 10% increment per click
 	ProgressBar _progressBar;

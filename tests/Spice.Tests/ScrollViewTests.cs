@@ -67,19 +67,19 @@ public class ScrollViewTests
 	}
 
 	[Fact]
-	public void CanContainStackView()
+	public void CanContainStackLayout()
 	{
 		var scrollView = new ScrollView();
-		var stackView = new StackView
+		var stackLayout = new StackLayout
 		{
 			new Label { Text = "Item 1" },
 			new Label { Text = "Item 2" },
 			new Label { Text = "Item 3" }
 		};
-		scrollView.Add(stackView);
+		scrollView.Add(stackLayout);
 		
 		Assert.Single(scrollView.Children);
-		Assert.Equal(stackView, scrollView.Children[0]);
-		Assert.Equal(3, stackView.Children.Count);
+		Assert.Equal(stackLayout, scrollView.Children[0]);
+		Assert.Equal(3, stackLayout.Children.Count);
 	}
 }
