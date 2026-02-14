@@ -31,6 +31,7 @@ public partial class Grid
 		NativeView.ColumnCount = Math.Max(1, ColumnDefinitions.Count);
 		RowDefinitions.CollectionChanged += OnDefinitionsChanged;
 		ColumnDefinitions.CollectionChanged += OnDefinitionsChanged;
+		Children.CollectionChanged += OnGridChildrenChanged;
 	}
 
 	/// <inheritdoc />
@@ -41,6 +42,7 @@ public partial class Grid
 		NativeView.ColumnCount = Math.Max(1, ColumnDefinitions.Count);
 		RowDefinitions.CollectionChanged += OnDefinitionsChanged;
 		ColumnDefinitions.CollectionChanged += OnDefinitionsChanged;
+		Children.CollectionChanged += OnGridChildrenChanged;
 	}
 
 	/// <inheritdoc />
@@ -78,8 +80,18 @@ public partial class Grid
 		UpdateLayout();
 	}
 
-	/// <inheritdoc />
-	protected override void AddSubview(View view)
+	void OnGridChildrenChanged(object? sender, NotifyCollectionChangedEventArgs e)
+	{
+		if (e.NewItems != null)
+		{
+			foreach (View item in e.NewItems)
+			{
+				ConfigureGridChild(item);
+			}
+		}
+	}
+
+	void ConfigureGridChild(View view)
 	{
 		var row = GetRow(view);
 		var column = GetColumn(view);
@@ -103,7 +115,6 @@ public partial class Grid
 
 		var layoutParams = CreateGridLayoutParams(row, column, rowSpan, columnSpan, maxRow, maxColumn);
 		view.NativeView.LayoutParameters = layoutParams;
-		NativeView.AddView(view.NativeView);
 	}
 
 	GridLayout.LayoutParams CreateGridLayoutParams(int row, int column, int rowSpan, int columnSpan, int maxRow, int maxColumn)
@@ -218,7 +229,8 @@ public partial class Grid
 		NativeView.RemoveAllViews();
 		foreach (var child in children)
 		{
-			AddSubview(child);
+			ConfigureGridChild(child);
+			NativeView.AddView(child.NativeView);
 		}
 	}
 }

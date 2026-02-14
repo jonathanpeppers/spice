@@ -83,7 +83,7 @@ public partial class Grid
 			// Ensure we have enough rows/columns for all children
 			foreach (UIView subview in Subviews)
 			{
-				var spiceView = _parent.Children.FirstOrDefault(v => ReferenceEquals(((UIView)v).Handle, subview.Handle));
+				var spiceView = _parent.Children.FirstOrDefault(v => ((UIView)v).Handle == subview.Handle);
 				if (spiceView == null)
 					continue;
 
@@ -142,8 +142,8 @@ public partial class Grid
 			usedWidth += (nfloat)_parent.ColumnSpacing * (colCount - 1);
 
 			// Distribute remaining space to star-sized rows/columns
-			nfloat remainingHeight = Math.Max(0, Bounds.Height - usedHeight);
-			nfloat remainingWidth = Math.Max(0, Bounds.Width - usedWidth);
+			nfloat remainingHeight = (nfloat)Math.Max(0, Bounds.Height - usedHeight);
+			nfloat remainingWidth = (nfloat)Math.Max(0, Bounds.Width - usedWidth);
 
 			for (int i = 0; i < rowCount; i++)
 			{
@@ -181,7 +181,7 @@ public partial class Grid
 			// Layout children
 			foreach (UIView subview in Subviews)
 			{
-				var spiceView = _parent.Children.FirstOrDefault(v => ReferenceEquals(((UIView)v).Handle, subview.Handle));
+				var spiceView = _parent.Children.FirstOrDefault(v => ((UIView)v).Handle == subview.Handle);
 				if (spiceView == null)
 					continue;
 
