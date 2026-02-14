@@ -1,0 +1,14 @@
+<Solution>
+  <Project Path="Spice.BlazorSample/Spice.BlazorSample.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="Spice.Scenarios/Spice.Scenarios.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="HeadToHeadMaui/HeadToHeadMaui.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="HeadToHeadSpice/HeadToHeadSpice.csproj">
+    <Deploy />
+  </Project>
+</Solution>

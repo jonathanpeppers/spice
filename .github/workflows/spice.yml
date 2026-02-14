@@ -13,7 +13,6 @@ jobs:
     runs-on: macos-latest
 
     env:
-      Configuration: Release
       WORKLOAD_VERSION: 10.0.103
       ValidateXcodeVersion: false
       APK_PERCENTAGE_REGRESSION: 3
@@ -38,16 +37,19 @@ jobs:
     - name: install workloads
       run: dotnet workload install maui-android maui-ios --version $WORKLOAD_VERSION
 
-    - name: build
-      run: dotnet build -bl:bin/build.binlog
+    - name: build main solution (Release)
+      run: dotnet build spice.slnx -c Release -bl:bin/build-main.binlog
+
+    - name: build samples (Debug, faster)
+      run: dotnet build samples/samples.slnx -c Debug -bl:bin/build-samples.binlog
 
     - name: tests
       run: dotnet test tests/Spice.Tests/Spice.Tests.csproj
 
     - name: pack
-      run: dotnet pack -bl:bin/pack.binlog
+      run: dotnet pack spice.slnx -c Release -bl:bin/pack.binlog
 
-    - name: build templates
+    - name: build templates (Android-only for speed)
       run: |
         dotnet new install src/Spice.Templates
         mkdir -p bin/templates && cd bin/templates
