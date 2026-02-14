@@ -1,4 +1,4 @@
-﻿namespace Spice.Scenarios;
+﻿amespace Spice.Scenarios;
 
 public class App : Application
 {
@@ -34,6 +34,14 @@ public class App : Application
 				{
 					Text = "DatePicker",
 					Clicked = _ => Main = new DatePickerScenario(),
+				},
+				new Button
+				{
+					Text = "ProgressBar",
+					Clicked = _ => Main = new ProgressBarScenario(),
+				},
+				new Button
+				{
 					Text = "Slider",
 					Clicked = _ => Main = new SliderScenario(),
 				},
