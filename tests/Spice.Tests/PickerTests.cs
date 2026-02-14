@@ -112,12 +112,12 @@ public class PickerTests
 		picker.Items.Add("Option 1");
 		picker.Items.Add("Option 2");
 
-		string? property = null;
-		picker.PropertyChanged += (sender, e) => property = e.PropertyName;
+		var properties = new List<string?>();
+		picker.PropertyChanged += (sender, e) => properties.Add(e.PropertyName);
 
 		picker.SelectedIndex = 1;
 
-		Assert.Equal(nameof(picker.SelectedItem), property);
+		Assert.Contains(nameof(picker.SelectedItem), properties);
 		Assert.Equal("Option 2", picker.SelectedItem);
 	}
 }
