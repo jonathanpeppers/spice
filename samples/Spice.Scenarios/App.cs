@@ -30,6 +30,11 @@ public class App : Application
 					Text = "Entry",
 					Clicked = _ => Main = new EntryScenario(),
 				},
+				new Button
+				{
+					Text = "ActivityIndicator",
+					Clicked = _ => Main = new ActivityIndicatorScenario(),
+				},
 			}
 		};
 	}
