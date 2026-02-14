@@ -3,7 +3,7 @@ namespace Spice.Scenarios;
 /// <summary>
 /// ImageButton scenario demonstrating clickable image buttons
 /// </summary>
-class ImageButtonScenario : StackView
+class ImageButtonScenario : StackLayout
 {
 	public ImageButtonScenario()
 	{
