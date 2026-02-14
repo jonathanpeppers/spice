@@ -39,17 +39,17 @@ class SliderScenario : StackView
 		Add(volumeSlider);
 		Add(volumeLabel);
 
-		// Third slider for percentage (0-1)
+		// Third slider for percentage (0-100)
 		var percentLabel = new Label { Text = "Percent: 50%" };
 		var percentSlider = new Slider
 		{
 			Minimum = 0,
-			Maximum = 1,
-			Value = 0.5
+			Maximum = 100,
+			Value = 50
 		};
 		percentSlider.ValueChanged = s =>
 		{
-			percentLabel.Text = $"Percent: {s.Value * 100:F0}%";
+			percentLabel.Text = $"Percent: {s.Value:F0}%";
 		};
 
 		Add(new Label { Text = "Percentage" });

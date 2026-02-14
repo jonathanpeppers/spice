@@ -52,7 +52,14 @@ public partial class Slider
 		NativeView.Progress = (int)Value;
 	}
 
-	partial void OnValueChanged(double value) => NativeView.Progress = (int)value;
+	partial void OnValueChanged(double value)
+	{
+		int intValue = (int)value;
+		if (NativeView.Progress != intValue)
+		{
+			NativeView.Progress = intValue;
+		}
+	}
 
 	SeekBarChangeListener? _listener;
 

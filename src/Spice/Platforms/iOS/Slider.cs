@@ -32,7 +32,13 @@ public partial class Slider
 
 	partial void OnMaximumChanged(double value) => NativeView.MaximumValue = (float)value;
 
-	partial void OnValueChanged(double value) => NativeView.Value = (float)value;
+	partial void OnValueChanged(double value)
+	{
+		if (Math.Abs(NativeView.Value - (float)value) > float.Epsilon)
+		{
+			NativeView.Value = (float)value;
+		}
+	}
 
 	EventHandler? _valueChangedEvent;
 
