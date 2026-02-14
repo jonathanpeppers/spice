@@ -34,6 +34,9 @@ public class App : Application
 				{
 					Text = "ProgressBar",
 					Clicked = _ => Main = new ProgressBarScenario(),
+				},
+				new Button
+				{
 					Text = "Slider",
 					Clicked = _ => Main = new SliderScenario(),
 				},
