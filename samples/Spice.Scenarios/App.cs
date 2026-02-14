@@ -34,6 +34,9 @@ public class App : Application
 				{
 					Text = "ActivityIndicator",
 					Clicked = _ => Main = new ActivityIndicatorScenario(),
+				},
+				new Button
+				{
 					Text = "Slider",
 					Clicked = _ => Main = new SliderScenario(),
 				},

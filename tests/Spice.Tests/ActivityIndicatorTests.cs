@@ -68,7 +68,7 @@ public class ActivityIndicatorTests
 		};
 
 		stackView.Add(activityIndicator);
-		Assert.Equal(1, stackView.Children.Count);
+		Assert.Single(stackView.Children);
 		Assert.Same(activityIndicator, stackView.Children[0]);
 		Assert.True(activityIndicator.IsRunning);
 		Assert.Equal(Colors.Blue, activityIndicator.Color);
