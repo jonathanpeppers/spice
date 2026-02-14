@@ -52,6 +52,11 @@ public class App : Application
 				},
 				new Button
 				{
+					Text = "ContentView",
+					Clicked = _ => Main = new ContentViewScenario(),
+				},
+				new Button
+				{
 					Text = "Slider",
 					Clicked = _ => Main = new SliderScenario(),
 				},
