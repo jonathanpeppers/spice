@@ -133,7 +133,7 @@ public class BorderTests
 	}
 
 	[Fact]
-	public void ChildrenCollectionCanBeModifiedButViewsAreNotRendered()
+	public void AddingToChildrenDoesNotSetContent()
 	{
 		var border = new Border();
 		var label1 = new Label { Text = "Label 1" };

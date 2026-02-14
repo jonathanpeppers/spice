@@ -19,6 +19,8 @@ public partial class Border
 	/// </summary>
 	public Border() : base(Platform.Context, Create)
 	{
+		// Subscribe to PropertyChanged to intercept BackgroundColor changes
+		// This is a self-reference and won't prevent garbage collection
 		PropertyChanged += OnPropertyChanged;
 	}
 
@@ -26,6 +28,8 @@ public partial class Border
 	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
 	public Border(Context context) : base(context, Create)
 	{
+		// Subscribe to PropertyChanged to intercept BackgroundColor changes
+		// This is a self-reference and won't prevent garbage collection
 		PropertyChanged += OnPropertyChanged;
 	}
 
@@ -34,6 +38,8 @@ public partial class Border
 	/// <param name="creator">Subclasses can pass in a Func to create a Android.Views.View</param>
 	protected Border(Context context, Func<Context, Android.Views.View> creator) : base(context, creator)
 	{
+		// Subscribe to PropertyChanged to intercept BackgroundColor changes
+		// This is a self-reference and won't prevent garbage collection
 		PropertyChanged += OnPropertyChanged;
 	}
 
