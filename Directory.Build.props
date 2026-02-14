@@ -12,5 +12,7 @@
     <PackageIcon>icon.png</PackageIcon>
     <PackageOutputPath>$(MSBuildThisFileDirectory)bin/$(Configuration)/</PackageOutputPath>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- Show all trimmer warnings/errors in this repo, not just one per assembly -->
+    <TrimmerSingleWarn>false</TrimmerSingleWarn>
   </PropertyGroup>
 </Project>

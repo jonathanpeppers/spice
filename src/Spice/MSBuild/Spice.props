@@ -4,8 +4,6 @@
 		<!--<IgnoreMauiXamlHotReloadCompatibilityCheck>true</IgnoreMauiXamlHotReloadCompatibilityCheck>-->
 		<!-- Opt into full trimming mode; users can override in their csproj -->
 		<TrimMode Condition=" '$(TrimMode)' == '' ">full</TrimMode>
-		<!-- Show all trimmer warnings/errors, not just one per assembly -->
-		<TrimmerSingleWarn Condition=" '$(TrimmerSingleWarn)' == '' ">false</TrimmerSingleWarn>
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- This tells VS Windows to load XamarinVS -->
