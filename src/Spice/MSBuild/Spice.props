@@ -3,7 +3,7 @@
 		<!-- To attempt XAML hot reload features one day -->
 		<!--<IgnoreMauiXamlHotReloadCompatibilityCheck>true</IgnoreMauiXamlHotReloadCompatibilityCheck>-->
 		<!-- Opt into full trimming mode; users can override in their csproj -->
-		<TrimMode>full</TrimMode>
+		<TrimMode Condition=" '$(TrimMode)' == '' ">full</TrimMode>
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- This tells VS Windows to load XamarinVS -->
