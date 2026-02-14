@@ -27,7 +27,7 @@ src/Spice/Blazor/        cross-platform Blazor; platform Blazor in Platforms/*/B
 src/Spice/MSBuild/       Spice.props (capabilities), Spice.targets (inlined SingleProject)
 samples/                 Spice.Scenarios, Spice.BlazorSample, HeadToHead*
 tests/Spice.Tests/       xUnit on net10.0 — views tested as POCOs, no device needed
-sizes/                   .apkdesc baselines for CI apkdiff (3% APK / 5% content thresholds)
+sizes/                   .apkdesc baselines for CI apkdiff (10% APK / 15% content thresholds)
 src/Spice.Templates/     dotnet new spice / spice-blazor
 ```
 
