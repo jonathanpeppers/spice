@@ -82,20 +82,17 @@ public partial class Slider
 
 	class SeekBarChangeListener : Java.Lang.Object, SeekBar.IOnSeekBarChangeListener
 	{
-		readonly WeakReference<Slider> _slider;
+		readonly Slider _slider;
 
 		public SeekBarChangeListener(Slider slider)
 		{
-			_slider = new WeakReference<Slider>(slider);
+			_slider = slider;
 		}
 
 		public void OnProgressChanged(SeekBar? seekBar, int progress, bool fromUser)
 		{
-			if (_slider.TryGetTarget(out var slider))
-			{
-				slider.Value = progress;
-				slider.ValueChanged?.Invoke(slider);
-			}
+			_slider.Value = progress;
+			_slider.ValueChanged?.Invoke(_slider);
 		}
 
 		public void OnStartTrackingTouch(SeekBar? seekBar) { }
