@@ -27,7 +27,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 
 | MAUI Control | Implemented in Spice | Should Implement? | Notes |
 |--------------|---------------------|-------------------|-------|
-| ActivityIndicator | ❌ No | 🔥 Yes | Loading spinner - very common |
+| ActivityIndicator | ✅ Yes | ✅ Done | Loading spinner - very common |
 | BlazorWebView | ✅ Yes | ✅ Done | Extends `WebView` in Blazor/ folders |
 | Border | ❌ No | 🟡 Maybe | Useful for rounded corners/borders |
 | BoxView | ❌ No | 🟢 Maybe | Colored rectangles - useful for dividers |
@@ -76,6 +76,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 **Implemented: 9 / 60+ controls**
 
 ### Spice Controls (Core)
+- ✅ ActivityIndicator
 - ✅ Application
 - ✅ Button
 - ✅ Entry (single-line text)
@@ -106,6 +107,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 ### Platform Mappings
 
 #### iOS (UIKit)
+- ActivityIndicator → UIActivityIndicatorView
 - Button → UIButton
 - Entry → UITextField
 - Image → UIImageView
@@ -119,6 +121,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - WebView → WKWebView
 
 #### Android (Android Widgets)
+- ActivityIndicator → ProgressBar (indeterminate)
 - Button → AppCompatButton
 - Entry → AppCompatEditText
 - Image → AppCompatImageView
@@ -356,7 +359,7 @@ Based on Spice's minimalist philosophy and common mobile UI needs, here are reas
 1. Grid layout
 2. ScrollView
 3. Switch
-4. ActivityIndicator
+4. ~~ActivityIndicator~~ ✅
 5. ProgressBar
 6. IsVisible property
 7. IsEnabled property
