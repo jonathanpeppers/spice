@@ -27,7 +27,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 
 | MAUI Control | Implemented in Spice | Should Implement? | Notes |
 |--------------|---------------------|-------------------|-------|
-| ActivityIndicator | ❌ No | 🔥 Yes | Loading spinner - very common |
+| ActivityIndicator | ✅ Yes | ✅ Done | Loading spinner - very common |
 | BlazorWebView | ✅ Yes | ✅ Done | Extends `WebView` in Blazor/ folders |
 | Border | ❌ No | 🟡 Maybe | Useful for rounded corners/borders |
 | BoxView | ❌ No | 🟢 Maybe | Colored rectangles - useful for dividers |
@@ -54,17 +54,17 @@ This document compares the stable/supported controls from .NET MAUI with what is
 | Picker | ❌ No | 🔥 Yes | Dropdown selection - essential |
 | Polygon | ❌ No | ❌ No | Shape control - can use Image |
 | Polyline | ❌ No | ❌ No | Shape control - can use Image |
-| ProgressBar | ❌ No | 🔥 Yes | Progress display - common |
+| ProgressBar | ✅ Yes | ✅ Done | Progress display - common |
 | RadioButton | ❌ No | 🟢 Maybe | Less common on mobile |
 | Rectangle | ❌ No | 🟢 Maybe | Shape control - BoxView covers this |
 | RefreshView | ❌ No | 🟢 Maybe | Pull-to-refresh wrapper |
 | RoundRectangle | ❌ No | ❌ No | Border can handle this |
-| ScrollView | ❌ No | 🔥 Yes | Scrollable content - fundamental |
+| ScrollView | ✅ Yes | ✅ Done | Fully implemented |
 | SearchBar | ❌ No | 🟡 Maybe | Search input - common pattern |
 | Slider | ✅ Yes | ✅ Done | Range selection - common |
 | Stepper | ❌ No | ❌ No | Rare, can use buttons + label |
 | SwipeView | ❌ No | 🟢 Maybe | Swipe actions - nice UX feature |
-| Switch | ❌ No | 🔥 Yes | Toggle control - essential |
+| Switch | ✅ Yes | ✅ Done | Toggle control - essential |
 | TableView | ❌ No | ❌ No | Settings-style list (less common) |
 | TimePicker | ❌ No | 🔥 Yes | Time selection - common in forms |
 | TitleBar | ❌ No | ❌ No | Desktop-focused |
@@ -73,16 +73,20 @@ This document compares the stable/supported controls from .NET MAUI with what is
 
 ## Summary
 
-**Implemented: 7 / 60+ controls**
+**Implemented: 9 / 60+ controls**
 
 ### Spice Controls (Core)
+- ✅ ActivityIndicator
 - ✅ Application
 - ✅ Button
 - ✅ Entry (single-line text)
 - ✅ Image
 - ✅ Label
+- ✅ ProgressBar
+- ✅ ScrollView
 - ✅ Slider
 - ✅ StackView (equivalent to StackLayout)
+- ✅ Switch (toggle control)
 - ✅ View (base class)
 - ✅ WebView
 - ✅ BlazorWebView (Blazor-specific)
@@ -102,21 +106,29 @@ This document compares the stable/supported controls from .NET MAUI with what is
 ### Platform Mappings
 
 #### iOS (UIKit)
+- ActivityIndicator → UIActivityIndicatorView
 - Button → UIButton
 - Entry → UITextField
 - Image → UIImageView
 - Label → UILabel
+- ProgressBar → UIProgressView
+- ScrollView → UIScrollView
 - Slider → UISlider
 - StackView → UIStackView
+- Switch → UISwitch
 - WebView → WKWebView
 
 #### Android (Android Widgets)
+- ActivityIndicator → ProgressBar (indeterminate)
 - Button → AppCompatButton
 - Entry → AppCompatEditText
 - Image → AppCompatImageView
 - Label → AppCompatTextView
+- ProgressBar → ProgressBar
+- ScrollView → ScrollView / HorizontalScrollView
 - Slider → SeekBar
 - StackView → LinearLayout
+- Switch → SwitchCompat
 - WebView → WebView
 
 ---
@@ -344,7 +356,7 @@ Based on Spice's minimalist philosophy and common mobile UI needs, here are reas
 1. Grid layout
 2. ScrollView
 3. Switch
-4. ActivityIndicator
+4. ~~ActivityIndicator~~ ✅
 5. ProgressBar
 6. IsVisible property
 7. IsEnabled property
