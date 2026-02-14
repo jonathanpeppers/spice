@@ -60,15 +60,25 @@ public partial class Grid
 	{
 		readonly Grid _parent;
 
+		/// <summary>
+		/// Creates a new SpiceGridView for the specified Grid.
+		/// </summary>
 		public SpiceGridView(Grid parent) => _parent = parent;
 
+		/// <summary>
+		/// Creates a new SpiceGridView for the specified Grid with the given frame.
+		/// </summary>
 		public SpiceGridView(Grid parent, CGRect frame) : base(frame) => _parent = parent;
 
+		/// <summary>
+		/// Invalidates the layout, causing it to be recalculated on the next layout pass.
+		/// </summary>
 		public void InvalidateLayout()
 		{
 			SetNeedsLayout();
 		}
 
+		/// <inheritdoc />
 		public override void LayoutSubviews()
 		{
 			base.LayoutSubviews();
