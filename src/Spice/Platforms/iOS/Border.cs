@@ -83,11 +83,13 @@ public partial class Border
 	}
 
 	/// <summary>
-	/// Override to handle single child only
+	/// Override to handle single child only.
+	/// Border only supports the Content property for adding a single child view.
+	/// Use the Content property instead of Children.Add() to set the border's content.
 	/// </summary>
 	protected override void AddSubview(View view)
 	{
-		// Border only supports Content property, not Children collection
-		// Do nothing here to prevent adding views via Children.Add()
+		// Do nothing - Border doesn't support Children collection
+		// Only Content property should be used to add a view
 	}
 }

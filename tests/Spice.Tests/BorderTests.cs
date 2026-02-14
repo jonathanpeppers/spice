@@ -133,17 +133,19 @@ public class BorderTests
 	}
 
 	[Fact]
-	public void ChildrenAddDoesNotAddViews()
+	public void ChildrenCollectionCanBeModifiedButViewsAreNotRendered()
 	{
 		var border = new Border();
 		var label1 = new Label { Text = "Label 1" };
 		var label2 = new Label { Text = "Label 2" };
 
 		// Border should only support Content, not Children collection
+		// Children can be added to the collection but they won't be rendered
 		border.Children.Add(label1);
 		border.Children.Add(label2);
 
-		// Children collection can be modified but views aren't actually added to native control
+		// Children collection is modified but Content remains null
 		Assert.Equal(2, border.Children.Count);
+		Assert.Null(border.Content);
 	}
 }
