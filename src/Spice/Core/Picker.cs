@@ -26,6 +26,16 @@ public partial class Picker : View
 	/// </summary>
 	public string? SelectedItem => _selectedIndex >= 0 && _selectedIndex < Items.Count ? Items[_selectedIndex] : null;
 
+	partial void OnSelectedIndexChanged(int oldValue, int newValue)
+	{
+		OnPropertyChanged(nameof(SelectedItem));
+	}
+
+	partial void OnItemsChanged(ObservableCollection<string> value)
+	{
+		OnPropertyChanged(nameof(SelectedItem));
+	}
+
 	/// <summary>
 	/// Optional title text to display for the picker
 	/// </summary>

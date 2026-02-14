@@ -1,3 +1,6 @@
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+
 namespace Spice;
 
 public partial class Picker
@@ -15,24 +18,24 @@ public partial class Picker
 	/// </summary>
 	public Picker() : base(_ => new UIPickerView { AutoresizingMask = UIViewAutoresizing.None })
 	{
-		var model = new PickerModel(this);
-		NativeView.Model = model;
+		NativeView.Model = new PickerModel(this);
+		Items.CollectionChanged += OnItemsCollectionChanged;
 	}
 
 	/// <inheritdoc />
 	/// <param name="frame">Pass the underlying view a frame</param>
 	public Picker(CGRect frame) : base(_ => new UIPickerView(frame) { AutoresizingMask = UIViewAutoresizing.None })
 	{
-		var model = new PickerModel(this);
-		NativeView.Model = model;
+		NativeView.Model = new PickerModel(this);
+		Items.CollectionChanged += OnItemsCollectionChanged;
 	}
 
 	/// <inheritdoc />
 	/// <param name="creator">Subclasses can pass in a Func to create a UIView</param>
 	protected Picker(Func<View, UIView> creator) : base(creator)
 	{
-		var model = new PickerModel(this);
-		NativeView.Model = model;
+		NativeView.Model = new PickerModel(this);
+		Items.CollectionChanged += OnItemsCollectionChanged;
 	}
 
 	/// <summary>
@@ -40,24 +43,50 @@ public partial class Picker
 	/// </summary>
 	public new UIPickerView NativeView => (UIPickerView)_nativeView.Value;
 
-	partial void OnItemsChanged(ObservableCollection<string> value)
+	partial void OnItemsChanged(ObservableCollection<string> oldValue, ObservableCollection<string> newValue)
 	{
-		// Reload the picker data
+		if (oldValue != null)
+			oldValue.CollectionChanged -= OnItemsCollectionChanged;
+		if (newValue != null)
+			newValue.CollectionChanged += OnItemsCollectionChanged;
+
+		ReloadItems();
+	}
+
+	void OnItemsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+	{
+		ReloadItems();
+	}
+
+	void ReloadItems()
+	{
 		NativeView.ReloadAllComponents();
-		
-		// If selected index is out of range, reset it
-		if (_selectedIndex >= value.Count)
+
+		// Clamp selected index to valid range
+		if (Items.Count == 0)
+			return;
+
+		if (_selectedIndex < 0 || _selectedIndex >= Items.Count)
 		{
-			SelectedIndex = -1;
+			SelectedIndex = 0;
+		}
+		else
+		{
+			NativeView.Select(_selectedIndex, 0, false);
 		}
 	}
 
 	partial void OnSelectedIndexChanged(int value)
 	{
-		if (value >= 0 && value < Items.Count)
-		{
-			NativeView.Select(value, 0, true);
-		}
+		if (Items.Count == 0)
+			return;
+
+		// Clamp to valid range for UIPickerView
+		var index = value;
+		if (index < 0 || index >= Items.Count)
+			index = 0;
+
+		NativeView.Select(index, 0, true);
 	}
 
 	partial void OnTitleChanged(string value)
@@ -67,7 +96,6 @@ public partial class Picker
 
 	partial void OnTextColorChanged(Color? value)
 	{
-		// Text color is controlled via the model's GetAttributedTitle method
 		NativeView.ReloadAllComponents();
 	}
 
@@ -91,13 +119,25 @@ public partial class Picker
 			return 0;
 		}
 
-		public override string GetTitle(UIPickerView pickerView, nint row, nint component)
+		public override NSAttributedString GetAttributedTitle(UIPickerView pickerView, nint row, nint component)
 		{
-			if (_picker.TryGetTarget(out var picker) && row >= 0 && row < picker.Items.Count)
+			if (!_picker.TryGetTarget(out var picker) || row < 0 || row >= picker.Items.Count)
+				return new NSAttributedString(string.Empty);
+
+			var text = picker.Items[(int)row];
+
+			if (picker.TextColor is Color color)
 			{
-				return picker.Items[(int)row];
+				var uiColor = UIColor.FromRGBA(
+					(nfloat)color.Red,
+					(nfloat)color.Green,
+					(nfloat)color.Blue,
+					(nfloat)color.Alpha);
+
+				return new NSAttributedString(text, new UIStringAttributes { ForegroundColor = uiColor });
 			}
-			return string.Empty;
+
+			return new NSAttributedString(text);
 		}
 
 		public override void Selected(UIPickerView pickerView, nint row, nint component)

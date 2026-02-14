@@ -1,3 +1,5 @@
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using Android.Content;
 using Android.Widget;
 
@@ -57,6 +59,9 @@ public partial class Picker
 		NativeView.Adapter = adapter;
 
 		NativeView.ItemSelected += OnItemSelected;
+
+		// Subscribe to initial Items collection
+		Items.CollectionChanged += OnItemsCollectionChanged;
 	}
 
 	void OnItemSelected(object? sender, AdapterView.ItemSelectedEventArgs e)
@@ -67,19 +72,34 @@ public partial class Picker
 		}
 	}
 
-	partial void OnItemsChanged(ObservableCollection<string> value)
+	void OnItemsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+	{
+		RefreshAdapter();
+	}
+
+	partial void OnItemsChanged(ObservableCollection<string> oldValue, ObservableCollection<string> newValue)
+	{
+		if (oldValue != null)
+			oldValue.CollectionChanged -= OnItemsCollectionChanged;
+		if (newValue != null)
+			newValue.CollectionChanged += OnItemsCollectionChanged;
+
+		RefreshAdapter();
+	}
+
+	void RefreshAdapter()
 	{
 		var adapter = (ArrayAdapter<string>?)NativeView.Adapter;
 		if (adapter != null)
 		{
 			adapter.Clear();
-			adapter.AddAll(value.ToArray());
+			adapter.AddAll(Items.ToArray());
 			adapter.NotifyDataSetChanged();
 
-			// If selected index is out of range, reset it
-			if (_selectedIndex >= value.Count)
+			// Clamp selected index: Spinner always has a selection when items exist
+			if (Items.Count > 0 && (_selectedIndex < 0 || _selectedIndex >= Items.Count))
 			{
-				SelectedIndex = -1;
+				SelectedIndex = 0;
 			}
 		}
 	}

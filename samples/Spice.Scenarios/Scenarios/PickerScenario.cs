@@ -49,7 +49,7 @@ class PickerScenario : StackView
 						"Red" => Colors.Red,
 						"Green" => Colors.Green,
 						"Blue" => Colors.Blue,
-						"Yellow" => new Color(200, 200, 0),
+						"Yellow" => Color.FromRgb(200, 200, 0),
 						"Orange" => Colors.Orange,
 						"Purple" => Colors.Purple,
 						"Pink" => Colors.Pink,

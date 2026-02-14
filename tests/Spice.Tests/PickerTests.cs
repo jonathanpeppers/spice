@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using Microsoft.Maui.Graphics;
 
 namespace Spice.Tests;
 
@@ -102,5 +103,21 @@ public class PickerTests
 		var picker = new Picker { Title = "Choose one" };
 
 		Assert.Equal("Choose one", picker.Title);
+	}
+
+	[Fact]
+	public void PickerSelectedItemNotifiesPropertyChanged()
+	{
+		var picker = new Picker();
+		picker.Items.Add("Option 1");
+		picker.Items.Add("Option 2");
+
+		string? property = null;
+		picker.PropertyChanged += (sender, e) => property = e.PropertyName;
+
+		picker.SelectedIndex = 1;
+
+		Assert.Equal(nameof(picker.SelectedItem), property);
+		Assert.Equal("Option 2", picker.SelectedItem);
 	}
 }
