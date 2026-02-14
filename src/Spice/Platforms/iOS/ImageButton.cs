@@ -30,14 +30,19 @@ public partial class ImageButton
 
 	partial void OnSourceChanged(string value)
 	{
-		var image = UIImage.FromFile($"{value}.png");
-		if (image != null)
+		UIImage? image = null;
+
+		if (!string.IsNullOrEmpty(value))
 		{
-			NativeView.SetImage(image, UIControlState.Normal);
-			if (HorizontalAlign != Align.Stretch && VerticalAlign != Align.Stretch)
-			{
-				NativeView.SizeToFit();
-			}
+			image = UIImage.FromFile($"{value}.png");
+		}
+
+		// Always update the button image so Source changes (including invalid/empty) are reflected.
+		NativeView.SetImage(image, UIControlState.Normal);
+
+		if (image != null && HorizontalAlign != Align.Stretch && VerticalAlign != Align.Stretch)
+		{
+			NativeView.SizeToFit();
 		}
 	}
 
@@ -45,17 +50,17 @@ public partial class ImageButton
 
 	partial void OnClickedChanged(Action<ImageButton>? value)
 	{
-		if (value == null)
+		// Always detach any existing handler to avoid multiple subscriptions
+		if (_click != null)
 		{
-			if (_click != null)
-			{
-				NativeView.TouchUpInside -= _click;
-				_click = null;
-			}
+			NativeView.TouchUpInside -= _click;
+			_click = null;
 		}
-		else
+
+		if (value != null)
 		{
-			NativeView.TouchUpInside += _click = (sender, e) => Clicked?.Invoke(this);
+			_click = (sender, e) => Clicked?.Invoke(this);
+			NativeView.TouchUpInside += _click;
 		}
 	}
 }

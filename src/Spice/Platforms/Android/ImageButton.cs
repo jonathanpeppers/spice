@@ -37,23 +37,30 @@ public partial class ImageButton
 	/// </summary>
 	public new Android.Widget.ImageButton NativeView => (Android.Widget.ImageButton)_nativeView.Value;
 
-	partial void OnSourceChanged(string value) => Interop.SetImage(NativeView, value);
+	partial void OnSourceChanged(string value)
+	{
+		// Clear any existing image so invalid/empty sources don't leave a stale image
+		NativeView.SetImageDrawable(null);
+
+		Interop.SetImage(NativeView, value);
+	}
 
 	EventHandler? _click;
 
 	partial void OnClickedChanged(Action<ImageButton>? value)
 	{
-		if (value == null)
+		// Always detach any existing handler to avoid multiple subscriptions
+		if (_click != null)
 		{
-			if (_click != null)
-			{
-				NativeView.Click -= _click;
-				_click = null;
-			}
+			NativeView.Click -= _click;
+			_click = null;
 		}
-		else
+
+		// Attach a new handler only when a non-null delegate is provided
+		if (value != null)
 		{
-			NativeView.Click += _click = (sender, e) => Clicked?.Invoke(this);
+			_click = (sender, e) => value(this);
+			NativeView.Click += _click;
 		}
 	}
 }
