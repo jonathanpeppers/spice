@@ -232,12 +232,12 @@ internal class iOSWebViewManager : WebViewManager
 
 	internal class WebViewNavigationDelegate : WKNavigationDelegate
 	{
-		private WKNavigation? _currentNavigation;
+		private WeakReference<WKNavigation>? _currentNavigation;
 		private Uri? _currentUri;
 
 		public override void DidStartProvisionalNavigation(WKWebView webView, WKNavigation navigation)
 		{
-			_currentNavigation = navigation;
+			_currentNavigation = new(navigation);
 		}
 
 		public override void DecidePolicy(WKWebView webView, WKNavigationAction navigationAction, Action<WKNavigationActionPolicy> decisionHandler)
@@ -286,7 +286,7 @@ internal class iOSWebViewManager : WebViewManager
 				_currentNavigation = null;
 				if (uri is not null)
 				{
-					var request = new NSUrlRequest(new NSUrl(uri.AbsoluteUri));
+					using var request = new NSUrlRequest(new NSUrl(uri.AbsoluteUri));
 					webView.LoadRequest(request);
 				}
 			}
@@ -306,7 +306,7 @@ internal class iOSWebViewManager : WebViewManager
 
 		public override void DidCommitNavigation(WKWebView webView, WKNavigation navigation)
 		{
-			if (_currentUri != null && _currentNavigation == navigation)
+			if (_currentUri != null && _currentNavigation is not null && _currentNavigation.TryGetTarget(out var nav) && nav == navigation)
 			{
 				// TODO: Determine whether this is needed
 				//_webView.HandleNavigationStarting(_currentUri);
@@ -315,7 +315,7 @@ internal class iOSWebViewManager : WebViewManager
 
 		public override void DidFinishNavigation(WKWebView webView, WKNavigation navigation)
 		{
-			if (_currentUri != null && _currentNavigation == navigation)
+			if (_currentUri != null && _currentNavigation is not null && _currentNavigation.TryGetTarget(out var nav) && nav == navigation)
 			{
 				// TODO: Determine whether this is needed
 				//_webView.HandleNavigationFinished(_currentUri);

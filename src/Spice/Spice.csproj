@@ -29,6 +29,10 @@
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="Microsoft.Maui.Graphics" Version="10.0.40" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebView" Version="10.0.3" />
+		<PackageReference Include="MemoryAnalyzers" Version="0.1.0-beta.5">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup Condition=" '$(TargetPlatformIdentifier)' == 'Android' ">

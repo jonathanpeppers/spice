@@ -108,22 +108,28 @@ public partial class BlazorWebView
 
 	private class WebViewScriptMessageHandler : NSObject, IWKScriptMessageHandler
 	{
-		readonly SchemeHandler _schemeHandler;
+		readonly WeakReference<SchemeHandler> _schemeHandler;
 
-		public WebViewScriptMessageHandler(SchemeHandler schemeHandler) => _schemeHandler = schemeHandler;
+		public WebViewScriptMessageHandler(SchemeHandler schemeHandler) => _schemeHandler = new(schemeHandler);
 
 		public void DidReceiveScriptMessage(WKUserContentController userContentController, WKScriptMessage message)
 		{
 			ArgumentNullException.ThrowIfNull(message);
 
-			//TODO: not a fan of getting WebView.Manager through here...
-			_schemeHandler.WebView?.Manager?.MessageReceivedInternal(AppOriginUri, ((NSString)message.Body).ToString());
+			if (_schemeHandler.TryGetTarget(out var schemeHandler))
+				schemeHandler.WebView?.Manager?.MessageReceivedInternal(AppOriginUri, ((NSString)message.Body).ToString());
 		}
 	}
 
 	private class SchemeHandler : NSObject, IWKUrlSchemeHandler
 	{
-		public BlazorWebView? WebView { get; set; }
+		WeakReference<BlazorWebView>? _webView;
+
+		public BlazorWebView? WebView
+		{
+			get => _webView is not null && _webView.TryGetTarget(out var wv) ? wv : null;
+			set => _webView = value is not null ? new(value) : null;
+		}
 
 		[Export("webView:startURLSchemeTask:")]
 		[SupportedOSPlatform("ios11.0")]

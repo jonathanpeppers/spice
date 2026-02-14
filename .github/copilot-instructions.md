@@ -16,6 +16,7 @@ Each view = 3 files: `Core/{Type}.cs` (cross-platform, `[ObservableProperty]`), 
 - **GlobalUsings**: `CommunityToolkit.Mvvm.ComponentModel` + `Color = Microsoft.Maui.Graphics.Color`
 - **`VANILLA` define**: Active on `net10.0` only; prefer partials over `#if`
 - **Blazor**: `Blazor/` folders at library+platform levels; `BlazorWebView` extends `WebView`
+- **iOS memory**: NSObject subclasses must not hold strong references to other NSObjects (causes cycles the garbage collector cannot break). Use `WeakReference<T>` for any NSObject-typed field/property in an NSObject subclass. Enforced by [`MemoryAnalyzers`](https://github.com/jonathanpeppers/memory-analyzers) (MEM0001–MEM0003).
 
 ## Layout
 
