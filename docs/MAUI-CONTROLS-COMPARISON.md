@@ -59,7 +59,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 | Rectangle | ❌ No | 🟢 Maybe | Shape control - BoxView covers this |
 | RefreshView | ❌ No | 🟢 Maybe | Pull-to-refresh wrapper |
 | RoundRectangle | ❌ No | ❌ No | Border can handle this |
-| ScrollView | ❌ No | 🔥 Yes | Scrollable content - fundamental |
+| ScrollView | ✅ Yes | ✅ Done | Fully implemented |
 | SearchBar | ❌ No | 🟡 Maybe | Search input - common pattern |
 | Slider | ❌ No | 🔥 Yes | Range selection - common |
 | Stepper | ❌ No | ❌ No | Rare, can use buttons + label |
@@ -73,7 +73,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 
 ## Summary
 
-**Implemented: 6 / 60+ controls**
+**Implemented: 7 / 60+ controls**
 
 ### Spice Controls (Core)
 - ✅ Application
@@ -81,6 +81,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - ✅ Entry (single-line text)
 - ✅ Image
 - ✅ Label
+- ✅ ScrollView
 - ✅ StackView (equivalent to StackLayout)
 - ✅ View (base class)
 - ✅ WebView
@@ -105,6 +106,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - Entry → UITextField
 - Image → UIImageView
 - Label → UILabel
+- ScrollView → UIScrollView
 - StackView → UIStackView
 - WebView → WKWebView
 
@@ -113,6 +115,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - Entry → AppCompatEditText
 - Image → AppCompatImageView
 - Label → AppCompatTextView
+- ScrollView → ScrollView
 - StackView → LinearLayout
 - WebView → WebView
 
