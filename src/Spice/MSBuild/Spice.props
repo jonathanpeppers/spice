@@ -3,9 +3,8 @@
 		<!-- To attempt XAML hot reload features one day -->
 		<!--<IgnoreMauiXamlHotReloadCompatibilityCheck>true</IgnoreMauiXamlHotReloadCompatibilityCheck>-->
 		<!-- Opt into full trimming mode; users can override in their csproj -->
-		<TrimMode Condition=" '$(TrimMode)' == '' ">full</TrimMode>
-		<!-- Suppress trim analysis warnings for Blazor projects (https://github.com/dotnet/aspnetcore/issues/63951) -->
-		<SuppressTrimAnalysisWarnings Condition=" '$(UsingMicrosoftNETSdkRazor)' == 'true' ">true</SuppressTrimAnalysisWarnings>
+        <!-- Blazor projects don't work (https://github.com/dotnet/aspnetcore/issues/63951) -->
+		<TrimMode Condition=" '$(TrimMode)' == '' and '$(UsingMicrosoftNETSdkRazor)' != 'true' ">full</TrimMode>
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- This tells VS Windows to load XamarinVS -->
