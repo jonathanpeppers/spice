@@ -4,6 +4,8 @@
 		<!--<IgnoreMauiXamlHotReloadCompatibilityCheck>true</IgnoreMauiXamlHotReloadCompatibilityCheck>-->
 		<!-- Opt into full trimming mode; users can override in their csproj -->
 		<TrimMode Condition=" '$(TrimMode)' == '' ">full</TrimMode>
+		<!-- Suppress trim analysis warnings for Blazor projects (https://github.com/dotnet/aspnetcore/issues/63951) -->
+		<SuppressTrimAnalysisWarnings Condition=" '$(UsingMicrosoftNETSdkRazor)' == 'true' ">true</SuppressTrimAnalysisWarnings>
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- This tells VS Windows to load XamarinVS -->

@@ -10,7 +10,6 @@
     <EnableDefaultCssItems>false</EnableDefaultCssItems>
     <!-- https://github.com/dotnet/aspnetcore/issues/63951 — Blazor doesn't support full trimming -->
     <NoWarn>$(NoWarn);IL2104;IL2110;IL2111</NoWarn>
-    <SuppressTrimAnalysisWarnings>true</SuppressTrimAnalysisWarnings>
     <ApplicationTitle>HelloBlazor</ApplicationTitle>
     <ApplicationId>com.companyname.HelloBlazor</ApplicationId>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
