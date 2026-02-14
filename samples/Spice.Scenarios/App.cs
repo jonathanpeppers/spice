@@ -34,6 +34,9 @@ public class App : Application
 				{
 					Text = "Switch",
 					Clicked = _ => Main = new SwitchScenario(),
+				},
+				new Button
+				{
 					Text = "Slider",
 					Clicked = _ => Main = new SliderScenario(),
 				},
