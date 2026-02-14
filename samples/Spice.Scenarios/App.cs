@@ -30,6 +30,11 @@ public class App : Application
 					Text = "Entry",
 					Clicked = _ => Main = new EntryScenario(),
 				},
+				new Button
+				{
+					Text = "DatePicker",
+					Clicked = _ => Main = new DatePickerScenario(),
+				},
 			}
 		};
 	}
