@@ -55,6 +55,11 @@ public class App : Application
 					Text = "Slider",
 					Clicked = _ => Main = new SliderScenario(),
 				},
+				new Button
+				{
+					Text = "Border",
+					Clicked = _ => Main = new BorderScenario(),
+				},
 			}
 		};
 	}

@@ -25,6 +25,16 @@ public static class PlatformExtensions
 	}
 
 	/// <summary>
+	/// Convert a Microsoft.Maui.Graphics.Color to a CGColor
+	/// </summary>
+	/// <param name="color">the Microsoft.Maui.Graphics.Color</param>
+	/// <returns>A CGColor or null if null was passed in</returns>
+	public static CGColor? ToCGColor(this Color? color)
+	{
+		return color.ToUIColor()?.CGColor;
+	}
+
+	/// <summary>
 	/// Calls [UIView recursiveDescription], an internal iOS API for debugging views
 	/// </summary>
 	/// <param name="view">The UIView to dump</param>
