@@ -27,7 +27,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 
 | MAUI Control | Implemented in Spice | Should Implement? | Notes |
 |--------------|---------------------|-------------------|-------|
-| ActivityIndicator | ❌ No | 🔥 Yes | Loading spinner - very common |
+| ActivityIndicator | ✅ Yes | ✅ Done | Loading spinner - very common |
 | BlazorWebView | ✅ Yes | ✅ Done | Extends `WebView` in Blazor/ folders |
 | Border | ❌ No | 🟡 Maybe | Useful for rounded corners/borders |
 | BoxView | ❌ No | 🟢 Maybe | Colored rectangles - useful for dividers |
@@ -66,7 +66,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 | SwipeView | ❌ No | 🟢 Maybe | Swipe actions - nice UX feature |
 | Switch | ✅ Yes | ✅ Done | Toggle control - essential |
 | TableView | ❌ No | ❌ No | Settings-style list (less common) |
-| TimePicker | ❌ No | 🔥 Yes | Time selection - common in forms |
+| TimePicker | ✅ Yes | ✅ Done | Time selection - common in forms |
 | TitleBar | ❌ No | ❌ No | Desktop-focused |
 | TwoPaneView | ❌ No | ❌ No | Foldable-specific |
 | WebView | ✅ Yes | ✅ Done | Fully implemented |
@@ -76,6 +76,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 **Implemented: 9 / 60+ controls**
 
 ### Spice Controls (Core)
+- ✅ ActivityIndicator
 - ✅ Application
 - ✅ Button
 - ✅ DatePicker
@@ -87,6 +88,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - ✅ Slider
 - ✅ StackView (equivalent to StackLayout)
 - ✅ Switch (toggle control)
+- ✅ TimePicker (time selection)
 - ✅ View (base class)
 - ✅ WebView
 - ✅ BlazorWebView (Blazor-specific)
@@ -106,6 +108,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 ### Platform Mappings
 
 #### iOS (UIKit)
+- ActivityIndicator → UIActivityIndicatorView
 - Button → UIButton
 - DatePicker → UIDatePicker
 - Entry → UITextField
@@ -116,9 +119,11 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - Slider → UISlider
 - StackView → UIStackView
 - Switch → UISwitch
+- TimePicker → UIDatePicker (Mode = Time)
 - WebView → WKWebView
 
 #### Android (Android Widgets)
+- ActivityIndicator → ProgressBar (indeterminate)
 - Button → AppCompatButton
 - DatePicker → DatePickerDialog
 - Entry → AppCompatEditText
@@ -129,6 +134,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - Slider → SeekBar
 - StackView → LinearLayout
 - Switch → SwitchCompat
+- TimePicker → TimePickerDialog
 - WebView → WebView
 
 ---
@@ -356,7 +362,7 @@ Based on Spice's minimalist philosophy and common mobile UI needs, here are reas
 1. Grid layout
 2. ScrollView
 3. Switch
-4. ActivityIndicator
+4. ~~ActivityIndicator~~ ✅
 5. ProgressBar
 6. IsVisible property
 7. IsEnabled property

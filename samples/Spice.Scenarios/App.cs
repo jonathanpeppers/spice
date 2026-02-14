@@ -37,6 +37,16 @@ public class App : Application
 				},
 				new Button
 				{
+					Text = "TimePicker",
+					Clicked = _ => Main = new TimePickerScenario(),
+				},
+				new Button
+				{
+					Text = "ActivityIndicator",
+					Clicked = _ => Main = new ActivityIndicatorScenario(),
+				},
+				new Button
+				{
 					Text = "Switch",
 					Clicked = _ => Main = new SwitchScenario(),
 				},
