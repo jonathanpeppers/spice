@@ -162,9 +162,9 @@ public class ViewVisibilityTests
 	}
 
 	[Fact]
-	public void IsVisibleWorksInStackView()
+	public void IsVisibleWorksInStackLayout()
 	{
-		var stackView = new StackView();
+		var stackView = new StackLayout();
 		var button = new Button
 		{
 			Text = "Test",
@@ -178,9 +178,9 @@ public class ViewVisibilityTests
 	}
 
 	[Fact]
-	public void IsEnabledWorksInStackView()
+	public void IsEnabledWorksInStackLayout()
 	{
-		var stackView = new StackView();
+		var stackView = new StackLayout();
 		var button = new Button
 		{
 			Text = "Test",
