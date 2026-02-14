@@ -1,6 +1,7 @@
 using Android.Content;
 using Android.App;
 using Android.Text.Format;
+using AndroidButton = Android.Widget.Button;
 
 namespace Spice;
 
@@ -10,9 +11,9 @@ public partial class TimePicker
 	/// Returns timePicker.NativeView
 	/// </summary>
 	/// <param name="timePicker">The Spice.TimePicker</param>
-	public static implicit operator Button(TimePicker timePicker) => timePicker.NativeView;
+	public static implicit operator AndroidButton(TimePicker timePicker) => timePicker.NativeView;
 
-	static Button Create(Context context) => new(context);
+	static AndroidButton Create(Context context) => new(context);
 
 	/// <summary>
 	/// Represents a control that allows the user to select a time value.
@@ -45,7 +46,7 @@ public partial class TimePicker
 	/// <summary>
 	/// The underlying Android.Widget.Button
 	/// </summary>
-	public new Button NativeView => (Button)_nativeView.Value;
+	public new AndroidButton NativeView => (AndroidButton)_nativeView.Value;
 
 	partial void OnTimeChanged(TimeOnly value)
 	{
