@@ -30,6 +30,14 @@ public class ScrollViewTests
 	}
 
 	[Fact]
+	public void CanSetOrientationViaPropertyInitializer()
+	{
+		// This tests the Android limitation where Orientation must be set before native view creation
+		var scrollView = new ScrollView { Orientation = Orientation.Horizontal };
+		Assert.Equal(Orientation.Horizontal, scrollView.Orientation);
+	}
+
+	[Fact]
 	public void CanAddChild()
 	{
 		var scrollView = new ScrollView();

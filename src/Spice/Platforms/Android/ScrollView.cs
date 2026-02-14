@@ -44,10 +44,21 @@ public partial class ScrollView
 		// Note: Changing orientation after creation requires recreating the native view
 		// Android has separate ScrollView (vertical) and HorizontalScrollView classes
 		// This is a limitation of Android's API design
-		// For now, we'll throw an exception if orientation changes after creation
+		// The Orientation property should be set before the native view is created
+		// (i.e., before accessing NativeView or Children)
 		if (_nativeView.IsValueCreated)
 		{
-			throw new NotSupportedException("Changing ScrollView orientation after creation is not supported on Android.");
+			throw new NotSupportedException("Changing ScrollView orientation after creation is not supported on Android. Set Orientation before accessing NativeView or adding children.");
 		}
+
+		// Update the creator function to use the correct type
+		_nativeView = new Lazy<Android.Views.View>(() =>
+		{
+			var view = value == Orientation.Horizontal
+				? (Android.Views.View)CreateHorizontal(Platform.Context)
+				: (Android.Views.View)CreateVertical(Platform.Context);
+			view.LayoutParameters = _layoutParameters.Value;
+			return view;
+		});
 	}
 }
