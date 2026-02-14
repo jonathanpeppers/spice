@@ -8,7 +8,6 @@ class ProgressBarScenario : StackView
 	const double ProgressIncrement = 0.1; // 10% increment per click
 	ProgressBar _progressBar;
 	Label _progressLabel;
-	double _progress = 0.0;
 
 	public ProgressBarScenario()
 	{
@@ -33,7 +32,7 @@ class ProgressBarScenario : StackView
 		var resetButton = new Button
 		{
 			Text = "Reset Progress",
-			Clicked = _ => ResetProgress()
+			Clicked = _ => SetProgress(0.0)
 		};
 
 		var setHalfButton = new Button
@@ -58,28 +57,14 @@ class ProgressBarScenario : StackView
 
 	void IncrementProgress()
 	{
-		_progress += ProgressIncrement;
-		if (_progress > 1.0)
-			_progress = 1.0;
-
-		UpdateProgress();
-	}
-
-	void ResetProgress()
-	{
-		_progress = 0.0;
-		UpdateProgress();
+		// ProgressBar.Progress property automatically clamps to [0.0, 1.0]
+		SetProgress(_progressBar.Progress + ProgressIncrement);
 	}
 
 	void SetProgress(double value)
 	{
-		_progress = value;
-		UpdateProgress();
-	}
-
-	void UpdateProgress()
-	{
-		_progressBar.Progress = _progress;
-		_progressLabel.Text = $"Progress: {(_progress * 100):F0}%";
+		_progressBar.Progress = value;
+		// Read back the clamped value from the property
+		_progressLabel.Text = $"Progress: {(_progressBar.Progress * 100):F0}%";
 	}
 }
