@@ -54,7 +54,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 | Picker | ❌ No | 🔥 Yes | Dropdown selection - essential |
 | Polygon | ❌ No | ❌ No | Shape control - can use Image |
 | Polyline | ❌ No | ❌ No | Shape control - can use Image |
-| ProgressBar | ❌ No | 🔥 Yes | Progress display - common |
+| ProgressBar | ✅ Yes | ✅ Done | Progress display - common |
 | RadioButton | ❌ No | 🟢 Maybe | Less common on mobile |
 | Rectangle | ❌ No | 🟢 Maybe | Shape control - BoxView covers this |
 | RefreshView | ❌ No | 🟢 Maybe | Pull-to-refresh wrapper |
@@ -73,7 +73,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 
 ## Summary
 
-**Implemented: 7 / 60+ controls**
+**Implemented: 8 / 60+ controls**
 
 ### Spice Controls (Core)
 - ✅ Application
@@ -81,6 +81,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - ✅ Entry (single-line text)
 - ✅ Image
 - ✅ Label
+- ✅ ProgressBar
 - ✅ Slider
 - ✅ StackView (equivalent to StackLayout)
 - ✅ TimePicker (time selection)
@@ -107,6 +108,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - Entry → UITextField
 - Image → UIImageView
 - Label → UILabel
+- ProgressBar → UIProgressView
 - Slider → UISlider
 - StackView → UIStackView
 - TimePicker → UIDatePicker (Mode = Time)
@@ -117,6 +119,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - Entry → AppCompatEditText
 - Image → AppCompatImageView
 - Label → AppCompatTextView
+- ProgressBar → ProgressBar
 - Slider → SeekBar
 - StackView → LinearLayout
 - TimePicker → TimePickerDialog
