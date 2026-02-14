@@ -12,20 +12,14 @@ class CheckBoxScenario : StackView
 			Text = "No items selected",
 		};
 
-		var checkBox1 = new CheckBox
-		{
-			CheckedChanged = _ => UpdateLabel()
-		};
+		var checkBox1 = new CheckBox();
 
 		var label1 = new Label
 		{
 			Text = "Option 1",
 		};
 
-		var checkBox2 = new CheckBox
-		{
-			CheckedChanged = _ => UpdateLabel()
-		};
+		var checkBox2 = new CheckBox();
 
 		var label2 = new Label
 		{
@@ -35,13 +29,16 @@ class CheckBoxScenario : StackView
 		var checkBox3 = new CheckBox
 		{
 			IsChecked = true,
-			CheckedChanged = _ => UpdateLabel()
 		};
 
 		var label3 = new Label
 		{
 			Text = "Option 3 (default checked)",
 		};
+
+		checkBox1.CheckedChanged = _ => UpdateLabel();
+		checkBox2.CheckedChanged = _ => UpdateLabel();
+		checkBox3.CheckedChanged = _ => UpdateLabel();
 
 		Add(new Image { Source = "spice" });
 		Add(label);
