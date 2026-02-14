@@ -51,7 +51,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 | ListView | ❌ No | 🟡 Yes | Scrollable lists - very common |
 | Map | ❌ No | ❌ No | External dependency |
 | Path | ❌ No | ❌ No | Complex shapes - can use Image |
-| Picker | ❌ No | 🔥 Yes | Dropdown selection - essential |
+| Picker | ✅ Yes | ✅ Done | Dropdown selection - essential |
 | Polygon | ❌ No | ❌ No | Shape control - can use Image |
 | Polyline | ❌ No | ❌ No | Shape control - can use Image |
 | ProgressBar | ❌ No | 🔥 Yes | Progress display - common |
@@ -73,7 +73,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 
 ## Summary
 
-**Implemented: 6 / 60+ controls**
+**Implemented: 7 / 60+ controls**
 
 ### Spice Controls (Core)
 - ✅ Application
@@ -81,6 +81,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - ✅ Entry (single-line text)
 - ✅ Image
 - ✅ Label
+- ✅ Picker (dropdown selection)
 - ✅ StackView (equivalent to StackLayout)
 - ✅ View (base class)
 - ✅ WebView
@@ -105,6 +106,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - Entry → UITextField
 - Image → UIImageView
 - Label → UILabel
+- Picker → UIPickerView
 - StackView → UIStackView
 - WebView → WKWebView
 
@@ -113,6 +115,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - Entry → AppCompatEditText
 - Image → AppCompatImageView
 - Label → AppCompatTextView
+- Picker → Spinner
 - StackView → LinearLayout
 - WebView → WebView
 
