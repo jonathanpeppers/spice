@@ -28,5 +28,5 @@ public partial class ProgressBar
 	/// </summary>
 	public new UIProgressView NativeView => (UIProgressView)_nativeView.Value;
 
-	partial void OnProgressChanged(double value) => NativeView.Progress = (float)value;
+	partial void OnProgressChanged(double value) => NativeView.Progress = (float)Math.Clamp(value, 0.0, 1.0);
 }

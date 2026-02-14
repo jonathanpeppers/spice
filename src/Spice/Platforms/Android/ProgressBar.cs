@@ -47,7 +47,8 @@ public partial class ProgressBar
 
 	partial void OnProgressChanged(double value)
 	{
-		var progress = (int)(value * NativeView.Max);
+		var clampedValue = Math.Clamp(value, 0.0, 1.0);
+		var progress = (int)(clampedValue * NativeView.Max);
 		NativeView.Progress = progress;
 	}
 }

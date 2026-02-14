@@ -8,7 +8,8 @@ namespace Spice;
 public partial class ProgressBar : View
 {
 	/// <summary>
-	/// The progress value, ranging from 0.0 (0%) to 1.0 (100%)
+	/// The progress value, ranging from 0.0 (0%) to 1.0 (100%).
+	/// Values outside this range will be clamped.
 	/// </summary>
 	[ObservableProperty]
 	double _progress;

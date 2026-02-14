@@ -5,6 +5,7 @@ namespace Spice.Scenarios;
 /// </summary>
 class ProgressBarScenario : StackView
 {
+	const double ProgressIncrement = 0.1; // 10% increment per click
 	ProgressBar _progressBar;
 	Label _progressLabel;
 	double _progress = 0.0;
@@ -57,7 +58,7 @@ class ProgressBarScenario : StackView
 
 	void IncrementProgress()
 	{
-		_progress += 0.1;
+		_progress += ProgressIncrement;
 		if (_progress > 1.0)
 			_progress = 1.0;
 
