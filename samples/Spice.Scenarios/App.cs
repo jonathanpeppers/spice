@@ -22,6 +22,11 @@ public class App : Application
 				},
 				new Button
 				{
+					Text = "ImageButton",
+					Clicked = _ => Main = new ImageButtonScenario(),
+				},
+				new Button
+				{
 					Text = "WebView",
 					Clicked = _ => Main = new WebViewScenario(),
 				},
@@ -69,6 +74,11 @@ public class App : Application
 				{
 					Text = "Picker",
 					Clicked = _ => Main = new PickerScenario(),
+        },
+				new Button
+				{
+					Text = "CheckBox",
+					Clicked = _ => Main = new CheckBoxScenario(),
         },
 				new Button
 				{
