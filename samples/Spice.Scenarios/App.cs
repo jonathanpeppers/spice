@@ -22,6 +22,11 @@ public class App : Application
 				},
 				new Button
 				{
+					Text = "ImageButton",
+					Clicked = _ => Main = new ImageButtonScenario(),
+				},
+				new Button
+				{
 					Text = "WebView",
 					Clicked = _ => Main = new WebViewScenario(),
 				},
