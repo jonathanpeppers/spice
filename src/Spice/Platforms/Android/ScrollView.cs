@@ -16,7 +16,7 @@ public partial class ScrollView
 
 	/// <summary>
 	/// A scrollable container view that can hold a single child view.
-	/// Android -> Android.Widget.ScrollView
+	/// Android -> Android.Widget.ScrollView (vertical) / Android.Widget.HorizontalScrollView (horizontal)
 	/// iOS -> UIKit.UIScrollView
 	/// </summary>
 	public ScrollView() : this(Platform.Context, CreateVertical) { }

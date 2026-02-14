@@ -10,7 +10,7 @@ public partial class ScrollView
 
 	/// <summary>
 	/// A scrollable container view that can hold a single child view.
-	/// Android -> Android.Widget.ScrollView
+	/// Android -> Android.Widget.ScrollView / Android.Widget.HorizontalScrollView
 	/// iOS -> UIKit.UIScrollView
 	/// </summary>
 	public ScrollView() : base(v => new SpiceScrollView((ScrollView)v) { AutoresizingMask = UIViewAutoresizing.None }) { }
