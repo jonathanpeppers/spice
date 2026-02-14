@@ -8,22 +8,37 @@ public partial class ScrollView
 	/// Returns scrollView.NativeView
 	/// </summary>
 	/// <param name="scrollView">The Spice.ScrollView</param>
-	public static implicit operator Android.Widget.ScrollView(ScrollView scrollView) => (Android.Widget.ScrollView)scrollView._nativeView.Value;
+	public static implicit operator Android.Views.ViewGroup(ScrollView scrollView) => (Android.Views.ViewGroup)scrollView._nativeView.Value;
 
-	static Android.Widget.ScrollView CreateVertical(Context context) => new(context);
+	static Android.Views.View CreateVertical(Context context) => new Android.Widget.ScrollView(context);
 
-	static HorizontalScrollView CreateHorizontal(Context context) => new(context);
+	static Android.Views.View CreateHorizontal(Context context) => new HorizontalScrollView(context);
+
+	static Func<Context, Android.Views.View> GetCreator(Orientation orientation) =>
+		orientation == Orientation.Horizontal ? CreateHorizontal : CreateVertical;
 
 	/// <summary>
 	/// A scrollable container view that can hold a single child view.
 	/// Android -> Android.Widget.ScrollView (vertical) / Android.Widget.HorizontalScrollView (horizontal)
 	/// iOS -> UIKit.UIScrollView
 	/// </summary>
-	public ScrollView() : this(Platform.Context, CreateVertical) { }
+	public ScrollView() : this(Platform.Context, Orientation.Vertical) { }
+
+	/// <inheritdoc />
+	/// <param name="orientation">The scroll orientation. Must be set at construction time on Android.</param>
+	public ScrollView(Orientation orientation) : this(Platform.Context, orientation) { }
 
 	/// <inheritdoc />
 	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
-	public ScrollView(Context context) : this(context, CreateVertical) { }
+	public ScrollView(Context context) : this(context, Orientation.Vertical) { }
+
+	/// <inheritdoc />
+	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
+	/// <param name="orientation">The scroll orientation. Must be set at construction time on Android.</param>
+	protected ScrollView(Context context, Orientation orientation) : base(context, GetCreator(orientation))
+	{
+		_orientation = orientation;
+	}
 
 	/// <inheritdoc />
 	/// <param name="creator">Subclasses can pass in a Func to create a Android.Views.View</param>
@@ -41,24 +56,10 @@ public partial class ScrollView
 
 	partial void OnOrientationChanging(Orientation value)
 	{
-		// Note: Changing orientation after creation requires recreating the native view
-		// Android has separate ScrollView (vertical) and HorizontalScrollView classes
-		// This is a limitation of Android's API design
-		// The Orientation property should be set before the native view is created
-		// (i.e., before accessing NativeView or Children)
-		if (_nativeView.IsValueCreated)
-		{
-			throw new NotSupportedException("Changing ScrollView orientation after creation is not supported on Android. Set Orientation before accessing NativeView or adding children.");
-		}
-
-		// Update the creator function to use the correct type
-		_nativeView = new Lazy<Android.Views.View>(() =>
-		{
-			var view = value == Orientation.Horizontal
-				? (Android.Views.View)CreateHorizontal(Platform.Context)
-				: (Android.Views.View)CreateVertical(Platform.Context);
-			view.LayoutParameters = _layoutParameters.Value;
-			return view;
-		});
+		// Android has separate ScrollView (vertical) and HorizontalScrollView classes.
+		// Use the ScrollView(Orientation) constructor to set orientation at creation time.
+		throw new NotSupportedException(
+			"Changing ScrollView orientation is not supported on Android. " +
+			"Use the ScrollView(Orientation) constructor instead.");
 	}
 }

@@ -16,6 +16,13 @@ public partial class ScrollView
 	public ScrollView() : base(v => new SpiceScrollView((ScrollView)v) { AutoresizingMask = UIViewAutoresizing.None }) { }
 
 	/// <inheritdoc />
+	/// <param name="orientation">The scroll orientation.</param>
+	public ScrollView(Orientation orientation) : this()
+	{
+		Orientation = orientation;
+	}
+
+	/// <inheritdoc />
 	/// <param name="frame">Pass the underlying view a frame</param>
 	public ScrollView(CGRect frame) : base(v => new SpiceScrollView((ScrollView)v, frame) { AutoresizingMask = UIViewAutoresizing.None }) { }
 
@@ -28,26 +35,45 @@ public partial class ScrollView
 	/// </summary>
 	public new UIScrollView NativeView => (UIScrollView)_nativeView.Value;
 
+	View? _childView;
+
 	partial void OnOrientationChanging(Orientation value)
 	{
-		// iOS UIScrollView supports both directions simultaneously by default
-		// We can optionally restrict scrolling direction if needed
+		if (!_nativeView.IsValueCreated)
+			return;
+
+		var scrollView = NativeView;
+		if (value == Orientation.Horizontal)
+		{
+			scrollView.AlwaysBounceHorizontal = true;
+			scrollView.AlwaysBounceVertical = false;
+			scrollView.ShowsHorizontalScrollIndicator = true;
+			scrollView.ShowsVerticalScrollIndicator = false;
+		}
+		else
+		{
+			scrollView.AlwaysBounceHorizontal = false;
+			scrollView.AlwaysBounceVertical = true;
+			scrollView.ShowsHorizontalScrollIndicator = false;
+			scrollView.ShowsVerticalScrollIndicator = true;
+		}
+
+		if (_childView != null)
+			UpdateContentSize(_childView);
 	}
 
 	/// <inheritdoc />
 	protected override void AddSubview(View view)
 	{
-		// ScrollView should only have one child
-		// Remove all existing children first
+		// ScrollView should only have one child — remove existing subviews
 		foreach (UIView subview in NativeView.Subviews)
 		{
 			subview.RemoveFromSuperview();
 		}
 
+		_childView = view;
 		NativeView.AddSubview(view);
 		view.UpdateAlign();
-
-		// Update content size based on child
 		UpdateContentSize(view);
 	}
 
@@ -59,12 +85,10 @@ public partial class ScrollView
 
 		if (Orientation == Orientation.Horizontal)
 		{
-			// Allow horizontal scrolling, constrain vertical
 			NativeView.ContentSize = new CGSize(size.Width, NativeView.Frame.Height);
 		}
-		else // Vertical
+		else
 		{
-			// Allow vertical scrolling, constrain horizontal
 			NativeView.ContentSize = new CGSize(NativeView.Frame.Width, size.Height);
 		}
 	}
@@ -81,10 +105,9 @@ public partial class ScrollView
 		{
 			base.LayoutSubviews();
 
-			// Update content size when layout changes
-			if (Subviews.Length > 0)
+			if (_parent._childView != null)
 			{
-				_parent.UpdateContentSize((View)Subviews[0]);
+				_parent.UpdateContentSize(_parent._childView);
 			}
 		}
 	}

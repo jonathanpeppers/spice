@@ -115,7 +115,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - Entry → AppCompatEditText
 - Image → AppCompatImageView
 - Label → AppCompatTextView
-- ScrollView → ScrollView
+- ScrollView → ScrollView / HorizontalScrollView
 - StackView → LinearLayout
 - WebView → WebView
 
