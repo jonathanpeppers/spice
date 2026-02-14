@@ -59,7 +59,7 @@
       "Size": 3800
     },
     "lib/arm64-v8a/libaot-CommunityToolkit.Mvvm.dll.so": {
-      "Size": 4368
+      "Size": 5080
     },
     "lib/arm64-v8a/libaot-Java.Interop.dll.so": {
       "Size": 164208
@@ -68,16 +68,16 @@
       "Size": 15792
     },
     "lib/arm64-v8a/libaot-Mono.Android.dll.so": {
-      "Size": 305568
+      "Size": 305880
     },
     "lib/arm64-v8a/libaot-Mono.Android.Runtime.dll.so": {
       "Size": 4480
     },
     "lib/arm64-v8a/libaot-Spice.dll.so": {
-      "Size": 35360
+      "Size": 35472
     },
     "lib/arm64-v8a/libaot-Spice.Scenarios.dll.so": {
-      "Size": 13432
+      "Size": 17872
     },
     "lib/arm64-v8a/libaot-System.ComponentModel.TypeConverter.dll.so": {
       "Size": 3800
@@ -92,7 +92,7 @@
       "Size": 11312
     },
     "lib/arm64-v8a/libaot-System.Private.CoreLib.dll.so": {
-      "Size": 871968
+      "Size": 871960
     },
     "lib/arm64-v8a/libaot-System.Runtime.dll.so": {
       "Size": 3608
@@ -137,7 +137,7 @@
       "Size": 19168
     },
     "lib/arm64-v8a/libassembly-store.so": {
-      "Size": 1279912
+      "Size": 1282208
     },
     "lib/arm64-v8a/libmono-component-marshal-ilgen.so": {
       "Size": 36616
@@ -161,7 +161,7 @@
       "Size": 165536
     },
     "lib/arm64-v8a/libxamarin-app.so": {
-      "Size": 70120
+      "Size": 70208
     },
     "META-INF/ANDROIDD.RSA": {
       "Size": 1607
@@ -2966,5 +2966,5 @@
       "Size": 1041120
     }
   },
-  "PackageSize": 8952303
+  "PackageSize": 8956399
 }
