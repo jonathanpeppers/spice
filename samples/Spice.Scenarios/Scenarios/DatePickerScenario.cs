@@ -29,6 +29,7 @@ class DatePickerScenario : StackView
 
 		Add(new Label { Text = "\nDatePicker with custom date:" });
 		
+		// TextColor is supported on Android only; iOS compact style uses system theme colors
 		var customDatePicker = new DatePicker
 		{
 			Date = new DateTime(2025, 12, 25),

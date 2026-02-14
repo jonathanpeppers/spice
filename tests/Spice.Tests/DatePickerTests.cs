@@ -8,8 +8,11 @@ public class DatePickerTests
 	[Fact]
 	public void DatePicker_DefaultDate_IsToday()
 	{
+		var todayBefore = DateTime.Today;
 		var datePicker = new DatePicker();
-		Assert.Equal(DateTime.Today, datePicker.Date);
+		var todayAfter = DateTime.Today;
+
+		Assert.True(datePicker.Date == todayBefore || datePicker.Date == todayAfter);
 	}
 
 	[Fact]
@@ -43,7 +46,7 @@ public class DatePickerTests
 	public void DatePicker_SetTextColor_UpdatesProperty()
 	{
 		var datePicker = new DatePicker();
-		var color = Colors.Red;
+		var color = Microsoft.Maui.Graphics.Colors.Red;
 		datePicker.TextColor = color;
 		Assert.Equal(color, datePicker.TextColor);
 	}

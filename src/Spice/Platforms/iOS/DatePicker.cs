@@ -51,14 +51,30 @@ public partial class DatePicker
 
 	partial void OnDateChanged(DateTime value)
 	{
-		NativeView.Date = value.ToNSDate();
+		var dateOnly = value.Date;
+
+		// Clamp to min/max if configured
+		if (MinimumDate.HasValue && dateOnly < MinimumDate.Value.Date)
+			dateOnly = MinimumDate.Value.Date;
+		if (MaximumDate.HasValue && dateOnly > MaximumDate.Value.Date)
+			dateOnly = MaximumDate.Value.Date;
+
+		if (dateOnly != value)
+			_date = dateOnly;
+
+		NativeView.Date = dateOnly.ToNSDate();
 	}
 
 	partial void OnMinimumDateChanged(DateTime? value)
 	{
 		if (value.HasValue)
 		{
-			NativeView.MinimumDate = value.Value.ToNSDate();
+			var minDate = value.Value.Date;
+			NativeView.MinimumDate = minDate.ToNSDate();
+
+			// UIDatePicker may silently adjust Date; keep managed property in sync
+			if (Date < minDate)
+				Date = minDate;
 		}
 		else
 		{
@@ -70,7 +86,12 @@ public partial class DatePicker
 	{
 		if (value.HasValue)
 		{
-			NativeView.MaximumDate = value.Value.ToNSDate();
+			var maxDate = value.Value.Date;
+			NativeView.MaximumDate = maxDate.ToNSDate();
+
+			// UIDatePicker may silently adjust Date; keep managed property in sync
+			if (Date > maxDate)
+				Date = maxDate;
 		}
 		else
 		{

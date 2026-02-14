@@ -10,42 +10,38 @@ public partial class DatePicker
 	/// Returns datePicker.NativeView
 	/// </summary>
 	/// <param name="datePicker">The Spice.DatePicker</param>
-	public static implicit operator Button(DatePicker datePicker) => datePicker.NativeView;
+	public static implicit operator Android.Widget.Button(DatePicker datePicker) => datePicker.NativeView;
 
-	static Button Create(Context context) => new(context);
+	static Android.Widget.Button Create(Context context) => new(context);
 
 	/// <summary>
 	/// Control for date selection.
 	/// Android -> Android.App.DatePickerDialog
 	/// iOS -> UIKit.UIDatePicker
 	/// </summary>
-	public DatePicker() : base(Platform.Context, Create)
-	{
-		UpdateText();
-		NativeView.Click += OnClick;
-	}
+	public DatePicker() : this(Platform.Context, Create) { }
 
 	/// <inheritdoc />
 	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
-	public DatePicker(Context context) : base(context, Create)
-	{
-		UpdateText();
-		NativeView.Click += OnClick;
-	}
+	public DatePicker(Context context) : this(context, Create) { }
 
 	/// <inheritdoc />
 	/// <param name="creator">Subclasses can pass in a Func to create a Android.Views.View</param>
-	protected DatePicker(Func<Context, Android.Views.View> creator) : base(Platform.Context, creator) { }
+	protected DatePicker(Func<Context, Android.Views.View> creator) : this(Platform.Context, creator) { }
 
 	/// <inheritdoc />
 	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
 	/// <param name="creator">Subclasses can pass in a Func to create a Android.Views.View</param>
-	protected DatePicker(Context context, Func<Context, Android.Views.View> creator) : base(context, creator) { }
+	protected DatePicker(Context context, Func<Context, Android.Views.View> creator) : base(context, creator)
+	{
+		UpdateText();
+		NativeView.Click += OnClick;
+	}
 
 	/// <summary>
 	/// The underlying Android.Widget.Button
 	/// </summary>
-	public new Button NativeView => (Button)_nativeView.Value;
+	public new Android.Widget.Button NativeView => (Android.Widget.Button)_nativeView.Value;
 
 	void OnClick(object? sender, EventArgs e)
 	{
