@@ -38,7 +38,7 @@ jobs:
       uses: actions/cache@v4
       with:
         path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj', '**/Directory.Build.props', '**/Directory.Build.targets') }}
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj', '**/*.slnx', '**/Directory.Build.props', '**/Directory.Build.targets') }}
         restore-keys: |
           ${{ runner.os }}-nuget-
         
@@ -62,7 +62,7 @@ jobs:
     - name: pack
       run: dotnet pack spice.slnx -c Release --no-build -bl:bin/pack.binlog
 
-    - name: build templates (Android-only for speed)
+    - name: build templates
       run: |
         dotnet new install src/Spice.Templates
         mkdir -p bin/templates && cd bin/templates
