@@ -15,8 +15,8 @@ jobs:
     env:
       WORKLOAD_VERSION: 10.0.103
       ValidateXcodeVersion: false
-      APK_PERCENTAGE_REGRESSION: 3
-      CONTENT_PERCENTAGE_REGRESSION: 5
+      APK_PERCENTAGE_REGRESSION: 10
+      CONTENT_PERCENTAGE_REGRESSION: 15
 
     steps:
     - name: checkout

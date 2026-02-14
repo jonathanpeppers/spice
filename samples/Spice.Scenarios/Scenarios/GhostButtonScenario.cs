@@ -3,7 +3,7 @@
 /// <summary>
 /// See GhostButton for an example of platform-specific logic
 /// </summary>
-class GhostButtonScenario : StackView
+class GhostButtonScenario : StackLayout
 {
 	public GhostButtonScenario()
 	{
