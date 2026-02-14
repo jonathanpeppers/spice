@@ -60,6 +60,10 @@ public partial class DatePicker
 		{
 			NativeView.MinimumDate = value.Value.ToNSDate();
 		}
+		else
+		{
+			NativeView.MinimumDate = null;
+		}
 	}
 
 	partial void OnMaximumDateChanged(DateTime? value)
@@ -67,6 +71,10 @@ public partial class DatePicker
 		if (value.HasValue)
 		{
 			NativeView.MaximumDate = value.Value.ToNSDate();
+		}
+		else
+		{
+			NativeView.MaximumDate = null;
 		}
 	}
 
