@@ -3,7 +3,7 @@ namespace Spice.Scenarios;
 /// <summary>
 /// Demonstrates the Border control with various configurations
 /// </summary>
-class BorderScenario : StackView
+class BorderScenario : StackLayout
 {
 	public BorderScenario()
 	{
@@ -68,7 +68,7 @@ class BorderScenario : StackView
 			HorizontalAlign = Align.Stretch
 		};
 
-		// Example 5: Nested content with StackView
+		// Example 5: Nested content with StackLayout
 		var nestedBorder = new Border
 		{
 			Stroke = Colors.Red,
@@ -76,7 +76,7 @@ class BorderScenario : StackView
 			CornerRadius = 12.0,
 			Padding = 10.0,
 			BackgroundColor = Colors.LightCoral,
-			Content = new StackView
+			Content = new StackLayout
 			{
 				new Label { Text = "Nested Content", TextColor = Colors.White },
 				new Label { Text = "Multiple items inside", TextColor = Colors.White },
