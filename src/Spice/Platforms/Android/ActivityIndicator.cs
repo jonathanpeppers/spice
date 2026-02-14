@@ -44,7 +44,7 @@ public partial class ActivityIndicator
 
 	partial void OnIsRunningChanged(bool value)
 	{
-		NativeView.Visibility = value ? Android.Views.ViewStates.Visible : Android.Views.ViewStates.Invisible;
+		NativeView.Visibility = value ? Android.Views.ViewStates.Visible : Android.Views.ViewStates.Gone;
 	}
 
 	partial void OnColorChanged(Color? value)
@@ -52,6 +52,10 @@ public partial class ActivityIndicator
 		if (value != null)
 		{
 			NativeView.IndeterminateDrawable?.SetTint(value.ToAndroidInt());
+		}
+		else
+		{
+			NativeView.IndeterminateDrawable?.ClearColorFilter();
 		}
 	}
 }
