@@ -37,6 +37,11 @@ public class App : Application
 				},
 				new Button
 				{
+					Text = "BoxView",
+					Clicked = _ => Main = new BoxViewScenario(),
+				},
+				new Button
+				{
 					Text = "Switch",
 					Clicked = _ => Main = new SwitchScenario(),
 				},
