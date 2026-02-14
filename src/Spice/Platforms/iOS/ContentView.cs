@@ -13,11 +13,11 @@ public partial class ContentView
 	/// Android -> Android.Views.ViewGroup (FrameLayout)
 	/// iOS -> UIKit.UIView
 	/// </summary>
-	public ContentView() : base(v => new UIView { AutoresizingMask = UIViewAutoresizing.None }) { }
+	public ContentView() : base(_ => new UIView { AutoresizingMask = UIViewAutoresizing.None }) { }
 
 	/// <inheritdoc />
 	/// <param name="frame">Pass the underlying view a frame</param>
-	public ContentView(CGRect frame) : base(v => new UIView(frame) { AutoresizingMask = UIViewAutoresizing.None }) { }
+	public ContentView(CGRect frame) : base(_ => new UIView(frame) { AutoresizingMask = UIViewAutoresizing.None }) { }
 
 	/// <inheritdoc />
 	/// <param name="creator">Subclasses can pass in a Func to create a UIView</param>

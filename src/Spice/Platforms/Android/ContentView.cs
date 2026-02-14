@@ -42,7 +42,7 @@ public partial class ContentView
 		// Remove old content
 		if (oldContent != null)
 		{
-			NativeView.RemoveView(oldContent.NativeView);
+			NativeView.RemoveView((Android.Views.View)oldContent);
 		}
 
 		// Add new content

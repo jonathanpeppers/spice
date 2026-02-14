@@ -18,14 +18,12 @@ public partial class ContentView : View
 		get => _content;
 		set
 		{
-			if (_content == value)
-				return;
-
 			var oldContent = _content;
-			_content = value;
 
-			OnPropertyChanged(nameof(Content));
-			OnContentChanged(oldContent, value);
+			if (SetProperty(ref _content, value))
+			{
+				OnContentChanged(oldContent, value);
+			}
 		}
 	}
 
