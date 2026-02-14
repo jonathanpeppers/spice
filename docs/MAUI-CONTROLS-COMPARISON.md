@@ -33,7 +33,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 | BoxView | ❌ No | 🟢 Maybe | Colored rectangles - useful for dividers |
 | Button | ✅ Yes | ✅ Done | Fully implemented |
 | CarouselView | ❌ No | ❌ No | Complex, less common |
-| CheckBox | ❌ No | 🔥 Yes | Standard checkbox input |
+| CheckBox | ✅ Yes | ✅ Done | Fully implemented |
 | CollectionView | ❌ No | 🟡 Maybe | Powerful grid/list control |
 | ContentView | ❌ No | 🟡 Maybe | Custom control composition |
 | DatePicker | ❌ No | 🔥 Yes | Date selection - common in forms |
@@ -73,11 +73,12 @@ This document compares the stable/supported controls from .NET MAUI with what is
 
 ## Summary
 
-**Implemented: 6 / 60+ controls**
+**Implemented: 7 / 60+ controls**
 
 ### Spice Controls (Core)
 - ✅ Application
 - ✅ Button
+- ✅ CheckBox
 - ✅ Entry (single-line text)
 - ✅ Image
 - ✅ Label
@@ -351,7 +352,7 @@ Based on Spice's minimalist philosophy and common mobile UI needs, here are reas
 **Phase 2 (Input Controls)**
 1. Picker
 2. Slider
-3. CheckBox
+3. ~~CheckBox~~ ✅ Done
 4. DatePicker
 5. TimePicker
 6. Editor (multiline text)
