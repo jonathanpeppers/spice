@@ -1,5 +1,5 @@
-<!-- From: https://github.com/dotnet/maui/blob/260fa08b0f75fbbb945375592896dd9eb374f22f/src/BlazorWebView/src/Maui/build/Microsoft.AspNetCore.Components.WebView.Maui.targets -->
-<Project>
+<!-- From: https://github.com/dotnet/maui/blob/2ccac2d3835d77a6548a7bb70773b5cf22b0f730/src/BlazorWebView/src/Maui/build/Microsoft.AspNetCore.Components.WebView.Maui.targets -->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <!-- Enable Razor files to be visible in Solution Explorer because they are not Content files in .NET MAUI projects -->
   <ItemGroup>
@@ -71,6 +71,7 @@
       <!-- Create a list of all content that *is* in the wwwroot folder (to preserve ItemGroup metadata) -->
       <_TemporaryHiddenContent Include="@(Content)" Exclude="@(_NonWWWRootContent)" />
       <!-- Add Scoped CSS files in the app to the list of hidden items -->
+      <_TemporaryHiddenContent Include="Components\**\*.razor.css" />
       <_TemporaryHiddenContent Include="Pages\**\*.razor.css" />
       <_TemporaryHiddenContent Include="Shared\**\*.razor.css" />
       <!-- Temporarily remove the items -->
@@ -92,6 +93,7 @@
       <!-- Create a list of all content that *is* in the wwwroot folder (to preserve ItemGroup metadata) -->
       <_TemporaryHiddenContent Include="@(Content)" Exclude="@(_NonWWWRootContent)" />
       <!-- Add Scoped CSS files in the app to the list of hidden items -->
+      <_TemporaryHiddenContent Include="Components\**\*.razor.css" />
       <_TemporaryHiddenContent Include="Pages\**\*.razor.css" />
       <_TemporaryHiddenContent Include="Shared\**\*.razor.css" />
       <!-- Temporarily remove the items -->
@@ -120,13 +122,5 @@
     </ItemGroup>
   </Target>
 
-  <!-- Microsoft.Android.Sdk.AssemblyResolution.targets _ResolveAssemblies triggers a nested build to
-       resolve publish files in a Maui specific way and that breaks elements depending on the '$(IntermediateOutputPath)'.
-       This target detects we are running inside one of such builds and adjust the relevant paths. -->
-  <Target Name="_AdjustStaticWebAssetPathBaseWhenBuildingWithRid" BeforeTargets="ResolveStaticWebAssetsConfiguration" Condition="'$(_OuterIntermediateOutputPath)' != ''">
-    <PropertyGroup>
-      <_StaticWebAssetsManifestBase>$(_OuterIntermediateOutputPath)</_StaticWebAssetsManifestBase>
-    </PropertyGroup>
-  </Target>
 
 </Project>
