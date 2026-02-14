@@ -18,6 +18,9 @@ public partial class CheckBox
 		// Configure button as checkbox
 		NativeView.SetImage(UIImage.GetSystemImage("square"), UIControlState.Normal);
 		NativeView.SetImage(UIImage.GetSystemImage("checkmark.square.fill"), UIControlState.Selected);
+		
+		// Always toggle on tap
+		NativeView.TouchUpInside += OnTouchUpInside;
 	}
 
 	/// <inheritdoc />
@@ -26,6 +29,9 @@ public partial class CheckBox
 	{
 		NativeView.SetImage(UIImage.GetSystemImage("square"), UIControlState.Normal);
 		NativeView.SetImage(UIImage.GetSystemImage("checkmark.square.fill"), UIControlState.Selected);
+		
+		// Always toggle on tap
+		NativeView.TouchUpInside += OnTouchUpInside;
 	}
 
 	/// <inheritdoc />
@@ -42,25 +48,14 @@ public partial class CheckBox
 		NativeView.Selected = value;
 	}
 
-	EventHandler? _touchUpInside;
+	void OnTouchUpInside(object? sender, EventArgs e)
+	{
+		IsChecked = !IsChecked;
+		CheckedChanged?.Invoke(this);
+	}
 
 	partial void OnCheckedChangedChanged(Action<CheckBox>? value)
 	{
-		if (value == null)
-		{
-			if (_touchUpInside != null)
-			{
-				NativeView.TouchUpInside -= _touchUpInside;
-				_touchUpInside = null;
-			}
-		}
-		else
-		{
-			NativeView.TouchUpInside += _touchUpInside = (sender, e) =>
-			{
-				IsChecked = !IsChecked;
-				CheckedChanged?.Invoke(this);
-			};
-		}
+		// Event subscription is handled in constructor
 	}
 }

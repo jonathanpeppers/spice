@@ -32,37 +32,42 @@ public partial class CheckBox
 	/// <inheritdoc />
 	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
 	/// <param name="creator">Subclasses can pass in a Func to create a Android.Views.View</param>
-	protected CheckBox(Context context, Func<Context, Android.Views.View> creator) : base(context, creator) { }
+	protected CheckBox(Context context, Func<Context, Android.Views.View> creator) : base(context, creator)
+	{
+		// Always subscribe to keep IsChecked in sync
+		NativeView.CheckedChange += OnCheckedChange;
+	}
 
 	/// <summary>
 	/// The underlying Android.Widget.CheckBox
 	/// </summary>
 	public new AndroidCheckBox NativeView => (AndroidCheckBox)_nativeView.Value;
 
+	bool _updatingChecked;
+
 	partial void OnIsCheckedChanged(bool value)
 	{
+		if (_updatingChecked)
+			return;
+
+		_updatingChecked = true;
 		NativeView.Checked = value;
+		_updatingChecked = false;
 	}
 
-	EventHandler<CompoundButton.CheckedChangeEventArgs>? _checkedChange;
+	void OnCheckedChange(object? sender, CompoundButton.CheckedChangeEventArgs e)
+	{
+		if (_updatingChecked)
+			return;
+
+		_updatingChecked = true;
+		IsChecked = e.IsChecked;
+		_updatingChecked = false;
+		CheckedChanged?.Invoke(this);
+	}
 
 	partial void OnCheckedChangedChanged(Action<CheckBox>? value)
 	{
-		if (value == null)
-		{
-			if (_checkedChange != null)
-			{
-				NativeView.CheckedChange -= _checkedChange;
-				_checkedChange = null;
-			}
-		}
-		else
-		{
-			NativeView.CheckedChange += _checkedChange = (sender, e) =>
-			{
-				IsChecked = e.IsChecked;
-				CheckedChanged?.Invoke(this);
-			};
-		}
+		// Event subscription is handled in constructor
 	}
 }
