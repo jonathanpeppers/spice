@@ -269,7 +269,7 @@
       "Size": 4480
     },
     "lib/arm64-v8a/libaot-Spice.dll.so": {
-      "Size": 49232
+      "Size": 48544
     },
     "lib/arm64-v8a/libaot-System.Collections.Concurrent.dll.so": {
       "Size": 54512
@@ -380,7 +380,7 @@
       "Size": 19168
     },
     "lib/arm64-v8a/libassembly-store.so": {
-      "Size": 2593648
+      "Size": 2593512
     },
     "lib/arm64-v8a/libmono-component-marshal-ilgen.so": {
       "Size": 36616
