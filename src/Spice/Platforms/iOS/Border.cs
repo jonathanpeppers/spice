@@ -12,11 +12,11 @@ public partial class Border
 	/// Represents a border around a single child view. Set Content to a View, and customize with Stroke, StrokeThickness, CornerRadius, and Padding.
 	/// iOS -> UIView with CALayer border
 	/// </summary>
-	public Border() : base(_ => new UIView { AutoresizingMask = UIViewAutoresizing.None }) { }
+	public Border() : base(v => new SpiceBorderView((Border)v) { AutoresizingMask = UIViewAutoresizing.None }) { }
 
 	/// <inheritdoc />
 	/// <param name="frame">Pass the underlying view a frame</param>
-	public Border(CGRect frame) : base(_ => new UIView(frame) { AutoresizingMask = UIViewAutoresizing.None }) { }
+	public Border(CGRect frame) : base(v => new SpiceBorderView((Border)v, frame) { AutoresizingMask = UIViewAutoresizing.None }) { }
 
 	/// <inheritdoc />
 	/// <param name="creator">Subclasses can pass in a Func to create a UIView</param>
@@ -41,6 +41,8 @@ public partial class Border
 		if (value != null)
 		{
 			NativeView.Layer.BorderColor = value.ToCGColor();
+			// Ensure default StrokeThickness is applied to native layer
+			NativeView.Layer.BorderWidth = (nfloat)StrokeThickness;
 		}
 		else
 		{
@@ -90,5 +92,20 @@ public partial class Border
 	{
 		// Do nothing - Border doesn't support Children collection
 		// Only Content property should be used to add a view
+	}
+
+	class SpiceBorderView : UIView
+	{
+		readonly Border _parent;
+
+		public SpiceBorderView(Border parent) => _parent = parent;
+
+		public SpiceBorderView(Border parent, CGRect frame) : base(frame) => _parent = parent;
+
+		public override void LayoutSubviews()
+		{
+			base.LayoutSubviews();
+			_parent.UpdateContentLayout();
+		}
 	}
 }

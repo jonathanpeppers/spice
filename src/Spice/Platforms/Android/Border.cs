@@ -1,4 +1,5 @@
 using Android.Content;
+using Android.Content.Res;
 using Android.Graphics.Drawables;
 
 namespace Spice;
@@ -73,7 +74,7 @@ public partial class Border
 
 		if (newValue != null)
 		{
-			NativeView.AddView(newValue);
+			NativeView.AddView(newValue.NativeView);
 			UpdateContentPadding();
 		}
 	}
@@ -83,11 +84,11 @@ public partial class Border
 		var drawable = GetOrCreateBorderDrawable();
 		if (value != null)
 		{
-			drawable.SetStroke(StrokeThickness.ToPixels(), value.ToAndroidInt());
+			drawable.SetStroke(StrokeThickness.ToPixels(), ColorStateList.ValueOf(value.ToAndroidColor()));
 		}
 		else
 		{
-			drawable.SetStroke(0, 0);
+			drawable.SetStroke(0, ColorStateList.ValueOf(Android.Graphics.Color.Transparent));
 		}
 	}
 
@@ -96,13 +97,11 @@ public partial class Border
 		var drawable = GetOrCreateBorderDrawable();
 		if (Stroke != null)
 		{
-			drawable.SetStroke(value.ToPixels(), Stroke.ToAndroidInt());
+			drawable.SetStroke(value.ToPixels(), ColorStateList.ValueOf(Stroke.ToAndroidColor()));
 		}
 		else
 		{
-			// Even if Stroke is null, we need to update the stroke thickness
-			// so that when Stroke is set later, the thickness is correct
-			drawable.SetStroke(value.ToPixels(), 0);
+			drawable.SetStroke(value.ToPixels(), ColorStateList.ValueOf(Android.Graphics.Color.Transparent));
 		}
 		UpdateContentPadding();
 	}
