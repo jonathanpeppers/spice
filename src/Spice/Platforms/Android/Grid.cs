@@ -86,12 +86,27 @@ public partial class Grid
 		var rowSpan = GetRowSpan(view);
 		var columnSpan = GetColumnSpan(view);
 
-		var layoutParams = CreateGridLayoutParams(row, column, rowSpan, columnSpan);
+		// Calculate actual grid dimensions
+		int maxRow = Math.Max(row + rowSpan - 1, RowDefinitions.Count - 1);
+		int maxColumn = Math.Max(column + columnSpan - 1, ColumnDefinitions.Count - 1);
+		
+		// Also check other children
+		foreach (var child in Children)
+		{
+			var childRow = GetRow(child);
+			var childColumn = GetColumn(child);
+			var childRowSpan = GetRowSpan(child);
+			var childColumnSpan = GetColumnSpan(child);
+			maxRow = Math.Max(maxRow, childRow + childRowSpan - 1);
+			maxColumn = Math.Max(maxColumn, childColumn + childColumnSpan - 1);
+		}
+
+		var layoutParams = CreateGridLayoutParams(row, column, rowSpan, columnSpan, maxRow, maxColumn);
 		view.NativeView.LayoutParameters = layoutParams;
 		NativeView.AddView(view.NativeView);
 	}
 
-	GridLayout.LayoutParams CreateGridLayoutParams(int row, int column, int rowSpan, int columnSpan)
+	GridLayout.LayoutParams CreateGridLayoutParams(int row, int column, int rowSpan, int columnSpan, int maxRow, int maxColumn)
 	{
 		var rowSpec = GridLayout.InvokeSpec(row, rowSpan, GridLayout.Fill);
 		var columnSpec = GridLayout.InvokeSpec(column, columnSpan, GridLayout.Fill);
@@ -148,9 +163,9 @@ public partial class Grid
 		if (RowSpacing > 0 || ColumnSpacing > 0)
 		{
 			var left = column > 0 ? (int)(ColumnSpacing / 2) : 0;
-			var right = column < ColumnDefinitions.Count - 1 ? (int)(ColumnSpacing / 2) : 0;
+			var right = column < maxColumn ? (int)(ColumnSpacing / 2) : 0;
 			var top = row > 0 ? (int)(RowSpacing / 2) : 0;
-			var bottom = row < RowDefinitions.Count - 1 ? (int)(RowSpacing / 2) : 0;
+			var bottom = row < maxRow ? (int)(RowSpacing / 2) : 0;
 			layoutParams.SetMargins(left, top, right, bottom);
 		}
 
@@ -159,22 +174,36 @@ public partial class Grid
 
 	void UpdateChildMargins()
 	{
+		// Calculate actual grid dimensions based on all children
+		int maxRow = 0;
+		int maxColumn = 0;
+		
+		foreach (var child in Children)
+		{
+			var row = GetRow(child);
+			var column = GetColumn(child);
+			var rowSpan = GetRowSpan(child);
+			var columnSpan = GetColumnSpan(child);
+			maxRow = Math.Max(maxRow, row + rowSpan - 1);
+			maxColumn = Math.Max(maxColumn, column + columnSpan - 1);
+		}
+
 		// Update margins on all existing children
 		for (int i = 0; i < NativeView.ChildCount; i++)
 		{
-			var child = NativeView.GetChildAt(i);
-			if (child?.LayoutParameters is GridLayout.LayoutParams layoutParams)
+			var nativeChild = NativeView.GetChildAt(i);
+			if (nativeChild?.LayoutParameters is GridLayout.LayoutParams layoutParams)
 			{
-				var spiceView = Children.FirstOrDefault(v => ReferenceEquals(v.NativeView, child));
+				var spiceView = Children.FirstOrDefault(v => ReferenceEquals(v.NativeView, nativeChild));
 				if (spiceView != null)
 				{
 					var row = GetRow(spiceView);
 					var column = GetColumn(spiceView);
 
 					var left = column > 0 ? (int)(ColumnSpacing / 2) : 0;
-					var right = column < ColumnDefinitions.Count - 1 ? (int)(ColumnSpacing / 2) : 0;
+					var right = column < maxColumn ? (int)(ColumnSpacing / 2) : 0;
 					var top = row > 0 ? (int)(RowSpacing / 2) : 0;
-					var bottom = row < RowDefinitions.Count - 1 ? (int)(RowSpacing / 2) : 0;
+					var bottom = row < maxRow ? (int)(RowSpacing / 2) : 0;
 					layoutParams.SetMargins(left, top, right, bottom);
 				}
 			}

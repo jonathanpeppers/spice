@@ -6,6 +6,8 @@ namespace Spice;
 /// A layout container that arranges child views in rows and columns.
 /// Android -> Android.Widget.GridLayout
 /// iOS -> Custom constraint-based layout
+/// 
+/// Note: Auto-sized rows and columns are not fully supported and will behave as star-sized with weight 1.
 /// </summary>
 public partial class Grid : View
 {
@@ -31,11 +33,11 @@ public partial class Grid : View
 	[ObservableProperty]
 	double _columnSpacing = 0;
 
-	// Attached properties for child views
-	static readonly Dictionary<View, int> _rows = new();
-	static readonly Dictionary<View, int> _columns = new();
-	static readonly Dictionary<View, int> _rowSpans = new();
-	static readonly Dictionary<View, int> _columnSpans = new();
+	// Attached properties for child views (thread-safe)
+	static readonly System.Collections.Concurrent.ConcurrentDictionary<View, int> _rows = new();
+	static readonly System.Collections.Concurrent.ConcurrentDictionary<View, int> _columns = new();
+	static readonly System.Collections.Concurrent.ConcurrentDictionary<View, int> _rowSpans = new();
+	static readonly System.Collections.Concurrent.ConcurrentDictionary<View, int> _columnSpans = new();
 
 	/// <summary>
 	/// Gets the row position of the specified view.
