@@ -31,13 +31,12 @@ public partial class Border
 	}
 
 	/// <inheritdoc />
-	/// <param name="creator">Subclasses can pass in a Func to create a Android.Views.View</param>
-	protected Border(Func<Context, Android.Views.View> creator) : base(Platform.Context, creator) { }
-
-	/// <inheritdoc />
 	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
 	/// <param name="creator">Subclasses can pass in a Func to create a Android.Views.View</param>
-	protected Border(Context context, Func<Context, Android.Views.View> creator) : base(context, creator) { }
+	protected Border(Context context, Func<Context, Android.Views.View> creator) : base(context, creator)
+	{
+		PropertyChanged += OnPropertyChanged;
+	}
 
 	/// <summary>
 	/// The underlying Android.Widget.FrameLayout
@@ -79,7 +78,8 @@ public partial class Border
 		var drawable = GetOrCreateBorderDrawable();
 		if (value != null)
 		{
-			drawable.SetStroke((int)StrokeThickness, value.ToAndroidInt());
+			var strokeWidthPx = (int)Math.Round(StrokeThickness);
+			drawable.SetStroke(strokeWidthPx, value.ToAndroidInt());
 		}
 		else
 		{
@@ -92,7 +92,8 @@ public partial class Border
 		var drawable = GetOrCreateBorderDrawable();
 		if (Stroke != null)
 		{
-			drawable.SetStroke((int)value, Stroke.ToAndroidInt());
+			var strokeWidthPx = (int)Math.Round(value);
+			drawable.SetStroke(strokeWidthPx, Stroke.ToAndroidInt());
 		}
 		UpdateContentPadding();
 	}
@@ -110,7 +111,7 @@ public partial class Border
 
 	void UpdateContentPadding()
 	{
-		var paddingPx = (int)(Padding + StrokeThickness);
+		var paddingPx = (int)Math.Round(Padding + StrokeThickness);
 		NativeView.SetPadding(paddingPx, paddingPx, paddingPx, paddingPx);
 	}
 
