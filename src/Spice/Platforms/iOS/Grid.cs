@@ -50,17 +50,15 @@ public partial class Grid
 	protected override void AddSubview(View view)
 	{
 		NativeView.AddSubview(view);
-		view.NativeView.TranslatesAutoresizingMaskIntoConstraints = false;
 		NativeView.InvalidateLayout();
 	}
 
 	/// <summary>
-	/// Custom UIView for Grid layout using constraints
+	/// Custom UIView for Grid layout using manual layout
 	/// </summary>
 	public class SpiceGridView : UIView
 	{
 		readonly Grid _parent;
-		readonly List<NSLayoutConstraint> _constraints = new();
 
 		public SpiceGridView(Grid parent) => _parent = parent;
 
@@ -68,12 +66,12 @@ public partial class Grid
 
 		public void InvalidateLayout()
 		{
-			// Remove old constraints
-			if (_constraints.Count > 0)
-			{
-				NSLayoutConstraint.DeactivateConstraints(_constraints.ToArray());
-				_constraints.Clear();
-			}
+			SetNeedsLayout();
+		}
+
+		public override void LayoutSubviews()
+		{
+			base.LayoutSubviews();
 
 			if (Subviews.Length == 0)
 				return;
@@ -83,11 +81,8 @@ public partial class Grid
 			int colCount = Math.Max(1, _parent.ColumnDefinitions.Count);
 
 			// Ensure we have enough rows/columns for all children
-			foreach (var subview in Subviews)
+			foreach (UIView subview in Subviews)
 			{
-				if (subview is not UIView)
-					continue;
-
 				var spiceView = _parent.Children.FirstOrDefault(v => ReferenceEquals(((UIView)v).Handle, subview.Handle));
 				if (spiceView == null)
 					continue;
@@ -101,160 +96,91 @@ public partial class Grid
 				colCount = Math.Max(colCount, col + colSpan);
 			}
 
-			// Create guide views for each cell boundary
-			var rowGuides = new UILayoutGuide[rowCount + 1];
-			var colGuides = new UILayoutGuide[colCount + 1];
+			// Calculate row heights and column widths
+			var rowHeights = new nfloat[rowCount];
+			var colWidths = new nfloat[colCount];
+			var rowPositions = new nfloat[rowCount];
+			var colPositions = new nfloat[colCount];
 
-			for (int i = 0; i <= rowCount; i++)
-			{
-				rowGuides[i] = new UILayoutGuide();
-				AddLayoutGuide(rowGuides[i]);
-			}
+			// Calculate absolute and auto sizes first
+			nfloat totalStarRowWeight = 0;
+			nfloat totalStarColWeight = 0;
+			nfloat usedHeight = 0;
+			nfloat usedWidth = 0;
 
-			for (int i = 0; i <= colCount; i++)
-			{
-				colGuides[i] = new UILayoutGuide();
-				AddLayoutGuide(colGuides[i]);
-			}
-
-			// Position row guides
-			_constraints.Add(rowGuides[0].TopAnchor.ConstraintEqualTo(TopAnchor));
 			for (int i = 0; i < rowCount; i++)
 			{
 				var rowDef = i < _parent.RowDefinitions.Count ? _parent.RowDefinitions[i] : new RowDefinition();
-				var topGuide = rowGuides[i];
-				var bottomGuide = rowGuides[i + 1];
-
-				// Add spacing
-				if (i > 0)
-				{
-					_constraints.Add(topGuide.TopAnchor.ConstraintEqualTo(rowGuides[i].TopAnchor, (nfloat)_parent.RowSpacing));
-				}
-
-				// Height constraint based on GridLength
 				if (rowDef.Height.IsAbsolute)
 				{
-					_constraints.Add(bottomGuide.TopAnchor.ConstraintEqualTo(topGuide.TopAnchor, (nfloat)rowDef.Height.Value));
+					rowHeights[i] = (nfloat)rowDef.Height.Value;
+					usedHeight += rowHeights[i];
 				}
-				else if (rowDef.Height.IsAuto)
+				else if (rowDef.Height.IsStar)
 				{
-					// Auto sizing - will be determined by content
-					_constraints.Add(bottomGuide.TopAnchor.ConstraintGreaterThanOrEqualTo(topGuide.TopAnchor));
+					totalStarRowWeight += (nfloat)rowDef.Height.Value;
 				}
-				else // Star
-				{
-					// Star sizing - proportional
-					// We'll handle this by making all star rows equal and then multiplying
-					_constraints.Add(bottomGuide.TopAnchor.ConstraintGreaterThanOrEqualTo(topGuide.TopAnchor));
-				}
-
-				// Zero height for guides
-				_constraints.Add(topGuide.HeightAnchor.ConstraintEqualTo(0));
-				_constraints.Add(bottomGuide.HeightAnchor.ConstraintEqualTo(0));
+				// Auto sizing would require measuring children - simplified for now
 			}
-			_constraints.Add(rowGuides[rowCount].TopAnchor.ConstraintEqualTo(BottomAnchor));
 
-			// Position column guides
-			_constraints.Add(colGuides[0].LeadingAnchor.ConstraintEqualTo(LeadingAnchor));
 			for (int i = 0; i < colCount; i++)
 			{
 				var colDef = i < _parent.ColumnDefinitions.Count ? _parent.ColumnDefinitions[i] : new ColumnDefinition();
-				var leftGuide = colGuides[i];
-				var rightGuide = colGuides[i + 1];
-
-				// Add spacing
-				if (i > 0)
-				{
-					_constraints.Add(leftGuide.LeadingAnchor.ConstraintEqualTo(colGuides[i].LeadingAnchor, (nfloat)_parent.ColumnSpacing));
-				}
-
-				// Width constraint based on GridLength
 				if (colDef.Width.IsAbsolute)
 				{
-					_constraints.Add(rightGuide.LeadingAnchor.ConstraintEqualTo(leftGuide.LeadingAnchor, (nfloat)colDef.Width.Value));
+					colWidths[i] = (nfloat)colDef.Width.Value;
+					usedWidth += colWidths[i];
 				}
-				else if (colDef.Width.IsAuto)
+				else if (colDef.Width.IsStar)
 				{
-					// Auto sizing - will be determined by content
-					_constraints.Add(rightGuide.LeadingAnchor.ConstraintGreaterThanOrEqualTo(leftGuide.LeadingAnchor));
+					totalStarColWeight += (nfloat)colDef.Width.Value;
 				}
-				else // Star
-				{
-					// Star sizing - proportional
-					_constraints.Add(rightGuide.LeadingAnchor.ConstraintGreaterThanOrEqualTo(leftGuide.LeadingAnchor));
-				}
-
-				// Zero width for guides
-				_constraints.Add(leftGuide.WidthAnchor.ConstraintEqualTo(0));
-				_constraints.Add(rightGuide.WidthAnchor.ConstraintEqualTo(0));
 			}
-			_constraints.Add(colGuides[colCount].LeadingAnchor.ConstraintEqualTo(TrailingAnchor));
 
-			// Handle star sizing by making all star rows/columns proportional
-			var starRows = new List<int>();
-			var starCols = new List<int>();
+			// Add spacing to used dimensions
+			usedHeight += (nfloat)_parent.RowSpacing * (rowCount - 1);
+			usedWidth += (nfloat)_parent.ColumnSpacing * (colCount - 1);
+
+			// Distribute remaining space to star-sized rows/columns
+			nfloat remainingHeight = Math.Max(0, Bounds.Height - usedHeight);
+			nfloat remainingWidth = Math.Max(0, Bounds.Width - usedWidth);
 
 			for (int i = 0; i < rowCount; i++)
 			{
 				var rowDef = i < _parent.RowDefinitions.Count ? _parent.RowDefinitions[i] : new RowDefinition();
-				if (rowDef.Height.IsStar)
-					starRows.Add(i);
+				if (rowDef.Height.IsStar && totalStarRowWeight > 0)
+				{
+					rowHeights[i] = remainingHeight * ((nfloat)rowDef.Height.Value / totalStarRowWeight);
+				}
 			}
 
 			for (int i = 0; i < colCount; i++)
 			{
 				var colDef = i < _parent.ColumnDefinitions.Count ? _parent.ColumnDefinitions[i] : new ColumnDefinition();
-				if (colDef.Width.IsStar)
-					starCols.Add(i);
-			}
-
-			// Make star rows proportional
-			if (starRows.Count > 0)
-			{
-				var firstStarRow = starRows[0];
-				var firstRowDef = firstStarRow < _parent.RowDefinitions.Count ? _parent.RowDefinitions[firstStarRow] : new RowDefinition();
-				var firstRowHeight = rowGuides[firstStarRow + 1].TopAnchor.ConstraintEqualTo(rowGuides[firstStarRow].TopAnchor);
-
-				foreach (var starRow in starRows.Skip(1))
+				if (colDef.Width.IsStar && totalStarColWeight > 0)
 				{
-					var rowDef = starRow < _parent.RowDefinitions.Count ? _parent.RowDefinitions[starRow] : new RowDefinition();
-					var multiplier = (nfloat)(rowDef.Height.Value / firstRowDef.Height.Value);
-					var constraint = NSLayoutConstraint.Create(
-						rowGuides[starRow + 1].TopAnchor,
-						NSLayoutRelation.Equal,
-						rowGuides[starRow].TopAnchor,
-						1,
-						0);
-					_constraints.Add(constraint);
+					colWidths[i] = remainingWidth * ((nfloat)colDef.Width.Value / totalStarColWeight);
 				}
 			}
 
-			// Make star columns proportional
-			if (starCols.Count > 0)
+			// Calculate positions
+			nfloat currentY = 0;
+			for (int i = 0; i < rowCount; i++)
 			{
-				var firstStarCol = starCols[0];
-				var firstColDef = firstStarCol < _parent.ColumnDefinitions.Count ? _parent.ColumnDefinitions[firstStarCol] : new ColumnDefinition();
-
-				foreach (var starCol in starCols.Skip(1))
-				{
-					var colDef = starCol < _parent.ColumnDefinitions.Count ? _parent.ColumnDefinitions[starCol] : new ColumnDefinition();
-					var multiplier = (nfloat)(colDef.Width.Value / firstColDef.Width.Value);
-					var constraint = NSLayoutConstraint.Create(
-						colGuides[starCol + 1].LeadingAnchor,
-						NSLayoutRelation.Equal,
-						colGuides[starCol].LeadingAnchor,
-						1,
-						0);
-					_constraints.Add(constraint);
-				}
+				rowPositions[i] = currentY;
+				currentY += rowHeights[i] + (nfloat)_parent.RowSpacing;
 			}
 
-			// Position child views within cells
-			foreach (var subview in Subviews)
+			nfloat currentX = 0;
+			for (int i = 0; i < colCount; i++)
 			{
-				if (subview is not UIView uiView)
-					continue;
+				colPositions[i] = currentX;
+				currentX += colWidths[i] + (nfloat)_parent.ColumnSpacing;
+			}
 
+			// Layout children
+			foreach (UIView subview in Subviews)
+			{
 				var spiceView = _parent.Children.FirstOrDefault(v => ReferenceEquals(((UIView)v).Handle, subview.Handle));
 				if (spiceView == null)
 					continue;
@@ -264,29 +190,29 @@ public partial class Grid
 				int rowSpan = GetRowSpan(spiceView);
 				int colSpan = GetColumnSpan(spiceView);
 
-				// Ensure indices are within bounds
 				if (row >= rowCount || col >= colCount)
 					continue;
 
-				// Constrain to cell boundaries
-				_constraints.Add(uiView.TopAnchor.ConstraintEqualTo(rowGuides[row].TopAnchor));
-				_constraints.Add(uiView.BottomAnchor.ConstraintEqualTo(rowGuides[Math.Min(row + rowSpan, rowCount)].TopAnchor));
-				_constraints.Add(uiView.LeadingAnchor.ConstraintEqualTo(colGuides[col].LeadingAnchor));
-				_constraints.Add(uiView.TrailingAnchor.ConstraintEqualTo(colGuides[Math.Min(col + colSpan, colCount)].LeadingAnchor));
-			}
+				nfloat x = colPositions[col];
+				nfloat y = rowPositions[row];
+				
+				nfloat width = 0;
+				for (int i = col; i < Math.Min(col + colSpan, colCount); i++)
+				{
+					width += colWidths[i];
+					if (i < col + colSpan - 1)
+						width += (nfloat)_parent.ColumnSpacing;
+				}
 
-			// Activate all constraints
-			NSLayoutConstraint.ActivateConstraints(_constraints.ToArray());
-		}
+				nfloat height = 0;
+				for (int i = row; i < Math.Min(row + rowSpan, rowCount); i++)
+				{
+					height += rowHeights[i];
+					if (i < row + rowSpan - 1)
+						height += (nfloat)_parent.RowSpacing;
+				}
 
-		public override void LayoutSubviews()
-		{
-			base.LayoutSubviews();
-			
-			// Ensure layout is set up
-			if (_constraints.Count == 0)
-			{
-				InvalidateLayout();
+				subview.Frame = new CGRect(x, y, width, height);
 			}
 		}
 	}
