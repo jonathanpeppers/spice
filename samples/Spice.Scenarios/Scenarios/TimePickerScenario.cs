@@ -20,7 +20,7 @@ class TimePickerScenario : StackView
 
 		var resultLabel = new Label
 		{
-			Text = $"Selected: {timePicker.Time:hh\\:mm tt}",
+			Text = GetTimeDisplayText(timePicker.Time),
 		};
 
 		Add(resultLabel);
@@ -30,8 +30,11 @@ class TimePickerScenario : StackView
 		{
 			if (e.PropertyName == nameof(timePicker.Time))
 			{
-				resultLabel.Text = $"Selected: {timePicker.Time:hh\\:mm tt}";
+				resultLabel.Text = GetTimeDisplayText(timePicker.Time);
 			}
 		};
 	}
+
+	static string GetTimeDisplayText(TimeOnly time) =>
+		$"Selected: {time:hh\\:mm tt}";
 }
