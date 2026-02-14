@@ -148,4 +148,30 @@ public class BorderTests
 		Assert.Equal(2, border.Children.Count);
 		Assert.Null(border.Content);
 	}
+
+	[Fact]
+	public void BackgroundColorCanBeSet()
+	{
+		var border = new Border
+		{
+			BackgroundColor = Colors.Blue
+		};
+		Assert.Equal(Colors.Blue, border.BackgroundColor);
+	}
+
+	[Fact]
+	public void BackgroundColorCanBeChanged()
+	{
+		var border = new Border
+		{
+			BackgroundColor = Colors.Blue
+		};
+		Assert.Equal(Colors.Blue, border.BackgroundColor);
+
+		border.BackgroundColor = Colors.Red;
+		Assert.Equal(Colors.Red, border.BackgroundColor);
+
+		border.BackgroundColor = null;
+		Assert.Null(border.BackgroundColor);
+	}
 }

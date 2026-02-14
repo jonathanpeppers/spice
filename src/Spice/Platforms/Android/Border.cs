@@ -77,8 +77,7 @@ public partial class Border
 		var drawable = GetOrCreateBorderDrawable();
 		if (value != null)
 		{
-			var strokeWidthPx = (int)Math.Round(StrokeThickness);
-			drawable.SetStroke(strokeWidthPx, value.ToAndroidInt());
+			drawable.SetStroke(StrokeThickness.ToPixels(), value.ToAndroidInt());
 		}
 		else
 		{
@@ -91,8 +90,7 @@ public partial class Border
 		var drawable = GetOrCreateBorderDrawable();
 		if (Stroke != null)
 		{
-			var strokeWidthPx = (int)Math.Round(value);
-			drawable.SetStroke(strokeWidthPx, Stroke.ToAndroidInt());
+			drawable.SetStroke(value.ToPixels(), Stroke.ToAndroidInt());
 		}
 		UpdateContentPadding();
 	}
@@ -110,7 +108,7 @@ public partial class Border
 
 	void UpdateContentPadding()
 	{
-		var paddingPx = (int)Math.Round(Padding + StrokeThickness);
+		var paddingPx = (Padding + StrokeThickness).ToPixels();
 		NativeView.SetPadding(paddingPx, paddingPx, paddingPx, paddingPx);
 	}
 
