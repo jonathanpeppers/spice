@@ -69,6 +69,11 @@ public class App : Application
 				{
 					Text = "Picker",
 					Clicked = _ => Main = new PickerScenario(),
+        },
+				new Button
+				{
+					Text = "ContentView",
+					Clicked = _ => Main = new ContentViewScenario(),
 				},
 				new Button
 				{
