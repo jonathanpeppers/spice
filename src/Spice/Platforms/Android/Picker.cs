@@ -79,10 +79,8 @@ public partial class Picker
 
 	partial void OnItemsChanged(ObservableCollection<string> oldValue, ObservableCollection<string> newValue)
 	{
-		if (oldValue != null)
-			oldValue.CollectionChanged -= OnItemsCollectionChanged;
-		if (newValue != null)
-			newValue.CollectionChanged += OnItemsCollectionChanged;
+		oldValue.CollectionChanged -= OnItemsCollectionChanged;
+		newValue.CollectionChanged += OnItemsCollectionChanged;
 
 		RefreshAdapter();
 	}
@@ -93,7 +91,8 @@ public partial class Picker
 		if (adapter != null)
 		{
 			adapter.Clear();
-			adapter.AddAll(Items.ToArray());
+			foreach (var item in Items)
+				adapter.Add(item);
 			adapter.NotifyDataSetChanged();
 
 			// Clamp selected index: Spinner always has a selection when items exist

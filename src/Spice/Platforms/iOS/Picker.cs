@@ -45,10 +45,8 @@ public partial class Picker
 
 	partial void OnItemsChanged(ObservableCollection<string> oldValue, ObservableCollection<string> newValue)
 	{
-		if (oldValue != null)
-			oldValue.CollectionChanged -= OnItemsCollectionChanged;
-		if (newValue != null)
-			newValue.CollectionChanged += OnItemsCollectionChanged;
+		oldValue.CollectionChanged -= OnItemsCollectionChanged;
+		newValue.CollectionChanged += OnItemsCollectionChanged;
 
 		ReloadItems();
 	}
