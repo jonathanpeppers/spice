@@ -19,6 +19,8 @@
 		<SpiceEnablePlatformUsings>true</SpiceEnablePlatformUsings>
 		<AndroidGenerateResourceDesigner>false</AndroidGenerateResourceDesigner>
 		<_UseLegacyJavadocImport>true</_UseLegacyJavadocImport>
+		<!-- Suppress trim analysis warnings for Spice library -->
+		<SuppressTrimAnalysisWarnings>true</SuppressTrimAnalysisWarnings>
 	</PropertyGroup>
 
 	<ItemGroup>
