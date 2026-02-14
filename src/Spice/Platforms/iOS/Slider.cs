@@ -28,9 +28,9 @@ public partial class Slider
 	/// </summary>
 	public new UISlider NativeView => (UISlider)_nativeView.Value;
 
-	partial void OnMinimumChanged(double value) => NativeView.MinimumValue = (float)value;
+	partial void OnMinimumChanged(double value) => NativeView.MinValue = (float)value;
 
-	partial void OnMaximumChanged(double value) => NativeView.MaximumValue = (float)value;
+	partial void OnMaximumChanged(double value) => NativeView.MaxValue = (float)value;
 
 	partial void OnValueChanged(double value)
 	{
@@ -44,21 +44,21 @@ public partial class Slider
 
 	partial void OnValueChangedChanged(Action<Slider>? value)
 	{
-		if (value == null)
+		if (_valueChangedEvent != null)
 		{
-			if (_valueChangedEvent != null)
-			{
-				NativeView.ValueChanged -= _valueChangedEvent;
-				_valueChangedEvent = null;
-			}
+			NativeView.ValueChanged -= _valueChangedEvent;
+			_valueChangedEvent = null;
 		}
-		else
+
+		if (value != null)
 		{
-			NativeView.ValueChanged += _valueChangedEvent = (sender, e) =>
+			_valueChangedEvent = (sender, e) =>
 			{
 				Value = NativeView.Value;
 				ValueChanged?.Invoke(this);
 			};
+
+			NativeView.ValueChanged += _valueChangedEvent;
 		}
 	}
 }
