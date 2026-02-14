@@ -72,6 +72,11 @@ public class App : Application
 				},
 				new Button
 				{
+					Text = "CheckBox",
+					Clicked = _ => Main = new CheckBoxScenario(),
+        },
+				new Button
+				{
 					Text = "ContentView",
 					Clicked = _ => Main = new ContentViewScenario(),
 				},
