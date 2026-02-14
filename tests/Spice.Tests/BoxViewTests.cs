@@ -43,18 +43,18 @@ public class BoxViewTests
 	}
 
 	[Fact]
-	public void BoxViewInStackView()
+	public void BoxViewInStackLayout()
 	{
 		var green = new Color(0, 255, 0);
-		var stackView = new StackView();
+		var stackLayout = new StackLayout();
 		var boxView = new BoxView
 		{
 			Color = green
 		};
 
-		stackView.Add(boxView);
-		Assert.Single(stackView.Children);
-		Assert.Same(boxView, stackView.Children[0]);
+		stackLayout.Add(boxView);
+		Assert.Single(stackLayout.Children);
+		Assert.Same(boxView, stackLayout.Children[0]);
 		Assert.Equal(green, boxView.Color);
 	}
 }
