@@ -41,17 +41,31 @@ jobs:
     - name: build
       run: dotnet build -bl:bin/build.binlog
 
-    - name: run apkdiff
-      run: |
-        dotnet tool install --global apkdiff
-        apkdiff -s --save-description-2=bin/com.companyname.Hello-Signed.apkdesc --descrease-is-regression --test-apk-percentage-regression=$APK_PERCENTAGE_REGRESSION --test-content-percentage-regression=$CONTENT_PERCENTAGE_REGRESSION sizes/com.companyname.Hello-Signed.apkdesc src/Spice.Templates/templates/spice/bin/Release/net10.0-android/android-arm64/com.companyname.Hello-Signed.apk
-        apkdiff -s --save-description-2=bin/com.companyname.HelloBlazor-Signed.apkdesc --descrease-is-regression --test-apk-percentage-regression=$APK_PERCENTAGE_REGRESSION --test-content-percentage-regression=$CONTENT_PERCENTAGE_REGRESSION sizes/com.companyname.HelloBlazor-Signed.apkdesc src/Spice.Templates/templates/spice-blazor/bin/Release/net10.0-android/android-arm64/com.companyname.HelloBlazor-Signed.apk
-
     - name: tests
       run: dotnet test tests/Spice.Tests/Spice.Tests.csproj
 
     - name: pack
       run: dotnet pack -bl:bin/pack.binlog
+
+    - name: build templates
+      run: |
+        dotnet new install src/Spice.Templates
+        mkdir -p bin/templates && cd bin/templates
+        dotnet new spice -n Hello
+        dotnet new spice-blazor -n HelloBlazor
+        TARGETS='<Project><PropertyGroup><RestorePackagesPath>$(MSBuildThisFileDirectory)packages</RestorePackagesPath><RestoreAdditionalProjectSources>$(MSBuildThisFileDirectory)../../../bin/Release/</RestoreAdditionalProjectSources><RestoreNoCache>true</RestoreNoCache></PropertyGroup></Project>'
+        echo $TARGETS > Hello/Directory.Build.targets
+        echo $TARGETS > HelloBlazor/Directory.Build.targets
+        echo '<Project />' > Directory.Build.props
+        echo '<Project />' > Directory.Build.targets
+        dotnet build Hello/Hello.csproj -f net10.0-android -c Release -r android-arm64
+        dotnet build HelloBlazor/HelloBlazor.csproj -f net10.0-android -c Release -r android-arm64
+
+    - name: run apkdiff
+      run: |
+        dotnet tool install --global apkdiff
+        apkdiff -s --save-description-2=bin/com.companyname.Hello-Signed.apkdesc --descrease-is-regression --test-apk-percentage-regression=$APK_PERCENTAGE_REGRESSION --test-content-percentage-regression=$CONTENT_PERCENTAGE_REGRESSION sizes/com.companyname.Hello-Signed.apkdesc bin/templates/Hello/bin/Release/net10.0-android/android-arm64/com.companyname.Hello-Signed.apk
+        apkdiff -s --save-description-2=bin/com.companyname.HelloBlazor-Signed.apkdesc --descrease-is-regression --test-apk-percentage-regression=$APK_PERCENTAGE_REGRESSION --test-content-percentage-regression=$CONTENT_PERCENTAGE_REGRESSION sizes/com.companyname.HelloBlazor-Signed.apkdesc bin/templates/HelloBlazor/bin/Release/net10.0-android/android-arm64/com.companyname.HelloBlazor-Signed.apk
 
     - name: artifacts
       if: always()

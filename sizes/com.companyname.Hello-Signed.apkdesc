@@ -2,7 +2,7 @@
   "Comment": null,
   "Entries": {
     "AndroidManifest.xml": {
-      "Size": 5920
+      "Size": 6304
     },
     "classes.dex": {
       "Size": 9030788
@@ -137,7 +137,7 @@
       "Size": 19168
     },
     "lib/arm64-v8a/libassembly-store.so": {
-      "Size": 1265840
+      "Size": 1265792
     },
     "lib/arm64-v8a/libmono-component-marshal-ilgen.so": {
       "Size": 36616
@@ -162,12 +162,6 @@
     },
     "lib/arm64-v8a/libxamarin-app.so": {
       "Size": 67736
-    },
-    "META-INF/ANDROIDD.RSA": {
-      "Size": 1211
-    },
-    "META-INF/ANDROIDD.SF": {
-      "Size": 118387
     },
     "META-INF/androidx.activity_activity.version": {
       "Size": 6
@@ -286,6 +280,12 @@
     "META-INF/androidx.viewpager2_viewpager2.version": {
       "Size": 6
     },
+    "META-INF/BNDLTOOL.RSA": {
+      "Size": 1211
+    },
+    "META-INF/BNDLTOOL.SF": {
+      "Size": 118478
+    },
     "META-INF/com.android.tools/proguard/coroutines.pro": {
       "Size": 1345
     },
@@ -311,7 +311,7 @@
       "Size": 5
     },
     "META-INF/MANIFEST.MF": {
-      "Size": 118260
+      "Size": 118351
     },
     "META-INF/maven/com.google.errorprone/error_prone_annotations/pom.properties": {
       "Size": 80
@@ -2962,9 +2962,12 @@
     "res/mipmap-xxxhdpi-v4/appicon.png": {
       "Size": 1455
     },
+    "res/xml/splits0.xml": {
+      "Size": 8404
+    },
     "resources.arsc": {
-      "Size": 1041120
+      "Size": 1041308
     }
   },
-  "PackageSize": 8931813
+  "PackageSize": 8923686
 }
