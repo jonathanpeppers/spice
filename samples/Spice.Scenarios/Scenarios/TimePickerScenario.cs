@@ -1,6 +1,6 @@
 namespace Spice.Scenarios;
 
-class TimePickerScenario : StackView
+class TimePickerScenario : StackLayout
 {
 	public TimePickerScenario()
 	{

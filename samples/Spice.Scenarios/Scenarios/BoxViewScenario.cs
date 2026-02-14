@@ -1,6 +1,6 @@
 namespace Spice.Scenarios;
 
-class BoxViewScenario : StackView
+class BoxViewScenario : StackLayout
 {
 	public BoxViewScenario()
 	{
