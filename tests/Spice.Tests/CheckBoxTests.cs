@@ -57,3 +57,4 @@ public class CheckBoxTests
 		Assert.True(invoked);
 	}
 }
+
