@@ -8,7 +8,7 @@ namespace Spice;
 public partial class ImageButton : View
 {
 	/// <summary>
-	/// Source is a string name of an image without the extension. For "spice.svg", just pass "spice".
+	/// Source is a string name of an image without the extension. For "spice.png", just pass "spice".
 	/// Currently URLs and absolute file paths are not supported.
 	/// </summary>
 	[ObservableProperty]
