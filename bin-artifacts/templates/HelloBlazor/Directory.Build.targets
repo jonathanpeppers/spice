@@ -1,0 +1,1 @@
+<Project><PropertyGroup><RestorePackagesPath>$(MSBuildThisFileDirectory)packages</RestorePackagesPath><RestoreAdditionalProjectSources>$(MSBuildThisFileDirectory)../../../bin/Release/</RestoreAdditionalProjectSources><RestoreNoCache>true</RestoreNoCache></PropertyGroup></Project>

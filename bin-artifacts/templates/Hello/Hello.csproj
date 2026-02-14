@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net10.0-android;net10.0-ios</TargetFrameworks>
@@ -7,15 +7,12 @@
     <SingleProject>true</SingleProject>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <EnableDefaultCssItems>false</EnableDefaultCssItems>
-    <!-- https://github.com/dotnet/aspnetcore/issues/63951 — Blazor doesn't support full trimming -->
-    <NoWarn>$(NoWarn);IL2026;IL2065;IL2067;IL2072;IL2104;IL2110;IL2111;IL2121</NoWarn>
-    <ApplicationTitle>HelloBlazor</ApplicationTitle>
-    <ApplicationId>com.companyname.HelloBlazor</ApplicationId>
+    <ApplicationTitle>Hello</ApplicationTitle>
+    <ApplicationId>com.companyname.Hello</ApplicationId>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
     <ApplicationVersion>1</ApplicationVersion>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">16.0</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">23.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
   <ItemGroup>
