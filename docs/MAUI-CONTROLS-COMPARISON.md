@@ -66,7 +66,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 | SwipeView | ❌ No | 🟢 Maybe | Swipe actions - nice UX feature |
 | Switch | ✅ Yes | ✅ Done | Toggle control - essential |
 | TableView | ❌ No | ❌ No | Settings-style list (less common) |
-| TimePicker | ❌ No | 🔥 Yes | Time selection - common in forms |
+| TimePicker | ✅ Yes | ✅ Done | Time selection - common in forms |
 | TitleBar | ❌ No | ❌ No | Desktop-focused |
 | TwoPaneView | ❌ No | ❌ No | Foldable-specific |
 | WebView | ✅ Yes | ✅ Done | Fully implemented |
@@ -87,6 +87,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - ✅ Slider
 - ✅ StackView (equivalent to StackLayout)
 - ✅ Switch (toggle control)
+- ✅ TimePicker (time selection)
 - ✅ View (base class)
 - ✅ WebView
 - ✅ BlazorWebView (Blazor-specific)
@@ -116,6 +117,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - Slider → UISlider
 - StackView → UIStackView
 - Switch → UISwitch
+- TimePicker → UIDatePicker (Mode = Time)
 - WebView → WKWebView
 
 #### Android (Android Widgets)
@@ -129,6 +131,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - Slider → SeekBar
 - StackView → LinearLayout
 - Switch → SwitchCompat
+- TimePicker → TimePickerDialog
 - WebView → WebView
 
 ---
