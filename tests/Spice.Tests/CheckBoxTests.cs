@@ -18,7 +18,7 @@ public class CheckBoxTests
 	}
 
 	[Fact]
-	public void CheckedChangedPropertyChanged()
+	public void CheckedChangedAssignmentRaisesPropertyChanged()
 	{
 		string? property = null;
 		var checkBox = new CheckBox();
