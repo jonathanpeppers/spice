@@ -34,6 +34,8 @@ public class App : Application
 				{
 					Text = "Picker",
 					Clicked = _ => Main = new PickerScenario(),
+					Text = "Slider",
+					Clicked = _ => Main = new SliderScenario(),
 				},
 			}
 		};
