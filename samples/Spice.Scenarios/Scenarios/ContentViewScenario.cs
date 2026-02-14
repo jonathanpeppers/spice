@@ -10,7 +10,7 @@ public class ContentViewScenario : Application
 		var card = new ContentView
 		{
 			BackgroundColor = Colors.LightGray,
-			Content = new StackView
+			Content = new StackLayout
 			{
 				new Label
 				{
@@ -55,7 +55,7 @@ public class ContentViewScenario : Application
 		{
 			Children =
 			{
-				new StackView
+				new StackLayout
 				{
 					card,
 					simpleContent,

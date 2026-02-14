@@ -86,10 +86,10 @@ public class ContentViewTests
 	}
 
 	[Fact]
-	public void CanContainStackView()
+	public void CanContainStackLayout()
 	{
 		var contentView = new ContentView();
-		var stackView = new StackView
+		var stackView = new StackLayout
 		{
 			new Label { Text = "Item 1" },
 			new Label { Text = "Item 2" },
@@ -108,7 +108,7 @@ public class ContentViewTests
 	{
 		var contentView = new ContentView();
 		var scrollView = new ScrollView();
-		var innerStack = new StackView
+		var innerStack = new StackLayout
 		{
 			new Label { Text = "Header" },
 			new Button { Text = "Click Me" },
@@ -126,7 +126,7 @@ public class ContentViewTests
 	[Fact]
 	public void ContentViewCanBeNestedInOtherViews()
 	{
-		var outerStack = new StackView();
+		var outerStack = new StackLayout();
 		var contentView = new ContentView
 		{
 			Content = new Label { Text = "Inside ContentView" }
@@ -146,7 +146,7 @@ public class ContentViewTests
 		var contentView2 = new ContentView { Content = new Label { Text = "Second" } };
 		var contentView3 = new ContentView { Content = new Label { Text = "Third" } };
 
-		var stackView = new StackView
+		var stackView = new StackLayout
 		{
 			contentView1,
 			contentView2,
