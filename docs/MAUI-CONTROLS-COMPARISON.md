@@ -19,9 +19,9 @@ This document compares the stable/supported controls from .NET MAUI with what is
 | BindableLayout | ❌ No | ❌ No | Binding-focused pattern |
 | FlexLayout | ❌ No | 🟡 Maybe | Powerful but complex CSS flexbox |
 | Grid | ❌ No | 🔥 Yes | Essential for complex layouts |
-| HorizontalStackLayout | ❌ No | ❌ No | StackView with Horizontal orientation |
-| StackLayout | ✅ Yes | ✅ Done | Implemented as `StackView` |
-| VerticalStackLayout | ❌ No | ❌ No | StackView with Vertical orientation |
+| HorizontalStackLayout | ❌ No | ❌ No | StackLayout with Horizontal orientation |
+| StackLayout | ✅ Yes | ✅ Done | Fully implemented |
+| VerticalStackLayout | ❌ No | ❌ No | StackLayout with Vertical orientation |
 
 ## Views
 
@@ -85,7 +85,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - ✅ ProgressBar
 - ✅ ScrollView
 - ✅ Slider
-- ✅ StackView (equivalent to StackLayout)
+- ✅ StackLayout
 - ✅ Switch (toggle control)
 - ✅ TimePicker (time selection)
 - ✅ View (base class)
@@ -115,7 +115,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - ProgressBar → UIProgressView
 - ScrollView → UIScrollView
 - Slider → UISlider
-- StackView → UIStackView
+- StackLayout → UIStackView
 - Switch → UISwitch
 - TimePicker → UIDatePicker (Mode = Time)
 - WebView → WKWebView
@@ -129,7 +129,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - ProgressBar → ProgressBar
 - ScrollView → ScrollView / HorizontalScrollView
 - Slider → SeekBar
-- StackView → LinearLayout
+- StackLayout → LinearLayout
 - Switch → SwitchCompat
 - TimePicker → TimePickerDialog
 - WebView → WebView

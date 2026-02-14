@@ -6,7 +6,7 @@ public class App : Application
 	{
 		BackgroundColor = Colors.CornflowerBlue;
 
-		Main = new StackView
+		Main = new StackLayout
 		{
 			Children =
 			{
