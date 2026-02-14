@@ -32,6 +32,21 @@ public class App : Application
 				},
 				new Button
 				{
+					Text = "Switch",
+					Clicked = _ => Main = new SwitchScenario(),
+				},
+				new Button
+				{
+					Text = "ProgressBar",
+					Clicked = _ => Main = new ProgressBarScenario(),
+				},
+				new Button
+				{
+					Text = "ScrollView",
+					Clicked = _ => Main = new ScrollViewScenario(),
+				},
+				new Button
+				{
 					Text = "Slider",
 					Clicked = _ => Main = new SliderScenario(),
 				},
