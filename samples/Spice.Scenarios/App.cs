@@ -34,6 +34,8 @@ public class App : Application
 				{
 					Text = "ScrollView",
 					Clicked = _ => Main = new ScrollViewScenario(),
+					Text = "Slider",
+					Clicked = _ => Main = new SliderScenario(),
 				},
 			}
 		};

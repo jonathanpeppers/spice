@@ -2,7 +2,7 @@
   "Comment": null,
   "Entries": {
     "AndroidManifest.xml": {
-      "Size": 5988
+      "Size": 6364
     },
     "assets/wwwroot/_framework/blazor.modules.json": {
       "Size": 4
@@ -49,17 +49,17 @@
     "assets/wwwroot/favicon.ico": {
       "Size": 5430
     },
+    "assets/wwwroot/HelloBlazor.5vi0tj9vah.bundle.scp.css": {
+      "Size": 2826
+    },
+    "assets/wwwroot/HelloBlazor.styles.css": {
+      "Size": 2826
+    },
     "assets/wwwroot/index.html": {
-      "Size": 798
-    },
-    "assets/wwwroot/Spice.BlazorSample.58c9xjhuy8.bundle.scp.css": {
-      "Size": 2826
-    },
-    "assets/wwwroot/Spice.BlazorSample.styles.css": {
-      "Size": 2826
+      "Size": 790
     },
     "classes.dex": {
-      "Size": 9392160
+      "Size": 9392120
     },
     "commonMain/default/linkdata/module": {
       "Size": 70
@@ -115,6 +115,9 @@
     "lib/arm64-v8a/libaot-CommunityToolkit.Mvvm.dll.so": {
       "Size": 4368
     },
+    "lib/arm64-v8a/libaot-HelloBlazor.dll.so": {
+      "Size": 15456
+    },
     "lib/arm64-v8a/libaot-Java.Interop.dll.so": {
       "Size": 168960
     },
@@ -166,11 +169,8 @@
     "lib/arm64-v8a/libaot-Mono.Android.Runtime.dll.so": {
       "Size": 4480
     },
-    "lib/arm64-v8a/libaot-Spice.BlazorSample.dll.so": {
-      "Size": 16216
-    },
     "lib/arm64-v8a/libaot-Spice.dll.so": {
-      "Size": 47304
+      "Size": 48536
     },
     "lib/arm64-v8a/libaot-System.Collections.Concurrent.dll.so": {
       "Size": 54512
@@ -278,7 +278,7 @@
       "Size": 19168
     },
     "lib/arm64-v8a/libassembly-store.so": {
-      "Size": 2579768
+      "Size": 2579824
     },
     "lib/arm64-v8a/libmono-component-marshal-ilgen.so": {
       "Size": 36616
@@ -302,13 +302,7 @@
       "Size": 165536
     },
     "lib/arm64-v8a/libxamarin-app.so": {
-      "Size": 74656
-    },
-    "META-INF/ANDROIDD.RSA": {
-      "Size": 1607
-    },
-    "META-INF/ANDROIDD.SF": {
-      "Size": 122413
+      "Size": 74640
     },
     "META-INF/androidx.activity_activity.version": {
       "Size": 6
@@ -427,6 +421,12 @@
     "META-INF/androidx.viewpager2_viewpager2.version": {
       "Size": 6
     },
+    "META-INF/BNDLTOOL.RSA": {
+      "Size": 1211
+    },
+    "META-INF/BNDLTOOL.SF": {
+      "Size": 122483
+    },
     "META-INF/com.android.tools/proguard/coroutines.pro": {
       "Size": 1345
     },
@@ -452,7 +452,7 @@
       "Size": 5
     },
     "META-INF/MANIFEST.MF": {
-      "Size": 122286
+      "Size": 122356
     },
     "META-INF/maven/com.google.errorprone/error_prone_annotations/pom.properties": {
       "Size": 80
@@ -3052,9 +3052,12 @@
     "res/mipmap-xxxhdpi-v4/appicon.png": {
       "Size": 1455
     },
+    "res/xml/splits0.xml": {
+      "Size": 8404
+    },
     "resources.arsc": {
-      "Size": 1021044
+      "Size": 1021236
     }
   },
-  "PackageSize": 11191928
+  "PackageSize": 11179684
 }
