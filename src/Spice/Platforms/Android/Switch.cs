@@ -38,7 +38,14 @@ public partial class Switch
 	/// </summary>
 	public new SwitchCompat NativeView => (SwitchCompat)_nativeView.Value;
 
-	partial void OnIsOnChanged(bool value) => NativeView.Checked = value;
+	bool _updatingIsOn;
+
+	partial void OnIsOnChanged(bool value)
+	{
+		_updatingIsOn = true;
+		NativeView.Checked = value;
+		_updatingIsOn = false;
+	}
 
 	EventHandler<CompoundButton.CheckedChangeEventArgs>? _checkedChange;
 
@@ -55,6 +62,7 @@ public partial class Switch
 		{
 			NativeView.CheckedChange += _checkedChange = (sender, e) =>
 			{
+				if (_updatingIsOn) return;
 				IsOn = e.IsChecked;
 				Toggled?.Invoke(this);
 			};

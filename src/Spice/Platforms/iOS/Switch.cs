@@ -28,7 +28,7 @@ public partial class Switch
 	/// </summary>
 	public new UISwitch NativeView => (UISwitch)_nativeView.Value;
 
-	partial void OnIsOnChanged(bool value) => NativeView.On = value;
+	partial void OnIsOnChanged(bool value) => NativeView.SetState(value, true);
 
 	EventHandler? _valueChanged;
 

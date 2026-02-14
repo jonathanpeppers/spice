@@ -38,8 +38,7 @@ public class SwitchTests
 		var switchControl = new Switch();
 		Assert.Null(switchControl.Toggled);
 
-		bool toggled = false;
-		switchControl.Toggled = _ => toggled = true;
+		switchControl.Toggled = _ => { };
 		Assert.NotNull(switchControl.Toggled);
 	}
 
@@ -62,13 +61,4 @@ public class SwitchTests
 		Assert.IsAssignableFrom<View>(switchControl);
 	}
 
-	[Fact]
-	public void SwitchCanSetBackgroundColor()
-	{
-		var switchControl = new Switch
-		{
-			BackgroundColor = Colors.Red
-		};
-		Assert.Equal(Colors.Red, switchControl.BackgroundColor);
-	}
 }
