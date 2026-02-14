@@ -33,11 +33,13 @@ public class ActivityIndicatorTests
 		var activityIndicator = new ActivityIndicator();
 		Assert.Null(activityIndicator.Color);
 
-		activityIndicator.Color = Colors.Red;
-		Assert.Equal(Colors.Red, activityIndicator.Color);
+		var red = new Color(255, 0, 0);
+		activityIndicator.Color = red;
+		Assert.Equal(red, activityIndicator.Color);
 
-		activityIndicator.Color = Colors.Blue;
-		Assert.Equal(Colors.Blue, activityIndicator.Color);
+		var blue = new Color(0, 0, 255);
+		activityIndicator.Color = blue;
+		Assert.Equal(blue, activityIndicator.Color);
 
 		activityIndicator.Color = null;
 		Assert.Null(activityIndicator.Color);
@@ -53,24 +55,25 @@ public class ActivityIndicatorTests
 		activityIndicator.IsRunning = true;
 		Assert.Equal(nameof(activityIndicator.IsRunning), propertyName);
 
-		activityIndicator.Color = Colors.Green;
+		activityIndicator.Color = new Color(0, 128, 0);
 		Assert.Equal(nameof(activityIndicator.Color), propertyName);
 	}
 
 	[Fact]
 	public void ActivityIndicatorInStackView()
 	{
+		var blue = new Color(0, 0, 255);
 		var stackView = new StackView();
 		var activityIndicator = new ActivityIndicator
 		{
 			IsRunning = true,
-			Color = Colors.Blue
+			Color = blue
 		};
 
 		stackView.Add(activityIndicator);
 		Assert.Single(stackView.Children);
 		Assert.Same(activityIndicator, stackView.Children[0]);
 		Assert.True(activityIndicator.IsRunning);
-		Assert.Equal(Colors.Blue, activityIndicator.Color);
+		Assert.Equal(blue, activityIndicator.Color);
 	}
 }
