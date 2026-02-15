@@ -1,4 +1,5 @@
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace Spice.UITests;
 
@@ -16,11 +17,11 @@ public class WebViewTests : BaseTest
             var webViewButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='WebView']"));
             webViewButton.Click();
 
-            // Give WebView some time to load
-            Thread.Sleep(3000);
+            // Wait for WebView to load
+            var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+            var webView = wait.Until(driver => driver.FindElement(By.ClassName("android.webkit.WebView")));
 
             // Assert - Find WebView control
-            var webView = Driver.FindElement(By.ClassName("android.webkit.WebView"));
             Assert.NotNull(webView);
             Assert.True(webView.Displayed);
         }

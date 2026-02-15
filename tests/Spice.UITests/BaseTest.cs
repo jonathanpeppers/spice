@@ -66,7 +66,8 @@ public abstract class BaseTest : IDisposable
         var serverUri = new Uri("http://127.0.0.1:4723");
         Driver = new AndroidDriver(serverUri, options);
 
-        // Configure implicit wait timeout
+        // Configure implicit wait timeout - tells the driver to poll the DOM for up to 10 seconds
+        // when trying to find elements. This helps handle elements that may not be immediately available.
         // Reference: http://appium.io/docs/en/latest/quickstart/test-dotnet/
         Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 

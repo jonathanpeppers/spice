@@ -16,11 +16,16 @@ public class TimePickerTests : BaseTest
             var timePickerButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='TimePicker']"));
             timePickerButton.Click();
 
-            // Assert - Find the selected label showing time
+            // Assert - Find the selected label showing time (initially 9:30 AM)
             var selectedLabel = Driver.FindElement(By.XPath("//android.widget.TextView[contains(@text, 'Selected:')]"));
             Assert.NotNull(selectedLabel);
             Assert.Contains("Selected:", selectedLabel.Text);
-            Assert.Contains("9:30", selectedLabel.Text.Replace("09:30", "9:30"));
+            
+            // Time can be formatted as "9:30 AM" or "09:30 AM" depending on locale
+            var labelText = selectedLabel.Text;
+            Assert.True(
+                labelText.Contains("9:30") || labelText.Contains("09:30"),
+                $"Expected time label to contain '9:30' or '09:30', but got: {labelText}");
         }
         catch (Exception)
         {
