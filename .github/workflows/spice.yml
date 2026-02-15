@@ -90,7 +90,7 @@ jobs:
         path: bin
 
   ui-tests:
-    runs-on: macos-13
+    runs-on: macos-14
     needs: [build]
     env:
       WORKLOAD_VERSION: 10.0.103
