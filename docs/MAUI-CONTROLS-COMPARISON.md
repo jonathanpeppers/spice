@@ -157,7 +157,7 @@ This section compares the properties available on MAUI's `View` class (which inh
 | MaximumHeightRequest | ❌ No | 🟡 Maybe | Useful for responsive layouts |
 | HorizontalOptions | ❌ No | ✅ Done | HorizontalAlign already implemented |
 | VerticalOptions | ❌ No | ✅ Done | VerticalAlign already implemented |
-| Margin | ❌ No | 🔥 Yes | Outer spacing - critical for layouts |
+| Margin | ✅ Yes | ✅ Done | Outer spacing - critical for layouts |
 | Bounds | ❌ No | ❌ No | Read-only - internal layout info |
 | Frame | ❌ No | ❌ No | Read-only - screen position |
 | DesiredSize | ❌ No | ❌ No | Read-only - layout system internal |
@@ -176,7 +176,7 @@ This section compares the properties available on MAUI's `View` class (which inh
 | BackgroundColor | ✅ Yes | ✅ Done | Color type |
 | Background | ❌ No | ❌ No | Brush (gradients) - complex |
 | Opacity | ❌ No | 🟢 Maybe | 0-1 transparency - useful for fades |
-| IsVisible | ❌ No | 🔥 Yes | Show/hide element - very common |
+| IsVisible | ✅ Yes | ✅ Done | Show/hide element - very common |
 | Shadow | ❌ No | ❌ No | Platform-inconsistent, use native |
 | Clip | ❌ No | ❌ No | Advanced, less common |
 
@@ -199,7 +199,7 @@ This section compares the properties available on MAUI's `View` class (which inh
 
 | MAUI Property | Spice Implementation | Should Implement? | Notes |
 |--------------|---------------------|-------------------|-------|
-| IsEnabled | ❌ No | 🔥 Yes | Enable/disable interaction - essential for forms |
+| IsEnabled | ✅ Yes | ✅ Done | Enable/disable interaction - essential for forms |
 | InputTransparent | ❌ No | 🟡 Maybe | Pass-through touch events - useful |
 | IsFocused | ❌ No | ❌ No | Read-only focus state - advanced |
 | GestureRecognizers | ❌ No | ❌ No | Add tap handlers directly to controls |
@@ -251,14 +251,20 @@ This section compares the properties available on MAUI's `View` class (which inh
 | HorizontalAlign | HorizontalOptions | Simpler enum-based alignment |
 | VerticalAlign | VerticalOptions | Simpler enum-based alignment |
 | BackgroundColor | BackgroundColor | Uses `Microsoft.Maui.Graphics.Color` |
+| IsVisible | IsVisible | Control visibility - show/hide |
+| IsEnabled | IsEnabled | Enable/disable interaction |
+| Margin | Margin | Outer spacing using Thickness struct |
 
 ### Summary
 
-**Spice View Properties: 4**
+**Spice View Properties: 7**
 - Children (collection)
 - HorizontalAlign
 - VerticalAlign  
 - BackgroundColor
+- IsVisible
+- IsEnabled
+- Margin
 
 **MAUI View/VisualElement Properties: 60+**
 
@@ -327,15 +333,15 @@ Based on Spice's minimalist philosophy and common mobile UI needs, here are reas
 
 **Layout & Sizing**
 - ✅ **WidthRequest/HeightRequest** - Essential for sizing views
-- ✅ **Margin** - Outer spacing (critical for layouts)
+- ✅ **Margin** ✅ Done - Outer spacing (critical for layouts)
 - ✅ **Padding** - Inner spacing (for containers)
 
 **Appearance**
-- ✅ **IsVisible** - Show/hide elements (very common)
+- ✅ **IsVisible** ✅ Done - Show/hide elements (very common)
 - ✅ **Opacity** - Transparency (common for fade effects)
 
 **Interaction**
-- ✅ **IsEnabled** - Enable/disable controls (essential for forms)
+- ✅ **IsEnabled** ✅ Done - Enable/disable controls (essential for forms)
 
 ### ❌ Not Recommended
 
@@ -359,15 +365,15 @@ Based on Spice's minimalist philosophy and common mobile UI needs, here are reas
 ### Implementation Priority
 
 **Phase 1 (Core Controls)**
-1. Grid layout
-2. ScrollView
-3. Switch
+1. Grid layout ✅
+2. ScrollView ✅
+3. Switch ✅
 4. ~~ActivityIndicator~~ ✅
-5. ProgressBar
-6. IsVisible property
-7. IsEnabled property
+5. ProgressBar ✅
+6. IsVisible property ✅
+7. IsEnabled property ✅
 8. WidthRequest/HeightRequest
-9. Margin
+9. Margin ✅
 
 **Phase 2 (Input Controls)**
 1. Picker
