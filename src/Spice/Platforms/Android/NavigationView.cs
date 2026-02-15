@@ -123,9 +123,8 @@ public partial class NavigationView
 	{
 		if (_backStack.Count > 1)
 		{
-			// Get the root (first pushed item, at the bottom of the stack)
-			var items = _backStack.ToArray();
-			var root = items[items.Length - 1]; // Last in array is first pushed (bottom of stack)
+			// Get the root (bottom of stack) - need to reverse since Stack.Last() is LIFO
+			var root = _backStack.Reverse().First();
 			
 			// Clear all but root
 			ContentFrame.RemoveAllViews();

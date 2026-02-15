@@ -38,9 +38,10 @@ public partial class Application
 	async partial Task PresentAsyncCore(View view)
 	{
 		var viewController = new UIViewController();
-		viewController.View!.AddSubview(view);
-		((UIView)view).Frame = viewController.View.Bounds;
-		((UIView)view).AutoresizingMask = UIViewAutoresizing.All;
+		var nativeView = (UIView)view;
+		viewController.View!.AddSubview(nativeView);
+		nativeView.Frame = viewController.View.Bounds;
+		nativeView.AutoresizingMask = UIViewAutoresizing.All;
 		
 		// Set the title from the view's Title property
 		if (!string.IsNullOrEmpty(view.Title))

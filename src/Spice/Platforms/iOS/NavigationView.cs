@@ -34,14 +34,15 @@ public partial class NavigationView
 	partial void PushCore(View view)
 	{
 		var viewController = new UIViewController();
-		viewController.View!.AddSubview(view);
+		var nativeView = (UIView)view;
+		viewController.View!.AddSubview(nativeView);
 		
 		// Set the title from the view's Title property
 		viewController.Title = view.Title;
 		
 		// Layout the view to fill the view controller's view
-		((UIView)view).Frame = viewController.View.Bounds;
-		((UIView)view).AutoresizingMask = UIViewAutoresizing.All;
+		nativeView.Frame = viewController.View.Bounds;
+		nativeView.AutoresizingMask = UIViewAutoresizing.All;
 		
 		NavigationController.PushViewController(viewController, animated: true);
 	}

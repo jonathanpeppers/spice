@@ -52,9 +52,10 @@ public partial class TabView
 				var viewController = new UIViewController();
 				if (tab.Content != null)
 				{
-					viewController.View!.AddSubview(tab.Content);
-					((UIView)tab.Content).Frame = viewController.View.Bounds;
-					((UIView)tab.Content).AutoresizingMask = UIViewAutoresizing.All;
+					var nativeContent = (UIView)tab.Content;
+					viewController.View!.AddSubview(nativeContent);
+					nativeContent.Frame = viewController.View.Bounds;
+					nativeContent.AutoresizingMask = UIViewAutoresizing.All;
 				}
 				
 				viewController.Title = tab.Title;
