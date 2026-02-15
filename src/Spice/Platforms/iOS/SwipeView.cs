@@ -122,7 +122,7 @@ public partial class SwipeView
 		};
 
 		nfloat x = 0;
-		const nfloat itemWidth = 75; // Default item width
+		const nfloat itemWidth = 75; // Default item width in points (device-independent units)
 		nfloat totalWidth = items.Items.Count * itemWidth;
 
 		foreach (var item in items.Items)

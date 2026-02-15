@@ -170,7 +170,7 @@ public partial class SwipeView
 			if (!item.IsVisible)
 				continue;
 
-			const int buttonWidth = 200; // Default button width in pixels
+			const int buttonWidth = 200; // Default button width in pixels (~75dp on typical screen)
 			var button = new Android.Widget.Button(Platform.Context)
 			{
 				Text = item.Text ?? "",
