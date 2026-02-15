@@ -66,7 +66,7 @@ public partial class SearchBar
 	{
 		if (SearchButtonPressed == null && TextChanged == null)
 		{
-			NativeView.Delegate = null!;
+			NativeView.Delegate = null;
 			_delegate = null;
 		}
 		else

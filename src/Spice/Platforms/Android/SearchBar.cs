@@ -74,9 +74,17 @@ public partial class SearchBar
 		if (editTextId != 0)
 		{
 			var editText = NativeView.FindViewById<Android.Widget.EditText>(editTextId);
-			if (editText != null && value != null)
+			if (editText != null)
 			{
-				editText.SetHintTextColor(value.ToAndroidInt());
+				if (value != null)
+				{
+					editText.SetHintTextColor(value.ToAndroidInt());
+				}
+				else
+				{
+					// Reset to default hint color
+					editText.SetHintTextColor(null);
+				}
 			}
 		}
 	}
