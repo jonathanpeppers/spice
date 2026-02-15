@@ -44,17 +44,15 @@ public partial class SearchBar
 		var textField = NativeView.SearchTextField;
 		if (textField != null)
 		{
-			// Set both placeholder and attributed placeholder color
+			var placeholderText = textField.Placeholder ?? "";
 			if (value != null)
 			{
-				var placeholderText = textField.Placeholder ?? "";
 				var attributes = new UIStringAttributes { ForegroundColor = value.ToUIColor() };
 				textField.AttributedPlaceholder = new NSAttributedString(placeholderText, attributes);
 			}
 			else
 			{
 				// Reset to default
-				var placeholderText = textField.Placeholder ?? "";
 				textField.AttributedPlaceholder = new NSAttributedString(placeholderText);
 			}
 		}
