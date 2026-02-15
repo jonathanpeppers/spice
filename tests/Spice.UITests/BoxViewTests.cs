@@ -9,25 +9,20 @@ public class BoxViewTests : BaseTest
     {
         try
         {
-            // Arrange
             InitializeAndroidDriver();
 
-            // Act - Navigate to BoxView scenario
             var boxViewButton = FindButtonByText("BoxView");
             boxViewButton.Click();
 
-            // Assert - Find the BoxView Demo label
+            // Verify the demo label loaded
             var label = FindTextViewContaining("BoxView Demo");
             Assert.NotNull(label);
 
-            // Find color change buttons
+            // Find and click a color change button
             var blueButton = FindButtonByText("Blue Color");
-            Assert.NotNull(blueButton);
-
-            // Click blue button to change color
             blueButton.Click();
             
-            // BoxView should still be present (color changed)
+            // Page should still be present
             label = FindTextViewContaining("BoxView Demo");
             Assert.NotNull(label);
         }

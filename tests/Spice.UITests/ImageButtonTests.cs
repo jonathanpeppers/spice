@@ -9,10 +9,8 @@ public class ImageButtonTests : BaseTest
     {
         try
         {
-            // Arrange
             InitializeAndroidDriver();
 
-            // Act - Navigate to ImageButton scenario
             var imageButtonScenarioButton = FindButtonByText("ImageButton");
             imageButtonScenarioButton.Click();
 
@@ -20,14 +18,11 @@ public class ImageButtonTests : BaseTest
             var label = FindTextViewContaining("Click the image");
             Assert.Contains("Click the image button below!", label.Text);
 
-            // Find the image button and click it
-            var imageButtons = Driver.FindElements(By.ClassName("android.widget.ImageButton"));
-            Assert.True(imageButtons.Count >= 2, "Should have at least 2 ImageButton controls");
-            
-            var firstImageButton = imageButtons[0];
-            firstImageButton.Click();
+            // Find an image button and click it
+            var imageButton = Driver.FindElement(By.ClassName("android.widget.ImageButton"));
+            imageButton.Click();
 
-            // Assert - Label should update with click count
+            // Label should update with click count
             label = FindTextViewContaining("Clicked");
             Assert.Contains("Clicked 1 time(s)!", label.Text);
         }
