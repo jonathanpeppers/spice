@@ -112,7 +112,7 @@ jobs:
     - name: restore and build Spice.Scenarios
       run: |
         dotnet restore tests/Spice.UITests/Spice.UITests.csproj
-        dotnet build samples/Spice.Scenarios/Spice.Scenarios.csproj -f net10.0-android -c Debug -r android-x64
+        dotnet build samples/Spice.Scenarios/Spice.Scenarios.csproj -f net10.0-android -c Debug -r android-x64 -p:TargetFrameworks=net10.0-android
 
     - name: install AndroidSdk.Tool
       run: dotnet tool install -g AndroidSdk.Tool
