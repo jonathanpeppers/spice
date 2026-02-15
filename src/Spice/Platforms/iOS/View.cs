@@ -81,6 +81,28 @@ public partial class View
 
 	partial void OnIsEnabledChanged(bool value) => NativeView.UserInteractionEnabled = value;
 
+	partial void OnWidthRequestChanged(double value)
+	{
+		// Trigger layout update if the view is already in the view hierarchy
+		if (NativeView.Superview != null)
+		{
+			UpdateAlign();
+		}
+	}
+
+	partial void OnHeightRequestChanged(double value)
+	{
+		// Trigger layout update if the view is already in the view hierarchy
+		if (NativeView.Superview != null)
+		{
+			UpdateAlign();
+		}
+	}
+
+	private partial double GetWidth() => (double)NativeView.Frame.Width;
+
+	private partial double GetHeight() => (double)NativeView.Frame.Height;
+
 	internal void UpdateAlign()
 	{
 		var view = NativeView;
@@ -107,7 +129,7 @@ public partial class View
 				frame.X = superframe.Width - frame.Width;
 				break;
 			case Align.Stretch:
-				frame.Width = superframe.Width;
+				frame.Width = WidthRequest >= 0 ? (nfloat)WidthRequest : superframe.Width;
 				frame.X = 0;
 				break;
 			default:
@@ -129,7 +151,7 @@ public partial class View
 				frame.Y = superframe.Height - frame.Height;
 				break;
 			case Align.Stretch:
-				frame.Height = superframe.Height;
+				frame.Height = HeightRequest >= 0 ? (nfloat)HeightRequest : superframe.Height;
 				frame.Y = 0;
 				break;
 			default:
@@ -145,7 +167,15 @@ public partial class View
 				return size.Value;
 
 			view!.SizeToFit();
-			return (size = view.Frame.Size).Value;
+			var result = view.Frame.Size;
+			
+			// If WidthRequest or HeightRequest are set, use them instead
+			if (WidthRequest >= 0)
+				result.Width = (nfloat)WidthRequest;
+			if (HeightRequest >= 0)
+				result.Height = (nfloat)HeightRequest;
+			
+			return (size = result).Value;
 		}
 	}
 }

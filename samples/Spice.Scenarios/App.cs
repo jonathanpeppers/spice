@@ -97,6 +97,11 @@ public class App : Application
 				},
 				new Button
 				{
+					Text = "CollectionView",
+					Clicked = _ => Main = new CollectionViewScenario(),
+				},
+				new Button
+				{
 					Text = "SwipeView",
 					Clicked = _ => Main = new SwipeViewScenario(),
 				},
