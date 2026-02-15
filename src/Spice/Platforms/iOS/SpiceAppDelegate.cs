@@ -17,6 +17,11 @@ public class SpiceSceneDelegate<TApp> : UIResponder, IUIWindowSceneDelegate wher
 	public UIWindow? Window { get; set; }
 
 	/// <summary>
+	/// The app view that is displayed in the window.
+	/// </summary>
+	private TApp? _appView;
+
+	/// <summary>
 	/// Called when a new scene session is being created and the UIWindow needs to be configured.
 	/// </summary>
 	[Export("scene:willConnectToSession:options:")]
@@ -27,9 +32,24 @@ public class SpiceSceneDelegate<TApp> : UIResponder, IUIWindowSceneDelegate wher
 			Window = Platform.Window = new UIWindow(windowScene);
 
 			var vc = new UIViewController();
-			vc.View!.AddSubview(new TApp());
+			_appView = new TApp();
+			vc.View!.AddSubview(_appView);
 			Window.RootViewController = vc;
 			Window.MakeKeyAndVisible();
+		}
+	}
+
+	/// <summary>
+	/// Called when the scene is about to disconnect from the session.
+	/// </summary>
+	[Export("sceneDidDisconnect:")]
+	public virtual void DidDisconnect(UIScene scene)
+	{
+		// Dispose the app view and all its children
+		if (_appView != null)
+		{
+			View.DisposeRecursive(_appView);
+			_appView = null;
 		}
 	}
 }
