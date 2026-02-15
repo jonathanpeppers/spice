@@ -30,7 +30,13 @@ public partial class SearchBar
 
 	partial void OnTextChanged(string value) => NativeView.Text = value;
 
-	partial void OnPlaceholderChanged(string? value) => NativeView.Placeholder = value;
+	partial void OnPlaceholderChanged(string? value)
+	{
+		NativeView.Placeholder = value;
+		// Reapply placeholder color if set
+		if (PlaceholderColor != null)
+			OnPlaceholderColorChanged(PlaceholderColor);
+	}
 
 	partial void OnTextColorChanged(Color? value)
 	{
