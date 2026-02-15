@@ -113,7 +113,7 @@ class CollectionViewScenario : StackLayout
 
 		// Add controls to layout
 		Add(selectedLabel);
-		Add(new ScrollView { Content = collectionView });
+		Add(new ScrollView { Children = { collectionView } });
 		Add(new StackLayout
 		{
 			Orientation = Orientation.Horizontal,
