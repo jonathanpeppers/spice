@@ -9,7 +9,7 @@ public partial class NavigationView
 	{
 	}
 
-	UINavigationController? _navigationController;
+	WeakReference<UINavigationController>? _navigationController;
 
 	/// <summary>
 	/// Gets the underlying UINavigationController
@@ -18,14 +18,16 @@ public partial class NavigationView
 	{
 		get
 		{
-			if (_navigationController == null)
+			UINavigationController? controller = null;
+			if (_navigationController == null || !_navigationController.TryGetTarget(out controller))
 			{
-				_navigationController = new UINavigationController();
-				NativeView.AddSubview(_navigationController.View);
-				_navigationController.View.Frame = NativeView.Bounds;
-				_navigationController.View.AutoresizingMask = UIViewAutoresizing.All;
+				controller = new UINavigationController();
+				_navigationController = new WeakReference<UINavigationController>(controller);
+				NativeView.AddSubview(controller.View);
+				controller.View.Frame = NativeView.Bounds;
+				controller.View.AutoresizingMask = UIViewAutoresizing.All;
 			}
-			return _navigationController;
+			return controller;
 		}
 	}
 

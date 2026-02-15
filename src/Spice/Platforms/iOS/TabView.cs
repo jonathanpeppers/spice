@@ -12,7 +12,7 @@ public partial class TabView
 		Children.CollectionChanged += OnTabsChanged;
 	}
 
-	UITabBarController? _tabBarController;
+	WeakReference<UITabBarController>? _tabBarController;
 
 	/// <summary>
 	/// Gets the underlying UITabBarController
@@ -21,14 +21,16 @@ public partial class TabView
 	{
 		get
 		{
-			if (_tabBarController == null)
+			UITabBarController? controller = null;
+			if (_tabBarController == null || !_tabBarController.TryGetTarget(out controller))
 			{
-				_tabBarController = new UITabBarController();
-				NativeView.AddSubview(_tabBarController.View);
-				_tabBarController.View.Frame = NativeView.Bounds;
-				_tabBarController.View.AutoresizingMask = UIViewAutoresizing.All;
+				controller = new UITabBarController();
+				_tabBarController = new WeakReference<UITabBarController>(controller);
+				NativeView.AddSubview(controller.View);
+				controller.View.Frame = NativeView.Bounds;
+				controller.View.AutoresizingMask = UIViewAutoresizing.All;
 			}
-			return _tabBarController;
+			return controller;
 		}
 	}
 

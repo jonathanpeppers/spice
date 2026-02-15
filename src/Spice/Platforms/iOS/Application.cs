@@ -33,7 +33,7 @@ public partial class Application
 		}
 	}
 
-	UIViewController? _presentedViewController;
+	WeakReference<UIViewController>? _presentedViewController;
 
 	async partial Task PresentAsyncCore(View view)
 	{
@@ -50,7 +50,7 @@ public partial class Application
 			viewController.Title = view.Title;
 		}
 
-		_presentedViewController = viewController;
+		_presentedViewController = new WeakReference<UIViewController>(viewController);
 
 		// Get the root view controller
 		var rootViewController = Platform.Window?.RootViewController;
@@ -65,9 +65,9 @@ public partial class Application
 
 	async partial Task DismissAsyncCore()
 	{
-		if (_presentedViewController != null)
+		if (_presentedViewController != null && _presentedViewController.TryGetTarget(out var viewController))
 		{
-			await _presentedViewController.DismissViewControllerAsync(animated: true);
+			await viewController.DismissViewControllerAsync(animated: true);
 			_presentedViewController = null;
 		}
 	}
