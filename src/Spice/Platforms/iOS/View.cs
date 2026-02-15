@@ -83,6 +83,28 @@ public partial class View
 
 	partial void OnMarginChanged(Thickness value) => UpdateAlign();
 
+	partial void OnWidthRequestChanged(double value)
+	{
+		// Trigger layout update if the view is already in the view hierarchy
+		if (NativeView.Superview != null)
+		{
+			UpdateAlign();
+		}
+	}
+
+	partial void OnHeightRequestChanged(double value)
+	{
+		// Trigger layout update if the view is already in the view hierarchy
+		if (NativeView.Superview != null)
+		{
+			UpdateAlign();
+		}
+	}
+
+	private partial double GetWidth() => (double)NativeView.Frame.Width;
+
+	private partial double GetHeight() => (double)NativeView.Frame.Height;
+
 	internal void UpdateAlign()
 	{
 		var view = NativeView;
@@ -117,7 +139,7 @@ public partial class View
 				frame.X = superframe.Width - marginRight - frame.Width;
 				break;
 			case Align.Stretch:
-				frame.Width = availableWidth;
+				frame.Width = WidthRequest >= 0 ? (nfloat)WidthRequest : availableWidth;
 				frame.X = marginLeft;
 				break;
 			default:
@@ -139,7 +161,7 @@ public partial class View
 				frame.Y = superframe.Height - marginBottom - frame.Height;
 				break;
 			case Align.Stretch:
-				frame.Height = availableHeight;
+				frame.Height = HeightRequest >= 0 ? (nfloat)HeightRequest : availableHeight;
 				frame.Y = marginTop;
 				break;
 			default:
@@ -155,7 +177,15 @@ public partial class View
 				return size.Value;
 
 			view!.SizeToFit();
-			return (size = view.Frame.Size).Value;
+			var result = view.Frame.Size;
+			
+			// If WidthRequest or HeightRequest are set, use them instead
+			if (WidthRequest >= 0)
+				result.Width = (nfloat)WidthRequest;
+			if (HeightRequest >= 0)
+				result.Height = (nfloat)HeightRequest;
+			
+			return (size = result).Value;
 		}
 	}
 }

@@ -61,4 +61,50 @@ public partial class View : ObservableObject, IEnumerable<View>
 	/// </summary>
 	[ObservableProperty]
 	Thickness _margin;
+
+	/// <summary>
+	/// Gets or sets the desired width of the view. 
+	/// Platform implementations: UIKit.UIView.Frame.Size / Android.Views.ViewGroup.LayoutParams.Width
+	/// </summary>
+	[ObservableProperty]
+	double _widthRequest = -1;
+
+	/// <summary>
+	/// Gets or sets the desired height of the view.
+	/// Platform implementations: UIKit.UIView.Frame.Size / Android.Views.ViewGroup.LayoutParams.Height
+	/// </summary>
+	[ObservableProperty]
+	double _heightRequest = -1;
+
+	/// <summary>
+	/// Gets the actual rendered width of the view.
+	/// Platform implementations: UIKit.UIView.Frame.Width / Android.Views.View.Width
+	/// </summary>
+#if VANILLA
+	public double Width => 0;
+#else
+	public double Width => GetWidth();
+#endif
+
+	/// <summary>
+	/// Gets the actual rendered height of the view.
+	/// Platform implementations: UIKit.UIView.Frame.Height / Android.Views.View.Height
+	/// </summary>
+#if VANILLA
+	public double Height => 0;
+#else
+	public double Height => GetHeight();
+#endif
+
+#if !VANILLA
+	/// <summary>
+	/// Platform-specific implementation to get actual width
+	/// </summary>
+	private partial double GetWidth();
+
+	/// <summary>
+	/// Platform-specific implementation to get actual height
+	/// </summary>
+	private partial double GetHeight();
+#endif
 }
