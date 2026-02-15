@@ -41,15 +41,12 @@ public partial class Application
 
 	AndroidX.AppCompat.App.AlertDialog? _presentedDialog;
 
-	async partial Task PresentAsyncCore(View view)
+	partial Task PresentAsyncCore(View view)
 	{
-		var tcs = new TaskCompletionSource<bool>();
-
 		var activity = Platform.Context as AndroidX.AppCompat.App.AppCompatActivity;
 		if (activity == null)
 		{
-			tcs.SetResult(false);
-			return;
+			return Task.CompletedTask;
 		}
 
 		var builder = new AndroidX.AppCompat.App.AlertDialog.Builder(activity);
@@ -73,21 +70,17 @@ public partial class Application
 		_presentedDialog.SetCanceledOnTouchOutside(false);
 		_presentedDialog.Show();
 
-		tcs.SetResult(true);
-		await tcs.Task;
+		return Task.CompletedTask;
 	}
 
-	async partial Task DismissAsyncCore()
+	partial Task DismissAsyncCore()
 	{
-		var tcs = new TaskCompletionSource<bool>();
-
 		if (_presentedDialog != null)
 		{
 			_presentedDialog.Dismiss();
 			_presentedDialog = null;
 		}
 
-		tcs.SetResult(true);
-		await tcs.Task;
+		return Task.CompletedTask;
 	}
 }

@@ -37,8 +37,6 @@ public partial class Application
 
 	async partial Task PresentAsyncCore(View view)
 	{
-		var tcs = new TaskCompletionSource<bool>();
-
 		var viewController = new UIViewController();
 		viewController.View!.AddSubview(view);
 		((UIView)view).Frame = viewController.View.Bounds;
@@ -58,9 +56,6 @@ public partial class Application
 		{
 			await rootViewController.PresentViewControllerAsync(viewController, animated: true);
 		}
-
-		tcs.SetResult(true);
-		await tcs.Task;
 	}
 
 	async partial Task DismissAsyncCore()

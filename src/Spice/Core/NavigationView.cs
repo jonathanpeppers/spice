@@ -2,7 +2,7 @@ namespace Spice;
 
 /// <summary>
 /// A view that provides push/pop navigation with a navigation bar.
-/// Platform implementations: iOS UINavigationController / Android NavController + NavHostFragment
+/// Platform implementations: iOS UINavigationController / Android Toolbar with FrameLayout
 /// </summary>
 public partial class NavigationView : View
 {
