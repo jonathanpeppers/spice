@@ -168,10 +168,10 @@ This section compares the properties available on MAUI's `View` class (which inh
 
 | MAUI Property | Spice Implementation | Should Implement? | Notes |
 |--------------|---------------------|-------------------|-------|
-| Width | ❌ No | ❌ No | Read-only in MAUI - computed value |
-| Height | ❌ No | ❌ No | Read-only in MAUI - computed value |
-| WidthRequest | ❌ No | 🔥 Yes | Desired width - essential for sizing |
-| HeightRequest | ❌ No | 🔥 Yes | Desired height - essential for sizing |
+| Width | ✅ Yes | ✅ Done | Read-only - returns actual rendered width |
+| Height | ✅ Yes | ✅ Done | Read-only - returns actual rendered height |
+| WidthRequest | ✅ Yes | ✅ Done | Desired width - essential for sizing |
+| HeightRequest | ✅ Yes | ✅ Done | Desired height - essential for sizing |
 | MinimumWidthRequest | ❌ No | 🟡 Maybe | Useful for responsive layouts |
 | MinimumHeightRequest | ❌ No | 🟡 Maybe | Useful for responsive layouts |
 | MaximumWidthRequest | ❌ No | 🟡 Maybe | Useful for responsive layouts |
@@ -274,16 +274,24 @@ This section compares the properties available on MAUI's `View` class (which inh
 | BackgroundColor | BackgroundColor | Uses `Microsoft.Maui.Graphics.Color` |
 | IsVisible | IsVisible | Show/hide element |
 | IsEnabled | IsEnabled | Enable/disable interaction |
+| WidthRequest | WidthRequest | Desired width for sizing |
+| HeightRequest | HeightRequest | Desired height for sizing |
+| Width | Width | Read-only actual width |
+| Height | Height | Read-only actual height |
 
 ### Summary
 
-**Spice View Properties: 6**
+**Spice View Properties: 10**
 - Children (collection)
 - HorizontalAlign
 - VerticalAlign  
 - BackgroundColor
 - IsVisible
 - IsEnabled
+- WidthRequest
+- HeightRequest
+- Width (read-only)
+- Height (read-only)
 
 **MAUI View/VisualElement Properties: 60+**
 
@@ -351,7 +359,7 @@ Based on Spice's minimalist philosophy and common mobile UI needs, here are reas
 ### 📊 View Properties - High Priority
 
 **Layout & Sizing**
-- 🔥 **WidthRequest/HeightRequest** - Essential for sizing views
+- ✅ **WidthRequest/HeightRequest** - Essential for sizing views (IMPLEMENTED)
 - 🔥 **Margin** - Outer spacing (critical for layouts)
 - 🟡 **Padding** - Inner spacing (for containers)
 
@@ -391,7 +399,7 @@ Based on Spice's minimalist philosophy and common mobile UI needs, here are reas
 5. ✅ ProgressBar
 6. ✅ IsVisible property
 7. ✅ IsEnabled property
-8. 🔥 WidthRequest/HeightRequest
+8. ✅ WidthRequest/HeightRequest
 9. 🔥 Margin
 
 **Phase 2 (Input Controls)** ✅
