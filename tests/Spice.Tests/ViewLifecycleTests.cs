@@ -152,6 +152,17 @@ public class ViewLifecycleTests
 		Assert.True(view.IsDisposed);
 	}
 
+	[Fact]
+	public void DoubleDisposeDoesNotThrow()
+	{
+		var view = new DisposableView();
+
+		View.DisposeRecursive(view);
+		View.DisposeRecursive(view);
+
+		Assert.True(view.IsDisposed);
+	}
+
 	/// <summary>
 	/// Helper class that tracks disposal order
 	/// </summary>
