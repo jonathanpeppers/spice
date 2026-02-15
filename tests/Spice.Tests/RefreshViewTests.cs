@@ -165,8 +165,6 @@ public class RefreshViewTests
 	}
 
 	[Fact]
-
-	[Fact]
 	public void PropertyChangedFiresOnRefreshColorChange()
 	{
 		string? property = null;
