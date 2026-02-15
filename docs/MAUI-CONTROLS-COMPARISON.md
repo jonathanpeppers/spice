@@ -73,7 +73,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 
 ## Summary
 
-**Implemented: 20 / 60+ controls**
+**Implemented: 25 / 60+ controls**
 
 ### Spice Controls (Core)
 - ✅ ActivityIndicator
