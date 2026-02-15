@@ -143,17 +143,6 @@ public class ViewLifecycleTests
 	}
 
 	[Fact]
-	public void EmptyViewHierarchyDoesNotThrow()
-	{
-		var view = new DisposableView();
-		
-		// Should not throw even with no children
-		View.DisposeRecursive(view);
-
-		Assert.True(view.IsDisposed);
-	}
-
-	[Fact]
 	public void ViewWithNoChildrenIsDisposed()
 	{
 		var view = new DisposableView();

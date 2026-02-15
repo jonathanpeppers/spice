@@ -22,8 +22,12 @@ public class SpiceActivity : AppCompatActivity
 	}
 
 	/// <summary>
-	/// Sets the content view and stores a reference for disposal
+	/// Sets the content view to a Spice View and stores a reference for disposal.
+	/// This method accepts a <see cref="Spice.View"/> rather than <see cref="Android.Views.View"/>,
+	/// providing a convenient way to set Spice views as content while ensuring proper lifecycle management.
+	/// The view will be automatically disposed when the activity is destroyed.
 	/// </summary>
+	/// <param name="view">The Spice view to set as content</param>
 	public void SetContentView(View view)
 	{
 		_appView = view;
