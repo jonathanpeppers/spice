@@ -109,6 +109,39 @@ public partial class View
 
 	private partial double GetHeight() => (double)NativeView.Frame.Height;
 
+	WeakReference<UIViewController>? _presentedViewController;
+
+	private async partial Task PresentAsyncCore(View view)
+	{
+		var viewController = new UIViewController();
+		var nativeView = (UIView)view;
+		viewController.View!.AddSubview(nativeView);
+		nativeView.Frame = viewController.View.Bounds;
+		nativeView.AutoresizingMask = UIViewAutoresizing.All;
+
+		if (!string.IsNullOrEmpty(view.Title))
+		{
+			viewController.Title = view.Title;
+		}
+
+		_presentedViewController = new WeakReference<UIViewController>(viewController);
+
+		var rootViewController = Platform.Window?.RootViewController;
+		if (rootViewController != null)
+		{
+			await rootViewController.PresentViewControllerAsync(viewController, animated: true);
+		}
+	}
+
+	private async partial Task DismissAsyncCore()
+	{
+		if (_presentedViewController != null && _presentedViewController.TryGetTarget(out var viewController))
+		{
+			await viewController.DismissViewControllerAsync(animated: true);
+			_presentedViewController = null;
+		}
+	}
+
 	internal void UpdateAlign()
 	{
 		var view = NativeView;

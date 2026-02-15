@@ -134,17 +134,17 @@ public partial class Tab<TContent> : Tab where TContent : View, new()
 ## Modal Presentation
 
 ```csharp
-// Present
-await Application.Current.PresentAsync<LoginView>();
+// Present (from any view)
+await PresentAsync<LoginView>();
 
 // Dismiss (from inside the modal)
-await Application.Current.DismissAsync();
+await DismissAsync();
 ```
 
 ### Proposed API
 
 ```csharp
-public partial class Application : View
+public partial class View
 {
     public Task PresentAsync(View view);
     public Task PresentAsync(Func<View> factory);              // lazy with args
@@ -152,6 +152,8 @@ public partial class Application : View
     public Task DismissAsync();
 }
 ```
+
+Modal methods live on `View` so any view can present/dismiss — no need for a global `Application.Current` singleton.
 
 Modals are async because the caller often needs to know when presentation/dismissal completes (e.g., to read a result). `Push`/`Pop` don't need this — you fire and forget.
 
@@ -183,7 +185,7 @@ public class FeedView : StackLayout
         Add(new Button
         {
             Text = "New Post",
-            Clicked = async _ => await Application.Current.PresentAsync<NewPostView>()
+            Clicked = async _ => await PresentAsync<NewPostView>()
         });
     }
 }
@@ -211,7 +213,7 @@ public class NewPostView : StackLayout
         Add(new Button
         {
             Text = "Post",
-            Clicked = async _ => await Application.Current.DismissAsync()
+            Clicked = async _ => await DismissAsync()
         });
     }
 }
