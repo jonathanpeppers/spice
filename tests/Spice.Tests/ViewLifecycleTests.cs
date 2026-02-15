@@ -163,6 +163,78 @@ public class ViewLifecycleTests
 		Assert.True(view.IsDisposed);
 	}
 
+	[Fact]
+	public void CollectionViewDisposesItemViews()
+	{
+		var createdViews = new List<DisposableView>();
+		var collectionView = new CollectionView
+		{
+			ItemsSource = new[] { "A", "B", "C" },
+			ItemTemplate = item =>
+			{
+				var view = new DisposableView();
+				createdViews.Add(view);
+				return view;
+			}
+		};
+
+		// Simulate platform creating item views
+		foreach (var item in collectionView.ItemsSource)
+			collectionView.CreateItemView(item);
+
+		Assert.Equal(3, createdViews.Count);
+		Assert.All(createdViews, v => Assert.False(v.IsDisposed));
+
+		View.DisposeRecursive(collectionView);
+
+		Assert.All(createdViews, v => Assert.True(v.IsDisposed));
+	}
+
+	[Fact]
+	public void CollectionViewRecycleDisposesOldView()
+	{
+		var collectionView = new CollectionView
+		{
+			ItemTemplate = item => new DisposableView()
+		};
+
+		var oldView = (DisposableView)collectionView.CreateItemView("old");
+		Assert.Single(collectionView._activeItemViews);
+		Assert.False(oldView.IsDisposed);
+
+		collectionView.RecycleItemView(oldView);
+
+		Assert.True(oldView.IsDisposed);
+		Assert.Empty(collectionView._activeItemViews);
+	}
+
+	[Fact]
+	public void CollectionViewRecycleAndCreateTracksCorrectly()
+	{
+		var collectionView = new CollectionView
+		{
+			ItemTemplate = item => new DisposableView()
+		};
+
+		var view1 = (DisposableView)collectionView.CreateItemView("item1");
+		var view2 = (DisposableView)collectionView.CreateItemView("item2");
+		Assert.Equal(2, collectionView._activeItemViews.Count);
+
+		// Recycle view1 (simulating cell reuse)
+		collectionView.RecycleItemView(view1);
+		Assert.True(view1.IsDisposed);
+		Assert.Single(collectionView._activeItemViews);
+
+		// Create a new view for the recycled cell
+		var view3 = (DisposableView)collectionView.CreateItemView("item3");
+		Assert.Equal(2, collectionView._activeItemViews.Count);
+
+		// Disposing the CollectionView disposes remaining active views
+		View.DisposeRecursive(collectionView);
+		Assert.True(view2.IsDisposed);
+		Assert.True(view3.IsDisposed);
+	}
+
 	/// <summary>
 	/// Helper class that tracks disposal order
 	/// </summary>

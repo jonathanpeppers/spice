@@ -193,12 +193,17 @@ public partial class CollectionView
 			{
 				var item = _itemsCache[(int)indexPath.Row];
 
-				// Clear existing content
-				foreach (var subview in cell.ContentView.Subviews)
-					subview.RemoveFromSuperview();
+				// Recycle existing item view
+				if (cell.CurrentItemView != null)
+				{
+					parent.RecycleItemView(cell.CurrentItemView);
+					cell.CurrentItemView.NativeView.RemoveFromSuperview();
+					cell.CurrentItemView = null;
+				}
 
 				// Create and add the view
-				var view = parent.ItemTemplate(item);
+				var view = parent.CreateItemView(item);
+				cell.CurrentItemView = view;
 				cell.ContentView.AddSubview(view);
 				view.UpdateAlign();
 			}
@@ -257,6 +262,8 @@ public partial class CollectionView
 
 	class SpiceCollectionViewCell : UICollectionViewCell
 	{
+		public View? CurrentItemView { get; set; }
+
 		public SpiceCollectionViewCell(IntPtr handle) : base(handle) { }
 	}
 }

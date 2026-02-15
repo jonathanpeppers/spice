@@ -179,11 +179,17 @@ public partial class CollectionView
 			{
 				var item = _items[position];
 
-				// Clear existing content
-				viewHolder.Container.RemoveAllViews();
+				// Recycle existing item views
+				if (viewHolder.CurrentItemView != null)
+				{
+					parent.RecycleItemView(viewHolder.CurrentItemView);
+					viewHolder.Container.RemoveAllViews();
+					viewHolder.CurrentItemView = null;
+				}
 
 				// Create and add the view
-				var view = parent.ItemTemplate(item);
+				var view = parent.CreateItemView(item);
+				viewHolder.CurrentItemView = view;
 				viewHolder.Container.AddView((Android.Views.View)view);
 
 				// Handle selection
@@ -214,6 +220,7 @@ public partial class CollectionView
 		readonly WeakReference<CollectionView> _parentRef;
 
 		public Android.Widget.FrameLayout Container { get; }
+		public View? CurrentItemView { get; set; }
 
 		public SpiceViewHolder(Android.Widget.FrameLayout container, WeakReference<CollectionView> parentRef)
 			: base(container)
