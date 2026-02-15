@@ -123,29 +123,28 @@ jobs:
         npm install -g appium
         appium driver install uiautomator2
 
-    - name: Prepare test script
-      run: |
-        cat > /tmp/run-ui-tests.sh << 'EOF'
-        set -e
-        APK_PATH=$(find samples/Spice.Scenarios/bin -name "*-Signed.apk" | head -1)
-        echo "Installing APK: $APK_PATH"
-        adb install "$APK_PATH"
-        adb shell monkey -p com.companyname.spice.scenarios -c android.intent.category.LAUNCHER 1
-        sleep 5
-        appium server --log-level info &
-        sleep 5
-        dotnet test tests/Spice.UITests/Spice.UITests.csproj -c Debug --logger trx --results-directory test-artifacts
-        EOF
-        chmod +x /tmp/run-ui-tests.sh
-
     - name: Run UI Tests
-      timeout-minutes: 30
+      timeout-minutes: 20
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: 34
         arch: x86_64
         target: google_apis
-        script: bash /tmp/run-ui-tests.sh
+        script: |
+          APK_PATH=$(find samples/Spice.Scenarios/bin -name "*-Signed.apk" | head -1)
+          echo "Installing APK: $APK_PATH"
+          adb install "$APK_PATH"
+          adb shell am start -n com.companyname.spice.scenarios/com.companyname.spice.scenarios.MainActivity
+          sleep 10
+          echo "=== UI Dump ==="
+          adb shell uiautomator dump /sdcard/window_dump.xml && adb pull /sdcard/window_dump.xml /tmp/window_dump.xml && cat /tmp/window_dump.xml || echo "uiautomator dump failed"
+          echo "=== Starting Appium ==="
+          appium server --log-level info &
+          sleep 5
+          dotnet test tests/Spice.UITests/Spice.UITests.csproj -c Debug --logger trx --results-directory test-artifacts || true
+          echo "=== Post-test UI Dump ==="
+          adb shell uiautomator dump /sdcard/window_dump2.xml && adb pull /sdcard/window_dump2.xml test-artifacts/window_dump.xml || true
+          adb logcat -d > test-artifacts/logcat.txt || true
 
     - name: Upload UI test results
       uses: actions/upload-artifact@v4
