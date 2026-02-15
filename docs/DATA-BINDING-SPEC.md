@@ -5,11 +5,14 @@
 
 ## Overview
 
-This document describes Spice's approach to data-binding that maintains its core philosophy: **NativeAOT safe, trimmer safe, strongly-typed, no reflection, and minimal**.
+Spice views already extend `ObservableObject` (via CommunityToolkit.Mvvm), so every `View`,
+`Label`, `CheckBox`, etc. implements `INotifyPropertyChanged` out of the box. This spec
+proposes a small `Bind()` helper that wires `PropertyChanged` subscriptions with less
+boilerplate — while staying NativeAOT safe, trimmer safe, and reflection-free.
 
-## Current Approach
+## What We Have Today
 
-Spice uses **direct lambda assignments** for property updates:
+Direct lambda assignments — explicit, transparent, zero magic:
 
 ```csharp
 public class App : Application
@@ -18,73 +21,44 @@ public class App : Application
     {
         int count = 0;
         var label = new Label { Text = "Hello, Spice 🌶" };
-        var button = new Button 
-        { 
-            Clicked = _ => label.Text = $"Times: {++count}" 
+        var button = new Button
+        {
+            Clicked = _ => label.Text = $"Times: {++count}"
         };
         Main = new StackLayout { label, button };
     }
 }
 ```
 
-This is explicit, transparent, and works perfectly for simple apps.
-
-## Using ViewModels with [ObservableProperty]
-
-For complex UIs, create ViewModels using `[ObservableProperty]` from **CommunityToolkit.Mvvm**:
+For larger UIs, a ViewModel with manual `PropertyChanged` wiring works but gets verbose:
 
 ```csharp
-public partial class TodoViewModel : ObservableObject
-{
-    [ObservableProperty]
-    string _title = "";
-    
-    [ObservableProperty]
-    bool _isCompleted;
-    
-    [ObservableProperty]
-    int _count;
-    
-    partial void OnTitleChanged(string value)
-    {
-        // Validation logic
-    }
-}
+var vm = new TodoViewModel();
+var titleLabel = new Label();
+var countLabel = new Label();
+var checkbox = new CheckBox();
 
-public class TodoApp : Application
+vm.PropertyChanged += (s, e) =>
 {
-    public TodoApp()
-    {
-        var vm = new TodoViewModel();
-        
-        var titleLabel = new Label();
-        var countLabel = new Label();
-        var checkbox = new CheckBox();
-        
-        // Manual binding through lambdas
-        vm.PropertyChanged += (s, e) =>
-        {
-            if (e.PropertyName == nameof(TodoViewModel.Title))
-                titleLabel.Text = vm.Title;
-            else if (e.PropertyName == nameof(TodoViewModel.Count))
-                countLabel.Text = $"Count: {vm.Count}";
-            else if (e.PropertyName == nameof(TodoViewModel.IsCompleted))
-                checkbox.IsChecked = vm.IsCompleted;
-        };
-        
-        checkbox.CheckedChanged += (s, isChecked) => 
-            vm.IsCompleted = isChecked;
-        
-        Main = new StackLayout { titleLabel, countLabel, checkbox };
-    }
-}
+    if (e.PropertyName == nameof(TodoViewModel.Title))
+        titleLabel.Text = vm.Title;
+    else if (e.PropertyName == nameof(TodoViewModel.Count))
+        countLabel.Text = $"Count: {vm.Count}";
+    else if (e.PropertyName == nameof(TodoViewModel.IsCompleted))
+        checkbox.IsChecked = vm.IsCompleted;
+};
+
+// Reverse: view → viewmodel (Action<CheckBox> property, not an event)
+checkbox.CheckedChanged = cb => vm.IsCompleted = cb.IsChecked;
+
+Main = new StackLayout { titleLabel, countLabel, checkbox };
 ```
 
-While this works, it's verbose for complex UIs. We can do better.
+## Proposed: `Bind()` Helper
 
-## Proposed Binding Helper
+### Core API
 
-Add a strongly-typed `Bind<TSource, TTarget>()` extension method:
+One method, no expression trees, no reflection:
 
 ```csharp
 namespace Spice;
@@ -92,85 +66,28 @@ namespace Spice;
 public static class BindingExtensions
 {
     /// <summary>
-    /// One-way binding from source property to target action.
-    /// Extracts property name at setup time (no runtime reflection).
+    /// One-way binding: subscribes to source.PropertyChanged and invokes
+    /// <paramref name="apply"/> whenever the named property changes.
+    /// Sets the initial value immediately.
     /// </summary>
     public static IDisposable Bind<TSource, TValue>(
         this TSource source,
-        Expression<Func<TSource, TValue>> propertySelector,
-        Action<TValue> onChanged)
+        string propertyName,
+        Func<TSource, TValue> getter,
+        Action<TValue> apply)
         where TSource : INotifyPropertyChanged
     {
-        // Extract property name from expression at setup time
-        string propertyName = GetPropertyName(propertySelector);
-        
-        // Get the compiled accessor
-        var accessor = propertySelector.Compile();
-        
-        // Set initial value
-        onChanged(accessor(source));
-        
-        // Subscribe to changes
-        PropertyChangedEventHandler handler = (s, e) =>
+        // Sync initial value
+        apply(getter(source));
+
+        PropertyChangedEventHandler handler = (_, e) =>
         {
             if (e.PropertyName == propertyName)
-                onChanged(accessor(source));
+                apply(getter(source));
         };
-        
         source.PropertyChanged += handler;
-        
-        // Return disposable for cleanup
+
         return new BindingSubscription(source, handler);
-    }
-    
-    /// <summary>
-    /// Two-way binding between source property and target property setter/getter.
-    /// </summary>
-    public static IDisposable BindTwoWay<TSource, TTarget, TValue>(
-        this TSource source,
-        Expression<Func<TSource, TValue>> sourceProperty,
-        TTarget target,
-        Func<TTarget, TValue> targetGetter,
-        Action<TTarget, TValue> targetSetter)
-        where TSource : INotifyPropertyChanged
-        where TTarget : INotifyPropertyChanged
-    {
-        string sourcePropertyName = GetPropertyName(sourceProperty);
-        var sourceAccessor = sourceProperty.Compile();
-        
-        // Initial sync: source -> target
-        targetSetter(target, sourceAccessor(source));
-        
-        // Source changes -> update target
-        PropertyChangedEventHandler sourceHandler = (s, e) =>
-        {
-            if (e.PropertyName == sourcePropertyName)
-                targetSetter(target, sourceAccessor(source));
-        };
-        source.PropertyChanged += sourceHandler;
-        
-        // Target changes -> update source (requires reflection or magic)
-        // For now, this requires manual wiring in user code
-        
-        return new BindingSubscription(source, sourceHandler);
-    }
-    
-    private static string GetPropertyName<TSource, TValue>(
-        Expression<Func<TSource, TValue>> propertySelector)
-    {
-        if (propertySelector.Body is MemberExpression memberExpr)
-        {
-            return memberExpr.Member.Name;
-        }
-        else if (propertySelector.Body is UnaryExpression unaryExpr 
-                 && unaryExpr.Operand is MemberExpression memberExpr2)
-        {
-            return memberExpr2.Member.Name;
-        }
-        
-        throw new ArgumentException(
-            "Expression must be a simple property access: x => x.Property",
-            nameof(propertySelector));
     }
 }
 
@@ -179,15 +96,13 @@ internal sealed class BindingSubscription : IDisposable
     private readonly INotifyPropertyChanged _source;
     private readonly PropertyChangedEventHandler _handler;
     private bool _disposed;
-    
-    public BindingSubscription(
-        INotifyPropertyChanged source,
-        PropertyChangedEventHandler handler)
+
+    public BindingSubscription(INotifyPropertyChanged source, PropertyChangedEventHandler handler)
     {
         _source = source;
         _handler = handler;
     }
-    
+
     public void Dispose()
     {
         if (!_disposed)
@@ -199,322 +114,203 @@ internal sealed class BindingSubscription : IDisposable
 }
 ```
 
+Usage with `nameof()` keeps everything compile-time safe:
+
+```csharp
+vm.Bind(nameof(vm.Title), v => v.Title, text => titleLabel.Text = text);
+vm.Bind(nameof(vm.Count), v => v.Count, n => countLabel.Text = $"Count: {n}");
+```
+
+### Why Not `Expression<Func<TSource, TValue>>`?
+
+An expression-tree overload like `vm.Bind(x => x.Title, ...)` is ergonomically nicer, but
+`Expression.Compile()` internally uses `Reflection.Emit` (or an interpreter on .NET 8+).
+For a library that promises NativeAOT safety, introducing expression trees is a real trade-off:
+
+- ✅ Works on .NET 8+ NativeAOT via the built-in interpreter
+- ⚠️ Slower than a plain `Func<>` (interpreter overhead + one-time compile cost)
+- ⚠️ Adds `System.Linq.Expressions` as a de facto dependency
+- ❌ Fails on older NativeAOT runtimes without the interpreter
+
+If the convenience is deemed worth it, an **optional** overload can be added alongside
+the `nameof` version — never as the only option:
+
+```csharp
+// Optional convenience overload (expression tree)
+public static IDisposable Bind<TSource, TValue>(
+    this TSource source,
+    Expression<Func<TSource, TValue>> propertySelector,
+    Action<TValue> apply)
+    where TSource : INotifyPropertyChanged
+{
+    string name = ((MemberExpression)propertySelector.Body).Member.Name;
+    var getter = propertySelector.Compile();
+    return source.Bind(name, getter, apply);
+}
+```
+
+### Two-Way Binding
+
+Since Spice views **already implement `INotifyPropertyChanged`**, true two-way binding is
+straightforward — subscribe in both directions with a guard to prevent infinite loops:
+
+```csharp
+public static IDisposable BindTwoWay<TSource, TValue>(
+    this TSource source,
+    string sourceProperty,
+    Func<TSource, TValue> sourceGetter,
+    Action<TSource, TValue> sourceSetter,
+    INotifyPropertyChanged target,
+    string targetProperty,
+    Func<TValue> targetGetter,
+    Action<TValue> targetSetter)
+    where TSource : INotifyPropertyChanged
+{
+    bool updating = false;
+
+    targetSetter(sourceGetter(source)); // initial sync
+
+    PropertyChangedEventHandler sourceHandler = (_, e) =>
+    {
+        if (!updating && e.PropertyName == sourceProperty)
+        {
+            updating = true;
+            targetSetter(sourceGetter(source));
+            updating = false;
+        }
+    };
+
+    PropertyChangedEventHandler targetHandler = (_, e) =>
+    {
+        if (!updating && e.PropertyName == targetProperty)
+        {
+            updating = true;
+            sourceSetter(source, targetGetter());
+            updating = false;
+        }
+    };
+
+    source.PropertyChanged += sourceHandler;
+    target.PropertyChanged += targetHandler;
+
+    return new TwoWayBindingSubscription(source, sourceHandler, target, targetHandler);
+}
+```
+
+Usage — ViewModel ↔ Entry (both are ObservableObjects):
+
+```csharp
+vm.BindTwoWay(
+    nameof(vm.Username), v => v.Username, (v, val) => v.Username = val,
+    usernameEntry,
+    nameof(Entry.Text), () => usernameEntry.Text, val => usernameEntry.Text = val);
+```
+
+This is verbose, which is intentional — it makes data flow explicit. For common cases,
+convenience overloads or a fluent builder could be added later.
+
 ## Usage Examples
 
-### Simple Binding
+### Simple One-Way
 
 ```csharp
-public class TodoApp : Application
+public class CounterApp : Application
 {
-    public TodoApp()
+    public CounterApp()
     {
-        var vm = new TodoViewModel();
-        var titleLabel = new Label();
-        
-        // One-way binding: ViewModel -> Label
-        vm.Bind(x => x.Title, text => titleLabel.Text = text);
-        
-        Main = titleLabel;
+        var vm = new CounterViewModel();
+        var label = new Label();
+        var button = new Button
+        {
+            Text = "Increment",
+            Clicked = _ => vm.Count++
+        };
+
+        vm.Bind(nameof(vm.Count), v => v.Count, n => label.Text = $"Count: {n}");
+
+        Main = new StackLayout { label, button };
     }
 }
 ```
 
-### Multiple Bindings
+### CollectionView with Per-Item Binding
 
 ```csharp
-public class TodoApp : Application
+var collectionView = new CollectionView
 {
-    public TodoApp()
+    ItemsSource = vm.Items,
+    ItemTemplate = item =>
     {
-        var vm = new TodoViewModel();
-        
-        var titleLabel = new Label();
-        var countLabel = new Label();
-        var completedCheckbox = new CheckBox();
-        
-        // Bind multiple properties
-        vm.Bind(x => x.Title, text => titleLabel.Text = text);
-        vm.Bind(x => x.Count, count => countLabel.Text = $"Count: {count}");
-        vm.Bind(x => x.IsCompleted, completed => completedCheckbox.IsChecked = completed);
-        
-        // Manual reverse binding (view -> viewmodel)
-        completedCheckbox.CheckedChanged += (_, isChecked) => 
-            vm.IsCompleted = isChecked;
-        
-        Main = new StackLayout 
-        { 
-            titleLabel, 
-            countLabel, 
-            completedCheckbox 
-        };
+        var todoItem = (TodoItem)item;
+        var label = new Label();
+        var checkbox = new CheckBox();
+
+        // One-way: model → view
+        todoItem.Bind(nameof(todoItem.Title), t => t.Title, text => label.Text = text);
+        todoItem.Bind(nameof(todoItem.IsCompleted), t => t.IsCompleted,
+            done => checkbox.IsChecked = done);
+
+        // Reverse: view → model
+        checkbox.CheckedChanged = cb => todoItem.IsCompleted = cb.IsChecked;
+
+        return new StackLayout { label, checkbox };
     }
-}
+};
 ```
 
-### Form Example with Validation
+> **Note:** `Bind()` returns an `IDisposable`, but `View` currently has no lifecycle event
+> for cleanup. In an `ItemTemplate`, the binding's subscription prevents the `TodoItem` from
+> being collected while the view lives. This is acceptable when items outlive their views
+> (the common case), but a future `View.Detached` event would allow explicit disposal during
+> recycling.
+
+## Memory Management
+
+`Bind()` returns `IDisposable`. In most Spice apps, bindings live as long as the view, so
+disposal is unnecessary. For short-lived views bound to long-lived sources, dispose explicitly:
 
 ```csharp
-public partial class LoginViewModel : ObservableObject
-{
-    [ObservableProperty]
-    string _username = "";
-    
-    [ObservableProperty]
-    string _password = "";
-    
-    [ObservableProperty]
-    bool _canLogin;
-    
-    [ObservableProperty]
-    string _errorMessage = "";
-    
-    partial void OnUsernameChanged(string value) => UpdateCanLogin();
-    partial void OnPasswordChanged(string value) => UpdateCanLogin();
-    
-    void UpdateCanLogin()
-    {
-        if (string.IsNullOrEmpty(Username))
-        {
-            ErrorMessage = "Username required";
-            CanLogin = false;
-        }
-        else if (string.IsNullOrEmpty(Password))
-        {
-            ErrorMessage = "Password required";
-            CanLogin = false;
-        }
-        else
-        {
-            ErrorMessage = "";
-            CanLogin = true;
-        }
-    }
-}
-
-public class LoginApp : Application
-{
-    public LoginApp()
-    {
-        var vm = new LoginViewModel();
-        
-        var usernameEntry = new Entry { Placeholder = "Username" };
-        var passwordEntry = new Entry { Placeholder = "Password", IsPassword = true };
-        var errorLabel = new Label { TextColor = Colors.Red };
-        var loginButton = new Button { Text = "Login" };
-        
-        // Bind view model to UI
-        vm.Bind(x => x.CanLogin, canLogin => loginButton.IsEnabled = canLogin);
-        vm.Bind(x => x.ErrorMessage, message => errorLabel.Text = message);
-        
-        // Initialize button state
-        loginButton.IsEnabled = vm.CanLogin;
-        
-        // Update view model from UI
-        usernameEntry.TextChanged += (_, text) => vm.Username = text;
-        passwordEntry.TextChanged += (_, text) => vm.Password = text;
-        
-        loginButton.Clicked += _ =>
-        {
-            // Perform login with vm.Username and vm.Password
-        };
-        
-        Main = new StackLayout 
-        { 
-            usernameEntry, 
-            passwordEntry, 
-            errorLabel,
-            loginButton 
-        };
-    }
-}
+var binding = vm.Bind(nameof(vm.Title), v => v.Title, text => label.Text = text);
+// ...
+binding.Dispose(); // unsubscribes from PropertyChanged
 ```
 
-### CollectionView Example
+Multiple bindings can be grouped with `CompositeDisposable` or a simple list:
 
 ```csharp
-public partial class TodoItem : ObservableObject
+var bindings = new List<IDisposable>
 {
-    [ObservableProperty]
-    string _title = "";
-    
-    [ObservableProperty]
-    bool _isCompleted;
-}
+    vm.Bind(nameof(vm.Title), v => v.Title, t => label.Text = t),
+    vm.Bind(nameof(vm.Count), v => v.Count, n => countLabel.Text = $"{n}"),
+};
 
-public partial class TodoListViewModel : ObservableObject
-{
-    public ObservableCollection<TodoItem> Items { get; } = new();
-    
-    public void AddItem(string title) => 
-        Items.Add(new TodoItem { Title = title });
-}
-
-public class TodoListApp : Application
-{
-    public TodoListApp()
-    {
-        var vm = new TodoListViewModel();
-        
-        var newItemEntry = new Entry { Placeholder = "New todo..." };
-        var addButton = new Button { Text = "Add" };
-        
-        var collectionView = new CollectionView
-        {
-            ItemsSource = vm.Items,
-            ItemTemplate = item =>
-            {
-                var todoItem = (TodoItem)item;
-                var label = new Label();
-                var checkbox = new CheckBox();
-                
-                var layout = new StackLayout { label, checkbox };
-                
-                // Bind item properties to views
-                var titleBinding = todoItem.Bind(x => x.Title, text => label.Text = text);
-                var completedBinding = todoItem.Bind(x => x.IsCompleted, 
-                    completed => checkbox.IsChecked = completed);
-                
-                // Cleanup subscriptions when item is recycled
-                // Note: Spice would need to support a Disposed/Detached event on View
-                // For now, this is a potential memory leak that needs addressing
-                
-                // Update model from view
-                checkbox.CheckedChanged += (_, isChecked) => 
-                    todoItem.IsCompleted = isChecked;
-                
-                return layout;
-            }
-        };
-        
-        addButton.Clicked += _ =>
-        {
-            if (!string.IsNullOrEmpty(newItemEntry.Text))
-            {
-                vm.AddItem(newItemEntry.Text);
-                newItemEntry.Text = "";
-            }
-        };
-        
-        Main = new StackLayout 
-        { 
-            new StackLayout { newItemEntry, addButton },
-            collectionView 
-        };
-    }
-}
+// Dispose all at once
+foreach (var b in bindings) b.Dispose();
 ```
 
-## Implementation Notes
+## Alternatives Considered
 
-### Expression Tree Analysis
+| Approach | Pros | Cons |
+|---|---|---|
+| **Manual `PropertyChanged` (status quo)** | Zero abstraction, fully explicit | Verbose, error-prone string matching |
+| **`nameof` + `Func<>` (this proposal)** | NativeAOT safe, no new dependencies | Property name repeated in `nameof()` call |
+| **`Expression<Func<>>` only** | Ergonomic (`x => x.Title`) | `Expression.Compile()` has NativeAOT caveats |
+| **Source generator** | Zero runtime cost, best ergonomics | Significant implementation effort, new tooling |
+| **CallerArgumentExpression hack** | No expression trees | Fragile string parsing, breaks with refactoring |
 
-The `Bind<TSource, TValue>()` method uses **expression trees** to extract property names:
+The `nameof` + `Func<>` approach is the right default for Spice: zero new dependencies,
+truly NativeAOT safe, and the `nameof()` repetition is a minor cost for full transparency.
 
-```csharp
-vm.Bind(x => x.Title, text => titleLabel.Text = text);
-       ~~~~~~~~~~~~  <- Expression tree analyzed at setup time
-```
+## Future Work
 
-The expression `x => x.Title` is compiled to a delegate for fast property access, and the property name "Title" is extracted for `PropertyChanged` filtering. This happens **once at setup**, not on every property change.
-
-### No Runtime Reflection
-
-The implementation uses:
-- ✅ **Expression trees** - analyzed at setup time only
-- ✅ **Compiled delegates** - for fast property access
-- ✅ **String comparison** - for PropertyChanged event filtering
-- ❌ **No reflection** - at runtime
-
-This makes it fully compatible with NativeAOT and IL trimming.
-
-### Memory Management
-
-The `Bind()` method returns an `IDisposable` for cleanup:
-
-```csharp
-var binding = vm.Bind(x => x.Title, text => label.Text = text);
-
-// Later, when done:
-binding.Dispose(); // Unsubscribes from PropertyChanged
-```
-
-For most apps, bindings live for the lifetime of the page/view, so explicit disposal isn't necessary. But for long-lived ViewModels with short-lived views, proper disposal prevents memory leaks.
-
-### Two-Way Binding Limitation
-
-True two-way binding (where target changes automatically update source) is difficult without reflection or source generators. For now, the recommendation is:
-
-```csharp
-// Forward: ViewModel -> View
-vm.Bind(x => x.Text, text => entry.Text = text);
-
-// Reverse: View -> ViewModel (manual)
-entry.TextChanged += (_, text) => vm.Text = text;
-```
-
-A future source generator could automate the reverse direction for Spice controls.
-
-## Benefits
-
-This approach provides:
-
-1. **Strongly-typed** - `vm.Bind(x => x.Title, ...)` catches typos at compile-time
-2. **Concise** - Much shorter than manual PropertyChanged handlers
-3. **NativeAOT safe** - No runtime reflection
-4. **Trimmer safe** - All code is statically analyzable
-5. **Transparent** - Simple implementation, easy to debug
-6. **Minimal** - Single extension method, no framework dependency
-7. **Compatible** - Works with existing `[ObservableProperty]` pattern
-
-## Testability
-
-ViewModels remain fully testable as POCOs:
-
-```csharp
-[Fact]
-public void LoginViewModel_ValidCredentials_EnablesLogin()
-{
-    var vm = new LoginViewModel
-    {
-        Username = "test",
-        Password = "password"
-    };
-    
-    Assert.True(vm.CanLogin);
-    Assert.Empty(vm.ErrorMessage);
-}
-
-[Fact]
-public void LoginViewModel_EmptyUsername_ShowsError()
-{
-    var vm = new LoginViewModel
-    {
-        Username = "",
-        Password = "password"
-    };
-    
-    Assert.False(vm.CanLogin);
-    Assert.Equal("Username required", vm.ErrorMessage);
-}
-```
-
-## Future Enhancements
-
-Potential improvements:
-
-1. **Source Generator** - Auto-generate optimized bindings at compile-time
-2. **View Lifecycle** - Add `Disposed` event to `View` for proper cleanup in CollectionView
-3. **Two-Way Binding** - Generate reverse bindings for Spice controls
-4. **Binding Converters** - Support for value transformation (e.g., bool to Visibility)
-5. **MultiBinding** - Combine multiple properties into one expression
+1. **View lifecycle** — Add `Detached` event to `View` for CollectionView recycling cleanup
+2. **Source generator** — Compile-time codegen to eliminate `nameof()` boilerplate
+3. **Value converters** — `Bind(..., converter: boolToColor)` for transformations
 
 ## Summary
 
-Spice's data-binding approach:
-
-- **Today**: Direct lambda assignments, `[ObservableProperty]` ViewModels
-- **Proposed**: Add `Bind<TSource, TValue>()` extension method
-- **Benefits**: Strongly-typed, concise, NativeAOT safe
-- **Philosophy**: Explicit, minimal, no framework magic
-
-The `Bind()` helper reduces boilerplate while maintaining Spice's core values of transparency and simplicity.
+- Spice views already implement `INotifyPropertyChanged` — leverage it
+- `Bind()` is a thin helper over `PropertyChanged`, not a framework
+- `nameof()` + `Func<>` = truly NativeAOT safe, no expression trees required
+- Two-way binding works because both sides are `ObservableObject`
+- Expression-tree overload is opt-in, not the default
