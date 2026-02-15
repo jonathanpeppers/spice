@@ -39,7 +39,7 @@ public partial class Application
 		}
 	}
 
-	AndroidX.AppCompat.App.AlertDialog? _presentedDialog;
+	SpiceModalFragment? _presentedFragment;
 
 	private partial Task PresentAsyncCore(View view)
 	{
@@ -49,38 +49,57 @@ public partial class Application
 			return Task.CompletedTask;
 		}
 
-		var builder = new AndroidX.AppCompat.App.AlertDialog.Builder(activity);
-		
-		if (!string.IsNullOrEmpty(view.Title))
-		{
-			builder.SetTitle(view.Title);
-		}
-
-		// Create a container for the view
-		var container = new Android.Widget.FrameLayout(activity)
-		{
-			LayoutParameters = new Android.Views.ViewGroup.LayoutParams(
-				Android.Views.ViewGroup.LayoutParams.MatchParent,
-				Android.Views.ViewGroup.LayoutParams.WrapContent)
-		};
-		container.AddView(view);
-		builder.SetView(container);
-
-		_presentedDialog = builder.Create();
-		_presentedDialog.SetCanceledOnTouchOutside(false);
-		_presentedDialog.Show();
+		_presentedFragment = new SpiceModalFragment(view);
+		_presentedFragment.Show(activity.SupportFragmentManager, "spice_modal");
 
 		return Task.CompletedTask;
 	}
 
 	private partial Task DismissAsyncCore()
 	{
-		if (_presentedDialog != null)
+		if (_presentedFragment != null)
 		{
-			_presentedDialog.Dismiss();
-			_presentedDialog = null;
+			_presentedFragment.Dismiss();
+			_presentedFragment = null;
 		}
 
 		return Task.CompletedTask;
+	}
+
+	class SpiceModalFragment : AndroidX.Fragment.App.DialogFragment
+	{
+		readonly View _spiceView;
+
+		public SpiceModalFragment(View spiceView)
+		{
+			_spiceView = spiceView;
+		}
+
+		public override Android.Views.View OnCreateView(Android.Views.LayoutInflater inflater, Android.Views.ViewGroup? container, Android.OS.Bundle? savedInstanceState)
+		{
+			var frame = new Android.Widget.FrameLayout(RequireContext())
+			{
+				LayoutParameters = new Android.Views.ViewGroup.LayoutParams(
+					Android.Views.ViewGroup.LayoutParams.MatchParent,
+					Android.Views.ViewGroup.LayoutParams.MatchParent)
+			};
+			frame.AddView(_spiceView);
+			return frame;
+		}
+
+		public override void OnStart()
+		{
+			base.OnStart();
+
+			// Make the dialog fullscreen
+			Dialog?.Window?.SetLayout(
+				Android.Views.ViewGroup.LayoutParams.MatchParent,
+				Android.Views.ViewGroup.LayoutParams.MatchParent);
+
+			if (!string.IsNullOrEmpty(_spiceView.Title))
+			{
+				Dialog?.SetTitle(_spiceView.Title);
+			}
+		}
 	}
 }
