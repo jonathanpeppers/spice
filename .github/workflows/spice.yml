@@ -114,9 +114,6 @@ jobs:
         dotnet restore tests/Spice.UITests/Spice.UITests.csproj
         dotnet build samples/Spice.Scenarios/Spice.Scenarios.csproj -f net10.0-android -c Debug -r android-x64 -p:TargetFrameworks=net10.0-android
 
-    - name: install AndroidSdk.Tool
-      run: dotnet tool install -g AndroidSdk.Tool
-
     - name: Enable KVM
       run: |
         echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
@@ -124,21 +121,19 @@ jobs:
         sudo udevadm trigger --name-match=kvm
 
     - name: Boot Android emulator
-      run: >
-        dotnet android sdk install --package platform-tools &&
-        dotnet android sdk install --package emulator &&
-        dotnet android sdk install --package '${{ env.TEST_EMULATOR_IMAGE }}' &&
-        dotnet android avd create --name '${{ env.TEST_EMULATOR_NAME }}' --sdk '${{ env.TEST_EMULATOR_IMAGE }}' --force &&
-        dotnet android avd start --name '${{ env.TEST_EMULATOR_NAME }}' --gpu swiftshader_indirect --wait-boot --no-window --no-snapshot --no-audio --no-boot-anim &&
-        dotnet android device list
+      run: |
+        echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install '${{ env.TEST_EMULATOR_IMAGE }}'
+        echo "no" | $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd -n '${{ env.TEST_EMULATOR_NAME }}' -k '${{ env.TEST_EMULATOR_IMAGE }}' --force
+        $ANDROID_HOME/emulator/emulator -avd '${{ env.TEST_EMULATOR_NAME }}' -gpu swiftshader_indirect -no-window -no-snapshot -no-audio -no-boot-anim &
+        adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'
+        adb devices
 
     - name: Install App
       run: |
-        # Find and install the APK
         APK_PATH=$(find samples/Spice.Scenarios/bin/Debug/net10.0-android -name "*-Signed.apk" | head -1)
         if [ -n "$APK_PATH" ]; then
           echo "Installing APK: $APK_PATH"
-          dotnet android device install --package "$APK_PATH"
+          adb install "$APK_PATH"
         else
           echo "No APK found"
           exit 1
