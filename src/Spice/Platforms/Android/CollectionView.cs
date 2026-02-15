@@ -117,7 +117,7 @@ public partial class CollectionView
 		// Add new decoration with updated spacing
 		if (value > 0)
 		{
-			NativeView.AddItemDecoration(new SpaceItemDecoration((int)value));
+			NativeView.AddItemDecoration(new SpaceItemDecoration(value.ToPixels()));
 		}
 	}
 

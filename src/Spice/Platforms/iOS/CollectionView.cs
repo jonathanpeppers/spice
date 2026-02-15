@@ -79,8 +79,20 @@ public partial class CollectionView
 
 	partial void OnSelectedItemChanged(object? value)
 	{
-		if (!_nativeView.IsValueCreated || value == null)
+		if (!_nativeView.IsValueCreated)
 			return;
+
+		// When SelectedItem is set to null, clear native selection
+		if (value == null)
+		{
+			var selectedIndexPaths = NativeView.IndexPathsForSelectedItems;
+			if (selectedIndexPaths != null)
+			{
+				foreach (var indexPath in selectedIndexPaths)
+					NativeView.DeselectItem(indexPath, false);
+			}
+			return;
+		}
 
 		if (_dataSource != null)
 		{
