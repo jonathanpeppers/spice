@@ -39,21 +39,49 @@ public partial class SearchBar
 			textField.TextColor = value.ToUIColor();
 	}
 
+	partial void OnPlaceholderColorChanged(Color? value)
+	{
+		var textField = NativeView.SearchTextField;
+		if (textField != null)
+		{
+			// Set both placeholder and attributed placeholder color
+			if (value != null)
+			{
+				var placeholderText = textField.Placeholder ?? "";
+				var attributes = new UIStringAttributes { ForegroundColor = value.ToUIColor() };
+				textField.AttributedPlaceholder = new NSAttributedString(placeholderText, attributes);
+			}
+			else
+			{
+				// Reset to default
+				var placeholderText = textField.Placeholder ?? "";
+				textField.AttributedPlaceholder = new NSAttributedString(placeholderText);
+			}
+		}
+	}
+
 	SearchBarDelegate? _delegate;
 
-	partial void OnSearchButtonPressedChanged(Action<SearchBar>? value)
+	void UpdateDelegate()
 	{
-		if (value == null)
+		if (SearchButtonPressed == null && TextChanged == null)
 		{
 			NativeView.Delegate = null!;
 			_delegate = null;
 		}
 		else
 		{
-			_delegate = new SearchBarDelegate(this);
-			NativeView.Delegate = _delegate;
+			if (_delegate == null)
+			{
+				_delegate = new SearchBarDelegate(this);
+				NativeView.Delegate = _delegate;
+			}
 		}
 	}
+
+	partial void OnSearchButtonPressedChanged(Action<SearchBar>? value) => UpdateDelegate();
+
+	partial void OnTextChangedChanged(Action<SearchBar>? value) => UpdateDelegate();
 
 	class SearchBarDelegate : UISearchBarDelegate
 	{
@@ -76,7 +104,10 @@ public partial class SearchBar
 		public override void TextChanged(UISearchBar uiSearchBar, string searchText)
 		{
 			if (_searchBar.TryGetTarget(out var searchBar))
+			{
 				searchBar.Text = searchText;
+				searchBar.TextChanged?.Invoke(searchBar);
+			}
 		}
 	}
 }

@@ -31,6 +31,20 @@ public class SearchBarTests
 	}
 
 	[Fact]
+	public void PlaceholderColor_DefaultsToNull()
+	{
+		var searchBar = new SearchBar();
+		Assert.Null(searchBar.PlaceholderColor);
+	}
+
+	[Fact]
+	public void TextChanged_DefaultsToNull()
+	{
+		var searchBar = new SearchBar();
+		Assert.Null(searchBar.TextChanged);
+	}
+
+	[Fact]
 	public void Text_CanBeSet()
 	{
 		var searchBar = new SearchBar();
@@ -62,6 +76,24 @@ public class SearchBarTests
 		searchBar.SearchButtonPressed = _ => pressed = true;
 		searchBar.SearchButtonPressed.Invoke(searchBar);
 		Assert.True(pressed);
+	}
+
+	[Fact]
+	public void PlaceholderColor_CanBeSet()
+	{
+		var searchBar = new SearchBar();
+		searchBar.PlaceholderColor = Colors.Gray;
+		Assert.Equal(Colors.Gray, searchBar.PlaceholderColor);
+	}
+
+	[Fact]
+	public void TextChanged_CanBeSet()
+	{
+		var searchBar = new SearchBar();
+		bool changed = false;
+		searchBar.TextChanged = _ => changed = true;
+		searchBar.TextChanged.Invoke(searchBar);
+		Assert.True(changed);
 	}
 
 	[Fact]
@@ -102,5 +134,25 @@ public class SearchBarTests
 		searchBar.PropertyChanged += (sender, e) => property = e.PropertyName;
 		searchBar.SearchButtonPressed = _ => { };
 		Assert.Equal(nameof(SearchBar.SearchButtonPressed), property);
+	}
+
+	[Fact]
+	public void PropertyChanged_PlaceholderColor()
+	{
+		string? property = null;
+		var searchBar = new SearchBar();
+		searchBar.PropertyChanged += (sender, e) => property = e.PropertyName;
+		searchBar.PlaceholderColor = Colors.Gray;
+		Assert.Equal(nameof(SearchBar.PlaceholderColor), property);
+	}
+
+	[Fact]
+	public void PropertyChanged_TextChanged()
+	{
+		string? property = null;
+		var searchBar = new SearchBar();
+		searchBar.PropertyChanged += (sender, e) => property = e.PropertyName;
+		searchBar.TextChanged = _ => { };
+		Assert.Equal(nameof(SearchBar.TextChanged), property);
 	}
 }

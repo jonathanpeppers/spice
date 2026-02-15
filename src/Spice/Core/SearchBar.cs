@@ -26,8 +26,20 @@ public partial class SearchBar : View
 	Color? _textColor;
 
 	/// <summary>
+	/// Color of the placeholder text
+	/// </summary>
+	[ObservableProperty]
+	Color? _placeholderColor;
+
+	/// <summary>
 	/// Action to run when the search button is pressed
 	/// </summary>
 	[ObservableProperty]
 	Action<SearchBar>? _searchButtonPressed;
+
+	/// <summary>
+	/// Action to run when the text changes
+	/// </summary>
+	[ObservableProperty]
+	Action<SearchBar>? _textChanged;
 }

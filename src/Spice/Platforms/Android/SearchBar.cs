@@ -67,21 +67,42 @@ public partial class SearchBar
 		}
 	}
 
+	partial void OnPlaceholderColorChanged(Color? value)
+	{
+		// SearchView hint color is set via the internal EditText
+		var editTextId = NativeView.Context?.Resources?.GetIdentifier("android:id/search_src_text", null, null) ?? 0;
+		if (editTextId != 0)
+		{
+			var editText = NativeView.FindViewById<Android.Widget.EditText>(editTextId);
+			if (editText != null && value != null)
+			{
+				editText.SetHintTextColor(value.ToAndroidInt());
+			}
+		}
+	}
+
 	SearchView.IOnQueryTextListener? _queryTextListener;
 
-	partial void OnSearchButtonPressedChanged(Action<SearchBar>? value)
+	void UpdateQueryTextListener()
 	{
-		if (value == null)
+		if (SearchButtonPressed == null && TextChanged == null)
 		{
 			NativeView.SetOnQueryTextListener(null);
 			_queryTextListener = null;
 		}
 		else
 		{
-			_queryTextListener = new QueryTextListener(this);
-			NativeView.SetOnQueryTextListener(_queryTextListener);
+			if (_queryTextListener == null)
+			{
+				_queryTextListener = new QueryTextListener(this);
+				NativeView.SetOnQueryTextListener(_queryTextListener);
+			}
 		}
 	}
+
+	partial void OnSearchButtonPressedChanged(Action<SearchBar>? value) => UpdateQueryTextListener();
+
+	partial void OnTextChangedChanged(Action<SearchBar>? value) => UpdateQueryTextListener();
 
 	class QueryTextListener : Java.Lang.Object, SearchView.IOnQueryTextListener
 	{
@@ -102,6 +123,7 @@ public partial class SearchBar
 		public bool OnQueryTextChange(string? newText)
 		{
 			_searchBar.Text = newText ?? "";
+			_searchBar.TextChanged?.Invoke(_searchBar);
 			return true;
 		}
 	}
