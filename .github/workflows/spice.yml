@@ -93,7 +93,7 @@ jobs:
     runs-on: macos-latest
     needs: [build]
     env:
-      TEST_EMULATOR_IMAGE: system-images;android-34;google_apis;x86_64
+      TEST_EMULATOR_IMAGE: system-images;android-34;google_apis;arm64-v8a
       TEST_EMULATOR_NAME: UITestsEmulator
       WORKLOAD_VERSION: 10.0.103
     
@@ -133,6 +133,12 @@ jobs:
           exit 1
         fi
 
+    - name: Verify App Launch
+      run: |
+        adb shell monkey -p com.companyname.spice.scenarios -c android.intent.category.LAUNCHER 1
+        sleep 5
+        adb logcat -d -s "AndroidRuntime:E" "mono:E" "*:F" | tail -50
+
     - name: Install Appium
       run: |
         npm install -g appium
@@ -145,6 +151,8 @@ jobs:
 
     - name: Run UI Tests
       run: dotnet test tests/Spice.UITests/Spice.UITests.csproj -c Debug --logger trx --results-directory test-artifacts
+      env:
+        ARTIFACTS_DIR: ${{ github.workspace }}/test-artifacts
 
     - name: Upload UI test results
       uses: actions/upload-artifact@v4
