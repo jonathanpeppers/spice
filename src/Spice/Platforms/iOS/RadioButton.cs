@@ -95,41 +95,44 @@ public partial class RadioButton
 		if (string.IsNullOrEmpty(GroupName))
 			return;
 
-		if (_groups.TryGetValue(GroupName, out var groupList))
+		lock (_groups)
 		{
-			// Clean up dead references and uncheck others
-			groupList.RemoveAll(wr => !wr.TryGetTarget(out _));
-			
-			foreach (var weakRef in groupList)
+			if (_groups.TryGetValue(GroupName, out var groupList))
 			{
-				if (weakRef.TryGetTarget(out var radioButton) && radioButton != this && radioButton.IsChecked)
+				// Clean up dead references and uncheck others
+				groupList.RemoveAll(wr => !wr.TryGetTarget(out _));
+				
+				foreach (var weakRef in groupList)
 				{
-					radioButton.IsChecked = false;
-					radioButton.CheckedChanged?.Invoke(radioButton);
+					if (weakRef.TryGetTarget(out var radioButton) && radioButton != this && radioButton.IsChecked)
+					{
+						radioButton.IsChecked = false;
+						radioButton.CheckedChanged?.Invoke(radioButton);
+					}
 				}
 			}
-		}
-		else
-		{
-			// Create the group list
-			groupList = new List<WeakReference<RadioButton>>();
-			_groups[GroupName] = groupList;
-		}
-
-		// Add this radio button to the group if not already present
-		bool found = false;
-		foreach (var weakRef in groupList)
-		{
-			if (weakRef.TryGetTarget(out var rb) && rb == this)
+			else
 			{
-				found = true;
-				break;
+				// Create the group list
+				groupList = new List<WeakReference<RadioButton>>();
+				_groups[GroupName] = groupList;
 			}
-		}
-		
-		if (!found)
-		{
-			groupList.Add(new WeakReference<RadioButton>(this));
+
+			// Add this radio button to the group if not already present
+			bool found = false;
+			foreach (var weakRef in groupList)
+			{
+				if (weakRef.TryGetTarget(out var rb) && rb == this)
+				{
+					found = true;
+					break;
+				}
+			}
+			
+			if (!found)
+			{
+				groupList.Add(new WeakReference<RadioButton>(this));
+			}
 		}
 	}
 }
