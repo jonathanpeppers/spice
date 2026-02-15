@@ -133,13 +133,12 @@ jobs:
         emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
         script: |
           cd $GITHUB_WORKSPACE
-          GITHUB_ACTIONS= dotnet build samples/Spice.Scenarios/Spice.Scenarios.csproj -f net10.0-android -c Debug -p:TargetFrameworks=net10.0-android -p:EmbedAssembliesIntoApk=true -bl:test-artifacts/install.binlog
-          adb install $GITHUB_WORKSPACE/samples/Spice.Scenarios/bin/Debug/net10.0-android/com.companyname.spice.scenarios-Signed.apk
+          GITHUB_ACTIONS= dotnet build samples/Spice.Scenarios/Spice.Scenarios.csproj -f net10.0-android -c Debug -p:TargetFrameworks=net10.0-android -t:Install -bl:test-artifacts/install.binlog
           appium server --log-level info &
           sleep 5
           TEST_EXIT=0
           dotnet test tests/Spice.UITests/Spice.UITests.csproj -c Debug --logger trx --results-directory test-artifacts || TEST_EXIT=$?
-          adb logcat -d > $GITHUB_WORKSPACE/test-artifacts/logcat.txt || true
+          adb logcat -d -t 5000 > $GITHUB_WORKSPACE/test-artifacts/logcat.txt || true
           exit $TEST_EXIT
 
     - name: Upload UI test results

@@ -1,3 +1,5 @@
+using OpenQA.Selenium;
+
 namespace Spice.UITests;
 
 public class BorderTests : BaseTest
@@ -9,7 +11,8 @@ public class BorderTests : BaseTest
         borderButton.Click();
         Thread.Sleep(1000);
 
-        var simpleBorderLabel = FindTextViewContaining("Simple Border");
-        Assert.NotNull(simpleBorderLabel);
+        // Border wraps content in a FrameLayout — find the button inside the last border
+        var buttonInBorder = FindButtonByText("Button in Border");
+        Assert.NotNull(buttonInBorder);
     });
 }

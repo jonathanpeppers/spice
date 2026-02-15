@@ -54,6 +54,10 @@ public abstract class BaseTest : IDisposable
         options.AddAdditionalAppiumOption("appActivity", ActivityName);
         options.AddAdditionalAppiumOption("appium:newCommandTimeout", 300);
         options.AddAdditionalAppiumOption("appium:connectHardwareKeyboard", true);
+        // Ensure the app is launched fresh each session
+        options.AddAdditionalAppiumOption("appium:forceAppLaunch", true);
+        options.AddAdditionalAppiumOption("appium:appWaitActivity", "*");
+        options.AddAdditionalAppiumOption("appium:appWaitDuration", 30000);
 
         // Create driver with default Appium server URL
         var serverUri = new Uri("http://127.0.0.1:4723");
@@ -63,6 +67,24 @@ public abstract class BaseTest : IDisposable
         // when trying to find elements. This helps handle elements that may not be immediately available.
         // Reference: http://appium.io/docs/en/latest/quickstart/test-dotnet/
         Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+
+        // Wait for app to be in foreground
+        WaitForAppForeground();
+    }
+
+    void WaitForAppForeground()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            try
+            {
+                var activity = Driver.CurrentActivity;
+                if (activity != null && activity.Contains("MainActivity"))
+                    return;
+            }
+            catch { }
+            Thread.Sleep(1000);
+        }
     }
 
     /// <summary>
