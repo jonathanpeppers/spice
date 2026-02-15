@@ -190,7 +190,7 @@ public partial class CollectionView
 				viewHolder.ItemView.Clickable = parent.SelectionMode != SelectionMode.None;
 				if (parent.SelectionMode == SelectionMode.Single)
 				{
-					viewHolder.ItemView.Selected = item.Equals(parent.SelectedItem);
+					viewHolder.ItemView.Selected = Equals(item, parent.SelectedItem);
 				}
 			}
 		}

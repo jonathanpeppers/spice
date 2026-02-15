@@ -79,20 +79,18 @@ public partial class CollectionView
 
 	partial void OnSelectedItemChanged(object? value)
 	{
-		if (!_nativeView.IsValueCreated || ItemsSource == null || value == null)
+		if (!_nativeView.IsValueCreated || value == null)
 			return;
 
-		// Find the index of the selected item
-		int index = 0;
-		foreach (var item in ItemsSource)
+		if (_dataSource != null)
 		{
-			if (item?.Equals(value) == true)
+			// Use cached items for O(1) lookup
+			int index = _dataSource._itemsCache.IndexOf(value);
+			if (index >= 0)
 			{
 				var indexPath = NSIndexPath.FromRowSection(index, 0);
 				NativeView.SelectItem(indexPath, false, UICollectionViewScrollPosition.None);
-				return;
 			}
-			index++;
 		}
 	}
 
