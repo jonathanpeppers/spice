@@ -95,6 +95,8 @@ public partial class RefreshView
 		}
 	}
 
+	readonly UIView _paddingWrapper = new UIView { AutoresizingMask = UIViewAutoresizing.None };
+
 	partial void OnContentChanged(View? oldContent, View? newContent)
 	{
 		// Detach refresh control from old content
@@ -110,7 +112,9 @@ public partial class RefreshView
 		if (newContent != null)
 		{
 			var contentView = (UIView)newContent;
-			NativeView.AddSubview(contentView);
+			if (_paddingWrapper.Superview == null)
+				NativeView.AddSubview(_paddingWrapper);
+			_paddingWrapper.AddSubview(contentView);
 			UpdateContentLayout();
 			
 			// Try to attach refresh control to scrollable content
@@ -129,15 +133,12 @@ public partial class RefreshView
 			return;
 
 		var padding = (nfloat)Padding;
-		var contentView = (UIView)Content;
 		var bounds = NativeView.Bounds;
+		var width = (nfloat)Math.Max(0, bounds.Width - padding * 2);
+		var height = (nfloat)Math.Max(0, bounds.Height - padding * 2);
 
-		contentView.Frame = new CGRect(
-			padding,
-			padding,
-			bounds.Width - (padding * 2),
-			bounds.Height - (padding * 2)
-		);
+		_paddingWrapper.Frame = new CGRect(padding, padding, width, height);
+		Content.UpdateAlign();
 	}
 
 	partial void OnIsRefreshingChanged(bool value)

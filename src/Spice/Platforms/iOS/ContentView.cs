@@ -23,6 +23,8 @@ public partial class ContentView
 	/// <param name="creator">Subclasses can pass in a Func to create a UIView</param>
 	protected ContentView(Func<View, UIView> creator) : base(creator) { }
 
+	readonly UIView _paddingWrapper = new UIView { AutoresizingMask = UIViewAutoresizing.None };
+
 	partial void OnContentChanged(View? oldContent, View? newContent)
 	{
 		// Remove old content
@@ -34,7 +36,9 @@ public partial class ContentView
 		// Add new content
 		if (newContent != null)
 		{
-			NativeView.AddSubview(newContent);
+			if (_paddingWrapper.Superview == null)
+				NativeView.AddSubview(_paddingWrapper);
+			_paddingWrapper.AddSubview(newContent);
 			UpdateContentLayout();
 		}
 	}
@@ -50,15 +54,12 @@ public partial class ContentView
 			return;
 
 		var padding = (nfloat)Padding;
-		var contentView = (UIView)Content;
 		var bounds = NativeView.Bounds;
+		var width = (nfloat)Math.Max(0, bounds.Width - padding * 2);
+		var height = (nfloat)Math.Max(0, bounds.Height - padding * 2);
 
-		contentView.Frame = new CGRect(
-			padding,
-			padding,
-			bounds.Width - (padding * 2),
-			bounds.Height - (padding * 2)
-		);
+		_paddingWrapper.Frame = new CGRect(padding, padding, width, height);
+		Content.UpdateAlign();
 	}
 
 	class SpiceContentView : UIView
