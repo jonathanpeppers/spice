@@ -181,7 +181,7 @@ public partial class View
 			// -1 means unset, use WrapContent if alignment is not Stretch
 			if (value < 0)
 			{
-				layoutParameters.Width = _horizontalAlign == Align.Stretch 
+				layoutParameters.Width = HorizontalAlign == Align.Stretch 
 					? Android.Views.ViewGroup.LayoutParams.MatchParent 
 					: Android.Views.ViewGroup.LayoutParams.WrapContent;
 			}
@@ -213,7 +213,7 @@ public partial class View
 			// -1 means unset, use WrapContent if alignment is not Stretch
 			if (value < 0)
 			{
-				layoutParameters.Height = _verticalAlign == Align.Stretch 
+				layoutParameters.Height = VerticalAlign == Align.Stretch 
 					? Android.Views.ViewGroup.LayoutParams.MatchParent 
 					: Android.Views.ViewGroup.LayoutParams.WrapContent;
 			}

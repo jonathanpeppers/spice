@@ -170,10 +170,10 @@ public partial class View
 			var result = view.Frame.Size;
 			
 			// If WidthRequest or HeightRequest are set, use them instead
-			if (_widthRequest >= 0)
-				result.Width = (nfloat)_widthRequest;
-			if (_heightRequest >= 0)
-				result.Height = (nfloat)_heightRequest;
+			if (WidthRequest >= 0)
+				result.Width = (nfloat)WidthRequest;
+			if (HeightRequest >= 0)
+				result.Height = (nfloat)HeightRequest;
 			
 			return (size = result).Value;
 		}
