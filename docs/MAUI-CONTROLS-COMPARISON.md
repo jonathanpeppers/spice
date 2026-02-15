@@ -18,7 +18,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 | AbsoluteLayout | ❌ No | ❌ No | Rare use case, complex |
 | BindableLayout | ❌ No | ❌ No | Binding-focused pattern |
 | FlexLayout | ❌ No | 🟡 Maybe | Powerful but complex CSS flexbox |
-| Grid | ❌ No | 🔥 Yes | Essential for complex layouts |
+| Grid | ✅ Yes | ✅ Done | Essential for complex layouts |
 | HorizontalStackLayout | ❌ No | ❌ No | StackLayout with Horizontal orientation |
 | StackLayout | ✅ Yes | ✅ Done | Fully implemented |
 | VerticalStackLayout | ❌ No | ❌ No | StackLayout with Vertical orientation |
@@ -29,13 +29,13 @@ This document compares the stable/supported controls from .NET MAUI with what is
 |--------------|---------------------|-------------------|-------|
 | ActivityIndicator | ✅ Yes | ✅ Done | Loading spinner - very common |
 | BlazorWebView | ✅ Yes | ✅ Done | Extends `WebView` in Blazor/ folders |
-| Border | ❌ No | 🟡 Maybe | Useful for rounded corners/borders |
-| BoxView | ❌ No | 🟢 Maybe | Colored rectangles - useful for dividers |
+| Border | ✅ Yes | ✅ Done | Useful for rounded corners/borders |
+| BoxView | ✅ Yes | ✅ Done | Colored rectangles - useful for dividers |
 | Button | ✅ Yes | ✅ Done | Fully implemented |
 | CarouselView | ❌ No | ❌ No | Complex, less common |
-| CheckBox | ❌ No | 🔥 Yes | Standard checkbox input |
+| CheckBox | ✅ Yes | ✅ Done | Standard checkbox input |
 | CollectionView | ❌ No | 🟡 Maybe | Powerful grid/list control |
-| ContentView | ❌ No | 🟡 Maybe | Custom control composition |
+| ContentView | ✅ Yes | ✅ Done | Custom control composition |
 | DatePicker | ✅ Yes | ✅ Done | Date selection - common in forms |
 | Editor | ❌ No | 🟡 Maybe | Multi-line text input |
 | Ellipse | ❌ No | 🟢 Maybe | Shape control - can use Image |
@@ -44,14 +44,14 @@ This document compares the stable/supported controls from .NET MAUI with what is
 | GraphicsView | ❌ No | ❌ No | Advanced - Microsoft.Maui.Graphics available |
 | HybridWebView | ❌ No | ❌ No | Specialized, newer control |
 | Image | ✅ Yes | ✅ Done | Fully implemented |
-| ImageButton | ❌ No | 🟡 Maybe | Common pattern (Image + tap) |
+| ImageButton | ✅ Yes | ✅ Done | Common pattern (Image + tap) |
 | IndicatorView | ❌ No | ❌ No | Depends on CarouselView |
 | Label | ✅ Yes | ✅ Done | Fully implemented |
 | Line | ❌ No | ❌ No | Shape control - can use BoxView |
 | ListView | ❌ No | 🟡 Yes | Scrollable lists - very common |
 | Map | ❌ No | ❌ No | External dependency |
 | Path | ❌ No | ❌ No | Complex shapes - can use Image |
-| Picker | ❌ No | 🔥 Yes | Dropdown selection - essential |
+| Picker | ✅ Yes | ✅ Done | Dropdown selection - essential |
 | Polygon | ❌ No | ❌ No | Shape control - can use Image |
 | Polyline | ❌ No | ❌ No | Shape control - can use Image |
 | ProgressBar | ✅ Yes | ✅ Done | Progress display - common |
@@ -73,16 +73,23 @@ This document compares the stable/supported controls from .NET MAUI with what is
 
 ## Summary
 
-**Implemented: 9 / 60+ controls**
+**Implemented: 19 / 60+ controls**
 
 ### Spice Controls (Core)
 - ✅ ActivityIndicator
 - ✅ Application
+- ✅ Border
+- ✅ BoxView
 - ✅ Button
+- ✅ CheckBox
+- ✅ ContentView
 - ✅ DatePicker
 - ✅ Entry (single-line text)
+- ✅ Grid
 - ✅ Image
+- ✅ ImageButton
 - ✅ Label
+- ✅ Picker
 - ✅ ProgressBar
 - ✅ ScrollView
 - ✅ Slider
@@ -95,8 +102,10 @@ This document compares the stable/supported controls from .NET MAUI with what is
 
 ### Supporting Types
 - Align (enums for alignment)
+- GridLength / GridUnitType (Grid sizing)
 - Orientation (horizontal/vertical)
 - RootComponent (Blazor)
+- Thickness (margin/padding)
 
 ### Key Differences
 - **No XAML**: Spice uses POCOs, not XAML markup
@@ -109,11 +118,18 @@ This document compares the stable/supported controls from .NET MAUI with what is
 
 #### iOS (UIKit)
 - ActivityIndicator → UIActivityIndicatorView
+- Border → UIView (with CALayer border)
+- BoxView → UIView
 - Button → UIButton
+- CheckBox → UIButton (checkmark)
+- ContentView → UIView
 - DatePicker → UIDatePicker
 - Entry → UITextField
+- Grid → UIView (manual layout)
 - Image → UIImageView
+- ImageButton → UIButton (with image)
 - Label → UILabel
+- Picker → UIPickerView
 - ProgressBar → UIProgressView
 - ScrollView → UIScrollView
 - Slider → UISlider
@@ -124,11 +140,18 @@ This document compares the stable/supported controls from .NET MAUI with what is
 
 #### Android (Android Widgets)
 - ActivityIndicator → ProgressBar (indeterminate)
+- Border → FrameLayout (with GradientDrawable)
+- BoxView → View
 - Button → AppCompatButton
+- CheckBox → CheckBox
+- ContentView → FrameLayout
 - DatePicker → DatePickerDialog
 - Entry → AppCompatEditText
+- Grid → GridLayout
 - Image → AppCompatImageView
+- ImageButton → AppCompatImageButton
 - Label → AppCompatTextView
+- Picker → Spinner
 - ProgressBar → ProgressBar
 - ScrollView → ScrollView / HorizontalScrollView
 - Slider → SeekBar
