@@ -88,6 +88,7 @@ public partial class RadioButton
 			UncheckOthersInGroup();
 		}
 
+		// Fire CheckedChanged for user interaction
 		CheckedChanged?.Invoke(this);
 	}
 

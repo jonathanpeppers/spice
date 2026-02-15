@@ -81,8 +81,9 @@ public partial class RadioButton
 		if (!IsChecked)
 		{
 			IsChecked = true;
-			CheckedChanged?.Invoke(this);
 		}
+		// Fire CheckedChanged for user interaction
+		CheckedChanged?.Invoke(this);
 	}
 
 	partial void OnCheckedChangedChanged(Action<RadioButton>? value)
