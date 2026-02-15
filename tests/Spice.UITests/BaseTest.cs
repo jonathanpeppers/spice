@@ -63,9 +63,6 @@ public abstract class BaseTest : IDisposable
         // when trying to find elements. This helps handle elements that may not be immediately available.
         // Reference: http://appium.io/docs/en/latest/quickstart/test-dotnet/
         Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-
-        // Start the app activity
-        Driver.StartActivity(PackageName, ActivityName);
     }
 
     protected void CaptureTestFailureDiagnostics([CallerMemberName] string testName = "")

@@ -140,6 +140,13 @@ jobs:
           exit 1
         fi
 
+    - name: Verify App Launch
+      run: |
+        $ANDROID_HOME/platform-tools/adb shell am start -n com.companyname.spice.scenarios/com.companyname.spice.scenarios.MainActivity
+        sleep 5
+        $ANDROID_HOME/platform-tools/adb shell dumpsys activity activities | grep "mResumedActivity" || true
+        $ANDROID_HOME/platform-tools/adb logcat -d -s "AndroidRuntime:E" "mono:E" "MonoAndroid:E" "dotnet:E" "*:F" | tail -50
+
     - name: Install Appium
       run: |
         npm install -g appium
