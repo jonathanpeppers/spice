@@ -110,6 +110,16 @@ public class App : Application
 					Text = "CollectionView",
 					Clicked = _ => Main = new CollectionViewScenario(),
 				},
+				new Button
+				{
+					Text = "SearchBar",
+					Clicked = _ => Main = new SearchBarScenario(),
+        },
+				new Button
+				{
+					Text = "SwipeView",
+					Clicked = _ => Main = new SwipeViewScenario(),
+				},
 			}
 		};
 	}

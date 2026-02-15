@@ -40,7 +40,7 @@ public partial class ImageButton
 		// Always update the button image so Source changes (including invalid/empty) are reflected.
 		NativeView.SetImage(image, UIControlState.Normal);
 
-		if (image != null && HorizontalAlign != Align.Stretch && VerticalAlign != Align.Stretch)
+		if (image != null && HorizontalOptions.Alignment != LayoutAlignment.Fill && VerticalOptions.Alignment != LayoutAlignment.Fill)
 		{
 			NativeView.SizeToFit();
 		}

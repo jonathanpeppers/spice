@@ -280,4 +280,33 @@ public class RefreshViewTests
 		Assert.NotNull(refreshView2.Content);
 		Assert.NotNull(refreshView3.Content);
 	}
+
+	[Fact]
+	public void DefaultPaddingIsZero()
+	{
+		var refreshView = new RefreshView();
+		Assert.Equal(0.0, refreshView.Padding);
+	}
+
+	[Fact]
+	public void CanSetPadding()
+	{
+		var refreshView = new RefreshView
+		{
+			Padding = 16.0
+		};
+		Assert.Equal(16.0, refreshView.Padding);
+	}
+
+	[Fact]
+	public void PropertyChangedFiresOnPaddingChange()
+	{
+		string? property = null;
+		var refreshView = new RefreshView();
+		refreshView.PropertyChanged += (sender, e) => property = e.PropertyName;
+		
+		refreshView.Padding = 18.0;
+
+		Assert.Equal(nameof(refreshView.Padding), property);
+	}
 }

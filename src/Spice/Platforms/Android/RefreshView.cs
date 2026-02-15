@@ -87,4 +87,10 @@ public partial class RefreshView
 			NativeView.SetColorSchemeColors(value.ToAndroidInt());
 		}
 	}
+
+	partial void OnPaddingChanged(double value)
+	{
+		var paddingPx = value.ToPixels();
+		NativeView.SetPadding(paddingPx, paddingPx, paddingPx, paddingPx);
+	}
 }

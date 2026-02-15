@@ -138,12 +138,12 @@ public class MarginTests
 		var view = new View
 		{
 			Margin = 10,
-			HorizontalAlign = Align.Start,
-			VerticalAlign = Align.Start
+			HorizontalOptions = LayoutOptions.Start,
+			VerticalOptions = LayoutOptions.Start
 		};
 		Assert.Equal(new Thickness(10), view.Margin);
-		Assert.Equal(Align.Start, view.HorizontalAlign);
-		Assert.Equal(Align.Start, view.VerticalAlign);
+		Assert.Equal(LayoutOptions.Start, view.HorizontalOptions);
+		Assert.Equal(LayoutOptions.Start, view.VerticalOptions);
 	}
 
 	[Fact]
