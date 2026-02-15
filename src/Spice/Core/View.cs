@@ -26,16 +26,18 @@ public partial class View : ObservableObject, IEnumerable<View>
 	IEnumerator IEnumerable.GetEnumerator() => Children.GetEnumerator();
 
 	/// <summary>
-	/// The view's horizontal alignment. Defaults to center.
+	/// The view's horizontal layout options.
+	/// Platform implementations: UIKit.UIView.Frame / Android.Widget.RelativeLayout alignment rules
 	/// </summary>
 	[ObservableProperty]
-	Align _horizontalAlign;
+	LayoutOptions _horizontalOptions;
 
 	/// <summary>
-	/// The view's vertical alignment. Defaults to center.
+	/// The view's vertical layout options.
+	/// Platform implementations: UIKit.UIView.Frame / Android.Widget.RelativeLayout alignment rules
 	/// </summary>
 	[ObservableProperty]
-	Align _verticalAlign;
+	LayoutOptions _verticalOptions;
 
 	/// <summary>
 	/// Background color of the view

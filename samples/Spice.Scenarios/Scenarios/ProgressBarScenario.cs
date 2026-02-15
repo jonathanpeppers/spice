@@ -20,7 +20,7 @@ class ProgressBarScenario : StackLayout
 		_progressBar = new ProgressBar
 		{
 			Progress = 0.0,
-			HorizontalAlign = Align.Stretch
+			HorizontalOptions = LayoutOptions.Fill
 		};
 
 		var incrementButton = new Button

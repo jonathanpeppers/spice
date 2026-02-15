@@ -73,9 +73,9 @@ public partial class View
 
 	partial void OnBackgroundColorChanged(Color? value) => NativeView.BackgroundColor = value.ToUIColor();
 
-	partial void OnVerticalAlignChanged(Align value) => UpdateAlign();
+	partial void OnVerticalOptionsChanged(LayoutOptions value) => UpdateAlign();
 
-	partial void OnHorizontalAlignChanged(Align value) => UpdateAlign();
+	partial void OnHorizontalOptionsChanged(LayoutOptions value) => UpdateAlign();
 
 	partial void OnIsVisibleChanged(bool value) => NativeView.Hidden = !value;
 
@@ -114,48 +114,48 @@ public partial class View
 		var superframe = superview.Frame;
 		var frame = new CGRect();
 
-		switch (_horizontalAlign)
+		switch (_horizontalOptions.Alignment)
 		{
-			case Align.Center:
+			case LayoutAlignment.Center:
 				frame.Width = getSize().Width;
 				frame.X = (superframe.Width - frame.Width) / 2;
 				break;
-			case Align.Start:
+			case LayoutAlignment.Start:
 				frame.Width = getSize().Width;
 				frame.X = 0;
 				break;
-			case Align.End:
+			case LayoutAlignment.End:
 				frame.Width = getSize().Width;
 				frame.X = superframe.Width - frame.Width;
 				break;
-			case Align.Stretch:
+			case LayoutAlignment.Fill:
 				frame.Width = WidthRequest >= 0 ? (nfloat)WidthRequest : superframe.Width;
 				frame.X = 0;
 				break;
 			default:
-				throw new NotSupportedException($"{nameof(HorizontalAlign)} value '{_horizontalAlign}' not supported!");
+				throw new NotSupportedException($"{nameof(HorizontalOptions)} value '{_horizontalOptions.Alignment}' not supported!");
 		}
 
-		switch (_verticalAlign)
+		switch (_verticalOptions.Alignment)
 		{
-			case Align.Center:
+			case LayoutAlignment.Center:
 				frame.Height = getSize().Height;
 				frame.Y = (superframe.Height - frame.Height) / 2;
 				break;
-			case Align.Start:
+			case LayoutAlignment.Start:
 				frame.Height = getSize().Height;
 				frame.Y = 0;
 				break;
-			case Align.End:
+			case LayoutAlignment.End:
 				frame.Height = getSize().Height;
 				frame.Y = superframe.Height - frame.Height;
 				break;
-			case Align.Stretch:
+			case LayoutAlignment.Fill:
 				frame.Height = HeightRequest >= 0 ? (nfloat)HeightRequest : superframe.Height;
 				frame.Y = 0;
 				break;
 			default:
-				throw new NotSupportedException($"{nameof(VerticalAlign)} value '{_verticalAlign}' not supported!");
+				throw new NotSupportedException($"{nameof(VerticalOptions)} value '{_verticalOptions.Alignment}' not supported!");
 		}
 
 		// Set the actual frame

@@ -244,13 +244,13 @@ public class ViewSizeTests
 		{
 			WidthRequest = 100,
 			HeightRequest = 200,
-			HorizontalAlign = Align.Start,
-			VerticalAlign = Align.End
+			HorizontalOptions = LayoutOptions.Start,
+			VerticalOptions = LayoutOptions.End
 		};
 		Assert.Equal(100, view.WidthRequest);
 		Assert.Equal(200, view.HeightRequest);
-		Assert.Equal(Align.Start, view.HorizontalAlign);
-		Assert.Equal(Align.End, view.VerticalAlign);
+		Assert.Equal(LayoutOptions.Start, view.HorizontalOptions);
+		Assert.Equal(LayoutOptions.End, view.VerticalOptions);
 	}
 
 	[Fact]
@@ -300,31 +300,31 @@ public class ViewSizeTests
 	}
 
 	[Fact]
-	public void SettingWidthRequestWithHorizontalAlignStretch()
+	public void SettingWidthRequestWithHorizontalOptionsFill()
 	{
 		var view = new View
 		{
-			HorizontalAlign = Align.Stretch
+			HorizontalOptions = LayoutOptions.Fill
 		};
 
 		view.WidthRequest = 200;
 
 		Assert.Equal(200, view.WidthRequest);
-		Assert.Equal(Align.Stretch, view.HorizontalAlign);
+		Assert.Equal(LayoutOptions.Fill, view.HorizontalOptions);
 	}
 
 	[Fact]
-	public void SettingHeightRequestWithVerticalAlignStretch()
+	public void SettingHeightRequestWithVerticalOptionsFill()
 	{
 		var view = new View
 		{
-			VerticalAlign = Align.Stretch
+			VerticalOptions = LayoutOptions.Fill
 		};
 
 		view.HeightRequest = 150;
 
 		Assert.Equal(150, view.HeightRequest);
-		Assert.Equal(Align.Stretch, view.VerticalAlign);
+		Assert.Equal(LayoutOptions.Fill, view.VerticalOptions);
 	}
 
 	[Fact]
@@ -332,19 +332,19 @@ public class ViewSizeTests
 	{
 		var view = new View
 		{
-			HorizontalAlign = Align.Start,
-			VerticalAlign = Align.Start
+			HorizontalOptions = LayoutOptions.Start,
+			VerticalOptions = LayoutOptions.Start
 		};
 
 		view.WidthRequest = 120;
 		view.HeightRequest = 80;
 
-		view.HorizontalAlign = Align.Stretch;
-		view.VerticalAlign = Align.Stretch;
+		view.HorizontalOptions = LayoutOptions.Fill;
+		view.VerticalOptions = LayoutOptions.Fill;
 
 		Assert.Equal(120, view.WidthRequest);
 		Assert.Equal(80, view.HeightRequest);
-		Assert.Equal(Align.Stretch, view.HorizontalAlign);
-		Assert.Equal(Align.Stretch, view.VerticalAlign);
+		Assert.Equal(LayoutOptions.Fill, view.HorizontalOptions);
+		Assert.Equal(LayoutOptions.Fill, view.VerticalOptions);
 	}
 }
