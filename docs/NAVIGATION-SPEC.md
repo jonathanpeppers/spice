@@ -1,155 +1,139 @@
 # Navigation in Spice 🌶
 
-A simple, succinct, cross-platform navigation API for Spice applications.
+Three new views and two methods on `Application`. That's it.
 
 ## Overview
 
-Spice navigation provides three cross-platform page types:
-- **`NavigationPage`** - Hierarchical navigation with push/pop and a navigation bar
-- **`TabbedPage`** - Tab-based navigation between multiple top-level pages
-- **Modal presentation** - Temporary overlay screens via `PresentAsync()` / `DismissAsync()`
+| Type | What it does | iOS | Android |
+|------|-------------|-----|---------|
+| `NavigationView` | Push/pop stack with nav bar | `UINavigationController` | AndroidX Navigation |
+| `TabView` | Bottom tabs | `UITabBarController` | `BottomNavigationView` |
+| `Application.PresentAsync()` | Modal overlay | `PresentViewController()` | `DialogFragment` |
 
-## NavigationPage
+> These are **views**, not pages — they compose with existing Spice views like any other layout.
+> `Application.Main` swapping still works; these are additive.
 
-Manages a stack of pages with automatic back navigation and a navigation bar.
-
-### Basic Usage
+## NavigationView
 
 ```csharp
 public class App : Application
 {
     public App()
     {
-        Main = new NavigationPage(new HomePage());
+        Main = new NavigationView(new HomeView());
     }
 }
 
-public class HomePage : ContentView
+public class HomeView : StackLayout
 {
-    public HomePage()
+    public HomeView()
     {
         Title = "Home";
-        
-        Content = new StackLayout
+        Add(new Label { Text = "Welcome!" });
+        Add(new Button
         {
-            new Label { Text = "Welcome!" },
-            new Button
-            {
-                Text = "Go to Details",
-                Clicked = async _ => await Navigation.PushAsync(new DetailPage())
-            }
-        };
+            Text = "Details",
+            Clicked = _ => Navigation!.Push(new DetailView())
+        });
     }
 }
 
-public class DetailPage : ContentView
+public class DetailView : StackLayout
 {
-    public DetailPage()
+    public DetailView()
     {
         Title = "Details";
-        
-        Content = new StackLayout
-        {
-            new Label { Text = "Detail Page" },
-            new Button
-            {
-                Text = "Go Back",
-                Clicked = async _ => await Navigation.PopAsync()
-            }
-        };
+        Add(new Label { Text = "Detail content" });
     }
+    // Back button is automatic — no code needed
 }
 ```
 
-### API
-
-#### Properties
-- **`Title`** (string) - Page title shown in the navigation bar
-- **`Navigation`** (INavigation) - Access to navigation methods
-
-#### Methods
-- **`PushAsync(View page)`** - Navigate forward to a new page
-- **`PopAsync()`** - Navigate back to the previous page
-- **`PopToRootAsync()`** - Navigate back to the first page in the stack
-
-#### Platform Mapping
-- **iOS**: Uses `UINavigationController` with `UIViewController` per page
-- **Android**: Uses multiple Activities with Intent-based navigation, or Fragment-based navigation with AndroidX Navigation Component
-
-## TabbedPage
-
-Switches between multiple top-level pages via tabs.
-
-### Basic Usage
+### Proposed API
 
 ```csharp
-public class App : Application
+// Added to View base class
+public partial class View
 {
-    public App()
-    {
-        Main = new TabbedPage
-        {
-            Children =
-            {
-                new NavigationPage(new HomePage()) { Title = "Home", Icon = "home.png" },
-                new NavigationPage(new SearchPage()) { Title = "Search", Icon = "search.png" },
-                new NavigationPage(new ProfilePage()) { Title = "Profile", Icon = "profile.png" }
-            }
-        };
-    }
+    [ObservableProperty] string _title = "";
+    public NavigationView? Navigation { get; internal set; }
+}
+
+public partial class NavigationView : View
+{
+    public NavigationView(View root);
+    public void Push(View view);
+    public void Pop();
+    public void PopToRoot();
 }
 ```
 
-### API
+`Push`/`Pop` are synchronous — matches Spice's `Action<T>` callback pattern. The native platform handles animations.
 
-#### Properties
-- **`Children`** (ObservableCollection<View>) - Collection of tab pages
-- **`Title`** (string) - Tab label
-- **`Icon`** (string) - Tab icon (asset name)
+`Title` is added to `View` so any view can set a nav bar title. Ignored when not inside a `NavigationView`.
 
-#### Platform Mapping
-- **iOS**: Uses `UITabBarController` with tab bar at bottom
-- **Android**: Uses `BottomNavigationView` with Material Design styling
+`Navigation` is set on child views by `NavigationView` when they're pushed, similar to how layouts already manage their `Children`.
 
-### Combining Navigation and Tabs
-
-Typically, each tab contains a `NavigationPage` to enable hierarchical navigation within that tab:
+## TabView
 
 ```csharp
-Main = new TabbedPage
+Main = new TabView
 {
-    Children =
-    {
-        new NavigationPage(new HomePage()) { Title = "Home" },
-        new NavigationPage(new SearchPage()) { Title = "Search" }
-    }
+    new Tab("Home", "home.png", new HomeView()),
+    new Tab("Search", "search.png", new SearchView()),
+    new Tab("Profile", "profile.png", new ProfileView()),
 };
 ```
 
-## Modal Presentation
-
-Display temporary pages that overlay the current context.
-
-### Basic Usage
+Each tab can contain a `NavigationView` for independent push/pop stacks:
 
 ```csharp
-// Present a modal
-var modal = new LoginPage();
-await Navigation.PresentAsync(modal);
-
-// Dismiss the modal (from within the modal page)
-await Navigation.DismissAsync();
+Main = new TabView
+{
+    new Tab("Home", "home.png", new NavigationView(new HomeView())),
+    new Tab("Search", "search.png", new NavigationView(new SearchView())),
+};
 ```
 
-### API
+### Proposed API
 
-#### Methods
-- **`PresentAsync(View page)`** - Present a page modally
-- **`DismissAsync()`** - Dismiss the current modal page
+```csharp
+public partial class TabView : View
+{
+    public void Add(Tab tab);  // collection initializer support
+}
 
-#### Platform Mapping
-- **iOS**: Uses `PresentViewController()` with configurable presentation styles
-- **Android**: Uses dialog-themed Activity or DialogFragment
+public partial class Tab : View
+{
+    [ObservableProperty] string _icon = "";
+
+    public Tab(string title, string icon, View content);
+}
+```
+
+`Tab` reuses `View.Title` for the tab label and `View.Children` for its content.
+
+## Modal Presentation
+
+```csharp
+// Present
+await Application.Current.PresentAsync(new LoginView());
+
+// Dismiss (from inside the modal)
+await Application.Current.DismissAsync();
+```
+
+### Proposed API
+
+```csharp
+public partial class Application : View
+{
+    public Task PresentAsync(View view);
+    public Task DismissAsync();
+}
+```
+
+Modals are async because the caller often needs to know when presentation/dismissal completes (e.g., to read a result). `Push`/`Pop` don't need this — you fire and forget.
 
 ## Complete Example
 
@@ -158,221 +142,105 @@ public class App : Application
 {
     public App()
     {
-        Main = new TabbedPage
+        Main = new TabView
         {
-            Children =
-            {
-                new NavigationPage(new FeedPage()) { Title = "Feed", Icon = "feed.png" },
-                new NavigationPage(new SearchPage()) { Title = "Search", Icon = "search.png" },
-                new NavigationPage(new ProfilePage()) { Title = "Profile", Icon = "profile.png" }
-            }
+            new Tab("Feed", "feed.png", new NavigationView(new FeedView())),
+            new Tab("Profile", "profile.png", new ProfileView()),
         };
     }
 }
 
-public class FeedPage : ContentView
+public class FeedView : StackLayout
 {
-    public FeedPage()
+    public FeedView()
     {
         Title = "Feed";
-        
-        Content = new StackLayout
+        Add(new Button
         {
-            new Button
-            {
-                Text = "View Post",
-                Clicked = async _ => await Navigation.PushAsync(new PostDetailPage())
-            },
-            new Button
-            {
-                Text = "Create Post",
-                Clicked = async _ => await Navigation.PresentAsync(new CreatePostPage())
-            }
-        };
+            Text = "View Post",
+            Clicked = _ => Navigation!.Push(new PostView())
+        });
+        Add(new Button
+        {
+            Text = "New Post",
+            Clicked = async _ => await Application.Current.PresentAsync(new NewPostView())
+        });
     }
 }
 
-public class PostDetailPage : ContentView
+public class PostView : StackLayout
 {
-    public PostDetailPage()
+    public PostView()
     {
-        Title = "Post Details";
-        
-        Content = new StackLayout
+        Title = "Post";
+        Add(new Label { Text = "Post content..." });
+        Add(new Button
         {
-            new Label { Text = "Post content here..." },
-            new Button
-            {
-                Text = "View Comments",
-                Clicked = async _ => await Navigation.PushAsync(new CommentsPage())
-            }
-        };
+            Text = "Comments",
+            Clicked = _ => Navigation!.Push(new CommentsView())
+        });
     }
 }
 
-public class CreatePostPage : ContentView
+public class NewPostView : StackLayout
 {
-    public CreatePostPage()
+    public NewPostView()
     {
-        Title = "Create Post";
-        
-        Content = new StackLayout
+        Title = "New Post";
+        Add(new Entry { Placeholder = "What's on your mind?" });
+        Add(new Button
         {
-            new Entry { Placeholder = "What's on your mind?" },
-            new Button
-            {
-                Text = "Post",
-                Clicked = async _ =>
-                {
-                    // Save post logic
-                    await Navigation.DismissAsync();
-                }
-            },
-            new Button
-            {
-                Text = "Cancel",
-                Clicked = async _ => await Navigation.DismissAsync()
-            }
-        };
+            Text = "Post",
+            Clicked = async _ => await Application.Current.DismissAsync()
+        });
     }
 }
 ```
 
-## Design Principles
-
-### Simplicity
-Navigation is expressed with just three concepts:
-- Push/pop for hierarchical navigation
-- Tabs for top-level sections
-- Modal for temporary overlays
-
-### Cross-Platform
-All navigation APIs work identically on iOS and Android, mapping to native patterns:
-- iOS: UINavigationController, UITabBarController, modal presentation
-- Android: Activities/Fragments, BottomNavigationView, dialogs
-
-### Type-Safe
-Navigation uses strongly-typed View instances, not strings or routes. No reflection required.
-
-### Testable
-Navigation can be tested in vanilla `net10.0` unit tests without device dependencies.
-
-## Implementation Notes
-
-### Navigation Property
-
-The `Navigation` property is available on all `View` instances and provides access to the navigation stack:
+## Migration
 
 ```csharp
-public interface INavigation
-{
-    Task PushAsync(View page);
-    Task PopAsync();
-    Task PopToRootAsync();
-    Task PresentAsync(View page);
-    Task DismissAsync();
-}
+// Before — swap the whole view tree
+new Button { Clicked = _ => Main = new DetailView() }
+
+// After — push onto the stack, get a nav bar + back button for free
+new Button { Clicked = _ => Navigation!.Push(new DetailView()) }
 ```
 
-### Page Lifecycle
-
-Pages can implement lifecycle methods for navigation events:
-
-```csharp
-public class MyPage : ContentView
-{
-    protected override void OnAppearing()
-    {
-        // Called when page becomes visible
-    }
-    
-    protected override void OnDisappearing()
-    {
-        // Called when page is no longer visible
-    }
-}
-```
-
-### Platform-Specific Customization
-
-Access native navigation controllers when needed:
-
-```csharp
-#if IOS
-// Access UINavigationController
-var navController = Platform.Window?.RootViewController as UINavigationController;
-navController?.NavigationBar.PrefersLargeTitles = true;
-#elif ANDROID
-// Access Activity or BottomNavigationView
-var activity = Platform.Context as Activity;
-activity?.SetTitle("Custom Title");
-#endif
-```
-
-## Comparison with Native APIs
+## Platform Mapping
 
 ### iOS
 
-| Spice API | Native iOS API |
-|-----------|----------------|
-| `NavigationPage` | `UINavigationController` |
-| `PushAsync()` | `PushViewController()` |
-| `PopAsync()` | `PopViewController()` |
-| `TabbedPage` | `UITabBarController` |
-| `PresentAsync()` | `PresentViewController()` |
-| `DismissAsync()` | `DismissViewController()` |
+| Spice | iOS |
+|-------|-----|
+| `NavigationView` | `UINavigationController` |
+| `Push()` | `pushViewController(_:animated:)` |
+| `Pop()` | `popViewController(animated:)` |
+| `PopToRoot()` | `popToRootViewController(animated:)` |
+| `TabView` | `UITabBarController` |
+| `Tab` | `UITab` / tab bar item |
+| `PresentAsync()` | `present(_:animated:completion:)` |
+| `DismissAsync()` | `dismiss(animated:completion:)` |
 
 ### Android
 
-| Spice API | Native Android API |
-|-----------|-------------------|
-| `NavigationPage` | Activity stack or Navigation Component |
-| `PushAsync()` | `StartActivity()` or `navigate()` |
-| `PopAsync()` | `Finish()` or `navigateUp()` |
-| `TabbedPage` | `BottomNavigationView` |
-| `PresentAsync()` | Dialog-themed Activity or `DialogFragment` |
-| `DismissAsync()` | `Dismiss()` or `Finish()` |
+| Spice | Android |
+|-------|---------|
+| `NavigationView` | `NavController` + `NavHostFragment` |
+| `Push()` | `navigate()` |
+| `Pop()` | `navigateUp()` |
+| `PopToRoot()` | `popBackStack(startDest)` |
+| `TabView` | `BottomNavigationView` |
+| `Tab` | Menu item |
+| `PresentAsync()` | `DialogFragment.show()` |
+| `DismissAsync()` | `DialogFragment.dismiss()` |
 
-## Migration from Current Approach
+## Design Decisions
 
-Currently, Spice apps navigate by setting `Application.Main` to a different view:
+**Why "views" not "pages"?** Spice doesn't have pages. `NavigationView` and `TabView` are views — they inherit from `View`, use `[ObservableProperty]`, and compose like `StackLayout` or `Grid`.
 
-```csharp
-// Current approach
-new Button
-{
-    Text = "Go to Details",
-    Clicked = _ => Main = new DetailView()
-}
-```
+**Why sync Push/Pop but async modals?** Push/pop match Spice's `Action<T>` event pattern — no `async void` needed in `Clicked` handlers. Modals are async because callers often await the result.
 
-With navigation pages:
+**Why `Title` on View?** It's one `[ObservableProperty]` field. Ignored unless the view is inside a `NavigationView` or `Tab`. Simpler than a separate "page" abstraction.
 
-```csharp
-// New approach
-new Button
-{
-    Text = "Go to Details",
-    Clicked = async _ => await Navigation.PushAsync(new DetailView())
-}
-```
-
-The new approach provides:
-- Automatic back navigation
-- Navigation bar with title
-- Proper page lifecycle
-- Modal presentation support
-- Platform-native animations
-
-## Official Documentation
-
-### iOS
-- [UINavigationController](https://developer.apple.com/documentation/uikit/uinavigationcontroller) - Hierarchical navigation
-- [UITabBarController](https://developer.apple.com/documentation/uikit/uitabbarcontroller) - Tab-based navigation
-- [Modal Presentation](https://developer.apple.com/documentation/uikit/uiviewcontroller/present(_:animated:completion:)) - Presenting view controllers
-
-### Android
-- [Navigation Component](https://developer.android.com/guide/navigation/) - Modern Android navigation
-- [Bottom Navigation](https://m3.material.io/components/navigation-bar/overview) - Material Design tab bar
-- [Activities](https://developer.android.com/guide/components/activities/intro-activities) - Android screens
-- [Dialogs](https://developer.android.com/develop/ui/views/components/dialogs) - Modal dialogs
+**What about `Application.Main` swapping?** Still works. Use `NavigationView`/`TabView` when you want native navigation chrome (back button, nav bar, tab bar). Use `Main =` when you don't.
