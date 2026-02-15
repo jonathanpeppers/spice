@@ -19,7 +19,7 @@ class BorderScenario : StackLayout
 				Text = "Simple Border",
 				TextColor = Colors.White
 			},
-			HorizontalAlign = Align.Stretch
+			HorizontalOptions = LayoutOptions.Fill
 		};
 
 		// Example 2: Border with background color
@@ -35,7 +35,7 @@ class BorderScenario : StackLayout
 				Text = "Border with Background",
 				TextColor = Colors.DarkGreen
 			},
-			HorizontalAlign = Align.Stretch
+			HorizontalOptions = LayoutOptions.Fill
 		};
 
 		// Example 3: Rounded border (high corner radius)
@@ -50,7 +50,7 @@ class BorderScenario : StackLayout
 				Text = "Rounded Border",
 				TextColor = Colors.White
 			},
-			HorizontalAlign = Align.Stretch
+			HorizontalOptions = LayoutOptions.Fill
 		};
 
 		// Example 4: Border with button inside
@@ -65,7 +65,7 @@ class BorderScenario : StackLayout
 				Text = "Button in Border",
 				Clicked = _ => System.Diagnostics.Debug.WriteLine("Button clicked!")
 			},
-			HorizontalAlign = Align.Stretch
+			HorizontalOptions = LayoutOptions.Fill
 		};
 
 		// Example 5: Nested content with StackLayout
@@ -81,7 +81,7 @@ class BorderScenario : StackLayout
 				new Label { Text = "Nested Content", TextColor = Colors.White },
 				new Label { Text = "Multiple items inside", TextColor = Colors.White },
 			},
-			HorizontalAlign = Align.Stretch
+			HorizontalOptions = LayoutOptions.Fill
 		};
 
 		// Title

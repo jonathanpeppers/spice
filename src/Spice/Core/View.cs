@@ -26,16 +26,18 @@ public partial class View : ObservableObject, IEnumerable<View>
 	IEnumerator IEnumerable.GetEnumerator() => Children.GetEnumerator();
 
 	/// <summary>
-	/// The view's horizontal alignment. Defaults to center.
+	/// The view's horizontal layout options.
+	/// Platform implementations: UIKit.UIView.Frame / Android.Widget.RelativeLayout alignment rules
 	/// </summary>
 	[ObservableProperty]
-	Align _horizontalAlign;
+	LayoutOptions _horizontalOptions;
 
 	/// <summary>
-	/// The view's vertical alignment. Defaults to center.
+	/// The view's vertical layout options.
+	/// Platform implementations: UIKit.UIView.Frame / Android.Widget.RelativeLayout alignment rules
 	/// </summary>
 	[ObservableProperty]
-	Align _verticalAlign;
+	LayoutOptions _verticalOptions;
 
 	/// <summary>
 	/// Background color of the view
@@ -54,6 +56,31 @@ public partial class View : ObservableObject, IEnumerable<View>
 	/// </summary>
 	[ObservableProperty]
 	bool _isEnabled = true;
+
+	double _opacity = 1.0;
+
+	/// <summary>
+	/// Gets or sets the opacity of the view, ranging from 0.0 (fully transparent) to 1.0 (fully opaque). Defaults to 1.0.
+	/// Values outside this range will be clamped.
+	/// Platform implementations: UIKit.UIView.Alpha / Android.Views.View.Alpha
+	/// </summary>
+	public double Opacity
+	{
+		get => _opacity;
+		set
+		{
+			var clampedValue = Math.Clamp(value, 0.0, 1.0);
+			if (SetProperty(ref _opacity, clampedValue))
+			{
+				OnOpacityChanged(clampedValue);
+			}
+		}
+	}
+
+	/// <summary>
+	/// Called when the Opacity property changes
+	/// </summary>
+	partial void OnOpacityChanged(double value);
 
 	/// <summary>
 	/// Space around the view. Supports uniform (10), horizontal/vertical (10,20), or individual sides (10,20,30,40).

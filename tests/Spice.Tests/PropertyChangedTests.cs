@@ -11,9 +11,9 @@ public class PropertyChangedTests
 		string? property = null;
 		var view = new View();
 		view.PropertyChanged += (sender, e) => property = e.PropertyName;
-		view.VerticalAlign = Align.End;
+		view.VerticalOptions = LayoutOptions.End;
 
-		Assert.Equal(nameof(view.VerticalAlign), property);
+		Assert.Equal(nameof(view.VerticalOptions), property);
 	}
 
 	[Fact]
@@ -22,8 +22,8 @@ public class PropertyChangedTests
 		string? property = null;
 		var view = new View();
 		view.PropertyChanging += (sender, e) => property = e.PropertyName;
-		view.HorizontalAlign = Align.End;
+		view.HorizontalOptions = LayoutOptions.End;
 
-		Assert.Equal(nameof(view.HorizontalAlign), property);
+		Assert.Equal(nameof(view.HorizontalOptions), property);
 	}
 }

@@ -1,5 +1,9 @@
 namespace Spice.Tests;
 
+/// <summary>
+/// Contains unit tests verifying the behavior of the Button view.
+/// </summary>
+
 public class ButtonTests
 {
 	[Fact]

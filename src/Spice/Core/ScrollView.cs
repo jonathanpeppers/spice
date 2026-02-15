@@ -12,4 +12,11 @@ public partial class ScrollView : View
 	/// </summary>
 	[ObservableProperty]
 	Orientation _orientation;
+
+	/// <summary>
+	/// Gets or sets the padding inside the ScrollView in device-independent units (uniform padding on all sides).
+	/// Platform implementations: Android.Views.ViewGroup.SetPadding / UIKit.UIScrollView.ContentInset
+	/// </summary>
+	[ObservableProperty]
+	double _padding;
 }

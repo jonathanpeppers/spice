@@ -1,5 +1,9 @@
 namespace Spice.Tests;
 
+/// <summary>
+/// Tests for the cross-platform WebView view behavior and defaults.
+/// </summary>
+
 public class WebViewTests
 {
 	[Fact]

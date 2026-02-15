@@ -1,5 +1,9 @@
 namespace Spice.Tests;
 
+/// <summary>
+/// Tests for the default behavior and configuration of <see cref="SwipeItems"/>.
+/// </summary>
+
 public class SwipeItemsTests
 {
 	[Fact]

@@ -1,5 +1,9 @@
 namespace Spice.Tests;
 
+/// <summary>
+/// Unit tests for the cross-platform Image view behavior and properties.
+/// </summary>
+
 public class ImageTests
 {
 	[Fact]

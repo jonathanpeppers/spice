@@ -73,6 +73,12 @@ public partial class Grid
 		UpdateChildMargins();
 	}
 
+	partial void OnPaddingChanged(double value)
+	{
+		var paddingPx = value.ToPixels();
+		NativeView.SetPadding(paddingPx, paddingPx, paddingPx, paddingPx);
+	}
+
 	void OnDefinitionsChanged(object? sender, NotifyCollectionChangedEventArgs e)
 	{
 		NativeView.RowCount = Math.Max(1, RowDefinitions.Count);

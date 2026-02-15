@@ -1,5 +1,9 @@
 namespace Spice.Tests;
 
+/// <summary>
+/// Tests for the Entry view's default values, property setters, and change notifications.
+/// </summary>
+
 public class EntryTests
 {
 	[Fact]

@@ -18,4 +18,11 @@ public partial class StackLayout : View
 	/// </summary>
 	[ObservableProperty]
 	double _spacing = 0;
+
+	/// <summary>
+	/// Gets or sets the padding inside the StackLayout in device-independent units (uniform padding on all sides).
+	/// Platform implementations: Android.Views.ViewGroup.SetPadding / UIKit.UIStackView.LayoutMargins
+	/// </summary>
+	[ObservableProperty]
+	double _padding;
 }

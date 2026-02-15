@@ -112,6 +112,11 @@ public class App : Application
 				},
 				new Button
 				{
+					Text = "SearchBar",
+					Clicked = _ => Main = new SearchBarScenario(),
+        },
+				new Button
+				{
 					Text = "SwipeView",
 					Clicked = _ => Main = new SwipeViewScenario(),
 				},

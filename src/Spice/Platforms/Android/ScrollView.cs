@@ -62,4 +62,10 @@ public partial class ScrollView
 			"Changing ScrollView orientation is not supported on Android. " +
 			"Use the ScrollView(Orientation) constructor instead.");
 	}
+
+	partial void OnPaddingChanged(double value)
+	{
+		var paddingPx = value.ToPixels();
+		NativeView.SetPadding(paddingPx, paddingPx, paddingPx, paddingPx);
+	}
 }

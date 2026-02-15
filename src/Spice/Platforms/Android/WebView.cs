@@ -47,8 +47,8 @@ public partial class WebView
 	void Initialize()
 	{
 		// Most users would want this default instead of center
-		HorizontalAlign = Align.Stretch;
-		VerticalAlign = Align.Stretch;
+		HorizontalOptions = LayoutOptions.Fill;
+		VerticalOptions = LayoutOptions.Fill;
 
 		SetClients();
 	}

@@ -1,5 +1,9 @@
 namespace Spice.Tests;
 
+/// <summary>
+/// Tests for the cross-platform Label view, covering creation, inheritance, defaults, and property changes.
+/// </summary>
+
 public class LabelTests
 {
 	[Fact]
