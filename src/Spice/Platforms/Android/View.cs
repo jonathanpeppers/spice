@@ -174,6 +174,7 @@ public partial class View
 	partial void OnOpacityChanged(double value) => _nativeView.Value.Alpha = (float)value;
 
 	partial void OnAutomationIdChanged(string? value) => _nativeView.Value.ContentDescription = value;
+
 	partial void OnMarginChanged(Thickness value)
 	{
 		if (_layoutParameters.Value is RelativeLayout.LayoutParams layoutParams)
