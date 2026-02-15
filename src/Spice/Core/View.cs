@@ -55,6 +55,28 @@ public partial class View : ObservableObject, IEnumerable<View>
 	[ObservableProperty]
 	bool _isEnabled = true;
 
+	double _opacity = 1.0;
+
+	/// <summary>
+	/// Gets or sets the opacity of the view, ranging from 0.0 (fully transparent) to 1.0 (fully opaque).
+	/// Values outside this range will be clamped. Defaults to 1.0 (fully opaque).
+	/// Platform implementations: UIKit.UIView.Alpha / Android.Views.View.Alpha
+	/// </summary>
+	public double Opacity
+	{
+		get => _opacity;
+		set
+		{
+			var clampedValue = Math.Clamp(value, 0.0, 1.0);
+			if (SetProperty(ref _opacity, clampedValue))
+			{
+#if !VANILLA
+				OnOpacityChanged(clampedValue);
+#endif
+			}
+		}
+	}
+
 	/// <summary>
 	/// Gets or sets the automation identifier for UI testing.
 	/// Platform implementations: UIKit.UIView.AccessibilityIdentifier / Android.Views.View.ContentDescription
@@ -113,5 +135,10 @@ public partial class View : ObservableObject, IEnumerable<View>
 	/// Platform-specific implementation to get actual height
 	/// </summary>
 	private partial double GetHeight();
+
+	/// <summary>
+	/// Called when the Opacity property changes
+	/// </summary>
+	partial void OnOpacityChanged(double value);
 #endif
 }

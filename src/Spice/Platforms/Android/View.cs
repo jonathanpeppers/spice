@@ -171,6 +171,8 @@ public partial class View
 
 	partial void OnIsEnabledChanged(bool value) => _nativeView.Value.Enabled = value;
 
+	partial void OnOpacityChanged(double value) => _nativeView.Value.Alpha = (float)value;
+
 	partial void OnAutomationIdChanged(string? value) => _nativeView.Value.ContentDescription = value;
 	partial void OnMarginChanged(Thickness value)
 	{

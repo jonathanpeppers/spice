@@ -81,6 +81,8 @@ public partial class View
 
 	partial void OnIsEnabledChanged(bool value) => NativeView.UserInteractionEnabled = value;
 
+	partial void OnOpacityChanged(double value) => NativeView.Alpha = (nfloat)value;
+
 	partial void OnAutomationIdChanged(string? value) => NativeView.AccessibilityIdentifier = value;
 
 	partial void OnMarginChanged(Thickness value) => UpdateAlign();
