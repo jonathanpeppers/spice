@@ -170,4 +170,17 @@ public partial class View
 	partial void OnIsVisibleChanged(bool value) => _nativeView.Value.Visibility = value ? Android.Views.ViewStates.Visible : Android.Views.ViewStates.Gone;
 
 	partial void OnIsEnabledChanged(bool value) => _nativeView.Value.Enabled = value;
+
+	partial void OnMarginChanged(Thickness value)
+	{
+		if (_layoutParameters.Value is RelativeLayout.LayoutParams layoutParams)
+		{
+			layoutParams.SetMargins(
+				(int)value.Left.ToPixels(),
+				(int)value.Top.ToPixels(),
+				(int)value.Right.ToPixels(),
+				(int)value.Bottom.ToPixels()
+			);
+		}
+	}
 }

@@ -54,4 +54,11 @@ public partial class View : ObservableObject, IEnumerable<View>
 	/// </summary>
 	[ObservableProperty]
 	bool _isEnabled = true;
+
+	/// <summary>
+	/// Space around the view. Supports uniform (10), horizontal/vertical (10,20), or individual sides (10,20,30,40).
+	/// Aligns with Microsoft.Maui Margin property.
+	/// </summary>
+	[ObservableProperty]
+	Thickness _margin;
 }
