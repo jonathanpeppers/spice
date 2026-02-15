@@ -115,10 +115,10 @@ jobs:
         dotnet restore samples/samples.slnx
 
     - name: build Spice.Scenarios
-      run: dotnet build samples/Spice.Scenarios/Spice.Scenarios.csproj -f net10.0-android -c Debug -r android-arm64
+      run: dotnet build samples/Spice.Scenarios/Spice.Scenarios.csproj -f net10.0-android -c Debug -r android-x86_64
 
-    - name: restore Tools
-      run: dotnet tool restore || echo "No tools to restore"
+    - name: install AndroidSdk.Tool
+      run: dotnet tool install -g AndroidSdk.Tool
 
     - name: Enable KVM
       run: |
