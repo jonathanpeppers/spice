@@ -56,7 +56,7 @@ public partial class SwipeView
 
 		NativeView.Touch += (sender, e) =>
 		{
-			_gestureDetector?.OnTouchEvent(e.Event);
+			if (e.Event != null) _gestureDetector?.OnTouchEvent(e.Event);
 
 			if (e.Event?.Action == MotionEventActions.Up || e.Event?.Action == MotionEventActions.Cancel)
 			{
@@ -154,12 +154,13 @@ public partial class SwipeView
 			return;
 
 		// Clean up existing swipe items layout
-		_swipeItemsLayout?.RemoveFromParent();
+		if (_swipeItemsLayout != null)
+			NativeView.RemoveView(_swipeItemsLayout);
 
 		// Create swipe items container
 		_swipeItemsLayout = new LinearLayout(Platform.Context)
 		{
-			Orientation = Orientation.Horizontal,
+			Orientation = Android.Widget.Orientation.Horizontal,
 			LayoutParameters = new FrameLayout.LayoutParams(
 				Android.Views.ViewGroup.LayoutParams.WrapContent,
 				Android.Views.ViewGroup.LayoutParams.MatchParent)
@@ -179,7 +180,7 @@ public partial class SwipeView
 
 			if (item.BackgroundColor != null)
 			{
-				button.SetBackgroundColor(item.BackgroundColor.Value.ToAndroidColor());
+				button.SetBackgroundColor(item.BackgroundColor.ToAndroidColor());
 			}
 
 			// Capture item reference for the closure
@@ -199,14 +200,10 @@ public partial class SwipeView
 		}
 
 		// Position swipe items layout
-		var layoutParams = (FrameLayout.LayoutParams)_swipeItemsLayout.LayoutParameters;
-		if (direction == SwipeDirection.Left)
+		var layoutParams = (FrameLayout.LayoutParams?)_swipeItemsLayout.LayoutParameters;
+		if (layoutParams != null)
 		{
-			layoutParams!.Gravity = GravityFlags.End;
-		}
-		else
-		{
-			layoutParams!.Gravity = GravityFlags.Start;
+			layoutParams.Gravity = direction == SwipeDirection.Left ? GravityFlags.End : GravityFlags.Start;
 		}
 
 		NativeView.AddView(_swipeItemsLayout, 0);
@@ -217,10 +214,10 @@ public partial class SwipeView
 			Android.Views.View.MeasureSpec.MakeMeasureSpec(0, MeasureSpecMode.Unspecified));
 		var itemsWidth = _swipeItemsLayout.MeasuredWidth;
 
-		_contentView.Animate()
-			.TranslationX(direction == SwipeDirection.Left ? -itemsWidth : itemsWidth)
-			.SetDuration(300)
-			.Start();
+		_contentView?.Animate()
+			?.TranslationX(direction == SwipeDirection.Left ? -itemsWidth : itemsWidth)
+			?.SetDuration(300)
+			?.Start();
 	}
 
 	void ResetPosition()
@@ -229,14 +226,15 @@ public partial class SwipeView
 			return;
 
 		_contentView.Animate()
-			.TranslationX(0)
-			.SetDuration(300)
-			.WithEndAction(new Java.Lang.Runnable(() =>
+			?.TranslationX(0)
+			?.SetDuration(300)
+			?.WithEndAction(new Java.Lang.Runnable(() =>
 			{
-				_swipeItemsLayout?.RemoveFromParent();
+				if (_swipeItemsLayout != null)
+					NativeView.RemoveView(_swipeItemsLayout);
 				_swipeItemsLayout = null;
 			}))
-			.Start();
+			?.Start();
 	}
 
 	partial void OnContentChanged(View? oldContent, View? newContent)
@@ -247,7 +245,8 @@ public partial class SwipeView
 			NativeView.RemoveView((Android.Views.View)oldContent);
 		}
 
-		_contentView?.RemoveFromParent();
+		if (_contentView != null)
+			NativeView.RemoveView(_contentView);
 
 		// Add new content
 		if (newContent != null)
@@ -258,7 +257,7 @@ public partial class SwipeView
 					Android.Views.ViewGroup.LayoutParams.MatchParent,
 					Android.Views.ViewGroup.LayoutParams.MatchParent)
 			};
-			_contentView.AddView(newContent);
+			((Android.Views.ViewGroup)_contentView).AddView(newContent);
 			NativeView.AddView(_contentView);
 		}
 	}
