@@ -4,15 +4,13 @@ using AndroidRadioButton = Android.Widget.RadioButton;
 
 namespace Spice;
 
-public partial class RadioButton
+public partial class RadioButton : IDisposable
 {
 	/// <summary>
 	/// Returns radioButton.NativeView
 	/// </summary>
 	/// <param name="radioButton">The Spice.RadioButton</param>
 	public static implicit operator AndroidRadioButton(RadioButton radioButton) => radioButton.NativeView;
-
-	static Dictionary<string, List<WeakReference<RadioButton>>> _groups = new();
 
 	static AndroidRadioButton Create(Context context) => new(context);
 
@@ -47,7 +45,7 @@ public partial class RadioButton
 
 	bool _updatingChecked;
 
-	partial void OnIsCheckedChanged(bool value)
+	partial void OnIsCheckedChangedPartial(bool value)
 	{
 		if (_updatingChecked)
 			return;
@@ -55,17 +53,6 @@ public partial class RadioButton
 		_updatingChecked = true;
 		NativeView.Checked = value;
 		_updatingChecked = false;
-
-		// Handle group exclusivity
-		if (value && !string.IsNullOrEmpty(GroupName))
-		{
-			UncheckOthersInGroup();
-		}
-	}
-
-	partial void OnGroupNameChanged(string? value)
-	{
-		// Group management happens when IsChecked changes
 	}
 
 	partial void OnContentChanged(string? value)
@@ -78,15 +65,18 @@ public partial class RadioButton
 		if (_updatingChecked)
 			return;
 
+		// Prevent unchecking via user tap - radio buttons can only be unchecked by another button in the group
+		if (!e.IsChecked && IsChecked)
+		{
+			_updatingChecked = true;
+			NativeView.Checked = true;
+			_updatingChecked = false;
+			return;
+		}
+
 		_updatingChecked = true;
 		IsChecked = e.IsChecked;
 		_updatingChecked = false;
-
-		// Handle group exclusivity for user interaction
-		if (e.IsChecked && !string.IsNullOrEmpty(GroupName))
-		{
-			UncheckOthersInGroup();
-		}
 
 		// Fire CheckedChanged for user interaction
 		CheckedChanged?.Invoke(this);
@@ -97,49 +87,14 @@ public partial class RadioButton
 		// Event subscription is handled in constructor
 	}
 
-	void UncheckOthersInGroup()
+	bool _disposed;
+
+	public void Dispose()
 	{
-		if (string.IsNullOrEmpty(GroupName))
+		if (_disposed)
 			return;
 
-		lock (_groups)
-		{
-			if (_groups.TryGetValue(GroupName, out var groupList))
-			{
-				// Clean up dead references and uncheck others
-				groupList.RemoveAll(wr => !wr.TryGetTarget(out _));
-				
-				foreach (var weakRef in groupList)
-				{
-					if (weakRef.TryGetTarget(out var radioButton) && radioButton != this && radioButton.IsChecked)
-					{
-						radioButton.IsChecked = false;
-						radioButton.CheckedChanged?.Invoke(radioButton);
-					}
-				}
-			}
-			else
-			{
-				// Create the group list
-				groupList = new List<WeakReference<RadioButton>>();
-				_groups[GroupName] = groupList;
-			}
-
-			// Add this radio button to the group if not already present
-			bool found = false;
-			foreach (var weakRef in groupList)
-			{
-				if (weakRef.TryGetTarget(out var rb) && rb == this)
-				{
-					found = true;
-					break;
-				}
-			}
-			
-			if (!found)
-			{
-				groupList.Add(new WeakReference<RadioButton>(this));
-			}
-		}
+		_disposed = true;
+		NativeView.CheckedChange -= OnCheckedChange;
 	}
 }

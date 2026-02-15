@@ -149,4 +149,66 @@ public class RadioButtonTests
 		Assert.True(radioButton1.IsChecked);
 		Assert.True(radioButton2.IsChecked);
 	}
+
+	[Fact]
+	public void ObjectInitializerWithIsCheckedBeforeGroupName()
+	{
+		// Bug fix: IsChecked set before GroupName should still enforce group exclusivity
+		var radioButton1 = new RadioButton { IsChecked = true, GroupName = "Options" };
+		var radioButton2 = new RadioButton { GroupName = "Options" };
+
+		Assert.True(radioButton1.IsChecked);
+		Assert.False(radioButton2.IsChecked);
+
+		radioButton2.IsChecked = true;
+		Assert.False(radioButton1.IsChecked);
+		Assert.True(radioButton2.IsChecked);
+	}
+
+	[Fact]
+	public void ChangingGroupNameRemovesFromOldGroup()
+	{
+		var radioButton1 = new RadioButton { GroupName = "GroupA", IsChecked = true };
+		var radioButton2 = new RadioButton { GroupName = "GroupA" };
+
+		Assert.True(radioButton1.IsChecked);
+		Assert.False(radioButton2.IsChecked);
+
+		// Change radioButton1 to GroupB
+		radioButton1.GroupName = "GroupB";
+
+		// Checking radioButton2 in GroupA should not affect radioButton1 anymore
+		radioButton2.IsChecked = true;
+		Assert.True(radioButton1.IsChecked); // Still checked, now in different group
+		Assert.True(radioButton2.IsChecked);
+	}
+
+	[Fact]
+	public void ChangingGroupNameToSameGroupEnforcesExclusivity()
+	{
+		var radioButton1 = new RadioButton { GroupName = "GroupA", IsChecked = true };
+		var radioButton2 = new RadioButton { GroupName = "GroupB", IsChecked = true };
+
+		Assert.True(radioButton1.IsChecked);
+		Assert.True(radioButton2.IsChecked);
+
+		// Move radioButton2 to GroupA - should uncheck radioButton1
+		radioButton2.GroupName = "GroupA";
+
+		Assert.False(radioButton1.IsChecked);
+		Assert.True(radioButton2.IsChecked);
+	}
+
+	[Fact]
+	public void DisposeUnsubscribesEvents()
+	{
+		var radioButton = new RadioButton();
+		
+		// Should not throw when disposed
+		radioButton.Dispose();
+		
+		// Setting IsChecked after dispose should still work (but event handlers are unsubscribed)
+		radioButton.IsChecked = true;
+		Assert.True(radioButton.IsChecked);
+	}
 }
