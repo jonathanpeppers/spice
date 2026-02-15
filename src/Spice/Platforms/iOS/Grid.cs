@@ -130,7 +130,11 @@ public partial class Grid
 				{
 					totalStarRowWeight += (nfloat)rowDef.Height.Value;
 				}
-				// Auto sizing would require measuring children - simplified for now
+				else if (rowDef.Height.IsAuto)
+				{
+					// Auto behaves as Star with weight 1
+					totalStarRowWeight += 1;
+				}
 			}
 
 			for (int i = 0; i < colCount; i++)
@@ -145,6 +149,11 @@ public partial class Grid
 				{
 					totalStarColWeight += (nfloat)colDef.Width.Value;
 				}
+				else if (colDef.Width.IsAuto)
+				{
+					// Auto behaves as Star with weight 1
+					totalStarColWeight += 1;
+				}
 			}
 
 			// Add spacing to used dimensions
@@ -158,18 +167,20 @@ public partial class Grid
 			for (int i = 0; i < rowCount; i++)
 			{
 				var rowDef = i < _parent.RowDefinitions.Count ? _parent.RowDefinitions[i] : new RowDefinition();
-				if (rowDef.Height.IsStar && totalStarRowWeight > 0)
+				if ((rowDef.Height.IsStar || rowDef.Height.IsAuto) && totalStarRowWeight > 0)
 				{
-					rowHeights[i] = remainingHeight * ((nfloat)rowDef.Height.Value / totalStarRowWeight);
+					var weight = rowDef.Height.IsAuto ? 1 : (nfloat)rowDef.Height.Value;
+					rowHeights[i] = remainingHeight * (weight / totalStarRowWeight);
 				}
 			}
 
 			for (int i = 0; i < colCount; i++)
 			{
 				var colDef = i < _parent.ColumnDefinitions.Count ? _parent.ColumnDefinitions[i] : new ColumnDefinition();
-				if (colDef.Width.IsStar && totalStarColWeight > 0)
+				if ((colDef.Width.IsStar || colDef.Width.IsAuto) && totalStarColWeight > 0)
 				{
-					colWidths[i] = remainingWidth * ((nfloat)colDef.Width.Value / totalStarColWeight);
+					var weight = colDef.Width.IsAuto ? 1 : (nfloat)colDef.Width.Value;
+					colWidths[i] = remainingWidth * (weight / totalStarColWeight);
 				}
 			}
 
