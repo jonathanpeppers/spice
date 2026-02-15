@@ -221,7 +221,8 @@ public partial class CollectionView
 			if (!_parentRef.TryGetTarget(out var parent))
 				return new CGSize(100, 44);
 
-			var flowLayout = (UICollectionViewFlowLayout)layout;
+			if (layout is not UICollectionViewFlowLayout)
+				return new CGSize(100, 44);
 			
 			if (parent.Orientation == Orientation.Horizontal)
 			{
