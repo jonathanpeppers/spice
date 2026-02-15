@@ -49,17 +49,17 @@ class RefreshViewScenario : StackLayout
 			RefreshColor = Colors.Blue,
 			Command = () =>
 			{
-				// Simulate a refresh operation
+				// Increment refresh counter
 				_refreshCount++;
 				countLabel.Text = $"Refresh count: {_refreshCount}";
 
-				// In a real app, you would fetch new data here
-				// For demo purposes, we just stop refreshing after a short delay
-				Task.Run(async () =>
-				{
-					await Task.Delay(1500);
-					refreshView.IsRefreshing = false;
-				});
+				// In a real app, you would:
+				// 1. Fetch new data from a server
+				// 2. Update your view models/data
+				// 3. Set IsRefreshing = false when done
+				// 
+				// For this demo, the "Trigger Refresh Manually" button below
+				// shows how to manually control the refresh state
 			}
 		};
 

@@ -176,6 +176,7 @@ public class RefreshViewTests
 		var refreshView = new RefreshView();
 		refreshView.PropertyChanged += (sender, e) => property = e.PropertyName;
 		
+		// Set command to test property change notification
 		refreshView.Command = () => { };
 
 		Assert.Equal(nameof(refreshView.Command), property);

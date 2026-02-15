@@ -138,7 +138,10 @@ public partial class RefreshView
 	{
 		if (_refreshControl != null && _refreshControl.TryGetTarget(out var refreshControl))
 		{
-			refreshControl.TintColor = value.ToUIColor();
+			if (value != null)
+			{
+				refreshControl.TintColor = value.ToUIColor();
+			}
 		}
 	}
 
