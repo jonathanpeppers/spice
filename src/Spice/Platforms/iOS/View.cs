@@ -81,44 +81,21 @@ public partial class View
 
 	partial void OnIsEnabledChanged(bool value) => NativeView.UserInteractionEnabled = value;
 
-	NSLayoutConstraint? _widthConstraint;
-	NSLayoutConstraint? _heightConstraint;
-
 	partial void OnWidthRequestChanged(double value)
 	{
-		var view = NativeView;
-		
-		// Remove existing width constraint if it exists
-		if (_widthConstraint != null)
+		// Trigger layout update if the view is already in the view hierarchy
+		if (NativeView.Superview != null)
 		{
-			_widthConstraint.Active = false;
-			_widthConstraint = null;
-		}
-
-		// If value is valid (>= 0), create a new constraint
-		if (value >= 0)
-		{
-			_widthConstraint = view.WidthAnchor.ConstraintEqualTo((nfloat)value);
-			_widthConstraint.Active = true;
+			UpdateAlign();
 		}
 	}
 
 	partial void OnHeightRequestChanged(double value)
 	{
-		var view = NativeView;
-		
-		// Remove existing height constraint if it exists
-		if (_heightConstraint != null)
+		// Trigger layout update if the view is already in the view hierarchy
+		if (NativeView.Superview != null)
 		{
-			_heightConstraint.Active = false;
-			_heightConstraint = null;
-		}
-
-		// If value is valid (>= 0), create a new constraint
-		if (value >= 0)
-		{
-			_heightConstraint = view.HeightAnchor.ConstraintEqualTo((nfloat)value);
-			_heightConstraint.Active = true;
+			UpdateAlign();
 		}
 	}
 
@@ -190,7 +167,15 @@ public partial class View
 				return size.Value;
 
 			view!.SizeToFit();
-			return (size = view.Frame.Size).Value;
+			var result = view.Frame.Size;
+			
+			// If WidthRequest or HeightRequest are set, use them instead
+			if (_widthRequest >= 0)
+				result.Width = (nfloat)_widthRequest;
+			if (_heightRequest >= 0)
+				result.Height = (nfloat)_heightRequest;
+			
+			return (size = result).Value;
 		}
 	}
 }
