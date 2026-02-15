@@ -68,13 +68,10 @@ public partial class RadioButton : IDisposable
 		if (!IsChecked)
 		{
 			IsChecked = true;
-		}
-		// Fire CheckedChanged for user interaction only if button is checked
-		// (tapping an already-checked radio button should do nothing)
-		if (IsChecked)
-		{
+			// Fire CheckedChanged only when state actually changes
 			CheckedChanged?.Invoke(this);
 		}
+		// Tapping an already-checked radio button does nothing
 	}
 
 	partial void OnCheckedChangedChanged(Action<RadioButton>? value)
