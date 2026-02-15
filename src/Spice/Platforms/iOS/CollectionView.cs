@@ -85,7 +85,7 @@ public partial class CollectionView
 		// When SelectedItem is set to null, clear native selection
 		if (value == null)
 		{
-			var selectedIndexPaths = NativeView.IndexPathsForSelectedItems;
+			var selectedIndexPaths = NativeView.GetIndexPathsForSelectedItems();
 			if (selectedIndexPaths != null)
 			{
 				foreach (var indexPath in selectedIndexPaths)
