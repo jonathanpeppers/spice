@@ -23,9 +23,9 @@ public partial class NavigationView
 			{
 				controller = new UINavigationController();
 				_navigationController = new WeakReference<UINavigationController>(controller);
-				NativeView.AddSubview(controller.View);
-				controller.View.Frame = NativeView.Bounds;
-				controller.View.AutoresizingMask = UIViewAutoresizing.All;
+				NativeView.AddSubview(controller.View!);
+				controller.View!.Frame = NativeView.Bounds;
+				controller.View!.AutoresizingMask = UIViewAutoresizing.All;
 			}
 			return controller;
 		}

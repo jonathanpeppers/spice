@@ -41,7 +41,7 @@ public partial class Application
 
 	AndroidX.AppCompat.App.AlertDialog? _presentedDialog;
 
-	partial Task PresentAsyncCore(View view)
+	private partial Task PresentAsyncCore(View view)
 	{
 		var activity = Platform.Context as AndroidX.AppCompat.App.AppCompatActivity;
 		if (activity == null)
@@ -73,7 +73,7 @@ public partial class Application
 		return Task.CompletedTask;
 	}
 
-	partial Task DismissAsyncCore()
+	private partial Task DismissAsyncCore()
 	{
 		if (_presentedDialog != null)
 		{

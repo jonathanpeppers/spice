@@ -18,7 +18,7 @@ public partial class TabView
 	/// <param name="context">The Android context</param>
 	public TabView(Context context) : base(context, ctx => new AndroidX.AppCompat.Widget.LinearLayoutCompat(ctx)
 	{
-		Orientation = Android.Widget.Orientation.Vertical
+		Orientation = (int)Android.Widget.Orientation.Vertical
 	})
 	{
 		Children.CollectionChanged += OnTabsChanged;
@@ -44,7 +44,7 @@ public partial class TabView
 						ViewGroup.LayoutParams.WrapContent)
 				};
 				
-				_bottomNavigationView.NavigationItemSelected += OnNavigationItemSelected;
+				_bottomNavigationView.ItemSelected += OnNavigationItemSelected;
 				
 				((AndroidX.AppCompat.Widget.LinearLayoutCompat)NativeView).AddView(_bottomNavigationView);
 			}
@@ -102,7 +102,7 @@ public partial class TabView
 						var resourceId = context.Resources?.GetIdentifier(tab.Icon, "drawable", context.PackageName);
 						if (resourceId.HasValue && resourceId.Value != 0)
 						{
-							menuItem.SetIcon(resourceId.Value);
+							menuItem?.SetIcon(resourceId.Value);
 						}
 					}
 				}
@@ -118,7 +118,7 @@ public partial class TabView
 		}
 	}
 
-	void OnNavigationItemSelected(object? sender, NavigationBarView.NavigationItemSelectedEventArgs e)
+	void OnNavigationItemSelected(object? sender, Google.Android.Material.Navigation.NavigationBarView.ItemSelectedEventArgs e)
 	{
 		var index = e.Item.ItemId;
 		ShowTab(index);

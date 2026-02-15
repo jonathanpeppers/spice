@@ -68,17 +68,17 @@ public class ModalPresentationTests
 	}
 
 	[Fact]
-	public void PresentAsyncWithNullViewThrows()
+	public async Task PresentAsyncWithNullViewThrows()
 	{
 		var app = new Application();
-		Assert.Throws<ArgumentNullException>(() => app.PresentAsync((View)null!));
+		await Assert.ThrowsAsync<ArgumentNullException>(() => app.PresentAsync((View)null!));
 	}
 
 	[Fact]
-	public void PresentAsyncWithNullFactoryThrows()
+	public async Task PresentAsyncWithNullFactoryThrows()
 	{
 		var app = new Application();
-		Assert.Throws<ArgumentNullException>(() => app.PresentAsync((Func<View>)null!));
+		await Assert.ThrowsAsync<ArgumentNullException>(() => app.PresentAsync((Func<View>)null!));
 	}
 
 	[Fact]

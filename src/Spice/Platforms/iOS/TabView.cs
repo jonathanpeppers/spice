@@ -26,9 +26,9 @@ public partial class TabView
 			{
 				controller = new UITabBarController();
 				_tabBarController = new WeakReference<UITabBarController>(controller);
-				NativeView.AddSubview(controller.View);
-				controller.View.Frame = NativeView.Bounds;
-				controller.View.AutoresizingMask = UIViewAutoresizing.All;
+				NativeView.AddSubview(controller.View!);
+				controller.View!.Frame = NativeView.Bounds;
+				controller.View!.AutoresizingMask = UIViewAutoresizing.All;
 			}
 			return controller;
 		}

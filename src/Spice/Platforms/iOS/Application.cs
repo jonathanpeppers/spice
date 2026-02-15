@@ -35,7 +35,7 @@ public partial class Application
 
 	WeakReference<UIViewController>? _presentedViewController;
 
-	async partial Task PresentAsyncCore(View view)
+	private async partial Task PresentAsyncCore(View view)
 	{
 		var viewController = new UIViewController();
 		var nativeView = (UIView)view;
@@ -59,7 +59,7 @@ public partial class Application
 		}
 	}
 
-	async partial Task DismissAsyncCore()
+	private async partial Task DismissAsyncCore()
 	{
 		if (_presentedViewController != null && _presentedViewController.TryGetTarget(out var viewController))
 		{

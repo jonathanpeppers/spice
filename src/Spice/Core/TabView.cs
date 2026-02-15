@@ -10,7 +10,7 @@ public partial class TabView : View
 	/// Adds a tab to the TabView. Supports collection initializer syntax.
 	/// </summary>
 	/// <param name="tab">The tab to add.</param>
-	public new void Add(Tab tab)
+	public void Add(Tab tab)
 	{
 		ArgumentNullException.ThrowIfNull(tab);
 		Children.Add(tab);
@@ -90,7 +90,7 @@ public partial class Tab : View
 	/// Ensures content is created if it hasn't been already.
 	/// Called by platform implementations when tab is first selected.
 	/// </summary>
-	internal void EnsureContent()
+	public void EnsureContent()
 	{
 		if (Content == null && _contentFactory != null)
 		{

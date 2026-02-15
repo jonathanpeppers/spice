@@ -17,25 +17,25 @@ public partial class NavigationView
 	/// <param name="context">The Android context</param>
 	public NavigationView(Context context) : base(context, ctx => new AndroidX.AppCompat.Widget.LinearLayoutCompat(ctx)
 	{
-		Orientation = Android.Widget.Orientation.Vertical
+		Orientation = (int)Android.Widget.Orientation.Vertical
 	})
 	{
 	}
 
-	Toolbar? _toolbar;
+	AndroidX.AppCompat.Widget.Toolbar? _toolbar;
 	Android.Widget.FrameLayout? _contentFrame;
 	readonly Stack<View> _backStack = new();
 
 	/// <summary>
 	/// Gets or creates the toolbar for navigation
 	/// </summary>
-	Toolbar Toolbar
+	AndroidX.AppCompat.Widget.Toolbar Toolbar
 	{
 		get
 		{
 			if (_toolbar == null)
 			{
-				_toolbar = new Toolbar(Platform.Context)
+				_toolbar = new AndroidX.AppCompat.Widget.Toolbar(Platform.Context)
 				{
 					LayoutParameters = new Android.Widget.LinearLayout.LayoutParams(
 						ViewGroup.LayoutParams.MatchParent,

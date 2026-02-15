@@ -10,6 +10,16 @@ public partial class Application : View
 	/// </summary>
 	public static Application? Current { get; internal set; }
 
+#if VANILLA
+	/// <summary>
+	/// Creates a new Application instance.
+	/// </summary>
+	public Application()
+	{
+		Current = this;
+	}
+#endif
+
 	/// <summary>
 	/// The single, main "view" of this application
 	/// </summary>
@@ -62,10 +72,18 @@ public partial class Application : View
 	/// <summary>
 	/// Platform-specific implementation of PresentAsync.
 	/// </summary>
-	partial Task PresentAsyncCore(View view);
+#if VANILLA
+	private Task PresentAsyncCore(View view) => Task.CompletedTask;
+#else
+	private partial Task PresentAsyncCore(View view);
+#endif
 
 	/// <summary>
 	/// Platform-specific implementation of DismissAsync.
 	/// </summary>
-	partial Task DismissAsyncCore();
+#if VANILLA
+	private Task DismissAsyncCore() => Task.CompletedTask;
+#else
+	private partial Task DismissAsyncCore();
+#endif
 }
