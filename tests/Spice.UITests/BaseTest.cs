@@ -12,35 +12,29 @@ public abstract class BaseTest : IDisposable
     protected AndroidDriver Driver { get; private set; } = null!;
 
     public string PackageName { get; } = "com.companyname.spice.scenarios";
+    // Generated CRC hash of the main activity class; may change if namespace/assembly is renamed
     public string ActivityName { get; } = "crc64d20bbc59baadfee5.MainActivity";
 
     private static readonly string ArtifactsPath = GetArtifactsPath();
 
     private static string GetArtifactsPath()
     {
+        // Use ARTIFACTS_DIR env var if set (CI), otherwise fall back to repo-root test-artifacts/
+        var envPath = Environment.GetEnvironmentVariable("ARTIFACTS_DIR");
+        if (!string.IsNullOrEmpty(envPath))
+            return envPath;
+
         string? assemblyLocation = Assembly.GetExecutingAssembly().Location;
         if (string.IsNullOrEmpty(assemblyLocation))
-        {
-            Console.WriteLine("Warning: Assembly location is null or empty, falling back to current directory");
             return Path.Combine(Environment.CurrentDirectory, "test-artifacts");
-        }
 
         string? assemblyDirectory = Path.GetDirectoryName(assemblyLocation);
         if (string.IsNullOrEmpty(assemblyDirectory))
-        {
-            Console.WriteLine("Warning: Assembly directory is null or empty, falling back to current directory");
             return Path.Combine(Environment.CurrentDirectory, "test-artifacts");
-        }
 
-        // Navigate up from bin/Debug/net10.0/ to project root, then create test-artifacts
+        // Navigate up from bin/Debug/net10.0/ to repo root
         string artifactsPath = Path.Combine(assemblyDirectory, "..", "..", "..", "..", "test-artifacts");
-        string fullPath = Path.GetFullPath(artifactsPath);
-
-        Console.WriteLine($"Assembly location: {assemblyLocation}");
-        Console.WriteLine($"Assembly directory: {assemblyDirectory}");
-        Console.WriteLine($"Artifacts path: {fullPath}");
-
-        return fullPath;
+        return Path.GetFullPath(artifactsPath);
     }
 
     static BaseTest()
