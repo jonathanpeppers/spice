@@ -68,8 +68,15 @@ class RefreshViewScenario : StackLayout
 			Text = "Trigger Refresh Manually",
 			Clicked = _ =>
 			{
+				// Start refreshing
 				refreshView.IsRefreshing = true;
+				
+				// Execute the refresh command
 				refreshView.Command?.Invoke();
+				
+				// In a real app, you would stop refreshing after async work completes
+				// For this simple demo, we'll stop it immediately
+				refreshView.IsRefreshing = false;
 			}
 		};
 

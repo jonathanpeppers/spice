@@ -144,13 +144,4 @@ public partial class RefreshView
 			}
 		}
 	}
-
-	partial void OnCommandChanged(Action? value)
-	{
-		// Ensure refresh control is created when command is set
-		if (value != null)
-		{
-			GetOrCreateRefreshControl();
-		}
-	}
 }

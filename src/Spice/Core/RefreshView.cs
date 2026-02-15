@@ -4,7 +4,7 @@ namespace Spice;
 /// A container view that provides pull-to-refresh functionality for scrollable content.
 /// Wrap a scrollable view (such as ScrollView, ListView, or CollectionView) to enable pull-to-refresh.
 /// Android -> AndroidX.SwipeRefreshLayout.Widget.SwipeRefreshLayout
-/// iOS -> UIKit.UIScrollView with UIRefreshControl
+/// iOS -> UIKit.UIView with UIRefreshControl attached to child scroll view
 /// </summary>
 public partial class RefreshView : View
 {
