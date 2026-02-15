@@ -196,8 +196,8 @@ public partial class CollectionView
 				// Recycle existing item view
 				if (cell.CurrentItemView != null)
 				{
-					parent.RecycleItemView(cell.CurrentItemView);
 					cell.CurrentItemView.NativeView.RemoveFromSuperview();
+					parent.RecycleItemView(cell.CurrentItemView);
 					cell.CurrentItemView = null;
 				}
 
