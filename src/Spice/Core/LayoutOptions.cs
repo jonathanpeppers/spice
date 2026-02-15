@@ -60,13 +60,18 @@ public struct LayoutOptions : IEquatable<LayoutOptions>
 		set { _flags = (_flags & 3) | (value ? (int)LayoutExpandFlag.Expand : 0); }
 	}
 
+	/// <inheritdoc/>
 	public bool Equals(LayoutOptions other) => _flags == other._flags;
 
+	/// <inheritdoc/>
 	public override bool Equals(object? obj) => obj is LayoutOptions other && Equals(other);
 
+	/// <inheritdoc/>
 	public override int GetHashCode() => _flags.GetHashCode();
 
+	/// <summary>Determines whether two <see cref="LayoutOptions"/> structures are equal.</summary>
 	public static bool operator ==(LayoutOptions left, LayoutOptions right) => left.Equals(right);
 
+	/// <summary>Determines whether two <see cref="LayoutOptions"/> structures are not equal.</summary>
 	public static bool operator !=(LayoutOptions left, LayoutOptions right) => !(left == right);
 }
