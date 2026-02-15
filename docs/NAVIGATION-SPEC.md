@@ -20,7 +20,7 @@ public class App : Application
 {
     public App()
     {
-        Main = new NavigationView(new HomeView());
+        Main = new NavigationView<HomeView>();
     }
 }
 
@@ -33,7 +33,7 @@ public class HomeView : StackLayout
         Add(new Button
         {
             Text = "Details",
-            Clicked = _ => Navigation!.Push(new DetailView())
+            Clicked = _ => Navigation!.Push<DetailView>()
         });
     }
 }
@@ -63,12 +63,21 @@ public partial class NavigationView : View
 {
     public NavigationView(View root);
     public void Push(View view);
+    public void Push<T>() where T : View, new();  // lazy creation
     public void Pop();
     public void PopToRoot();
+}
+
+// Generic subclass — creates root view lazily
+public partial class NavigationView<TRoot> : NavigationView where TRoot : View, new()
+{
+    public NavigationView();
 }
 ```
 
 `Push`/`Pop` are synchronous — matches Spice's `Action<T>` callback pattern. The native platform handles animations.
+
+`Push<T>()` creates the view on demand. Use `Push(view)` when you need to pass data to the constructor.
 
 `Title` is added to `View` so any view can set a nav bar title. Ignored when not inside a `NavigationView`.
 
@@ -79,9 +88,9 @@ public partial class NavigationView : View
 ```csharp
 Main = new TabView
 {
-    new Tab("Home", "home.png", new HomeView()),
-    new Tab("Search", "search.png", new SearchView()),
-    new Tab("Profile", "profile.png", new ProfileView()),
+    new Tab<HomeView>("Home", "home.png"),
+    new Tab<SearchView>("Search", "search.png"),
+    new Tab<ProfileView>("Profile", "profile.png"),
 };
 ```
 
@@ -90,8 +99,8 @@ Each tab can contain a `NavigationView` for independent push/pop stacks:
 ```csharp
 Main = new TabView
 {
-    new Tab("Home", "home.png", new NavigationView(new HomeView())),
-    new Tab("Search", "search.png", new NavigationView(new SearchView())),
+    new Tab("Home", "home.png", new NavigationView<HomeView>()),
+    new Tab("Search", "search.png", new NavigationView<SearchView>()),
 };
 ```
 
@@ -109,6 +118,12 @@ public partial class Tab : View
 
     public Tab(string title, string icon, View content);
 }
+
+// Generic subclass — creates content lazily on first tab selection
+public partial class Tab<TContent> : Tab where TContent : View, new()
+{
+    public Tab(string title, string icon);
+}
 ```
 
 `Tab` reuses `View.Title` for the tab label and `View.Children` for its content.
@@ -117,7 +132,7 @@ public partial class Tab : View
 
 ```csharp
 // Present
-await Application.Current.PresentAsync(new LoginView());
+await Application.Current.PresentAsync<LoginView>();
 
 // Dismiss (from inside the modal)
 await Application.Current.DismissAsync();
@@ -129,6 +144,7 @@ await Application.Current.DismissAsync();
 public partial class Application : View
 {
     public Task PresentAsync(View view);
+    public Task PresentAsync<T>() where T : View, new();  // lazy creation
     public Task DismissAsync();
 }
 ```
@@ -144,8 +160,8 @@ public class App : Application
     {
         Main = new TabView
         {
-            new Tab("Feed", "feed.png", new NavigationView(new FeedView())),
-            new Tab("Profile", "profile.png", new ProfileView()),
+            new Tab("Feed", "feed.png", new NavigationView<FeedView>()),
+            new Tab<ProfileView>("Profile", "profile.png"),
         };
     }
 }
@@ -158,12 +174,12 @@ public class FeedView : StackLayout
         Add(new Button
         {
             Text = "View Post",
-            Clicked = _ => Navigation!.Push(new PostView())
+            Clicked = _ => Navigation!.Push<PostView>()
         });
         Add(new Button
         {
             Text = "New Post",
-            Clicked = async _ => await Application.Current.PresentAsync(new NewPostView())
+            Clicked = async _ => await Application.Current.PresentAsync<NewPostView>()
         });
     }
 }
@@ -177,7 +193,7 @@ public class PostView : StackLayout
         Add(new Button
         {
             Text = "Comments",
-            Clicked = _ => Navigation!.Push(new CommentsView())
+            Clicked = _ => Navigation!.Push<CommentsView>()
         });
     }
 }
@@ -204,7 +220,7 @@ public class NewPostView : StackLayout
 new Button { Clicked = _ => Main = new DetailView() }
 
 // After — push onto the stack, get a nav bar + back button for free
-new Button { Clicked = _ => Navigation!.Push(new DetailView()) }
+new Button { Clicked = _ => Navigation!.Push<DetailView>() }
 ```
 
 ## Platform Mapping
@@ -244,3 +260,5 @@ new Button { Clicked = _ => Navigation!.Push(new DetailView()) }
 **Why `Title` on View?** It's one `[ObservableProperty]` field. Ignored unless the view is inside a `NavigationView` or `Tab`. Simpler than a separate "page" abstraction.
 
 **What about `Application.Main` swapping?** Still works. Use `NavigationView`/`TabView` when you want native navigation chrome (back button, nav bar, tab bar). Use `Main =` when you don't.
+
+**Why generic `new()` overloads?** `Tab<HomeView>` doesn't create `HomeView` until the tab is first selected. `Push<T>()` is shorter than `Push(new T())`. The instance overloads (`Push(view)`, `Tab(..., view)`) remain for when you need to pass constructor arguments.
