@@ -44,19 +44,12 @@ public partial class Editor
 
 	partial void OnPlaceholderChanged(string? value)
 	{
-		UpdatePlaceholder();
+		// UITextView doesn't have native placeholder support; no-op on iOS
 	}
 
 	partial void OnPlaceholderColorChanged(Color? value)
 	{
-		UpdatePlaceholder();
-	}
-
-	void UpdatePlaceholder()
-	{
-		// UITextView doesn't have native placeholder support, so we need to handle it ourselves
-		// For now, we'll skip the placeholder implementation to keep it minimal
-		// A full implementation would require a delegate to show/hide placeholder text
+		// UITextView doesn't have native placeholder support; no-op on iOS
 	}
 
 	partial void OnAutoSizeChanged(bool value)

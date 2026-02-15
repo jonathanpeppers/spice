@@ -13,7 +13,7 @@ class EditorScenario : StackLayout
 			HeightRequest = 150
 		});
 		
-		Add(new Label { Text = "With Placeholder" });
+		Add(new Label { Text = "With Placeholder (Android only)" });
 		Add(new Editor 
 		{ 
 			Placeholder = "Enter your comments here...",
