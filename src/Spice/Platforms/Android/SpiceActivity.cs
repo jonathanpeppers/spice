@@ -24,7 +24,7 @@ public class SpiceActivity : AppCompatActivity
 	/// <summary>
 	/// Sets the content view and stores a reference for disposal
 	/// </summary>
-	public new void SetContentView(View view)
+	public void SetContentView(View view)
 	{
 		_appView = view;
 		base.SetContentView((Android.Views.View)view);
