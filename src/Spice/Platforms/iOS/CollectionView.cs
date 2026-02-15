@@ -122,7 +122,7 @@ public partial class CollectionView
 
 	class SpiceCollectionView : UICollectionView
 	{
-		readonly CollectionView _parent;
+		readonly WeakReference<CollectionView> _parentRef;
 
 		public SpiceCollectionView(CollectionView parent) : base(CGRect.Empty, new UICollectionViewFlowLayout
 		{
@@ -131,13 +131,13 @@ public partial class CollectionView
 			MinimumInteritemSpacing = 0
 		})
 		{
-			_parent = parent;
+			_parentRef = new WeakReference<CollectionView>(parent);
 			RegisterClassForCell(typeof(SpiceCollectionViewCell), "SpiceCell");
 
-			_parent._dataSource = new SpiceCollectionViewDataSource(_parent);
-			_parent._delegate = new SpiceCollectionViewDelegate(_parent);
-			DataSource = _parent._dataSource;
-			Delegate = _parent._delegate;
+			parent._dataSource = new SpiceCollectionViewDataSource(parent);
+			parent._delegate = new SpiceCollectionViewDelegate(parent);
+			DataSource = parent._dataSource;
+			Delegate = parent._delegate;
 
 			BackgroundColor = UIColor.Clear;
 		}
@@ -239,14 +239,6 @@ public partial class CollectionView
 					parent.SelectedItem = item;
 				}
 			}
-		}
-
-		public override void ItemDeselected(UICollectionView collectionView, NSIndexPath indexPath)
-		{
-			if (!_parentRef.TryGetTarget(out var parent) || parent.SelectionMode != SelectionMode.Single)
-				return;
-
-			parent.SelectedItem = null;
 		}
 	}
 
