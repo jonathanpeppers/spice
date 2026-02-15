@@ -16,7 +16,7 @@ public struct LayoutOptions : IEquatable<LayoutOptions>
 	public static readonly LayoutOptions Center = new LayoutOptions(LayoutAlignment.Center, false);
 	/// <summary>A <see cref="LayoutOptions"/> structure that describes an element that appears at the end of its parent and does not expand.</summary>
 	public static readonly LayoutOptions End = new LayoutOptions(LayoutAlignment.End, false);
-	/// <summary>A <see cref="LayoutOptions"/> stucture that describes an element that has no padding around itself and does not expand.</summary>
+	/// <summary>A <see cref="LayoutOptions"/> structure that describes an element that has no padding around itself and does not expand.</summary>
 	public static readonly LayoutOptions Fill = new LayoutOptions(LayoutAlignment.Fill, false);
 
 	/// <summary>A <see cref="LayoutOptions"/> structure that describes an element that appears at the start of its parent and expands.</summary>
