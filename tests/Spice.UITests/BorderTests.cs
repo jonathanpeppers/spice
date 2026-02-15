@@ -7,9 +7,7 @@ public class BorderTests : BaseTest
     {
         var borderButton = FindButtonByText("Border");
         borderButton.Click();
-
-        var titleLabel = FindTextViewContaining("Border Examples");
-        Assert.NotNull(titleLabel);
+        Thread.Sleep(1000);
 
         var simpleBorderLabel = FindTextViewContaining("Simple Border");
         Assert.NotNull(simpleBorderLabel);

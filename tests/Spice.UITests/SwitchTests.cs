@@ -29,11 +29,17 @@ public class SwitchTests : BaseTest
         var switchButton = FindButtonByText("Switch");
         switchButton.Click();
 
+        // First switch starts OFF (unchecked)
+        var switches = Driver.FindElements(MobileBy.AndroidUIAutomator("new UiSelector().checkable(true)"));
+        Assert.True(switches.Count >= 1, $"Expected at least 1 checkable element, found {switches.Count}");
+        Assert.Equal("false", switches[0].GetAttribute("checked"));
+
         var toggleButton = FindButtonByText("Toggle First Switch Programmatically");
         toggleButton.Click();
         Thread.Sleep(500);
 
-        var stateLabel = FindTextViewContaining("Switch is ON");
-        Assert.NotNull(stateLabel);
+        // After programmatic toggle, switch should be ON (checked)
+        switches = Driver.FindElements(MobileBy.AndroidUIAutomator("new UiSelector().checkable(true)"));
+        Assert.Equal("true", switches[0].GetAttribute("checked"));
     });
 }
