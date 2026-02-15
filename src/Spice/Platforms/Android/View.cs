@@ -93,33 +93,33 @@ public partial class View
 		}
 	}
 
-	partial void OnHorizontalAlignChanged(Align value)
+	partial void OnHorizontalOptionsChanged(LayoutOptions value)
 	{
 		// TODO: reduce JNI calls
 		if (_layoutParameters.Value is RelativeLayout.LayoutParams layoutParameters)
 		{
 			// TODO: support value changing
-			switch (value)
+			switch (value.Alignment)
 			{
-				case Align.Center:
-					layoutParameters.Width = Android.Views.ViewGroup.LayoutParams.WrapContent;
+				case LayoutAlignment.Center:
+					layoutParameters.Width = WidthRequest >= 0 ? GetWidthInPixels() : Android.Views.ViewGroup.LayoutParams.WrapContent;
 					layoutParameters.AddRule(LayoutRules.CenterHorizontal);
 					break;
-				case Align.Start:
-					layoutParameters.Width = Android.Views.ViewGroup.LayoutParams.WrapContent;
+				case LayoutAlignment.Start:
+					layoutParameters.Width = WidthRequest >= 0 ? GetWidthInPixels() : Android.Views.ViewGroup.LayoutParams.WrapContent;
 					layoutParameters.RemoveRule(LayoutRules.CenterHorizontal);
 					layoutParameters.AddRule(LayoutRules.AlignParentLeft);
 					break;
-				case Align.End:
-					layoutParameters.Width = Android.Views.ViewGroup.LayoutParams.WrapContent;
+				case LayoutAlignment.End:
+					layoutParameters.Width = WidthRequest >= 0 ? GetWidthInPixels() : Android.Views.ViewGroup.LayoutParams.WrapContent;
 					layoutParameters.RemoveRule(LayoutRules.CenterHorizontal);
 					layoutParameters.AddRule(LayoutRules.AlignParentRight);
 					break;
-				case Align.Stretch:
-					layoutParameters.Width = Android.Views.ViewGroup.LayoutParams.MatchParent;
+				case LayoutAlignment.Fill:
+					layoutParameters.Width = WidthRequest >= 0 ? GetWidthInPixels() : Android.Views.ViewGroup.LayoutParams.MatchParent;
 					break;
 				default:
-					throw new NotSupportedException($"{nameof(HorizontalAlign)} value '{value}' not supported!");
+					throw new NotSupportedException($"{nameof(HorizontalOptions)} value '{value.Alignment}' not supported!");
 			}
 		}
 		else
@@ -128,35 +128,35 @@ public partial class View
 		}
 	}
 
-	partial void OnVerticalAlignChanged(Align value)
+	partial void OnVerticalOptionsChanged(LayoutOptions value)
 	{
 		// TODO: reduce JNI calls
 
 		if (_layoutParameters.Value is RelativeLayout.LayoutParams layoutParameters)
 		{
 			// TODO: support value changing
-			switch (value)
+			switch (value.Alignment)
 			{
-				case Align.Center:
-					layoutParameters.Height = Android.Views.ViewGroup.LayoutParams.WrapContent;
+				case LayoutAlignment.Center:
+					layoutParameters.Height = HeightRequest >= 0 ? GetHeightInPixels() : Android.Views.ViewGroup.LayoutParams.WrapContent;
 					layoutParameters.RemoveRule(LayoutRules.CenterVertical);
 					layoutParameters.AddRule(LayoutRules.CenterVertical);
 					break;
-				case Align.Start:
-					layoutParameters.Height = Android.Views.ViewGroup.LayoutParams.WrapContent;
+				case LayoutAlignment.Start:
+					layoutParameters.Height = HeightRequest >= 0 ? GetHeightInPixels() : Android.Views.ViewGroup.LayoutParams.WrapContent;
 					layoutParameters.RemoveRule(LayoutRules.CenterVertical);
 					layoutParameters.AddRule(LayoutRules.AlignParentTop);
 					break;
-				case Align.End:
-					layoutParameters.Height = Android.Views.ViewGroup.LayoutParams.WrapContent;
+				case LayoutAlignment.End:
+					layoutParameters.Height = HeightRequest >= 0 ? GetHeightInPixels() : Android.Views.ViewGroup.LayoutParams.WrapContent;
 					layoutParameters.RemoveRule(LayoutRules.CenterVertical);
 					layoutParameters.AddRule(LayoutRules.AlignParentBottom);
 					break;
-				case Align.Stretch:
-					layoutParameters.Height = Android.Views.ViewGroup.LayoutParams.MatchParent;
+				case LayoutAlignment.Fill:
+					layoutParameters.Height = HeightRequest >= 0 ? GetHeightInPixels() : Android.Views.ViewGroup.LayoutParams.MatchParent;
 					break;
 				default:
-					throw new NotSupportedException($"{nameof(VerticalAlign)} value '{value}' not supported!");
+					throw new NotSupportedException($"{nameof(VerticalOptions)} value '{value.Alignment}' not supported!");
 			}
 		}
 		else
@@ -170,4 +170,97 @@ public partial class View
 	partial void OnIsVisibleChanged(bool value) => _nativeView.Value.Visibility = value ? Android.Views.ViewStates.Visible : Android.Views.ViewStates.Gone;
 
 	partial void OnIsEnabledChanged(bool value) => _nativeView.Value.Enabled = value;
+
+	partial void OnOpacityChanged(double value) => _nativeView.Value.Alpha = (float)value;
+
+	partial void OnAutomationIdChanged(string? value) => _nativeView.Value.ContentDescription = value;
+
+	partial void OnMarginChanged(Thickness value)
+	{
+		if (_layoutParameters.Value is RelativeLayout.LayoutParams layoutParams)
+		{
+			layoutParams.SetMargins(
+				(int)value.Left.ToPixels(),
+				(int)value.Top.ToPixels(),
+				(int)value.Right.ToPixels(),
+				(int)value.Bottom.ToPixels()
+			);
+		}
+		else
+		{
+			throw new NotSupportedException($"LayoutParameters of type {_layoutParameters.Value.GetType()} not supported!");
+		}
+	}
+
+	partial void OnWidthRequestChanged(double value)
+	{
+		var layoutParameters = _layoutParameters.Value;
+
+		if (value < 0)
+		{
+			layoutParameters.Width = HorizontalOptions.Alignment == LayoutAlignment.Fill
+				? Android.Views.ViewGroup.LayoutParams.MatchParent
+				: Android.Views.ViewGroup.LayoutParams.WrapContent;
+		}
+		else
+		{
+			layoutParameters.Width = GetWidthInPixels();
+		}
+
+		_nativeView.Value.RequestLayout();
+	}
+
+	partial void OnHeightRequestChanged(double value)
+	{
+		var layoutParameters = _layoutParameters.Value;
+
+		if (value < 0)
+		{
+			layoutParameters.Height = VerticalOptions.Alignment == LayoutAlignment.Fill
+				? Android.Views.ViewGroup.LayoutParams.MatchParent
+				: Android.Views.ViewGroup.LayoutParams.WrapContent;
+		}
+		else
+		{
+			layoutParameters.Height = GetHeightInPixels();
+		}
+
+		_nativeView.Value.RequestLayout();
+	}
+
+	int GetWidthInPixels()
+	{
+		var displayMetrics = _nativeView.Value.Resources?.DisplayMetrics;
+		return displayMetrics != null ? (int)(WidthRequest * displayMetrics.Density) : (int)WidthRequest;
+	}
+
+	int GetHeightInPixels()
+	{
+		var displayMetrics = _nativeView.Value.Resources?.DisplayMetrics;
+		return displayMetrics != null ? (int)(HeightRequest * displayMetrics.Density) : (int)HeightRequest;
+	}
+
+	private partial double GetWidth()
+	{
+		var view = _nativeView.Value;
+		// Convert from pixels to device-independent units
+		var displayMetrics = view.Resources?.DisplayMetrics;
+		if (displayMetrics != null)
+		{
+			return view.Width / displayMetrics.Density;
+		}
+		return view.Width;
+	}
+
+	private partial double GetHeight()
+	{
+		var view = _nativeView.Value;
+		// Convert from pixels to device-independent units
+		var displayMetrics = view.Resources?.DisplayMetrics;
+		if (displayMetrics != null)
+		{
+			return view.Height / displayMetrics.Density;
+		}
+		return view.Height;
+	}
 }

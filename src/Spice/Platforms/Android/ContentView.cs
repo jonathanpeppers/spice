@@ -51,4 +51,10 @@ public partial class ContentView
 			NativeView.AddView(newContent);
 		}
 	}
+
+	partial void OnPaddingChanged(double value)
+	{
+		var paddingPx = value.ToPixels();
+		NativeView.SetPadding(paddingPx, paddingPx, paddingPx, paddingPx);
+	}
 }

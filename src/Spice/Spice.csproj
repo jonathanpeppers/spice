@@ -12,6 +12,10 @@
 		<Nullable>enable</Nullable>
 		<SingleProject>true</SingleProject>
 		<IsTrimmable>true</IsTrimmable>
+		<IsAotCompatible>true</IsAotCompatible>
+		<EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+		<EnableSingleFileAnalyzer>true</EnableSingleFileAnalyzer>
+		<EnableAotAnalyzer>true</EnableAotAnalyzer>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">16.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
@@ -37,6 +41,7 @@
 
 	<ItemGroup Condition=" '$(TargetPlatformIdentifier)' == 'Android' ">
 		<PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.6.1.10" />
+		<PackageReference Include="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.1.0.21" />
 		<PackageReference Include="Xamarin.Google.Android.Material" Version="1.10.0.6" />
 		<AndroidJavaSource Include="Platforms/Android/*.java" />
 		<TransformFile Include="Platforms/Android/Transforms.xml" />

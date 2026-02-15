@@ -31,7 +31,7 @@ public partial class Label
 	partial void OnTextChanged(string value)
 	{
 		NativeView.Text = value;
-		if (HorizontalAlign != Align.Stretch && VerticalAlign != Align.Stretch)
+		if (HorizontalOptions.Alignment != LayoutAlignment.Fill && VerticalOptions.Alignment != LayoutAlignment.Fill)
 		{
 			NativeView.SizeToFit();
 		}

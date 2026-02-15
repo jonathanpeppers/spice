@@ -82,4 +82,33 @@ public class ScrollViewTests
 		Assert.Equal(stackLayout, scrollView.Children[0]);
 		Assert.Equal(3, stackLayout.Children.Count);
 	}
+
+	[Fact]
+	public void DefaultPaddingIsZero()
+	{
+		var scrollView = new ScrollView();
+		Assert.Equal(0.0, scrollView.Padding);
+	}
+
+	[Fact]
+	public void CanSetPadding()
+	{
+		var scrollView = new ScrollView
+		{
+			Padding = 12.0
+		};
+		Assert.Equal(12.0, scrollView.Padding);
+	}
+
+	[Fact]
+	public void PropertyChangedFiresOnPaddingChange()
+	{
+		string? property = null;
+		var scrollView = new ScrollView();
+		scrollView.PropertyChanged += (sender, e) => property = e.PropertyName;
+		
+		scrollView.Padding = 20.0;
+
+		Assert.Equal(nameof(scrollView.Padding), property);
+	}
 }

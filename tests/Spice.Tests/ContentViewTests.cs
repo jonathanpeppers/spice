@@ -158,4 +158,33 @@ public class ContentViewTests
 		Assert.NotNull(contentView2.Content);
 		Assert.NotNull(contentView3.Content);
 	}
+
+	[Fact]
+	public void DefaultPaddingIsZero()
+	{
+		var contentView = new ContentView();
+		Assert.Equal(0.0, contentView.Padding);
+	}
+
+	[Fact]
+	public void CanSetPadding()
+	{
+		var contentView = new ContentView
+		{
+			Padding = 10.0
+		};
+		Assert.Equal(10.0, contentView.Padding);
+	}
+
+	[Fact]
+	public void PropertyChangedFiresOnPaddingChange()
+	{
+		string? property = null;
+		var contentView = new ContentView();
+		contentView.PropertyChanged += (sender, e) => property = e.PropertyName;
+		
+		contentView.Padding = 15.0;
+
+		Assert.Equal(nameof(contentView.Padding), property);
+	}
 }

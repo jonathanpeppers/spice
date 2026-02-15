@@ -31,7 +31,7 @@ public partial class Button
 	partial void OnTextChanged(string value)
 	{
 		NativeView.SetTitle(value, UIControlState.Normal);
-		if (HorizontalAlign != Align.Stretch && VerticalAlign != Align.Stretch)
+		if (HorizontalOptions.Alignment != LayoutAlignment.Fill && VerticalOptions.Alignment != LayoutAlignment.Fill)
 		{
 			NativeView.SizeToFit();
 		}

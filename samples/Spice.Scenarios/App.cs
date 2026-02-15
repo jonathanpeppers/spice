@@ -72,6 +72,11 @@ public class App : Application
 				},
 				new Button
 				{
+					Text = "RefreshView",
+					Clicked = _ => Main = new RefreshViewScenario(),
+				},
+				new Button
+				{
 					Text = "Picker",
 					Clicked = _ => Main = new PickerScenario(),
 				},
@@ -94,6 +99,26 @@ public class App : Application
 				{
 					Text = "Border",
 					Clicked = _ => Main = new BorderScenario(),
+				},
+				new Button
+				{
+					Text = "Margin",
+					Clicked = _ => Main = new MarginScenario(),
+				},
+				new Button
+				{
+					Text = "CollectionView",
+					Clicked = _ => Main = new CollectionViewScenario(),
+				},
+				new Button
+				{
+					Text = "SearchBar",
+					Clicked = _ => Main = new SearchBarScenario(),
+        },
+				new Button
+				{
+					Text = "SwipeView",
+					Clicked = _ => Main = new SwipeViewScenario(),
 				},
 			}
 		};

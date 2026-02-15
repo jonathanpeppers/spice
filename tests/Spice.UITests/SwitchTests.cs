@@ -17,7 +17,7 @@ public class SwitchTests : BaseTest
             switchButton.Click();
 
             // Find the first switch control
-            var switches = Driver.FindElements(By.ClassName("android.widget.Switch"));
+            var switches = Driver.FindElements(By.ClassName("androidx.appcompat.widget.SwitchCompat"));
             Assert.True(switches.Count >= 2, "Should have at least 2 Switch controls");
 
             var firstSwitch = switches[0];
@@ -66,9 +66,11 @@ public class SwitchTests : BaseTest
             // Click the toggle button
             toggleButton.Click();
 
+            // Wait briefly for the programmatic toggle to propagate
+            Thread.Sleep(500);
+
             // Assert - Label should update to ON
-            stateLabel = FindTextViewContaining("Switch is");
-            Assert.Contains("Switch is ON", stateLabel.Text);
+            stateLabel = FindTextViewContaining("Switch is ON");
         }
         catch (Exception)
         {

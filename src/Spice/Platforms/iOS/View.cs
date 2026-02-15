@@ -73,13 +73,41 @@ public partial class View
 
 	partial void OnBackgroundColorChanged(Color? value) => NativeView.BackgroundColor = value.ToUIColor();
 
-	partial void OnVerticalAlignChanged(Align value) => UpdateAlign();
+	partial void OnVerticalOptionsChanged(LayoutOptions value) => UpdateAlign();
 
-	partial void OnHorizontalAlignChanged(Align value) => UpdateAlign();
+	partial void OnHorizontalOptionsChanged(LayoutOptions value) => UpdateAlign();
 
 	partial void OnIsVisibleChanged(bool value) => NativeView.Hidden = !value;
 
 	partial void OnIsEnabledChanged(bool value) => NativeView.UserInteractionEnabled = value;
+
+	partial void OnOpacityChanged(double value) => NativeView.Alpha = (nfloat)value;
+
+	partial void OnAutomationIdChanged(string? value) => NativeView.AccessibilityIdentifier = value;
+
+	partial void OnMarginChanged(Thickness value) => UpdateAlign();
+
+	partial void OnWidthRequestChanged(double value)
+	{
+		// Trigger layout update if the view is already in the view hierarchy
+		if (NativeView.Superview != null)
+		{
+			UpdateAlign();
+		}
+	}
+
+	partial void OnHeightRequestChanged(double value)
+	{
+		// Trigger layout update if the view is already in the view hierarchy
+		if (NativeView.Superview != null)
+		{
+			UpdateAlign();
+		}
+	}
+
+	private partial double GetWidth() => (double)NativeView.Frame.Width;
+
+	private partial double GetHeight() => (double)NativeView.Frame.Height;
 
 	internal void UpdateAlign()
 	{
@@ -92,48 +120,56 @@ public partial class View
 		var superframe = superview.Frame;
 		var frame = new CGRect();
 
-		switch (_horizontalAlign)
+		// Apply margins
+		var marginLeft = (nfloat)_margin.Left;
+		var marginTop = (nfloat)_margin.Top;
+		var marginRight = (nfloat)_margin.Right;
+		var marginBottom = (nfloat)_margin.Bottom;
+		var availableWidth = superframe.Width - marginLeft - marginRight;
+		var availableHeight = superframe.Height - marginTop - marginBottom;
+
+		switch (_horizontalOptions.Alignment)
 		{
-			case Align.Center:
+			case LayoutAlignment.Center:
 				frame.Width = getSize().Width;
-				frame.X = (superframe.Width - frame.Width) / 2;
+				frame.X = marginLeft + (availableWidth - frame.Width) / 2;
 				break;
-			case Align.Start:
+			case LayoutAlignment.Start:
 				frame.Width = getSize().Width;
-				frame.X = 0;
+				frame.X = marginLeft;
 				break;
-			case Align.End:
+			case LayoutAlignment.End:
 				frame.Width = getSize().Width;
-				frame.X = superframe.Width - frame.Width;
+				frame.X = superframe.Width - marginRight - frame.Width;
 				break;
-			case Align.Stretch:
-				frame.Width = superframe.Width;
-				frame.X = 0;
+			case LayoutAlignment.Fill:
+				frame.Width = WidthRequest >= 0 ? (nfloat)WidthRequest : availableWidth;
+				frame.X = marginLeft;
 				break;
 			default:
-				throw new NotSupportedException($"{nameof(HorizontalAlign)} value '{_horizontalAlign}' not supported!");
+				throw new NotSupportedException($"{nameof(HorizontalOptions)} value '{_horizontalOptions.Alignment}' not supported!");
 		}
 
-		switch (_verticalAlign)
+		switch (_verticalOptions.Alignment)
 		{
-			case Align.Center:
+			case LayoutAlignment.Center:
 				frame.Height = getSize().Height;
-				frame.Y = (superframe.Height - frame.Height) / 2;
+				frame.Y = marginTop + (availableHeight - frame.Height) / 2;
 				break;
-			case Align.Start:
+			case LayoutAlignment.Start:
 				frame.Height = getSize().Height;
-				frame.Y = 0;
+				frame.Y = marginTop;
 				break;
-			case Align.End:
+			case LayoutAlignment.End:
 				frame.Height = getSize().Height;
-				frame.Y = superframe.Height - frame.Height;
+				frame.Y = superframe.Height - marginBottom - frame.Height;
 				break;
-			case Align.Stretch:
-				frame.Height = superframe.Height;
-				frame.Y = 0;
+			case LayoutAlignment.Fill:
+				frame.Height = HeightRequest >= 0 ? (nfloat)HeightRequest : availableHeight;
+				frame.Y = marginTop;
 				break;
 			default:
-				throw new NotSupportedException($"{nameof(VerticalAlign)} value '{_verticalAlign}' not supported!");
+				throw new NotSupportedException($"{nameof(VerticalOptions)} value '{_verticalOptions.Alignment}' not supported!");
 		}
 
 		// Set the actual frame
@@ -145,7 +181,15 @@ public partial class View
 				return size.Value;
 
 			view!.SizeToFit();
-			return (size = view.Frame.Size).Value;
+			var result = view.Frame.Size;
+			
+			// If WidthRequest or HeightRequest are set, use them instead
+			if (WidthRequest >= 0)
+				result.Width = (nfloat)WidthRequest;
+			if (HeightRequest >= 0)
+				result.Height = (nfloat)HeightRequest;
+			
+			return (size = result).Value;
 		}
 	}
 }

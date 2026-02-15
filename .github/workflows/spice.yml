@@ -157,6 +157,7 @@ jobs:
         api-level: 34
         arch: x86_64
         target: google_apis
+        profile: pixel_6
         script: bash $GITHUB_WORKSPACE/run-ui-tests.sh
 
     - name: Upload UI test results
