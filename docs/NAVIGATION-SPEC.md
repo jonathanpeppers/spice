@@ -62,8 +62,10 @@ public partial class View
 public partial class NavigationView : View
 {
     public NavigationView(View root);
+    public NavigationView(Func<View> factory);             // lazy with args
     public void Push(View view);
-    public void Push<T>() where T : View, new();  // lazy creation
+    public void Push(Func<View> factory);                  // lazy with args
+    public void Push<T>() where T : View, new();           // lazy parameterless
     public void Pop();
     public void PopToRoot();
 }
@@ -77,7 +79,7 @@ public partial class NavigationView<TRoot> : NavigationView where TRoot : View, 
 
 `Push`/`Pop` are synchronous — matches Spice's `Action<T>` callback pattern. The native platform handles animations.
 
-`Push<T>()` creates the view on demand. Use `Push(view)` when you need to pass data to the constructor.
+`Push<T>()` and `Push(() => new T(args))` create the view on demand. Use `Push(view)` when you already have one.
 
 `Title` is added to `View` so any view can set a nav bar title. Ignored when not inside a `NavigationView`.
 
@@ -117,6 +119,7 @@ public partial class Tab : View
     [ObservableProperty] string _icon = "";
 
     public Tab(string title, string icon, View content);
+    public Tab(string title, string icon, Func<View> factory);  // lazy with args
 }
 
 // Generic subclass — creates content lazily on first tab selection
@@ -144,7 +147,8 @@ await Application.Current.DismissAsync();
 public partial class Application : View
 {
     public Task PresentAsync(View view);
-    public Task PresentAsync<T>() where T : View, new();  // lazy creation
+    public Task PresentAsync(Func<View> factory);              // lazy with args
+    public Task PresentAsync<T>() where T : View, new();      // lazy parameterless
     public Task DismissAsync();
 }
 ```
@@ -261,4 +265,4 @@ new Button { Clicked = _ => Navigation!.Push<DetailView>() }
 
 **What about `Application.Main` swapping?** Still works. Use `NavigationView`/`TabView` when you want native navigation chrome (back button, nav bar, tab bar). Use `Main =` when you don't.
 
-**Why generic `new()` overloads?** `Tab<HomeView>` doesn't create `HomeView` until the tab is first selected. `Push<T>()` is shorter than `Push(new T())`. The instance overloads (`Push(view)`, `Tab(..., view)`) remain for when you need to pass constructor arguments.
+**Why three overload forms?** `Push(view)` for pre-built views. `Push<T>()` for parameterless construction. `Push(() => new DetailView(postId))` for lazy creation with arguments. Same pattern on `Tab`, `NavigationView`, and `PresentAsync`.
