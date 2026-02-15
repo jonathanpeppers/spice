@@ -6,7 +6,6 @@ namespace Spice;
 /// Values that represent layout alignment.
 /// Maps to UIKit/Android alignment options.
 /// </summary>
-[Flags]
 public enum LayoutAlignment
 {
 	/// <summary>
