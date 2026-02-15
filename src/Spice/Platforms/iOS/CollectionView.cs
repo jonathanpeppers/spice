@@ -146,7 +146,7 @@ public partial class CollectionView
 	class SpiceCollectionViewDataSource : UICollectionViewDataSource
 	{
 		readonly WeakReference<CollectionView> _parentRef;
-		List<object> _itemsCache = new();
+		internal List<object> _itemsCache = new();
 
 		public SpiceCollectionViewDataSource(CollectionView parent)
 		{

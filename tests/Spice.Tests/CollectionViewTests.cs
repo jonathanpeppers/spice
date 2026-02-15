@@ -70,7 +70,7 @@ public class CollectionViewTests
 	public void CanSetItemTemplate()
 	{
 		var collectionView = new CollectionView();
-		Func<object, View> template = item => new Label { Text = item.ToString() };
+		Func<object, View> template = item => new Label { Text = item.ToString()! };
 		
 		collectionView.ItemTemplate = template;
 		
@@ -141,7 +141,7 @@ public class CollectionViewTests
 		var collectionView = new CollectionView();
 		collectionView.PropertyChanged += (sender, e) => property = e.PropertyName;
 		
-		collectionView.ItemTemplate = item => new Label { Text = item.ToString() };
+		collectionView.ItemTemplate = item => new Label { Text = item.ToString()! };
 
 		Assert.Equal(nameof(collectionView.ItemTemplate), property);
 	}
@@ -199,7 +199,7 @@ public class CollectionViewTests
 	{
 		var collectionView = new CollectionView
 		{
-			ItemTemplate = item => new Label { Text = item.ToString() }
+			ItemTemplate = item => new Label { Text = item.ToString()! }
 		};
 
 		var view = collectionView.ItemTemplate!("Test Item");
@@ -219,7 +219,7 @@ public class CollectionViewTests
 				if (item is string s && s.StartsWith("Button"))
 					return new Button { Text = s };
 				else
-					return new Label { Text = item.ToString() };
+					return new Label { Text = item.ToString()! };
 			}
 		};
 
@@ -290,7 +290,7 @@ public class CollectionViewTests
 		var collectionView = new CollectionView
 		{
 			ItemsSource = items,
-			ItemTemplate = item => new Label { Text = item.ToString() },
+			ItemTemplate = item => new Label { Text = item.ToString()! },
 			Orientation = Orientation.Vertical,
 			SelectionMode = SelectionMode.Single,
 			ItemSpacing = 5

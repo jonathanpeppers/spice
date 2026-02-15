@@ -146,7 +146,7 @@ public partial class CollectionView
 	class SpiceRecyclerViewAdapter : RecyclerView.Adapter
 	{
 		readonly WeakReference<CollectionView> _parentRef;
-		List<object> _items = new();
+		internal List<object> _items = new();
 
 		public SpiceRecyclerViewAdapter(CollectionView parent)
 		{
