@@ -55,6 +55,31 @@ public partial class View : ObservableObject, IEnumerable<View>
 	[ObservableProperty]
 	bool _isEnabled = true;
 
+	double _opacity = 1.0;
+
+	/// <summary>
+	/// Gets or sets the opacity of the view, ranging from 0.0 (fully transparent) to 1.0 (fully opaque). Defaults to 1.0.
+	/// Values outside this range will be clamped.
+	/// Platform implementations: UIKit.UIView.Alpha / Android.Views.View.Alpha
+	/// </summary>
+	public double Opacity
+	{
+		get => _opacity;
+		set
+		{
+			var clampedValue = Math.Clamp(value, 0.0, 1.0);
+			if (SetProperty(ref _opacity, clampedValue))
+			{
+				OnOpacityChanged(clampedValue);
+			}
+		}
+	}
+
+	/// <summary>
+	/// Called when the Opacity property changes
+	/// </summary>
+	partial void OnOpacityChanged(double value);
+
 	/// <summary>
 	/// Space around the view. Supports uniform (10), horizontal/vertical (10,20), or individual sides (10,20,30,40).
 	/// Aligns with Microsoft.Maui Margin property.
