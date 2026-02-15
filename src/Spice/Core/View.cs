@@ -85,6 +85,18 @@ public partial class View : ObservableObject, IEnumerable<View>
 	string? _automationId;
 
 	/// <summary>
+	/// Gets or sets the title of the view. Used by NavigationView for the navigation bar title and by Tab for the tab label.
+	/// Ignored when the view is not inside a NavigationView or Tab.
+	/// </summary>
+	[ObservableProperty]
+	string _title = "";
+
+	/// <summary>
+	/// Gets the NavigationView that contains this view, if any. Set automatically when the view is pushed onto a NavigationView.
+	/// </summary>
+	public NavigationView? Navigation { get; internal set; }
+
+	/// <summary>
 	/// Called when the Opacity property changes
 	/// </summary>
 	partial void OnOpacityChanged(double value);

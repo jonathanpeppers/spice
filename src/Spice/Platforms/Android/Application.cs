@@ -7,11 +7,17 @@ public partial class Application
 	/// <summary>
 	/// The root "view" of a Spice application. Set Main to a single view.
 	/// </summary>
-	public Application() { }
+	public Application()
+	{
+		Current = this;
+	}
 
 	/// <inheritdoc />
 	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
-	public Application(Context context) : base(context) { }
+	public Application(Context context) : base(context)
+	{
+		Current = this;
+	}
 
 	/// <inheritdoc />
 	protected override Android.Views.ViewGroup.LayoutParams CreateLayoutParameters() =>
@@ -31,5 +37,57 @@ public partial class Application
 		{
 			NativeView.AddView(value);
 		}
+	}
+
+	AndroidX.AppCompat.App.AlertDialog? _presentedDialog;
+
+	async partial Task PresentAsyncCore(View view)
+	{
+		var tcs = new TaskCompletionSource<bool>();
+
+		var activity = Platform.Context as AndroidX.AppCompat.App.AppCompatActivity;
+		if (activity == null)
+		{
+			tcs.SetResult(false);
+			return;
+		}
+
+		var builder = new AndroidX.AppCompat.App.AlertDialog.Builder(activity);
+		
+		if (!string.IsNullOrEmpty(view.Title))
+		{
+			builder.SetTitle(view.Title);
+		}
+
+		// Create a container for the view
+		var container = new Android.Widget.FrameLayout(activity)
+		{
+			LayoutParameters = new Android.Views.ViewGroup.LayoutParams(
+				Android.Views.ViewGroup.LayoutParams.MatchParent,
+				Android.Views.ViewGroup.LayoutParams.WrapContent)
+		};
+		container.AddView(view);
+		builder.SetView(container);
+
+		_presentedDialog = builder.Create();
+		_presentedDialog.SetCanceledOnTouchOutside(false);
+		_presentedDialog.Show();
+
+		tcs.SetResult(true);
+		await tcs.Task;
+	}
+
+	async partial Task DismissAsyncCore()
+	{
+		var tcs = new TaskCompletionSource<bool>();
+
+		if (_presentedDialog != null)
+		{
+			_presentedDialog.Dismiss();
+			_presentedDialog = null;
+		}
+
+		tcs.SetResult(true);
+		await tcs.Task;
 	}
 }
