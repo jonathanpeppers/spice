@@ -6,13 +6,18 @@ class SearchBarScenario : StackLayout
 	{
 		Spacing = 5;
 
-		var label = new Label { Text = "Search for something..." };
+		var searchLabel = new Label { Text = "Search for something..." };
+		var textChangedLabel = new Label { Text = "Type to see text changes..." };
 
 		Add(new SearchBar
 		{
 			Placeholder = "Search",
-			SearchButtonPressed = s => label.Text = $"Searched: {s.Text}",
+			PlaceholderColor = Colors.Gray,
+			TextColor = Colors.Blue,
+			SearchButtonPressed = s => searchLabel.Text = $"Searched: {s.Text}",
+			TextChanged = s => textChangedLabel.Text = $"Current: {s.Text}",
 		});
-		Add(label);
+		Add(searchLabel);
+		Add(textChangedLabel);
 	}
 }

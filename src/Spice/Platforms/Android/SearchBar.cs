@@ -106,24 +106,30 @@ public partial class SearchBar
 
 	class QueryTextListener : Java.Lang.Object, SearchView.IOnQueryTextListener
 	{
-		readonly SearchBar _searchBar;
+		readonly WeakReference<SearchBar> _searchBar;
 
 		public QueryTextListener(SearchBar searchBar)
 		{
-			_searchBar = searchBar;
+			_searchBar = new WeakReference<SearchBar>(searchBar);
 		}
 
 		public bool OnQueryTextSubmit(string? query)
 		{
-			_searchBar.Text = query ?? "";
-			_searchBar.SearchButtonPressed?.Invoke(_searchBar);
+			if (_searchBar.TryGetTarget(out var searchBar))
+			{
+				searchBar.Text = query ?? "";
+				searchBar.SearchButtonPressed?.Invoke(searchBar);
+			}
 			return true;
 		}
 
 		public bool OnQueryTextChange(string? newText)
 		{
-			_searchBar.Text = newText ?? "";
-			_searchBar.TextChanged?.Invoke(_searchBar);
+			if (_searchBar.TryGetTarget(out var searchBar))
+			{
+				searchBar.Text = newText ?? "";
+				searchBar.TextChanged?.Invoke(searchBar);
+			}
 			return true;
 		}
 	}
