@@ -25,6 +25,15 @@ public partial class SwipeView
 		SetupGestureRecognizers();
 	}
 
+	/// <summary>
+	/// Initializes a new instance of <see cref="SwipeView"/> with a custom native view creator.
+	/// </summary>
+	/// <param name="creator">Factory function that creates the underlying UIKit.UIView.</param>
+	protected SwipeView(Func<View, UIView> creator) : base(creator)
+	{
+		SetupGestureRecognizers();
+	}
+
 	UIPanGestureRecognizer? _panGesture;
 	UIView? _contentView;
 	UIView? _swipeItemsView;
@@ -84,23 +93,26 @@ public partial class SwipeView
 			case UIGestureRecognizerState.Cancelled:
 				if (_currentSwipeDirection != null)
 				{
-					var threshold = Threshold > 0 ? Threshold : 50; // Use configured threshold or default
-					var isOpen = Math.Abs(translation.X) > threshold;
-					
-					if (isOpen && _currentSwipeDirection == SwipeDirection.Left && RightItems != null)
+					var threshold = Threshold > 0 ? Threshold : 50; // points
+					var exceedsThreshold = Math.Abs(translation.X) > threshold;
+					var didOpen = false;
+
+					if (exceedsThreshold && _currentSwipeDirection == SwipeDirection.Left && RightItems != null)
 					{
 						ShowSwipeItems(RightItems, SwipeDirection.Left);
+						didOpen = true;
 					}
-					else if (isOpen && _currentSwipeDirection == SwipeDirection.Right && LeftItems != null)
+					else if (exceedsThreshold && _currentSwipeDirection == SwipeDirection.Right && LeftItems != null)
 					{
 						ShowSwipeItems(LeftItems, SwipeDirection.Right);
+						didOpen = true;
 					}
 					else
 					{
 						ResetPosition();
 					}
 
-					SwipeEnded?.Invoke(this, _currentSwipeDirection.Value, isOpen);
+					SwipeEnded?.Invoke(this, _currentSwipeDirection.Value, didOpen);
 					_currentSwipeDirection = null;
 				}
 				break;
@@ -122,8 +134,9 @@ public partial class SwipeView
 		};
 
 		nfloat x = 0;
-		nfloat itemWidth = 75; // Default item width in points (device-independent units)
-		nfloat totalWidth = items.Items.Count * itemWidth;
+		nfloat itemWidth = 75; // Default item width in points
+		nfloat visibleCount = items.Items.Count(i => i.IsVisible);
+		nfloat totalWidth = visibleCount * itemWidth;
 
 		foreach (var item in items.Items)
 		{
@@ -154,8 +167,8 @@ public partial class SwipeView
 		}
 
 		_swipeItemsView.Frame = direction == SwipeDirection.Left
-			? new CGRect(NativeView.Frame.Width, 0, totalWidth, NativeView.Frame.Height)
-			: new CGRect(-totalWidth, 0, totalWidth, NativeView.Frame.Height);
+			? new CGRect(NativeView.Frame.Width - totalWidth, 0, totalWidth, NativeView.Frame.Height)
+			: new CGRect(0, 0, totalWidth, NativeView.Frame.Height);
 
 		NativeView.InsertSubviewBelow(_swipeItemsView, _contentView);
 
@@ -215,8 +228,8 @@ public partial class SwipeView
 		{
 			SwipeDirection.Left => RightItems,
 			SwipeDirection.Right => LeftItems,
-			SwipeDirection.Up => BottomItems,
-			SwipeDirection.Down => TopItems,
+			SwipeDirection.Up => null, // vertical not yet supported
+			SwipeDirection.Down => null, // vertical not yet supported
 			_ => null
 		};
 

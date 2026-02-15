@@ -10,6 +10,7 @@ public partial class SwipeItems : ObservableObject
 {
 	/// <summary>
 	/// Gets or sets the swipe mode, which determines how swipe items behave.
+	/// Note: Current platform implementations only support Reveal mode.
 	/// </summary>
 	[ObservableProperty]
 	SwipeMode _mode = SwipeMode.Reveal;

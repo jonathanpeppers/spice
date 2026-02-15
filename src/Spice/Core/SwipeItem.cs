@@ -2,7 +2,7 @@ namespace Spice;
 
 /// <summary>
 /// Represents an individual swipe action item that can be invoked.
-/// Each SwipeItem can display text, an optional icon, and a background color.
+/// Each SwipeItem can display text and a background color.
 /// </summary>
 public partial class SwipeItem : ObservableObject
 {

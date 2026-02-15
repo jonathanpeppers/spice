@@ -52,7 +52,7 @@ public partial class SwipeView
 	void SetupGestureDetector()
 	{
 		var listener = new SwipeGestureListener(this);
-		_gestureDetector = new GestureDetector(Platform.Context, listener);
+		_gestureDetector = new GestureDetector(NativeView.Context, listener);
 
 		NativeView.Touch += (sender, e) =>
 		{
@@ -128,8 +128,9 @@ public partial class SwipeView
 			return;
 
 		var deltaX = e != null ? e.GetX() - _startX : 0;
-		var threshold = Threshold > 0 ? Threshold : 150; // Use configured threshold or default
-		var isOpen = Math.Abs(deltaX) > threshold;
+		var thresholdDp = Threshold > 0 ? Threshold : 150; // dp
+		var thresholdPx = thresholdDp.ToPixels();
+		var isOpen = Math.Abs(deltaX) > thresholdPx;
 
 		if (isOpen && _currentSwipeDirection == SwipeDirection.Left && RightItems != null)
 		{
@@ -158,7 +159,7 @@ public partial class SwipeView
 			NativeView.RemoveView(_swipeItemsLayout);
 
 		// Create swipe items container
-		_swipeItemsLayout = new LinearLayout(Platform.Context)
+		_swipeItemsLayout = new LinearLayout(NativeView.Context!)
 		{
 			Orientation = Android.Widget.Orientation.Horizontal,
 			LayoutParameters = new FrameLayout.LayoutParams(
@@ -171,11 +172,11 @@ public partial class SwipeView
 			if (!item.IsVisible)
 				continue;
 
-			const int buttonWidth = 200; // Default button width in pixels (~75dp on typical screen)
-			var button = new Android.Widget.Button(Platform.Context)
+			var buttonWidthPx = 75.ToPixels(); // 75dp converted to pixels
+			var button = new Android.Widget.Button(NativeView.Context!)
 			{
 				Text = item.Text ?? "",
-				LayoutParameters = new LinearLayout.LayoutParams(buttonWidth, Android.Views.ViewGroup.LayoutParams.MatchParent)
+				LayoutParameters = new LinearLayout.LayoutParams(buttonWidthPx, Android.Views.ViewGroup.LayoutParams.MatchParent)
 			};
 
 			if (item.BackgroundColor != null)
@@ -251,7 +252,7 @@ public partial class SwipeView
 		// Add new content
 		if (newContent != null)
 		{
-			_contentView = new FrameLayout(Platform.Context)
+			_contentView = new FrameLayout(NativeView.Context!)
 			{
 				LayoutParameters = new FrameLayout.LayoutParams(
 					Android.Views.ViewGroup.LayoutParams.MatchParent,
@@ -268,8 +269,8 @@ public partial class SwipeView
 		{
 			SwipeDirection.Left => RightItems,
 			SwipeDirection.Right => LeftItems,
-			SwipeDirection.Up => BottomItems,
-			SwipeDirection.Down => TopItems,
+			SwipeDirection.Up => null, // vertical not yet supported
+			SwipeDirection.Down => null, // vertical not yet supported
 			_ => null
 		};
 
