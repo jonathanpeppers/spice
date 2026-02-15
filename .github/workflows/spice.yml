@@ -110,7 +110,7 @@ jobs:
     - name: restore
       run: |
         dotnet restore tests/Spice.UITests/Spice.UITests.csproj
-        dotnet restore samples/Spice.Scenarios/Spice.Scenarios.csproj
+        dotnet restore samples/Spice.Scenarios/Spice.Scenarios.csproj -p:TargetFrameworks=net10.0-android
 
     - name: Enable KVM
       run: |
