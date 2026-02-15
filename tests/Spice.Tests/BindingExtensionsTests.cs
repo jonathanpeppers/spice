@@ -136,7 +136,7 @@ public class BindingExtensionsTests
 
 		// Act & Assert
 		Assert.Throws<ArgumentNullException>(() =>
-			viewModel.Bind(nameof(viewModel.Title), null!, text => label.Text = text));
+			viewModel.Bind(nameof(viewModel.Title), (Func<TestViewModel, string>)null!, text => label.Text = text));
 	}
 
 	[Fact]
