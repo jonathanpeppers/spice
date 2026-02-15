@@ -183,7 +183,7 @@ public partial class CollectionView
 				viewHolder.Container.RemoveAllViews();
 
 				// Create and add the view
-				var view = parent.ItemTemplate(item);
+				var view = parent.CreateItemView(item);
 				viewHolder.Container.AddView((Android.Views.View)view);
 
 				// Handle selection
