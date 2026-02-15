@@ -20,11 +20,14 @@ This spec defines when and how disposal happens on each platform.
 
 ## Proposed: IDisposable Contract
 
+**Key principle:** Only custom Views that hold resources implement `IDisposable` (opt-in).
+Built-in Views (Button, Label, StackLayout, etc.) do **not** implement `IDisposable`.
+
 ### What Gets Disposed
 
-1. **Views that implement `IDisposable`** — called when the view is destroyed
-2. **Children of a disposed view** — disposing a parent recursively disposes children
-3. **Recurring:** Resources kept alive by `Bind()` subscriptions can be freed this way
+1. **Custom Views that implement `IDisposable`** — `Dispose()` is called when the view is destroyed
+2. **Children of a disposed view** — if a parent is disposed, it recursively disposes children that are `IDisposable`
+3. **Resources:** Event subscriptions, timers, and `Bind()` subscriptions can be freed this way
 
 ### Platform Semantics
 
@@ -170,34 +173,40 @@ that need explicit cleanup.
 
 ## Implementation Roadmap
 
-### Phase 1: Documentation (this spec)
-- Establish the contract
+### Phase 1: Documentation (this spec) ✓
+- Establish the contract: custom Views can implement `IDisposable`
 - Show patterns and examples
 - Guide developers on when to implement `IDisposable`
 
-### Phase 2: View Base Class (future)
-Add a virtual `protected virtual void OnDisposed()` hook to `View`:
+### Phase 2: Platform Integration (future)
+**Android:** Call `Dispose()` on the app's top-level View during `Activity.OnDestroy()`
 
 ```csharp
-public partial class View : ObservableObject
+protected override void OnDestroy()
 {
-    protected virtual void OnDisposed() { }
-
-    void IDisposable.Dispose()
-    {
-        OnDisposed();
-        foreach (var child in Children)
-            if (child is IDisposable d)
-                d.Dispose();
-    }
+    if (_appView is IDisposable disposable)
+        disposable.Dispose();
+    base.OnDestroy();
 }
 ```
 
-Then platform-specific code calls `Dispose()` at the right time.
+**iOS:** Hook `Children.CollectionChanged` to dispose removed views
 
-### Phase 3: Platform Integration
-- **Android:** Call `app.Main?.Dispose()` in `MainActivity.OnDestroy()`
-- **iOS:** Hook `Children.CollectionChanged` to dispose removed items
+```csharp
+// In View.cs
+private void OnChildrenChanged(object? sender, NotifyCollectionChangedEventArgs e)
+{
+    if (e.Action == NotifyCollectionChangedAction.Remove)
+    {
+        foreach (var item in e.OldItems ?? [])
+        {
+            if (item is IDisposable disposable)
+                disposable.Dispose();
+        }
+    }
+    // ... also handle Replace, etc.
+}
+```
 
 ## Example: Todo App with Cleanup
 
@@ -257,7 +266,7 @@ public class TodoListApp : Application
 
 ## Summary
 
-- Views that implement `IDisposable` will have `Dispose()` called when destroyed
-- Disposal is recursive: parent disposes children
+- Only custom Views implement `IDisposable` (opt-in) — built-in Views do not
+- Disposal is recursive: when a View is disposed, children that implement `IDisposable` are disposed too
 - Use this contract to clean up `Bind()` subscriptions and other resources
 - Platform integration will make this automatic (future)
