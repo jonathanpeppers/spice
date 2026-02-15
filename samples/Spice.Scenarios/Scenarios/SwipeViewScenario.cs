@@ -14,12 +14,12 @@ public class SwipeViewScenario : ContentView
 				new Label
 				{
 					Text = "SwipeView Demo",
-					HorizontalAlign = Align.Center
+					HorizontalOptions = LayoutOptions.Center
 				},
 				new Label
 				{
 					Text = "Swipe items left or right to see actions",
-					HorizontalAlign = Align.Center
+					HorizontalOptions = LayoutOptions.Center
 				},
 
 				// Basic swipe view with right items (swipe left to reveal)

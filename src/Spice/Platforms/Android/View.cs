@@ -93,33 +93,33 @@ public partial class View
 		}
 	}
 
-	partial void OnHorizontalAlignChanged(Align value)
+	partial void OnHorizontalOptionsChanged(LayoutOptions value)
 	{
 		// TODO: reduce JNI calls
 		if (_layoutParameters.Value is RelativeLayout.LayoutParams layoutParameters)
 		{
 			// TODO: support value changing
-			switch (value)
+			switch (value.Alignment)
 			{
-				case Align.Center:
+				case LayoutAlignment.Center:
 					layoutParameters.Width = WidthRequest >= 0 ? GetWidthInPixels() : Android.Views.ViewGroup.LayoutParams.WrapContent;
 					layoutParameters.AddRule(LayoutRules.CenterHorizontal);
 					break;
-				case Align.Start:
+				case LayoutAlignment.Start:
 					layoutParameters.Width = WidthRequest >= 0 ? GetWidthInPixels() : Android.Views.ViewGroup.LayoutParams.WrapContent;
 					layoutParameters.RemoveRule(LayoutRules.CenterHorizontal);
 					layoutParameters.AddRule(LayoutRules.AlignParentLeft);
 					break;
-				case Align.End:
+				case LayoutAlignment.End:
 					layoutParameters.Width = WidthRequest >= 0 ? GetWidthInPixels() : Android.Views.ViewGroup.LayoutParams.WrapContent;
 					layoutParameters.RemoveRule(LayoutRules.CenterHorizontal);
 					layoutParameters.AddRule(LayoutRules.AlignParentRight);
 					break;
-				case Align.Stretch:
+				case LayoutAlignment.Fill:
 					layoutParameters.Width = WidthRequest >= 0 ? GetWidthInPixels() : Android.Views.ViewGroup.LayoutParams.MatchParent;
 					break;
 				default:
-					throw new NotSupportedException($"{nameof(HorizontalAlign)} value '{value}' not supported!");
+					throw new NotSupportedException($"{nameof(HorizontalOptions)} value '{value.Alignment}' not supported!");
 			}
 		}
 		else
@@ -128,35 +128,35 @@ public partial class View
 		}
 	}
 
-	partial void OnVerticalAlignChanged(Align value)
+	partial void OnVerticalOptionsChanged(LayoutOptions value)
 	{
 		// TODO: reduce JNI calls
 
 		if (_layoutParameters.Value is RelativeLayout.LayoutParams layoutParameters)
 		{
 			// TODO: support value changing
-			switch (value)
+			switch (value.Alignment)
 			{
-				case Align.Center:
+				case LayoutAlignment.Center:
 					layoutParameters.Height = HeightRequest >= 0 ? GetHeightInPixels() : Android.Views.ViewGroup.LayoutParams.WrapContent;
 					layoutParameters.RemoveRule(LayoutRules.CenterVertical);
 					layoutParameters.AddRule(LayoutRules.CenterVertical);
 					break;
-				case Align.Start:
+				case LayoutAlignment.Start:
 					layoutParameters.Height = HeightRequest >= 0 ? GetHeightInPixels() : Android.Views.ViewGroup.LayoutParams.WrapContent;
 					layoutParameters.RemoveRule(LayoutRules.CenterVertical);
 					layoutParameters.AddRule(LayoutRules.AlignParentTop);
 					break;
-				case Align.End:
+				case LayoutAlignment.End:
 					layoutParameters.Height = HeightRequest >= 0 ? GetHeightInPixels() : Android.Views.ViewGroup.LayoutParams.WrapContent;
 					layoutParameters.RemoveRule(LayoutRules.CenterVertical);
 					layoutParameters.AddRule(LayoutRules.AlignParentBottom);
 					break;
-				case Align.Stretch:
+				case LayoutAlignment.Fill:
 					layoutParameters.Height = HeightRequest >= 0 ? GetHeightInPixels() : Android.Views.ViewGroup.LayoutParams.MatchParent;
 					break;
 				default:
-					throw new NotSupportedException($"{nameof(VerticalAlign)} value '{value}' not supported!");
+					throw new NotSupportedException($"{nameof(VerticalOptions)} value '{value.Alignment}' not supported!");
 			}
 		}
 		else
@@ -196,7 +196,7 @@ public partial class View
 
 		if (value < 0)
 		{
-			layoutParameters.Width = HorizontalAlign == Align.Stretch
+			layoutParameters.Width = HorizontalOptions.Alignment == LayoutAlignment.Fill
 				? Android.Views.ViewGroup.LayoutParams.MatchParent
 				: Android.Views.ViewGroup.LayoutParams.WrapContent;
 		}
@@ -214,7 +214,7 @@ public partial class View
 
 		if (value < 0)
 		{
-			layoutParameters.Height = VerticalAlign == Align.Stretch
+			layoutParameters.Height = VerticalOptions.Alignment == LayoutAlignment.Fill
 				? Android.Views.ViewGroup.LayoutParams.MatchParent
 				: Android.Views.ViewGroup.LayoutParams.WrapContent;
 		}
