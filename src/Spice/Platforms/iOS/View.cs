@@ -81,6 +81,8 @@ public partial class View
 
 	partial void OnIsEnabledChanged(bool value) => NativeView.UserInteractionEnabled = value;
 
+	partial void OnOpacityChanged(double value) => NativeView.Alpha = (nfloat)value;
+
 	partial void OnWidthRequestChanged(double value)
 	{
 		// Trigger layout update if the view is already in the view hierarchy

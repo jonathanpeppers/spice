@@ -56,6 +56,13 @@ public partial class View : ObservableObject, IEnumerable<View>
 	bool _isEnabled = true;
 
 	/// <summary>
+	/// Gets or sets the opacity of the view, ranging from 0.0 (fully transparent) to 1.0 (fully opaque). Defaults to 1.0.
+	/// Platform implementations: UIKit.UIView.Alpha / Android.Views.View.Alpha
+	/// </summary>
+	[ObservableProperty]
+	double _opacity = 1.0;
+
+	/// <summary>
 	/// Gets or sets the desired width of the view. 
 	/// Platform implementations: UIKit.UIView.Frame.Size / Android.Views.ViewGroup.LayoutParams.Width
 	/// </summary>
