@@ -56,6 +56,13 @@ public partial class View : ObservableObject, IEnumerable<View>
 	bool _isEnabled = true;
 
 	/// <summary>
+	/// Gets or sets the automation identifier for UI testing.
+	/// Platform implementations: UIKit.UIView.AccessibilityIdentifier / Android.Views.View.Tag
+	/// </summary>
+	[ObservableProperty]
+	string? _automationId;
+
+	/// <summary>
 	/// Gets or sets the desired width of the view. 
 	/// Platform implementations: UIKit.UIView.Frame.Size / Android.Views.ViewGroup.LayoutParams.Width
 	/// </summary>

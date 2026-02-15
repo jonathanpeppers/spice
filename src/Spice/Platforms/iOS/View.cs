@@ -81,6 +81,8 @@ public partial class View
 
 	partial void OnIsEnabledChanged(bool value) => NativeView.UserInteractionEnabled = value;
 
+	partial void OnAutomationIdChanged(string? value) => NativeView.AccessibilityIdentifier = value;
+
 	partial void OnWidthRequestChanged(double value)
 	{
 		// Trigger layout update if the view is already in the view hierarchy

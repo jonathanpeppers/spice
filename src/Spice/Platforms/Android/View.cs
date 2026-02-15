@@ -171,6 +171,8 @@ public partial class View
 
 	partial void OnIsEnabledChanged(bool value) => _nativeView.Value.Enabled = value;
 
+	partial void OnAutomationIdChanged(string? value) => _nativeView.Value.Tag = value;
+
 	partial void OnWidthRequestChanged(double value)
 	{
 		var layoutParameters = _layoutParameters.Value;
