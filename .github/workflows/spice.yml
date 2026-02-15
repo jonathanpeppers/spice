@@ -108,10 +108,10 @@ jobs:
     - name: install workloads
       run: dotnet workload install maui-android --version $WORKLOAD_VERSION
 
-    - name: restore and build Spice.Scenarios
+    - name: restore
       run: |
         dotnet restore tests/Spice.UITests/Spice.UITests.csproj
-        GITHUB_ACTIONS= dotnet build samples/Spice.Scenarios/Spice.Scenarios.csproj -f net10.0-android -c Debug -p:TargetFrameworks=net10.0-android -p:EmbedAssembliesIntoApk=true
+        dotnet restore samples/Spice.Scenarios/Spice.Scenarios.csproj
 
     - name: Enable KVM
       run: |
@@ -131,16 +131,12 @@ jobs:
         api-level: 34
         arch: x86_64
         target: google_apis
-        emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -skin 1080x1920
+        emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
         script: |
-          APK_PATH=$(find $GITHUB_WORKSPACE/samples/Spice.Scenarios/bin -name "*-Signed.apk" | head -1)
-          [ -z "$APK_PATH" ] && APK_PATH=$(find $GITHUB_WORKSPACE/samples/Spice.Scenarios/bin -name "*.apk" | head -1)
-          [ -z "$APK_PATH" ] && echo "No APK found!" && exit 1
-          echo "Installing APK: $APK_PATH"
-          adb install "$APK_PATH"
+          cd $GITHUB_WORKSPACE
+          GITHUB_ACTIONS= dotnet build samples/Spice.Scenarios/Spice.Scenarios.csproj -f net10.0-android -c Debug -p:TargetFrameworks=net10.0-android -t:Install
           appium server --log-level info &
           sleep 5
-          cd $GITHUB_WORKSPACE
           TEST_EXIT=0
           dotnet test tests/Spice.UITests/Spice.UITests.csproj -c Debug --logger trx --results-directory test-artifacts || TEST_EXIT=$?
           adb logcat -d > $GITHUB_WORKSPACE/test-artifacts/logcat.txt || true
