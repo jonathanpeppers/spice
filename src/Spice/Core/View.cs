@@ -81,6 +81,13 @@ public partial class View : ObservableObject, IEnumerable<View>
 	partial void OnOpacityChanged(double value);
 
 	/// <summary>
+	/// Space around the view. Supports uniform (10), horizontal/vertical (10,20), or individual sides (10,20,30,40).
+	/// Aligns with Microsoft.Maui Margin property.
+	/// </summary>
+	[ObservableProperty]
+	Thickness _margin;
+
+	/// <summary>
 	/// Gets or sets the desired width of the view. 
 	/// Platform implementations: UIKit.UIView.Frame.Size / Android.Views.ViewGroup.LayoutParams.Width
 	/// </summary>

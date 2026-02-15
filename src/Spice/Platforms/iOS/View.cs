@@ -83,6 +83,8 @@ public partial class View
 
 	partial void OnOpacityChanged(double value) => NativeView.Alpha = (nfloat)value;
 
+	partial void OnMarginChanged(Thickness value) => UpdateAlign();
+
 	partial void OnWidthRequestChanged(double value)
 	{
 		// Trigger layout update if the view is already in the view hierarchy
@@ -116,23 +118,31 @@ public partial class View
 		var superframe = superview.Frame;
 		var frame = new CGRect();
 
+		// Apply margins
+		var marginLeft = (nfloat)_margin.Left;
+		var marginTop = (nfloat)_margin.Top;
+		var marginRight = (nfloat)_margin.Right;
+		var marginBottom = (nfloat)_margin.Bottom;
+		var availableWidth = superframe.Width - marginLeft - marginRight;
+		var availableHeight = superframe.Height - marginTop - marginBottom;
+
 		switch (_horizontalAlign)
 		{
 			case Align.Center:
 				frame.Width = getSize().Width;
-				frame.X = (superframe.Width - frame.Width) / 2;
+				frame.X = marginLeft + (availableWidth - frame.Width) / 2;
 				break;
 			case Align.Start:
 				frame.Width = getSize().Width;
-				frame.X = 0;
+				frame.X = marginLeft;
 				break;
 			case Align.End:
 				frame.Width = getSize().Width;
-				frame.X = superframe.Width - frame.Width;
+				frame.X = superframe.Width - marginRight - frame.Width;
 				break;
 			case Align.Stretch:
-				frame.Width = WidthRequest >= 0 ? (nfloat)WidthRequest : superframe.Width;
-				frame.X = 0;
+				frame.Width = WidthRequest >= 0 ? (nfloat)WidthRequest : availableWidth;
+				frame.X = marginLeft;
 				break;
 			default:
 				throw new NotSupportedException($"{nameof(HorizontalAlign)} value '{_horizontalAlign}' not supported!");
@@ -142,19 +152,19 @@ public partial class View
 		{
 			case Align.Center:
 				frame.Height = getSize().Height;
-				frame.Y = (superframe.Height - frame.Height) / 2;
+				frame.Y = marginTop + (availableHeight - frame.Height) / 2;
 				break;
 			case Align.Start:
 				frame.Height = getSize().Height;
-				frame.Y = 0;
+				frame.Y = marginTop;
 				break;
 			case Align.End:
 				frame.Height = getSize().Height;
-				frame.Y = superframe.Height - frame.Height;
+				frame.Y = superframe.Height - marginBottom - frame.Height;
 				break;
 			case Align.Stretch:
-				frame.Height = HeightRequest >= 0 ? (nfloat)HeightRequest : superframe.Height;
-				frame.Y = 0;
+				frame.Height = HeightRequest >= 0 ? (nfloat)HeightRequest : availableHeight;
+				frame.Y = marginTop;
 				break;
 			default:
 				throw new NotSupportedException($"{nameof(VerticalAlign)} value '{_verticalAlign}' not supported!");
