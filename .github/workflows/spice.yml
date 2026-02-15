@@ -131,7 +131,14 @@ jobs:
         arch: x86_64
         target: google_apis
         script: |
-          APK_PATH=$(find samples/Spice.Scenarios/bin -name "*-Signed.apk" | head -1)
+          echo "=== Finding APK ==="
+          find $GITHUB_WORKSPACE/samples/Spice.Scenarios/bin -name "*.apk" -o -name "*.aab" | head -10
+          APK_PATH=$(find $GITHUB_WORKSPACE/samples/Spice.Scenarios/bin -name "*-Signed.apk" -o -name "*.apk" | head -1)
+          if [ -z "$APK_PATH" ]; then
+            echo "No APK found!"
+            find $GITHUB_WORKSPACE/samples/Spice.Scenarios/bin -type f | head -30
+            exit 1
+          fi
           echo "Installing APK: $APK_PATH"
           adb install "$APK_PATH"
           adb shell am start -n com.companyname.spice.scenarios/com.companyname.spice.scenarios.MainActivity
@@ -141,10 +148,11 @@ jobs:
           echo "=== Starting Appium ==="
           appium server --log-level info &
           sleep 5
+          cd $GITHUB_WORKSPACE
           dotnet test tests/Spice.UITests/Spice.UITests.csproj -c Debug --logger trx --results-directory test-artifacts || true
           echo "=== Post-test UI Dump ==="
-          adb shell uiautomator dump /sdcard/window_dump2.xml && adb pull /sdcard/window_dump2.xml test-artifacts/window_dump.xml || true
-          adb logcat -d > test-artifacts/logcat.txt || true
+          adb shell uiautomator dump /sdcard/window_dump2.xml && adb pull /sdcard/window_dump2.xml $GITHUB_WORKSPACE/test-artifacts/window_dump.xml || true
+          adb logcat -d > $GITHUB_WORKSPACE/test-artifacts/logcat.txt || true
 
     - name: Upload UI test results
       uses: actions/upload-artifact@v4
