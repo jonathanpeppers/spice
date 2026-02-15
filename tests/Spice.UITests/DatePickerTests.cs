@@ -13,11 +13,11 @@ public class DatePickerTests : BaseTest
             InitializeAndroidDriver();
 
             // Act - Navigate to DatePicker scenario
-            var datePickerButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='DatePicker']"));
+            var datePickerButton = FindButtonByText("DatePicker");
             datePickerButton.Click();
 
             // Assert - Find the selected label showing date
-            var selectedLabel = Driver.FindElement(By.XPath("//android.widget.TextView[contains(@text, 'Selected:')]"));
+            var selectedLabel = FindTextViewContaining("Selected:");
             Assert.NotNull(selectedLabel);
             Assert.Contains("Selected:", selectedLabel.Text);
         }

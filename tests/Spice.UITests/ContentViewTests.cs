@@ -13,17 +13,17 @@ public class ContentViewTests : BaseTest
             InitializeAndroidDriver();
 
             // Act - Navigate to ContentView scenario
-            var contentViewButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='ContentView']"));
+            var contentViewButton = FindButtonByText("ContentView");
             contentViewButton.Click();
 
             // Assert - Find labels within ContentView
-            var exampleLabel = Driver.FindElement(By.XPath("//android.widget.TextView[@text='ContentView Example']"));
+            var exampleLabel = FindTextViewContaining("ContentView Example");
             Assert.NotNull(exampleLabel);
 
-            var simpleLabel = Driver.FindElement(By.XPath("//android.widget.TextView[@text='Simple ContentView']"));
+            var simpleLabel = FindTextViewContaining("Simple ContentView");
             Assert.NotNull(simpleLabel);
 
-            var nestedLabel = Driver.FindElement(By.XPath("//android.widget.TextView[@text='Nested ContentView']"));
+            var nestedLabel = FindTextViewContaining("Nested ContentView");
             Assert.NotNull(nestedLabel);
         }
         catch (Exception)

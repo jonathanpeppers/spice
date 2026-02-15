@@ -13,11 +13,11 @@ public class PickerTests : BaseTest
             InitializeAndroidDriver();
 
             // Act - Navigate to Picker scenario
-            var pickerButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='Picker']"));
+            var pickerButton = FindButtonByText("Picker");
             pickerButton.Click();
 
             // Assert - Find the result label
-            var resultLabel = Driver.FindElement(By.XPath("//android.widget.TextView[contains(@text, 'No selection')]"));
+            var resultLabel = FindTextViewContaining("No selection");
             Assert.NotNull(resultLabel);
             Assert.Contains("No selection", resultLabel.Text);
         }

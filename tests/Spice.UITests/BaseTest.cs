@@ -65,6 +65,35 @@ public abstract class BaseTest : IDisposable
         Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
     }
 
+    /// <summary>
+    /// Finds a button by text, scrolling if needed. Android's default button style
+    /// transforms text to uppercase, so this matches using the uppercased text.
+    /// </summary>
+    protected AppiumElement FindButtonByText(string text)
+    {
+        var upper = text.ToUpperInvariant();
+        var uiSelector = $"new UiSelector().className(\"android.widget.Button\").text(\"{upper}\")";
+        try
+        {
+            return Driver.FindElement(MobileBy.AndroidUIAutomator(uiSelector));
+        }
+        catch
+        {
+            // If not immediately visible, try scrolling into view
+            return Driver.FindElement(MobileBy.AndroidUIAutomator(
+                $"new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView({uiSelector})"));
+        }
+    }
+
+    /// <summary>
+    /// Finds a TextView by partial text match.
+    /// </summary>
+    protected AppiumElement FindTextViewContaining(string text)
+    {
+        return Driver.FindElement(MobileBy.AndroidUIAutomator(
+            $"new UiSelector().className(\"android.widget.TextView\").textContains(\"{text}\")"));
+    }
+
     protected void CaptureTestFailureDiagnostics([CallerMemberName] string testName = "")
     {
         var timestamp = DateTime.Now.ToString("yyyyMMdd-HHmmss");

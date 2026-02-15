@@ -13,7 +13,7 @@ public class WebViewTests : BaseTest
             InitializeAndroidDriver();
 
             // Act - Navigate to WebView scenario
-            var webViewButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='WebView']"));
+            var webViewButton = FindButtonByText("WebView");
             webViewButton.Click();
 
             // Assert - Find WebView control (implicit wait handles load time)

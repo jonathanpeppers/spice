@@ -13,7 +13,7 @@ public class EntryTests : BaseTest
             InitializeAndroidDriver();
 
             // Act - Navigate to Entry scenario
-            var entryButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='Entry']"));
+            var entryButton = FindButtonByText("Entry");
             entryButton.Click();
 
             // Assert - Find EditText controls

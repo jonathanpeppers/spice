@@ -140,9 +140,11 @@ jobs:
         appium server --log-level info &
         sleep 5
         cd $GITHUB_WORKSPACE
-        dotnet test tests/Spice.UITests/Spice.UITests.csproj -c Debug --logger trx --results-directory test-artifacts || true
+        TEST_EXIT=0
+        dotnet test tests/Spice.UITests/Spice.UITests.csproj -c Debug --logger trx --results-directory test-artifacts || TEST_EXIT=$?
         adb shell uiautomator dump /sdcard/window_dump2.xml && adb pull /sdcard/window_dump2.xml $GITHUB_WORKSPACE/test-artifacts/window_dump.xml || true
         adb logcat -d > $GITHUB_WORKSPACE/test-artifacts/logcat.txt || true
+        exit $TEST_EXIT
         SCRIPT
         sed -i 's/^        //' $GITHUB_WORKSPACE/run-ui-tests.sh
         chmod +x $GITHUB_WORKSPACE/run-ui-tests.sh

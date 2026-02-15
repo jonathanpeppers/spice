@@ -13,11 +13,11 @@ public class TimePickerTests : BaseTest
             InitializeAndroidDriver();
 
             // Act - Navigate to TimePicker scenario
-            var timePickerButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='TimePicker']"));
+            var timePickerButton = FindButtonByText("TimePicker");
             timePickerButton.Click();
 
             // Assert - Find the selected label showing time (initially 9:30 AM)
-            var selectedLabel = Driver.FindElement(By.XPath("//android.widget.TextView[contains(@text, 'Selected:')]"));
+            var selectedLabel = FindTextViewContaining("Selected:");
             Assert.NotNull(selectedLabel);
             Assert.Contains("Selected:", selectedLabel.Text);
             

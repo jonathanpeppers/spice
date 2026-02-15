@@ -13,21 +13,21 @@ public class ButtonTests : BaseTest
             InitializeAndroidDriver();
 
             // Act - Navigate to Hello World scenario
-            var helloWorldButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='Hello World']"));
+            var helloWorldButton = FindButtonByText("Hello World");
             helloWorldButton.Click();
 
             // Find the "Click Me" button
-            var clickMeButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='Click Me']"));
+            var clickMeButton = FindButtonByText("Click Me");
             
             // Find the label - it should initially say "Hello, Spice 🌶"
-            var label = Driver.FindElement(By.XPath("//android.widget.TextView[contains(@text, 'Hello, Spice')]"));
+            var label = FindTextViewContaining("Hello, Spice");
             Assert.Contains("Hello, Spice", label.Text);
 
             // Click the button
             clickMeButton.Click();
 
             // Assert - Label should update to show click count
-            label = Driver.FindElement(By.XPath("//android.widget.TextView[contains(@text, 'Times:')]"));
+            label = FindTextViewContaining("Times:");
             Assert.Contains("Times: 1", label.Text);
         }
         catch (Exception)

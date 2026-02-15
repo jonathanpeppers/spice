@@ -13,7 +13,7 @@ public class ImageTests : BaseTest
             InitializeAndroidDriver();
 
             // Act - Navigate to Hello World scenario
-            var helloWorldButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='Hello World']"));
+            var helloWorldButton = FindButtonByText("Hello World");
             helloWorldButton.Click();
 
             // Assert - Find the image view (spice image)

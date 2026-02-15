@@ -13,7 +13,7 @@ public class SliderTests : BaseTest
             InitializeAndroidDriver();
 
             // Act - Navigate to Slider scenario
-            var sliderButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='Slider']"));
+            var sliderButton = FindButtonByText("Slider");
             sliderButton.Click();
 
             // Assert - Find SeekBar controls (Slider maps to SeekBar on Android)
@@ -21,7 +21,7 @@ public class SliderTests : BaseTest
             Assert.True(seekBars.Count >= 3, "Should have at least 3 Slider controls");
 
             // Find the value label
-            var valueLabel = Driver.FindElement(By.XPath("//android.widget.TextView[contains(@text, 'Value: 50')]"));
+            var valueLabel = FindTextViewContaining("Value: 50");
             Assert.NotNull(valueLabel);
             Assert.Contains("Value: 50", valueLabel.Text);
         }

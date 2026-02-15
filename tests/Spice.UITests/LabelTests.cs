@@ -13,11 +13,11 @@ public class LabelTests : BaseTest
             InitializeAndroidDriver();
 
             // Act - Navigate to Hello World scenario
-            var helloWorldButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='Hello World']"));
+            var helloWorldButton = FindButtonByText("Hello World");
             helloWorldButton.Click();
 
             // Assert - Find and verify the label text
-            var label = Driver.FindElement(By.XPath("//android.widget.TextView[contains(@text, 'Hello, Spice')]"));
+            var label = FindTextViewContaining("Hello, Spice");
             Assert.NotNull(label);
             Assert.Contains("Hello, Spice", label.Text);
         }

@@ -19,7 +19,7 @@ public class StackLayoutTests : BaseTest
             Assert.True(buttons.Count > 0, "StackLayout should contain multiple buttons");
             
             // Verify buttons are present
-            var helloWorldButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='Hello World']"));
+            var helloWorldButton = FindButtonByText("Hello World");
             Assert.NotNull(helloWorldButton);
         }
         catch (Exception)
@@ -38,13 +38,13 @@ public class StackLayoutTests : BaseTest
             InitializeAndroidDriver();
 
             // Act - Navigate to Hello World scenario which uses StackLayout
-            var helloWorldButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='Hello World']"));
+            var helloWorldButton = FindButtonByText("Hello World");
             helloWorldButton.Click();
 
             // Assert - Children should be displayed in the order: Image, Label, Button
             var image = Driver.FindElement(By.ClassName("android.widget.ImageView"));
-            var label = Driver.FindElement(By.XPath("//android.widget.TextView[contains(@text, 'Hello, Spice')]"));
-            var button = Driver.FindElement(By.XPath("//android.widget.Button[@text='Click Me']"));
+            var label = FindTextViewContaining("Hello, Spice");
+            var button = FindButtonByText("Click Me");
 
             Assert.NotNull(image);
             Assert.NotNull(label);

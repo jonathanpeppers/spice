@@ -13,11 +13,11 @@ public class ProgressBarTests : BaseTest
             InitializeAndroidDriver();
 
             // Act - Navigate to ProgressBar scenario
-            var progressBarButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='ProgressBar']"));
+            var progressBarButton = FindButtonByText("ProgressBar");
             progressBarButton.Click();
 
             // Assert - Find the progress label
-            var progressLabel = Driver.FindElement(By.XPath("//android.widget.TextView[contains(@text, 'Progress:')]"));
+            var progressLabel = FindTextViewContaining("Progress:");
             Assert.NotNull(progressLabel);
             Assert.Contains("Progress: 0%", progressLabel.Text);
         }
@@ -37,17 +37,17 @@ public class ProgressBarTests : BaseTest
             InitializeAndroidDriver();
 
             // Act - Navigate to ProgressBar scenario
-            var progressBarButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='ProgressBar']"));
+            var progressBarButton = FindButtonByText("ProgressBar");
             progressBarButton.Click();
 
             // Find the increment button
-            var incrementButton = Driver.FindElement(By.XPath("//android.widget.Button[contains(@text, 'Increment Progress')]"));
+            var incrementButton = FindButtonByText("Increment Progress (+10%)");
             
             // Click increment button
             incrementButton.Click();
 
             // Assert - Progress should increase to 10%
-            var progressLabel = Driver.FindElement(By.XPath("//android.widget.TextView[contains(@text, 'Progress:')]"));
+            var progressLabel = FindTextViewContaining("Progress:");
             Assert.Contains("Progress: 10%", progressLabel.Text);
         }
         catch (Exception)
@@ -66,17 +66,17 @@ public class ProgressBarTests : BaseTest
             InitializeAndroidDriver();
 
             // Act - Navigate to ProgressBar scenario
-            var progressBarButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='ProgressBar']"));
+            var progressBarButton = FindButtonByText("ProgressBar");
             progressBarButton.Click();
 
             // Find the set to 50% button
-            var setHalfButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='Set to 50%']"));
+            var setHalfButton = FindButtonByText("Set to 50%");
             
             // Click button
             setHalfButton.Click();
 
             // Assert - Progress should be 50%
-            var progressLabel = Driver.FindElement(By.XPath("//android.widget.TextView[contains(@text, 'Progress:')]"));
+            var progressLabel = FindTextViewContaining("Progress:");
             Assert.Contains("Progress: 50%", progressLabel.Text);
         }
         catch (Exception)

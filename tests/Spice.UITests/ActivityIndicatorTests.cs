@@ -13,7 +13,7 @@ public class ActivityIndicatorTests : BaseTest
             InitializeAndroidDriver();
 
             // Act - Navigate to ActivityIndicator scenario
-            var activityIndicatorButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='ActivityIndicator']"));
+            var activityIndicatorButton = FindButtonByText("ActivityIndicator");
             activityIndicatorButton.Click();
 
             // Assert - Find ProgressBar (ActivityIndicator maps to ProgressBar on Android)
@@ -37,11 +37,11 @@ public class ActivityIndicatorTests : BaseTest
             InitializeAndroidDriver();
 
             // Act - Navigate to ActivityIndicator scenario
-            var activityIndicatorButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='ActivityIndicator']"));
+            var activityIndicatorButton = FindButtonByText("ActivityIndicator");
             activityIndicatorButton.Click();
 
             // Find the toggle button
-            var toggleButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='Toggle Running']"));
+            var toggleButton = FindButtonByText("Toggle Running");
             
             // Assert - ProgressBar should exist
             var progressBar = Driver.FindElement(By.ClassName("android.widget.ProgressBar"));

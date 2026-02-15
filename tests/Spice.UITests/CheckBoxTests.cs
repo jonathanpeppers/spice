@@ -13,7 +13,7 @@ public class CheckBoxTests : BaseTest
             InitializeAndroidDriver();
 
             // Act - Navigate to CheckBox scenario
-            var checkBoxButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='CheckBox']"));
+            var checkBoxButton = FindButtonByText("CheckBox");
             checkBoxButton.Click();
 
             // Assert - Find checkboxes
@@ -21,7 +21,7 @@ public class CheckBoxTests : BaseTest
             Assert.True(checkBoxes.Count >= 3, "Should have at least 3 CheckBox controls");
 
             // Find the label showing selected count
-            var selectedLabel = Driver.FindElement(By.XPath("//android.widget.TextView[contains(@text, 'selected')]"));
+            var selectedLabel = FindTextViewContaining("selected");
             Assert.NotNull(selectedLabel);
             // Initially one checkbox is checked (Option 3)
             Assert.Contains("1 item selected", selectedLabel.Text);
@@ -42,7 +42,7 @@ public class CheckBoxTests : BaseTest
             InitializeAndroidDriver();
 
             // Act - Navigate to CheckBox scenario
-            var checkBoxButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='CheckBox']"));
+            var checkBoxButton = FindButtonByText("CheckBox");
             checkBoxButton.Click();
 
             // Find the first checkbox and click it
@@ -51,7 +51,7 @@ public class CheckBoxTests : BaseTest
             firstCheckBox.Click();
 
             // Assert - Label should update to show 2 items selected
-            var selectedLabel = Driver.FindElement(By.XPath("//android.widget.TextView[contains(@text, 'selected')]"));
+            var selectedLabel = FindTextViewContaining("selected");
             Assert.Contains("2 items selected", selectedLabel.Text);
         }
         catch (Exception)

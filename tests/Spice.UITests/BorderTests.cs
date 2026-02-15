@@ -13,21 +13,21 @@ public class BorderTests : BaseTest
             InitializeAndroidDriver();
 
             // Act - Navigate to Border scenario
-            var borderButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='Border']"));
+            var borderButton = FindButtonByText("Border");
             borderButton.Click();
 
             // Assert - Find the title
-            var titleLabel = Driver.FindElement(By.XPath("//android.widget.TextView[@text='Border Examples']"));
+            var titleLabel = FindTextViewContaining("Border Examples");
             Assert.NotNull(titleLabel);
 
             // Find labels within borders
-            var simpleBorderLabel = Driver.FindElement(By.XPath("//android.widget.TextView[@text='Simple Border']"));
+            var simpleBorderLabel = FindTextViewContaining("Simple Border");
             Assert.NotNull(simpleBorderLabel);
 
-            var coloredBorderLabel = Driver.FindElement(By.XPath("//android.widget.TextView[@text='Border with Background']"));
+            var coloredBorderLabel = FindTextViewContaining("Border with Background");
             Assert.NotNull(coloredBorderLabel);
 
-            var roundedBorderLabel = Driver.FindElement(By.XPath("//android.widget.TextView[@text='Rounded Border']"));
+            var roundedBorderLabel = FindTextViewContaining("Rounded Border");
             Assert.NotNull(roundedBorderLabel);
         }
         catch (Exception)

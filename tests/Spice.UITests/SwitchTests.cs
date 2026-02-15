@@ -13,7 +13,7 @@ public class SwitchTests : BaseTest
             InitializeAndroidDriver();
 
             // Act - Navigate to Switch scenario
-            var switchButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='Switch']"));
+            var switchButton = FindButtonByText("Switch");
             switchButton.Click();
 
             // Find the first switch control
@@ -23,7 +23,7 @@ public class SwitchTests : BaseTest
             var firstSwitch = switches[0];
             
             // Find the label that shows switch state
-            var stateLabel = Driver.FindElement(By.XPath("//android.widget.TextView[contains(@text, 'Switch is')]"));
+            var stateLabel = FindTextViewContaining("Switch is");
             
             // Initially should be OFF
             Assert.Contains("Switch is OFF", stateLabel.Text);
@@ -32,7 +32,7 @@ public class SwitchTests : BaseTest
             firstSwitch.Click();
 
             // Assert - Label should update to ON
-            stateLabel = Driver.FindElement(By.XPath("//android.widget.TextView[contains(@text, 'Switch is')]"));
+            stateLabel = FindTextViewContaining("Switch is");
             Assert.Contains("Switch is ON", stateLabel.Text);
         }
         catch (Exception)
@@ -51,14 +51,14 @@ public class SwitchTests : BaseTest
             InitializeAndroidDriver();
 
             // Act - Navigate to Switch scenario
-            var switchButton = Driver.FindElement(By.XPath("//android.widget.Button[@text='Switch']"));
+            var switchButton = FindButtonByText("Switch");
             switchButton.Click();
 
             // Find the toggle button
-            var toggleButton = Driver.FindElement(By.XPath("//android.widget.Button[contains(@text, 'Toggle First Switch')]"));
+            var toggleButton = FindButtonByText("Toggle First Switch Programmatically");
             
             // Find the label that shows switch state
-            var stateLabel = Driver.FindElement(By.XPath("//android.widget.TextView[contains(@text, 'Switch is')]"));
+            var stateLabel = FindTextViewContaining("Switch is");
             
             // Initially should be OFF
             Assert.Contains("Switch is OFF", stateLabel.Text);
@@ -67,7 +67,7 @@ public class SwitchTests : BaseTest
             toggleButton.Click();
 
             // Assert - Label should update to ON
-            stateLabel = Driver.FindElement(By.XPath("//android.widget.TextView[contains(@text, 'Switch is')]"));
+            stateLabel = FindTextViewContaining("Switch is");
             Assert.Contains("Switch is ON", stateLabel.Text);
         }
         catch (Exception)

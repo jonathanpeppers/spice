@@ -43,9 +43,9 @@ public class AppLaunchTests : BaseTest
 
             // Verify some expected buttons exist
             var buttonTexts = buttons.Select(b => b.Text).ToList();
-            Assert.Contains("Hello World", buttonTexts);
-            Assert.Contains("ImageButton", buttonTexts);
-            Assert.Contains("WebView", buttonTexts);
+            Assert.Contains("HELLO WORLD", buttonTexts);
+            Assert.Contains("IMAGEBUTTON", buttonTexts);
+            Assert.Contains("WEBVIEW", buttonTexts);
         }
         catch (Exception)
         {
