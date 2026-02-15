@@ -39,6 +39,8 @@ public partial class SwipeItems : ObservableObject
 	/// <param name="items">The collection of SwipeItem objects to add.</param>
 	public SwipeItems(IEnumerable<SwipeItem> items)
 	{
+		ArgumentNullException.ThrowIfNull(items);
+		
 		foreach (var item in items)
 		{
 			Items.Add(item);
