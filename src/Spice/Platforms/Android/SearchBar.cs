@@ -78,7 +78,10 @@ public partial class SearchBar
 			{
 				if (value != null)
 				{
-					editText.SetHintTextColor(value.ToAndroidInt());
+					int color = value.ToAndroidInt();
+					editText.SetHintTextColor(new Android.Content.Res.ColorStateList(
+						new[] { Array.Empty<int>() },
+						new[] { color }));
 				}
 				else
 				{
