@@ -32,6 +32,13 @@ public class SpiceSceneDelegate<TApp> : UIResponder, IUIWindowSceneDelegate wher
 			Window = Platform.Window = new UIWindow(windowScene);
 
 			var vc = new UIViewController();
+			
+			// Dispose existing app view if reconnecting
+			if (_appView != null)
+			{
+				View.DisposeRecursive(_appView);
+			}
+			
 			_appView = new TApp();
 			vc.View!.AddSubview(_appView);
 			Window.RootViewController = vc;
