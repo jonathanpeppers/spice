@@ -5,35 +5,19 @@ namespace Spice.UITests;
 public class ButtonTests : BaseTest
 {
     [Fact]
-    public void HelloWorld_Button_Should_UpdateLabel()
+    public void HelloWorld_Button_Should_UpdateLabel() => RunTest(() =>
     {
-        try
-        {
-            // Arrange
-            InitializeAndroidDriver();
+        var helloWorldButton = FindButtonByText("Hello World");
+        helloWorldButton.Click();
 
-            // Act - Navigate to Hello World scenario
-            var helloWorldButton = FindButtonByText("Hello World");
-            helloWorldButton.Click();
+        var clickMeButton = FindButtonByText("Click Me");
+        
+        var label = FindTextViewContaining("Hello, Spice");
+        Assert.Contains("Hello, Spice", label.Text);
 
-            // Find the "Click Me" button
-            var clickMeButton = FindButtonByText("Click Me");
-            
-            // Find the label - it should initially say "Hello, Spice 🌶"
-            var label = FindTextViewContaining("Hello, Spice");
-            Assert.Contains("Hello, Spice", label.Text);
+        clickMeButton.Click();
 
-            // Click the button
-            clickMeButton.Click();
-
-            // Assert - Label should update to show click count
-            label = FindTextViewContaining("Times:");
-            Assert.Contains("Times: 1", label.Text);
-        }
-        catch (Exception)
-        {
-            CaptureTestFailureDiagnostics();
-            throw;
-        }
-    }
+        label = FindTextViewContaining("Times:");
+        Assert.Contains("Times: 1", label.Text);
+    });
 }

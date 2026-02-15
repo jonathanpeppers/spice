@@ -5,26 +5,13 @@ namespace Spice.UITests;
 public class WebViewTests : BaseTest
 {
     [Fact]
-    public void WebView_Should_LoadWebsite()
+    public void WebView_Should_LoadWebsite() => RunTest(() =>
     {
-        try
-        {
-            // Arrange
-            InitializeAndroidDriver();
+        var webViewButton = FindButtonByText("WebView");
+        webViewButton.Click();
 
-            // Act - Navigate to WebView scenario
-            var webViewButton = FindButtonByText("WebView");
-            webViewButton.Click();
-
-            // Assert - Find WebView control (implicit wait handles load time)
-            var webView = Driver.FindElement(By.ClassName("android.webkit.WebView"));
-            Assert.NotNull(webView);
-            Assert.True(webView.Displayed);
-        }
-        catch (Exception)
-        {
-            CaptureTestFailureDiagnostics();
-            throw;
-        }
-    }
+        var webView = Driver.FindElement(By.ClassName("android.webkit.WebView"));
+        Assert.NotNull(webView);
+        Assert.True(webView.Displayed);
+    });
 }

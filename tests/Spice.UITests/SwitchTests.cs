@@ -1,53 +1,28 @@
-using OpenQA.Selenium;
-
 namespace Spice.UITests;
 
 public class SwitchTests : BaseTest
 {
     [Fact]
-    public void Switch_Should_ToggleAndUpdateLabel()
+    public void Switch_Should_ToggleAndUpdateLabel() => RunTest(() =>
     {
-        try
-        {
-            InitializeAndroidDriver();
+        var switchButton = FindButtonByText("Switch");
+        switchButton.Click();
 
-            var switchButton = FindButtonByText("Switch");
-            switchButton.Click();
-
-            // Find the label that shows switch state — initially OFF
-            var stateLabel = FindTextViewContaining("Switch is OFF");
-            Assert.NotNull(stateLabel);
-        }
-        catch (Exception)
-        {
-            CaptureTestFailureDiagnostics();
-            throw;
-        }
-    }
+        var stateLabel = FindTextViewContaining("Switch is OFF");
+        Assert.NotNull(stateLabel);
+    });
 
     [Fact]
-    public void Switch_Should_ToggleProgrammatically()
+    public void Switch_Should_ToggleProgrammatically() => RunTest(() =>
     {
-        try
-        {
-            InitializeAndroidDriver();
+        var switchButton = FindButtonByText("Switch");
+        switchButton.Click();
 
-            var switchButton = FindButtonByText("Switch");
-            switchButton.Click();
+        var toggleButton = FindButtonByText("Toggle First Switch Programmatically");
+        toggleButton.Click();
+        Thread.Sleep(500);
 
-            // Find and click the toggle button
-            var toggleButton = FindButtonByText("Toggle First Switch Programmatically");
-            toggleButton.Click();
-            Thread.Sleep(500);
-
-            // Label should update to ON
-            var stateLabel = FindTextViewContaining("Switch is ON");
-            Assert.NotNull(stateLabel);
-        }
-        catch (Exception)
-        {
-            CaptureTestFailureDiagnostics();
-            throw;
-        }
-    }
+        var stateLabel = FindTextViewContaining("Switch is ON");
+        Assert.NotNull(stateLabel);
+    });
 }

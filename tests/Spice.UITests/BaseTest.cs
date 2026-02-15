@@ -94,7 +94,25 @@ public abstract class BaseTest : IDisposable
             $"new UiSelector().className(\"android.widget.TextView\").textContains(\"{text}\")"));
     }
 
-    protected void CaptureTestFailureDiagnostics([CallerMemberName] string testName = "")
+    /// <summary>
+    /// Runs a test body with automatic driver initialization and failure diagnostics.
+    /// Eliminates the need for try/catch in every test method.
+    /// </summary>
+    protected void RunTest(Action testBody, [CallerMemberName] string testName = "")
+    {
+        try
+        {
+            InitializeAndroidDriver();
+            testBody();
+        }
+        catch (Exception ex)
+        {
+            CaptureTestFailureDiagnostics(ex, testName);
+            throw;
+        }
+    }
+
+    void CaptureTestFailureDiagnostics(Exception testException, [CallerMemberName] string testName = "")
     {
         var timestamp = DateTime.Now.ToString("yyyyMMdd-HHmmss");
         var testArtifactDir = Path.Combine(ArtifactsPath, $"{testName}-{timestamp}");
@@ -102,13 +120,14 @@ public abstract class BaseTest : IDisposable
 
         try
         {
-            // Capture screenshot
-            CaptureScreenshot(testArtifactDir, testName);
+            // Log the exception that caused the failure
+            var exceptionPath = Path.Combine(testArtifactDir, $"{testName}-exception.txt");
+            File.WriteAllText(exceptionPath, testException.ToString());
+            Console.WriteLine($"Test {testName} failed: {testException.Message}");
 
-            // Capture logcat output
+            CaptureScreenshot(testArtifactDir, testName);
             CaptureLogcat(testArtifactDir, testName);
 
-            // Dump page source (XML view hierarchy) for debugging element class names
             try
             {
                 var source = Driver.PageSource;

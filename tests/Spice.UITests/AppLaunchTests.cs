@@ -5,52 +5,24 @@ namespace Spice.UITests;
 public class AppLaunchTests : BaseTest
 {
     [Fact]
-    public void App_Should_LaunchWithoutCrashing()
+    public void App_Should_LaunchWithoutCrashing() => RunTest(() =>
     {
-        try
-        {
-            // Arrange & Act
-            InitializeAndroidDriver();
+        Assert.NotNull(Driver);
+        Assert.True(Driver.SessionId != null, "Driver should have a valid session");
 
-            // Assert - If we get here without an exception, the app launched successfully
-            Assert.NotNull(Driver);
-            Assert.True(Driver.SessionId != null, "Driver should have a valid session");
-
-            // Verify the driver is responsive
-            var currentActivity = Driver.CurrentActivity;
-            Assert.False(string.IsNullOrEmpty(currentActivity), "Should have an active activity");
-        }
-        catch (Exception)
-        {
-            CaptureTestFailureDiagnostics();
-            throw;
-        }
-    }
+        var currentActivity = Driver.CurrentActivity;
+        Assert.False(string.IsNullOrEmpty(currentActivity), "Should have an active activity");
+    });
 
     [Fact]
-    public void MainMenu_Should_DisplayAllScenarioButtons()
+    public void MainMenu_Should_DisplayAllScenarioButtons() => RunTest(() =>
     {
-        try
-        {
-            // Arrange
-            InitializeAndroidDriver();
+        var buttons = Driver.FindElements(By.ClassName("android.widget.Button"));
+        Assert.True(buttons.Count > 0, "Should have at least one scenario button");
 
-            // Act - Find all buttons on the main screen
-            var buttons = Driver.FindElements(By.ClassName("android.widget.Button"));
-
-            // Assert - Verify we have scenario buttons available
-            Assert.True(buttons.Count > 0, "Should have at least one scenario button");
-
-            // Verify some expected buttons exist
-            var buttonTexts = buttons.Select(b => b.Text).ToList();
-            Assert.Contains("HELLO WORLD", buttonTexts);
-            Assert.Contains("IMAGEBUTTON", buttonTexts);
-            Assert.Contains("WEBVIEW", buttonTexts);
-        }
-        catch (Exception)
-        {
-            CaptureTestFailureDiagnostics();
-            throw;
-        }
-    }
+        var buttonTexts = buttons.Select(b => b.Text).ToList();
+        Assert.Contains("HELLO WORLD", buttonTexts);
+        Assert.Contains("IMAGEBUTTON", buttonTexts);
+        Assert.Contains("WEBVIEW", buttonTexts);
+    });
 }

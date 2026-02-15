@@ -5,55 +5,27 @@ namespace Spice.UITests;
 public class StackLayoutTests : BaseTest
 {
     [Fact]
-    public void StackLayout_Should_ArrangeChildrenVertically()
+    public void StackLayout_Should_ArrangeChildrenVertically() => RunTest(() =>
     {
-        try
-        {
-            // Arrange
-            InitializeAndroidDriver();
-
-            // Act - The main menu itself is a StackLayout with buttons arranged vertically
-            var buttons = Driver.FindElements(By.ClassName("android.widget.Button"));
-
-            // Assert - Should have multiple buttons arranged in the StackLayout
-            Assert.True(buttons.Count > 0, "StackLayout should contain multiple buttons");
-            
-            // Verify buttons are present
-            var helloWorldButton = FindButtonByText("Hello World");
-            Assert.NotNull(helloWorldButton);
-        }
-        catch (Exception)
-        {
-            CaptureTestFailureDiagnostics();
-            throw;
-        }
-    }
+        var buttons = Driver.FindElements(By.ClassName("android.widget.Button"));
+        Assert.True(buttons.Count > 0, "StackLayout should contain multiple buttons");
+        
+        var helloWorldButton = FindButtonByText("Hello World");
+        Assert.NotNull(helloWorldButton);
+    });
 
     [Fact]
-    public void StackLayout_Should_DisplayChildrenInOrder()
+    public void StackLayout_Should_DisplayChildrenInOrder() => RunTest(() =>
     {
-        try
-        {
-            // Arrange
-            InitializeAndroidDriver();
+        var helloWorldButton = FindButtonByText("Hello World");
+        helloWorldButton.Click();
 
-            // Act - Navigate to Hello World scenario which uses StackLayout
-            var helloWorldButton = FindButtonByText("Hello World");
-            helloWorldButton.Click();
+        var image = Driver.FindElement(By.ClassName("android.widget.ImageView"));
+        var label = FindTextViewContaining("Hello, Spice");
+        var button = FindButtonByText("Click Me");
 
-            // Assert - Children should be displayed in the order: Image, Label, Button
-            var image = Driver.FindElement(By.ClassName("android.widget.ImageView"));
-            var label = FindTextViewContaining("Hello, Spice");
-            var button = FindButtonByText("Click Me");
-
-            Assert.NotNull(image);
-            Assert.NotNull(label);
-            Assert.NotNull(button);
-        }
-        catch (Exception)
-        {
-            CaptureTestFailureDiagnostics();
-            throw;
-        }
-    }
+        Assert.NotNull(image);
+        Assert.NotNull(label);
+        Assert.NotNull(button);
+    });
 }

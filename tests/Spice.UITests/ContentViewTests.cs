@@ -1,35 +1,20 @@
-using OpenQA.Selenium;
-
 namespace Spice.UITests;
 
 public class ContentViewTests : BaseTest
 {
     [Fact]
-    public void ContentView_Should_DisplayNestedContent()
+    public void ContentView_Should_DisplayNestedContent() => RunTest(() =>
     {
-        try
-        {
-            // Arrange
-            InitializeAndroidDriver();
+        var contentViewButton = FindButtonByText("ContentView");
+        contentViewButton.Click();
 
-            // Act - Navigate to ContentView scenario
-            var contentViewButton = FindButtonByText("ContentView");
-            contentViewButton.Click();
+        var exampleLabel = FindTextViewContaining("ContentView Example");
+        Assert.NotNull(exampleLabel);
 
-            // Assert - Find labels within ContentView
-            var exampleLabel = FindTextViewContaining("ContentView Example");
-            Assert.NotNull(exampleLabel);
+        var simpleLabel = FindTextViewContaining("Simple ContentView");
+        Assert.NotNull(simpleLabel);
 
-            var simpleLabel = FindTextViewContaining("Simple ContentView");
-            Assert.NotNull(simpleLabel);
-
-            var nestedLabel = FindTextViewContaining("Nested ContentView");
-            Assert.NotNull(nestedLabel);
-        }
-        catch (Exception)
-        {
-            CaptureTestFailureDiagnostics();
-            throw;
-        }
-    }
+        var nestedLabel = FindTextViewContaining("Nested ContentView");
+        Assert.NotNull(nestedLabel);
+    });
 }

@@ -5,31 +5,18 @@ namespace Spice.UITests;
 public class ImageButtonTests : BaseTest
 {
     [Fact]
-    public void ImageButton_Should_BeClickable()
+    public void ImageButton_Should_BeClickable() => RunTest(() =>
     {
-        try
-        {
-            InitializeAndroidDriver();
+        var imageButtonScenarioButton = FindButtonByText("ImageButton");
+        imageButtonScenarioButton.Click();
 
-            var imageButtonScenarioButton = FindButtonByText("ImageButton");
-            imageButtonScenarioButton.Click();
+        var label = FindTextViewContaining("Click the image");
+        Assert.Contains("Click the image button below!", label.Text);
 
-            // Find the label
-            var label = FindTextViewContaining("Click the image");
-            Assert.Contains("Click the image button below!", label.Text);
+        var imageButton = Driver.FindElement(By.ClassName("android.widget.ImageButton"));
+        imageButton.Click();
 
-            // Find an image button and click it
-            var imageButton = Driver.FindElement(By.ClassName("android.widget.ImageButton"));
-            imageButton.Click();
-
-            // Label should update with click count
-            label = FindTextViewContaining("Clicked");
-            Assert.Contains("Clicked 1 time(s)!", label.Text);
-        }
-        catch (Exception)
-        {
-            CaptureTestFailureDiagnostics();
-            throw;
-        }
-    }
+        label = FindTextViewContaining("Clicked");
+        Assert.Contains("Clicked 1 time(s)!", label.Text);
+    });
 }
