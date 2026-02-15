@@ -73,21 +73,31 @@ public partial class View : ObservableObject, IEnumerable<View>
 	/// Gets the actual rendered width of the view.
 	/// Platform implementations: UIKit.UIView.Frame.Width / Android.Views.View.Width
 	/// </summary>
+#if VANILLA
+	public double Width => 0;
+#else
 	public double Width => GetWidth();
+#endif
 
 	/// <summary>
 	/// Gets the actual rendered height of the view.
 	/// Platform implementations: UIKit.UIView.Frame.Height / Android.Views.View.Height
 	/// </summary>
+#if VANILLA
+	public double Height => 0;
+#else
 	public double Height => GetHeight();
+#endif
 
+#if !VANILLA
 	/// <summary>
 	/// Platform-specific implementation to get actual width
 	/// </summary>
-	partial double GetWidth();
+	private partial double GetWidth();
 
 	/// <summary>
 	/// Platform-specific implementation to get actual height
 	/// </summary>
-	partial double GetHeight();
+	private partial double GetHeight();
+#endif
 }

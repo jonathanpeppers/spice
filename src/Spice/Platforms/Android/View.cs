@@ -235,7 +235,7 @@ public partial class View
 		}
 	}
 
-	partial double GetWidth()
+	private partial double GetWidth()
 	{
 		var view = _nativeView.Value;
 		// Convert from pixels to device-independent units
@@ -247,7 +247,7 @@ public partial class View
 		return view.Width;
 	}
 
-	partial double GetHeight()
+	private partial double GetHeight()
 	{
 		var view = _nativeView.Value;
 		// Convert from pixels to device-independent units

@@ -99,9 +99,9 @@ public partial class View
 		}
 	}
 
-	partial double GetWidth() => (double)NativeView.Frame.Width;
+	private partial double GetWidth() => (double)NativeView.Frame.Width;
 
-	partial double GetHeight() => (double)NativeView.Frame.Height;
+	private partial double GetHeight() => (double)NativeView.Frame.Height;
 
 	internal void UpdateAlign()
 	{
