@@ -235,34 +235,45 @@ public class CounterApp : Application
 
 ### CollectionView with Per-Item Binding
 
+For CollectionView recycling, wrap the template in a custom `IDisposable` View:
+
 ```csharp
-var collectionView = new CollectionView
+public class TodoItemView : StackLayout, IDisposable
 {
-    ItemsSource = vm.Items,
-    ItemTemplate = item =>
+    private IDisposable? _titleBinding;
+
+    public TodoItemView(TodoItem item)
     {
-        var todoItem = (TodoItem)item;
         var label = new Label();
         var checkbox = new CheckBox();
 
         // One-way: model → view
-        todoItem.Bind(nameof(todoItem.Title), t => t.Title, text => label.Text = text);
-        todoItem.Bind(nameof(todoItem.IsCompleted), t => t.IsCompleted,
+        _titleBinding = item.Bind(nameof(item.Title), t => t.Title, 
+            text => label.Text = text);
+        item.Bind(nameof(item.IsCompleted), t => t.IsCompleted,
             done => checkbox.IsChecked = done);
 
         // Reverse: view → model
-        checkbox.CheckedChanged = cb => todoItem.IsCompleted = cb.IsChecked;
+        checkbox.CheckedChanged = cb => item.IsCompleted = cb.IsChecked;
 
-        return new StackLayout { label, checkbox };
+        Children.Add(new StackLayout { label, checkbox });
     }
+
+    public void Dispose()
+    {
+        _titleBinding?.Dispose();
+    }
+}
+
+var collectionView = new CollectionView
+{
+    ItemsSource = vm.Items,
+    ItemTemplate = item => new TodoItemView((TodoItem)item)
 };
 ```
 
-> **Note:** `Bind()` returns an `IDisposable`, but `View` currently has no lifecycle event
-> for cleanup. In an `ItemTemplate`, the binding's subscription prevents the `TodoItem` from
-> being collected while the view lives. This is acceptable when items outlive their views
-> (the common case), but a future `View.Detached` event would allow explicit disposal during
-> recycling.
+When the view is recycled, `Dispose()` will be called and subscriptions cleaned up.
+See [VIEW-LIFECYCLE-SPEC.md](./VIEW-LIFECYCLE-SPEC.md) for details.
 
 ## Memory Management
 
