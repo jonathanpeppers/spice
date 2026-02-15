@@ -43,7 +43,7 @@ public partial class SearchBar
 			NativeView.SetQuery(value, false);
 	}
 
-	partial void OnPlaceholderChanged(string? value) => NativeView.QueryHint = value;
+	partial void OnPlaceholderChanged(string? value) => NativeView.SetQueryHint(value);
 
 	partial void OnTextColorChanged(Color? value)
 	{
