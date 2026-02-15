@@ -34,7 +34,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 | Button | ✅ Yes | ✅ Done | Fully implemented |
 | CarouselView | ❌ No | ❌ No | Complex, less common |
 | CheckBox | ✅ Yes | ✅ Done | Standard checkbox input |
-| CollectionView | ❌ No | 🟡 Maybe | Powerful grid/list control |
+| CollectionView | ✅ Yes | ✅ Done | Powerful grid/list control |
 | ContentView | ✅ Yes | ✅ Done | Custom control composition |
 | DatePicker | ✅ Yes | ✅ Done | Date selection - common in forms |
 | Editor | ❌ No | 🟡 Maybe | Multi-line text input |
@@ -57,13 +57,13 @@ This document compares the stable/supported controls from .NET MAUI with what is
 | ProgressBar | ✅ Yes | ✅ Done | Progress display - common |
 | RadioButton | ❌ No | 🟢 Maybe | Less common on mobile |
 | Rectangle | ❌ No | 🟢 Maybe | Shape control - BoxView covers this |
-| RefreshView | ❌ No | 🟢 Maybe | Pull-to-refresh wrapper |
+| RefreshView | ✅ Yes | ✅ Done | Pull-to-refresh wrapper |
 | RoundRectangle | ❌ No | ❌ No | Border can handle this |
 | ScrollView | ✅ Yes | ✅ Done | Fully implemented |
 | SearchBar | ✅ Yes | ✅ Done | Search input with search button |
 | Slider | ✅ Yes | ✅ Done | Range selection - common |
 | Stepper | ❌ No | ❌ No | Rare, can use buttons + label |
-| SwipeView | ❌ No | 🟢 Maybe | Swipe actions - nice UX feature |
+| SwipeView | ✅ Yes | ✅ Done | Swipe actions - nice UX feature |
 | Switch | ✅ Yes | ✅ Done | Toggle control - essential |
 | TableView | ❌ No | ❌ No | Settings-style list (less common) |
 | TimePicker | ✅ Yes | ✅ Done | Time selection - common in forms |
@@ -73,7 +73,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 
 ## Summary
 
-**Implemented: 17 / 60+ controls**
+**Implemented: 25 / 60+ controls**
 
 ### Spice Controls (Core)
 - ✅ ActivityIndicator
@@ -82,6 +82,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - ✅ BoxView
 - ✅ Button
 - ✅ CheckBox
+- ✅ CollectionView
 - ✅ ContentView
 - ✅ DatePicker
 - ✅ Entry (single-line text)
@@ -91,10 +92,12 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - ✅ Label
 - ✅ Picker
 - ✅ ProgressBar
+- ✅ RefreshView
 - ✅ ScrollView
 - ✅ SearchBar
 - ✅ Slider
 - ✅ StackLayout
+- ✅ SwipeView
 - ✅ Switch (toggle control)
 - ✅ TimePicker (time selection)
 - ✅ View (base class)
@@ -102,9 +105,12 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - ✅ BlazorWebView (Blazor-specific)
 
 ### Supporting Types
-- Align (enums for alignment)
+- LayoutAlignment (enums for alignment)
+- LayoutOptions (alignment with expansion)
 - Orientation (horizontal/vertical)
 - RootComponent (Blazor)
+- SelectionMode (selection in lists)
+- SwipeBehaviorOnInvoked, SwipeDirection, SwipeItem, SwipeItems, SwipeMode (swipe gesture support)
 
 ### Key Differences
 - **No XAML**: Spice uses POCOs, not XAML markup
@@ -121,6 +127,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - BoxView → UIView
 - Button → UIButton
 - CheckBox → UIButton (with checkmark styling)
+- CollectionView → UICollectionView
 - ContentView → UIView
 - DatePicker → UIDatePicker
 - Entry → UITextField
@@ -130,10 +137,12 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - Label → UILabel
 - Picker → UIPickerView
 - ProgressBar → UIProgressView
+- RefreshView → UIView with UIRefreshControl
 - ScrollView → UIScrollView
 - SearchBar → UISearchBar
 - Slider → UISlider
 - StackLayout → UIStackView
+- SwipeView → UIView with gesture recognizers
 - Switch → UISwitch
 - TimePicker → UIDatePicker (Mode = Time)
 - WebView → WKWebView
@@ -144,6 +153,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - BoxView → View
 - Button → AppCompatButton
 - CheckBox → CheckBox
+- CollectionView → AndroidX.RecyclerView.Widget.RecyclerView
 - ContentView → FrameLayout
 - DatePicker → DatePickerDialog
 - Entry → AppCompatEditText
@@ -153,10 +163,12 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - Label → AppCompatTextView
 - Picker → Spinner
 - ProgressBar → ProgressBar
+- RefreshView → AndroidX.SwipeRefreshLayout.Widget.SwipeRefreshLayout
 - ScrollView → ScrollView / HorizontalScrollView
 - SearchBar → SearchView
 - Slider → SeekBar
 - StackLayout → LinearLayout
+- SwipeView → Custom view with gesture detection
 - Switch → SwitchCompat
 - TimePicker → TimePickerDialog
 - WebView → WebView
@@ -179,8 +191,8 @@ This section compares the properties available on MAUI's `View` class (which inh
 | MinimumHeightRequest | ❌ No | 🟡 Maybe | Useful for responsive layouts |
 | MaximumWidthRequest | ❌ No | 🟡 Maybe | Useful for responsive layouts |
 | MaximumHeightRequest | ❌ No | 🟡 Maybe | Useful for responsive layouts |
-| HorizontalOptions | ❌ No | ✅ Done | HorizontalAlign already implemented |
-| VerticalOptions | ❌ No | ✅ Done | VerticalAlign already implemented |
+| HorizontalOptions | ✅ Yes | ✅ Done | Spice: `HorizontalOptions` (LayoutOptions) |
+| VerticalOptions | ✅ Yes | ✅ Done | Spice: `VerticalOptions` (LayoutOptions) |
 | Margin | ✅ Yes | ✅ Done | Outer spacing using Thickness struct |
 | Bounds | ❌ No | ❌ No | Read-only - internal layout info |
 | Frame | ❌ No | ❌ No | Read-only - screen position |
@@ -190,8 +202,8 @@ This section compares the properties available on MAUI's `View` class (which inh
 
 | MAUI Property | Spice Implementation | Should Implement? | Notes |
 |--------------|---------------------|-------------------|-------|
-| HorizontalOptions (MAUI) | ✅ Yes | ✅ Done | Spice: `HorizontalAlign` (enum) |
-| VerticalOptions (MAUI) | ✅ Yes | ✅ Done | Spice: `VerticalAlign` (enum) |
+| HorizontalOptions (MAUI) | ✅ Yes | ✅ Done | Spice: `HorizontalOptions` (LayoutOptions) |
+| VerticalOptions (MAUI) | ✅ Yes | ✅ Done | Spice: `VerticalOptions` (LayoutOptions) |
 
 ### Appearance Properties
 
@@ -199,7 +211,7 @@ This section compares the properties available on MAUI's `View` class (which inh
 |--------------|---------------------|-------------------|-------|
 | BackgroundColor | ✅ Yes | ✅ Done | Color type |
 | Background | ❌ No | ❌ No | Brush (gradients) - complex |
-| Opacity | ❌ No | 🟢 Maybe | 0-1 transparency - useful for fades |
+| Opacity | ✅ Yes | ✅ Done | 0-1 transparency - clamped range |
 | IsVisible | ✅ Yes | ✅ Done | Show/hide element - very common |
 | Shadow | ❌ No | ❌ No | Platform-inconsistent, use native |
 | Clip | ❌ No | ❌ No | Advanced, less common |
@@ -261,7 +273,7 @@ This section compares the properties available on MAUI's `View` class (which inh
 
 | MAUI Property | Spice Implementation | Should Implement? | Notes |
 |--------------|---------------------|-------------------|-------|
-| AutomationId | ❌ No | 🟡 Maybe | UI testing identifier - useful for QA |
+| AutomationId | ✅ Yes | ✅ Done | UI testing identifier - useful for QA |
 | Handler | ❌ No | ❌ No | Platform handler - internal |
 | FlowDirection | ❌ No | 🟢 Maybe | RTL support - i18n feature |
 | IsLoaded | ❌ No | ❌ No | Loaded state - internal lifecycle |
@@ -272,11 +284,13 @@ This section compares the properties available on MAUI's `View` class (which inh
 | Spice Property | MAUI Equivalent | Notes |
 |---------------|-----------------|-------|
 | Children | Yes (in Container types) | `ObservableCollection<View>`, supports collection initializers |
-| HorizontalAlign | HorizontalOptions | Simpler enum-based alignment |
-| VerticalAlign | VerticalOptions | Simpler enum-based alignment |
+| HorizontalOptions | HorizontalOptions | Uses `LayoutOptions` with alignment and expansion flags |
+| VerticalOptions | VerticalOptions | Uses `LayoutOptions` with alignment and expansion flags |
 | BackgroundColor | BackgroundColor | Uses `Microsoft.Maui.Graphics.Color` |
 | IsVisible | IsVisible | Show/hide element |
 | IsEnabled | IsEnabled | Enable/disable interaction |
+| Opacity | Opacity | 0-1 transparency, clamped range |
+| AutomationId | AutomationId | UI testing identifier |
 | Margin | Margin | Outer spacing using Thickness struct |
 | WidthRequest | WidthRequest | Desired width for sizing |
 | HeightRequest | HeightRequest | Desired height for sizing |
@@ -285,13 +299,15 @@ This section compares the properties available on MAUI's `View` class (which inh
 
 ### Summary
 
-**Spice View Properties: 11**
+**Spice View Properties: 14**
 - Children (collection)
-- HorizontalAlign
-- VerticalAlign  
+- HorizontalOptions (LayoutOptions)
+- VerticalOptions (LayoutOptions)
 - BackgroundColor
 - IsVisible
 - IsEnabled
+- Opacity
+- AutomationId
 - Margin
 - WidthRequest
 - HeightRequest
@@ -340,12 +356,12 @@ Based on Spice's minimalist philosophy and common mobile UI needs, here are reas
 - ✅ **Border** - Wraps content with border/rounded corners; common UI pattern (IMPLEMENTED)
 
 **Lists**
+- ✅ **CollectionView** - Flexible grid/list; maps to UICollectionView/RecyclerView (IMPLEMENTED)
 - 🟡 **ListView** - Scrollable list of items; maps to UITableView/RecyclerView (critical for many apps)
-- 🟡 **CollectionView** - Flexible grid/list; more powerful than ListView
 
 **Input**
 - 🟡 **Editor** - Multi-line text input; maps to UITextView/EditText (multiline)
-- ✅ **SearchBar** - Search input; maps to UISearchBar/SearchView
+- ✅ **SearchBar** - Search input; maps to UISearchBar/SearchView (IMPLEMENTED)
 
 **Display**
 - ✅ **ImageButton** - Tappable image; common pattern (can be done with Image + gesture) (IMPLEMENTED)
@@ -353,8 +369,8 @@ Based on Spice's minimalist philosophy and common mobile UI needs, here are reas
 ### 🟢 Nice to Have - Special Cases
 
 **Advanced Controls**
-- 🟢 **RefreshView** - Pull-to-refresh wrapper
-- 🟢 **SwipeView** - Swipe actions/context menus
+- ✅ **RefreshView** - Pull-to-refresh wrapper (IMPLEMENTED)
+- ✅ **SwipeView** - Swipe actions/context menus (IMPLEMENTED)
 - 🟢 **RadioButton** - Radio button groups (less common on mobile)
 
 **Shapes** (Lower priority - can use Image or GraphicsView)
@@ -370,7 +386,7 @@ Based on Spice's minimalist philosophy and common mobile UI needs, here are reas
 
 **Appearance**
 - ✅ **IsVisible** - Show/hide elements (very common) (IMPLEMENTED)
-- 🟡 **Opacity** - Transparency (common for fade effects)
+- ✅ **Opacity** - Transparency (common for fade effects) (IMPLEMENTED)
 
 **Interaction**
 - ✅ **IsEnabled** - Enable/disable controls (essential for forms) (IMPLEMENTED)
@@ -415,20 +431,20 @@ Based on Spice's minimalist philosophy and common mobile UI needs, here are reas
 5. ✅ TimePicker
 6. 🟡 Editor (multiline text)
 
-**Phase 3 (Lists & Advanced)**
+**Phase 3 (Lists & Advanced)** ✅
 1. 🟡 ListView
 2. ✅ SearchBar
-3. 🟡 CollectionView
+3. ✅ CollectionView
 4. ✅ Border
 5. ✅ ContentView
 6. ✅ ImageButton
 
-**Phase 4 (Nice-to-Have)**
-1. 🟢 RefreshView
-2. 🟢 SwipeView
+**Phase 4 (Nice-to-Have)** ✅
+1. ✅ RefreshView
+2. ✅ SwipeView
 3. ✅ BoxView
 4. 🟢 RadioButton
-5. 🟡 Opacity property
+5. ✅ Opacity property
 
 ---
 
