@@ -6,7 +6,7 @@ namespace Spice;
 public partial class Application : View
 {
 	/// <summary>
-	/// Gets the current Application instance.
+	/// Gets the current Application instance. Only one Application instance should exist per process.
 	/// </summary>
 	public static Application? Current { get; internal set; }
 
