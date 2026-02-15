@@ -1,6 +1,6 @@
 namespace Spice;
 
-public partial class RadioButton : IDisposable
+public partial class RadioButton
 {
 	/// <summary>
 	/// Returns radioButton.NativeView
@@ -81,7 +81,7 @@ public partial class RadioButton : IDisposable
 
 	bool _disposed;
 
-	public void Dispose()
+	partial void DisposePartial()
 	{
 		if (_disposed)
 			return;

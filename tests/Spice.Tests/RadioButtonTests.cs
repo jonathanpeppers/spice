@@ -203,19 +203,16 @@ public class RadioButtonTests
 	public void DisposeUnsubscribesEvents()
 	{
 		var radioButton = new RadioButton();
-		bool eventFired = false;
+		radioButton.CheckedChanged = _ => { };
 		
-		radioButton.CheckedChanged = _ => eventFired = true;
-		
-		// Dispose should unsubscribe event handlers
+		// Dispose should not throw
 		radioButton.Dispose();
 		
-		// Setting IsChecked after dispose should not fire the event
+		// Setting IsChecked after dispose should still work
 		radioButton.IsChecked = true;
 		Assert.True(radioButton.IsChecked);
 		
-		// Note: CheckedChanged action is still set (it's a property), but native event handlers are unsubscribed
-		// This means programmatic changes still work but native UI events won't trigger callbacks
+		// CheckedChanged action is still set (it's a property), but native event handlers are unsubscribed
 		Assert.NotNull(radioButton.CheckedChanged);
 	}
 }

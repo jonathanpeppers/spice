@@ -5,7 +5,7 @@ namespace Spice;
 /// Android -> Android.Widget.RadioButton
 /// iOS -> UIKit.UIButton (with circle styling)
 /// </summary>
-public partial class RadioButton : View
+public partial class RadioButton : View, IDisposable
 {
 	static readonly Dictionary<string, List<WeakReference<RadioButton>>> _groups = new();
 
@@ -127,4 +127,11 @@ public partial class RadioButton : View
 
 	// Platform-specific implementation
 	partial void OnIsCheckedChangedPartial(bool value);
+	partial void DisposePartial();
+
+	/// <inheritdoc />
+	public void Dispose()
+	{
+		DisposePartial();
+	}
 }
