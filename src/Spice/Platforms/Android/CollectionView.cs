@@ -138,6 +138,7 @@ public partial class CollectionView
 		}
 		else
 		{
+			_adapter.UpdateItems(this);
 			_adapter.NotifyDataSetChanged();
 		}
 	}
@@ -150,13 +151,13 @@ public partial class CollectionView
 		public SpiceRecyclerViewAdapter(CollectionView parent)
 		{
 			_parentRef = new WeakReference<CollectionView>(parent);
-			UpdateItems();
+			UpdateItems(parent);
 		}
 
-		void UpdateItems()
+		public void UpdateItems(CollectionView parent)
 		{
 			_items.Clear();
-			if (_parentRef.TryGetTarget(out var parent) && parent.ItemsSource != null)
+			if (parent.ItemsSource != null)
 			{
 				foreach (var item in parent.ItemsSource)
 				{
@@ -165,14 +166,7 @@ public partial class CollectionView
 			}
 		}
 
-		public override int ItemCount
-		{
-			get
-			{
-				UpdateItems();
-				return _items.Count;
-			}
-		}
+		public override int ItemCount => _items.Count;
 
 		public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
 		{
@@ -180,9 +174,8 @@ public partial class CollectionView
 				return;
 
 			var viewHolder = (SpiceViewHolder)holder;
-			UpdateItems();
 
-			if (position < _items.Count)
+			if (position >= 0 && position < _items.Count)
 			{
 				var item = _items[position];
 
@@ -243,22 +236,18 @@ public partial class CollectionView
 			if (position == RecyclerView.NoPosition)
 				return;
 
-			// Get item at position
-			if (parent.ItemsSource == null)
-				return;
+			// Get adapter to access cached items
+			var adapter = ItemView.Parent is RecyclerView recyclerView 
+				? recyclerView.GetAdapter() as SpiceRecyclerViewAdapter 
+				: null;
 
-			int currentIndex = 0;
-			foreach (var item in parent.ItemsSource)
+			if (adapter != null && position >= 0 && position < adapter._items.Count)
 			{
-				if (currentIndex == position)
+				var item = adapter._items[position];
+				if (parent.SelectionMode == SelectionMode.Single)
 				{
-					if (parent.SelectionMode == SelectionMode.Single)
-					{
-						parent.SelectedItem = item;
-					}
-					break;
+					parent.SelectedItem = item;
 				}
-				currentIndex++;
 			}
 		}
 

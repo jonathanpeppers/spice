@@ -116,6 +116,9 @@ public partial class CollectionView
 		if (!_nativeView.IsValueCreated)
 			return;
 
+		if (_dataSource != null)
+			_dataSource.UpdateItemsCache(this);
+
 		NativeView.ReloadData();
 	}
 
@@ -145,46 +148,41 @@ public partial class CollectionView
 	class SpiceCollectionViewDataSource : UICollectionViewDataSource
 	{
 		readonly WeakReference<CollectionView> _parentRef;
+		List<object> _itemsCache = new();
 
 		public SpiceCollectionViewDataSource(CollectionView parent)
 		{
 			_parentRef = new WeakReference<CollectionView>(parent);
+			UpdateItemsCache(parent);
+		}
+
+		public void UpdateItemsCache(CollectionView parent)
+		{
+			_itemsCache.Clear();
+			if (parent.ItemsSource != null)
+			{
+				foreach (var item in parent.ItemsSource)
+					_itemsCache.Add(item);
+			}
 		}
 
 		public override nint GetItemsCount(UICollectionView collectionView, nint section)
 		{
-			if (!_parentRef.TryGetTarget(out var parent) || parent.ItemsSource == null)
-				return 0;
-
-			// Count items in IEnumerable
-			int count = 0;
-			foreach (var _ in parent.ItemsSource)
-				count++;
-			return count;
+			return _itemsCache.Count;
 		}
 
 		public override UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
 		{
 			var cell = (SpiceCollectionViewCell)collectionView.DequeueReusableCell("SpiceCell", indexPath);
 
-			if (!_parentRef.TryGetTarget(out var parent) || parent.ItemsSource == null || parent.ItemTemplate == null)
+			if (!_parentRef.TryGetTarget(out var parent) || parent.ItemTemplate == null)
 				return cell;
 
-			// Get the item at this index
-			int currentIndex = 0;
-			object? item = null;
-			foreach (var i in parent.ItemsSource)
+			// Get the item at this index from cache
+			if (indexPath.Row >= 0 && indexPath.Row < _itemsCache.Count)
 			{
-				if (currentIndex == indexPath.Row)
-				{
-					item = i;
-					break;
-				}
-				currentIndex++;
-			}
+				var item = _itemsCache[(int)indexPath.Row];
 
-			if (item != null)
-			{
 				// Clear existing content
 				foreach (var subview in cell.ContentView.Subviews)
 					subview.RemoveFromSuperview();
@@ -229,25 +227,19 @@ public partial class CollectionView
 
 		public override void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
 		{
-			if (!_parentRef.TryGetTarget(out var parent) || parent.SelectionMode == SelectionMode.None || parent.ItemsSource == null)
+			if (!_parentRef.TryGetTarget(out var parent) || parent.SelectionMode == SelectionMode.None)
 				return;
 
-			// Get the item at this index
-			int currentIndex = 0;
-			object? item = null;
-			foreach (var i in parent.ItemsSource)
+			// Get the item at this index from data source cache
+			var dataSource = collectionView.DataSource as SpiceCollectionViewDataSource;
+			if (dataSource != null && indexPath.Row >= 0 && indexPath.Row < dataSource._itemsCache.Count)
 			{
-				if (currentIndex == indexPath.Row)
+				var item = dataSource._itemsCache[(int)indexPath.Row];
+				
+				if (parent.SelectionMode == SelectionMode.Single)
 				{
-					item = i;
-					break;
+					parent.SelectedItem = item;
 				}
-				currentIndex++;
-			}
-
-			if (parent.SelectionMode == SelectionMode.Single)
-			{
-				parent.SelectedItem = item;
 			}
 		}
 
