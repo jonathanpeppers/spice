@@ -12,8 +12,6 @@ public abstract class BaseTest : IDisposable
     protected AndroidDriver Driver { get; private set; } = null!;
 
     public string PackageName { get; } = "com.companyname.spice.scenarios";
-    // Generated CRC hash of the main activity class; may change if namespace/assembly is renamed
-    public string ActivityName { get; } = "crc64d20bbc59baadfee5.MainActivity";
 
     private static readonly string ArtifactsPath = GetArtifactsPath();
 
@@ -52,7 +50,8 @@ public abstract class BaseTest : IDisposable
         options.AddAdditionalAppiumOption("platformName", "Android");
         options.AutomationName = "UiAutomator2";
         options.AddAdditionalAppiumOption("appPackage", PackageName);
-        options.AddAdditionalAppiumOption("appActivity", ActivityName);
+        // Let UiAutomator2 determine the launcher activity from the manifest
+        options.AddAdditionalAppiumOption("appium:appWaitForLaunch", true);
         options.AddAdditionalAppiumOption("appium:newCommandTimeout", 300);
         options.AddAdditionalAppiumOption("appium:connectHardwareKeyboard", true);
 
@@ -64,9 +63,6 @@ public abstract class BaseTest : IDisposable
         // when trying to find elements. This helps handle elements that may not be immediately available.
         // Reference: http://appium.io/docs/en/latest/quickstart/test-dotnet/
         Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-
-        // Start the app activity
-        Driver.StartActivity(PackageName, ActivityName);
     }
 
     protected void CaptureTestFailureDiagnostics([CallerMemberName] string testName = "")
