@@ -14,11 +14,11 @@ public partial class RefreshView
 	/// Android -> AndroidX.SwipeRefreshLayout.Widget.SwipeRefreshLayout
 	/// iOS -> UIKit.UIView with UIRefreshControl attached to child scroll view
 	/// </summary>
-	public RefreshView() : base(_ => new UIView { AutoresizingMask = UIViewAutoresizing.None }) { }
+	public RefreshView() : base(v => new SpiceRefreshView((RefreshView)v) { AutoresizingMask = UIViewAutoresizing.None }) { }
 
 	/// <inheritdoc />
 	/// <param name="frame">Pass the underlying view a frame</param>
-	public RefreshView(CGRect frame) : base(_ => new UIView(frame) { AutoresizingMask = UIViewAutoresizing.None }) { }
+	public RefreshView(CGRect frame) : base(v => new SpiceRefreshView((RefreshView)v, frame) { AutoresizingMask = UIViewAutoresizing.None }) { }
 
 	/// <inheritdoc />
 	/// <param name="creator">Subclasses can pass in a Func to create a UIView</param>
@@ -166,6 +166,21 @@ public partial class RefreshView
 		if (_refreshControl != null && value != null)
 		{
 			_refreshControl.TintColor = value.ToUIColor();
+		}
+	}
+
+	class SpiceRefreshView : UIView
+	{
+		readonly RefreshView _parent;
+
+		public SpiceRefreshView(RefreshView parent) => _parent = parent;
+
+		public SpiceRefreshView(RefreshView parent, CGRect frame) : base(frame) => _parent = parent;
+
+		public override void LayoutSubviews()
+		{
+			base.LayoutSubviews();
+			_parent.UpdateContentLayout();
 		}
 	}
 }

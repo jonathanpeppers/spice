@@ -13,11 +13,11 @@ public partial class ContentView
 	/// Android -> Android.Views.ViewGroup (FrameLayout)
 	/// iOS -> UIKit.UIView
 	/// </summary>
-	public ContentView() : base(_ => new UIView { AutoresizingMask = UIViewAutoresizing.None }) { }
+	public ContentView() : base(v => new SpiceContentView((ContentView)v) { AutoresizingMask = UIViewAutoresizing.None }) { }
 
 	/// <inheritdoc />
 	/// <param name="frame">Pass the underlying view a frame</param>
-	public ContentView(CGRect frame) : base(_ => new UIView(frame) { AutoresizingMask = UIViewAutoresizing.None }) { }
+	public ContentView(CGRect frame) : base(v => new SpiceContentView((ContentView)v, frame) { AutoresizingMask = UIViewAutoresizing.None }) { }
 
 	/// <inheritdoc />
 	/// <param name="creator">Subclasses can pass in a Func to create a UIView</param>
@@ -59,5 +59,20 @@ public partial class ContentView
 			bounds.Width - (padding * 2),
 			bounds.Height - (padding * 2)
 		);
+	}
+
+	class SpiceContentView : UIView
+	{
+		readonly ContentView _parent;
+
+		public SpiceContentView(ContentView parent) => _parent = parent;
+
+		public SpiceContentView(ContentView parent, CGRect frame) : base(frame) => _parent = parent;
+
+		public override void LayoutSubviews()
+		{
+			base.LayoutSubviews();
+			_parent.UpdateContentLayout();
+		}
 	}
 }
