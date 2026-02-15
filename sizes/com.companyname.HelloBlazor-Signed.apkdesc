@@ -59,10 +59,10 @@
       "Size": 790
     },
     "classes.dex": {
-      "Size": 9872948
+      "Size": 9884408
     },
     "classes2.dex": {
-      "Size": 239516
+      "Size": 197456
     },
     "commonMain/default/linkdata/module": {
       "Size": 281
@@ -269,7 +269,7 @@
       "Size": 4480
     },
     "lib/arm64-v8a/libaot-Spice.dll.so": {
-      "Size": 56696
+      "Size": 57976
     },
     "lib/arm64-v8a/libaot-System.Collections.Concurrent.dll.so": {
       "Size": 47528
@@ -380,7 +380,7 @@
       "Size": 19168
     },
     "lib/arm64-v8a/libassembly-store.so": {
-      "Size": 2534728
+      "Size": 2534968
     },
     "lib/arm64-v8a/libmono-component-marshal-ilgen.so": {
       "Size": 36616
@@ -502,9 +502,6 @@
     "META-INF/androidx.startup_startup-runtime.version": {
       "Size": 6
     },
-    "META-INF/androidx.swiperefreshlayout_swiperefreshlayout.version": {
-      "Size": 6
-    },
     "META-INF/androidx.tracing_tracing.version": {
       "Size": 6
     },
@@ -530,7 +527,7 @@
       "Size": 1605
     },
     "META-INF/BNDLTOOL.SF": {
-      "Size": 129295
+      "Size": 129160
     },
     "META-INF/com.android.tools/proguard/coroutines.pro": {
       "Size": 1345
@@ -557,7 +554,7 @@
       "Size": 5
     },
     "META-INF/MANIFEST.MF": {
-      "Size": 129168
+      "Size": 129033
     },
     "META-INF/maven/com.google.errorprone/error_prone_annotations/pom.properties": {
       "Size": 80
@@ -3200,8 +3197,8 @@
       "Size": 8404
     },
     "resources.arsc": {
-      "Size": 1021484
+      "Size": 1021392
     }
   },
-  "PackageSize": 11385847
+  "PackageSize": 11369354
 }
