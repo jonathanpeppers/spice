@@ -63,8 +63,14 @@ public static class TwoWayBindingExtensions
 			if (!updating && e.PropertyName == sourceProperty)
 			{
 				updating = true;
-				targetSetter(sourceGetter(source));
-				updating = false;
+				try
+				{
+					targetSetter(sourceGetter(source));
+				}
+				finally
+				{
+					updating = false;
+				}
 			}
 		};
 
@@ -73,8 +79,14 @@ public static class TwoWayBindingExtensions
 			if (!updating && e.PropertyName == targetProperty)
 			{
 				updating = true;
-				sourceSetter(source, targetGetter());
-				updating = false;
+				try
+				{
+					sourceSetter(source, targetGetter());
+				}
+				finally
+				{
+					updating = false;
+				}
 			}
 		};
 
