@@ -252,4 +252,33 @@ public class GridTests
 
 		Assert.Equal(nameof(grid.ColumnSpacing), property);
 	}
+
+	[Fact]
+	public void DefaultPaddingIsZero()
+	{
+		var grid = new Grid();
+		Assert.Equal(0.0, grid.Padding);
+	}
+
+	[Fact]
+	public void CanSetPadding()
+	{
+		var grid = new Grid
+		{
+			Padding = 15.0
+		};
+		Assert.Equal(15.0, grid.Padding);
+	}
+
+	[Fact]
+	public void PropertyChangedFiresOnPaddingChange()
+	{
+		string? property = null;
+		var grid = new Grid();
+		grid.PropertyChanged += (sender, e) => property = e.PropertyName;
+		
+		grid.Padding = 25.0;
+
+		Assert.Equal(nameof(grid.Padding), property);
+	}
 }

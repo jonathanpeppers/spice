@@ -27,5 +27,12 @@ public partial class ContentView : View
 		}
 	}
 
+	/// <summary>
+	/// Gets or sets the padding inside the ContentView in device-independent units (uniform padding on all sides).
+	/// Platform implementations: Android.Views.ViewGroup.SetPadding / UIKit.UIView frame adjustments
+	/// </summary>
+	[ObservableProperty]
+	double _padding;
+
 	partial void OnContentChanged(View? oldContent, View? newContent);
 }

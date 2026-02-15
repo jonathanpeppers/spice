@@ -33,6 +33,13 @@ public partial class Grid : View
 	[ObservableProperty]
 	double _columnSpacing = 0;
 
+	/// <summary>
+	/// Gets or sets the padding inside the Grid in device-independent units (uniform padding on all sides).
+	/// Platform implementations: Android.Views.ViewGroup.SetPadding / iOS manual layout adjustments
+	/// </summary>
+	[ObservableProperty]
+	double _padding;
+
 	// Attached properties for child views (thread-safe)
 	static readonly System.Collections.Concurrent.ConcurrentDictionary<View, int> _rows = new();
 	static readonly System.Collections.Concurrent.ConcurrentDictionary<View, int> _columns = new();

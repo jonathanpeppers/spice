@@ -41,6 +41,8 @@ public partial class Grid
 
 	partial void OnColumnSpacingChanged(double value) => NativeView.InvalidateLayout();
 
+	partial void OnPaddingChanged(double value) => NativeView.InvalidateLayout();
+
 	void OnDefinitionsChanged(object? sender, NotifyCollectionChangedEventArgs e)
 	{
 		NativeView.InvalidateLayout();
@@ -160,6 +162,13 @@ public partial class Grid
 			usedHeight += (nfloat)_parent.RowSpacing * (rowCount - 1);
 			usedWidth += (nfloat)_parent.ColumnSpacing * (colCount - 1);
 
+			// Account for padding
+			var padding = (nfloat)_parent.Padding;
+			var paddingWidth = padding * 2;
+			var paddingHeight = padding * 2;
+			usedHeight += paddingHeight;
+			usedWidth += paddingWidth;
+
 			// Distribute remaining space to star-sized rows/columns
 			nfloat remainingHeight = (nfloat)Math.Max(0, Bounds.Height - usedHeight);
 			nfloat remainingWidth = (nfloat)Math.Max(0, Bounds.Width - usedWidth);
@@ -184,15 +193,15 @@ public partial class Grid
 				}
 			}
 
-			// Calculate positions
-			nfloat currentY = 0;
+			// Calculate positions (including padding offset)
+			nfloat currentY = padding;
 			for (int i = 0; i < rowCount; i++)
 			{
 				rowPositions[i] = currentY;
 				currentY += rowHeights[i] + (nfloat)_parent.RowSpacing;
 			}
 
-			nfloat currentX = 0;
+			nfloat currentX = padding;
 			for (int i = 0; i < colCount; i++)
 			{
 				colPositions[i] = currentX;

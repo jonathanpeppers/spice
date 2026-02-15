@@ -111,11 +111,33 @@ public partial class RefreshView
 		{
 			var contentView = (UIView)newContent;
 			NativeView.AddSubview(contentView);
-			newContent.UpdateAlign();
+			UpdateContentLayout();
 			
 			// Try to attach refresh control to scrollable content
 			TryAttachRefreshControl(contentView);
 		}
+	}
+
+	partial void OnPaddingChanged(double value)
+	{
+		UpdateContentLayout();
+	}
+
+	void UpdateContentLayout()
+	{
+		if (Content == null)
+			return;
+
+		var padding = (nfloat)Padding;
+		var contentView = (UIView)Content;
+		var bounds = NativeView.Bounds;
+
+		contentView.Frame = new CGRect(
+			padding,
+			padding,
+			bounds.Width - (padding * 2),
+			bounds.Height - (padding * 2)
+		);
 	}
 
 	partial void OnIsRefreshingChanged(bool value)

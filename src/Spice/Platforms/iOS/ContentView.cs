@@ -35,7 +35,29 @@ public partial class ContentView
 		if (newContent != null)
 		{
 			NativeView.AddSubview(newContent);
-			newContent.UpdateAlign();
+			UpdateContentLayout();
 		}
+	}
+
+	partial void OnPaddingChanged(double value)
+	{
+		UpdateContentLayout();
+	}
+
+	void UpdateContentLayout()
+	{
+		if (Content == null)
+			return;
+
+		var padding = (nfloat)Padding;
+		var contentView = (UIView)Content;
+		var bounds = NativeView.Bounds;
+
+		contentView.Frame = new CGRect(
+			padding,
+			padding,
+			bounds.Width - (padding * 2),
+			bounds.Height - (padding * 2)
+		);
 	}
 }
