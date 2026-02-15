@@ -102,6 +102,11 @@ public class App : Application
 				},
 				new Button
 				{
+					Text = "Margin",
+					Clicked = _ => Main = new MarginScenario(),
+				},
+				new Button
+				{
 					Text = "CollectionView",
 					Clicked = _ => Main = new CollectionViewScenario(),
 				},

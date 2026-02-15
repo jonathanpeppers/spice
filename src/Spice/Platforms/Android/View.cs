@@ -171,6 +171,23 @@ public partial class View
 
 	partial void OnIsEnabledChanged(bool value) => _nativeView.Value.Enabled = value;
 
+	partial void OnMarginChanged(Thickness value)
+	{
+		if (_layoutParameters.Value is RelativeLayout.LayoutParams layoutParams)
+		{
+			layoutParams.SetMargins(
+				(int)value.Left.ToPixels(),
+				(int)value.Top.ToPixels(),
+				(int)value.Right.ToPixels(),
+				(int)value.Bottom.ToPixels()
+			);
+		}
+		else
+		{
+			throw new NotSupportedException($"LayoutParameters of type {_layoutParameters.Value.GetType()} not supported!");
+		}
+	}
+
 	partial void OnWidthRequestChanged(double value)
 	{
 		var layoutParameters = _layoutParameters.Value;
