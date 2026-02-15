@@ -95,6 +95,11 @@ public class App : Application
 					Text = "Border",
 					Clicked = _ => Main = new BorderScenario(),
 				},
+				new Button
+				{
+					Text = "Margin",
+					Clicked = _ => Main = new MarginScenario(),
+				},
 			}
 		};
 	}
