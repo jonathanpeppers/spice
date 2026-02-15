@@ -15,6 +15,13 @@ public static class PlatformExtensions
 	public static int ToPixels(this int value) => (int)Math.Round(value * Density.Value);
 
 	/// <summary>
+	/// Convert DP to Pixels
+	/// </summary>
+	/// <param name="value">DP value</param>
+	/// <returns>Pixel value</returns>
+	public static int ToPixels(this double value) => (int)Math.Round(value * Density.Value);
+
+	/// <summary>
 	/// Converts a Maui.Graphics.Color to Android int representation of a color
 	/// </summary>
 	/// <param name="color">The Maui.Graphics.Color</param>
