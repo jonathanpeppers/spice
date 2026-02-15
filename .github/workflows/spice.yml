@@ -91,7 +91,6 @@ jobs:
 
   ui-tests:
     runs-on: ubuntu-latest
-    needs: [build]
     env:
       WORKLOAD_VERSION: 10.0.103
       ARTIFACTS_DIR: ${{ github.workspace }}/test-artifacts
