@@ -17,11 +17,6 @@ public class SpiceSceneDelegate<TApp> : UIResponder, IUIWindowSceneDelegate wher
 	public UIWindow? Window { get; set; }
 
 	/// <summary>
-	/// Weak reference to the app view displayed in the window, avoiding MEM0002 in NSObject subclass.
-	/// </summary>
-	private WeakReference<TApp>? _appViewRef;
-
-	/// <summary>
 	/// Called when a new scene session is being created and the UIWindow needs to be configured.
 	/// </summary>
 	[Export("scene:willConnectToSession:options:")]
@@ -32,33 +27,10 @@ public class SpiceSceneDelegate<TApp> : UIResponder, IUIWindowSceneDelegate wher
 			Window = Platform.Window = new UIWindow(windowScene);
 
 			var vc = new UIViewController();
-
-			// Dispose existing app view if reconnecting
-			if (_appViewRef != null && _appViewRef.TryGetTarget(out var oldView))
-			{
-				View.DisposeRecursive(oldView);
-			}
-
-			var appView = new TApp();
-			_appViewRef = new WeakReference<TApp>(appView);
-			vc.View!.AddSubview(appView);
+			vc.View!.AddSubview(new TApp());
 			Window.RootViewController = vc;
 			Window.MakeKeyAndVisible();
 		}
-	}
-
-	/// <summary>
-	/// Called when the scene is about to disconnect from the session.
-	/// </summary>
-	[Export("sceneDidDisconnect:")]
-	public virtual void DidDisconnect(UIScene scene)
-	{
-		// Dispose the app view and all its children
-		if (_appViewRef != null && _appViewRef.TryGetTarget(out var appView))
-		{
-			View.DisposeRecursive(appView);
-		}
-		_appViewRef = null;
 	}
 }
 

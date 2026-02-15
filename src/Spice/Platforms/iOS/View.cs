@@ -59,9 +59,6 @@ public partial class View
 			foreach (View item in e.OldItems)
 			{
 				((UIView)item).RemoveFromSuperview();
-				
-				// Dispose the removed view if it implements IDisposable
-				DisposeRecursive(item);
 			}
 		}
 
