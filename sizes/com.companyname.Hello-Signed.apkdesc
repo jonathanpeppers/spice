@@ -188,7 +188,7 @@
       "Size": 11312
     },
     "lib/arm64-v8a/libaot-System.Private.CoreLib.dll.so": {
-      "Size": 871968
+      "Size": 871840
     },
     "lib/arm64-v8a/libaot-System.Runtime.dll.so": {
       "Size": 3608

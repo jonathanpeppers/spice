@@ -2,20 +2,15 @@
 	<PropertyGroup>
 		<!-- To attempt XAML hot reload features one day -->
 		<!--<IgnoreMauiXamlHotReloadCompatibilityCheck>true</IgnoreMauiXamlHotReloadCompatibilityCheck>-->
+		<!-- Opt into full trimming mode; users can override in their csproj -->
+        <!-- Blazor projects don't work (https://github.com/dotnet/aspnetcore/issues/63951) -->
+		<TrimMode Condition=" '$(TrimMode)' == '' and '$(UsingMicrosoftNETSdkRazor)' != 'true' ">full</TrimMode>
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- This tells VS Windows to load XamarinVS -->
 		<ProjectCapability Include="Maui" />
 		<!-- If we want to track Spice -->
 		<ProjectCapability Include="Spice" />
-	</ItemGroup>
-	<ItemGroup>
-		<!-- Deemed "safe enough" for now -->
-		<TrimmableAssembly Include="Microsoft.Maui.Graphics" />
-		<TrimmableAssembly Include="Microsoft.AspNetCore.Components.WebView" />
-		<TrimmableAssembly Include="Microsoft.Extensions.FileProviders.Abstractions" />
-		<TrimmableAssembly Include="Microsoft.Extensions.FileProviders.Embedded" />
-		<TrimmableAssembly Include="Microsoft.Extensions.Primitives" />
 	</ItemGroup>
 
 </Project>

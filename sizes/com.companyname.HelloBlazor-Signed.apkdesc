@@ -218,7 +218,7 @@
       "Size": 15464
     },
     "lib/arm64-v8a/libaot-Java.Interop.dll.so": {
-      "Size": 168960
+      "Size": 168720
     },
     "lib/arm64-v8a/libaot-Microsoft.AspNetCore.Components.dll.so": {
       "Size": 208152
@@ -260,25 +260,25 @@
       "Size": 12880
     },
     "lib/arm64-v8a/libaot-Microsoft.JSInterop.dll.so": {
-      "Size": 60344
+      "Size": 53224
     },
     "lib/arm64-v8a/libaot-Mono.Android.dll.so": {
-      "Size": 313152
+      "Size": 313144
     },
     "lib/arm64-v8a/libaot-Mono.Android.Runtime.dll.so": {
       "Size": 4480
     },
     "lib/arm64-v8a/libaot-Spice.dll.so": {
-      "Size": 48544
+      "Size": 49840
     },
     "lib/arm64-v8a/libaot-System.Collections.Concurrent.dll.so": {
-      "Size": 54512
+      "Size": 47528
     },
     "lib/arm64-v8a/libaot-System.Collections.dll.so": {
-      "Size": 47664
+      "Size": 45240
     },
     "lib/arm64-v8a/libaot-System.Collections.Immutable.dll.so": {
-      "Size": 110200
+      "Size": 108928
     },
     "lib/arm64-v8a/libaot-System.ComponentModel.dll.so": {
       "Size": 3656
@@ -314,10 +314,10 @@
       "Size": 29448
     },
     "lib/arm64-v8a/libaot-System.ObjectModel.dll.so": {
-      "Size": 12032
+      "Size": 12008
     },
     "lib/arm64-v8a/libaot-System.Private.CoreLib.dll.so": {
-      "Size": 1433536
+      "Size": 1422992
     },
     "lib/arm64-v8a/libaot-System.Private.Uri.dll.so": {
       "Size": 90360
@@ -335,10 +335,10 @@
       "Size": 22392
     },
     "lib/arm64-v8a/libaot-System.Text.Json.dll.so": {
-      "Size": 445904
+      "Size": 308424
     },
     "lib/arm64-v8a/libaot-System.Text.RegularExpressions.dll.so": {
-      "Size": 190832
+      "Size": 190800
     },
     "lib/arm64-v8a/libaot-Xamarin.AndroidX.Activity.dll.so": {
       "Size": 9184
@@ -380,7 +380,7 @@
       "Size": 19168
     },
     "lib/arm64-v8a/libassembly-store.so": {
-      "Size": 2593512
+      "Size": 2533448
     },
     "lib/arm64-v8a/libmono-component-marshal-ilgen.so": {
       "Size": 36616
@@ -3200,5 +3200,5 @@
       "Size": 1021392
     }
   },
-  "PackageSize": 11471754
+  "PackageSize": 11369354
 }
