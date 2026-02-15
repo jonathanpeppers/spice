@@ -167,4 +167,24 @@ public class ViewOpacityTests
 		Assert.NotNull(contentView.Content);
 		Assert.Equal(0.2, contentView.Content.Opacity);
 	}
+
+	[Fact]
+	public void OpacityBelowZeroIsClampedToZero()
+	{
+		var view = new View
+		{
+			Opacity = -0.5
+		};
+		Assert.Equal(0.0, view.Opacity);
+	}
+
+	[Fact]
+	public void OpacityAboveOneIsClampedToOne()
+	{
+		var view = new View
+		{
+			Opacity = 1.5
+		};
+		Assert.Equal(1.0, view.Opacity);
+	}
 }
