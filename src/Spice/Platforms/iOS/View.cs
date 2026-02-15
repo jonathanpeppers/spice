@@ -129,7 +129,7 @@ public partial class View
 				frame.X = superframe.Width - frame.Width;
 				break;
 			case Align.Stretch:
-				frame.Width = superframe.Width;
+				frame.Width = WidthRequest >= 0 ? (nfloat)WidthRequest : superframe.Width;
 				frame.X = 0;
 				break;
 			default:
@@ -151,7 +151,7 @@ public partial class View
 				frame.Y = superframe.Height - frame.Height;
 				break;
 			case Align.Stretch:
-				frame.Height = superframe.Height;
+				frame.Height = HeightRequest >= 0 ? (nfloat)HeightRequest : superframe.Height;
 				frame.Y = 0;
 				break;
 			default:

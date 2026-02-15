@@ -102,21 +102,21 @@ public partial class View
 			switch (value)
 			{
 				case Align.Center:
-					layoutParameters.Width = Android.Views.ViewGroup.LayoutParams.WrapContent;
+					layoutParameters.Width = WidthRequest >= 0 ? GetWidthInPixels() : Android.Views.ViewGroup.LayoutParams.WrapContent;
 					layoutParameters.AddRule(LayoutRules.CenterHorizontal);
 					break;
 				case Align.Start:
-					layoutParameters.Width = Android.Views.ViewGroup.LayoutParams.WrapContent;
+					layoutParameters.Width = WidthRequest >= 0 ? GetWidthInPixels() : Android.Views.ViewGroup.LayoutParams.WrapContent;
 					layoutParameters.RemoveRule(LayoutRules.CenterHorizontal);
 					layoutParameters.AddRule(LayoutRules.AlignParentLeft);
 					break;
 				case Align.End:
-					layoutParameters.Width = Android.Views.ViewGroup.LayoutParams.WrapContent;
+					layoutParameters.Width = WidthRequest >= 0 ? GetWidthInPixels() : Android.Views.ViewGroup.LayoutParams.WrapContent;
 					layoutParameters.RemoveRule(LayoutRules.CenterHorizontal);
 					layoutParameters.AddRule(LayoutRules.AlignParentRight);
 					break;
 				case Align.Stretch:
-					layoutParameters.Width = Android.Views.ViewGroup.LayoutParams.MatchParent;
+					layoutParameters.Width = WidthRequest >= 0 ? GetWidthInPixels() : Android.Views.ViewGroup.LayoutParams.MatchParent;
 					break;
 				default:
 					throw new NotSupportedException($"{nameof(HorizontalAlign)} value '{value}' not supported!");
@@ -138,22 +138,22 @@ public partial class View
 			switch (value)
 			{
 				case Align.Center:
-					layoutParameters.Height = Android.Views.ViewGroup.LayoutParams.WrapContent;
+					layoutParameters.Height = HeightRequest >= 0 ? GetHeightInPixels() : Android.Views.ViewGroup.LayoutParams.WrapContent;
 					layoutParameters.RemoveRule(LayoutRules.CenterVertical);
 					layoutParameters.AddRule(LayoutRules.CenterVertical);
 					break;
 				case Align.Start:
-					layoutParameters.Height = Android.Views.ViewGroup.LayoutParams.WrapContent;
+					layoutParameters.Height = HeightRequest >= 0 ? GetHeightInPixels() : Android.Views.ViewGroup.LayoutParams.WrapContent;
 					layoutParameters.RemoveRule(LayoutRules.CenterVertical);
 					layoutParameters.AddRule(LayoutRules.AlignParentTop);
 					break;
 				case Align.End:
-					layoutParameters.Height = Android.Views.ViewGroup.LayoutParams.WrapContent;
+					layoutParameters.Height = HeightRequest >= 0 ? GetHeightInPixels() : Android.Views.ViewGroup.LayoutParams.WrapContent;
 					layoutParameters.RemoveRule(LayoutRules.CenterVertical);
 					layoutParameters.AddRule(LayoutRules.AlignParentBottom);
 					break;
 				case Align.Stretch:
-					layoutParameters.Height = Android.Views.ViewGroup.LayoutParams.MatchParent;
+					layoutParameters.Height = HeightRequest >= 0 ? GetHeightInPixels() : Android.Views.ViewGroup.LayoutParams.MatchParent;
 					break;
 				default:
 					throw new NotSupportedException($"{nameof(VerticalAlign)} value '{value}' not supported!");
@@ -173,66 +173,50 @@ public partial class View
 
 	partial void OnWidthRequestChanged(double value)
 	{
-		if (_layoutParameters.IsValueCreated)
+		var layoutParameters = _layoutParameters.Value;
+
+		if (value < 0)
 		{
-			var layoutParameters = _layoutParameters.Value;
-			
-			// Convert value to pixels
-			// -1 means unset, use WrapContent if alignment is not Stretch
-			if (value < 0)
-			{
-				layoutParameters.Width = HorizontalAlign == Align.Stretch 
-					? Android.Views.ViewGroup.LayoutParams.MatchParent 
-					: Android.Views.ViewGroup.LayoutParams.WrapContent;
-			}
-			else
-			{
-				// Convert from device-independent units to pixels
-				var displayMetrics = _nativeView.Value.Resources?.DisplayMetrics;
-				if (displayMetrics != null)
-				{
-					layoutParameters.Width = (int)(value * displayMetrics.Density);
-				}
-				else
-				{
-					layoutParameters.Width = (int)value;
-				}
-			}
-			
-			_nativeView.Value.RequestLayout();
+			layoutParameters.Width = HorizontalAlign == Align.Stretch
+				? Android.Views.ViewGroup.LayoutParams.MatchParent
+				: Android.Views.ViewGroup.LayoutParams.WrapContent;
 		}
+		else
+		{
+			layoutParameters.Width = GetWidthInPixels();
+		}
+
+		_nativeView.Value.RequestLayout();
 	}
 
 	partial void OnHeightRequestChanged(double value)
 	{
-		if (_layoutParameters.IsValueCreated)
+		var layoutParameters = _layoutParameters.Value;
+
+		if (value < 0)
 		{
-			var layoutParameters = _layoutParameters.Value;
-			
-			// Convert value to pixels
-			// -1 means unset, use WrapContent if alignment is not Stretch
-			if (value < 0)
-			{
-				layoutParameters.Height = VerticalAlign == Align.Stretch 
-					? Android.Views.ViewGroup.LayoutParams.MatchParent 
-					: Android.Views.ViewGroup.LayoutParams.WrapContent;
-			}
-			else
-			{
-				// Convert from device-independent units to pixels
-				var displayMetrics = _nativeView.Value.Resources?.DisplayMetrics;
-				if (displayMetrics != null)
-				{
-					layoutParameters.Height = (int)(value * displayMetrics.Density);
-				}
-				else
-				{
-					layoutParameters.Height = (int)value;
-				}
-			}
-			
-			_nativeView.Value.RequestLayout();
+			layoutParameters.Height = VerticalAlign == Align.Stretch
+				? Android.Views.ViewGroup.LayoutParams.MatchParent
+				: Android.Views.ViewGroup.LayoutParams.WrapContent;
 		}
+		else
+		{
+			layoutParameters.Height = GetHeightInPixels();
+		}
+
+		_nativeView.Value.RequestLayout();
+	}
+
+	int GetWidthInPixels()
+	{
+		var displayMetrics = _nativeView.Value.Resources?.DisplayMetrics;
+		return displayMetrics != null ? (int)(WidthRequest * displayMetrics.Density) : (int)WidthRequest;
+	}
+
+	int GetHeightInPixels()
+	{
+		var displayMetrics = _nativeView.Value.Resources?.DisplayMetrics;
+		return displayMetrics != null ? (int)(HeightRequest * displayMetrics.Density) : (int)HeightRequest;
 	}
 
 	private partial double GetWidth()

@@ -57,14 +57,14 @@ public partial class View : ObservableObject, IEnumerable<View>
 
 	/// <summary>
 	/// Gets or sets the desired width of the view. 
-	/// Platform implementations: UIKit.UIView.WidthAnchor / Android.Views.ViewGroup.LayoutParams.Width
+	/// Platform implementations: UIKit.UIView.Frame.Size / Android.Views.ViewGroup.LayoutParams.Width
 	/// </summary>
 	[ObservableProperty]
 	double _widthRequest = -1;
 
 	/// <summary>
 	/// Gets or sets the desired height of the view.
-	/// Platform implementations: UIKit.UIView.HeightAnchor / Android.Views.ViewGroup.LayoutParams.Height
+	/// Platform implementations: UIKit.UIView.Frame.Size / Android.Views.ViewGroup.LayoutParams.Height
 	/// </summary>
 	[ObservableProperty]
 	double _heightRequest = -1;

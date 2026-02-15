@@ -298,4 +298,53 @@ public class ViewSizeTests
 		Assert.True(width >= 0);
 		Assert.True(height >= 0);
 	}
+
+	[Fact]
+	public void SettingWidthRequestWithHorizontalAlignStretch()
+	{
+		var view = new View
+		{
+			HorizontalAlign = Align.Stretch
+		};
+
+		view.WidthRequest = 200;
+
+		Assert.Equal(200, view.WidthRequest);
+		Assert.Equal(Align.Stretch, view.HorizontalAlign);
+	}
+
+	[Fact]
+	public void SettingHeightRequestWithVerticalAlignStretch()
+	{
+		var view = new View
+		{
+			VerticalAlign = Align.Stretch
+		};
+
+		view.HeightRequest = 150;
+
+		Assert.Equal(150, view.HeightRequest);
+		Assert.Equal(Align.Stretch, view.VerticalAlign);
+	}
+
+	[Fact]
+	public void ChangingAlignmentAfterSizeRequestsAreSetKeepsRequests()
+	{
+		var view = new View
+		{
+			HorizontalAlign = Align.Start,
+			VerticalAlign = Align.Start
+		};
+
+		view.WidthRequest = 120;
+		view.HeightRequest = 80;
+
+		view.HorizontalAlign = Align.Stretch;
+		view.VerticalAlign = Align.Stretch;
+
+		Assert.Equal(120, view.WidthRequest);
+		Assert.Equal(80, view.HeightRequest);
+		Assert.Equal(Align.Stretch, view.HorizontalAlign);
+		Assert.Equal(Align.Stretch, view.VerticalAlign);
+	}
 }
