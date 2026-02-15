@@ -60,7 +60,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 | RefreshView | ❌ No | 🟢 Maybe | Pull-to-refresh wrapper |
 | RoundRectangle | ❌ No | ❌ No | Border can handle this |
 | ScrollView | ✅ Yes | ✅ Done | Fully implemented |
-| SearchBar | ❌ No | 🟡 Maybe | Search input - common pattern |
+| SearchBar | ✅ Yes | ✅ Done | Search input with search button |
 | Slider | ✅ Yes | ✅ Done | Range selection - common |
 | Stepper | ❌ No | ❌ No | Rare, can use buttons + label |
 | SwipeView | ❌ No | 🟢 Maybe | Swipe actions - nice UX feature |
@@ -73,7 +73,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 
 ## Summary
 
-**Implemented: 16 / 60+ controls**
+**Implemented: 17 / 60+ controls**
 
 ### Spice Controls (Core)
 - ✅ ActivityIndicator
@@ -92,6 +92,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - ✅ Picker
 - ✅ ProgressBar
 - ✅ ScrollView
+- ✅ SearchBar
 - ✅ Slider
 - ✅ StackLayout
 - ✅ Switch (toggle control)
@@ -130,6 +131,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - Picker → UIPickerView
 - ProgressBar → UIProgressView
 - ScrollView → UIScrollView
+- SearchBar → UISearchBar
 - Slider → UISlider
 - StackLayout → UIStackView
 - Switch → UISwitch
@@ -152,6 +154,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - Picker → Spinner
 - ProgressBar → ProgressBar
 - ScrollView → ScrollView / HorizontalScrollView
+- SearchBar → SearchView
 - Slider → SeekBar
 - StackLayout → LinearLayout
 - Switch → SwitchCompat
@@ -340,7 +343,7 @@ Based on Spice's minimalist philosophy and common mobile UI needs, here are reas
 
 **Input**
 - 🟡 **Editor** - Multi-line text input; maps to UITextView/EditText (multiline)
-- 🟡 **SearchBar** - Search input; maps to UISearchBar/SearchView
+- ✅ **SearchBar** - Search input; maps to UISearchBar/SearchView
 
 **Display**
 - ✅ **ImageButton** - Tappable image; common pattern (can be done with Image + gesture) (IMPLEMENTED)
@@ -412,7 +415,7 @@ Based on Spice's minimalist philosophy and common mobile UI needs, here are reas
 
 **Phase 3 (Lists & Advanced)**
 1. 🟡 ListView
-2. 🟡 SearchBar
+2. ✅ SearchBar
 3. 🟡 CollectionView
 4. ✅ Border
 5. ✅ ContentView
