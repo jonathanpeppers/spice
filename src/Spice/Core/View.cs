@@ -78,6 +78,13 @@ public partial class View : ObservableObject, IEnumerable<View>
 	}
 
 	/// <summary>
+	/// Gets or sets the automation identifier for UI testing.
+	/// Platform implementations: UIKit.UIView.AccessibilityIdentifier / Android.Views.View.ContentDescription
+	/// </summary>
+	[ObservableProperty]
+	string? _automationId;
+
+	/// <summary>
 	/// Called when the Opacity property changes
 	/// </summary>
 	partial void OnOpacityChanged(double value);
@@ -133,5 +140,6 @@ public partial class View : ObservableObject, IEnumerable<View>
 	/// Platform-specific implementation to get actual height
 	/// </summary>
 	private partial double GetHeight();
+
 #endif
 }
