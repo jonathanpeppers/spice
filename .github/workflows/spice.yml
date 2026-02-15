@@ -109,13 +109,10 @@ jobs:
     - name: install workloads
       run: dotnet workload install maui-android --version $WORKLOAD_VERSION
 
-    - name: restore projects
+    - name: restore and build Spice.Scenarios
       run: |
-        dotnet restore spice.slnx
-        dotnet restore samples/samples.slnx
-
-    - name: build Spice.Scenarios
-      run: dotnet build samples/Spice.Scenarios/Spice.Scenarios.csproj -f net10.0-android -c Debug -r android-x86_64
+        dotnet restore tests/Spice.UITests/Spice.UITests.csproj
+        dotnet build samples/Spice.Scenarios/Spice.Scenarios.csproj -f net10.0-android -c Debug -r android-x86_64
 
     - name: install AndroidSdk.Tool
       run: dotnet tool install -g AndroidSdk.Tool
