@@ -90,11 +90,9 @@ jobs:
         path: bin
 
   ui-tests:
-    runs-on: macos-latest
+    runs-on: macos-13
     needs: [build]
     env:
-      TEST_EMULATOR_IMAGE: system-images;android-34;google_apis;arm64-v8a
-      TEST_EMULATOR_NAME: UITestsEmulator
       WORKLOAD_VERSION: 10.0.103
     
     steps:
@@ -114,61 +112,28 @@ jobs:
         dotnet restore tests/Spice.UITests/Spice.UITests.csproj
         dotnet build samples/Spice.Scenarios/Spice.Scenarios.csproj -f net10.0-android -c Debug -p:TargetFrameworks=net10.0-android
 
-    - name: Boot Android emulator
-      timeout-minutes: 10
-      run: |
-        echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install '${{ env.TEST_EMULATOR_IMAGE }}'
-        echo "no" | $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd -n '${{ env.TEST_EMULATOR_NAME }}' -k '${{ env.TEST_EMULATOR_IMAGE }}' --force
-        nohup $ANDROID_HOME/emulator/emulator -avd '${{ env.TEST_EMULATOR_NAME }}' -no-window -no-snapshot -no-audio -no-boot-anim 2>&1 &
-        echo "Waiting for emulator to boot..."
-        adb wait-for-device
-        # Poll for boot_completed with a timeout
-        for i in $(seq 1 120); do
-          if adb shell getprop sys.boot_completed 2>/dev/null | grep -q 1; then
-            echo "Emulator booted after ${i}s"
-            break
-          fi
-          if [ $i -eq 120 ]; then
-            echo "Emulator failed to boot within 120s"
-            adb devices
-            exit 1
-          fi
-          sleep 1
-        done
-        adb devices
-
-    - name: Install App
-      run: |
-        APK_PATH=$(find samples/Spice.Scenarios/bin/Debug/net10.0-android -name "*-Signed.apk" | head -1)
-        if [ -n "$APK_PATH" ]; then
-          echo "Installing APK: $APK_PATH"
-          adb install "$APK_PATH"
-        else
-          echo "No APK found"
-          exit 1
-        fi
-
-    - name: Verify App Launch
-      run: |
-        adb shell monkey -p com.companyname.spice.scenarios -c android.intent.category.LAUNCHER 1
-        sleep 5
-        adb logcat -d -s "AndroidRuntime:E" "mono:E" "*:F" | tail -50
-
     - name: Install Appium
       run: |
         npm install -g appium
         appium driver install uiautomator2
 
-    - name: Start Appium server
-      run: |
-        appium server --log-level info &
-        sleep 5
-
     - name: Run UI Tests
-      timeout-minutes: 20
-      run: dotnet test tests/Spice.UITests/Spice.UITests.csproj -c Debug --logger trx --results-directory test-artifacts
-      env:
-        ARTIFACTS_DIR: ${{ github.workspace }}/test-artifacts
+      timeout-minutes: 30
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 34
+        arch: x86_64
+        target: google_apis
+        script: |
+          APK_PATH=$(find samples/Spice.Scenarios/bin/Debug/net10.0-android -name "*-Signed.apk" | head -1)
+          if [ -z "$APK_PATH" ]; then echo "No APK found"; exit 1; fi
+          echo "Installing APK: $APK_PATH"
+          adb install "$APK_PATH"
+          adb shell monkey -p com.companyname.spice.scenarios -c android.intent.category.LAUNCHER 1
+          sleep 5
+          appium server --log-level info &
+          sleep 5
+          dotnet test tests/Spice.UITests/Spice.UITests.csproj -c Debug --logger trx --results-directory test-artifacts
 
     - name: Upload UI test results
       uses: actions/upload-artifact@v4
