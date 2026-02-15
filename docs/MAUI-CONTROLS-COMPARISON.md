@@ -73,7 +73,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 
 ## Summary
 
-**Implemented: 19 / 60+ controls**
+**Implemented: 16 / 60+ controls**
 
 ### Spice Controls (Core)
 - ✅ ActivityIndicator
@@ -102,10 +102,8 @@ This document compares the stable/supported controls from .NET MAUI with what is
 
 ### Supporting Types
 - Align (enums for alignment)
-- GridLength / GridUnitType (Grid sizing)
 - Orientation (horizontal/vertical)
 - RootComponent (Blazor)
-- Thickness (margin/padding)
 
 ### Key Differences
 - **No XAML**: Spice uses POCOs, not XAML markup
@@ -121,13 +119,13 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - Border → UIView (with CALayer border)
 - BoxView → UIView
 - Button → UIButton
-- CheckBox → UIButton (checkmark)
+- CheckBox → UIButton (with checkmark styling)
 - ContentView → UIView
 - DatePicker → UIDatePicker
 - Entry → UITextField
-- Grid → UIView (manual layout)
+- Grid → Custom constraint-based layout
 - Image → UIImageView
-- ImageButton → UIButton (with image)
+- ImageButton → UIButton
 - Label → UILabel
 - Picker → UIPickerView
 - ProgressBar → UIProgressView
@@ -140,7 +138,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 
 #### Android (Android Widgets)
 - ActivityIndicator → ProgressBar (indeterminate)
-- Border → FrameLayout (with GradientDrawable)
+- Border → FrameLayout (with GradientDrawable background)
 - BoxView → View
 - Button → AppCompatButton
 - CheckBox → CheckBox
@@ -149,7 +147,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - Entry → AppCompatEditText
 - Grid → GridLayout
 - Image → AppCompatImageView
-- ImageButton → AppCompatImageButton
+- ImageButton → ImageButton
 - Label → AppCompatTextView
 - Picker → Spinner
 - ProgressBar → ProgressBar
@@ -180,7 +178,7 @@ This section compares the properties available on MAUI's `View` class (which inh
 | MaximumHeightRequest | ❌ No | 🟡 Maybe | Useful for responsive layouts |
 | HorizontalOptions | ❌ No | ✅ Done | HorizontalAlign already implemented |
 | VerticalOptions | ❌ No | ✅ Done | VerticalAlign already implemented |
-| Margin | ✅ Yes | ✅ Done | Outer spacing - critical for layouts |
+| Margin | ✅ Yes | ✅ Done | Outer spacing using Thickness struct |
 | Bounds | ❌ No | ❌ No | Read-only - internal layout info |
 | Frame | ❌ No | ❌ No | Read-only - screen position |
 | DesiredSize | ❌ No | ❌ No | Read-only - layout system internal |
@@ -274,7 +272,7 @@ This section compares the properties available on MAUI's `View` class (which inh
 | HorizontalAlign | HorizontalOptions | Simpler enum-based alignment |
 | VerticalAlign | VerticalOptions | Simpler enum-based alignment |
 | BackgroundColor | BackgroundColor | Uses `Microsoft.Maui.Graphics.Color` |
-| IsVisible | IsVisible | Control visibility - show/hide |
+| IsVisible | IsVisible | Show/hide element |
 | IsEnabled | IsEnabled | Enable/disable interaction |
 | Margin | Margin | Outer spacing using Thickness struct |
 
@@ -309,26 +307,26 @@ Based on Spice's minimalist philosophy and common mobile UI needs, here are reas
 ### 🔥 High Priority - Essential Controls
 
 **Layouts**
-- ✅ **Grid** - Essential for complex layouts; maps to UIStackView/LinearLayout with weights or constraint-based layout
-- ✅ **ScrollView** - Fundamental for scrollable content; maps to UIScrollView/ScrollView
+- ✅ **Grid** - Essential for complex layouts; maps to UIStackView/LinearLayout with weights or constraint-based layout (IMPLEMENTED)
+- ✅ **ScrollView** - Fundamental for scrollable content; maps to UIScrollView/ScrollView (IMPLEMENTED)
 
 **Input Controls**
-- ✅ **Switch** - Standard toggle control; maps to UISwitch/SwitchCompat
+- ✅ **Switch** - Standard toggle control; maps to UISwitch/SwitchCompat (IMPLEMENTED)
 - ✅ **Slider** - Common for settings/media controls; maps to UISlider/SeekBar (IMPLEMENTED)
-- ✅ **Picker** - Standard dropdown/selection; maps to UIPickerView/Spinner
-- ✅ **DatePicker** - Date selection; maps to UIDatePicker/DatePickerDialog
-- ✅ **TimePicker** - Time selection; maps to UIDatePicker/TimePickerDialog
-- ✅ **CheckBox** - Boolean selection; maps to UIButton (checkmark)/CheckBox
+- ✅ **Picker** - Standard dropdown/selection; maps to UIPickerView/Spinner (IMPLEMENTED)
+- ✅ **DatePicker** - Date selection; maps to UIDatePicker/DatePickerDialog (IMPLEMENTED)
+- ✅ **TimePicker** - Time selection; maps to UIDatePicker/TimePickerDialog (IMPLEMENTED)
+- ✅ **CheckBox** - Boolean selection; maps to UIButton (checkmark)/CheckBox (IMPLEMENTED)
 
 **Display Controls**
-- ✅ **ActivityIndicator** - Loading spinner; maps to UIActivityIndicatorView/ProgressBar (indeterminate)
-- ✅ **ProgressBar** - Progress display; maps to UIProgressView/ProgressBar (determinate)
+- ✅ **ActivityIndicator** - Loading spinner; maps to UIActivityIndicatorView/ProgressBar (indeterminate) (IMPLEMENTED)
+- ✅ **ProgressBar** - Progress display; maps to UIProgressView/ProgressBar (determinate) (IMPLEMENTED)
 
 ### 🟡 Medium Priority - Very Useful
 
 **Layouts**
-- 🟡 **ContentView** - Custom control container for composition
-- 🟡 **Border** - Wraps content with border/rounded corners; common UI pattern
+- ✅ **ContentView** - Custom control container for composition (IMPLEMENTED)
+- ✅ **Border** - Wraps content with border/rounded corners; common UI pattern (IMPLEMENTED)
 
 **Lists**
 - 🟡 **ListView** - Scrollable list of items; maps to UITableView/RecyclerView (critical for many apps)
@@ -339,7 +337,7 @@ Based on Spice's minimalist philosophy and common mobile UI needs, here are reas
 - 🟡 **SearchBar** - Search input; maps to UISearchBar/SearchView
 
 **Display**
-- 🟡 **ImageButton** - Tappable image; common pattern (can be done with Image + gesture)
+- ✅ **ImageButton** - Tappable image; common pattern (can be done with Image + gesture) (IMPLEMENTED)
 
 ### 🟢 Nice to Have - Special Cases
 
@@ -349,22 +347,22 @@ Based on Spice's minimalist philosophy and common mobile UI needs, here are reas
 - 🟢 **RadioButton** - Radio button groups (less common on mobile)
 
 **Shapes** (Lower priority - can use Image or GraphicsView)
-- 🟢 **BoxView** - Colored rectangle (useful for dividers/spacers)
+- ✅ **BoxView** - Colored rectangle (useful for dividers/spacers) (IMPLEMENTED)
 - 🟢 **Rectangle/Ellipse** - Basic shapes
 
 ### 📊 View Properties - High Priority
 
 **Layout & Sizing**
-- ✅ **WidthRequest/HeightRequest** - Essential for sizing views
-- ✅ **Margin** ✅ Done - Outer spacing (critical for layouts)
-- ✅ **Padding** - Inner spacing (for containers)
+- 🔥 **WidthRequest/HeightRequest** - Essential for sizing views
+- ✅ **Margin** - Outer spacing (critical for layouts) (IMPLEMENTED)
+- 🟡 **Padding** - Inner spacing (for containers)
 
 **Appearance**
-- ✅ **IsVisible** ✅ Done - Show/hide elements (very common)
-- ✅ **Opacity** - Transparency (common for fade effects)
+- ✅ **IsVisible** - Show/hide elements (very common) (IMPLEMENTED)
+- 🟡 **Opacity** - Transparency (common for fade effects)
 
 **Interaction**
-- ✅ **IsEnabled** ✅ Done - Enable/disable controls (essential for forms)
+- ✅ **IsEnabled** - Enable/disable controls (essential for forms) (IMPLEMENTED)
 
 ### ❌ Not Recommended
 
@@ -387,39 +385,39 @@ Based on Spice's minimalist philosophy and common mobile UI needs, here are reas
 
 ### Implementation Priority
 
-**Phase 1 (Core Controls)**
-1. Grid layout ✅
-2. ScrollView ✅
-3. Switch ✅
-4. ~~ActivityIndicator~~ ✅
-5. ProgressBar ✅
-6. IsVisible property ✅
-7. IsEnabled property ✅
-8. WidthRequest/HeightRequest
-9. Margin ✅
+**Phase 1 (Core Controls)** ✅
+1. ✅ Grid layout
+2. ✅ ScrollView
+3. ✅ Switch
+4. ✅ ActivityIndicator
+5. ✅ ProgressBar
+6. ✅ IsVisible property
+7. ✅ IsEnabled property
+8. 🔥 WidthRequest/HeightRequest
+9. ✅ Margin
 
-**Phase 2 (Input Controls)**
-1. Picker
-2. ✅ Slider (IMPLEMENTED)
-3. CheckBox
-4. DatePicker
-5. TimePicker
-6. Editor (multiline text)
+**Phase 2 (Input Controls)** ✅
+1. ✅ Picker
+2. ✅ Slider
+3. ✅ CheckBox
+4. ✅ DatePicker
+5. ✅ TimePicker
+6. 🟡 Editor (multiline text)
 
 **Phase 3 (Lists & Advanced)**
-1. ListView
-2. SearchBar
-3. CollectionView
-4. Border
-5. ContentView
-6. ImageButton
+1. 🟡 ListView
+2. 🟡 SearchBar
+3. 🟡 CollectionView
+4. ✅ Border
+5. ✅ ContentView
+6. ✅ ImageButton
 
 **Phase 4 (Nice-to-Have)**
-1. RefreshView
-2. SwipeView
-3. BoxView
-4. RadioButton
-5. Opacity property
+1. 🟢 RefreshView
+2. 🟢 SwipeView
+3. ✅ BoxView
+4. 🟢 RadioButton
+5. 🟡 Opacity property
 
 ---
 
