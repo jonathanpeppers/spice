@@ -24,21 +24,20 @@ public partial class RefreshView
 	/// <param name="creator">Subclasses can pass in a Func to create a UIView</param>
 	protected RefreshView(Func<View, UIView> creator) : base(creator) { }
 
-	WeakReference<UIRefreshControl>? _refreshControl;
-	WeakReference<UIScrollView>? _scrollView;
+	UIRefreshControl? _refreshControl;
+	UIScrollView? _scrollView;
 
 	UIRefreshControl GetOrCreateRefreshControl()
 	{
-		if (_refreshControl != null && _refreshControl.TryGetTarget(out var control))
+		if (_refreshControl != null)
 		{
-			return control;
+			return _refreshControl;
 		}
 
-		var refreshControl = new UIRefreshControl();
-		refreshControl.ValueChanged += OnRefreshControlValueChanged;
-		_refreshControl = new WeakReference<UIRefreshControl>(refreshControl);
+		_refreshControl = new UIRefreshControl();
+		_refreshControl.ValueChanged += OnRefreshControlValueChanged;
 
-		return refreshControl;
+		return _refreshControl;
 	}
 
 	void OnRefreshControlValueChanged(object? sender, EventArgs e)
@@ -62,7 +61,7 @@ public partial class RefreshView
 			var refreshControl = GetOrCreateRefreshControl();
 			scrollView.RefreshControl = refreshControl;
 			scrollView.AlwaysBounceVertical = true;
-			_scrollView = new WeakReference<UIScrollView>(scrollView);
+			_scrollView = scrollView;
 			return true;
 		}
 
@@ -83,10 +82,16 @@ public partial class RefreshView
 
 	void TryDetachRefreshControl()
 	{
-		if (_scrollView != null && _scrollView.TryGetTarget(out var scrollView))
+		if (_scrollView != null)
 		{
-			scrollView.RefreshControl = null;
+			_scrollView.RefreshControl = null;
 			_scrollView = null;
+		}
+
+		if (_refreshControl != null)
+		{
+			_refreshControl.ValueChanged -= OnRefreshControlValueChanged;
+			_refreshControl = null;
 		}
 	}
 
@@ -115,20 +120,20 @@ public partial class RefreshView
 
 	partial void OnIsRefreshingChanged(bool value)
 	{
-		if (_refreshControl != null && _refreshControl.TryGetTarget(out var refreshControl))
+		if (_refreshControl != null)
 		{
 			if (value)
 			{
-				if (!refreshControl.Refreshing)
+				if (!_refreshControl.Refreshing)
 				{
-					refreshControl.BeginRefreshing();
+					_refreshControl.BeginRefreshing();
 				}
 			}
 			else
 			{
-				if (refreshControl.Refreshing)
+				if (_refreshControl.Refreshing)
 				{
-					refreshControl.EndRefreshing();
+					_refreshControl.EndRefreshing();
 				}
 			}
 		}
@@ -136,12 +141,9 @@ public partial class RefreshView
 
 	partial void OnRefreshColorChanged(Color? value)
 	{
-		if (_refreshControl != null && _refreshControl.TryGetTarget(out var refreshControl))
+		if (_refreshControl != null && value != null)
 		{
-			if (value != null)
-			{
-				refreshControl.TintColor = value.ToUIColor();
-			}
+			_refreshControl.TintColor = value.ToUIColor();
 		}
 	}
 }

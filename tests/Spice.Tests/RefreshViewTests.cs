@@ -34,13 +34,6 @@ public class RefreshViewTests
 	}
 
 	[Fact]
-	public void CommandParameterIsNullByDefault()
-	{
-		var refreshView = new RefreshView();
-		Assert.Null(refreshView.CommandParameter);
-	}
-
-	[Fact]
 	public void RefreshColorIsNullByDefault()
 	{
 		var refreshView = new RefreshView();
@@ -116,17 +109,6 @@ public class RefreshViewTests
 	}
 
 	[Fact]
-	public void CanSetCommandParameter()
-	{
-		var refreshView = new RefreshView();
-		var parameter = new { Value = 42 };
-
-		refreshView.CommandParameter = parameter;
-		Assert.NotNull(refreshView.CommandParameter);
-		Assert.Equal(parameter, refreshView.CommandParameter);
-	}
-
-	[Fact]
 	public void CanSetRefreshColor()
 	{
 		var refreshView = new RefreshView();
@@ -183,16 +165,6 @@ public class RefreshViewTests
 	}
 
 	[Fact]
-	public void PropertyChangedFiresOnCommandParameterChange()
-	{
-		string? property = null;
-		var refreshView = new RefreshView();
-		refreshView.PropertyChanged += (sender, e) => property = e.PropertyName;
-		
-		refreshView.CommandParameter = "test";
-
-		Assert.Equal(nameof(refreshView.CommandParameter), property);
-	}
 
 	[Fact]
 	public void PropertyChangedFiresOnRefreshColorChange()
@@ -263,14 +235,12 @@ public class RefreshViewTests
 			Content = new ScrollView(),
 			IsRefreshing = true,
 			Command = () => commandExecuted = true,
-			CommandParameter = "test",
 			RefreshColor = blue
 		};
 
 		Assert.NotNull(refreshView.Content);
 		Assert.True(refreshView.IsRefreshing);
 		Assert.NotNull(refreshView.Command);
-		Assert.Equal("test", refreshView.CommandParameter);
 		Assert.Equal(blue, refreshView.RefreshColor);
 
 		refreshView.Command.Invoke();
@@ -311,18 +281,5 @@ public class RefreshViewTests
 		Assert.NotNull(refreshView1.Content);
 		Assert.NotNull(refreshView2.Content);
 		Assert.NotNull(refreshView3.Content);
-	}
-
-	[Fact]
-	public void CommandCanAccessCommandParameter()
-	{
-		var refreshView = new RefreshView();
-		object? capturedParameter = null;
-		
-		refreshView.CommandParameter = "TestParameter";
-		refreshView.Command = () => capturedParameter = refreshView.CommandParameter;
-
-		refreshView.Command.Invoke();
-		Assert.Equal("TestParameter", capturedParameter);
 	}
 }

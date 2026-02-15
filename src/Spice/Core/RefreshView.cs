@@ -42,12 +42,6 @@ public partial class RefreshView : View
 	Action? _command;
 
 	/// <summary>
-	/// Gets or sets the parameter passed to the Command when it is executed.
-	/// </summary>
-	[ObservableProperty]
-	object? _commandParameter;
-
-	/// <summary>
 	/// Gets or sets the color of the refresh indicator.
 	/// </summary>
 	[ObservableProperty]
