@@ -110,7 +110,7 @@ jobs:
     - name: restore and build Spice.Scenarios
       run: |
         dotnet restore tests/Spice.UITests/Spice.UITests.csproj
-        GITHUB_ACTIONS= dotnet build samples/Spice.Scenarios/Spice.Scenarios.csproj -f net10.0-android -c Debug -p:TargetFrameworks=net10.0-android
+        GITHUB_ACTIONS= dotnet build samples/Spice.Scenarios/Spice.Scenarios.csproj -f net10.0-android -c Debug -p:TargetFrameworks=net10.0-android -p:EmbedAssembliesIntoApk=true
 
     - name: Enable KVM
       run: |
