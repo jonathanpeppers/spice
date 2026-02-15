@@ -65,16 +65,6 @@ public partial class CollectionView : View, IDisposable
 		return view;
 	}
 
-	/// <summary>
-	/// Disposes a previously created item view and removes it from tracking.
-	/// Platform implementations should call this when recycling cells.
-	/// </summary>
-	internal void RecycleItemView(View view)
-	{
-		_activeItemViews.Remove(view);
-		DisposeRecursive(view);
-	}
-
 	/// <inheritdoc />
 	public void Dispose()
 	{
