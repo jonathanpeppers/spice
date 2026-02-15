@@ -107,6 +107,18 @@ public abstract class BaseTest : IDisposable
 
             // Capture logcat output
             CaptureLogcat(testArtifactDir, testName);
+
+            // Dump page source (XML view hierarchy) for debugging element class names
+            try
+            {
+                var source = Driver.PageSource;
+                File.WriteAllText(Path.Combine(testArtifactDir, $"{testName}-page-source.xml"), source);
+                Console.WriteLine($"Page source for {testName}:\n{source}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Failed to capture page source: {ex.Message}");
+            }
         }
         catch (Exception ex)
         {
