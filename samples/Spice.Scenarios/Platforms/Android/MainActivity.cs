@@ -1,5 +1,6 @@
 ﻿using Android.App;
 using Android.OS;
+using Android.Runtime;
 
 namespace Spice.Scenarios;
 
@@ -8,7 +9,7 @@ namespace Spice.Scenarios;
 	// Theme = "@style/Maui.SplashTheme", 
 	Theme = "@style/Theme.MaterialComponents.Light.NoActionBar",
 	MainLauncher = true)]
-[Android.Runtime.Register("com.companyname.spice.scenarios.MainActivity")]
+[Register("com.companyname.spice.scenarios.MainActivity")]
 public class MainActivity : SpiceActivity
 {
 	protected override void OnCreate(Bundle? savedInstanceState)
