@@ -92,7 +92,7 @@ public partial class Editor
 		// For minimal implementation, we'll skip this for now
 	}
 
-	TextWatcher? _textWatcher;
+	EditorTextWatcher? _textWatcher;
 
 	void EnsureTextWatcher()
 	{
