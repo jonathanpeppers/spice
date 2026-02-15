@@ -61,4 +61,10 @@ public partial class StackLayout
 	}
 
 	partial void OnSpacingChanged(double value) => NativeView.DividerPadding = (int)value;
+
+	partial void OnPaddingChanged(double value)
+	{
+		var paddingPx = value.ToPixels();
+		NativeView.SetPadding(paddingPx, paddingPx, paddingPx, paddingPx);
+	}
 }

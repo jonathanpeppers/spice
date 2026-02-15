@@ -45,6 +45,13 @@ public partial class StackLayout
 
 	partial void OnSpacingChanged(double value) => NativeView.Spacing = (nfloat)value;
 
+	partial void OnPaddingChanged(double value)
+	{
+		var padding = (nfloat)value;
+		NativeView.LayoutMargins = new UIEdgeInsets(padding, padding, padding, padding);
+		NativeView.LayoutMarginsRelativeArrangement = true;
+	}
+
 	/// <inheritdoc />
 	protected override void AddSubview(View view)
 	{

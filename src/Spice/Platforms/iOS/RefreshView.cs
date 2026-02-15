@@ -14,11 +14,11 @@ public partial class RefreshView
 	/// Android -> AndroidX.SwipeRefreshLayout.Widget.SwipeRefreshLayout
 	/// iOS -> UIKit.UIView with UIRefreshControl attached to child scroll view
 	/// </summary>
-	public RefreshView() : base(_ => new UIView { AutoresizingMask = UIViewAutoresizing.None }) { }
+	public RefreshView() : base(v => new SpiceRefreshView((RefreshView)v) { AutoresizingMask = UIViewAutoresizing.None }) { }
 
 	/// <inheritdoc />
 	/// <param name="frame">Pass the underlying view a frame</param>
-	public RefreshView(CGRect frame) : base(_ => new UIView(frame) { AutoresizingMask = UIViewAutoresizing.None }) { }
+	public RefreshView(CGRect frame) : base(v => new SpiceRefreshView((RefreshView)v, frame) { AutoresizingMask = UIViewAutoresizing.None }) { }
 
 	/// <inheritdoc />
 	/// <param name="creator">Subclasses can pass in a Func to create a UIView</param>
@@ -95,6 +95,8 @@ public partial class RefreshView
 		}
 	}
 
+	readonly UIView _paddingWrapper = new UIView { AutoresizingMask = UIViewAutoresizing.None };
+
 	partial void OnContentChanged(View? oldContent, View? newContent)
 	{
 		// Detach refresh control from old content
@@ -110,12 +112,33 @@ public partial class RefreshView
 		if (newContent != null)
 		{
 			var contentView = (UIView)newContent;
-			NativeView.AddSubview(contentView);
-			newContent.UpdateAlign();
+			if (_paddingWrapper.Superview == null)
+				NativeView.AddSubview(_paddingWrapper);
+			_paddingWrapper.AddSubview(contentView);
+			UpdateContentLayout();
 			
 			// Try to attach refresh control to scrollable content
 			TryAttachRefreshControl(contentView);
 		}
+	}
+
+	partial void OnPaddingChanged(double value)
+	{
+		UpdateContentLayout();
+	}
+
+	void UpdateContentLayout()
+	{
+		if (Content == null)
+			return;
+
+		var padding = (nfloat)Padding;
+		var bounds = NativeView.Bounds;
+		var width = (nfloat)Math.Max(0, bounds.Width - padding * 2);
+		var height = (nfloat)Math.Max(0, bounds.Height - padding * 2);
+
+		_paddingWrapper.Frame = new CGRect(padding, padding, width, height);
+		Content.UpdateAlign();
 	}
 
 	partial void OnIsRefreshingChanged(bool value)
@@ -144,6 +167,21 @@ public partial class RefreshView
 		if (_refreshControl != null && value != null)
 		{
 			_refreshControl.TintColor = value.ToUIColor();
+		}
+	}
+
+	class SpiceRefreshView : UIView
+	{
+		readonly RefreshView _parent;
+
+		public SpiceRefreshView(RefreshView parent) => _parent = parent;
+
+		public SpiceRefreshView(RefreshView parent, CGRect frame) : base(frame) => _parent = parent;
+
+		public override void LayoutSubviews()
+		{
+			base.LayoutSubviews();
+			_parent.UpdateContentLayout();
 		}
 	}
 }

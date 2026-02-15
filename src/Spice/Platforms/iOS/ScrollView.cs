@@ -62,6 +62,12 @@ public partial class ScrollView
 			UpdateContentSize(_childView);
 	}
 
+	partial void OnPaddingChanged(double value)
+	{
+		var padding = (nfloat)value;
+		NativeView.ContentInset = new UIEdgeInsets(padding, padding, padding, padding);
+	}
+
 	/// <inheritdoc />
 	protected override void AddSubview(View view)
 	{
