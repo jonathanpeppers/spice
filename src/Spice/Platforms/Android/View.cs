@@ -170,4 +170,92 @@ public partial class View
 	partial void OnIsVisibleChanged(bool value) => _nativeView.Value.Visibility = value ? Android.Views.ViewStates.Visible : Android.Views.ViewStates.Gone;
 
 	partial void OnIsEnabledChanged(bool value) => _nativeView.Value.Enabled = value;
+
+	partial void OnWidthRequestChanged(double value)
+	{
+		if (_layoutParameters.IsValueCreated)
+		{
+			var layoutParameters = _layoutParameters.Value;
+			
+			// Convert value to pixels
+			// -1 means unset, use WrapContent if alignment is not Stretch
+			if (value < 0)
+			{
+				layoutParameters.Width = _horizontalAlign == Align.Stretch 
+					? Android.Views.ViewGroup.LayoutParams.MatchParent 
+					: Android.Views.ViewGroup.LayoutParams.WrapContent;
+			}
+			else
+			{
+				// Convert from device-independent units to pixels
+				var displayMetrics = _nativeView.Value.Resources?.DisplayMetrics;
+				if (displayMetrics != null)
+				{
+					layoutParameters.Width = (int)(value * displayMetrics.Density);
+				}
+				else
+				{
+					layoutParameters.Width = (int)value;
+				}
+			}
+			
+			_nativeView.Value.RequestLayout();
+		}
+	}
+
+	partial void OnHeightRequestChanged(double value)
+	{
+		if (_layoutParameters.IsValueCreated)
+		{
+			var layoutParameters = _layoutParameters.Value;
+			
+			// Convert value to pixels
+			// -1 means unset, use WrapContent if alignment is not Stretch
+			if (value < 0)
+			{
+				layoutParameters.Height = _verticalAlign == Align.Stretch 
+					? Android.Views.ViewGroup.LayoutParams.MatchParent 
+					: Android.Views.ViewGroup.LayoutParams.WrapContent;
+			}
+			else
+			{
+				// Convert from device-independent units to pixels
+				var displayMetrics = _nativeView.Value.Resources?.DisplayMetrics;
+				if (displayMetrics != null)
+				{
+					layoutParameters.Height = (int)(value * displayMetrics.Density);
+				}
+				else
+				{
+					layoutParameters.Height = (int)value;
+				}
+			}
+			
+			_nativeView.Value.RequestLayout();
+		}
+	}
+
+	partial double GetWidth()
+	{
+		var view = _nativeView.Value;
+		// Convert from pixels to device-independent units
+		var displayMetrics = view.Resources?.DisplayMetrics;
+		if (displayMetrics != null)
+		{
+			return view.Width / displayMetrics.Density;
+		}
+		return view.Width;
+	}
+
+	partial double GetHeight()
+	{
+		var view = _nativeView.Value;
+		// Convert from pixels to device-independent units
+		var displayMetrics = view.Resources?.DisplayMetrics;
+		if (displayMetrics != null)
+		{
+			return view.Height / displayMetrics.Density;
+		}
+		return view.Height;
+	}
 }

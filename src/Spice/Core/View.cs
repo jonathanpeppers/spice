@@ -54,4 +54,40 @@ public partial class View : ObservableObject, IEnumerable<View>
 	/// </summary>
 	[ObservableProperty]
 	bool _isEnabled = true;
+
+	/// <summary>
+	/// Gets or sets the desired width of the view. 
+	/// Platform implementations: UIKit.UIView.WidthAnchor / Android.Views.ViewGroup.LayoutParams.Width
+	/// </summary>
+	[ObservableProperty]
+	double _widthRequest = -1;
+
+	/// <summary>
+	/// Gets or sets the desired height of the view.
+	/// Platform implementations: UIKit.UIView.HeightAnchor / Android.Views.ViewGroup.LayoutParams.Height
+	/// </summary>
+	[ObservableProperty]
+	double _heightRequest = -1;
+
+	/// <summary>
+	/// Gets the actual rendered width of the view.
+	/// Platform implementations: UIKit.UIView.Frame.Width / Android.Views.View.Width
+	/// </summary>
+	public double Width => GetWidth();
+
+	/// <summary>
+	/// Gets the actual rendered height of the view.
+	/// Platform implementations: UIKit.UIView.Frame.Height / Android.Views.View.Height
+	/// </summary>
+	public double Height => GetHeight();
+
+	/// <summary>
+	/// Platform-specific implementation to get actual width
+	/// </summary>
+	partial double GetWidth();
+
+	/// <summary>
+	/// Platform-specific implementation to get actual height
+	/// </summary>
+	partial double GetHeight();
 }

@@ -81,6 +81,51 @@ public partial class View
 
 	partial void OnIsEnabledChanged(bool value) => NativeView.UserInteractionEnabled = value;
 
+	NSLayoutConstraint? _widthConstraint;
+	NSLayoutConstraint? _heightConstraint;
+
+	partial void OnWidthRequestChanged(double value)
+	{
+		var view = NativeView;
+		
+		// Remove existing width constraint if it exists
+		if (_widthConstraint != null)
+		{
+			_widthConstraint.Active = false;
+			_widthConstraint = null;
+		}
+
+		// If value is valid (>= 0), create a new constraint
+		if (value >= 0)
+		{
+			_widthConstraint = view.WidthAnchor.ConstraintEqualTo((nfloat)value);
+			_widthConstraint.Active = true;
+		}
+	}
+
+	partial void OnHeightRequestChanged(double value)
+	{
+		var view = NativeView;
+		
+		// Remove existing height constraint if it exists
+		if (_heightConstraint != null)
+		{
+			_heightConstraint.Active = false;
+			_heightConstraint = null;
+		}
+
+		// If value is valid (>= 0), create a new constraint
+		if (value >= 0)
+		{
+			_heightConstraint = view.HeightAnchor.ConstraintEqualTo((nfloat)value);
+			_heightConstraint.Active = true;
+		}
+	}
+
+	partial double GetWidth() => (double)NativeView.Frame.Width;
+
+	partial double GetHeight() => (double)NativeView.Frame.Height;
+
 	internal void UpdateAlign()
 	{
 		var view = NativeView;
