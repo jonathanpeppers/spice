@@ -57,10 +57,17 @@ public partial class View : ObservableObject, IEnumerable<View>
 
 	/// <summary>
 	/// Gets or sets the automation identifier for UI testing.
-	/// Platform implementations: UIKit.UIView.AccessibilityIdentifier / Android.Views.View.Tag
+	/// Platform implementations: UIKit.UIView.AccessibilityIdentifier / Android.Views.View.ContentDescription
 	/// </summary>
 	[ObservableProperty]
 	string? _automationId;
+
+	/// <summary>
+	/// Space around the view. Supports uniform (10), horizontal/vertical (10,20), or individual sides (10,20,30,40).
+	/// Aligns with Microsoft.Maui Margin property.
+	/// </summary>
+	[ObservableProperty]
+	Thickness _margin;
 
 	/// <summary>
 	/// Gets or sets the desired width of the view. 
