@@ -94,6 +94,7 @@ jobs:
     needs: [build]
     env:
       WORKLOAD_VERSION: 10.0.103
+      ARTIFACTS_DIR: ${{ github.workspace }}/test-artifacts
     
     steps:
     - name: checkout

@@ -14,7 +14,7 @@ UI tests are provided for all implemented Spice controls:
 - ContentView
 - DatePicker
 - Entry
-- Grid
+
 - Image
 - ImageButton
 - Label
@@ -94,7 +94,7 @@ dotnet test tests/Spice.UITests/Spice.UITests.csproj --filter "FullyQualifiedNam
 ## CI/CD
 
 The UI tests run automatically in CI on every pull request using:
-- Ubuntu 22.04 runner
+- Ubuntu runner (latest)
 - Android SDK with system-images;android-34
 - Appium with UiAutomator2 driver
 - GitHub Actions workflow defined in `.github/workflows/spice.yml`
@@ -131,9 +131,9 @@ To add tests for a new control:
 1. Create a scenario in `samples/Spice.Scenarios/Scenarios/`
 2. Add the scenario to the menu in `samples/Spice.Scenarios/App.cs`
 3. Create a test class in `tests/Spice.UITests/` (e.g., `MyControlTests.cs`)
-4. Inherit from `BaseTest` and use Appium's `Driver` to interact with the UI
-5. Use XPath or class name selectors to find Android widgets
-6. Call `CaptureTestFailureDiagnostics()` in catch blocks for failure analysis
+4. Inherit from `BaseTest` and use `RunTest()` to wrap test logic
+5. Use `FindButtonByText()`, `FindTextViewContaining()`, or class name selectors
+6. Failure diagnostics (screenshots, logcat, page source) are captured automatically
 
 Example:
 ```csharp
@@ -142,27 +142,14 @@ namespace Spice.UITests;
 public class MyControlTests : BaseTest
 {
     [Fact]
-    public void MyControl_Should_DoSomething()
+    public void MyControl_Should_DoSomething() => RunTest(() =>
     {
-        try
-        {
-            // Arrange
-            InitializeAndroidDriver();
+        var button = FindButtonByText("MyControl");
+        button.Click();
 
-            // Act - Navigate to scenario
-            var button = Driver.FindElement(By.XPath("//android.widget.Button[@text='MyControl']"));
-            button.Click();
-
-            // Assert
-            var element = Driver.FindElement(By.ClassName("android.widget.TextView"));
-            Assert.NotNull(element);
-        }
-        catch (Exception)
-        {
-            CaptureTestFailureDiagnostics();
-            throw;
-        }
-    }
+        var element = FindTextViewContaining("Expected Text");
+        Assert.NotNull(element);
+    });
 }
 ```
 
