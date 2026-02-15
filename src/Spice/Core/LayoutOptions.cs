@@ -42,7 +42,7 @@ public struct LayoutOptions : IEquatable<LayoutOptions>
 	{
 		var a = (int)alignment;
 		if (a < 0 || a > 3)
-			throw new ArgumentOutOfRangeException();
+			throw new ArgumentOutOfRangeException(nameof(alignment));
 		_flags = (int)alignment | (expands ? (int)LayoutExpandFlag.Expand : 0);
 	}
 
