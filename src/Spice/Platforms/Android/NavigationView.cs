@@ -141,11 +141,19 @@ public partial class NavigationView
 
 	Android.Graphics.Drawables.Drawable? GetBackIcon()
 	{
-		// Use the built-in back arrow from Material Design
+		// Create a simple back arrow using Material icon if available
+		// Otherwise toolbar will work without an icon
 		var context = Platform.Context;
 		if (context != null)
 		{
-			return AndroidX.Core.Content.ContextCompat.GetDrawable(context, Resource.Drawable.abc_ic_ab_back_material);
+			// Try to get the home as up indicator from AppCompat theme
+			var typedArray = context.Theme?.ObtainStyledAttributes(new int[] { Android.Resource.Attribute.HomeAsUpIndicator });
+			if (typedArray != null)
+			{
+				var drawable = typedArray.GetDrawable(0);
+				typedArray.Recycle();
+				return drawable;
+			}
 		}
 		return null;
 	}
