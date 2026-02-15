@@ -37,6 +37,7 @@
 
 	<ItemGroup Condition=" '$(TargetPlatformIdentifier)' == 'Android' ">
 		<PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.6.1.10" />
+		<PackageReference Include="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.1.0.21" />
 		<PackageReference Include="Xamarin.Google.Android.Material" Version="1.10.0.6" />
 		<AndroidJavaSource Include="Platforms/Android/*.java" />
 		<TransformFile Include="Platforms/Android/Transforms.xml" />
