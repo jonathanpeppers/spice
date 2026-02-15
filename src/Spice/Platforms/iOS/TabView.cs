@@ -5,6 +5,11 @@ namespace Spice;
 public partial class TabView
 {
 	/// <summary>
+	/// Implicit conversion to UITabBarController.
+	/// </summary>
+	public static implicit operator UITabBarController(TabView tabView) => tabView.TabBarController;
+
+	/// <summary>
 	/// TabView ctor - creates a UITabBarController
 	/// </summary>
 	public TabView() : base(_ => new UIView { AutoresizingMask = UIViewAutoresizing.All })

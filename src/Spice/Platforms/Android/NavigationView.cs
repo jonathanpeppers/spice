@@ -119,12 +119,14 @@ public partial class NavigationView
 		}
 	}
 
+	/// <summary>
+	/// Gets the root (bottom of stack)
+	/// </summary>
 	partial void PopToRootCore()
 	{
 		if (_backStack.Count > 1)
 		{
-			// Get the root (bottom of stack) - need to reverse since Stack.Last() is LIFO
-			var root = _backStack.Reverse().First();
+			var root = _backStack.Last();
 			
 			// Clear all but root
 			ContentFrame.RemoveAllViews();

@@ -111,10 +111,11 @@ public partial class TabView
 			}
 		}
 
-		// Show first tab by default
+		// Restore previously selected tab, or show first tab if new
 		if (Children.Count > 0)
 		{
-			ShowTab(0);
+			var tabIndex = _selectedTabIndex < Children.Count ? _selectedTabIndex : 0;
+			ShowTab(tabIndex);
 		}
 	}
 

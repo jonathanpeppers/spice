@@ -3,6 +3,11 @@ namespace Spice;
 public partial class NavigationView
 {
 	/// <summary>
+	/// Implicit conversion to UINavigationController.
+	/// </summary>
+	public static implicit operator UINavigationController(NavigationView nav) => nav.NavigationController;
+
+	/// <summary>
 	/// NavigationView ctor - creates a UINavigationController
 	/// </summary>
 	public NavigationView() : base(_ => new UIView { AutoresizingMask = UIViewAutoresizing.All })
