@@ -133,10 +133,7 @@ jobs:
         emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
         script: |
           cd $GITHUB_WORKSPACE
-          GITHUB_ACTIONS= dotnet build samples/Spice.Scenarios/Spice.Scenarios.csproj -f net10.0-android -c Debug -p:TargetFrameworks=net10.0-android -p:EmbedAssembliesIntoApk=true -bl:test-artifacts/install.binlog
-          APK_PATH=$(find $GITHUB_WORKSPACE/samples/Spice.Scenarios/bin/Debug/net10.0-android -name "*.apk" | head -1)
-          echo "Installing APK: $APK_PATH"
-          adb install "$APK_PATH"
+          GITHUB_ACTIONS= dotnet build samples/Spice.Scenarios/Spice.Scenarios.csproj -f net10.0-android -c Debug -p:TargetFrameworks=net10.0-android -t:Install -bl:test-artifacts/install.binlog
           appium server --log-level info &
           sleep 5
           TEST_EXIT=0
