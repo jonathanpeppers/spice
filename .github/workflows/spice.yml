@@ -131,8 +131,8 @@ jobs:
         arch: x86_64
         target: google_apis
         script: |
-          APK_PATH=$(find samples/Spice.Scenarios/bin/Debug/net10.0-android -name "*-Signed.apk" | head -1)
-          if [ -z "$APK_PATH" ]; then echo "No APK found"; exit 1; fi
+          find samples/Spice.Scenarios/bin -name "*.apk" -ls
+          APK_PATH=$(find samples/Spice.Scenarios/bin -name "*-Signed.apk" -print -quit)
           echo "Installing APK: $APK_PATH"
           adb install "$APK_PATH"
           adb shell monkey -p com.companyname.spice.scenarios -c android.intent.category.LAUNCHER 1
