@@ -182,5 +182,9 @@ public partial class View
 				(int)value.Bottom.ToPixels()
 			);
 		}
+		else
+		{
+			throw new NotSupportedException($"LayoutParameters of type {_layoutParameters.Value.GetType()} not supported!");
+		}
 	}
 }
