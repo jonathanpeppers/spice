@@ -123,6 +123,31 @@ jobs:
         npm install -g appium
         appium driver install uiautomator2
 
+    - name: Prepare test script
+      run: |
+        cat > $GITHUB_WORKSPACE/run-ui-tests.sh <<'SCRIPT'
+        #!/bin/bash
+        set -e
+        APK_PATH=$(find $GITHUB_WORKSPACE/samples/Spice.Scenarios/bin -name "*-Signed.apk" | head -1)
+        [ -z "$APK_PATH" ] && APK_PATH=$(find $GITHUB_WORKSPACE/samples/Spice.Scenarios/bin -name "*.apk" | head -1)
+        [ -z "$APK_PATH" ] && echo "No APK found!" && exit 1
+        echo "Installing APK: $APK_PATH"
+        adb install "$APK_PATH"
+        adb shell am start -n com.companyname.spice.scenarios/com.companyname.spice.scenarios.MainActivity
+        sleep 10
+        echo "=== UI Dump ==="
+        adb shell uiautomator dump /sdcard/window_dump.xml && adb pull /sdcard/window_dump.xml /tmp/window_dump.xml && cat /tmp/window_dump.xml || echo "uiautomator dump failed"
+        appium server --log-level info &
+        sleep 5
+        cd $GITHUB_WORKSPACE
+        dotnet test tests/Spice.UITests/Spice.UITests.csproj -c Debug --logger trx --results-directory test-artifacts || true
+        adb shell uiautomator dump /sdcard/window_dump2.xml && adb pull /sdcard/window_dump2.xml $GITHUB_WORKSPACE/test-artifacts/window_dump.xml || true
+        adb logcat -d > $GITHUB_WORKSPACE/test-artifacts/logcat.txt || true
+        SCRIPT
+        sed -i 's/^        //' $GITHUB_WORKSPACE/run-ui-tests.sh
+        chmod +x $GITHUB_WORKSPACE/run-ui-tests.sh
+        cat $GITHUB_WORKSPACE/run-ui-tests.sh
+
     - name: Run UI Tests
       timeout-minutes: 20
       uses: reactivecircus/android-emulator-runner@v2
@@ -130,29 +155,7 @@ jobs:
         api-level: 34
         arch: x86_64
         target: google_apis
-        script: |
-          echo "=== Finding APK ==="
-          find $GITHUB_WORKSPACE/samples/Spice.Scenarios/bin -name "*.apk" -o -name "*.aab" | head -10
-          APK_PATH=$(find $GITHUB_WORKSPACE/samples/Spice.Scenarios/bin -name "*-Signed.apk" -o -name "*.apk" | head -1)
-          if [ -z "$APK_PATH" ]; then
-            echo "No APK found!"
-            find $GITHUB_WORKSPACE/samples/Spice.Scenarios/bin -type f | head -30
-            exit 1
-          fi
-          echo "Installing APK: $APK_PATH"
-          adb install "$APK_PATH"
-          adb shell am start -n com.companyname.spice.scenarios/com.companyname.spice.scenarios.MainActivity
-          sleep 10
-          echo "=== UI Dump ==="
-          adb shell uiautomator dump /sdcard/window_dump.xml && adb pull /sdcard/window_dump.xml /tmp/window_dump.xml && cat /tmp/window_dump.xml || echo "uiautomator dump failed"
-          echo "=== Starting Appium ==="
-          appium server --log-level info &
-          sleep 5
-          cd $GITHUB_WORKSPACE
-          dotnet test tests/Spice.UITests/Spice.UITests.csproj -c Debug --logger trx --results-directory test-artifacts || true
-          echo "=== Post-test UI Dump ==="
-          adb shell uiautomator dump /sdcard/window_dump2.xml && adb pull /sdcard/window_dump2.xml $GITHUB_WORKSPACE/test-artifacts/window_dump.xml || true
-          adb logcat -d > $GITHUB_WORKSPACE/test-artifacts/logcat.txt || true
+        script: bash $GITHUB_WORKSPACE/run-ui-tests.sh
 
     - name: Upload UI test results
       uses: actions/upload-artifact@v4
