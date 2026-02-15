@@ -85,6 +85,11 @@ public partial class View : ObservableObject, IEnumerable<View>
 	string? _automationId;
 
 	/// <summary>
+	/// Called when the Opacity property changes
+	/// </summary>
+	partial void OnOpacityChanged(double value);
+
+	/// <summary>
 	/// Space around the view. Supports uniform (10), horizontal/vertical (10,20), or individual sides (10,20,30,40).
 	/// Aligns with Microsoft.Maui Margin property.
 	/// </summary>
@@ -136,9 +141,5 @@ public partial class View : ObservableObject, IEnumerable<View>
 	/// </summary>
 	private partial double GetHeight();
 
-	/// <summary>
-	/// Called when the Opacity property changes
-	/// </summary>
-	partial void OnOpacityChanged(double value);
 #endif
 }
