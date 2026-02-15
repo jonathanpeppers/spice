@@ -84,7 +84,8 @@ public partial class SwipeView
 			case UIGestureRecognizerState.Cancelled:
 				if (_currentSwipeDirection != null)
 				{
-					var isOpen = Math.Abs(translation.X) > 50; // Simple threshold
+					var threshold = Threshold > 0 ? Threshold : 50; // Use configured threshold or default
+					var isOpen = Math.Abs(translation.X) > threshold;
 					
 					if (isOpen && _currentSwipeDirection == SwipeDirection.Left && RightItems != null)
 					{
@@ -121,7 +122,7 @@ public partial class SwipeView
 		};
 
 		nfloat x = 0;
-		nfloat itemWidth = 75;
+		const nfloat itemWidth = 75; // Default item width
 		nfloat totalWidth = items.Items.Count * itemWidth;
 
 		foreach (var item in items.Items)

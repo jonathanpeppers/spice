@@ -128,7 +128,8 @@ public partial class SwipeView
 			return;
 
 		var deltaX = e != null ? e.GetX() - _startX : 0;
-		var isOpen = Math.Abs(deltaX) > 150; // Simple threshold
+		var threshold = Threshold > 0 ? Threshold : 150; // Use configured threshold or default
+		var isOpen = Math.Abs(deltaX) > threshold;
 
 		if (isOpen && _currentSwipeDirection == SwipeDirection.Left && RightItems != null)
 		{
@@ -169,10 +170,11 @@ public partial class SwipeView
 			if (!item.IsVisible)
 				continue;
 
+			const int buttonWidth = 200; // Default button width in pixels
 			var button = new Android.Widget.Button(Platform.Context)
 			{
 				Text = item.Text ?? "",
-				LayoutParameters = new LinearLayout.LayoutParams(200, Android.Views.ViewGroup.LayoutParams.MatchParent)
+				LayoutParameters = new LinearLayout.LayoutParams(buttonWidth, Android.Views.ViewGroup.LayoutParams.MatchParent)
 			};
 
 			if (item.BackgroundColor != null)
