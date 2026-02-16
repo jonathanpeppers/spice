@@ -55,7 +55,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 | Polygon | ❌ No | ❌ No | Shape control - can use Image |
 | Polyline | ❌ No | ❌ No | Shape control - can use Image |
 | ProgressBar | ✅ Yes | ✅ Done | Progress display - common |
-| RadioButton | ❌ No | 🟢 Maybe | Less common on mobile |
+| RadioButton | ✅ Yes | ✅ Done | Single selection from a group; uses cross-platform GroupName (no Android RadioGroup) because iOS lacks a native radio button |
 | Rectangle | ❌ No | 🟢 Maybe | Shape control - BoxView covers this |
 | RefreshView | ✅ Yes | ✅ Done | Pull-to-refresh wrapper |
 | RoundRectangle | ❌ No | ❌ No | Border can handle this |
@@ -93,6 +93,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - ✅ Label
 - ✅ Picker
 - ✅ ProgressBar
+- ✅ RadioButton
 - ✅ RefreshView
 - ✅ ScrollView
 - ✅ SearchBar
@@ -139,6 +140,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - Label → UILabel
 - Picker → UIPickerView
 - ProgressBar → UIProgressView
+- RadioButton → UIButton (with circle/circle.fill SF Symbols; cross-platform GroupName for exclusivity)
 - RefreshView → UIView with UIRefreshControl
 - ScrollView → UIScrollView
 - SearchBar → UISearchBar
@@ -166,6 +168,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - Label → AppCompatTextView
 - Picker → Spinner
 - ProgressBar → ProgressBar
+- RadioButton → Android.Widget.RadioButton (cross-platform GroupName for exclusivity, not RadioGroup)
 - RefreshView → AndroidX.SwipeRefreshLayout.Widget.SwipeRefreshLayout
 - ScrollView → ScrollView / HorizontalScrollView
 - SearchBar → SearchView
@@ -374,7 +377,7 @@ Based on Spice's minimalist philosophy and common mobile UI needs, here are reas
 **Advanced Controls**
 - ✅ **RefreshView** - Pull-to-refresh wrapper (IMPLEMENTED)
 - ✅ **SwipeView** - Swipe actions/context menus (IMPLEMENTED)
-- 🟢 **RadioButton** - Radio button groups (less common on mobile)
+- ✅ **RadioButton** - Radio button groups; uses cross-platform GroupName since iOS has no native radio concept
 
 **Shapes** (Lower priority - can use Image or GraphicsView)
 - ✅ **BoxView** - Colored rectangle (useful for dividers/spacers) (IMPLEMENTED)
@@ -446,7 +449,7 @@ Based on Spice's minimalist philosophy and common mobile UI needs, here are reas
 1. ✅ RefreshView
 2. ✅ SwipeView
 3. ✅ BoxView
-4. 🟢 RadioButton
+4. ✅ RadioButton
 5. ✅ Opacity property
 
 ---
