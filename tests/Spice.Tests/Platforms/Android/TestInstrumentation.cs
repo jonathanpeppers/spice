@@ -22,7 +22,7 @@ public class TestInstrumentation : Instrumentation
 
 		var bundle = new Bundle();
 		var entryPoint = new TestEntryPoint(
-			Application.Context.CacheDir!.AbsolutePath);
+			Android.App.Application.Context.CacheDir!.AbsolutePath);
 		entryPoint.TestsCompleted += (_, results) =>
 		{
 			bundle.PutLong("return-code", results.FailedTests == 0 ? 0 : 1);
@@ -37,7 +37,7 @@ public class TestInstrumentation : Instrumentation
 
 		if (File.Exists(entryPoint.TestsResultsFinalPath))
 		{
-			var externalDir = Application.Context.GetExternalFilesDir(null)!.AbsolutePath;
+			var externalDir = Android.App.Application.Context.GetExternalFilesDir(null)!.AbsolutePath;
 			var dest = Path.Combine(externalDir, "TestResults.xml");
 			File.Copy(entryPoint.TestsResultsFinalPath, dest, overwrite: true);
 			bundle.PutString("test-results-path", dest);

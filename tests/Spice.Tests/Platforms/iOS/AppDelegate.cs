@@ -11,10 +11,12 @@ public class AppDelegate : UIApplicationDelegate
 
 	public override bool FinishedLaunching(UIApplication application, NSDictionary? launchOptions)
 	{
+#pragma warning disable CA1422 // Validate platform compatibility (xharness simulators)
 		Window = new UIWindow(UIScreen.MainScreen.Bounds)
 		{
 			RootViewController = new UIViewController()
 		};
+#pragma warning restore CA1422
 		Window.MakeKeyAndVisible();
 
 		Task.Run(async () =>

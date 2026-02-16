@@ -1,4 +1,3 @@
-using System.Reflection;
 using Microsoft.DotNet.XHarness.TestRunners.Common;
 using Microsoft.DotNet.XHarness.TestRunners.Xunit;
 using ObjCRuntime;
@@ -17,7 +16,8 @@ class TestEntryPoint : iOSApplicationEntryPoint
 	protected override IEnumerable<TestAssemblyInfo> GetTestAssemblies()
 	{
 		var asm = typeof(TestEntryPoint).Assembly;
-		return [new TestAssemblyInfo(asm, asm.Location)];
+		var path = Path.Combine(AppContext.BaseDirectory, asm.GetName().Name + ".dll");
+		return [new TestAssemblyInfo(asm, path)];
 	}
 
 	protected override void TerminateWithSuccess()
