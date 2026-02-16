@@ -37,7 +37,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 | CollectionView | ✅ Yes | ✅ Done | Powerful grid/list control |
 | ContentView | ✅ Yes | ✅ Done | Custom control composition |
 | DatePicker | ✅ Yes | ✅ Done | Date selection - common in forms |
-| Editor | ❌ No | 🟡 Maybe | Multi-line text input |
+| Editor | ✅ Yes | ✅ Done | Multi-line text input |
 | Ellipse | ❌ No | 🟢 Maybe | Shape control - can use Image |
 | Entry | ✅ Yes | ✅ Done | Single-line text input |
 | Frame | ❌ No | ❌ No | Superseded by Border |
@@ -73,7 +73,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 
 ## Summary
 
-**Implemented: 25 / 60+ controls**
+**Implemented: 26 / 60+ controls**
 
 ### Spice Controls (Core)
 - ✅ ActivityIndicator
@@ -85,6 +85,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - ✅ CollectionView
 - ✅ ContentView
 - ✅ DatePicker
+- ✅ Editor (multi-line text)
 - ✅ Entry (single-line text)
 - ✅ Grid
 - ✅ Image
@@ -130,6 +131,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - CollectionView → UICollectionView
 - ContentView → UIView
 - DatePicker → UIDatePicker
+- Editor → UITextView
 - Entry → UITextField
 - Grid → Custom constraint-based layout
 - Image → UIImageView
@@ -156,6 +158,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - CollectionView → AndroidX.RecyclerView.Widget.RecyclerView
 - ContentView → FrameLayout
 - DatePicker → DatePickerDialog
+- Editor → EditText (multiline)
 - Entry → AppCompatEditText
 - Grid → GridLayout
 - Image → AppCompatImageView
@@ -360,7 +363,7 @@ Based on Spice's minimalist philosophy and common mobile UI needs, here are reas
 - 🟡 **ListView** - Scrollable list of items; maps to UITableView/RecyclerView (critical for many apps)
 
 **Input**
-- 🟡 **Editor** - Multi-line text input; maps to UITextView/EditText (multiline)
+- ✅ **Editor** - Multi-line text input; maps to UITextView/EditText (multiline) (IMPLEMENTED)
 - ✅ **SearchBar** - Search input; maps to UISearchBar/SearchView (IMPLEMENTED)
 
 **Display**
@@ -429,7 +432,7 @@ Based on Spice's minimalist philosophy and common mobile UI needs, here are reas
 3. ✅ CheckBox
 4. ✅ DatePicker
 5. ✅ TimePicker
-6. 🟡 Editor (multiline text)
+6. ✅ Editor (multiline text)
 
 **Phase 3 (Lists & Advanced)** ✅
 1. 🟡 ListView
