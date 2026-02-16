@@ -90,7 +90,7 @@ jobs:
         path: bin
 
   ui-tests:
-    runs-on: macos-latest
+    runs-on: macos-13
     env:
       WORKLOAD_VERSION: 10.0.103
       ARTIFACTS_DIR: ${{ github.workspace }}/test-artifacts
@@ -127,9 +127,9 @@ jobs:
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: 34
-        arch: arm64-v8a
+        arch: x86_64
         target: google_apis
-        emulator-options: -no-window -gpu host -no-snapshot -noaudio -no-boot-anim
+        emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
         script: |
           adb shell input keyevent 82
           adb shell settings put global window_animation_scale 0
