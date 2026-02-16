@@ -121,12 +121,25 @@ public abstract class BaseTest : IDisposable
         {
             try
             {
-                // Clean up any previous driver
+                // Clean up any previous driver and restart app on retry
                 if (attempt > 1)
                 {
                     Console.WriteLine($"Test {testName}: retry attempt {attempt}/{maxAttempts}");
                     try { Driver?.Quit(); } catch { }
                     Thread.Sleep(2000);
+
+                    // Force-stop and relaunch the app via adb
+                    try
+                    {
+                        RunAdbCommand($"shell am force-stop {PackageName}");
+                        Thread.Sleep(1000);
+                        RunAdbCommand($"shell am start -n {PackageName}/{ActivityName}");
+                        Thread.Sleep(3000);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"adb restart failed: {ex.Message}");
+                    }
                 }
 
                 InitializeAndroidDriver();
@@ -144,6 +157,19 @@ public abstract class BaseTest : IDisposable
                 Console.WriteLine($"Test {testName} attempt {attempt} failed: {ex.Message}");
             }
         }
+    }
+
+    private static void RunAdbCommand(string args)
+    {
+        var psi = new ProcessStartInfo("adb", args)
+        {
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            UseShellExecute = false,
+            CreateNoWindow = true
+        };
+        using var proc = Process.Start(psi);
+        proc?.WaitForExit(10000);
     }
 
     void CaptureTestFailureDiagnostics(Exception testException, [CallerMemberName] string testName = "")
