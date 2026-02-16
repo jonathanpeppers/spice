@@ -5,9 +5,9 @@ namespace Spice;
 /// </summary>
 public partial class Application : View
 {
-/// <summary>
-/// The single, main "view" of this application
-/// </summary>
-[ObservableProperty]
-View? _main;
+	/// <summary>
+	/// The single, main "view" of this application
+	/// </summary>
+	[ObservableProperty]
+	View? _main;
 }
