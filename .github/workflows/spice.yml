@@ -88,3 +88,84 @@ jobs:
       with:
         name: nupkgs
         path: bin
+
+  ui-tests:
+    runs-on: ubuntu-latest
+    env:
+      WORKLOAD_VERSION: 10.0.103
+      ARTIFACTS_DIR: ${{ github.workspace }}/test-artifacts
+    
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+
+    - name: install .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 10.0.x
+
+    - name: install workloads
+      run: dotnet workload install maui-android --version $WORKLOAD_VERSION
+
+    - name: restore
+      run: |
+        dotnet restore tests/Spice.UITests/Spice.UITests.csproj
+        dotnet restore samples/Spice.Scenarios/Spice.Scenarios.csproj -p:TargetFrameworks=net10.0-android
+
+    - name: Enable KVM
+      run: |
+        echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+        sudo udevadm control --reload-rules
+        sudo udevadm trigger --name-match=kvm
+
+    - name: Install Appium
+      run: |
+        npm install -g appium
+        appium driver install uiautomator2
+
+    - name: Build app
+      run: |
+        GITHUB_ACTIONS= dotnet build samples/Spice.Scenarios/Spice.Scenarios.csproj -f net10.0-android -c Debug -p:TargetFrameworks=net10.0-android -p:EmbedAssembliesIntoApk=true -bl:test-artifacts/install.binlog
+
+    - name: Run UI Tests
+      timeout-minutes: 30
+      continue-on-error: true
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 30
+        arch: x86_64
+        target: google_apis
+        disable-animations: true
+        emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+        script: |
+          adb shell input keyevent 82
+          adb install $GITHUB_WORKSPACE/samples/Spice.Scenarios/bin/Debug/net10.0-android/com.companyname.spice.scenarios-Signed.apk
+          adb logcat -c
+          appium server --log-level info &
+          sleep 5
+          dotnet test tests/Spice.UITests/Spice.UITests.csproj -c Debug --logger trx --results-directory test-artifacts; echo $? > $GITHUB_WORKSPACE/test-artifacts/exit-code.txt
+          adb logcat -d -t 5000 > $GITHUB_WORKSPACE/test-artifacts/logcat.txt 2>/dev/null || true
+
+    - name: Upload UI test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: ui-test-results
+        path: test-artifacts/
+        retention-days: 30
+
+    - name: Check UI test results
+      if: always()
+      run: |
+        if [ -f test-artifacts/exit-code.txt ]; then
+          EXIT_CODE=$(cat test-artifacts/exit-code.txt)
+          echo "Test exit code: $EXIT_CODE"
+          if [ "$EXIT_CODE" != "0" ]; then
+            echo "::error::UI tests failed with exit code $EXIT_CODE"
+            exit 1
+          fi
+          echo "UI tests passed!"
+        else
+          echo "::error::No test results found - emulator may have failed to boot"
+          exit 1
+        fi

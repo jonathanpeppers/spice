@@ -6,7 +6,7 @@ public class App : Application
 	{
 		BackgroundColor = Colors.CornflowerBlue;
 
-		Main = new StackLayout
+		var menu = new StackLayout
 		{
 			Children =
 			{
@@ -84,12 +84,12 @@ public class App : Application
 				{
 					Text = "Picker",
 					Clicked = _ => Main = new PickerScenario(),
-        },
+				},
 				new Button
 				{
 					Text = "CheckBox",
 					Clicked = _ => Main = new CheckBoxScenario(),
-        },
+				},
 				new Button
 				{
 					Text = "ContentView",
@@ -127,5 +127,10 @@ public class App : Application
 				},
 			}
 		};
+
+		// Wrap in ScrollView so all buttons are reachable on smaller screens
+		var scrollView = new ScrollView();
+		scrollView.Add(menu);
+		Main = scrollView;
 	}
 }

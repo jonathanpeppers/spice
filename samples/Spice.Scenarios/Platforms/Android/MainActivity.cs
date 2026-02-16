@@ -4,6 +4,7 @@ using Android.OS;
 namespace Spice.Scenarios;
 
 [Activity(
+	Name = "com.companyname.spice.scenarios.MainActivity",
 	// TODO: fix splash theme
 	// Theme = "@style/Maui.SplashTheme", 
 	Theme = "@style/Theme.MaterialComponents.Light.NoActionBar",
