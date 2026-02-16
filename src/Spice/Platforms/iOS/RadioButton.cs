@@ -78,15 +78,4 @@ public partial class RadioButton
 	{
 		// Event subscription is handled in InitializeRadioButton
 	}
-
-	bool _disposed;
-
-	partial void DisposePartial()
-	{
-		if (_disposed)
-			return;
-
-		_disposed = true;
-		NativeView.TouchUpInside -= OnTouchUpInside;
-	}
 }

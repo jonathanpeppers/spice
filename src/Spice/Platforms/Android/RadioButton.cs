@@ -92,15 +92,4 @@ public partial class RadioButton
 	{
 		// Event subscription is handled in constructor
 	}
-
-	bool _disposed;
-
-	partial void DisposePartial()
-	{
-		if (_disposed)
-			return;
-
-		_disposed = true;
-		NativeView.CheckedChange -= OnCheckedChange;
-	}
 }

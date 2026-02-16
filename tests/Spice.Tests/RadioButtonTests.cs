@@ -199,20 +199,4 @@ public class RadioButtonTests
 		Assert.True(radioButton2.IsChecked);
 	}
 
-	[Fact]
-	public void DisposeUnsubscribesEvents()
-	{
-		var radioButton = new RadioButton();
-		radioButton.CheckedChanged = _ => { };
-		
-		// Dispose should not throw
-		radioButton.Dispose();
-		
-		// Setting IsChecked after dispose should still work
-		radioButton.IsChecked = true;
-		Assert.True(radioButton.IsChecked);
-		
-		// CheckedChanged action is still set (it's a property), but native event handlers are unsubscribed
-		Assert.NotNull(radioButton.CheckedChanged);
-	}
 }
