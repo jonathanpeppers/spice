@@ -142,4 +142,26 @@ public partial class View : ObservableObject, IEnumerable<View>
 	private partial double GetHeight();
 
 #endif
+
+	/// <summary>
+	/// Recursively disposes a view and all its children if they implement IDisposable.
+	/// Children are disposed before parents (bottom-up). Views that do not implement
+	/// IDisposable are skipped.
+	/// </summary>
+	internal static void DisposeRecursive(View view)
+	{
+		ArgumentNullException.ThrowIfNull(view);
+
+		// Dispose children first (bottom-up)
+		foreach (var child in view.Children)
+		{
+			DisposeRecursive(child);
+		}
+
+		// Then dispose the view itself if it implements IDisposable
+		if (view is IDisposable disposable)
+		{
+			disposable.Dispose();
+		}
+	}
 }

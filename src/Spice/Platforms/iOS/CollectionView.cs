@@ -198,7 +198,7 @@ public partial class CollectionView
 					subview.RemoveFromSuperview();
 
 				// Create and add the view
-				var view = parent.ItemTemplate(item);
+				var view = parent.CreateItemView(item);
 				cell.ContentView.AddSubview(view);
 				view.UpdateAlign();
 			}

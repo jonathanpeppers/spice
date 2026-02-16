@@ -37,6 +37,11 @@ public class App : Application
 				},
 				new Button
 				{
+					Text = "Editor",
+					Clicked = _ => Main = new EditorScenario(),
+				},
+				new Button
+				{
 					Text = "DatePicker",
 					Clicked = _ => Main = new DatePickerScenario(),
 				},
