@@ -126,15 +126,15 @@ public abstract class BaseTest : IDisposable
                 {
                     Console.WriteLine($"Test {testName}: retry attempt {attempt}/{maxAttempts}");
                     try { Driver?.Quit(); } catch { }
-                    Thread.Sleep(2000);
+                    Thread.Sleep(1000);
 
                     // Force-stop and relaunch the app via adb
                     try
                     {
                         RunAdbCommand($"shell am force-stop {PackageName}");
-                        Thread.Sleep(1000);
+                        Thread.Sleep(500);
                         RunAdbCommand($"shell am start -n {PackageName}/{ActivityName}");
-                        Thread.Sleep(3000);
+                        Thread.Sleep(2000);
                     }
                     catch (Exception ex)
                     {

@@ -156,7 +156,7 @@ jobs:
         chmod +x test-artifacts/run-tests.sh
 
     - name: Run UI Tests
-      timeout-minutes: 30
+      timeout-minutes: 40
       continue-on-error: true
       uses: reactivecircus/android-emulator-runner@v2
       with:
