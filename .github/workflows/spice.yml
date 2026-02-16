@@ -125,7 +125,7 @@ jobs:
         --version "$XHARNESS_VERSION"
 
     - name: build test app
-      run: dotnet build tests/Spice.Tests/Spice.Tests.csproj -f net10.0-android -c Release -bl:bin/build-device-tests-android.binlog
+      run: dotnet build tests/Spice.Tests/Spice.Tests.csproj -f net10.0-android -c Release -p:DeviceTests=true -bl:bin/build-device-tests-android.binlog
 
     - name: run Android device tests
       run: >
@@ -185,7 +185,7 @@ jobs:
         --version "$XHARNESS_VERSION"
 
     - name: build test app
-      run: dotnet build tests/Spice.Tests/Spice.Tests.csproj -f net10.0-ios -c Release -r iossimulator-x64 -bl:bin/build-device-tests-ios.binlog
+      run: dotnet build tests/Spice.Tests/Spice.Tests.csproj -f net10.0-ios -c Release -p:DeviceTests=true -r iossimulator-x64 -bl:bin/build-device-tests-ios.binlog
 
     - name: run iOS device tests
       run: >

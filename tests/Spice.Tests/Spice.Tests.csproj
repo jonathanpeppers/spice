@@ -4,7 +4,9 @@
   <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>net10.0;net10.0-android;net10.0-ios</TargetFrameworks>
+    <!-- Device-test TFMs only included when building with -f or -p:DeviceTests=true -->
+    <TargetFrameworks Condition=" '$(DeviceTests)' != 'true' ">net10.0</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(DeviceTests)' == 'true' ">net10.0;net10.0-android;net10.0-ios</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <SingleProject>true</SingleProject>
