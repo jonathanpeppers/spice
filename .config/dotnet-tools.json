@@ -8,6 +8,13 @@
         "android"
       ],
       "rollForward": true
+    },
+    "microsoft.dotnet.xharness.cli": {
+      "version": "11.0.0-prerelease.26114.1",
+      "commands": [
+        "xharness"
+      ],
+      "rollForward": true
     }
   }
 }

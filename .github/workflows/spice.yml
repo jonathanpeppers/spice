@@ -95,7 +95,6 @@ jobs:
 
     env:
       WORKLOAD_VERSION: 10.0.103
-      XHARNESS_VERSION: 11.0.0-prerelease*
       TEST_EMULATOR_IMAGE: system-images;android-34;google_apis;x86_64
       TEST_EMULATOR_NAME: DeviceTestsEmulator
 
@@ -118,13 +117,6 @@ jobs:
 
     - name: install workloads
       run: dotnet workload install maui-android --version $WORKLOAD_VERSION
-
-    - name: install xharness
-      run: >
-        dotnet tool install Microsoft.DotNet.XHarness.CLI
-        --global
-        --add-source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json
-        --version "$XHARNESS_VERSION"
 
     - name: restore .NET tools
       run: dotnet tool restore
@@ -167,7 +159,6 @@ jobs:
     env:
       WORKLOAD_VERSION: 10.0.103
       ValidateXcodeVersion: false
-      XHARNESS_VERSION: 11.0.0-prerelease*
 
     steps:
     - name: checkout
@@ -194,12 +185,8 @@ jobs:
     - name: install workloads
       run: dotnet workload install maui-ios --version $WORKLOAD_VERSION
 
-    - name: install xharness
-      run: >
-        dotnet tool install Microsoft.DotNet.XHarness.CLI
-        --global
-        --add-source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json
-        --version "$XHARNESS_VERSION"
+    - name: restore .NET tools
+      run: dotnet tool restore
 
     - name: restore test app
       run: dotnet restore tests/Spice.Tests/Spice.Tests.csproj -f net10.0-ios -p:DeviceTests=true -r iossimulator-x64
