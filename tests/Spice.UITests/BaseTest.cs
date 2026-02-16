@@ -54,17 +54,65 @@ public abstract class BaseTest : IDisposable
         options.AddAdditionalAppiumOption("appActivity", ActivityName);
         options.AddAdditionalAppiumOption("appium:newCommandTimeout", 300);
         options.AddAdditionalAppiumOption("appium:connectHardwareKeyboard", true);
-        options.AddAdditionalAppiumOption("appium:appWaitDuration", 30000);
         options.AddAdditionalAppiumOption("appium:autoGrantPermissions", true);
+        options.AddAdditionalAppiumOption("appium:noReset", true);
 
-        // Create driver with default Appium server URL
+        // Create driver with default Appium server URL, retrying on failure
         var serverUri = new Uri("http://127.0.0.1:4723");
-        Driver = new AndroidDriver(serverUri, options);
+        const int maxRetries = 3;
+        for (int attempt = 1; attempt <= maxRetries; attempt++)
+        {
+            try
+            {
+                Driver = new AndroidDriver(serverUri, options);
+                break;
+            }
+            catch (Exception ex) when (attempt < maxRetries)
+            {
+                Console.WriteLine($"Driver init attempt {attempt} failed: {ex.Message}. Retrying...");
+                Thread.Sleep(3000);
+            }
+        }
 
         // Configure implicit wait timeout - tells the driver to poll the DOM for up to 10 seconds
         // when trying to find elements. This helps handle elements that may not be immediately available.
         // Reference: http://appium.io/docs/en/latest/quickstart/test-dotnet/
         Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+
+        // With noReset, the app may be on a scenario page from a prior test.
+        // Ensure we're on the main menu by checking current activity and pressing back if needed.
+        EnsureOnMainMenu();
+    }
+
+    private void EnsureOnMainMenu()
+    {
+        try
+        {
+            var currentActivity = Driver.CurrentActivity;
+            if (currentActivity != null && currentActivity.Contains("MainActivity"))
+            {
+                // Check if we can see any main menu button (indicates we're on the main menu)
+                Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
+                try
+                {
+                    Driver.FindElement(MobileBy.AndroidUIAutomator(
+                        "new UiSelector().className(\"android.widget.Button\").text(\"BUTTON\")"));
+                    Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+                    return; // Already on main menu
+                }
+                catch
+                {
+                    // Not on main menu, press back
+                    Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+                    Driver.Navigate().Back();
+                    Thread.Sleep(500);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"EnsureOnMainMenu: {ex.Message}");
+        }
     }
 
     /// <summary>
