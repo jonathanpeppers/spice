@@ -7,6 +7,7 @@ class BorderScenario : StackLayout
 {
 	public BorderScenario()
 	{
+		Title = "Border";
 		// Example 1: Simple border with text
 		var simpleBorder = new Border
 		{

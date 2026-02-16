@@ -4,6 +4,7 @@ public class ContentViewScenario : Application
 {
 	public ContentViewScenario()
 	{
+		Title = "Content View";
 		BackgroundColor = Colors.White;
 
 		// Create a simple card-like ContentView

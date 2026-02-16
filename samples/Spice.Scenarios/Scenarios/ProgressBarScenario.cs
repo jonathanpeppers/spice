@@ -11,6 +11,7 @@ class ProgressBarScenario : StackLayout
 
 	public ProgressBarScenario()
 	{
+		Title = "Progress Bar";
 		_progressLabel = new Label
 		{
 			Text = "Progress: 0%",

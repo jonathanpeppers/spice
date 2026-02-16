@@ -4,6 +4,7 @@ class BoxViewScenario : StackLayout
 {
 	public BoxViewScenario()
 	{
+		Title = "Box View";
 		Spacing = 20;
 
 		var boxView = new BoxView

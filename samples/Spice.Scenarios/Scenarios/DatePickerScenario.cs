@@ -4,6 +4,7 @@ class DatePickerScenario : StackLayout
 {
 	public DatePickerScenario()
 	{
+		Title = "Date Picker";
 		Spacing = 10;
 
 		Add(new Label { Text = "Select a date:" });

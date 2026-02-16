@@ -4,6 +4,7 @@ class SearchBarScenario : StackLayout
 {
 	public SearchBarScenario()
 	{
+		Title = "Search Bar";
 		Spacing = 5;
 
 		var searchLabel = new Label { Text = "Search for something..." };

@@ -8,6 +8,7 @@ class HelloWorldScenario : StackLayout
 {
 	public HelloWorldScenario()
 	{
+		Title = "Hello World";
 		int count = 0;
 
 		var label = new Label
