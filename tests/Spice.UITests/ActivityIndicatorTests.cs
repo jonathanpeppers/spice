@@ -4,8 +4,6 @@ namespace Spice.UITests;
 
 public class ActivityIndicatorTests : BaseTest
 {
-    public ActivityIndicatorTests(SharedDriverFixture fixture) : base(fixture) { }
-
     [Fact]
     public void ActivityIndicator_Should_BeRunning() => RunTest(() =>
     {

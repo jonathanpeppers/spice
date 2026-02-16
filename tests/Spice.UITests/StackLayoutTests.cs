@@ -4,8 +4,6 @@ namespace Spice.UITests;
 
 public class StackLayoutTests : BaseTest
 {
-    public StackLayoutTests(SharedDriverFixture fixture) : base(fixture) { }
-
     [Fact]
     public void StackLayout_Should_ArrangeChildrenVertically() => RunTest(() =>
     {

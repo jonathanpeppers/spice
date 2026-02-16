@@ -2,8 +2,6 @@ namespace Spice.UITests;
 
 public class PickerTests : BaseTest
 {
-    public PickerTests(SharedDriverFixture fixture) : base(fixture) { }
-
     [Fact]
     public void Picker_Should_DisplayWithDefaultState() => RunTest(() =>
     {

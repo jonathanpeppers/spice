@@ -4,8 +4,6 @@ namespace Spice.UITests;
 
 public class SwitchTests : BaseTest
 {
-    public SwitchTests(SharedDriverFixture fixture) : base(fixture) { }
-
     [Fact]
     public void Switch_Should_ToggleAndUpdateLabel() => RunTest(() =>
     {

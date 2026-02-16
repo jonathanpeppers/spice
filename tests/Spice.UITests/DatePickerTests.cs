@@ -2,8 +2,6 @@ namespace Spice.UITests;
 
 public class DatePickerTests : BaseTest
 {
-    public DatePickerTests(SharedDriverFixture fixture) : base(fixture) { }
-
     [Fact]
     public void DatePicker_Should_DisplayWithDefaultValue() => RunTest(() =>
     {

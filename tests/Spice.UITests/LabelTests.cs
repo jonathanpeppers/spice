@@ -2,8 +2,6 @@ namespace Spice.UITests;
 
 public class LabelTests : BaseTest
 {
-    public LabelTests(SharedDriverFixture fixture) : base(fixture) { }
-
     [Fact]
     public void HelloWorld_Label_Should_DisplayText() => RunTest(() =>
     {

@@ -4,8 +4,6 @@ namespace Spice.UITests;
 
 public class BorderTests : BaseTest
 {
-    public BorderTests(SharedDriverFixture fixture) : base(fixture) { }
-
     [Fact]
     public void Border_Should_DisplayWithContent() => RunTest(() =>
     {

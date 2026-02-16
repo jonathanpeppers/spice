@@ -2,8 +2,6 @@ namespace Spice.UITests;
 
 public class ScrollViewTests : BaseTest
 {
-    public ScrollViewTests(SharedDriverFixture fixture) : base(fixture) { }
-
     [Fact]
     public void ScrollView_Should_DisplayScrollableContent() => RunTest(() =>
     {

@@ -2,8 +2,6 @@ namespace Spice.UITests;
 
 public class TimePickerTests : BaseTest
 {
-    public TimePickerTests(SharedDriverFixture fixture) : base(fixture) { }
-
     [Fact]
     public void TimePicker_Should_DisplayWithDefaultValue() => RunTest(() =>
     {

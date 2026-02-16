@@ -2,8 +2,6 @@ namespace Spice.UITests;
 
 public class BoxViewTests : BaseTest
 {
-    public BoxViewTests(SharedDriverFixture fixture) : base(fixture) { }
-
     [Fact]
     public void BoxView_Should_DisplayWithColor() => RunTest(() =>
     {

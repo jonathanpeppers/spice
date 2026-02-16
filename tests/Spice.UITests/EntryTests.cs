@@ -4,8 +4,6 @@ namespace Spice.UITests;
 
 public class EntryTests : BaseTest
 {
-    public EntryTests(SharedDriverFixture fixture) : base(fixture) { }
-
     [Fact]
     public void Entry_Should_DisplayTextAndPassword() => RunTest(() =>
     {
