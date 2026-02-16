@@ -128,6 +128,24 @@ jobs:
       run: |
         GITHUB_ACTIONS= dotnet build samples/Spice.Scenarios/Spice.Scenarios.csproj -f net10.0-android -c Debug -p:TargetFrameworks=net10.0-android -p:EmbedAssembliesIntoApk=true -bl:test-artifacts/install.binlog
 
+    - name: Write test script
+      run: |
+        cat > test-artifacts/run-tests.sh << 'SCRIPT'
+        #!/bin/bash
+        set -x
+        adb install $GITHUB_WORKSPACE/samples/Spice.Scenarios/bin/Debug/net10.0-android/com.companyname.spice.scenarios-Signed.apk
+        appium server --log-level info &
+        APPIUM_PID=$!
+        sleep 5
+        TEST_EXIT=0
+        dotnet test tests/Spice.UITests/Spice.UITests.csproj -c Debug --logger trx --results-directory test-artifacts || TEST_EXIT=$?
+        adb logcat -d -t 5000 > $GITHUB_WORKSPACE/test-artifacts/logcat.txt 2>/dev/null || true
+        kill $APPIUM_PID 2>/dev/null || true
+        echo $TEST_EXIT > $GITHUB_WORKSPACE/test-artifacts/exit-code.txt
+        exit $TEST_EXIT
+        SCRIPT
+        chmod +x test-artifacts/run-tests.sh
+
     - name: Run UI Tests
       timeout-minutes: 30
       continue-on-error: true
@@ -138,17 +156,7 @@ jobs:
         target: google_apis
         force-avd-creation: false
         emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
-        script: |
-          adb install $GITHUB_WORKSPACE/samples/Spice.Scenarios/bin/Debug/net10.0-android/com.companyname.spice.scenarios-Signed.apk
-          appium server --log-level info &
-          APPIUM_PID=$!
-          sleep 5
-          TEST_EXIT=0
-          dotnet test tests/Spice.UITests/Spice.UITests.csproj -c Debug --logger trx --results-directory test-artifacts || TEST_EXIT=$?
-          adb logcat -d -t 5000 > $GITHUB_WORKSPACE/test-artifacts/logcat.txt 2>/dev/null || true
-          kill $APPIUM_PID 2>/dev/null || true
-          echo $TEST_EXIT > $GITHUB_WORKSPACE/test-artifacts/exit-code.txt
-          exit $TEST_EXIT
+        script: bash $GITHUB_WORKSPACE/test-artifacts/run-tests.sh
 
     - name: Upload UI test results
       uses: actions/upload-artifact@v4
