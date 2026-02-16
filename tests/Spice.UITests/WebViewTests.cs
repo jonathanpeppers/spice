@@ -4,6 +4,8 @@ namespace Spice.UITests;
 
 public class WebViewTests : BaseTest
 {
+    public WebViewTests(SharedDriverFixture fixture) : base(fixture) { }
+
     [Fact]
     public void WebView_Should_LoadWebsite() => RunTest(() =>
     {

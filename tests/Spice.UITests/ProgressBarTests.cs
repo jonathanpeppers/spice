@@ -2,6 +2,8 @@ namespace Spice.UITests;
 
 public class ProgressBarTests : BaseTest
 {
+    public ProgressBarTests(SharedDriverFixture fixture) : base(fixture) { }
+
     [Fact]
     public void ProgressBar_Should_DisplayWithInitialValue() => RunTest(() =>
     {

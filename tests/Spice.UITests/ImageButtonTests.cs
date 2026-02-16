@@ -4,6 +4,8 @@ namespace Spice.UITests;
 
 public class ImageButtonTests : BaseTest
 {
+    public ImageButtonTests(SharedDriverFixture fixture) : base(fixture) { }
+
     [Fact]
     public void ImageButton_Should_BeClickable() => RunTest(() =>
     {

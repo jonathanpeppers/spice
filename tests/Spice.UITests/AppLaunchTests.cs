@@ -4,6 +4,8 @@ namespace Spice.UITests;
 
 public class AppLaunchTests : BaseTest
 {
+    public AppLaunchTests(SharedDriverFixture fixture) : base(fixture) { }
+
     [Fact]
     public void App_Should_LaunchWithoutCrashing() => RunTest(() =>
     {

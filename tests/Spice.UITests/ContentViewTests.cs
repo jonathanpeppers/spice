@@ -2,6 +2,8 @@ namespace Spice.UITests;
 
 public class ContentViewTests : BaseTest
 {
+    public ContentViewTests(SharedDriverFixture fixture) : base(fixture) { }
+
     [Fact]
     public void ContentView_Should_DisplayNestedContent() => RunTest(() =>
     {

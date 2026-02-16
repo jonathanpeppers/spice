@@ -4,6 +4,8 @@ namespace Spice.UITests;
 
 public class ButtonTests : BaseTest
 {
+    public ButtonTests(SharedDriverFixture fixture) : base(fixture) { }
+
     [Fact]
     public void HelloWorld_Button_Should_UpdateLabel() => RunTest(() =>
     {

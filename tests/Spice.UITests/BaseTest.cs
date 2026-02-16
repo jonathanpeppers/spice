@@ -7,9 +7,45 @@ using OpenQA.Selenium.Appium.Android;
 
 namespace Spice.UITests;
 
-public abstract class BaseTest : IDisposable
+/// <summary>
+/// Shared fixture that creates a single Appium session for all UI tests.
+/// This avoids the force-stop/restart cycle that causes flakiness on CI emulators.
+/// </summary>
+public class SharedDriverFixture : IDisposable
 {
-    protected AndroidDriver Driver { get; private set; } = null!;
+    public AndroidDriver Driver { get; }
+    public string PackageName { get; } = "com.companyname.spice.scenarios";
+    public string ActivityName { get; } = "com.companyname.spice.scenarios.MainActivity";
+
+    public SharedDriverFixture()
+    {
+        var options = new AppiumOptions();
+        options.AddAdditionalAppiumOption("platformName", "Android");
+        options.AutomationName = "UiAutomator2";
+        options.AddAdditionalAppiumOption("appPackage", PackageName);
+        options.AddAdditionalAppiumOption("appActivity", ActivityName);
+        options.AddAdditionalAppiumOption("appium:newCommandTimeout", 300);
+        options.AddAdditionalAppiumOption("appium:connectHardwareKeyboard", true);
+        options.AddAdditionalAppiumOption("appium:autoGrantPermissions", true);
+
+        var serverUri = new Uri("http://127.0.0.1:4723");
+        Driver = new AndroidDriver(serverUri, options);
+        Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+    }
+
+    public void Dispose()
+    {
+        Driver?.Quit();
+    }
+}
+
+[CollectionDefinition("UI Tests")]
+public class UITestCollection : ICollectionFixture<SharedDriverFixture> { }
+
+[Collection("UI Tests")]
+public abstract class BaseTest
+{
+    protected AndroidDriver Driver { get; }
 
     public string PackageName { get; } = "com.companyname.spice.scenarios";
     public string ActivityName { get; } = "com.companyname.spice.scenarios.MainActivity";
@@ -43,39 +79,32 @@ public abstract class BaseTest : IDisposable
         Console.WriteLine($"Created artifacts directory: {ArtifactsPath}");
     }
 
-    protected void InitializeAndroidDriver()
+    protected BaseTest(SharedDriverFixture fixture)
     {
-        var options = new AppiumOptions();
+        Driver = fixture.Driver;
+    }
 
-        // Basic Android capabilities
-        options.AddAdditionalAppiumOption("platformName", "Android");
-        options.AutomationName = "UiAutomator2";
-        options.AddAdditionalAppiumOption("appPackage", PackageName);
-        options.AddAdditionalAppiumOption("appActivity", ActivityName);
-        options.AddAdditionalAppiumOption("appium:newCommandTimeout", 300);
-        options.AddAdditionalAppiumOption("appium:connectHardwareKeyboard", true);
-        options.AddAdditionalAppiumOption("appium:autoGrantPermissions", true);
-
-        // Create driver with default Appium server URL, retrying on failure
-        var serverUri = new Uri("http://127.0.0.1:4723");
-        const int maxRetries = 3;
-        for (int attempt = 1; attempt <= maxRetries; attempt++)
+    /// <summary>
+    /// Navigate back to the main menu by pressing Back until a known menu button is visible.
+    /// </summary>
+    private void NavigateToMainMenu()
+    {
+        for (int i = 0; i < 5; i++)
         {
             try
             {
-                Driver = new AndroidDriver(serverUri, options);
-                break;
+                Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
+                Driver.FindElement(MobileBy.AndroidUIAutomator(
+                    "new UiSelector().className(\"android.widget.Button\").text(\"HELLO WORLD\")"));
+                Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+                return; // Found main menu
             }
-            catch (Exception ex) when (attempt < maxRetries)
+            catch
             {
-                Console.WriteLine($"Driver init attempt {attempt} failed: {ex.Message}. Retrying...");
-                Thread.Sleep(3000);
+                Driver.Navigate().Back();
+                Thread.Sleep(500);
             }
         }
-
-        // Configure implicit wait timeout - tells the driver to poll the DOM for up to 10 seconds
-        // when trying to find elements. This helps handle elements that may not be immediately available.
-        // Reference: http://appium.io/docs/en/latest/quickstart/test-dotnet/
         Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
     }
 
@@ -109,67 +138,20 @@ public abstract class BaseTest : IDisposable
     }
 
     /// <summary>
-    /// Runs a test body with automatic driver initialization and failure diagnostics.
-    /// Retries up to 2 additional times on failure to handle emulator flakiness.
+    /// Runs a test body with automatic navigation to main menu and failure diagnostics.
     /// </summary>
     protected void RunTest(Action testBody, [CallerMemberName] string testName = "")
     {
-        const int maxAttempts = 3;
-        Exception? lastException = null;
-
-        for (int attempt = 1; attempt <= maxAttempts; attempt++)
+        try
         {
-            try
-            {
-                // Clean up any previous driver and restart app on retry
-                if (attempt > 1)
-                {
-                    Console.WriteLine($"Test {testName}: retry attempt {attempt}/{maxAttempts}");
-                    try { Driver?.Quit(); } catch { }
-                    Thread.Sleep(1000);
-
-                    // Force-stop and relaunch the app via adb
-                    try
-                    {
-                        RunAdbCommand($"shell am force-stop {PackageName}");
-                        Thread.Sleep(500);
-                        RunAdbCommand($"shell am start -n {PackageName}/{ActivityName}");
-                        Thread.Sleep(2000);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"adb restart failed: {ex.Message}");
-                    }
-                }
-
-                InitializeAndroidDriver();
-                testBody();
-                return; // Test passed
-            }
-            catch (Exception ex)
-            {
-                lastException = ex;
-                if (attempt == maxAttempts)
-                {
-                    CaptureTestFailureDiagnostics(ex, testName);
-                    throw;
-                }
-                Console.WriteLine($"Test {testName} attempt {attempt} failed: {ex.Message}");
-            }
+            NavigateToMainMenu();
+            testBody();
         }
-    }
-
-    private static void RunAdbCommand(string args)
-    {
-        var psi = new ProcessStartInfo("adb", args)
+        catch (Exception ex)
         {
-            RedirectStandardOutput = true,
-            RedirectStandardError = true,
-            UseShellExecute = false,
-            CreateNoWindow = true
-        };
-        using var proc = Process.Start(psi);
-        proc?.WaitForExit(10000);
+            CaptureTestFailureDiagnostics(ex, testName);
+            throw;
+        }
     }
 
     void CaptureTestFailureDiagnostics(Exception testException, [CallerMemberName] string testName = "")
@@ -223,13 +205,12 @@ public abstract class BaseTest : IDisposable
         }
     }
 
-    private void CaptureLogcat(string artifactDir, string testName)
+    private static void CaptureLogcat(string artifactDir, string testName)
     {
         try
         {
             var logcatPath = Path.Combine(artifactDir, $"{testName}-logcat.txt");
 
-            // Run adb logcat command to capture recent logs
             var processStartInfo = new ProcessStartInfo
             {
                 FileName = "adb",
@@ -262,10 +243,5 @@ public abstract class BaseTest : IDisposable
         {
             Console.WriteLine($"Failed to capture logcat: {ex.Message}");
         }
-    }
-
-    public void Dispose()
-    {
-        Driver?.Quit();
     }
 }

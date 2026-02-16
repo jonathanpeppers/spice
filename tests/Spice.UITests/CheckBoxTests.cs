@@ -4,6 +4,8 @@ namespace Spice.UITests;
 
 public class CheckBoxTests : BaseTest
 {
+    public CheckBoxTests(SharedDriverFixture fixture) : base(fixture) { }
+
     [Fact]
     public void CheckBox_Should_DisplayWithInitialState() => RunTest(() =>
     {
