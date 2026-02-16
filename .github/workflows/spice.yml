@@ -135,7 +135,7 @@ jobs:
 
     - name: run Android device tests
       run: >
-        xharness android test
+        dotnet xharness android test
         --app="tests/Spice.Tests/bin/Release/net10.0-android/com.jonathanpeppers.spice.tests-Signed.apk"
         --package-name="com.jonathanpeppers.spice.tests"
         --instrumentation="com.jonathanpeppers.spice.tests.TestInstrumentation"
@@ -190,7 +190,7 @@ jobs:
 
     - name: run iOS device tests
       run: >
-        xharness apple test
+        dotnet xharness apple test
         --app="tests/Spice.Tests/bin/Release/net10.0-ios/iossimulator-x64/Spice.Tests.app"
         --output-directory=bin/device-test-results/ios
         --target=ios-simulator-64
