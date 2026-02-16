@@ -94,6 +94,7 @@ jobs:
     env:
       WORKLOAD_VERSION: 10.0.103
       ARTIFACTS_DIR: ${{ github.workspace }}/test-artifacts
+      ANDROID_EMULATOR_WAIT_TIME_BEFORE_KILL: 5
     
     steps:
     - name: checkout
