@@ -57,7 +57,7 @@ jobs:
       run: dotnet build samples/samples.slnx -c Debug --no-restore -bl:bin/build-samples.binlog -maxcpucount
 
     - name: tests
-      run: dotnet test tests/Spice.Tests/Spice.Tests.csproj -c Release --no-build
+      run: dotnet test tests/Spice.Tests/Spice.Tests.csproj -f net10.0 -c Release --no-build
 
     - name: pack
       run: dotnet pack spice.slnx -c Release --no-build -bl:bin/pack.binlog
@@ -88,3 +88,116 @@ jobs:
       with:
         name: nupkgs
         path: bin
+
+  device-tests-android:
+
+    runs-on: macos-latest
+
+    env:
+      WORKLOAD_VERSION: 10.0.103
+      XHARNESS_VERSION: 11.0.0-prerelease*
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+
+    - name: install .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 10.0.x
+
+    - name: cache NuGet packages
+      uses: actions/cache@v4
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj', '**/*.slnx', '**/Directory.Build.props', '**/Directory.Build.targets') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+
+    - name: install workloads
+      run: dotnet workload install maui-android --version $WORKLOAD_VERSION
+
+    - name: install xharness
+      run: >
+        dotnet tool install Microsoft.DotNet.XHarness.CLI
+        --global
+        --add-source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json
+        --version "$XHARNESS_VERSION"
+
+    - name: build test app
+      run: dotnet build tests/Spice.Tests/Spice.Tests.csproj -f net10.0-android -c Release -bl:bin/build-device-tests-android.binlog
+
+    - name: run Android device tests
+      run: >
+        xharness android test
+        --app="tests/Spice.Tests/bin/Release/net10.0-android/com.jonathanpeppers.spice.tests-Signed.apk"
+        --package-name="com.jonathanpeppers.spice.tests"
+        --instrumentation="com.jonathanpeppers.spice.tests.TestInstrumentation"
+        --output-directory=bin/device-test-results/android
+        --timeout=00:10:00
+
+    - name: publish test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: device-test-results-android
+        path: bin/device-test-results/android
+
+  device-tests-ios:
+
+    runs-on: macos-latest
+
+    env:
+      WORKLOAD_VERSION: 10.0.103
+      ValidateXcodeVersion: false
+      XHARNESS_VERSION: 11.0.0-prerelease*
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+
+    - name: select Xcode version
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+
+    - name: install .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 10.0.x
+
+    - name: cache NuGet packages
+      uses: actions/cache@v4
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj', '**/*.slnx', '**/Directory.Build.props', '**/Directory.Build.targets') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+
+    - name: install workloads
+      run: dotnet workload install maui-ios --version $WORKLOAD_VERSION
+
+    - name: install xharness
+      run: >
+        dotnet tool install Microsoft.DotNet.XHarness.CLI
+        --global
+        --add-source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json
+        --version "$XHARNESS_VERSION"
+
+    - name: build test app
+      run: dotnet build tests/Spice.Tests/Spice.Tests.csproj -f net10.0-ios -c Release -r iossimulator-x64 -bl:bin/build-device-tests-ios.binlog
+
+    - name: run iOS device tests
+      run: >
+        xharness apple test
+        --app="tests/Spice.Tests/bin/Release/net10.0-ios/iossimulator-x64/Spice.Tests.app"
+        --output-directory=bin/device-test-results/ios
+        --target=ios-simulator-64
+        --timeout=00:10:00
+
+    - name: publish test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: device-test-results-ios
+        path: bin/device-test-results/ios

@@ -1,14 +1,29 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project>
+
+  <Import Project="../../src/Spice/MSBuild/Spice.props" />
+  <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
 
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFrameworks>net10.0;net10.0-android;net10.0-ios</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <SingleProject>true</SingleProject>
+
+    <!-- net10.0 is a plain test library; mobile TFMs are Exe (test apps) -->
+    <OutputType Condition=" '$(TargetFramework)' != 'net10.0' ">Exe</OutputType>
+
+    <ApplicationTitle>Spice.Tests</ApplicationTitle>
+    <ApplicationId>com.jonathanpeppers.spice.tests</ApplicationId>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">16.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
-  <ItemGroup>
+  <!-- Desktop test runner packages (net10.0 only) -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net10.0' ">
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
-    <PackageReference Include="xunit" Version="2.9.3" />
     <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
@@ -19,8 +34,22 @@
     </PackageReference>
   </ItemGroup>
 
+  <!-- Shared test framework -->
+  <ItemGroup>
+    <PackageReference Include="xunit" Version="2.9.3" />
+  </ItemGroup>
+
+  <!-- XHarness test runners for device tests -->
+  <ItemGroup Condition=" '$(TargetFramework)' != 'net10.0' ">
+    <PackageReference Include="xunit.runner.utility" Version="2.9.3" />
+    <PackageReference Include="Microsoft.DotNet.XHarness.TestRunners.Xunit" Version="11.0.0-prerelease.*" />
+  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\src\Spice\Spice.csproj" />
   </ItemGroup>
+
+  <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.targets" />
+  <Import Project="../../src/Spice/MSBuild/Spice.targets" />
 
 </Project>
