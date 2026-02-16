@@ -140,6 +140,7 @@ jobs:
           TEST_EXIT=0
           dotnet test tests/Spice.UITests/Spice.UITests.csproj -c Debug --logger trx --results-directory test-artifacts || TEST_EXIT=$?
           adb logcat -d -t 5000 > $GITHUB_WORKSPACE/test-artifacts/logcat.txt || true
+          adb emu kill || true
           exit $TEST_EXIT
 
     - name: Upload UI test results
