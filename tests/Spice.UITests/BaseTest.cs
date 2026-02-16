@@ -54,6 +54,8 @@ public abstract class BaseTest : IDisposable
         options.AddAdditionalAppiumOption("appActivity", ActivityName);
         options.AddAdditionalAppiumOption("appium:newCommandTimeout", 300);
         options.AddAdditionalAppiumOption("appium:connectHardwareKeyboard", true);
+        options.AddAdditionalAppiumOption("appium:appWaitDuration", 30000);
+        options.AddAdditionalAppiumOption("appium:autoGrantPermissions", true);
 
         // Create driver with default Appium server URL
         var serverUri = new Uri("http://127.0.0.1:4723");

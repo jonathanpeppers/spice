@@ -42,7 +42,7 @@ dotnet test tests/Spice.Tests/Spice.Tests.csproj   # unit tests (net10.0, no dev
 
 ## Entry Points
 
-- **iOS**: Scene-based. `SpiceAppDelegate<TApp>` + `SpiceSceneDelegate<TApp>`. Consumers: `class AppDelegate : SpiceAppDelegate<App> { }`. Requires `UIApplicationSceneManifest` in Info.plist. Window via `Platform.Window`.
+- **iOS**: Scene-based. `SpiceAppDelegate` + `SpiceSceneDelegate` (non-generic). Consumers: `class AppDelegate : SpiceAppDelegate { override CreateApplication() => new App(); }`. Requires `UIApplicationSceneManifest` in Info.plist. Window via `Platform.Window`.
 - **Android**: `SpiceActivity : AppCompatActivity`. Sets `Platform.Context`. Consumers call `SetContentView(new App())`.
 
 ## MSBuild

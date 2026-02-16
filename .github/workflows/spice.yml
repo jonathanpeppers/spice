@@ -133,7 +133,16 @@ jobs:
         cat > test-artifacts/run-tests.sh << 'SCRIPT'
         #!/bin/bash
         set -x
+
+        # Prepare emulator: dismiss lock screen, disable animations
+        adb shell input keyevent 82
+        adb shell settings put global window_animation_scale 0
+        adb shell settings put global transition_animation_scale 0
+        adb shell settings put global animator_duration_scale 0
+
         adb install $GITHUB_WORKSPACE/samples/Spice.Scenarios/bin/Debug/net10.0-android/com.companyname.spice.scenarios-Signed.apk
+        adb logcat -c || true
+
         appium server --log-level info &
         APPIUM_PID=$!
         sleep 5
