@@ -214,6 +214,20 @@ jobs:
         --output-directory=bin/device-test-results/ios
         --target=ios-simulator-64
         --timeout=00:10:00
+        --verbosity verbose
+
+    - name: collect simulator logs
+      if: always()
+      run: |
+        # Grab the most recent simulator device log
+        UDID=$(xcrun simctl list devices booted -j | python3 -c "import sys,json; devs=[d for r in json.load(sys.stdin)['devices'].values() for d in r if d['state']=='Booted']; print(devs[0]['udid'] if devs else '')" 2>/dev/null || true)
+        if [ -n "$UDID" ]; then
+          LOG_DIR="$HOME/Library/Logs/DiagnosticReports"
+          mkdir -p bin/device-test-results/ios
+          cp "$LOG_DIR"/*.ips bin/device-test-results/ios/ 2>/dev/null || true
+          # Also grab the system log from the simulator
+          xcrun simctl spawn "$UDID" log show --last 5m --predicate 'process == "Spice.Tests"' > bin/device-test-results/ios/simulator-system.log 2>&1 || true
+        fi
 
     - name: publish test results
       if: always()
