@@ -6,8 +6,10 @@ namespace Spice.Tests;
 
 class TestDevice : IDevice
 {
+	private readonly string _uniqueIdentifier = Guid.NewGuid().ToString("N");
+
 	public string BundleIdentifier => Foundation.NSBundle.MainBundle.BundleIdentifier ?? "";
-	public string UniqueIdentifier => Guid.NewGuid().ToString("N");
+	public string UniqueIdentifier => _uniqueIdentifier;
 	public string Name => UIDevice.CurrentDevice.Name;
 	public string Model => UIDevice.CurrentDevice.Model;
 	public string SystemName => UIDevice.CurrentDevice.SystemName;

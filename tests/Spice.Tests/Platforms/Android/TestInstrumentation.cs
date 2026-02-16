@@ -16,36 +16,46 @@ public class TestInstrumentation : Instrumentation
 		Start();
 	}
 
-	public override async void OnStart()
+	public override void OnStart()
 	{
 		base.OnStart();
 
-		var bundle = new Bundle();
-		var entryPoint = new TestEntryPoint(
-			Android.App.Application.Context.CacheDir!.AbsolutePath);
-		entryPoint.TestsCompleted += (_, results) =>
+		Task.Run(async () =>
 		{
-			bundle.PutLong("return-code", results.FailedTests == 0 ? 0 : 1);
-			bundle.PutString("test-execution-summary",
-				$"Tests run: {results.ExecutedTests} " +
-				$"Passed: {results.PassedTests} " +
-				$"Failed: {results.FailedTests} " +
-				$"Skipped: {results.SkippedTests}");
-		};
+			var bundle = new Bundle();
+			try
+			{
+				var entryPoint = new TestEntryPoint(
+					Android.App.Application.Context.CacheDir!.AbsolutePath);
+				entryPoint.TestsCompleted += (_, results) =>
+				{
+					bundle.PutLong("return-code", results.FailedTests == 0 ? 0 : 1);
+					bundle.PutString("test-execution-summary",
+						$"Tests run: {results.ExecutedTests} " +
+						$"Passed: {results.PassedTests} " +
+						$"Failed: {results.FailedTests} " +
+						$"Skipped: {results.SkippedTests}");
+				};
 
-		await entryPoint.RunAsync();
+				await entryPoint.RunAsync();
 
-		if (File.Exists(entryPoint.TestsResultsFinalPath))
-		{
-			var externalDir = Android.App.Application.Context.GetExternalFilesDir(null)!.AbsolutePath;
-			var dest = Path.Combine(externalDir, "TestResults.xml");
-			File.Copy(entryPoint.TestsResultsFinalPath, dest, overwrite: true);
-			bundle.PutString("test-results-path", dest);
-		}
+				if (File.Exists(entryPoint.TestsResultsFinalPath))
+				{
+					var externalDir = Android.App.Application.Context.GetExternalFilesDir(null)!.AbsolutePath;
+					var dest = Path.Combine(externalDir, "TestResults.xml");
+					File.Copy(entryPoint.TestsResultsFinalPath, dest, overwrite: true);
+					bundle.PutString("test-results-path", dest);
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine("Error while running tests: " + ex);
+			}
 
-		if (bundle.GetLong("return-code", -1) == -1)
-			bundle.PutLong("return-code", 1);
+			if (bundle.GetLong("return-code", -1) == -1)
+				bundle.PutLong("return-code", 1);
 
-		Finish(Result.Ok, bundle);
+			Finish(Result.Ok, bundle);
+		});
 	}
 }

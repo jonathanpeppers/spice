@@ -21,18 +21,25 @@ public class AppDelegate : UIApplicationDelegate
 
 		Task.Run(async () =>
 		{
-			var runner = new TestEntryPoint();
-
-			runner.TestsCompleted += (_, results) =>
+			try
 			{
-				Console.WriteLine(
-					$"Tests run: {results.ExecutedTests} " +
-					$"Passed: {results.PassedTests} " +
-					$"Failed: {results.FailedTests} " +
-					$"Skipped: {results.SkippedTests}");
-			};
+				var runner = new TestEntryPoint();
 
-			await runner.RunAsync();
+				runner.TestsCompleted += (_, results) =>
+				{
+					Console.WriteLine(
+						$"Tests run: {results.ExecutedTests} " +
+						$"Passed: {results.PassedTests} " +
+						$"Failed: {results.FailedTests} " +
+						$"Skipped: {results.SkippedTests}");
+				};
+
+				await runner.RunAsync();
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine("Error while running tests: " + ex);
+			}
 		});
 
 		return true;
