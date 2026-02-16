@@ -127,9 +127,9 @@ jobs:
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: 34
-        arch: x86_64
+        arch: arm64-v8a
         target: google_apis
-        emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+        emulator-options: -no-window -gpu host -no-snapshot -noaudio -no-boot-anim
         script: |
           adb shell input keyevent 82
           adb shell settings put global window_animation_scale 0
