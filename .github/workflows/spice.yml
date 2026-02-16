@@ -90,11 +90,10 @@ jobs:
         path: bin
 
   ui-tests:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     env:
       WORKLOAD_VERSION: 10.0.103
       ARTIFACTS_DIR: ${{ github.workspace }}/test-artifacts
-      ANDROID_EMULATOR_WAIT_TIME_BEFORE_KILL: 5
     
     steps:
     - name: checkout
@@ -113,47 +112,14 @@ jobs:
         dotnet restore tests/Spice.UITests/Spice.UITests.csproj
         dotnet restore samples/Spice.Scenarios/Spice.Scenarios.csproj -p:TargetFrameworks=net10.0-android
 
-    - name: Enable KVM
-      run: |
-        echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
-        sudo udevadm control --reload-rules
-        sudo udevadm trigger --name-match=kvm
-
     - name: Install Appium
       run: |
         npm install -g appium
         appium driver install uiautomator2
 
-    - name: Build and install app
+    - name: Build app
       run: |
         GITHUB_ACTIONS= dotnet build samples/Spice.Scenarios/Spice.Scenarios.csproj -f net10.0-android -c Debug -p:TargetFrameworks=net10.0-android -p:EmbedAssembliesIntoApk=true -bl:test-artifacts/install.binlog
-
-    - name: Write test script
-      run: |
-        cat > test-artifacts/run-tests.sh << 'SCRIPT'
-        #!/bin/bash
-        set -x
-
-        # Prepare emulator: dismiss lock screen, disable animations
-        adb shell input keyevent 82
-        adb shell settings put global window_animation_scale 0
-        adb shell settings put global transition_animation_scale 0
-        adb shell settings put global animator_duration_scale 0
-
-        adb install $GITHUB_WORKSPACE/samples/Spice.Scenarios/bin/Debug/net10.0-android/com.companyname.spice.scenarios-Signed.apk
-        adb logcat -c || true
-
-        appium server --log-level info &
-        APPIUM_PID=$!
-        sleep 5
-        TEST_EXIT=0
-        dotnet test tests/Spice.UITests/Spice.UITests.csproj -c Debug --logger trx --results-directory test-artifacts || TEST_EXIT=$?
-        adb logcat -d -t 5000 > $GITHUB_WORKSPACE/test-artifacts/logcat.txt 2>/dev/null || true
-        kill $APPIUM_PID 2>/dev/null || true
-        echo $TEST_EXIT > $GITHUB_WORKSPACE/test-artifacts/exit-code.txt
-        exit $TEST_EXIT
-        SCRIPT
-        chmod +x test-artifacts/run-tests.sh
 
     - name: Run UI Tests
       timeout-minutes: 30
@@ -163,9 +129,18 @@ jobs:
         api-level: 34
         arch: x86_64
         target: google_apis
-        force-avd-creation: false
         emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
-        script: bash $GITHUB_WORKSPACE/test-artifacts/run-tests.sh
+        script: |
+          adb shell input keyevent 82
+          adb shell settings put global window_animation_scale 0
+          adb shell settings put global transition_animation_scale 0
+          adb shell settings put global animator_duration_scale 0
+          adb install $GITHUB_WORKSPACE/samples/Spice.Scenarios/bin/Debug/net10.0-android/com.companyname.spice.scenarios-Signed.apk
+          adb logcat -c
+          appium server --log-level info &
+          sleep 5
+          dotnet test tests/Spice.UITests/Spice.UITests.csproj -c Debug --logger trx --results-directory test-artifacts; echo $? > $GITHUB_WORKSPACE/test-artifacts/exit-code.txt
+          adb logcat -d -t 5000 > $GITHUB_WORKSPACE/test-artifacts/logcat.txt 2>/dev/null || true
 
     - name: Upload UI test results
       uses: actions/upload-artifact@v4
