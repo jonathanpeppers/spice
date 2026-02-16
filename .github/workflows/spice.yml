@@ -121,11 +121,8 @@ jobs:
     - name: restore .NET tools
       run: dotnet tool restore
 
-    - name: restore test app
-      run: dotnet restore tests/Spice.Tests/Spice.Tests.csproj -f net10.0-android -p:DeviceTests=true
-
     - name: build test app
-      run: dotnet build tests/Spice.Tests/Spice.Tests.csproj -f net10.0-android -c Release -p:DeviceTests=true --no-restore -bl:bin/build-device-tests-android.binlog
+      run: dotnet build tests/Spice.Tests/Spice.Tests.csproj -f net10.0-android -c Release -p:DeviceTests=true -bl:bin/build-device-tests-android.binlog
 
     - name: boot Android emulator
       run: >
@@ -188,11 +185,8 @@ jobs:
     - name: restore .NET tools
       run: dotnet tool restore
 
-    - name: restore test app
-      run: dotnet restore tests/Spice.Tests/Spice.Tests.csproj -f net10.0-ios -p:DeviceTests=true -r iossimulator-x64
-
     - name: build test app
-      run: dotnet build tests/Spice.Tests/Spice.Tests.csproj -f net10.0-ios -c Release -p:DeviceTests=true -r iossimulator-x64 --no-restore -bl:bin/build-device-tests-ios.binlog
+      run: dotnet build tests/Spice.Tests/Spice.Tests.csproj -f net10.0-ios -c Release -p:DeviceTests=true -r iossimulator-x64 -bl:bin/build-device-tests-ios.binlog
 
     - name: run iOS device tests
       run: >
