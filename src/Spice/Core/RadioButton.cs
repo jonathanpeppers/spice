@@ -4,6 +4,10 @@ namespace Spice;
 /// A radio button control for single selection from a group of options.
 /// Android -> Android.Widget.RadioButton
 /// iOS -> UIKit.UIButton (with circle styling)
+///
+/// Group exclusivity is managed in shared code via <see cref="GroupName"/> rather than
+/// Android's RadioGroup, because iOS has no native radio button or group concept.
+/// A cross-platform dictionary keeps behavior consistent on both platforms.
 /// </summary>
 public partial class RadioButton : View
 {
