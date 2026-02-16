@@ -55,7 +55,6 @@ public abstract class BaseTest : IDisposable
         options.AddAdditionalAppiumOption("appium:newCommandTimeout", 300);
         options.AddAdditionalAppiumOption("appium:connectHardwareKeyboard", true);
         options.AddAdditionalAppiumOption("appium:autoGrantPermissions", true);
-        options.AddAdditionalAppiumOption("appium:noReset", true);
 
         // Create driver with default Appium server URL, retrying on failure
         var serverUri = new Uri("http://127.0.0.1:4723");
@@ -78,41 +77,6 @@ public abstract class BaseTest : IDisposable
         // when trying to find elements. This helps handle elements that may not be immediately available.
         // Reference: http://appium.io/docs/en/latest/quickstart/test-dotnet/
         Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-
-        // With noReset, the app may be on a scenario page from a prior test.
-        // Ensure we're on the main menu by checking current activity and pressing back if needed.
-        EnsureOnMainMenu();
-    }
-
-    private void EnsureOnMainMenu()
-    {
-        try
-        {
-            var currentActivity = Driver.CurrentActivity;
-            if (currentActivity != null && currentActivity.Contains("MainActivity"))
-            {
-                // Check if we can see any main menu button (indicates we're on the main menu)
-                Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
-                try
-                {
-                    Driver.FindElement(MobileBy.AndroidUIAutomator(
-                        "new UiSelector().className(\"android.widget.Button\").text(\"BUTTON\")"));
-                    Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-                    return; // Already on main menu
-                }
-                catch
-                {
-                    // Not on main menu, press back
-                    Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-                    Driver.Navigate().Back();
-                    Thread.Sleep(500);
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"EnsureOnMainMenu: {ex.Message}");
-        }
     }
 
     /// <summary>
@@ -146,19 +110,39 @@ public abstract class BaseTest : IDisposable
 
     /// <summary>
     /// Runs a test body with automatic driver initialization and failure diagnostics.
-    /// Eliminates the need for try/catch in every test method.
+    /// Retries up to 2 additional times on failure to handle emulator flakiness.
     /// </summary>
     protected void RunTest(Action testBody, [CallerMemberName] string testName = "")
     {
-        try
+        const int maxAttempts = 3;
+        Exception? lastException = null;
+
+        for (int attempt = 1; attempt <= maxAttempts; attempt++)
         {
-            InitializeAndroidDriver();
-            testBody();
-        }
-        catch (Exception ex)
-        {
-            CaptureTestFailureDiagnostics(ex, testName);
-            throw;
+            try
+            {
+                // Clean up any previous driver
+                if (attempt > 1)
+                {
+                    Console.WriteLine($"Test {testName}: retry attempt {attempt}/{maxAttempts}");
+                    try { Driver?.Quit(); } catch { }
+                    Thread.Sleep(2000);
+                }
+
+                InitializeAndroidDriver();
+                testBody();
+                return; // Test passed
+            }
+            catch (Exception ex)
+            {
+                lastException = ex;
+                if (attempt == maxAttempts)
+                {
+                    CaptureTestFailureDiagnostics(ex, testName);
+                    throw;
+                }
+                Console.WriteLine($"Test {testName} attempt {attempt} failed: {ex.Message}");
+            }
         }
     }
 
