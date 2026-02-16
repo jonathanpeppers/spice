@@ -90,7 +90,7 @@ jobs:
         path: bin
 
   ui-tests:
-    runs-on: macos-13
+    runs-on: ubuntu-latest
     env:
       WORKLOAD_VERSION: 10.0.103
       ARTIFACTS_DIR: ${{ github.workspace }}/test-artifacts
@@ -112,6 +112,12 @@ jobs:
         dotnet restore tests/Spice.UITests/Spice.UITests.csproj
         dotnet restore samples/Spice.Scenarios/Spice.Scenarios.csproj -p:TargetFrameworks=net10.0-android
 
+    - name: Enable KVM
+      run: |
+        echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+        sudo udevadm control --reload-rules
+        sudo udevadm trigger --name-match=kvm
+
     - name: Install Appium
       run: |
         npm install -g appium
@@ -126,15 +132,13 @@ jobs:
       continue-on-error: true
       uses: reactivecircus/android-emulator-runner@v2
       with:
-        api-level: 34
+        api-level: 30
         arch: x86_64
         target: google_apis
+        disable-animations: true
         emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
         script: |
           adb shell input keyevent 82
-          adb shell settings put global window_animation_scale 0
-          adb shell settings put global transition_animation_scale 0
-          adb shell settings put global animator_duration_scale 0
           adb install $GITHUB_WORKSPACE/samples/Spice.Scenarios/bin/Debug/net10.0-android/com.companyname.spice.scenarios-Signed.apk
           adb logcat -c
           appium server --log-level info &
