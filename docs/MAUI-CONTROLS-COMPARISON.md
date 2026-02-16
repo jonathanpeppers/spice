@@ -37,7 +37,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 | CollectionView | ✅ Yes | ✅ Done | Powerful grid/list control |
 | ContentView | ✅ Yes | ✅ Done | Custom control composition |
 | DatePicker | ✅ Yes | ✅ Done | Date selection - common in forms |
-| Editor | ❌ No | 🟡 Maybe | Multi-line text input |
+| Editor | ✅ Yes | ✅ Done | Multi-line text input |
 | Ellipse | ❌ No | 🟢 Maybe | Shape control - can use Image |
 | Entry | ✅ Yes | ✅ Done | Single-line text input |
 | Frame | ❌ No | ❌ No | Superseded by Border |
@@ -55,7 +55,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 | Polygon | ❌ No | ❌ No | Shape control - can use Image |
 | Polyline | ❌ No | ❌ No | Shape control - can use Image |
 | ProgressBar | ✅ Yes | ✅ Done | Progress display - common |
-| RadioButton | ❌ No | 🟢 Maybe | Less common on mobile |
+| RadioButton | ✅ Yes | ✅ Done | Single selection from a group; uses cross-platform GroupName (no Android RadioGroup) because iOS lacks a native radio button |
 | Rectangle | ❌ No | 🟢 Maybe | Shape control - BoxView covers this |
 | RefreshView | ✅ Yes | ✅ Done | Pull-to-refresh wrapper |
 | RoundRectangle | ❌ No | ❌ No | Border can handle this |
@@ -73,7 +73,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 
 ## Summary
 
-**Implemented: 25 / 60+ controls**
+**Implemented: 26 / 60+ controls**
 
 ### Spice Controls (Core)
 - ✅ ActivityIndicator
@@ -85,6 +85,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - ✅ CollectionView
 - ✅ ContentView
 - ✅ DatePicker
+- ✅ Editor (multi-line text)
 - ✅ Entry (single-line text)
 - ✅ Grid
 - ✅ Image
@@ -92,6 +93,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - ✅ Label
 - ✅ Picker
 - ✅ ProgressBar
+- ✅ RadioButton
 - ✅ RefreshView
 - ✅ ScrollView
 - ✅ SearchBar
@@ -130,6 +132,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - CollectionView → UICollectionView
 - ContentView → UIView
 - DatePicker → UIDatePicker
+- Editor → UITextView
 - Entry → UITextField
 - Grid → Custom constraint-based layout
 - Image → UIImageView
@@ -137,6 +140,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - Label → UILabel
 - Picker → UIPickerView
 - ProgressBar → UIProgressView
+- RadioButton → UIButton (with circle/circle.fill SF Symbols; cross-platform GroupName for exclusivity)
 - RefreshView → UIView with UIRefreshControl
 - ScrollView → UIScrollView
 - SearchBar → UISearchBar
@@ -156,6 +160,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - CollectionView → AndroidX.RecyclerView.Widget.RecyclerView
 - ContentView → FrameLayout
 - DatePicker → DatePickerDialog
+- Editor → EditText (multiline)
 - Entry → AppCompatEditText
 - Grid → GridLayout
 - Image → AppCompatImageView
@@ -163,6 +168,7 @@ This document compares the stable/supported controls from .NET MAUI with what is
 - Label → AppCompatTextView
 - Picker → Spinner
 - ProgressBar → ProgressBar
+- RadioButton → Android.Widget.RadioButton (cross-platform GroupName for exclusivity, not RadioGroup)
 - RefreshView → AndroidX.SwipeRefreshLayout.Widget.SwipeRefreshLayout
 - ScrollView → ScrollView / HorizontalScrollView
 - SearchBar → SearchView
@@ -360,7 +366,7 @@ Based on Spice's minimalist philosophy and common mobile UI needs, here are reas
 - 🟡 **ListView** - Scrollable list of items; maps to UITableView/RecyclerView (critical for many apps)
 
 **Input**
-- 🟡 **Editor** - Multi-line text input; maps to UITextView/EditText (multiline)
+- ✅ **Editor** - Multi-line text input; maps to UITextView/EditText (multiline) (IMPLEMENTED)
 - ✅ **SearchBar** - Search input; maps to UISearchBar/SearchView (IMPLEMENTED)
 
 **Display**
@@ -371,7 +377,7 @@ Based on Spice's minimalist philosophy and common mobile UI needs, here are reas
 **Advanced Controls**
 - ✅ **RefreshView** - Pull-to-refresh wrapper (IMPLEMENTED)
 - ✅ **SwipeView** - Swipe actions/context menus (IMPLEMENTED)
-- 🟢 **RadioButton** - Radio button groups (less common on mobile)
+- ✅ **RadioButton** - Radio button groups; uses cross-platform GroupName since iOS has no native radio concept
 
 **Shapes** (Lower priority - can use Image or GraphicsView)
 - ✅ **BoxView** - Colored rectangle (useful for dividers/spacers) (IMPLEMENTED)
@@ -429,7 +435,7 @@ Based on Spice's minimalist philosophy and common mobile UI needs, here are reas
 3. ✅ CheckBox
 4. ✅ DatePicker
 5. ✅ TimePicker
-6. 🟡 Editor (multiline text)
+6. ✅ Editor (multiline text)
 
 **Phase 3 (Lists & Advanced)** ✅
 1. 🟡 ListView
@@ -443,7 +449,7 @@ Based on Spice's minimalist philosophy and common mobile UI needs, here are reas
 1. ✅ RefreshView
 2. ✅ SwipeView
 3. ✅ BoxView
-4. 🟢 RadioButton
+4. ✅ RadioButton
 5. ✅ Opacity property
 
 ---
