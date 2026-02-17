@@ -95,8 +95,6 @@ jobs:
 
     env:
       WORKLOAD_VERSION: 10.0.103
-      TEST_EMULATOR_IMAGE: system-images;android-34;google_apis;x86_64
-      TEST_EMULATOR_NAME: DeviceTestsEmulator
 
     steps:
     - name: checkout
@@ -133,23 +131,19 @@ jobs:
     - name: build test app
       run: dotnet build tests/Spice.Tests/Spice.Tests.csproj -f net10.0-android -c Release -r android-x64 --no-restore -bl:bin/build-device-tests-android.binlog
 
-    - name: boot Android emulator
-      run: >
-        dotnet android sdk install --package platform-tools &&
-        dotnet android sdk install --package emulator &&
-        dotnet android sdk install --package '${{ env.TEST_EMULATOR_IMAGE }}' &&
-        dotnet android avd create --name '${{ env.TEST_EMULATOR_NAME }}' --sdk '${{ env.TEST_EMULATOR_IMAGE }}' --force &&
-        dotnet android avd start --name '${{ env.TEST_EMULATOR_NAME }}' --gpu swiftshader_indirect --wait-boot --no-window --no-snapshot --no-audio --no-boot-anim &&
-        dotnet android device list
-
     - name: run Android device tests
-      run: >
-        dotnet xharness android test
-        --app="tests/Spice.Tests/bin/Release/net10.0-android/android-x64/com.jonathanpeppers.spice.tests-Signed.apk"
-        --package-name="com.jonathanpeppers.spice.tests"
-        --instrumentation="com.jonathanpeppers.spice.tests.TestInstrumentation"
-        --output-directory=bin/device-test-results/android
-        --timeout=00:10:00
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 34
+        target: google_apis
+        arch: x86_64
+        script: |
+          dotnet xharness android test \
+            --app="tests/Spice.Tests/bin/Release/net10.0-android/android-x64/com.jonathanpeppers.spice.tests-Signed.apk" \
+            --package-name="com.jonathanpeppers.spice.tests" \
+            --instrumentation="com.jonathanpeppers.spice.tests.TestInstrumentation" \
+            --output-directory=bin/device-test-results/android \
+            --timeout=00:10:00
 
     - name: publish test results
       if: always()
