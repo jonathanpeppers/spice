@@ -1,6 +1,5 @@
 using Foundation;
 using Microsoft.DotNet.XHarness.TestRunners.Common;
-using System.Reflection;
 using UIKit;
 
 namespace Spice.Tests;
@@ -20,10 +19,8 @@ public class AppDelegate : UIApplicationDelegate
 #pragma warning restore CA1422
 		Window.MakeKeyAndVisible();
 
-		// Set Spice.Platform.Window so controls can create native views
-		var platformType = typeof(Spice.View).Assembly.GetType("Spice.Platform");
-		platformType?.GetProperty("Window", BindingFlags.Public | BindingFlags.Static)
-			?.SetValue(null, Window);
+		// Initialize Spice platform so controls can create native views
+		Spice.Platform.Window = Window;
 
 		Task.Run(async () =>
 		{

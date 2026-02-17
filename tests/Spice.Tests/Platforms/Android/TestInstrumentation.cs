@@ -1,7 +1,6 @@
 using Android.App;
 using Android.OS;
 using Android.Runtime;
-using System.Reflection;
 
 namespace Spice.Tests;
 
@@ -21,10 +20,8 @@ public class TestInstrumentation : Instrumentation
 	{
 		base.OnStart();
 
-		// Set Spice.Platform.Context so controls can create native views
-		var platformType = typeof(Spice.View).Assembly.GetType("Spice.Platform");
-		platformType?.GetProperty("Context", BindingFlags.Public | BindingFlags.Static)
-			?.SetValue(null, Android.App.Application.Context);
+		// Initialize Spice platform so controls can create native views
+		Spice.Platform.Context = Android.App.Application.Context;
 
 		Task.Run(async () =>
 		{
