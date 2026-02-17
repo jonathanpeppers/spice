@@ -4,8 +4,8 @@
   <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
 
   <PropertyGroup>
-    <TargetFramework Condition=" '$(RuntimeIdentifier.StartsWith('android-')) ">net10.0-android</TargetFramework>
-    <TargetFramework Condition=" '$(RuntimeIdentifier.StartsWith('ios-')) ">net10.0-ios</TargetFramework>
+    <TargetFramework Condition=" '$(RuntimeIdentifier)' != '' and $(RuntimeIdentifier.StartsWith('android-')) ">net10.0-android</TargetFramework>
+    <TargetFramework Condition=" '$(RuntimeIdentifier)' != '' and ($(RuntimeIdentifier.StartsWith('iossimulator-')) or $(RuntimeIdentifier.StartsWith('ios-'))) ">net10.0-ios</TargetFramework>
     <TargetFramework Condition=" '$(TargetFramework)' == '' ">net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
