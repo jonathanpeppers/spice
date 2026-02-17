@@ -24,6 +24,7 @@ public class AppDelegate : UIApplicationDelegate
 
 		Task.Run(async () =>
 		{
+			Console.WriteLine("Spice.Tests: Starting test runner...");
 			try
 			{
 				var runner = new TestEntryPoint();
@@ -38,6 +39,7 @@ public class AppDelegate : UIApplicationDelegate
 				};
 
 				await runner.RunAsync();
+				Console.WriteLine("Spice.Tests: Test runner completed.");
 			}
 			catch (Exception ex)
 			{

@@ -26,9 +26,10 @@
     <TrimMode>partial</TrimMode>
     <SuppressTrimAnalysisWarnings>true</SuppressTrimAnalysisWarnings>
 
-    <!-- Disable AOT on iOS — simulator supports JIT natively -->
+    <!-- Disable AOT on iOS — simulator supports JIT natively.
+         Use SdkOnly linking to keep xUnit assemblies intact. -->
     <RunAOTCompilation Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">false</RunAOTCompilation>
-    <MtouchLink Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">None</MtouchLink>
+    <MtouchLink Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">SdkOnly</MtouchLink>
 
     <!-- Android: disable AOT so xUnit's reflection-based test discovery works.
          Assembly store remains enabled (default); xUnit loads via Assembly.Load(). -->
