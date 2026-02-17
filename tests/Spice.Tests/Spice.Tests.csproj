@@ -28,6 +28,7 @@
 
     <!-- Disable AOT on iOS — simulator supports JIT natively -->
     <RunAOTCompilation Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">false</RunAOTCompilation>
+    <PublishTrimmed Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">false</PublishTrimmed>
 
     <!-- Android: disable AOT so xUnit's reflection-based test discovery works.
          Assembly store remains enabled (default); xUnit loads via Assembly.Load(). -->
