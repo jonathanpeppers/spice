@@ -25,6 +25,12 @@
     <!-- Disable trimming for test assemblies — xUnit needs reflection -->
     <TrimMode>copy</TrimMode>
     <SuppressTrimAnalysisWarnings>true</SuppressTrimAnalysisWarnings>
+
+    <!-- Android: keep assemblies as .dll files on disk so xUnit can discover them -->
+    <AndroidEnableAssemblyCompression>false</AndroidEnableAssemblyCompression>
+    <AndroidEnableMarshalMethods>false</AndroidEnableMarshalMethods>
+    <AndroidUseAssemblyStore>false</AndroidUseAssemblyStore>
+    <RunAOTCompilation>false</RunAOTCompilation>
   </PropertyGroup>
 
   <!-- Desktop test runner packages (net10.0 only) -->
