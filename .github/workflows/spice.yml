@@ -137,13 +137,7 @@ jobs:
         api-level: 34
         target: google_apis
         arch: x86_64
-        script: |
-          dotnet xharness android test \
-            --app="tests/Spice.Tests/bin/Release/net10.0-android/android-x64/com.jonathanpeppers.spice.tests-Signed.apk" \
-            --package-name="com.jonathanpeppers.spice.tests" \
-            --instrumentation="com.jonathanpeppers.spice.tests.TestInstrumentation" \
-            --output-directory=bin/device-test-results/android \
-            --timeout=00:10:00
+        script: dotnet xharness android test --app="tests/Spice.Tests/bin/Release/net10.0-android/android-x64/com.jonathanpeppers.spice.tests-Signed.apk" --package-name="com.jonathanpeppers.spice.tests" --instrumentation="com.jonathanpeppers.spice.tests.TestInstrumentation" --output-directory=bin/device-test-results/android --timeout=00:10:00
 
     - name: publish test results
       if: always()
