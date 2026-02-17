@@ -35,6 +35,10 @@
 		<CodesignEntitlements Condition=" '$(CodesignEntitlements)' == '' and Exists('$(iOSProjectFolder)Entitlements.plist') ">$(iOSProjectFolder)Entitlements.plist</CodesignEntitlements>
 	</PropertyGroup>
 
+	<ItemGroup Condition=" '$(SingleProject)' == 'true' and '$([MSBuild]::GetTargetPlatformIdentifier($(TargetFramework)))' == 'ios' ">
+		<None Include="$(iOSProjectFolder)Info.plist" LogicalName="Info.plist" Condition=" Exists('$(iOSProjectFolder)Info.plist') " />
+	</ItemGroup>
+
 	<ItemGroup Condition=" '$(SingleProject)' == 'true' ">
 		<!-- Add metadata indicating that the platform-specific files are not part of every build configuration. -->
 		<Compile Update="$(PlatformsProjectFolder)**/*$(DefaultLanguageSourceExtension)">

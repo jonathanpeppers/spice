@@ -23,7 +23,11 @@ public partial class Application
 	{
 		if (value != null)
 		{
-			AddSubview(value);
+			// The Main view should always fill the entire Application area
+			UIView native = value;
+			native.Frame = NativeView.Bounds;
+			native.AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight;
+			NativeView.AddSubview(native);
 		}
 	}
 }
