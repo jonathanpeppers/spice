@@ -22,8 +22,11 @@ class TestEntryPoint : iOSApplicationEntryPoint
 
 	protected override void TerminateWithSuccess()
 	{
-		var selector = new Selector("terminateWithSuccess");
-		UIApplication.SharedApplication.PerformSelector(
-			selector, UIApplication.SharedApplication, 0);
+		UIApplication.SharedApplication.BeginInvokeOnMainThread(() =>
+		{
+			var selector = new Selector("terminateWithSuccess");
+			UIApplication.SharedApplication.PerformSelector(
+				selector, UIApplication.SharedApplication, 0);
+		});
 	}
 }
