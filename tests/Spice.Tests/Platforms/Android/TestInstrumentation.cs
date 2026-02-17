@@ -41,7 +41,10 @@ public class TestInstrumentation : Instrumentation
 
 				if (File.Exists(entryPoint.TestsResultsFinalPath))
 				{
-					bundle.PutString("test-results-path", entryPoint.TestsResultsFinalPath);
+					// Don't report test-results-path to xharness — on API 34+ adb
+					// cannot pull from app-private or scoped-storage paths.
+					// xharness will use the return-code and test-execution-summary
+					// from the bundle instead.
 				}
 			}
 			catch (Exception ex)
