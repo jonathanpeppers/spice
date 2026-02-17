@@ -9,7 +9,7 @@ class TestEntryPoint : iOSApplicationEntryPoint
 {
 	protected override bool LogExcludedTests => true;
 
-	protected override int? MaxParallelThreads => Environment.ProcessorCount;
+	protected override int? MaxParallelThreads => 1;
 
 	protected override IDevice Device { get; } = new TestDevice();
 
