@@ -91,16 +91,22 @@ jobs:
 
   device-tests-android:
 
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     env:
       WORKLOAD_VERSION: 10.0.103
-      TEST_EMULATOR_IMAGE: system-images;android-34;google_apis;arm64-v8a
+      TEST_EMULATOR_IMAGE: system-images;android-34;google_apis;x86_64
       TEST_EMULATOR_NAME: DeviceTestsEmulator
 
     steps:
     - name: checkout
       uses: actions/checkout@v4
+
+    - name: enable KVM
+      run: |
+        echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+        sudo udevadm control --reload-rules
+        sudo udevadm trigger --name-match=kvm
 
     - name: install .NET
       uses: actions/setup-dotnet@v4
