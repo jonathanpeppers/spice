@@ -95,7 +95,7 @@ jobs:
 
     env:
       WORKLOAD_VERSION: 10.0.103
-      TEST_EMULATOR_IMAGE: system-images;android-34;google_apis;x86_64
+      TEST_EMULATOR_IMAGE: system-images;android-34;google_apis;arm64-v8a
       TEST_EMULATOR_NAME: DeviceTestsEmulator
 
     steps:
@@ -186,16 +186,15 @@ jobs:
       run: dotnet tool restore
 
     - name: build test app
-      run: dotnet build tests/Spice.Tests/Spice.Tests.csproj -f net10.0-ios -c Release -p:DeviceTests=true -r iossimulator-x64 -bl:bin/build-device-tests-ios.binlog
+      run: dotnet build tests/Spice.Tests/Spice.Tests.csproj -f net10.0-ios -c Release -p:DeviceTests=true -r iossimulator-arm64 -bl:bin/build-device-tests-ios.binlog
 
     - name: run iOS device tests
       run: >
         dotnet xharness apple test
-        --app="tests/Spice.Tests/bin/Release/net10.0-ios/iossimulator-x64/Spice.Tests.app"
+        --app="tests/Spice.Tests/bin/Release/net10.0-ios/iossimulator-arm64/Spice.Tests.app"
         --output-directory=bin/device-test-results/ios
         --target=ios-simulator-64
         --timeout=00:10:00
-        --verbosity verbose
 
     - name: collect simulator logs
       if: always()
