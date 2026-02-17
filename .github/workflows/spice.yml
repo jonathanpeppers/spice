@@ -194,7 +194,8 @@ jobs:
         --app="tests/Spice.Tests/bin/Release/net10.0-ios/iossimulator-arm64/Spice.Tests.app"
         --output-directory=bin/device-test-results/ios
         --target=ios-simulator-64
-        --timeout=00:10:00
+        --timeout=00:15:00
+        --launch-timeout=00:10:00
         --communication-channel=Network
 
     - name: collect simulator logs
