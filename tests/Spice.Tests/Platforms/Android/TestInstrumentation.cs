@@ -1,6 +1,7 @@
 using Android.App;
 using Android.OS;
 using Android.Runtime;
+using System.Reflection;
 
 namespace Spice.Tests;
 
@@ -20,6 +21,11 @@ public class TestInstrumentation : Instrumentation
 	{
 		base.OnStart();
 
+		// Set Spice.Platform.Context so controls can create native views
+		var platformType = typeof(Spice.View).Assembly.GetType("Spice.Platform");
+		platformType?.GetProperty("Context", BindingFlags.Public | BindingFlags.Static)
+			?.SetValue(null, Android.App.Application.Context);
+
 		Task.Run(async () =>
 		{
 			var bundle = new Bundle();
@@ -38,14 +44,6 @@ public class TestInstrumentation : Instrumentation
 				};
 
 				await entryPoint.RunAsync();
-
-				if (File.Exists(entryPoint.TestsResultsFinalPath))
-				{
-					// Don't report test-results-path to xharness — on API 34+ adb
-					// cannot pull from app-private or scoped-storage paths.
-					// xharness will use the return-code and test-execution-summary
-					// from the bundle instead.
-				}
 			}
 			catch (Exception ex)
 			{
