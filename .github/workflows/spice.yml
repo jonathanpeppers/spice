@@ -122,13 +122,13 @@ jobs:
           ${{ runner.os }}-nuget-
 
     - name: install workloads
-      run: dotnet workload install maui-android maui-ios --version $WORKLOAD_VERSION
+      run: dotnet workload install maui-android --version $WORKLOAD_VERSION
 
     - name: restore .NET tools
       run: dotnet tool restore
 
     - name: build test app
-      run: dotnet build tests/Spice.Tests/Spice.Tests.csproj -f net10.0-android -c Release -p:DeviceTests=true -bl:bin/build-device-tests-android.binlog
+      run: dotnet build tests/Spice.Tests/Spice.Tests.csproj -f net10.0-android -c Release -p:DeviceTests=true -r android-x64 -bl:bin/build-device-tests-android.binlog
 
     - name: boot Android emulator
       run: >
@@ -142,7 +142,7 @@ jobs:
     - name: run Android device tests
       run: >
         dotnet xharness android test
-        --app="tests/Spice.Tests/bin/Release/net10.0-android/com.jonathanpeppers.spice.tests-Signed.apk"
+        --app="tests/Spice.Tests/bin/Release/net10.0-android/android-x64/com.jonathanpeppers.spice.tests-Signed.apk"
         --package-name="com.jonathanpeppers.spice.tests"
         --instrumentation="com.jonathanpeppers.spice.tests.TestInstrumentation"
         --output-directory=bin/device-test-results/android
@@ -186,7 +186,7 @@ jobs:
           ${{ runner.os }}-nuget-
 
     - name: install workloads
-      run: dotnet workload install maui-android maui-ios --version $WORKLOAD_VERSION
+      run: dotnet workload install maui-ios --version $WORKLOAD_VERSION
 
     - name: restore .NET tools
       run: dotnet tool restore
