@@ -22,13 +22,14 @@
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">16.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 
-    <!-- Disable trimming for test assemblies — xUnit needs reflection -->
-    <TrimMode>copy</TrimMode>
+    <!-- xUnit/xharness packages are not trimmer-compatible -->
+    <TrimMode>partial</TrimMode>
     <SuppressTrimAnalysisWarnings>true</SuppressTrimAnalysisWarnings>
 
-    <!-- Disable AOT — test apps run fine in interpreter mode -->
-    <RunAOTCompilation Condition=" '$(TargetFramework)' != 'net10.0' ">false</RunAOTCompilation>
-    <UseInterpreter Condition=" '$(TargetFramework)' != 'net10.0' ">true</UseInterpreter>
+    <!-- Disable AOT on iOS — the AOT compiler fails with TrimMode=partial on some assemblies.
+         On simulator, JIT/interpreter is fine. -->
+    <RunAOTCompilation Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">false</RunAOTCompilation>
+    <UseInterpreter Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">true</UseInterpreter>
 
     <!-- Android: keep assemblies as .dll files on disk so xUnit can discover them -->
     <AndroidEnableAssemblyCompression>false</AndroidEnableAssemblyCompression>
