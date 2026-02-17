@@ -31,11 +31,9 @@
     <RunAOTCompilation Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">false</RunAOTCompilation>
     <UseInterpreter Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">true</UseInterpreter>
 
-    <!-- Android: keep assemblies as .dll files on disk so xUnit can discover them -->
-    <AndroidEnableAssemblyCompression>false</AndroidEnableAssemblyCompression>
-    <AndroidEnableMarshalMethods>false</AndroidEnableMarshalMethods>
-    <AndroidUseAssemblyStore>false</AndroidUseAssemblyStore>
-    <RunAOTCompilation>false</RunAOTCompilation>
+    <!-- Android: disable AOT so xUnit's reflection-based test discovery works.
+         Assembly store remains enabled (default); xUnit loads via Assembly.Load(). -->
+    <RunAOTCompilation Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">false</RunAOTCompilation>
   </PropertyGroup>
 
   <!-- Desktop test runner packages (net10.0 only) -->
