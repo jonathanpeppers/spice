@@ -132,9 +132,6 @@ jobs:
       run: dotnet build tests/Spice.Tests/Spice.Tests.csproj -f net10.0-android -c Release -r android-x64 --no-restore -bl:bin/build-device-tests-android.binlog
 
     - name: run Android device tests
-      # 50 tests fail due to Android Looper requirement (views must be
-      # created on the UI thread). These will be addressed separately.
-      continue-on-error: true
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: 34
@@ -192,16 +189,13 @@ jobs:
       run: dotnet build tests/Spice.Tests/Spice.Tests.csproj -f net10.0-ios -c Release -r iossimulator-arm64 --no-restore -bl:bin/build-device-tests-ios.binlog
 
     - name: run iOS device tests
-      # xharness cannot capture stdout from the iOS simulator on newer
-      # Xcode/iOS versions, causing a timeout→crash report even though
-      # the test app may run successfully. Tracked for follow-up.
-      continue-on-error: true
       run: >
         dotnet xharness apple test
         --app="tests/Spice.Tests/bin/Release/net10.0-ios/iossimulator-arm64/Spice.Tests.app"
         --output-directory=bin/device-test-results/ios
         --target=ios-simulator-64
-        --timeout=00:15:00
+        --timeout=00:10:00
+        --communication-channel=Network
 
     - name: collect simulator logs
       if: always()

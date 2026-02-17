@@ -18,7 +18,7 @@ class TestEntryPoint : AndroidApplicationEntryPoint
 
 	public override string TestsResultsFinalPath => _resultsPath;
 
-	protected override int? MaxParallelThreads => Environment.ProcessorCount;
+	protected override int? MaxParallelThreads => 1;
 
 	protected override IDevice Device { get; } = new TestDevice();
 

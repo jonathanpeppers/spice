@@ -23,8 +23,17 @@ public class TestInstrumentation : Instrumentation
 		// Initialize Spice platform so controls can create native views
 		Spice.Platform.Context = Android.App.Application.Context;
 
+		// Prepare a Looper on this thread so Android views (WebView,
+		// SwipeRefreshLayout, etc.) that require a Handler can be created.
+		if (Looper.MyLooper() == null)
+			Looper.Prepare();
+
 		Task.Run(async () =>
 		{
+			// Also prepare a Looper on the Task.Run thread
+			if (Looper.MyLooper() == null)
+				Looper.Prepare();
+
 			var bundle = new Bundle();
 			try
 			{
