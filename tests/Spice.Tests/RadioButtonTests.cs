@@ -122,6 +122,11 @@ public class RadioButtonTests
 		Assert.False(radioButton1.IsChecked);
 		Assert.False(radioButton2.IsChecked);
 		Assert.True(radioButton3.IsChecked);
+
+		// Prevent aggressive GC from collecting Java peers during group operations
+		GC.KeepAlive(radioButton1);
+		GC.KeepAlive(radioButton2);
+		GC.KeepAlive(radioButton3);
 	}
 
 	[Fact]
