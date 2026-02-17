@@ -1,4 +1,6 @@
 ﻿using System.Collections.Specialized;
+using CoreFoundation;
+using Foundation;
 
 namespace Spice;
 
@@ -27,7 +29,16 @@ public partial class View
 	/// <param name="creator">Subclasses can pass in a Func to create a UIView</param>
 	protected View(Func<View, UIView> creator)
 	{
-		_nativeView = new Lazy<UIView>(() => creator(this));
+		_nativeView = new Lazy<UIView>(() =>
+		{
+			// UIKit views must be created on the main thread
+			if (NSThread.IsMain)
+				return creator(this);
+
+			UIView? view = null;
+			DispatchQueue.MainQueue.DispatchSync(() => view = creator(this));
+			return view!;
+		});
 
 		Children.CollectionChanged += OnChildrenChanged;
 	}

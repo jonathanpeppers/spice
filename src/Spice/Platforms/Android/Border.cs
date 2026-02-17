@@ -69,12 +69,12 @@ public partial class Border
 	{
 		if (oldValue != null)
 		{
-			NativeView.RemoveView(oldValue.NativeView);
+			NativeView.RemoveView(oldValue);
 		}
 
 		if (newValue != null)
 		{
-			NativeView.AddView(newValue.NativeView);
+			NativeView.AddView(newValue);
 			UpdateContentPadding();
 		}
 	}

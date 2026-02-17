@@ -57,7 +57,7 @@ jobs:
       run: dotnet build samples/samples.slnx -c Debug --no-restore -bl:bin/build-samples.binlog -maxcpucount
 
     - name: tests
-      run: dotnet test tests/Spice.Tests/Spice.Tests.csproj -c Release --no-build
+      run: dotnet test tests/Spice.Tests/Spice.Tests.csproj -f net10.0 -c Release --no-build
 
     - name: pack
       run: dotnet pack spice.slnx -c Release --no-build -bl:bin/pack.binlog
@@ -88,3 +88,132 @@ jobs:
       with:
         name: nupkgs
         path: bin
+
+  device-tests-android:
+
+    runs-on: ubuntu-latest
+
+    env:
+      WORKLOAD_VERSION: 10.0.103
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+
+    - name: enable KVM
+      run: |
+        echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+        sudo udevadm control --reload-rules
+        sudo udevadm trigger --name-match=kvm
+
+    - name: install .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 10.0.x
+
+    - name: cache NuGet packages
+      uses: actions/cache@v4
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj', '**/*.slnx', '**/Directory.Build.props', '**/Directory.Build.targets') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+
+    - name: install workloads
+      run: dotnet workload install maui-android --version $WORKLOAD_VERSION
+
+    - name: restore .NET tools
+      run: dotnet tool restore
+
+    - name: restore test app
+      run: dotnet msbuild tests/Spice.Tests/Spice.Tests.csproj -t:Restore -p:TargetFramework=net10.0-android -p:RuntimeIdentifier=android-x64
+
+    - name: build test app
+      run: dotnet build tests/Spice.Tests/Spice.Tests.csproj -f net10.0-android -c Release -r android-x64 --no-restore -bl:bin/build-device-tests-android.binlog
+
+    - name: run Android device tests
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 34
+        target: google_apis
+        arch: x86_64
+        script: dotnet xharness android test --app="tests/Spice.Tests/bin/Release/net10.0-android/android-x64/com.jonathanpeppers.spice.tests-Signed.apk" --package-name="com.jonathanpeppers.spice.tests" --instrumentation="com.jonathanpeppers.spice.tests.TestInstrumentation" --output-directory=bin/device-test-results/android --timeout=00:10:00
+
+    - name: publish test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: device-test-results-android
+        path: bin/device-test-results/android
+
+  device-tests-ios:
+
+    runs-on: macos-latest
+
+    env:
+      WORKLOAD_VERSION: 10.0.103
+      ValidateXcodeVersion: false
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+
+    - name: select Xcode version
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+
+    - name: install .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 10.0.x
+
+    - name: cache NuGet packages
+      uses: actions/cache@v4
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj', '**/*.slnx', '**/Directory.Build.props', '**/Directory.Build.targets') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+
+    - name: install workloads
+      run: dotnet workload install maui-ios --version $WORKLOAD_VERSION
+
+    - name: restore .NET tools
+      run: dotnet tool restore
+
+    - name: restore test app
+      run: dotnet msbuild tests/Spice.Tests/Spice.Tests.csproj -t:Restore -p:TargetFramework=net10.0-ios -p:RuntimeIdentifier=iossimulator-arm64
+
+    - name: build test app
+      run: dotnet build tests/Spice.Tests/Spice.Tests.csproj -f net10.0-ios -c Release -r iossimulator-arm64 --no-restore -bl:bin/build-device-tests-ios.binlog
+
+    - name: run iOS device tests
+      run: >
+        dotnet xharness apple test
+        --app="tests/Spice.Tests/bin/Release/net10.0-ios/iossimulator-arm64/Spice.Tests.app"
+        --output-directory=bin/device-test-results/ios
+        --target=ios-simulator-64
+        --timeout=00:15:00
+        --launch-timeout=00:10:00
+        --communication-channel=Network
+
+    - name: collect simulator logs
+      if: always()
+      run: |
+        # Grab the most recent simulator device log
+        UDID=$(xcrun simctl list devices booted -j | python3 -c "import sys,json; devs=[d for r in json.load(sys.stdin)['devices'].values() for d in r if d['state']=='Booted']; print(devs[0]['udid'] if devs else '')" 2>/dev/null || true)
+        if [ -n "$UDID" ]; then
+          LOG_DIR="$HOME/Library/Logs/DiagnosticReports"
+          mkdir -p bin/device-test-results/ios
+          cp "$LOG_DIR"/*.ips bin/device-test-results/ios/ 2>/dev/null || true
+          # Also grab the system log from the simulator
+          xcrun simctl spawn "$UDID" log show --last 5m --predicate 'process == "Spice.Tests"' > bin/device-test-results/ios/simulator-system.log 2>&1 || true
+        fi
+
+    - name: publish test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: device-test-results-ios
+        path: bin/device-test-results/ios
