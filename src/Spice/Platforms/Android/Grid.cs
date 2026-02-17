@@ -12,21 +12,14 @@ public partial class Grid
 	/// <param name="grid">The Spice.Grid</param>
 	public static implicit operator GridLayout(Grid grid) => grid.NativeView;
 
-	static GridLayout Create(Context context, Grid grid)
-	{
-		var layout = new GridLayout(context);
-		layout.RowCount = Math.Max(1, grid.RowDefinitions.Count);
-		layout.ColumnCount = Math.Max(1, grid.ColumnDefinitions.Count);
-		return layout;
-	}
+	static GridLayout Create(Context context) => new(context);
 
 	/// <summary>
 	/// A layout container that arranges child views in rows and columns.
 	/// Android -> Android.Widget.GridLayout
 	/// </summary>
-	public Grid() : this(Platform.Context, (context) => Create(context, null!))
+	public Grid() : this(Platform.Context, Create)
 	{
-		// Update the layout after construction
 		NativeView.RowCount = Math.Max(1, RowDefinitions.Count);
 		NativeView.ColumnCount = Math.Max(1, ColumnDefinitions.Count);
 		RowDefinitions.CollectionChanged += OnDefinitionsChanged;
@@ -36,7 +29,7 @@ public partial class Grid
 
 	/// <inheritdoc />
 	/// <param name="context">Option to pass the desired Context, otherwise Platform.Context is used</param>
-	public Grid(Context context) : this(context, (ctx) => Create(ctx, null!))
+	public Grid(Context context) : this(context, Create)
 	{
 		NativeView.RowCount = Math.Max(1, RowDefinitions.Count);
 		NativeView.ColumnCount = Math.Max(1, ColumnDefinitions.Count);
@@ -120,7 +113,7 @@ public partial class Grid
 		}
 
 		var layoutParams = CreateGridLayoutParams(row, column, rowSpan, columnSpan, maxRow, maxColumn);
-		view.NativeView.LayoutParameters = layoutParams;
+		((Android.Views.View)view).LayoutParameters = layoutParams;
 	}
 
 	GridLayout.LayoutParams CreateGridLayoutParams(int row, int column, int rowSpan, int columnSpan, int maxRow, int maxColumn)
@@ -211,7 +204,7 @@ public partial class Grid
 			var nativeChild = NativeView.GetChildAt(i);
 			if (nativeChild?.LayoutParameters is GridLayout.LayoutParams layoutParams)
 			{
-				var spiceView = Children.FirstOrDefault(v => ReferenceEquals(v.NativeView, nativeChild));
+				var spiceView = Children.FirstOrDefault(v => ReferenceEquals((Android.Views.View)v, nativeChild));
 				if (spiceView != null)
 				{
 					var row = GetRow(spiceView);
@@ -236,7 +229,7 @@ public partial class Grid
 		foreach (var child in children)
 		{
 			ConfigureGridChild(child);
-			NativeView.AddView(child.NativeView);
+			NativeView.AddView(child);
 		}
 	}
 }

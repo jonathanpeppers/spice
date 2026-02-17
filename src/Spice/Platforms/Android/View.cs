@@ -80,7 +80,7 @@ public partial class View
 		{
 			foreach (View item in e.OldItems)
 			{
-				NativeView.RemoveView(item.NativeView);
+				NativeView.RemoveView(item);
 			}
 		}
 
