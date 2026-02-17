@@ -41,10 +41,7 @@ public class TestInstrumentation : Instrumentation
 
 				if (File.Exists(entryPoint.TestsResultsFinalPath))
 				{
-					var externalDir = Android.App.Application.Context.GetExternalFilesDir(null)!.AbsolutePath;
-					var dest = Path.Combine(externalDir, "TestResults.xml");
-					File.Copy(entryPoint.TestsResultsFinalPath, dest, overwrite: true);
-					bundle.PutString("test-results-path", dest);
+					bundle.PutString("test-results-path", entryPoint.TestsResultsFinalPath);
 				}
 			}
 			catch (Exception ex)
