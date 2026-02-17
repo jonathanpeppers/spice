@@ -22,7 +22,8 @@ public class AppDelegate : UIApplicationDelegate
 		// Initialize Spice platform so controls can create native views
 		Spice.Platform.Window = Window;
 
-		Task.Run(async () =>
+		// Run tests on main thread — UIKit views must be created/mutated on main thread
+		BeginInvokeOnMainThread(async () =>
 		{
 			Console.WriteLine("Spice.Tests: Starting test runner...");
 			try
