@@ -26,6 +26,10 @@ class TestEntryPoint : AndroidApplicationEntryPoint
 	{
 		var asm = typeof(TestEntryPoint).Assembly;
 		var path = Path.Combine(AppContext.BaseDirectory, asm.GetName().Name + ".dll");
+		// On Android, assemblies are embedded as native .so files; create a
+		// placeholder so TestAssemblyInfo's file-existence check passes.
+		if (!File.Exists(path))
+			File.Create(path).Dispose();
 		return [new TestAssemblyInfo(asm, path)];
 	}
 
