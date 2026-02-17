@@ -1,4 +1,5 @@
-﻿using Foundation;
+﻿using System.Diagnostics;
+using Foundation;
 using ObjCRuntime;
 
 namespace Spice;
@@ -6,9 +7,10 @@ namespace Spice;
 /// <summary>
 /// A <see cref="IUIWindowSceneDelegate"/> for Spice applications that sets up the <see cref="UIWindow"/>
 /// and root <see cref="Application"/> view using the modern scene-based lifecycle.
+/// Declared as <c>UISceneDelegateClassName</c> in Info.plist.
 /// </summary>
-/// <typeparam name="TApp">The <see cref="Application"/> subclass to display as the root view.</typeparam>
-public class SpiceSceneDelegate<TApp> : UIResponder, IUIWindowSceneDelegate where TApp : Application, new()
+[Register("SpiceSceneDelegate")]
+public class SpiceSceneDelegate : UIResponder, IUIWindowSceneDelegate
 {
 	/// <summary>
 	/// The main window for the scene.
@@ -26,8 +28,12 @@ public class SpiceSceneDelegate<TApp> : UIResponder, IUIWindowSceneDelegate wher
 		{
 			Window = Platform.Window = new UIWindow(windowScene);
 
+			var appDelegate = (SpiceAppDelegate)UIApplication.SharedApplication.Delegate;
 			var vc = new UIViewController();
-			vc.View!.AddSubview(new TApp());
+			var view = vc.View;
+			Debug.Assert(view != null, "UIViewController should have a view");
+			view.BackgroundColor = UIColor.SystemBackground;
+			view.AddSubview(appDelegate.CreateApplication());
 			Window.RootViewController = vc;
 			Window.MakeKeyAndVisible();
 		}
@@ -36,17 +42,13 @@ public class SpiceSceneDelegate<TApp> : UIResponder, IUIWindowSceneDelegate wher
 
 /// <summary>
 /// The <see cref="UIApplicationDelegate"/> to use in Spice applications.
-/// Configures the app to use <see cref="SpiceSceneDelegate{TApp}"/> for the modern scene-based lifecycle.
-/// Requires <c>UIApplicationSceneManifest</c> in Info.plist.
+/// Override <see cref="CreateApplication"/> to provide the root <see cref="Application"/> view.
+/// Requires <c>UIApplicationSceneManifest</c> in Info.plist with <c>UISceneDelegateClassName</c> set to <c>SpiceSceneDelegate</c>.
 /// </summary>
-/// <typeparam name="TApp">The <see cref="Application"/> subclass to display as the root view.</typeparam>
-public class SpiceAppDelegate<TApp> : UIApplicationDelegate where TApp : Application, new()
+public abstract class SpiceAppDelegate : UIApplicationDelegate
 {
-	/// <inheritdoc />
-	public override UISceneConfiguration GetConfiguration(UIApplication application, UISceneSession connectingSceneSession, UISceneConnectionOptions options)
-	{
-		var config = new UISceneConfiguration("Default Configuration", connectingSceneSession.Role);
-		config.DelegateType = typeof(SpiceSceneDelegate<TApp>);
-		return config;
-	}
+	/// <summary>
+	/// Creates the root <see cref="Application"/> view for the app.
+	/// </summary>
+	public abstract Application CreateApplication();
 }
