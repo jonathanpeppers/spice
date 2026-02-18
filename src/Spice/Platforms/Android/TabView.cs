@@ -146,6 +146,9 @@ public partial class TabView
 			
 			if (tab.Content != null)
 			{
+				// Remove from current parent if needed (content may be in Tab's Children)
+				var parent = ((Android.Views.View)tab.Content).Parent as Android.Views.ViewGroup;
+				parent?.RemoveView(tab.Content);
 				ContentFrame.AddView(tab.Content);
 			}
 		}
