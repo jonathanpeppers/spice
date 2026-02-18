@@ -122,8 +122,14 @@ public partial class View
 
 	WeakReference<UIViewController>? _presentedViewController;
 
-	private async partial Task PresentAsyncCore(View view)
+	private partial Task PresentAsyncCore(View view)
 	{
+		var rootViewController = Platform.Window?.RootViewController;
+		if (rootViewController == null)
+		{
+			return Task.CompletedTask;
+		}
+
 		var viewController = new UIViewController();
 		var nativeView = (UIView)view;
 		viewController.View!.AddSubview(nativeView);
@@ -137,20 +143,17 @@ public partial class View
 
 		_presentedViewController = new WeakReference<UIViewController>(viewController);
 
-		var rootViewController = Platform.Window?.RootViewController;
-		if (rootViewController != null)
-		{
-			await rootViewController.PresentViewControllerAsync(viewController, animated: true);
-		}
+		return rootViewController.PresentViewControllerAsync(viewController, animated: true);
 	}
 
-	private async partial Task DismissAsyncCore()
+	private partial Task DismissAsyncCore()
 	{
 		if (_presentedViewController != null && _presentedViewController.TryGetTarget(out var viewController))
 		{
-			await viewController.DismissViewControllerAsync(animated: true);
 			_presentedViewController = null;
+			return viewController.DismissViewControllerAsync(animated: true);
 		}
+		return Task.CompletedTask;
 	}
 
 	internal void UpdateAlign()
