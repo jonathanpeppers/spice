@@ -34,21 +34,6 @@ public partial class TabView
 	int _selectedTabIndex = 0;
 
 	/// <summary>
-	/// Creates a themed context suitable for Material components
-	/// </summary>
-	static Context GetThemedContext(Context context)
-	{
-		// BottomNavigationView requires Theme.AppCompat; wrap context with Material theme
-		var resources = context.Resources;
-		int themeId = resources?.GetIdentifier(
-			"Theme_MaterialComponents_Light_NoActionBar", "style", context.PackageName) ?? 0;
-		if (themeId != 0)
-			return new Android.Views.ContextThemeWrapper(context, themeId);
-
-		return context;
-	}
-
-	/// <summary>
 	/// Gets or creates the bottom navigation view
 	/// </summary>
 	BottomNavigationView BottomNavigationView
@@ -57,7 +42,7 @@ public partial class TabView
 		{
 			if (_bottomNavigationView == null)
 			{
-				_bottomNavigationView = new BottomNavigationView(GetThemedContext(Platform.Context))
+				_bottomNavigationView = new BottomNavigationView(Platform.Context)
 				{
 					LayoutParameters = new Android.Widget.LinearLayout.LayoutParams(
 						ViewGroup.LayoutParams.MatchParent,
