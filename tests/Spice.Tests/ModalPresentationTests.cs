@@ -93,10 +93,8 @@ public class ModalPresentationTests
 		var view = new TestView();
 		var modal = new SecondView();
 
-		var task = view.PresentAsync(modal);
-
-		await Task.WhenAny(task, Task.Delay(1000));
-		Assert.True(task.IsCompleted);
+		// Should complete without throwing
+		await view.PresentAsync(modal);
 	}
 
 	[Fact]
@@ -104,10 +102,8 @@ public class ModalPresentationTests
 	{
 		var view = new TestView();
 
-		var task = view.DismissAsync();
-
-		await Task.WhenAny(task, Task.Delay(1000));
-		Assert.True(task.IsCompleted);
+		// Should complete without throwing
+		await view.DismissAsync();
 	}
 
 	[Fact]

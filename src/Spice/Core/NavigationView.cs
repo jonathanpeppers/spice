@@ -6,11 +6,18 @@ namespace Spice;
 /// </summary>
 public partial class NavigationView : View
 {
+#if VANILLA
+	/// <summary>
+	/// Creates a NavigationView.
+	/// </summary>
+	public NavigationView() { }
+#endif
+
 	/// <summary>
 	/// Creates a NavigationView with the specified root view.
 	/// </summary>
 	/// <param name="root">The root view to display in the navigation stack.</param>
-	public NavigationView(View root)
+	public NavigationView(View root) : this()
 	{
 		ArgumentNullException.ThrowIfNull(root);
 		Push(root);
@@ -21,7 +28,7 @@ public partial class NavigationView : View
 	/// The root view is created lazily when needed.
 	/// </summary>
 	/// <param name="factory">A function that creates the root view.</param>
-	public NavigationView(Func<View> factory)
+	public NavigationView(Func<View> factory) : this()
 	{
 		ArgumentNullException.ThrowIfNull(factory);
 		Push(factory);
