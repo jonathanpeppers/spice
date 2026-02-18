@@ -22,6 +22,11 @@ public partial class NavigationView
 	{
 	}
 
+	/// <summary>
+	/// The underlying LinearLayoutCompat
+	/// </summary>
+	public new AndroidX.AppCompat.Widget.LinearLayoutCompat NativeView => (AndroidX.AppCompat.Widget.LinearLayoutCompat)_nativeView.Value;
+
 	AndroidX.AppCompat.Widget.Toolbar? _toolbar;
 	Android.Widget.FrameLayout? _contentFrame;
 	readonly Stack<View> _backStack = new();
@@ -41,7 +46,7 @@ public partial class NavigationView
 						ViewGroup.LayoutParams.MatchParent,
 						ViewGroup.LayoutParams.WrapContent)
 				};
-				((AndroidX.AppCompat.Widget.LinearLayoutCompat)NativeView).AddView(_toolbar);
+				NativeView.AddView(_toolbar);
 
 				// Setup back button
 				_toolbar.NavigationClick += (s, e) => Pop();
@@ -65,7 +70,7 @@ public partial class NavigationView
 						ViewGroup.LayoutParams.MatchParent,
 						ViewGroup.LayoutParams.MatchParent)
 				};
-				((AndroidX.AppCompat.Widget.LinearLayoutCompat)NativeView).AddView(_contentFrame);
+				NativeView.AddView(_contentFrame);
 			}
 			return _contentFrame;
 		}

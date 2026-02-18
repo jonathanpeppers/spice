@@ -24,6 +24,11 @@ public partial class TabView
 		Children.CollectionChanged += OnTabsChanged;
 	}
 
+	/// <summary>
+	/// The underlying LinearLayoutCompat
+	/// </summary>
+	public new AndroidX.AppCompat.Widget.LinearLayoutCompat NativeView => (AndroidX.AppCompat.Widget.LinearLayoutCompat)_nativeView.Value;
+
 	BottomNavigationView? _bottomNavigationView;
 	Android.Widget.FrameLayout? _contentFrame;
 	int _selectedTabIndex = 0;
@@ -46,7 +51,7 @@ public partial class TabView
 				
 				_bottomNavigationView.ItemSelected += OnNavigationItemSelected;
 				
-				((AndroidX.AppCompat.Widget.LinearLayoutCompat)NativeView).AddView(_bottomNavigationView);
+				NativeView.AddView(_bottomNavigationView);
 			}
 			return _bottomNavigationView;
 		}
@@ -69,7 +74,7 @@ public partial class TabView
 						1.0f) // weight to fill remaining space
 				};
 				// Insert before bottom navigation
-				((AndroidX.AppCompat.Widget.LinearLayoutCompat)NativeView).AddView(_contentFrame, 0);
+				NativeView.AddView(_contentFrame, 0);
 			}
 			return _contentFrame;
 		}
