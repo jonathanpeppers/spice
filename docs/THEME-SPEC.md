@@ -122,12 +122,17 @@ public partial class Application : View
 {
     /// <summary>
     /// The current theme. Setting this applies colors to the entire view tree
-    /// and subscribes to live updates.
+    /// and subscribes to live updates. Null means no theme — views keep their
+    /// individually-set colors (backward compatible default).
     /// </summary>
     [ObservableProperty]
     Theme? _theme;
 }
 ```
+
+> **Why nullable?** Theming is opt-in. Existing apps that never set `Theme` continue
+> working exactly as before — no colors change, no behavior changes. Apps opt in with
+> a single line: `Theme = Theme.Light;`
 
 ## How Theming Works
 
@@ -521,6 +526,12 @@ keeps its explicit color.
 - Optional `Application.AppearanceChanged` callback
 - Platform implementations to detect iOS `traitCollectionDidChange` and Android `uiMode`
 - Auto-switch between `Theme.Light` and `Theme.Dark` when system appearance changes
+
+### Phase 5: Project Template Examples
+- Update `spice` template to use `Theme = Theme.Light` instead of hardcoded `BackgroundColor = Colors.CornflowerBlue`
+- Add a dark mode `Switch` toggle to the template so new projects demonstrate theming out of the box
+- Update `spice-blazor` template if applicable (BlazorWebView theming may differ)
+- Update `Spice.Scenarios` sample with a theming scenario
 
 ## Summary
 
