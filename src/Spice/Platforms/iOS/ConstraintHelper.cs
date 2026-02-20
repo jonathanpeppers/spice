@@ -30,7 +30,7 @@ static class ConstraintHelper
 	/// <summary>
 	/// Pins a child view to its parent on all four edges with uniform inset.
 	/// </summary>
-	public static NSLayoutConstraint[] PinEdges(UIView child, UIView parent, nfloat inset = 0)
+	public static NSLayoutConstraint[] PinEdges(UIView child, UIView parent, nfloat inset = default)
 	{
 		return PinEdges(child, parent, inset, inset, inset, inset);
 	}
