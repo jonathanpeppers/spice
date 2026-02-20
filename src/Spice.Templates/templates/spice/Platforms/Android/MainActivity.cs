@@ -4,7 +4,7 @@ using Android.OS;
 namespace Hello;
 
 [Activity(
-	Theme = "@style/Theme.MaterialComponents.Light.NoActionBar",
+	Theme = "@style/Theme.Material3.Light.NoActionBar",
 	MainLauncher = true)]
 public class MainActivity : SpiceActivity
 {
