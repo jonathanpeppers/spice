@@ -107,19 +107,41 @@ static class ConstraintHelper
 				}
 				break;
 			case LayoutAlignment.Center:
-				constraints.Add(child.CenterXAnchor.ConstraintEqualTo(parent.CenterXAnchor, (marginLeft - marginRight) / 2));
 				if (widthRequest >= 0)
+				{
+					constraints.Add(child.CenterXAnchor.ConstraintEqualTo(parent.CenterXAnchor, (marginLeft - marginRight) / 2));
 					constraints.Add(child.WidthAnchor.ConstraintEqualTo((nfloat)widthRequest));
+				}
+				else
+				{
+					// Without an explicit width, anchor to both leading and trailing to avoid ambiguous width.
+					constraints.Add(child.LeadingAnchor.ConstraintEqualTo(parent.LeadingAnchor, marginLeft));
+					constraints.Add(parent.TrailingAnchor.ConstraintEqualTo(child.TrailingAnchor, marginRight));
+				}
 				break;
 			case LayoutAlignment.Start:
 				constraints.Add(child.LeadingAnchor.ConstraintEqualTo(parent.LeadingAnchor, marginLeft));
 				if (widthRequest >= 0)
+				{
 					constraints.Add(child.WidthAnchor.ConstraintEqualTo((nfloat)widthRequest));
+				}
+				else
+				{
+					// Derive width from parent when no explicit width is requested.
+					constraints.Add(parent.TrailingAnchor.ConstraintEqualTo(child.TrailingAnchor, marginRight));
+				}
 				break;
 			case LayoutAlignment.End:
 				constraints.Add(parent.TrailingAnchor.ConstraintEqualTo(child.TrailingAnchor, marginRight));
 				if (widthRequest >= 0)
+				{
 					constraints.Add(child.WidthAnchor.ConstraintEqualTo((nfloat)widthRequest));
+				}
+				else
+				{
+					// Derive width from parent when no explicit width is requested.
+					constraints.Add(child.LeadingAnchor.ConstraintEqualTo(parent.LeadingAnchor, marginLeft));
+				}
 				break;
 		}
 
@@ -139,19 +161,41 @@ static class ConstraintHelper
 				}
 				break;
 			case LayoutAlignment.Center:
-				constraints.Add(child.CenterYAnchor.ConstraintEqualTo(parent.CenterYAnchor, (marginTop - marginBottom) / 2));
 				if (heightRequest >= 0)
+				{
+					constraints.Add(child.CenterYAnchor.ConstraintEqualTo(parent.CenterYAnchor, (marginTop - marginBottom) / 2));
 					constraints.Add(child.HeightAnchor.ConstraintEqualTo((nfloat)heightRequest));
+				}
+				else
+				{
+					// Without an explicit height, anchor to both top and bottom to avoid ambiguous height.
+					constraints.Add(child.TopAnchor.ConstraintEqualTo(parent.TopAnchor, marginTop));
+					constraints.Add(parent.BottomAnchor.ConstraintEqualTo(child.BottomAnchor, marginBottom));
+				}
 				break;
 			case LayoutAlignment.Start:
 				constraints.Add(child.TopAnchor.ConstraintEqualTo(parent.TopAnchor, marginTop));
 				if (heightRequest >= 0)
+				{
 					constraints.Add(child.HeightAnchor.ConstraintEqualTo((nfloat)heightRequest));
+				}
+				else
+				{
+					// Derive height from parent when no explicit height is requested.
+					constraints.Add(parent.BottomAnchor.ConstraintEqualTo(child.BottomAnchor, marginBottom));
+				}
 				break;
 			case LayoutAlignment.End:
 				constraints.Add(parent.BottomAnchor.ConstraintEqualTo(child.BottomAnchor, marginBottom));
 				if (heightRequest >= 0)
+				{
 					constraints.Add(child.HeightAnchor.ConstraintEqualTo((nfloat)heightRequest));
+				}
+				else
+				{
+					// Derive height from parent when no explicit height is requested.
+					constraints.Add(child.TopAnchor.ConstraintEqualTo(parent.TopAnchor, marginTop));
+				}
 				break;
 		}
 
