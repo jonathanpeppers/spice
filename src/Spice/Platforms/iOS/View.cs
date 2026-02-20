@@ -130,6 +130,12 @@ public partial class View
 			return Task.CompletedTask;
 		}
 
+		// Only present if this view is in the view hierarchy
+		if (NativeView.Window == null)
+		{
+			return Task.CompletedTask;
+		}
+
 		var viewController = new UIViewController();
 		var nativeView = (UIView)view;
 		viewController.View!.AddSubview(nativeView);
