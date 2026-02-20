@@ -24,7 +24,7 @@ public class TestInstrumentation : Instrumentation
 		// Wrap with Material theme so Material components (BottomNavigationView) work.
 		var appContext = Android.App.Application.Context;
 		Spice.Platform.Context = new Android.Views.ContextThemeWrapper(
-			appContext, Resource.Style.Theme_MaterialComponents_Light_NoActionBar);
+			appContext, Resource.Style.Theme_Material3_Light_NoActionBar);
 
 		// Prepare a Looper on this thread so Android views (WebView,
 		// SwipeRefreshLayout, etc.) that require a Handler can be created.
