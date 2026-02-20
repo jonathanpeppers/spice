@@ -7,6 +7,7 @@ class SwitchScenario : StackLayout
 {
 	public SwitchScenario()
 	{
+		Title = "Switch";
 		var label = new Label
 		{
 			Text = "Switch is OFF",

@@ -7,6 +7,7 @@ class ScrollViewScenario : ScrollView
 {
 	public ScrollViewScenario()
 	{
+		Title = "Scroll View";
 		var stackLayout = new StackLayout { Spacing = 10 };
 
 		// Add a title

@@ -4,6 +4,7 @@ class ActivityIndicatorScenario : StackLayout
 {
 	public ActivityIndicatorScenario()
 	{
+		Title = "Activity Indicator";
 		Spacing = 20;
 
 		var activityIndicator = new ActivityIndicator

@@ -20,8 +20,11 @@ public class TestInstrumentation : Instrumentation
 	{
 		base.OnStart();
 
-		// Initialize Spice platform so controls can create native views
-		Spice.Platform.Context = Android.App.Application.Context;
+		// Initialize Spice platform so controls can create native views.
+		// Wrap with Material theme so Material components (BottomNavigationView) work.
+		var appContext = Android.App.Application.Context;
+		Spice.Platform.Context = new Android.Views.ContextThemeWrapper(
+			appContext, Resource.Style.Theme_MaterialComponents_Light_NoActionBar);
 
 		// Prepare a Looper on this thread so Android views (WebView,
 		// SwipeRefreshLayout, etc.) that require a Handler can be created.

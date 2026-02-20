@@ -7,6 +7,7 @@ class GhostButtonScenario : StackLayout
 {
 	public GhostButtonScenario()
 	{
+		Title = "Ghost Button";
 		int count = 0;
 
 		var label = new Label

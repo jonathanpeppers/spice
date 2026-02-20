@@ -6,126 +6,38 @@ public class App : Application
 	{
 		BackgroundColor = Colors.CornflowerBlue;
 
-		Main = new StackLayout
-		{
-			Children =
-			{
-				new Button
-				{
-					Text = "Hello World",
-					Clicked = _ => Main = new HelloWorldScenario(),
-				},
-				new Button
-				{
-					Text = "Ghost Button",
-					Clicked = _ => Main = new GhostButtonScenario(),
-				},
-				new Button
-				{
-					Text = "ImageButton",
-					Clicked = _ => Main = new ImageButtonScenario(),
-				},
-				new Button
-				{
-					Text = "WebView",
-					Clicked = _ => Main = new WebViewScenario(),
-				},
-				new Button
-				{
-					Text = "Entry",
-					Clicked = _ => Main = new EntryScenario(),
-				},
-				new Button
-				{
-					Text = "Editor",
-					Clicked = _ => Main = new EditorScenario(),
-				},
-				new Button
-				{
-					Text = "DatePicker",
-					Clicked = _ => Main = new DatePickerScenario(),
-				},
-				new Button
-				{
-					Text = "TimePicker",
-					Clicked = _ => Main = new TimePickerScenario(),
-				},
-				new Button
-				{
-					Text = "ActivityIndicator",
-					Clicked = _ => Main = new ActivityIndicatorScenario(),
-				},
-				new Button
-				{
-					Text = "BoxView",
-					Clicked = _ => Main = new BoxViewScenario(),
-				},
-				new Button
-				{
-					Text = "Switch",
-					Clicked = _ => Main = new SwitchScenario(),
-				},
-				new Button
-				{
-					Text = "ProgressBar",
-					Clicked = _ => Main = new ProgressBarScenario(),
-				},
-				new Button
-				{
-					Text = "ScrollView",
-					Clicked = _ => Main = new ScrollViewScenario(),
-				},
-				new Button
-				{
-					Text = "RefreshView",
-					Clicked = _ => Main = new RefreshViewScenario(),
-				},
-				new Button
-				{
-					Text = "Picker",
-					Clicked = _ => Main = new PickerScenario(),
-        },
-				new Button
-				{
-					Text = "CheckBox",
-					Clicked = _ => Main = new CheckBoxScenario(),
-        },
-				new Button
-				{
-					Text = "ContentView",
-					Clicked = _ => Main = new ContentViewScenario(),
-				},
-				new Button
-				{
-					Text = "Slider",
-					Clicked = _ => Main = new SliderScenario(),
-				},
-				new Button
-				{
-					Text = "Border",
-					Clicked = _ => Main = new BorderScenario(),
-				},
-				new Button
-				{
-					Text = "Margin",
-					Clicked = _ => Main = new MarginScenario(),
-				},
-				new Button
-				{
-					Text = "CollectionView",
-					Clicked = _ => Main = new CollectionViewScenario(),
-				},
-				new Button
-				{
-					Text = "SearchBar",
-					Clicked = _ => Main = new SearchBarScenario(),
-        },
-				new Button
-				{
-					Text = "SwipeView",
-					Clicked = _ => Main = new SwipeViewScenario(),
-				},
-			}
-		};
+		Main = new NavigationView(new ScenarioList());
+	}
+}
+
+class ScenarioList : StackLayout
+{
+	public ScenarioList()
+	{
+		Title = "Scenarios";
+
+		Add(new Button { Text = "Hello World", Clicked = _ => Navigation!.Push<HelloWorldScenario>() });
+		Add(new Button { Text = "Ghost Button", Clicked = _ => Navigation!.Push<GhostButtonScenario>() });
+		Add(new Button { Text = "ImageButton", Clicked = _ => Navigation!.Push<ImageButtonScenario>() });
+		Add(new Button { Text = "WebView", Clicked = _ => Navigation!.Push<WebViewScenario>() });
+		Add(new Button { Text = "Entry", Clicked = _ => Navigation!.Push<EntryScenario>() });
+		Add(new Button { Text = "Editor", Clicked = _ => Navigation!.Push<EditorScenario>() });
+		Add(new Button { Text = "DatePicker", Clicked = _ => Navigation!.Push<DatePickerScenario>() });
+		Add(new Button { Text = "TimePicker", Clicked = _ => Navigation!.Push<TimePickerScenario>() });
+		Add(new Button { Text = "ActivityIndicator", Clicked = _ => Navigation!.Push<ActivityIndicatorScenario>() });
+		Add(new Button { Text = "BoxView", Clicked = _ => Navigation!.Push<BoxViewScenario>() });
+		Add(new Button { Text = "Switch", Clicked = _ => Navigation!.Push<SwitchScenario>() });
+		Add(new Button { Text = "ProgressBar", Clicked = _ => Navigation!.Push<ProgressBarScenario>() });
+		Add(new Button { Text = "ScrollView", Clicked = _ => Navigation!.Push<ScrollViewScenario>() });
+		Add(new Button { Text = "RefreshView", Clicked = _ => Navigation!.Push<RefreshViewScenario>() });
+		Add(new Button { Text = "Picker", Clicked = _ => Navigation!.Push<PickerScenario>() });
+		Add(new Button { Text = "CheckBox", Clicked = _ => Navigation!.Push<CheckBoxScenario>() });
+		Add(new Button { Text = "ContentView", Clicked = _ => Navigation!.Push<ContentViewScenario>() });
+		Add(new Button { Text = "Slider", Clicked = _ => Navigation!.Push<SliderScenario>() });
+		Add(new Button { Text = "Border", Clicked = _ => Navigation!.Push<BorderScenario>() });
+		Add(new Button { Text = "Margin", Clicked = _ => Navigation!.Push<MarginScenario>() });
+		Add(new Button { Text = "CollectionView", Clicked = _ => Navigation!.Push<CollectionViewScenario>() });
+		Add(new Button { Text = "SearchBar", Clicked = _ => Navigation!.Push<SearchBarScenario>() });
+		Add(new Button { Text = "SwipeView", Clicked = _ => Navigation!.Push<SwipeViewScenario>() });
 	}
 }

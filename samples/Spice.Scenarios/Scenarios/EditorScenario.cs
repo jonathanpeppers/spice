@@ -4,6 +4,7 @@ class EditorScenario : StackLayout
 {
 	public EditorScenario()
 	{
+		Title = "Editor";
 		Spacing = 10;
 
 		Add(new Label { Text = "Editor Control" });

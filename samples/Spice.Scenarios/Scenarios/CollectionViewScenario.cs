@@ -9,6 +9,7 @@ class CollectionViewScenario : StackLayout
 {
 	public CollectionViewScenario()
 	{
+		Title = "Collection View";
 		Spacing = 10;
 
 		// Title

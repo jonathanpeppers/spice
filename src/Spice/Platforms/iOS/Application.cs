@@ -1,4 +1,4 @@
-﻿namespace Spice;
+namespace Spice;
 
 public partial class Application
 {
@@ -11,7 +11,7 @@ public partial class Application
 	/// <param name="frame">Pass the underlying view a frame</param>
 	public Application(CGRect frame) : base(_ => new UIView(frame) { AutoresizingMask = UIViewAutoresizing.All }) { }
 
-	partial void OnMainChanging(View? value)	
+	partial void OnMainChanging(View? value)
 	{
 		if (_main != null)
 		{

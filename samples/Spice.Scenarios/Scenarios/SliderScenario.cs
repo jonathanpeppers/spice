@@ -4,6 +4,7 @@ class SliderScenario : StackLayout
 {
 	public SliderScenario()
 	{
+		Title = "Slider";
 		Spacing = 10;
 
 		var valueLabel = new Label { Text = "Value: 50" };
