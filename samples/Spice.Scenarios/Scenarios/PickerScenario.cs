@@ -6,6 +6,7 @@ class PickerScenario : StackLayout
 {
 	public PickerScenario()
 	{
+		Title = "Picker";
 		Spacing = 10;
 		BackgroundColor = Colors.White;
 

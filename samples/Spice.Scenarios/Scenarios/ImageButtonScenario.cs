@@ -7,6 +7,7 @@ class ImageButtonScenario : StackLayout
 {
 	public ImageButtonScenario()
 	{
+		Title = "Image Button";
 		int count = 0;
 
 		var label = new Label

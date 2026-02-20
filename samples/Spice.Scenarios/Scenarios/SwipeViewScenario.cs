@@ -7,6 +7,7 @@ public class SwipeViewScenario : ContentView
 {
 	public SwipeViewScenario()
 	{
+		Title = "Swipe View";
 		Content = new ScrollView
 		{
 			new StackLayout

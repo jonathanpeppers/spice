@@ -7,6 +7,7 @@ class CheckBoxScenario : StackLayout
 {
 	public CheckBoxScenario()
 	{
+		Title = "Check Box";
 		var label = new Label
 		{
 			Text = "No items selected",

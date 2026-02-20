@@ -7,6 +7,7 @@ class RadioButtonScenario : StackLayout
 {
 	public RadioButtonScenario()
 	{
+		Title = "Radio Button";
 		var label = new Label
 		{
 			Text = "No option selected",

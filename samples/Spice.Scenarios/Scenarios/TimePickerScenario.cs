@@ -4,6 +4,7 @@ class TimePickerScenario : StackLayout
 {
 	public TimePickerScenario()
 	{
+		Title = "Time Picker";
 		Spacing = 10;
 
 		Add(new Label

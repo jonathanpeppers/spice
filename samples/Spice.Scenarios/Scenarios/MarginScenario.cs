@@ -4,6 +4,7 @@ class MarginScenario : StackLayout
 {
 	public MarginScenario()
 	{
+		Title = "Margin";
 		Spacing = 20;
 
 		Add(new Label { Text = "Margin Demo", TextColor = Colors.White });

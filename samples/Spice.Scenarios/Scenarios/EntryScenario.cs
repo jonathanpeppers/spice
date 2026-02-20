@@ -4,6 +4,7 @@ class EntryScenario : StackLayout
 {
 	public EntryScenario()
 	{
+		Title = "Entry";
 		Spacing = 5;
 
 		Add(new Entry { Text = "jonathan.peppers@gmail.com" });

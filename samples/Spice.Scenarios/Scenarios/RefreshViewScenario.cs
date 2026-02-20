@@ -9,6 +9,7 @@ class RefreshViewScenario : StackLayout
 
 	public RefreshViewScenario()
 	{
+		Title = "Refresh View";
 		Spacing = 10;
 
 		var label = new Label

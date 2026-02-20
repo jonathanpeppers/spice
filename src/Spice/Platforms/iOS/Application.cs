@@ -1,4 +1,4 @@
-﻿namespace Spice;
+namespace Spice;
 
 public partial class Application
 {
@@ -13,7 +13,7 @@ public partial class Application
 
 	NSLayoutConstraint[]? _mainConstraints;
 
-	partial void OnMainChanging(View? value)	
+	partial void OnMainChanging(View? value)
 	{
 		if (_main != null)
 		{

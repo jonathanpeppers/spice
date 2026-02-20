@@ -7,6 +7,7 @@ class WebViewScenario : WebView
 {
 	public WebViewScenario()
 	{
+		Title = "Web View";
 		Source = "https://www.google.com";
 	}
 }

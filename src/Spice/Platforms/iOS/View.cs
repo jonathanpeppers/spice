@@ -120,6 +120,47 @@ public partial class View
 
 	private partial double GetHeight() => (double)NativeView.Frame.Height;
 
+	WeakReference<UIViewController>? _presentedViewController;
+
+	private partial Task PresentAsyncCore(View view)
+	{
+		var rootViewController = Platform.Window?.RootViewController;
+		if (rootViewController == null)
+		{
+			return Task.CompletedTask;
+		}
+
+		// Only present if this view is in the view hierarchy
+		if (NativeView.Window == null)
+		{
+			return Task.CompletedTask;
+		}
+
+		var viewController = new UIViewController();
+		var nativeView = (UIView)view;
+		viewController.View!.AddSubview(nativeView);
+		ConstraintHelper.PinEdges(nativeView, viewController.View!);
+
+		if (!string.IsNullOrEmpty(view.Title))
+		{
+			viewController.Title = view.Title;
+		}
+
+		_presentedViewController = new WeakReference<UIViewController>(viewController);
+
+		return rootViewController.PresentViewControllerAsync(viewController, animated: true);
+	}
+
+	private partial Task DismissAsyncCore()
+	{
+		if (_presentedViewController != null && _presentedViewController.TryGetTarget(out var viewController))
+		{
+			_presentedViewController = null;
+			return viewController.DismissViewControllerAsync(animated: true);
+		}
+		return Task.CompletedTask;
+	}
+
 	NSLayoutConstraint[]? _alignConstraints;
 
 	internal void ApplyConstraints()
