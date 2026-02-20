@@ -336,24 +336,67 @@ public class App : Application
 
 Flipping the `Switch` swaps the entire theme — every view in the tree updates immediately.
 
-### Responding to System Dark Mode
+### Automatic System Appearance Detection
 
-Platform-specific code can detect the system appearance and set the theme accordingly:
+Spice provides a built-in cross-platform API to detect and follow the OS dark/light mode.
+Set `Application.UseSystemTheme = true` and Spice handles the rest:
 
 ```csharp
-// iOS — in SpiceSceneDelegate or app startup
-if (UITraitCollection.CurrentTraitCollection.UserInterfaceStyle == UIUserInterfaceStyle.Dark)
-    app.Theme = Theme.Dark;
-else
-    app.Theme = Theme.Light;
+public class App : Application
+{
+    public App()
+    {
+        UseSystemTheme = true; // auto-selects Theme.Light or Theme.Dark based on OS
 
-// Android — in SpiceActivity
-var nightMode = Resources?.Configuration?.UiMode & UiMode.NightMask;
-app.Theme = nightMode == UiMode.NightYes ? Theme.Dark : Theme.Light;
+        Main = new StackLayout
+        {
+            new Label { Text = "Hello, Spice 🌶" },
+        };
+    }
+}
 ```
 
-A future enhancement could add `Application.AppearanceChanged` callback to make this
-cross-platform, but the platform hooks above work today with zero new API.
+When `UseSystemTheme` is enabled:
+- On startup, Spice queries the OS appearance and sets `Theme` to `Theme.Light` or `Theme.Dark`
+- When the OS appearance changes at runtime, `Theme` is swapped automatically
+- Setting `Theme` explicitly disables `UseSystemTheme` (explicit wins)
+
+```csharp
+public partial class Application : View
+{
+    /// <summary>
+    /// When true, automatically sets Theme to Theme.Light or Theme.Dark
+    /// based on the OS appearance, and updates live when the system
+    /// appearance changes.
+    /// </summary>
+    [ObservableProperty]
+    bool _useSystemTheme;
+
+    partial void OnUseSystemThemeChanged(bool value)
+    {
+        if (value)
+            Theme = PlatformAppearance.IsDarkMode ? Theme.Dark : Theme.Light;
+    }
+}
+```
+
+Platform implementations behind `PlatformAppearance`:
+
+```csharp
+// iOS — UITraitCollection
+PlatformAppearance.IsDarkMode =
+    UITraitCollection.CurrentTraitCollection.UserInterfaceStyle == UIUserInterfaceStyle.Dark;
+
+// Android — UiMode
+var nightMode = Resources?.Configuration?.UiMode & UiMode.NightMask;
+PlatformAppearance.IsDarkMode = nightMode == UiMode.NightYes;
+```
+
+For fully custom themes that still track the OS mode, use the `AppearanceChanged` callback:
+
+```csharp
+AppearanceChanged = isDark => Theme = isDark ? myDarkTheme : myLightTheme;
+```
 
 ## Custom Themes
 
@@ -523,13 +566,14 @@ keeps its explicit color.
 - Cover NavigationView push, TabView tab switching, CollectionView cell creation
 
 ### Phase 4: System Appearance Detection
-- Optional `Application.AppearanceChanged` callback
-- Platform implementations to detect iOS `traitCollectionDidChange` and Android `uiMode`
-- Auto-switch between `Theme.Light` and `Theme.Dark` when system appearance changes
+- Add `Application.UseSystemTheme` property (opt-in, sets `Theme.Light`/`Theme.Dark` automatically)
+- Add `PlatformAppearance` static class with `IsDarkMode` and change notification
+- Platform implementations: iOS `traitCollectionDidChange`, Android `onConfigurationChanged`
+- Add `Application.AppearanceChanged` callback for custom theme switching
+- Setting `Theme` explicitly disables `UseSystemTheme`
 
 ### Phase 5: Project Template Examples
-- Update `spice` template to use `Theme = Theme.Light` instead of hardcoded `BackgroundColor = Colors.CornflowerBlue`
-- Add a dark mode `Switch` toggle to the template so new projects demonstrate theming out of the box
+- Update `spice` template to use `UseSystemTheme = true` instead of hardcoded `BackgroundColor = Colors.CornflowerBlue`
 - Update `spice-blazor` template if applicable (BlazorWebView theming may differ)
 - Update `Spice.Scenarios` sample with a theming scenario
 
@@ -539,6 +583,6 @@ keeps its explicit color.
 - **`Application.Theme`** sets the active theme and walks the view tree
 - **Live updates** — change a theme property or swap the entire theme, views update immediately
 - **Explicit overrides win** — set `TextColor = Colors.Red` and the theme won't touch it
-- **Dark/Light mode** — swap `Theme.Light` ↔ `Theme.Dark` with one assignment
+- **Dark/Light mode** — `UseSystemTheme = true` auto-detects OS appearance; or swap manually with one assignment
 - **Custom themes** — subclass `Theme` or just construct one with your own colors
 - **NativeAOT safe** — zero reflection, fully trimmable, compile-time type safety
