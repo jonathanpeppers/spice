@@ -51,7 +51,9 @@ public partial class RadioButton
 			return;
 
 		_updatingChecked = true;
-		NativeView.Checked = value;
+		// Guard against disposed Java peer (GC can collect during group operations)
+		if (NativeView.Handle != IntPtr.Zero)
+			NativeView.Checked = value;
 		_updatingChecked = false;
 	}
 
