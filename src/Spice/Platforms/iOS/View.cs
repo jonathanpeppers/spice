@@ -60,7 +60,7 @@ public partial class View
 	protected virtual void AddSubview(View view)
 	{
 		NativeView.AddSubview(view);
-		view.UpdateAlign();
+		view.ApplyConstraints();
 	}
 
 	void OnChildrenChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -84,9 +84,9 @@ public partial class View
 
 	partial void OnBackgroundColorChanged(Color? value) => NativeView.BackgroundColor = value.ToUIColor();
 
-	partial void OnVerticalOptionsChanged(LayoutOptions value) => UpdateAlign();
+	partial void OnVerticalOptionsChanged(LayoutOptions value) => ApplyConstraints();
 
-	partial void OnHorizontalOptionsChanged(LayoutOptions value) => UpdateAlign();
+	partial void OnHorizontalOptionsChanged(LayoutOptions value) => ApplyConstraints();
 
 	partial void OnIsVisibleChanged(bool value) => NativeView.Hidden = !value;
 
@@ -96,14 +96,14 @@ public partial class View
 
 	partial void OnAutomationIdChanged(string? value) => NativeView.AccessibilityIdentifier = value;
 
-	partial void OnMarginChanged(Thickness value) => UpdateAlign();
+	partial void OnMarginChanged(Thickness value) => ApplyConstraints();
 
 	partial void OnWidthRequestChanged(double value)
 	{
 		// Trigger layout update if the view is already in the view hierarchy
 		if (NativeView.Superview != null)
 		{
-			UpdateAlign();
+			ApplyConstraints();
 		}
 	}
 
@@ -112,7 +112,7 @@ public partial class View
 		// Trigger layout update if the view is already in the view hierarchy
 		if (NativeView.Superview != null)
 		{
-			UpdateAlign();
+			ApplyConstraints();
 		}
 	}
 
@@ -120,87 +120,28 @@ public partial class View
 
 	private partial double GetHeight() => (double)NativeView.Frame.Height;
 
-	internal void UpdateAlign()
+	NSLayoutConstraint[]? _alignConstraints;
+
+	internal void ApplyConstraints()
 	{
 		var view = NativeView;
 		var superview = view.Superview;
 		if (superview == null || superview is UIStackView)
 			return;
 
-		var size = default(CGSize?);
-		var superframe = superview.Frame;
-		var frame = new CGRect();
+		// Remove previous constraints
+		ConstraintHelper.RemoveConstraints(_alignConstraints);
 
-		// Apply margins
-		var marginLeft = (nfloat)_margin.Left;
-		var marginTop = (nfloat)_margin.Top;
-		var marginRight = (nfloat)_margin.Right;
-		var marginBottom = (nfloat)_margin.Bottom;
-		var availableWidth = superframe.Width - marginLeft - marginRight;
-		var availableHeight = superframe.Height - marginTop - marginBottom;
-
-		switch (_horizontalOptions.Alignment)
-		{
-			case LayoutAlignment.Center:
-				frame.Width = getSize().Width;
-				frame.X = marginLeft + (availableWidth - frame.Width) / 2;
-				break;
-			case LayoutAlignment.Start:
-				frame.Width = getSize().Width;
-				frame.X = marginLeft;
-				break;
-			case LayoutAlignment.End:
-				frame.Width = getSize().Width;
-				frame.X = superframe.Width - marginRight - frame.Width;
-				break;
-			case LayoutAlignment.Fill:
-				frame.Width = WidthRequest >= 0 ? (nfloat)WidthRequest : availableWidth;
-				frame.X = marginLeft;
-				break;
-			default:
-				throw new NotSupportedException($"{nameof(HorizontalOptions)} value '{_horizontalOptions.Alignment}' not supported!");
-		}
-
-		switch (_verticalOptions.Alignment)
-		{
-			case LayoutAlignment.Center:
-				frame.Height = getSize().Height;
-				frame.Y = marginTop + (availableHeight - frame.Height) / 2;
-				break;
-			case LayoutAlignment.Start:
-				frame.Height = getSize().Height;
-				frame.Y = marginTop;
-				break;
-			case LayoutAlignment.End:
-				frame.Height = getSize().Height;
-				frame.Y = superframe.Height - marginBottom - frame.Height;
-				break;
-			case LayoutAlignment.Fill:
-				frame.Height = HeightRequest >= 0 ? (nfloat)HeightRequest : availableHeight;
-				frame.Y = marginTop;
-				break;
-			default:
-				throw new NotSupportedException($"{nameof(VerticalOptions)} value '{_verticalOptions.Alignment}' not supported!");
-		}
-
-		// Set the actual frame
-		view.Frame = frame;
-
-		CGSize getSize()
-		{
-			if (size != null)
-				return size.Value;
-
-			view!.SizeToFit();
-			var result = view.Frame.Size;
-			
-			// If WidthRequest or HeightRequest are set, use them instead
-			if (WidthRequest >= 0)
-				result.Width = (nfloat)WidthRequest;
-			if (HeightRequest >= 0)
-				result.Height = (nfloat)HeightRequest;
-			
-			return (size = result).Value;
-		}
+		_alignConstraints = ConstraintHelper.ApplyAlignment(
+			view,
+			superview,
+			_horizontalOptions.Alignment,
+			_verticalOptions.Alignment,
+			_margin,
+			_widthRequest,
+			_heightRequest);
 	}
+
+	// Keep for backward compatibility with callers
+	internal void UpdateAlign() => ApplyConstraints();
 }

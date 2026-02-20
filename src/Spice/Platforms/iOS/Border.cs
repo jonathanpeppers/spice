@@ -12,27 +12,33 @@ public partial class Border
 	/// Represents a border around a single child view. Set Content to a View, and customize with Stroke, StrokeThickness, CornerRadius, and Padding.
 	/// iOS -> UIView with CALayer border
 	/// </summary>
-	public Border() : base(v => new SpiceBorderView((Border)v) { AutoresizingMask = UIViewAutoresizing.None }) { }
+	public Border() : base(v => new UIView { AutoresizingMask = UIViewAutoresizing.None }) { }
 
 	/// <inheritdoc />
 	/// <param name="frame">Pass the underlying view a frame</param>
-	public Border(CGRect frame) : base(v => new SpiceBorderView((Border)v, frame) { AutoresizingMask = UIViewAutoresizing.None }) { }
+	public Border(CGRect frame) : base(v => new UIView(frame) { AutoresizingMask = UIViewAutoresizing.None }) { }
 
 	/// <inheritdoc />
 	/// <param name="creator">Subclasses can pass in a Func to create a UIView</param>
 	protected Border(Func<View, UIView> creator) : base(creator) { }
 
+	NSLayoutConstraint[]? _contentConstraints;
+
 	partial void OnContentChanged(View? oldValue, View? newValue)
 	{
 		if (oldValue != null)
 		{
+			ConstraintHelper.RemoveConstraints(_contentConstraints);
+			_contentConstraints = null;
 			((UIView)oldValue).RemoveFromSuperview();
 		}
 
 		if (newValue != null)
 		{
-			NativeView.AddSubview(newValue);
-			UpdateContentLayout();
+			UIView contentView = newValue;
+			NativeView.AddSubview(contentView);
+			var padding = (nfloat)Padding;
+			_contentConstraints = ConstraintHelper.PinEdges(contentView, NativeView, padding);
 		}
 	}
 
@@ -63,24 +69,11 @@ public partial class Border
 
 	partial void OnPaddingChanged(double value)
 	{
-		UpdateContentLayout();
-	}
-
-	void UpdateContentLayout()
-	{
-		if (Content == null)
-			return;
-
-		var padding = (nfloat)Padding;
-		var contentView = (UIView)Content;
-		var bounds = NativeView.Bounds;
-
-		contentView.Frame = new CGRect(
-			padding,
-			padding,
-			bounds.Width - (padding * 2),
-			bounds.Height - (padding * 2)
-		);
+		if (_contentConstraints != null)
+		{
+			var padding = (nfloat)value;
+			ConstraintHelper.UpdateInsets(_contentConstraints, padding);
+		}
 	}
 
 	/// <summary>
@@ -92,20 +85,5 @@ public partial class Border
 	{
 		// Do nothing - Border doesn't support Children collection
 		// Only Content property should be used to add a view
-	}
-
-	class SpiceBorderView : UIView
-	{
-		readonly Border _parent;
-
-		public SpiceBorderView(Border parent) => _parent = parent;
-
-		public SpiceBorderView(Border parent, CGRect frame) : base(frame) => _parent = parent;
-
-		public override void LayoutSubviews()
-		{
-			base.LayoutSubviews();
-			_parent.UpdateContentLayout();
-		}
 	}
 }

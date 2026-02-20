@@ -211,14 +211,20 @@ public partial class SwipeView
 		// Add new content
 		if (newContent != null)
 		{
-			_contentView = new UIView
-			{
-				Frame = new CGRect(0, 0, NativeView.Frame.Width, NativeView.Frame.Height),
-				AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
-			};
+			_contentView = new UIView();
+			_contentView.TranslatesAutoresizingMaskIntoConstraints = false;
 			_contentView.AddSubview(newContent);
 			newContent.UpdateAlign();
 			NativeView.AddSubview(_contentView);
+
+			// Pin content view to fill parent
+			NSLayoutConstraint.ActivateConstraints(new[]
+			{
+				_contentView.LeadingAnchor.ConstraintEqualTo(NativeView.LeadingAnchor),
+				_contentView.TrailingAnchor.ConstraintEqualTo(NativeView.TrailingAnchor),
+				_contentView.TopAnchor.ConstraintEqualTo(NativeView.TopAnchor),
+				_contentView.BottomAnchor.ConstraintEqualTo(NativeView.BottomAnchor),
+			});
 		}
 	}
 

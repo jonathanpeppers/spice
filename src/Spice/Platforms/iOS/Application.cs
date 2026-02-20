@@ -5,16 +5,20 @@ public partial class Application
 	/// <summary>
 	/// The root "view" of a Spice application. Set Main to a single view.
 	/// </summary>
-	public Application() : base(_ => new UIView(Platform.Window!.Frame) { AutoresizingMask = UIViewAutoresizing.All }) { }
+	public Application() : base(_ => new UIView(Platform.Window!.Frame) { AutoresizingMask = UIViewAutoresizing.None }) { }
 
 	/// <inheritdoc />
 	/// <param name="frame">Pass the underlying view a frame</param>
-	public Application(CGRect frame) : base(_ => new UIView(frame) { AutoresizingMask = UIViewAutoresizing.All }) { }
+	public Application(CGRect frame) : base(_ => new UIView(frame) { AutoresizingMask = UIViewAutoresizing.None }) { }
+
+	NSLayoutConstraint[]? _mainConstraints;
 
 	partial void OnMainChanging(View? value)	
 	{
 		if (_main != null)
 		{
+			ConstraintHelper.RemoveConstraints(_mainConstraints);
+			_mainConstraints = null;
 			((UIView)_main).RemoveFromSuperview();
 		}
 	}
@@ -23,11 +27,9 @@ public partial class Application
 	{
 		if (value != null)
 		{
-			// The Main view should always fill the entire Application area
 			UIView native = value;
-			native.Frame = NativeView.Bounds;
-			native.AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight;
 			NativeView.AddSubview(native);
+			_mainConstraints = ConstraintHelper.PinEdges(native, NativeView);
 		}
 	}
 }
