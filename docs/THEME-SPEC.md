@@ -82,7 +82,7 @@ public partial class Theme : ObservableObject
     [ObservableProperty]
     Color? _strokeColor;
 
-    /// <summary>Placeholder text color for Entry, SearchBar, etc.</summary>
+    /// <summary>Placeholder text color for Editor, SearchBar, etc.</summary>
     [ObservableProperty]
     Color? _placeholderColor;
 }
@@ -101,7 +101,7 @@ public partial class Theme
         BackgroundColor = Colors.White,
         AccentColor = Color.FromArgb("#0078D4"),
         StrokeColor = Color.FromArgb("#E0E0E0"),
-        PlaceholderColor = Colors.DarkGrey,
+        PlaceholderColor = Colors.DarkGray,
     };
 
     public static Theme Dark => new()
@@ -110,7 +110,7 @@ public partial class Theme
         BackgroundColor = Color.FromArgb("#1E1E1E"),
         AccentColor = Color.FromArgb("#4CC2FF"),
         StrokeColor = Color.FromArgb("#404040"),
-        PlaceholderColor = Colors.LightGrey,
+        PlaceholderColor = Colors.LightGray,
     };
 }
 ```
@@ -145,12 +145,16 @@ public partial class View
     /// Applies semantic theme colors to this view. Override in subclasses
     /// to map additional theme slots to view-specific properties.
     /// Only sets properties that the developer has not explicitly set.
+    /// Sets _isApplyingTheme = true so that On{Prop}Changing hooks can
+    /// distinguish theme-driven changes from developer-driven changes.
     /// </summary>
-    internal virtual void ApplyTheme(Theme theme)
+    protected virtual void ApplyTheme(Theme theme)
     {
+        _isApplyingTheme = true;
         _themedBackgroundColor = theme.BackgroundColor;
         if (!_isBackgroundColorSet)
             BackgroundColor = _themedBackgroundColor;
+        _isApplyingTheme = false;
     }
 }
 ```
@@ -159,7 +163,7 @@ public partial class View
 // In Label
 public partial class Label : View
 {
-    internal override void ApplyTheme(Theme theme)
+    protected override void ApplyTheme(Theme theme)
     {
         base.ApplyTheme(theme);
         _themedTextColor = theme.TextColor;
@@ -173,7 +177,7 @@ public partial class Label : View
 // In Button
 public partial class Button : View
 {
-    internal override void ApplyTheme(Theme theme)
+    protected override void ApplyTheme(Theme theme)
     {
         base.ApplyTheme(theme);
         _themedTextColor = theme.TextColor;
@@ -190,7 +194,7 @@ public partial class Button : View
 // In Border
 public partial class Border : View
 {
-    internal override void ApplyTheme(Theme theme)
+    protected override void ApplyTheme(Theme theme)
     {
         base.ApplyTheme(theme);
         _themedStroke = theme.StrokeColor;
@@ -219,8 +223,13 @@ public partial class Label : View
     // We provide an additional hook:
     partial void OnTextColorChanging(Color? value)
     {
-        // If this change didn't come from ApplyTheme, it's an explicit set
-        _isTextColorSet = true;
+        // ApplyTheme sets _isApplyingTheme = true while pushing theme values.
+        // Only changes made outside ApplyTheme count as explicit overrides.
+        if (!_isApplyingTheme)
+        {
+            // null means "clear explicit value, fall back to theme"
+            _isTextColorSet = value is not null;
+        }
     }
 }
 ```
@@ -281,13 +290,14 @@ StackLayout at runtime), it should pick up the current theme. This hooks into th
 existing `Children.CollectionChanged` event:
 
 ```csharp
-// In View base — when children change, apply theme to new additions
+// In View base — when children change, ask the owning Application to theme new additions
 void OnChildrenChanged(object? sender, NotifyCollectionChangedEventArgs e)
 {
-    if (e.Action == NotifyCollectionChangedAction.Add && _currentTheme is not null)
+    // Application is a reference to the owning app, set when the view is attached
+    if (e.Action == NotifyCollectionChangedAction.Add && Application?.Theme is not null)
     {
         foreach (View child in e.NewItems ?? [])
-            ApplyThemeToTree(child, _currentTheme);
+            Application.ApplyThemeToTree(child, Application.Theme);
     }
     // existing platform child management code...
 }
@@ -378,7 +388,7 @@ Custom views consume these in their own `ApplyTheme`:
 ```csharp
 public partial class HeaderView : Label
 {
-    internal override void ApplyTheme(Theme theme)
+    protected override void ApplyTheme(Theme theme)
     {
         base.ApplyTheme(theme);
         if (theme is BrandTheme brand && brand.HeaderColor is not null)
@@ -428,13 +438,12 @@ Expression trees would let us infer property names automatically, but they requi
 `System.Linq.Expressions` which is not fully NativeAOT safe and increases binary size.
 Explicit virtual methods are zero-overhead and always trimmable.
 
-### Why `internal virtual` Instead of `public virtual`?
+### Why `protected virtual` Instead of `public virtual`?
 
-`ApplyTheme` is an internal implementation detail. Developers don't call it — they set
-`Application.Theme` and the framework handles the rest. Making it `internal` keeps the
-public API surface clean. Custom views that need to participate in theming can still
-override it because they're in the same assembly, or in the case of external libraries,
-the `ApplyTheme` method can be made `protected internal` in a future revision if needed.
+`ApplyTheme` is a framework implementation detail — developers don't call it directly,
+they set `Application.Theme` and the framework handles the rest. Making it `protected`
+keeps it out of the public API surface while still allowing external libraries and custom
+controls to override it and participate in theming.
 
 ### Why Re-Apply the Entire Theme on Single-Property Changes?
 
