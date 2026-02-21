@@ -262,6 +262,9 @@
     "lib/arm64-v8a/libaot-Microsoft.JSInterop.dll.so": {
       "Size": 53224
     },
+    "lib/arm64-v8a/libaot-Microsoft.Maui.Graphics.dll.so": {
+      "Size": 3848
+    },
     "lib/arm64-v8a/libaot-Mono.Android.dll.so": {
       "Size": 313144
     },
