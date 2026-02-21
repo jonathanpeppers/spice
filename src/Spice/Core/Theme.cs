@@ -1,5 +1,3 @@
-using Microsoft.Maui.Graphics;
-
 namespace Spice;
 
 /// <summary>
@@ -36,8 +34,8 @@ public partial class Theme : ObservableObject
 	{
 		TextColor = Colors.Black,
 		BackgroundColor = Colors.White,
-		AccentColor = Color.FromArgb("#0078D4"),
-		StrokeColor = Color.FromArgb("#E0E0E0"),
+		AccentColor = new Color(0f, 0.471f, 0.831f),       // #0078D4
+		StrokeColor = new Color(0.878f, 0.878f, 0.878f),   // #E0E0E0
 		PlaceholderColor = Colors.DarkGray,
 	};
 
@@ -47,9 +45,9 @@ public partial class Theme : ObservableObject
 	public static Theme Dark => new()
 	{
 		TextColor = Colors.White,
-		BackgroundColor = Color.FromArgb("#1E1E1E"),
-		AccentColor = Color.FromArgb("#4CC2FF"),
-		StrokeColor = Color.FromArgb("#404040"),
+		BackgroundColor = new Color(0.118f, 0.118f, 0.118f), // #1E1E1E
+		AccentColor = new Color(0.298f, 0.761f, 1f),         // #4CC2FF
+		StrokeColor = new Color(0.251f, 0.251f, 0.251f),     // #404040
 		PlaceholderColor = Colors.LightGray,
 	};
 }
