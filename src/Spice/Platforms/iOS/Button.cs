@@ -43,17 +43,17 @@ public partial class Button
 
 	partial void OnClickedChanged(Action<Button>? value)
 	{
-		// Always detach any existing handler to avoid multiple subscriptions
-		if (_click != null)
+		if (value == null)
 		{
-			NativeView.TouchUpInside -= _click;
-			_click = null;
+			if (_click != null)
+			{
+				NativeView.TouchUpInside -= _click;
+				_click = null;
+			}
 		}
-
-		if (value != null)
+		else
 		{
-			_click = (sender, e) => Clicked?.Invoke(this);
-			NativeView.TouchUpInside += _click;
+			NativeView.TouchUpInside += _click = (sender, e) => Clicked?.Invoke(this);
 		}
 	}
 }
