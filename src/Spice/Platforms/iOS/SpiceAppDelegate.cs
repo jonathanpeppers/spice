@@ -46,15 +46,30 @@ public class SpiceSceneDelegate : UIResponder, IUIWindowSceneDelegate
 /// </summary>
 class SpiceViewController : UIViewController
 {
+	public override void ViewDidLoad()
+	{
+		base.ViewDidLoad();
+		if (OperatingSystem.IsIOSVersionAtLeast(17))
+		{
+			RegisterForTraitChanges([typeof(UITraitUserInterfaceStyle)], (IUITraitEnvironment _, UITraitCollection _) =>
+			{
+				PlatformAppearance.OnChanged(PlatformAppearance.IsDarkMode);
+			});
+		}
+	}
+
+#pragma warning disable CA1422 // Validate platform compatibility (fallback for iOS 16)
 	public override void TraitCollectionDidChange(UITraitCollection? previousTraitCollection)
 	{
 		base.TraitCollectionDidChange(previousTraitCollection);
 
-		if (previousTraitCollection?.UserInterfaceStyle != TraitCollection.UserInterfaceStyle)
+		if (!OperatingSystem.IsIOSVersionAtLeast(17) &&
+			previousTraitCollection?.UserInterfaceStyle != TraitCollection.UserInterfaceStyle)
 		{
 			PlatformAppearance.OnChanged(PlatformAppearance.IsDarkMode);
 		}
 	}
+#pragma warning restore CA1422
 }
 
 /// <summary>
