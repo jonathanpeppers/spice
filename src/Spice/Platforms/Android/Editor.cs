@@ -63,10 +63,6 @@ public partial class Editor
 			int color = value.ToAndroidInt();
 			NativeView.SetTextColor(Interop.GetEditTextColorStateList(color, color));
 		}
-		else
-		{
-			NativeView.SetTextColor(null);
-		}
 	}
 
 	partial void OnPlaceholderChanged(string? value) => NativeView.Hint = value;
@@ -79,10 +75,6 @@ public partial class Editor
 			NativeView.SetHintTextColor(new Android.Content.Res.ColorStateList(
 				new[] { Array.Empty<int>() },
 				new[] { color }));
-		}
-		else
-		{
-			NativeView.SetHintTextColor(null);
 		}
 	}
 
