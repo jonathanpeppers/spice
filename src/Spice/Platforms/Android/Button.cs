@@ -42,13 +42,7 @@ public partial class Button
 	partial void OnTextColorChanged(Color? value)
 	{
 		if (value != null)
-		{
 			NativeView.SetTextColor(Interop.GetDefaultColorStateList(value.ToAndroidInt()));
-		}
-		else
-		{
-			NativeView.SetTextColor(null);
-		}
 	}
 
 	EventHandler? _click;

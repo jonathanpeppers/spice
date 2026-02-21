@@ -29,7 +29,7 @@ public class SpiceSceneDelegate : UIResponder, IUIWindowSceneDelegate
 			Window = Platform.Window = new UIWindow(windowScene);
 
 			var appDelegate = (SpiceAppDelegate)UIApplication.SharedApplication.Delegate;
-			var vc = new UIViewController();
+			var vc = new SpiceViewController();
 			var view = vc.View;
 			Debug.Assert(view != null, "UIViewController should have a view");
 			view.BackgroundColor = UIColor.SystemBackground;

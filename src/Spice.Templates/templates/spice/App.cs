@@ -4,6 +4,8 @@ public class App : Application
 {
 	public App()
 	{
+		UseSystemTheme = true;
+
 		int count = 0;
 
 		var label = new Label
@@ -17,7 +19,6 @@ public class App : Application
 			Clicked = _ => label.Text = $"Times: {++count}"
 		};
 
-		BackgroundColor = Colors.CornflowerBlue;
 		Main = new StackLayout { new Image { Source = "spice" }, label, button };
 	}
 }

@@ -47,10 +47,6 @@ public partial class Entry
 			int color = value.ToAndroidInt();
 			NativeView.SetTextColor(Interop.GetEditTextColorStateList(color, color));
 		}
-		else
-		{
-			NativeView.SetTextColor(null);
-		}
 	}
 
 	partial void OnIsPasswordChanged(bool value) =>

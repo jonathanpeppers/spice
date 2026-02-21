@@ -52,17 +52,10 @@ public partial class SearchBar
 		if (editTextId != 0)
 		{
 			var editText = NativeView.FindViewById<Android.Widget.EditText>(editTextId);
-			if (editText != null)
+			if (editText != null && value != null)
 			{
-				if (value != null)
-				{
-					int color = value.ToAndroidInt();
-					editText.SetTextColor(Interop.GetEditTextColorStateList(color, color));
-				}
-				else
-				{
-					editText.SetTextColor(null);
-				}
+				int color = value.ToAndroidInt();
+				editText.SetTextColor(Interop.GetEditTextColorStateList(color, color));
 			}
 		}
 	}
@@ -74,20 +67,12 @@ public partial class SearchBar
 		if (editTextId != 0)
 		{
 			var editText = NativeView.FindViewById<Android.Widget.EditText>(editTextId);
-			if (editText != null)
+			if (editText != null && value != null)
 			{
-				if (value != null)
-				{
-					int color = value.ToAndroidInt();
-					editText.SetHintTextColor(new Android.Content.Res.ColorStateList(
-						new[] { Array.Empty<int>() },
-						new[] { color }));
-				}
-				else
-				{
-					// Reset to default hint color
-					editText.SetHintTextColor(null);
-				}
+				int color = value.ToAndroidInt();
+				editText.SetHintTextColor(new Android.Content.Res.ColorStateList(
+					new[] { Array.Empty<int>() },
+					new[] { color }));
 			}
 		}
 	}

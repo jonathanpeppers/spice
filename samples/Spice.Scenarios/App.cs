@@ -4,7 +4,7 @@ public class App : Application
 {
 	public App()
 	{
-		BackgroundColor = Colors.CornflowerBlue;
+		UseSystemTheme = true;
 
 		Main = new NavigationView(new ScenarioList());
 	}
@@ -39,5 +39,6 @@ class ScenarioList : StackLayout
 		Add(new Button { Text = "CollectionView", Clicked = _ => Navigation!.Push<CollectionViewScenario>() });
 		Add(new Button { Text = "SearchBar", Clicked = _ => Navigation!.Push<SearchBarScenario>() });
 		Add(new Button { Text = "SwipeView", Clicked = _ => Navigation!.Push<SwipeViewScenario>() });
+		Add(new Button { Text = "Theme", Clicked = _ => Navigation!.Push<ThemeScenario>() });
 	}
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace Spice;
 
@@ -8,6 +9,66 @@ namespace Spice;
 /// </summary>
 public partial class View : ObservableObject, IEnumerable<View>
 {
+	/// <summary>
+	/// Whether a theme is currently being applied (used to distinguish theme-driven vs developer-driven property changes).
+	/// </summary>
+	protected bool _isApplyingTheme;
+	/// <summary>
+	/// Whether BackgroundColor was explicitly set by the developer.
+	/// </summary>
+	protected bool _isBackgroundColorSet;
+	/// <summary>
+	/// The themed background color value.
+	/// </summary>
+	protected Color? _themedBackgroundColor;
+	internal Theme? _appliedTheme;
+	bool _themeChildrenSubscribed;
+
+	/// <summary>
+	/// Applies semantic theme colors to this view. Override in subclasses
+	/// to map additional theme slots to view-specific properties.
+	/// Only sets properties that the developer has not explicitly set.
+	/// </summary>
+	protected virtual void ApplyTheme(Theme theme)
+	{
+		_isApplyingTheme = true;
+		_appliedTheme = theme;
+
+		if (!_themeChildrenSubscribed)
+		{
+			_themeChildrenSubscribed = true;
+			Children.CollectionChanged += OnThemeChildrenChanged;
+		}
+
+		_themedBackgroundColor = theme.BackgroundColor;
+		if (!_isBackgroundColorSet)
+			BackgroundColor = _themedBackgroundColor;
+		_isApplyingTheme = false;
+	}
+
+	partial void OnBackgroundColorChanging(Color? value)
+	{
+		if (!_isApplyingTheme)
+			_isBackgroundColorSet = value is not null;
+	}
+
+	void OnThemeChildrenChanged(object? sender, NotifyCollectionChangedEventArgs e)
+	{
+		if (e.NewItems is not null && _appliedTheme is not null)
+		{
+			foreach (View child in e.NewItems)
+				ApplyThemeToTree(child, _appliedTheme);
+		}
+	}
+
+	internal static void ApplyThemeToTree(View? view, Theme theme)
+	{
+		if (view is null) return;
+		view.ApplyTheme(theme);
+		foreach (var child in view.Children)
+			ApplyThemeToTree(child, theme);
+	}
+
 	/// <summary>
 	/// Child views of this view
 	/// </summary>
