@@ -65,6 +65,8 @@ public partial class Button
 		}
 		else
 		{
+			if (_click != null)
+				NativeView.Click -= _click;
 			NativeView.Click += _click = (sender, e) => Clicked?.Invoke(this);
 		}
 	}
