@@ -7,6 +7,9 @@ namespace Spice;
 /// </summary>
 public partial class Button : View
 {
+	bool _isTextColorSet;
+	Color? _themedTextColor;
+
 	/// <summary>
 	/// Text on the button
 	/// </summary>
@@ -24,4 +27,24 @@ public partial class Button : View
 	/// </summary>
 	[ObservableProperty]
 	Action<Button>? _clicked;
+
+	/// <inheritdoc />
+	protected override void ApplyTheme(Theme theme)
+	{
+		base.ApplyTheme(theme);
+		_isApplyingTheme = true;
+		_themedTextColor = theme.TextColor;
+		if (!_isTextColorSet)
+			TextColor = _themedTextColor;
+		_themedBackgroundColor = theme.AccentColor;
+		if (!_isBackgroundColorSet)
+			BackgroundColor = _themedBackgroundColor;
+		_isApplyingTheme = false;
+	}
+
+	partial void OnTextColorChanging(Color? value)
+	{
+		if (!_isApplyingTheme)
+			_isTextColorSet = value is not null;
+	}
 }

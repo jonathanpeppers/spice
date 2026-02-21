@@ -7,6 +7,11 @@ namespace Spice;
 /// </summary>
 public partial class Editor : View
 {
+	bool _isTextColorSet;
+	Color? _themedTextColor;
+	bool _isPlaceholderColorSet;
+	Color? _themedPlaceholderColor;
+
 	/// <summary>
 	/// The text input by the user (also displayed)
 	/// </summary>
@@ -39,4 +44,30 @@ public partial class Editor : View
 	/// </summary>
 	[ObservableProperty]
 	bool _autoSize = false;
+
+	/// <inheritdoc />
+	protected override void ApplyTheme(Theme theme)
+	{
+		base.ApplyTheme(theme);
+		_isApplyingTheme = true;
+		_themedTextColor = theme.TextColor;
+		if (!_isTextColorSet)
+			TextColor = _themedTextColor;
+		_themedPlaceholderColor = theme.PlaceholderColor;
+		if (!_isPlaceholderColorSet)
+			PlaceholderColor = _themedPlaceholderColor;
+		_isApplyingTheme = false;
+	}
+
+	partial void OnTextColorChanging(Color? value)
+	{
+		if (!_isApplyingTheme)
+			_isTextColorSet = value is not null;
+	}
+
+	partial void OnPlaceholderColorChanging(Color? value)
+	{
+		if (!_isApplyingTheme)
+			_isPlaceholderColorSet = value is not null;
+	}
 }

@@ -7,6 +7,9 @@ namespace Spice;
 /// </summary>
 public partial class Border : View
 {
+	bool _isStrokeSet;
+	Color? _themedStroke;
+
 	/// <summary>
 	/// The single child view to display inside the border
 	/// </summary>
@@ -36,4 +39,21 @@ public partial class Border : View
 	/// </summary>
 	[ObservableProperty]
 	double _padding;
+
+	/// <inheritdoc />
+	protected override void ApplyTheme(Theme theme)
+	{
+		base.ApplyTheme(theme);
+		_isApplyingTheme = true;
+		_themedStroke = theme.StrokeColor;
+		if (!_isStrokeSet)
+			Stroke = _themedStroke;
+		_isApplyingTheme = false;
+	}
+
+	partial void OnStrokeChanging(Color? value)
+	{
+		if (!_isApplyingTheme)
+			_isStrokeSet = value is not null;
+	}
 }
