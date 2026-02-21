@@ -41,38 +41,6 @@ public class SpiceSceneDelegate : UIResponder, IUIWindowSceneDelegate
 }
 
 /// <summary>
-/// A UIViewController that detects system appearance (dark/light mode) changes
-/// and notifies <see cref="PlatformAppearance"/>.
-/// </summary>
-class SpiceViewController : UIViewController
-{
-	public override void ViewDidLoad()
-	{
-		base.ViewDidLoad();
-		if (OperatingSystem.IsIOSVersionAtLeast(17))
-		{
-			RegisterForTraitChanges([typeof(UITraitUserInterfaceStyle)], (IUITraitEnvironment _, UITraitCollection _) =>
-			{
-				PlatformAppearance.OnChanged(PlatformAppearance.IsDarkMode);
-			});
-		}
-	}
-
-#pragma warning disable CA1422 // Validate platform compatibility (fallback for iOS 16)
-	public override void TraitCollectionDidChange(UITraitCollection? previousTraitCollection)
-	{
-		base.TraitCollectionDidChange(previousTraitCollection);
-
-		if (!OperatingSystem.IsIOSVersionAtLeast(17) &&
-			previousTraitCollection?.UserInterfaceStyle != TraitCollection.UserInterfaceStyle)
-		{
-			PlatformAppearance.OnChanged(PlatformAppearance.IsDarkMode);
-		}
-	}
-#pragma warning restore CA1422
-}
-
-/// <summary>
 /// The <see cref="UIApplicationDelegate"/> to use in Spice applications.
 /// Override <see cref="CreateApplication"/> to provide the root <see cref="Application"/> view.
 /// Requires <c>UIApplicationSceneManifest</c> in Info.plist with <c>UISceneDelegateClassName</c> set to <c>SpiceSceneDelegate</c>.
