@@ -1,4 +1,5 @@
-﻿using AndroidX.AppCompat.App;
+﻿using Android.Content.Res;
+using AndroidX.AppCompat.App;
 
 namespace Spice;
 
@@ -32,6 +33,15 @@ public class SpiceActivity : AppCompatActivity
 	{
 		_appView = view;
 		base.SetContentView((Android.Views.View)view);
+	}
+
+	/// <inheritdoc />
+	public override void OnConfigurationChanged(Configuration newConfig)
+	{
+		base.OnConfigurationChanged(newConfig);
+
+		var nightMode = newConfig.UiMode & UiMode.NightMask;
+		PlatformAppearance.OnChanged(nightMode == UiMode.NightYes);
 	}
 
 	/// <inheritdoc />

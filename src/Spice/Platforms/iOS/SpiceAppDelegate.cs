@@ -29,13 +29,30 @@ public class SpiceSceneDelegate : UIResponder, IUIWindowSceneDelegate
 			Window = Platform.Window = new UIWindow(windowScene);
 
 			var appDelegate = (SpiceAppDelegate)UIApplication.SharedApplication.Delegate;
-			var vc = new UIViewController();
+			var vc = new SpiceViewController();
 			var view = vc.View;
 			Debug.Assert(view != null, "UIViewController should have a view");
 			view.BackgroundColor = UIColor.SystemBackground;
 			view.AddSubview(appDelegate.CreateApplication());
 			Window.RootViewController = vc;
 			Window.MakeKeyAndVisible();
+		}
+	}
+}
+
+/// <summary>
+/// A UIViewController that detects system appearance (dark/light mode) changes
+/// and notifies <see cref="PlatformAppearance"/>.
+/// </summary>
+class SpiceViewController : UIViewController
+{
+	public override void TraitCollectionDidChange(UITraitCollection? previousTraitCollection)
+	{
+		base.TraitCollectionDidChange(previousTraitCollection);
+
+		if (previousTraitCollection?.UserInterfaceStyle != TraitCollection.UserInterfaceStyle)
+		{
+			PlatformAppearance.OnChanged(PlatformAppearance.IsDarkMode);
 		}
 	}
 }
