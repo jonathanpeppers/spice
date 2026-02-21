@@ -114,4 +114,34 @@ public class ButtonTests
 		button.Clicked = _ => { };
 		Assert.True(propertyChangedFired);
 	}
+
+	[Fact]
+	public void ClickedCanBeReplacedWithoutStaleHandler()
+	{
+		var button = new Button();
+		int callCount1 = 0;
+		int callCount2 = 0;
+
+		// Set first handler
+		button.Clicked = _ => callCount1++;
+
+		// Replace with second handler
+		button.Clicked = _ => callCount2++;
+
+		// Only the second handler should be the current Clicked value
+		button.Clicked?.Invoke(button);
+		Assert.Equal(0, callCount1);
+		Assert.Equal(1, callCount2);
+	}
+
+	[Fact]
+	public void ClickedCanBeSetToNullAfterNonNull()
+	{
+		var button = new Button();
+		button.Clicked = _ => { };
+		Assert.NotNull(button.Clicked);
+
+		button.Clicked = null;
+		Assert.Null(button.Clicked);
+	}
 }
