@@ -53,6 +53,8 @@ public partial class Button
 		}
 		else
 		{
+			if (_click != null)
+				NativeView.TouchUpInside -= _click;
 			NativeView.TouchUpInside += _click = (sender, e) => Clicked?.Invoke(this);
 		}
 	}
