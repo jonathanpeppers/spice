@@ -9,8 +9,12 @@ namespace Spice;
 /// </summary>
 public partial class View : ObservableObject, IEnumerable<View>
 {
+	/// <summary>
+	/// Built-in theme property flags. An Int32 supports up to 32 properties.
+	/// Custom views can define additional flags starting at <c>1 &lt;&lt; 5</c>.
+	/// </summary>
 	[Flags]
-	internal enum ThemeProperty
+	public enum ThemeProperty
 	{
 		None            = 0,
 		BackgroundColor = 1 << 0,
@@ -20,23 +24,30 @@ public partial class View : ObservableObject, IEnumerable<View>
 		Color           = 1 << 4,
 	}
 
-	internal bool _isApplyingTheme;
-	ThemeProperty _explicitProps;
+	bool _isApplyingTheme;
+	int _explicitProps;
 	internal Theme? _appliedTheme;
 	bool _themeChildrenSubscribed;
 
-	internal void TrackExplicit(ThemeProperty prop, object? value)
+	/// <summary>
+	/// Tracks whether a theme property was explicitly set by the developer.
+	/// When <paramref name="value"/> is non-null the flag is set; when null it is cleared.
+	/// </summary>
+	public void TrackExplicit(int property, object? value)
 	{
 		if (!_isApplyingTheme)
 		{
 			if (value is not null)
-				_explicitProps |= prop;
+				_explicitProps |= property;
 			else
-				_explicitProps &= ~prop;
+				_explicitProps &= ~property;
 		}
 	}
 
-	internal bool CanApplyTheme(ThemeProperty prop) => (_explicitProps & prop) == 0;
+	/// <summary>
+	/// Returns true when the theme property has not been explicitly set by the developer.
+	/// </summary>
+	public bool CanApplyTheme(int property) => (_explicitProps & property) == 0;
 
 	/// <summary>
 	/// Applies semantic theme colors to this view. Override in subclasses
@@ -54,12 +65,12 @@ public partial class View : ObservableObject, IEnumerable<View>
 			Children.CollectionChanged += OnThemeChildrenChanged;
 		}
 
-		if (CanApplyTheme(ThemeProperty.BackgroundColor))
+		if (CanApplyTheme((int)ThemeProperty.BackgroundColor))
 			BackgroundColor = theme.BackgroundColor;
 		_isApplyingTheme = false;
 	}
 
-	partial void OnBackgroundColorChanging(Color? value) => TrackExplicit(ThemeProperty.BackgroundColor, value);
+	partial void OnBackgroundColorChanging(Color? value) => TrackExplicit((int)ThemeProperty.BackgroundColor, value);
 
 	void OnThemeChildrenChanged(object? sender, NotifyCollectionChangedEventArgs e)
 	{

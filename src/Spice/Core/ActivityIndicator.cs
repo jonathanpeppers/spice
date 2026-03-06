@@ -7,7 +7,6 @@ namespace Spice;
 /// </summary>
 public partial class ActivityIndicator : View
 {
-
 	/// <summary>
 	/// Whether the activity indicator is running (showing the spinner)
 	/// </summary>
@@ -25,10 +24,10 @@ public partial class ActivityIndicator : View
 	{
 		base.ApplyTheme(theme);
 		_isApplyingTheme = true;
-		if (CanApplyTheme(ThemeProperty.Color))
+		if (CanApplyTheme((int)ThemeProperty.Color))
 			Color = theme.AccentColor;
 		_isApplyingTheme = false;
 	}
 
-	partial void OnColorChanging(Color? value) => TrackExplicit(ThemeProperty.Color, value);
+	partial void OnColorChanging(Color? value) => TrackExplicit((int)ThemeProperty.Color, value);
 }

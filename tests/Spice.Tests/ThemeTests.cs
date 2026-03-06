@@ -7,7 +7,6 @@ namespace Spice.Tests;
 /// </summary>
 public class ThemeTests
 {
-	// ── Phase 1: Core Theme Class ──────────────────────────────────
 
 	[Fact]
 	public void ThemeCanBeCreated()
@@ -66,8 +65,6 @@ public class ThemeTests
 		var app = new Application();
 		Assert.Null(app.Theme);
 	}
-
-	// ── Phase 1: ApplyTheme on View ────────────────────────────────
 
 	[Fact]
 	public void ThemeAppliesBackgroundColorToView()
@@ -185,8 +182,6 @@ public class ThemeTests
 		Assert.Equal(Theme.Light.AccentColor, ai.Color);
 	}
 
-	// ── Phase 1: Tree Walking ──────────────────────────────────────
-
 	[Fact]
 	public void ThemeAppliedToEntireTree()
 	{
@@ -266,8 +261,6 @@ public class ThemeTests
 		app.Theme = null;
 		// Should not throw
 	}
-
-	// ── Phase 2: Developer Override Tracking ───────────────────────
 
 	[Fact]
 	public void ExplicitTextColorWins()
@@ -375,8 +368,6 @@ public class ThemeTests
 		Assert.Equal(Colors.Orange, label.TextColor);
 	}
 
-	// ── Phase 3: Dynamic View Addition ─────────────────────────────
-
 	[Fact]
 	public void NewChildrenGetThemed()
 	{
@@ -411,8 +402,6 @@ public class ThemeTests
 		Assert.Equal(Colors.Black, label.TextColor);
 		Assert.Equal(Colors.White, innerStack.BackgroundColor);
 	}
-
-	// ── Phase 4: System Appearance Detection ──────────────────────
 
 	[Fact]
 	public void UseSystemThemeSetsTheme()
@@ -476,8 +465,6 @@ public class ThemeTests
 		app.UseSystemTheme = false;
 	}
 
-	// ── Custom Theme ──────────────────────────────────────────────
-
 	[Fact]
 	public void CustomThemeApplied()
 	{
@@ -504,8 +491,6 @@ public class ThemeTests
 		Assert.Equal(Color.FromArgb("#CCCCCC"), border.Stroke);
 		Assert.Equal(Color.FromArgb("#999999"), editor.PlaceholderColor);
 	}
-
-	// ── Full scenario from spec ────────────────────────────────────
 
 	[Fact]
 	public void FullScenarioFromSpec()

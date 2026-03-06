@@ -7,7 +7,6 @@
 /// </summary>
 public partial class Entry : View
 {
-
 	/// <summary>
 	/// The text input by the user (also displayed)
 	/// </summary>
@@ -31,11 +30,11 @@ public partial class Entry : View
 	{
 		base.ApplyTheme(theme);
 		_isApplyingTheme = true;
-		if (CanApplyTheme(ThemeProperty.TextColor))
+		if (CanApplyTheme((int)ThemeProperty.TextColor))
 			TextColor = theme.TextColor;
 		_isApplyingTheme = false;
 	}
 
-	partial void OnTextColorChanging(Color? value) => TrackExplicit(ThemeProperty.TextColor, value);
+	partial void OnTextColorChanging(Color? value) => TrackExplicit((int)ThemeProperty.TextColor, value);
 }
 
