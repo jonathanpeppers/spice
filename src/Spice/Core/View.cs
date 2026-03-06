@@ -53,8 +53,15 @@ public partial class View : ObservableObject, IEnumerable<View>
 	/// Applies semantic theme colors to this view. Override in subclasses
 	/// to map additional theme slots to view-specific properties.
 	/// Only sets properties that the developer has not explicitly set.
+	/// The <c>_isApplyingTheme</c> flag is managed by the caller.
 	/// </summary>
 	protected virtual void ApplyTheme(Theme theme)
+	{
+		if (CanApplyTheme((int)ThemeProperty.BackgroundColor))
+			BackgroundColor = theme.BackgroundColor;
+	}
+
+	internal void ApplyThemeInternal(Theme theme)
 	{
 		_isApplyingTheme = true;
 		_appliedTheme = theme;
@@ -65,8 +72,7 @@ public partial class View : ObservableObject, IEnumerable<View>
 			Children.CollectionChanged += OnThemeChildrenChanged;
 		}
 
-		if (CanApplyTheme((int)ThemeProperty.BackgroundColor))
-			BackgroundColor = theme.BackgroundColor;
+		ApplyTheme(theme);
 		_isApplyingTheme = false;
 	}
 
@@ -84,7 +90,7 @@ public partial class View : ObservableObject, IEnumerable<View>
 	internal static void ApplyThemeToTree(View? view, Theme theme)
 	{
 		if (view is null) return;
-		view.ApplyTheme(theme);
+		view.ApplyThemeInternal(theme);
 		foreach (var child in view.Children)
 			ApplyThemeToTree(child, theme);
 	}

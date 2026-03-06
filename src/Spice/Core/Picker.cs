@@ -52,10 +52,8 @@ public partial class Picker : View
 	protected override void ApplyTheme(Theme theme)
 	{
 		base.ApplyTheme(theme);
-		_isApplyingTheme = true;
 		if (CanApplyTheme((int)ThemeProperty.TextColor))
 			TextColor = theme.TextColor;
-		_isApplyingTheme = false;
 	}
 
 	partial void OnTextColorChanging(Color? value) => TrackExplicit((int)ThemeProperty.TextColor, value);

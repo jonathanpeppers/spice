@@ -41,10 +41,8 @@ public partial class Border : View
 	protected override void ApplyTheme(Theme theme)
 	{
 		base.ApplyTheme(theme);
-		_isApplyingTheme = true;
 		if (CanApplyTheme((int)ThemeProperty.Stroke))
 			Stroke = theme.StrokeColor;
-		_isApplyingTheme = false;
 	}
 
 	partial void OnStrokeChanging(Color? value) => TrackExplicit((int)ThemeProperty.Stroke, value);

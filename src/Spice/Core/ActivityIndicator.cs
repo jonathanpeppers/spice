@@ -23,10 +23,8 @@ public partial class ActivityIndicator : View
 	protected override void ApplyTheme(Theme theme)
 	{
 		base.ApplyTheme(theme);
-		_isApplyingTheme = true;
 		if (CanApplyTheme((int)ThemeProperty.Color))
 			Color = theme.AccentColor;
-		_isApplyingTheme = false;
 	}
 
 	partial void OnColorChanging(Color? value) => TrackExplicit((int)ThemeProperty.Color, value);

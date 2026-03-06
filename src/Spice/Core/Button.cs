@@ -29,12 +29,10 @@ public partial class Button : View
 	protected override void ApplyTheme(Theme theme)
 	{
 		base.ApplyTheme(theme);
-		_isApplyingTheme = true;
 		if (CanApplyTheme((int)ThemeProperty.TextColor))
 			TextColor = theme.TextColor;
 		if (CanApplyTheme((int)ThemeProperty.BackgroundColor))
 			BackgroundColor = theme.AccentColor;
-		_isApplyingTheme = false;
 	}
 
 	partial void OnTextColorChanging(Color? value) => TrackExplicit((int)ThemeProperty.TextColor, value);
