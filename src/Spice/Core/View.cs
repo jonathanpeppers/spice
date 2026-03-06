@@ -20,7 +20,7 @@ public partial class View : ObservableObject, IEnumerable<View>
 		Color           = 1 << 4,
 	}
 
-	bool _isApplyingTheme;
+	internal bool _isApplyingTheme;
 	ThemeProperty _explicitProps;
 	internal Theme? _appliedTheme;
 	bool _themeChildrenSubscribed;
