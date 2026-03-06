@@ -16,11 +16,17 @@ public partial class View : ObservableObject, IEnumerable<View>
 	[Flags]
 	public enum ThemeProperty
 	{
+		/// <summary>No property.</summary>
 		None            = 0,
+		/// <summary>Background color of any view.</summary>
 		BackgroundColor = 1 << 0,
+		/// <summary>Text color for Label, Button, Entry, Editor, SearchBar, Picker, DatePicker.</summary>
 		TextColor       = 1 << 1,
+		/// <summary>Placeholder text color for Editor and SearchBar.</summary>
 		PlaceholderColor= 1 << 2,
+		/// <summary>Border stroke color.</summary>
 		Stroke          = 1 << 3,
+		/// <summary>Accent color for ActivityIndicator.</summary>
 		Color           = 1 << 4,
 	}
 
