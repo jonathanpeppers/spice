@@ -7,10 +7,6 @@
 /// </summary>
 public partial class SearchBar : View
 {
-	bool _isTextColorSet;
-	Color? _themedTextColor;
-	bool _isPlaceholderColorSet;
-	Color? _themedPlaceholderColor;
 
 	/// <summary>
 	/// The search text input by the user
@@ -53,24 +49,14 @@ public partial class SearchBar : View
 	{
 		base.ApplyTheme(theme);
 		_isApplyingTheme = true;
-		_themedTextColor = theme.TextColor;
-		if (!_isTextColorSet)
-			TextColor = _themedTextColor;
-		_themedPlaceholderColor = theme.PlaceholderColor;
-		if (!_isPlaceholderColorSet)
-			PlaceholderColor = _themedPlaceholderColor;
+		if (CanApplyTheme(ThemeProperty.TextColor))
+			TextColor = theme.TextColor;
+		if (CanApplyTheme(ThemeProperty.PlaceholderColor))
+			PlaceholderColor = theme.PlaceholderColor;
 		_isApplyingTheme = false;
 	}
 
-	partial void OnTextColorChanging(Color? value)
-	{
-		if (!_isApplyingTheme)
-			_isTextColorSet = value is not null;
-	}
+	partial void OnTextColorChanging(Color? value) => TrackExplicit(ThemeProperty.TextColor, value);
 
-	partial void OnPlaceholderColorChanging(Color? value)
-	{
-		if (!_isApplyingTheme)
-			_isPlaceholderColorSet = value is not null;
-	}
+	partial void OnPlaceholderColorChanging(Color? value) => TrackExplicit(ThemeProperty.PlaceholderColor, value);
 }

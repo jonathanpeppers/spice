@@ -9,20 +9,34 @@ namespace Spice;
 /// </summary>
 public partial class View : ObservableObject, IEnumerable<View>
 {
-	/// <summary>
-	/// Whether a theme is currently being applied (used to distinguish theme-driven vs developer-driven property changes).
-	/// </summary>
-	protected bool _isApplyingTheme;
-	/// <summary>
-	/// Whether BackgroundColor was explicitly set by the developer.
-	/// </summary>
-	protected bool _isBackgroundColorSet;
-	/// <summary>
-	/// The themed background color value.
-	/// </summary>
-	protected Color? _themedBackgroundColor;
+	[Flags]
+	internal enum ThemeProperty
+	{
+		None            = 0,
+		BackgroundColor = 1 << 0,
+		TextColor       = 1 << 1,
+		PlaceholderColor= 1 << 2,
+		Stroke          = 1 << 3,
+		Color           = 1 << 4,
+	}
+
+	bool _isApplyingTheme;
+	ThemeProperty _explicitProps;
 	internal Theme? _appliedTheme;
 	bool _themeChildrenSubscribed;
+
+	internal void TrackExplicit(ThemeProperty prop, object? value)
+	{
+		if (!_isApplyingTheme)
+		{
+			if (value is not null)
+				_explicitProps |= prop;
+			else
+				_explicitProps &= ~prop;
+		}
+	}
+
+	internal bool CanApplyTheme(ThemeProperty prop) => (_explicitProps & prop) == 0;
 
 	/// <summary>
 	/// Applies semantic theme colors to this view. Override in subclasses
@@ -40,17 +54,12 @@ public partial class View : ObservableObject, IEnumerable<View>
 			Children.CollectionChanged += OnThemeChildrenChanged;
 		}
 
-		_themedBackgroundColor = theme.BackgroundColor;
-		if (!_isBackgroundColorSet)
-			BackgroundColor = _themedBackgroundColor;
+		if (CanApplyTheme(ThemeProperty.BackgroundColor))
+			BackgroundColor = theme.BackgroundColor;
 		_isApplyingTheme = false;
 	}
 
-	partial void OnBackgroundColorChanging(Color? value)
-	{
-		if (!_isApplyingTheme)
-			_isBackgroundColorSet = value is not null;
-	}
+	partial void OnBackgroundColorChanging(Color? value) => TrackExplicit(ThemeProperty.BackgroundColor, value);
 
 	void OnThemeChildrenChanged(object? sender, NotifyCollectionChangedEventArgs e)
 	{

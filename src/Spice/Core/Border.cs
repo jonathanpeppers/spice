@@ -7,8 +7,6 @@ namespace Spice;
 /// </summary>
 public partial class Border : View
 {
-	bool _isStrokeSet;
-	Color? _themedStroke;
 
 	/// <summary>
 	/// The single child view to display inside the border
@@ -45,15 +43,10 @@ public partial class Border : View
 	{
 		base.ApplyTheme(theme);
 		_isApplyingTheme = true;
-		_themedStroke = theme.StrokeColor;
-		if (!_isStrokeSet)
-			Stroke = _themedStroke;
+		if (CanApplyTheme(ThemeProperty.Stroke))
+			Stroke = theme.StrokeColor;
 		_isApplyingTheme = false;
 	}
 
-	partial void OnStrokeChanging(Color? value)
-	{
-		if (!_isApplyingTheme)
-			_isStrokeSet = value is not null;
-	}
+	partial void OnStrokeChanging(Color? value) => TrackExplicit(ThemeProperty.Stroke, value);
 }

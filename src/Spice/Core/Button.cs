@@ -7,8 +7,6 @@ namespace Spice;
 /// </summary>
 public partial class Button : View
 {
-	bool _isTextColorSet;
-	Color? _themedTextColor;
 
 	/// <summary>
 	/// Text on the button
@@ -33,18 +31,12 @@ public partial class Button : View
 	{
 		base.ApplyTheme(theme);
 		_isApplyingTheme = true;
-		_themedTextColor = theme.TextColor;
-		if (!_isTextColorSet)
-			TextColor = _themedTextColor;
-		_themedBackgroundColor = theme.AccentColor;
-		if (!_isBackgroundColorSet)
-			BackgroundColor = _themedBackgroundColor;
+		if (CanApplyTheme(ThemeProperty.TextColor))
+			TextColor = theme.TextColor;
+		if (CanApplyTheme(ThemeProperty.BackgroundColor))
+			BackgroundColor = theme.AccentColor;
 		_isApplyingTheme = false;
 	}
 
-	partial void OnTextColorChanging(Color? value)
-	{
-		if (!_isApplyingTheme)
-			_isTextColorSet = value is not null;
-	}
+	partial void OnTextColorChanging(Color? value) => TrackExplicit(ThemeProperty.TextColor, value);
 }
