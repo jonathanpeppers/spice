@@ -554,7 +554,7 @@ keeps its explicit color.
 - Add `Application.Theme` property
 - Implement `ApplyTheme` virtual method on `View` and all built-in views
 - Implement tree walking in `Application.OnThemeChanged`
-- Unit tests for theme application (POCOs on `net10.0`, no device needed)
+- Unit tests for theme application (POCOs on `net11.0`, no device needed)
 
 ### Phase 2: Developer Override Tracking
 - Add `_is{Prop}Set` booleans per themeable property
