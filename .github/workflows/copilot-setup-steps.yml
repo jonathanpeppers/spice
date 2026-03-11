@@ -14,8 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-    env:
-      WORKLOAD_VERSION: 11.0.100-preview.2
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -29,4 +27,4 @@ jobs:
           dotnet-quality: preview
 
       - name: install workloads
-        run: dotnet workload install maui-android --version $WORKLOAD_VERSION
+        run: dotnet workload install maui-android
