@@ -124,7 +124,7 @@ jobs:
       run: dotnet tool restore
 
     - name: restore test app
-      run: dotnet msbuild tests/Spice.Tests/Spice.Tests.csproj -t:Restore -p:TargetFramework=net11.0-android -p:RuntimeIdentifier=android-x64
+      run: dotnet restore tests/Spice.Tests/Spice.Tests.csproj -p:TargetFramework=net11.0-android -p:RuntimeIdentifier=android-x64 -bl:bin/restore-device-tests-android.binlog
 
     - name: build test app
       run: dotnet build tests/Spice.Tests/Spice.Tests.csproj -f net11.0-android -c Release -r android-x64 --no-restore -bl:bin/build-device-tests-android.binlog
@@ -181,7 +181,7 @@ jobs:
       run: dotnet tool restore
 
     - name: restore test app
-      run: dotnet msbuild tests/Spice.Tests/Spice.Tests.csproj -t:Restore -p:TargetFramework=net11.0-ios -p:RuntimeIdentifier=iossimulator-arm64
+      run: dotnet restore tests/Spice.Tests/Spice.Tests.csproj -p:TargetFramework=net11.0-ios -p:RuntimeIdentifier=iossimulator-arm64 -bl:bin/restore-device-tests-ios.binlog
 
     - name: build test app
       run: dotnet build tests/Spice.Tests/Spice.Tests.csproj -f net11.0-ios -c Release -r iossimulator-arm64 --no-restore -bl:bin/build-device-tests-ios.binlog
