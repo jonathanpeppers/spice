@@ -243,12 +243,13 @@ internal class iOSWebViewManager : WebViewManager
 		public override void DecidePolicy(WKWebView webView, WKNavigationAction navigationAction, Action<WKNavigationActionPolicy> decisionHandler)
 		{
 			var requestUrl = navigationAction.Request.Url;
-			if (requestUrl is null)
+			var requestString = requestUrl?.ToString();
+			if (requestString is null)
 			{
 				decisionHandler(WKNavigationActionPolicy.Cancel);
 				return;
 			}
-			var uri = new Uri(requestUrl.ToString());
+			var uri = new Uri(requestString);
 			bool openExternally = false;
 
 			// TargetFrame is null for navigation to a new window (`_blank`)
