@@ -106,7 +106,8 @@ jobs:
     - name: install .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 10.0.x
+        dotnet-version: 11.0.x
+        dotnet-quality: preview
 
     - name: cache NuGet packages
       uses: actions/cache@v4
@@ -123,10 +124,10 @@ jobs:
       run: dotnet tool restore
 
     - name: restore test app
-      run: dotnet msbuild tests/Spice.Tests/Spice.Tests.csproj -t:Restore -p:TargetFramework=net10.0-android -p:RuntimeIdentifier=android-x64
+      run: dotnet msbuild tests/Spice.Tests/Spice.Tests.csproj -t:Restore -p:TargetFramework=net11.0-android -p:RuntimeIdentifier=android-x64
 
     - name: build test app
-      run: dotnet build tests/Spice.Tests/Spice.Tests.csproj -f net10.0-android -c Release -r android-x64 --no-restore -bl:bin/build-device-tests-android.binlog
+      run: dotnet build tests/Spice.Tests/Spice.Tests.csproj -f net11.0-android -c Release -r android-x64 --no-restore -bl:bin/build-device-tests-android.binlog
 
     - name: run Android device tests
       uses: reactivecircus/android-emulator-runner@v2
@@ -134,7 +135,7 @@ jobs:
         api-level: 34
         target: google_apis
         arch: x86_64
-        script: dotnet xharness android test --app="tests/Spice.Tests/bin/Release/net10.0-android/android-x64/com.jonathanpeppers.spice.tests-Signed.apk" --package-name="com.jonathanpeppers.spice.tests" --instrumentation="com.jonathanpeppers.spice.tests.TestInstrumentation" --output-directory=bin/device-test-results/android --timeout=00:10:00
+        script: dotnet xharness android test --app="tests/Spice.Tests/bin/Release/net11.0-android/android-x64/com.jonathanpeppers.spice.tests-Signed.apk" --package-name="com.jonathanpeppers.spice.tests" --instrumentation="com.jonathanpeppers.spice.tests.TestInstrumentation" --output-directory=bin/device-test-results/android --timeout=00:10:00
 
     - name: publish test results
       if: always()
@@ -162,7 +163,8 @@ jobs:
     - name: install .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 10.0.x
+        dotnet-version: 11.0.x
+        dotnet-quality: preview
 
     - name: cache NuGet packages
       uses: actions/cache@v4
@@ -179,15 +181,15 @@ jobs:
       run: dotnet tool restore
 
     - name: restore test app
-      run: dotnet msbuild tests/Spice.Tests/Spice.Tests.csproj -t:Restore -p:TargetFramework=net10.0-ios -p:RuntimeIdentifier=iossimulator-arm64
+      run: dotnet msbuild tests/Spice.Tests/Spice.Tests.csproj -t:Restore -p:TargetFramework=net11.0-ios -p:RuntimeIdentifier=iossimulator-arm64
 
     - name: build test app
-      run: dotnet build tests/Spice.Tests/Spice.Tests.csproj -f net10.0-ios -c Release -r iossimulator-arm64 --no-restore -bl:bin/build-device-tests-ios.binlog
+      run: dotnet build tests/Spice.Tests/Spice.Tests.csproj -f net11.0-ios -c Release -r iossimulator-arm64 --no-restore -bl:bin/build-device-tests-ios.binlog
 
     - name: run iOS device tests
       run: >
         dotnet xharness apple test
-        --app="tests/Spice.Tests/bin/Release/net10.0-ios/iossimulator-arm64/Spice.Tests.app"
+        --app="tests/Spice.Tests/bin/Release/net11.0-ios/iossimulator-arm64/Spice.Tests.app"
         --output-directory=bin/device-test-results/ios
         --target=ios-simulator-64
         --timeout=00:15:00
