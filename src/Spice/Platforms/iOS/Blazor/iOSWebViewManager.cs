@@ -244,7 +244,7 @@ internal class iOSWebViewManager : WebViewManager
 		{
 			var requestUrl = navigationAction.Request.Url;
 			var requestString = requestUrl?.ToString();
-			if (requestString is null)
+			if (requestUrl is null || requestString is null)
 			{
 				decisionHandler(WKNavigationActionPolicy.Cancel);
 				return;
