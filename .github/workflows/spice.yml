@@ -13,7 +13,6 @@ jobs:
     runs-on: macos-latest
 
     env:
-      WORKLOAD_VERSION: 10.0.103
       ValidateXcodeVersion: false
       APK_PERCENTAGE_REGRESSION: 10
       CONTENT_PERCENTAGE_REGRESSION: 15
@@ -43,7 +42,7 @@ jobs:
           ${{ runner.os }}-nuget-
         
     - name: install workloads
-      run: dotnet workload install maui-android maui-ios --version $WORKLOAD_VERSION
+      run: dotnet workload install maui-android maui-ios
 
     - name: restore all projects
       run: |
@@ -93,9 +92,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    env:
-      WORKLOAD_VERSION: 10.0.103
-
     steps:
     - name: checkout
       uses: actions/checkout@v4
@@ -120,7 +116,7 @@ jobs:
           ${{ runner.os }}-nuget-
 
     - name: install workloads
-      run: dotnet workload install maui-android --version $WORKLOAD_VERSION
+      run: dotnet workload install maui-android
 
     - name: restore .NET tools
       run: dotnet tool restore
@@ -151,7 +147,6 @@ jobs:
     runs-on: macos-latest
 
     env:
-      WORKLOAD_VERSION: 10.0.103
       ValidateXcodeVersion: false
 
     steps:
@@ -177,7 +172,7 @@ jobs:
           ${{ runner.os }}-nuget-
 
     - name: install workloads
-      run: dotnet workload install maui-ios --version $WORKLOAD_VERSION
+      run: dotnet workload install maui-ios
 
     - name: restore .NET tools
       run: dotnet tool restore
