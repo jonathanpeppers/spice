@@ -38,9 +38,9 @@ jobs:
       uses: actions/cache@v4
       with:
         path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj', '**/*.slnx', '**/Directory.Build.props', '**/Directory.Build.targets') }}
+        key: ${{ runner.os }}-nuget-net11-${{ hashFiles('**/*.csproj', '**/*.slnx', '**/Directory.Build.props', '**/Directory.Build.targets') }}
         restore-keys: |
-          ${{ runner.os }}-nuget-
+          ${{ runner.os }}-nuget-net11-
         
     - name: install workloads
       run: dotnet workload install maui-android maui-ios
@@ -113,9 +113,9 @@ jobs:
       uses: actions/cache@v4
       with:
         path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj', '**/*.slnx', '**/Directory.Build.props', '**/Directory.Build.targets') }}
+        key: ${{ runner.os }}-nuget-net11-${{ hashFiles('**/*.csproj', '**/*.slnx', '**/Directory.Build.props', '**/Directory.Build.targets') }}
         restore-keys: |
-          ${{ runner.os }}-nuget-
+          ${{ runner.os }}-nuget-net11-
 
     - name: install workloads
       run: dotnet workload install maui-android
@@ -170,9 +170,9 @@ jobs:
       uses: actions/cache@v4
       with:
         path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj', '**/*.slnx', '**/Directory.Build.props', '**/Directory.Build.targets') }}
+        key: ${{ runner.os }}-nuget-net11-${{ hashFiles('**/*.csproj', '**/*.slnx', '**/Directory.Build.props', '**/Directory.Build.targets') }}
         restore-keys: |
-          ${{ runner.os }}-nuget-
+          ${{ runner.os }}-nuget-net11-
 
     - name: install workloads
       run: dotnet workload install maui-ios
