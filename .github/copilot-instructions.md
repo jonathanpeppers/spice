@@ -14,7 +14,7 @@ Each view = 3 files: `Core/{Type}.cs` (cross-platform, `[ObservableProperty]`), 
 - **Lazy views**: `Lazy<T> _nativeView` with factory function
 - **XML docs**: Required on all public API; include platform mappings (e.g. `Android.Widget.TextView / UIKit.UILabel`)
 - **GlobalUsings**: `CommunityToolkit.Mvvm.ComponentModel` + `Color = Microsoft.Maui.Graphics.Color`
-- **`VANILLA` define**: Active on `net10.0` only; prefer partials over `#if`
+- **`VANILLA` define**: Active on `net11.0` only; prefer partials over `#if`
 - **Blazor**: `Blazor/` folders at library+platform levels; `BlazorWebView` extends `WebView`
 - **iOS memory**: NSObject subclasses must not hold strong references to other NSObjects (causes cycles the garbage collector cannot break). Use `WeakReference<T>` for any NSObject-typed field/property in an NSObject subclass. Enforced by [`MemoryAnalyzers`](https://github.com/jonathanpeppers/memory-analyzers) (MEM0001–MEM0003).
 
@@ -26,7 +26,7 @@ src/Spice/Platforms/     iOS + Android partials, entry points
 src/Spice/Blazor/        cross-platform Blazor; platform Blazor in Platforms/*/Blazor/
 src/Spice/MSBuild/       Spice.props (capabilities), Spice.targets (inlined SingleProject)
 samples/                 Spice.Scenarios, Spice.BlazorSample, HeadToHead*
-tests/Spice.Tests/       xUnit on net10.0 — views tested as POCOs, no device needed
+tests/Spice.Tests/       xUnit on net11.0 — views tested as POCOs, no device needed
 sizes/                   .apkdesc baselines for CI apkdiff (10% APK / 15% content thresholds)
 src/Spice.Templates/     dotnet new spice / spice-blazor
 ```
@@ -35,9 +35,9 @@ src/Spice.Templates/     dotnet new spice / spice-blazor
 
 ```sh
 dotnet build                                      # all TFMs (needs maui-android + maui-ios workloads)
-dotnet build -f net10.0-android -t:Run             # run Android
-dotnet build -f net10.0-ios -t:Run                 # run iOS
-dotnet test tests/Spice.Tests/Spice.Tests.csproj   # unit tests (net10.0, no device)
+dotnet build -f net11.0-android -t:Run             # run Android
+dotnet build -f net11.0-ios -t:Run                 # run iOS
+dotnet test tests/Spice.Tests/Spice.Tests.csproj   # unit tests (net11.0, no device)
 ```
 
 ## Entry Points
