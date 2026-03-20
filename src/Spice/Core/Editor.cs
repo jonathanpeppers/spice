@@ -39,4 +39,18 @@ public partial class Editor : View
 	/// </summary>
 	[ObservableProperty]
 	bool _autoSize = false;
+
+	/// <inheritdoc />
+	protected override void ApplyTheme(Theme theme)
+	{
+		base.ApplyTheme(theme);
+		if (CanApplyTheme((int)ThemeProperty.TextColor))
+			TextColor = theme.TextColor;
+		if (CanApplyTheme((int)ThemeProperty.PlaceholderColor))
+			PlaceholderColor = theme.PlaceholderColor;
+	}
+
+	partial void OnTextColorChanging(Color? value) => TrackExplicit((int)ThemeProperty.TextColor, value);
+
+	partial void OnPlaceholderColorChanging(Color? value) => TrackExplicit((int)ThemeProperty.PlaceholderColor, value);
 }

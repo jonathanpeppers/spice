@@ -36,4 +36,14 @@ public partial class Border : View
 	/// </summary>
 	[ObservableProperty]
 	double _padding;
+
+	/// <inheritdoc />
+	protected override void ApplyTheme(Theme theme)
+	{
+		base.ApplyTheme(theme);
+		if (CanApplyTheme((int)ThemeProperty.Stroke))
+			Stroke = theme.StrokeColor;
+	}
+
+	partial void OnStrokeChanging(Color? value) => TrackExplicit((int)ThemeProperty.Stroke, value);
 }

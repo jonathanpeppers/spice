@@ -24,4 +24,16 @@ public partial class Button : View
 	/// </summary>
 	[ObservableProperty]
 	Action<Button>? _clicked;
+
+	/// <inheritdoc />
+	protected override void ApplyTheme(Theme theme)
+	{
+		base.ApplyTheme(theme);
+		if (CanApplyTheme((int)ThemeProperty.TextColor))
+			TextColor = theme.TextColor;
+		if (CanApplyTheme((int)ThemeProperty.BackgroundColor))
+			BackgroundColor = theme.AccentColor;
+	}
+
+	partial void OnTextColorChanging(Color? value) => TrackExplicit((int)ThemeProperty.TextColor, value);
 }

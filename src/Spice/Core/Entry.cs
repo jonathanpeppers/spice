@@ -24,5 +24,15 @@ public partial class Entry : View
 	/// </summary>
 	[ObservableProperty]
 	bool _isPassword = false;
+
+	/// <inheritdoc />
+	protected override void ApplyTheme(Theme theme)
+	{
+		base.ApplyTheme(theme);
+		if (CanApplyTheme((int)ThemeProperty.TextColor))
+			TextColor = theme.TextColor;
+	}
+
+	partial void OnTextColorChanging(Color? value) => TrackExplicit((int)ThemeProperty.TextColor, value);
 }
 

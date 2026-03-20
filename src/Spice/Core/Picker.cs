@@ -47,4 +47,14 @@ public partial class Picker : View
 	/// </summary>
 	[ObservableProperty]
 	Color? _textColor;
+
+	/// <inheritdoc />
+	protected override void ApplyTheme(Theme theme)
+	{
+		base.ApplyTheme(theme);
+		if (CanApplyTheme((int)ThemeProperty.TextColor))
+			TextColor = theme.TextColor;
+	}
+
+	partial void OnTextColorChanging(Color? value) => TrackExplicit((int)ThemeProperty.TextColor, value);
 }

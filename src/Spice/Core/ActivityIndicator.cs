@@ -18,4 +18,14 @@ public partial class ActivityIndicator : View
 	/// </summary>
 	[ObservableProperty]
 	Color? _color;
+
+	/// <inheritdoc />
+	protected override void ApplyTheme(Theme theme)
+	{
+		base.ApplyTheme(theme);
+		if (CanApplyTheme((int)ThemeProperty.Color))
+			Color = theme.AccentColor;
+	}
+
+	partial void OnColorChanging(Color? value) => TrackExplicit((int)ThemeProperty.Color, value);
 }

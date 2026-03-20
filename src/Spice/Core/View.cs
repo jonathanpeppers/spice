@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace Spice;
 
@@ -8,6 +9,98 @@ namespace Spice;
 /// </summary>
 public partial class View : ObservableObject, IEnumerable<View>
 {
+	/// <summary>
+	/// Built-in theme property flags. An Int32 supports up to 32 properties.
+	/// Custom views can define additional flags starting at <c>1 &lt;&lt; 5</c>.
+	/// </summary>
+	[Flags]
+	public enum ThemeProperty
+	{
+		/// <summary>No property.</summary>
+		None            = 0,
+		/// <summary>Background color of any view.</summary>
+		BackgroundColor = 1 << 0,
+		/// <summary>Text color for Label, Button, Entry, Editor, SearchBar, Picker, DatePicker.</summary>
+		TextColor       = 1 << 1,
+		/// <summary>Placeholder text color for Editor and SearchBar.</summary>
+		PlaceholderColor= 1 << 2,
+		/// <summary>Border stroke color.</summary>
+		Stroke          = 1 << 3,
+		/// <summary>Accent color for ActivityIndicator.</summary>
+		Color           = 1 << 4,
+	}
+
+	bool _isApplyingTheme;
+	int _explicitProps;
+	internal Theme? _appliedTheme;
+	bool _themeChildrenSubscribed;
+
+	/// <summary>
+	/// Tracks whether a theme property was explicitly set by the developer.
+	/// When <paramref name="value"/> is non-null the flag is set; when null it is cleared.
+	/// </summary>
+	public void TrackExplicit(int property, object? value)
+	{
+		if (!_isApplyingTheme)
+		{
+			if (value is not null)
+				_explicitProps |= property;
+			else
+				_explicitProps &= ~property;
+		}
+	}
+
+	/// <summary>
+	/// Returns true when the theme property has not been explicitly set by the developer.
+	/// </summary>
+	public bool CanApplyTheme(int property) => (_explicitProps & property) == 0;
+
+	/// <summary>
+	/// Applies semantic theme colors to this view. Override in subclasses
+	/// to map additional theme slots to view-specific properties.
+	/// Only sets properties that the developer has not explicitly set.
+	/// The <c>_isApplyingTheme</c> flag is managed by the caller.
+	/// </summary>
+	protected virtual void ApplyTheme(Theme theme)
+	{
+		if (CanApplyTheme((int)ThemeProperty.BackgroundColor))
+			BackgroundColor = theme.BackgroundColor;
+	}
+
+	internal void ApplyThemeInternal(Theme theme)
+	{
+		_isApplyingTheme = true;
+		_appliedTheme = theme;
+
+		if (!_themeChildrenSubscribed)
+		{
+			_themeChildrenSubscribed = true;
+			Children.CollectionChanged += OnThemeChildrenChanged;
+		}
+
+		ApplyTheme(theme);
+		_isApplyingTheme = false;
+	}
+
+	partial void OnBackgroundColorChanging(Color? value) => TrackExplicit((int)ThemeProperty.BackgroundColor, value);
+
+	void OnThemeChildrenChanged(object? sender, NotifyCollectionChangedEventArgs e)
+	{
+		if (e.NewItems is not null && _appliedTheme is not null)
+		{
+			foreach (View child in e.NewItems)
+				ApplyThemeToTree(child, _appliedTheme);
+		}
+	}
+
+	internal static void ApplyThemeToTree(View? view, Theme theme)
+	{
+		if (view is null) return;
+		view.ApplyThemeInternal(theme);
+		foreach (var child in view.Children)
+			ApplyThemeToTree(child, theme);
+	}
+
 	/// <summary>
 	/// Child views of this view
 	/// </summary>
