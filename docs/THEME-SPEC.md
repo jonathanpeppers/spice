@@ -1,55 +1,16 @@
 # Themes in Spice 🌶
 
-**Status:** Design Specification  
+**Status:** Implemented  
 **Created:** February 2026
 
 ## Overview
 
-Spice views support color properties (`TextColor`, `BackgroundColor`, `Stroke`, etc.) but
-there is no built-in way to define a palette of colors and auto-apply them across every view
-in the tree. Developers must set colors on each control individually, and switching between
-light and dark mode means touching every property by hand.
-
-This spec proposes a simple `Theme` class — a plain C# object with well-known color
+Spice provides a built-in `Theme` class — a plain C# object with well-known color
 properties — and a mechanism for views to consume those colors automatically, update
 live when the theme changes, and still allow per-view overrides. The entire design is
 **NativeAOT safe, trimmer safe, and reflection-free**.
 
-## What We Have Today
-
-Colors are set per-control. There's no shared palette:
-
-```csharp
-public class App : Application
-{
-    public App()
-    {
-        Main = new StackLayout
-        {
-            BackgroundColor = Colors.White,
-            new Label  { Text = "Hello", TextColor = Colors.Black },
-            new Button { Text = "Tap me", TextColor = Colors.White, BackgroundColor = Colors.Blue },
-        };
-    }
-}
-```
-
-Switching to dark mode means changing every single value:
-
-```csharp
-void SwitchToDark()
-{
-    stackLayout.BackgroundColor = Color.FromArgb("#1E1E1E");
-    label.TextColor = Colors.White;
-    button.TextColor = Colors.White;
-    button.BackgroundColor = Color.FromArgb("#0078D4");
-    // ...repeat for every view...
-}
-```
-
-This doesn't scale. We need a way to define colors once and have them flow to all views.
-
-## Proposed: `Theme` Class
+## `Theme` Class
 
 ### Core API
 
@@ -57,13 +18,6 @@ A `Theme` is just a POCO that extends `ObservableObject` — same base as every 
 It defines **semantic color slots** that map to view properties:
 
 ```csharp
-namespace Spice;
-
-/// <summary>
-/// Defines a set of semantic colors that are auto-applied to views.
-/// Extend ObservableObject so that changing a color fires PropertyChanged
-/// and updates all subscribed views live.
-/// </summary>
 public partial class Theme : ObservableObject
 {
     /// <summary>Default text color for Label, Button, Entry, SearchBar, etc.</summary>
@@ -92,25 +46,29 @@ No reflection, no dictionaries, no string lookups. Just typed properties on a ty
 
 ### Built-In Light and Dark Themes
 
+The built-in themes use float constructors instead of `Colors` static properties to avoid
+pulling `Microsoft.Maui.Graphics` references into the AOT-compiled output, keeping APK size
+down:
+
 ```csharp
 public partial class Theme
 {
     public static Theme Light => new()
     {
-        TextColor = Colors.Black,
-        BackgroundColor = Colors.White,
-        AccentColor = Color.FromArgb("#0078D4"),
-        StrokeColor = Color.FromArgb("#E0E0E0"),
-        PlaceholderColor = Colors.DarkGray,
+        TextColor = Black,                                   // #000000
+        BackgroundColor = White,                             // #FFFFFF
+        AccentColor = new Color(0f, 0.471f, 0.831f),        // #0078D4
+        StrokeColor = new Color(0.878f, 0.878f, 0.878f),    // #E0E0E0
+        PlaceholderColor = DarkGray,                         // #A9A9A9
     };
 
     public static Theme Dark => new()
     {
-        TextColor = Colors.White,
-        BackgroundColor = Color.FromArgb("#1E1E1E"),
-        AccentColor = Color.FromArgb("#4CC2FF"),
-        StrokeColor = Color.FromArgb("#404040"),
-        PlaceholderColor = Colors.LightGray,
+        TextColor = White,                                    // #FFFFFF
+        BackgroundColor = new Color(0.118f, 0.118f, 0.118f),  // #1E1E1E
+        AccentColor = new Color(0.298f, 0.761f, 1f),          // #4CC2FF
+        StrokeColor = new Color(0.251f, 0.251f, 0.251f),      // #404040
+        PlaceholderColor = LightGray,                          // #D3D3D3
     };
 }
 ```
@@ -138,151 +96,235 @@ public partial class Application : View
 
 ### Step 1: Each View Knows How to Apply a Theme
 
-Every view type overrides a virtual method that maps theme color slots to its own
-properties. This is the **only** connection between themes and views — no reflection,
-no attribute scanning, no magic:
+Every view type overrides a `protected virtual` method that maps theme color slots to its
+own properties. This is the **only** connection between themes and views — no reflection,
+no attribute scanning, no magic.
+
+The base `View` class applies `BackgroundColor`:
 
 ```csharp
 // In View (base class)
-public partial class View
+protected virtual void ApplyTheme(Theme theme)
 {
-    /// <summary>
-    /// Applies semantic theme colors to this view. Override in subclasses
-    /// to map additional theme slots to view-specific properties.
-    /// Only sets properties that the developer has not explicitly set.
-    /// Sets _isApplyingTheme = true so that On{Prop}Changing hooks can
-    /// distinguish theme-driven changes from developer-driven changes.
-    /// </summary>
-    protected virtual void ApplyTheme(Theme theme)
-    {
-        _isApplyingTheme = true;
-        _themedBackgroundColor = theme.BackgroundColor;
-        if (!_isBackgroundColorSet)
-            BackgroundColor = _themedBackgroundColor;
-        _isApplyingTheme = false;
-    }
+    if (CanApplyTheme((int)ThemeProperty.BackgroundColor))
+        BackgroundColor = theme.BackgroundColor;
 }
 ```
+
+Subclasses override to add their own mappings:
 
 ```csharp
 // In Label
-public partial class Label : View
+protected override void ApplyTheme(Theme theme)
 {
-    protected override void ApplyTheme(Theme theme)
-    {
-        base.ApplyTheme(theme);
-        _themedTextColor = theme.TextColor;
-        if (!_isTextColorSet)
-            TextColor = _themedTextColor;
-    }
+    base.ApplyTheme(theme);
+    if (CanApplyTheme((int)ThemeProperty.TextColor))
+        TextColor = theme.TextColor;
 }
 ```
 
 ```csharp
-// In Button
-public partial class Button : View
+// In Button — uses AccentColor for its background
+protected override void ApplyTheme(Theme theme)
 {
-    protected override void ApplyTheme(Theme theme)
-    {
-        base.ApplyTheme(theme);
-        _themedTextColor = theme.TextColor;
-        if (!_isTextColorSet)
-            TextColor = _themedTextColor;
-        _themedBackgroundColor = theme.AccentColor;
-        if (!_isBackgroundColorSet)
-            BackgroundColor = _themedBackgroundColor;
-    }
+    base.ApplyTheme(theme);
+    if (CanApplyTheme((int)ThemeProperty.TextColor))
+        TextColor = theme.TextColor;
+    if (CanApplyTheme((int)ThemeProperty.BackgroundColor))
+        BackgroundColor = theme.AccentColor;
 }
 ```
 
 ```csharp
 // In Border
-public partial class Border : View
+protected override void ApplyTheme(Theme theme)
 {
-    protected override void ApplyTheme(Theme theme)
-    {
-        base.ApplyTheme(theme);
-        _themedStroke = theme.StrokeColor;
-        if (!_isStrokeSet)
-            Stroke = _themedStroke;
-    }
+    base.ApplyTheme(theme);
+    if (CanApplyTheme((int)ThemeProperty.Stroke))
+        Stroke = theme.StrokeColor;
 }
 ```
 
-Each mapping is a single line of C# per property — explicit, debuggable, and visible in any
-IDE without decompilers. Adding a new theme slot for a new control means adding one line
-in its `ApplyTheme`.
+```csharp
+// In Editor — text and placeholder colors
+protected override void ApplyTheme(Theme theme)
+{
+    base.ApplyTheme(theme);
+    if (CanApplyTheme((int)ThemeProperty.TextColor))
+        TextColor = theme.TextColor;
+    if (CanApplyTheme((int)ThemeProperty.PlaceholderColor))
+        PlaceholderColor = theme.PlaceholderColor;
+}
+```
+
+```csharp
+// In ActivityIndicator — accent color
+protected override void ApplyTheme(Theme theme)
+{
+    base.ApplyTheme(theme);
+    if (CanApplyTheme((int)ThemeProperty.Color))
+        Color = theme.AccentColor;
+}
+```
+
+#### Complete Theme Mapping Table
+
+| View | Theme Slot → Property |
+|---|---|
+| **View** (base) | `BackgroundColor` → `BackgroundColor` |
+| **Label** | `TextColor` → `TextColor` |
+| **Button** | `TextColor` → `TextColor`, `AccentColor` → `BackgroundColor` |
+| **Entry** | `TextColor` → `TextColor` |
+| **Editor** | `TextColor` → `TextColor`, `PlaceholderColor` → `PlaceholderColor` |
+| **SearchBar** | `TextColor` → `TextColor`, `PlaceholderColor` → `PlaceholderColor` |
+| **DatePicker** | `TextColor` → `TextColor` |
+| **Picker** | `TextColor` → `TextColor` |
+| **Border** | `StrokeColor` → `Stroke` |
+| **ActivityIndicator** | `AccentColor` → `Color` |
+
+Views that only inherit the base `BackgroundColor` mapping (no override): Image, ImageButton,
+Switch, Slider, ProgressBar, WebView, ScrollView, StackLayout, ContentView, Grid, BoxView,
+CheckBox, RadioButton, TimePicker.
 
 ### Step 2: Tracking "Developer Set" vs "Theme Set"
 
 When a developer explicitly sets a color on a view, that value takes priority over the
-theme. We track this with a simple boolean per themeable property:
+theme. This is tracked with a bitmask (`_explicitProps`) and a `ThemeProperty` flags enum:
 
 ```csharp
-public partial class Label : View
+public partial class View
 {
-    bool _isTextColorSet;
-    Color? _themedTextColor;
-
-    // The [ObservableProperty] source generator creates OnTextColorChanged.
-    // We provide an additional hook:
-    partial void OnTextColorChanging(Color? value)
+    /// <summary>
+    /// Built-in theme property flags. An Int32 supports up to 32 properties.
+    /// Custom views can define additional flags starting at 1 << 5.
+    /// </summary>
+    [Flags]
+    public enum ThemeProperty
     {
-        // ApplyTheme sets _isApplyingTheme = true while pushing theme values.
-        // Only changes made outside ApplyTheme count as explicit overrides.
+        None            = 0,
+        BackgroundColor = 1 << 0,
+        TextColor       = 1 << 1,
+        PlaceholderColor= 1 << 2,
+        Stroke          = 1 << 3,
+        Color           = 1 << 4,
+    }
+
+    bool _isApplyingTheme;
+    int _explicitProps;
+
+    /// <summary>
+    /// Tracks whether a theme property was explicitly set by the developer.
+    /// When value is non-null the flag is set; when null it is cleared.
+    /// </summary>
+    public void TrackExplicit(int property, object? value)
+    {
         if (!_isApplyingTheme)
         {
-            // null means "clear explicit value, fall back to theme"
-            _isTextColorSet = value is not null;
+            if (value is not null)
+                _explicitProps |= property;
+            else
+                _explicitProps &= ~property;
         }
     }
+
+    /// <summary>
+    /// Returns true when the theme property has not been explicitly set.
+    /// </summary>
+    public bool CanApplyTheme(int property) => (_explicitProps & property) == 0;
 }
 ```
 
-> **Why not a separate `ThemeTextColor` property?** That doubles the API surface for every
-> color property. Tracking a bool keeps the public API clean — developers still just set
-> `label.TextColor = Colors.Red` and the theme won't overwrite it.
+Each view hooks its `On{Prop}Changing` partial to call `TrackExplicit`:
+
+```csharp
+// In View
+partial void OnBackgroundColorChanging(Color? value) =>
+    TrackExplicit((int)ThemeProperty.BackgroundColor, value);
+
+// In Label
+partial void OnTextColorChanging(Color? value) =>
+    TrackExplicit((int)ThemeProperty.TextColor, value);
+
+// In Border
+partial void OnStrokeChanging(Color? value) =>
+    TrackExplicit((int)ThemeProperty.Stroke, value);
+```
+
+> **Why a bitmask instead of per-property booleans?** A single `int` tracks up to 32
+> properties with no per-field memory overhead. The `ThemeProperty` enum provides
+> compile-time safety for the flag values.
 
 To **clear** an explicit override and revert to the theme:
 
 ```csharp
-// Future: could add a helper, but for now:
-label.TextColor = null; // null means "no explicit value, use theme"
+label.TextColor = null; // clears the flag, theme value applies on next theme application
 ```
 
 ### Step 3: Walking the View Tree
 
-When `Application.Theme` is set or changed, walk the entire `Main` view tree and call
-`ApplyTheme` on each view. This is a simple recursive traversal of `Children`:
+When `Application.Theme` is set or changed, the entire `Main` view tree is walked via
+`ApplyThemeToTree` (an `internal static` method on `View`). Each view is themed through
+`ApplyThemeInternal`, which manages the `_isApplyingTheme` flag, stores the applied theme
+for dynamic children, and delegates to the virtual `ApplyTheme`:
+
+```csharp
+// In View
+internal void ApplyThemeInternal(Theme theme)
+{
+    _isApplyingTheme = true;
+    _appliedTheme = theme;
+
+    if (!_themeChildrenSubscribed)
+    {
+        _themeChildrenSubscribed = true;
+        Children.CollectionChanged += OnThemeChildrenChanged;
+    }
+
+    ApplyTheme(theme);
+    _isApplyingTheme = false;
+}
+
+internal static void ApplyThemeToTree(View? view, Theme theme)
+{
+    if (view is null) return;
+    view.ApplyThemeInternal(theme);
+    foreach (var child in view.Children)
+        ApplyThemeToTree(child, theme);
+}
+```
+
+In `Application`, theme changes subscribe to `PropertyChanged` for live updates. Setting
+`Main` after a theme also applies the theme to the new tree. Explicitly setting `Theme`
+disables `UseSystemTheme`:
 
 ```csharp
 // In Application
-partial void OnThemeChanged(Theme? oldValue, Theme? value)
+partial void OnThemeChanging(Theme? value)
 {
-    // Unsubscribe from old theme
+    if (!_isSettingSystemTheme)
+        UseSystemTheme = false;
+}
+
+partial void OnThemeChanged(Theme? oldValue, Theme? newValue)
+{
     if (oldValue is not null)
         oldValue.PropertyChanged -= OnThemePropertyChanged;
 
-    // Subscribe to new theme for live updates
-    if (value is not null)
+    if (newValue is not null)
     {
-        value.PropertyChanged += OnThemePropertyChanged;
-        ApplyThemeToTree(Main, value);
+        newValue.PropertyChanged += OnThemePropertyChanged;
+        ApplyThemeToTree(Main, newValue);
     }
 }
 
-static void ApplyThemeToTree(View? view, Theme theme)
+partial void OnMainChanged(View? oldValue, View? newValue)
 {
-    if (view is null) return;
-    view.ApplyTheme(theme);
-    foreach (var child in view.Children)
-        ApplyThemeToTree(child, theme);
+    if (newValue is not null && Theme is not null)
+        ApplyThemeToTree(newValue, Theme);
 }
 
 void OnThemePropertyChanged(object? sender, PropertyChangedEventArgs e)
 {
-    // A single color in the theme changed — re-apply the whole theme
-    // (theme objects are small, this is cheap)
     if (Theme is not null)
         ApplyThemeToTree(Main, Theme);
 }
@@ -290,21 +332,19 @@ void OnThemePropertyChanged(object? sender, PropertyChangedEventArgs e)
 
 ### Step 4: New Views Get the Theme Too
 
-When a view is added to the tree (e.g., pushed onto a NavigationView, added to a
-StackLayout at runtime), it should pick up the current theme. This hooks into the
-existing `Children.CollectionChanged` event:
+When a view is added to the tree at runtime, it picks up the current theme. Each
+view lazily subscribes to its own `Children.CollectionChanged` the first time
+`ApplyThemeInternal` is called, and themes any newly added children:
 
 ```csharp
-// In View base — when children change, ask the owning Application to theme new additions
-void OnChildrenChanged(object? sender, NotifyCollectionChangedEventArgs e)
+// In View — registered lazily inside ApplyThemeInternal
+void OnThemeChildrenChanged(object? sender, NotifyCollectionChangedEventArgs e)
 {
-    // Application is a reference to the owning app, set when the view is attached
-    if (e.Action == NotifyCollectionChangedAction.Add && Application?.Theme is not null)
+    if (e.NewItems is not null && _appliedTheme is not null)
     {
-        foreach (View child in e.NewItems ?? [])
-            Application.ApplyThemeToTree(child, Application.Theme);
+        foreach (View child in e.NewItems)
+            ApplyThemeToTree(child, _appliedTheme);
     }
-    // existing platform child management code...
 }
 ```
 
@@ -338,7 +378,25 @@ Flipping the `Switch` swaps the entire theme — every view in the tree updates 
 
 ### Automatic System Appearance Detection
 
-Spice provides a built-in cross-platform API to detect and follow the OS dark/light mode.
+Spice provides `PlatformAppearance` — a cross-platform static class that exposes the
+system's current appearance and a change notification:
+
+```csharp
+public static partial class PlatformAppearance
+{
+    /// <summary>
+    /// Event raised when the system appearance changes.
+    /// The bool parameter is true when the system switched to dark mode.
+    /// </summary>
+    public static event Action<bool>? Changed;
+
+    /// <summary>
+    /// Gets whether the system is in dark mode.
+    /// </summary>
+    public static bool IsDarkMode { get; }
+}
+```
+
 Set `Application.UseSystemTheme = true` and Spice handles the rest:
 
 ```csharp
@@ -357,40 +415,43 @@ public class App : Application
 ```
 
 When `UseSystemTheme` is enabled:
-- On startup, Spice queries the OS appearance and sets `Theme` to `Theme.Light` or `Theme.Dark`
-- When the OS appearance changes at runtime, `Theme` is swapped automatically
+- On startup, Spice queries `PlatformAppearance.IsDarkMode` and sets `Theme` accordingly
+- It subscribes to `PlatformAppearance.Changed` so that `Theme` is swapped automatically when the OS appearance changes
 - Setting `Theme` explicitly disables `UseSystemTheme` (explicit wins)
+- When `UseSystemTheme` is disabled, the `Changed` subscription is removed
 
 ```csharp
-public partial class Application : View
+partial void OnUseSystemThemeChanged(bool value)
 {
-    /// <summary>
-    /// When true, automatically sets Theme to Theme.Light or Theme.Dark
-    /// based on the OS appearance, and updates live when the system
-    /// appearance changes.
-    /// </summary>
-    [ObservableProperty]
-    bool _useSystemTheme;
-
-    partial void OnUseSystemThemeChanged(bool value)
+    if (value)
     {
-        if (value)
-            Theme = PlatformAppearance.IsDarkMode ? Theme.Dark : Theme.Light;
+        PlatformAppearance.Changed += OnPlatformAppearanceChanged;
+        _isSettingSystemTheme = true;
+        Theme = PlatformAppearance.IsDarkMode ? Theme.Dark : Theme.Light;
+        _isSettingSystemTheme = false;
     }
+    else
+    {
+        PlatformAppearance.Changed -= OnPlatformAppearanceChanged;
+    }
+}
+
+void OnPlatformAppearanceChanged(bool isDarkMode)
+{
+    if (_useSystemTheme)
+    {
+        _isSettingSystemTheme = true;
+        Theme = isDarkMode ? Theme.Dark : Theme.Light;
+        _isSettingSystemTheme = false;
+    }
+    AppearanceChanged?.Invoke(isDarkMode);
 }
 ```
 
-Platform implementations behind `PlatformAppearance`:
+Platform implementations behind `PlatformAppearance.IsDarkMode`:
 
-```csharp
-// iOS — UITraitCollection
-PlatformAppearance.IsDarkMode =
-    UITraitCollection.CurrentTraitCollection.UserInterfaceStyle == UIUserInterfaceStyle.Dark;
-
-// Android — UiMode
-var nightMode = Resources?.Configuration?.UiMode & UiMode.NightMask;
-PlatformAppearance.IsDarkMode = nightMode == UiMode.NightYes;
-```
+- **iOS** — reads `UITraitCollection.CurrentTraitCollection.UserInterfaceStyle`; listens for trait changes via `RegisterForTraitChanges` (iOS 17+) or `TraitCollectionDidChange`.
+- **Android** — reads `UiMode.NightMask` from `Resources.Configuration`; listens for configuration changes in `SpiceActivity.OnConfigurationChanged`.
 
 For fully custom themes that still track the OS mode, use the `AppearanceChanged` callback:
 
@@ -486,6 +547,12 @@ Expression trees would let us infer property names automatically, but they requi
 `System.Linq.Expressions` which is not fully NativeAOT safe and increases binary size.
 Explicit virtual methods are zero-overhead and always trimmable.
 
+### Why a Bitmask for Override Tracking?
+
+A single `int _explicitProps` field tracks up to 32 themeable properties with zero
+per-field memory overhead. The `ThemeProperty` flags enum provides compile-time safety
+for the bit positions. Custom views can define additional flags starting at `1 << 5`.
+
 ### Why `protected virtual` Instead of `public virtual`?
 
 `ApplyTheme` is a framework implementation detail — developers don't call it directly,
@@ -547,42 +614,14 @@ public class App : Application
 Toggle the switch → every view updates to dark colors instantly, except the red label which
 keeps its explicit color.
 
-## Implementation Roadmap
-
-### Phase 1: Core Theme Class
-- Add `Theme` class with semantic color properties
-- Add `Application.Theme` property
-- Implement `ApplyTheme` virtual method on `View` and all built-in views
-- Implement tree walking in `Application.OnThemeChanged`
-- Unit tests for theme application (POCOs on `net10.0`, no device needed)
-
-### Phase 2: Developer Override Tracking
-- Add `_is{Prop}Set` booleans per themeable property
-- Hook `On{Prop}Changing` partials to detect explicit sets
-- Ensure `null` assignment resets to theme value
-
-### Phase 3: Dynamic View Addition
-- Hook `Children.CollectionChanged` to apply theme to newly added views
-- Cover NavigationView push, TabView tab switching, CollectionView cell creation
-
-### Phase 4: System Appearance Detection
-- Add `Application.UseSystemTheme` property (opt-in, sets `Theme.Light`/`Theme.Dark` automatically)
-- Add `PlatformAppearance` static class with `IsDarkMode` and change notification
-- Platform implementations: iOS `traitCollectionDidChange`, Android `onConfigurationChanged`
-- Add `Application.AppearanceChanged` callback for custom theme switching
-- Setting `Theme` explicitly disables `UseSystemTheme`
-
-### Phase 5: Project Template Examples
-- Update `spice` template to use `UseSystemTheme = true` instead of hardcoded `BackgroundColor = Colors.CornflowerBlue`
-- Update `spice-blazor` template if applicable (BlazorWebView theming may differ)
-- Update `Spice.Scenarios` sample with a theming scenario
-
 ## Summary
 
 - **`Theme`** is a POCO extending `ObservableObject` — just typed color properties, no reflection
 - **`Application.Theme`** sets the active theme and walks the view tree
 - **Live updates** — change a theme property or swap the entire theme, views update immediately
-- **Explicit overrides win** — set `TextColor = Colors.Red` and the theme won't touch it
+- **Explicit overrides win** — set `TextColor = Colors.Red` and the theme won't touch it; set to `null` to revert
+- **Bitmask tracking** — `ThemeProperty` flags + `_explicitProps` track developer-set vs theme-set properties
+- **Dynamic children** — views added to the tree at runtime automatically receive the current theme
 - **Dark/Light mode** — `UseSystemTheme = true` auto-detects OS appearance; or swap manually with one assignment
 - **Custom themes** — subclass `Theme` or just construct one with your own colors
 - **NativeAOT safe** — zero reflection, fully trimmable, compile-time type safety
