@@ -30,7 +30,7 @@
 		<None Include="README.md" Pack="true" PackagePath="" />
 		<None Include="../../docs/icon.png" Pack="true" PackagePath="" />
 		<None Include="MSBuild/**" Pack="true" PackagePath="build;buildTransitive" />
-		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
 		<PackageReference Include="Microsoft.Maui.Graphics" Version="10.0.40" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebView" Version="10.0.3" />
 		<PackageReference Include="MemoryAnalyzers" Version="0.1.0-beta.5">
