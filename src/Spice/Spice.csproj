@@ -32,7 +32,7 @@
 		<None Include="MSBuild/**" Pack="true" PackagePath="build;buildTransitive" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
 		<PackageReference Include="Microsoft.Maui.Graphics" Version="10.0.60" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebView" Version="10.0.8" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebView" Version="10.0.9" />
 		<PackageReference Include="MemoryAnalyzers" Version="0.1.0-beta.5">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
